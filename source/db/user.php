@@ -133,7 +133,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	 * than Rakuun_Intern_Module::TIMEOUT_NOACTIVITY seconds ago.
 	 */
 	public function isOnline() {
-		return ($this->isOnline > time() - Rakuun_Intern_Module::TIMEOUT_NOACTIVITY);
+		return ($this->isOnline > time() - Rakuun_Intern_Module::TIMEOUT_NOACTIVITY && !Rakuun_User_Manager::isSitting());
 	}
 	
 	/**
