@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<content>
-  <rakuun2>
-    <migrations>
-      <file name="001.setup.php"/>
-      <file name="002.testdata.php"/>
-    </migrations>
-  </rakuun2>
-</content>
