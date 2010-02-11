@@ -1,0 +1,46 @@
+<?php
+
+class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Panel_Production_WIP {
+	public function __construct($name, Rakuun_Intern_Production_Producer_Units $producer, $title = '') {
+		parent::__construct($name, $producer, $title);
+		
+		if ($wip = $this->getProducer()->getWIP()) {
+			$this->contentPanel->countdown->setJSCallback('null');
+			$this->contentPanel->addPanel($countDownTotal = new Rakuun_GUI_Panel_CountDown('countdown_total', $wip[0]->getTotalTargetTime()));
+			$countDownTotal->enableHoverInfo(true);
+			if (Router::get()->getCurrentModule() instanceof Rakuun_Intern_Module_Overview) {
+				// FIXME evil, hardcoded panel ids
+				$countDownTotal->setJSCallback(sprintf('function (){$.core.refreshPanels(["%s", "%s"]);}', 'main-overview_content-wip_units', 'main-overview_content-units'));
+			}
+			else {
+				$countDownTotal->setJSCallback('function (){window.location.assign(location.href)}');
+			}
+		}
+		
+		$this->contentPanel->addPanel($pauseButton = new GUI_Control_SubmitButton('pause', 'Produktion pausieren'));
+		if (Rakuun_User_Manager::getCurrentUser()->productionPaused)
+			$pauseButton->setValue('Produktion fortsetzen');
+		
+		$this->contentPanel->setTemplate(dirname(__FILE__).'/units.tpl');
+	}
+	
+	public function onPause() {
+		$user = Rakuun_User_Manager::getCurrentUser();
+		
+		if (Rakuun_User_Manager::getCurrentUser()->productionPaused) {
+			$wipContainer = Rakuun_DB_Containers::getUnitsWIPContainer();
+			// TODO urgh, hard-coded query
+			$query = 'UPDATE `'.$wipContainer->getTable().'` SET starttime = starttime + ' . (time() - Rakuun_User_Manager::getCurrentUser()->productionPaused).' WHERE user = \''.$user->getPK().'\'';
+			$wipContainer->update($query);
+			$user->productionPaused = 0;
+		}
+		else {
+			$user->productionPaused = time();
+		}
+		
+		Rakuun_User_Manager::update($user);
+		Router::get()->getCurrentModule()->invalidate();
+	}
+}
+
+?>

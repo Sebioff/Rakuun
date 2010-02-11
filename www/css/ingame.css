@@ -1,0 +1,299 @@
+@CHARSET "UTF-8";
+
+/*
+	$1  -  Common
+	$2  -  Head
+	$2a -  Head / Navigation
+	$2b -  Head / Ressources
+	$3  -  Production
+	$4  -  Alliances
+	$5  -  Messages
+	$6  -  Overview
+	$7  -  Techtree
+	$8  -  WarSim
+*/
+
+/* $1  -  Common -------------------------------------------------------------*/
+#ctn_ingame
+{
+	margin:0px auto;
+	width:1020px;
+}
+
+#ctn_ingame .rakuun_requirements_met
+{
+	color:#009f00;
+}
+
+#ctn_ingame .rakuun_requirements_failed
+{
+	color:#ff0000;
+}
+
+.rakuun_gui_infopanel
+{
+	background:transparent url('../images/info.png') no-repeat left top;
+	padding-left:20px;
+}
+
+.core_gui_table_sortable th.header, .core_gui_table_sortable th.headerSortUp, .core_gui_table_sortable th.headerSortDown
+{
+	background:transparent url('../images/sort.gif') no-repeat left top;
+	padding-left:20px;
+}
+
+.user_online
+{
+	background-color:green;
+	color:green;
+}
+
+.user_offline
+{
+	background-color:red;
+	color:red;
+}
+
+/* $2  -  Head ---------------------------------------------------------------*/
+#ctn_head
+{
+	border:1px solid #cccccc;
+	margin:10px 0px;
+}
+
+/* $2a -  Head / Navigation --------------------------------------------------*/
+#ctn_head #ctn_navigation
+{
+	float:left;
+}
+
+#ctn_head #ctn_navigation li {
+	float:left;
+	margin-right:20px;
+}
+
+#ctn_head #ctn_navigation .core_navigation_node_inpath a {
+	text-decoration:underline;
+}
+
+/* $2b -  Head / Ressources --------------------------------------------------*/
+#ctn_head #ctn_ressources
+{
+	float:right;
+}
+
+#ctn_head #ctn_ressources .rakuun_ressource
+{
+	color:#000000;
+	font-weight:normal;
+}
+
+/* $3  -  Production ---------------------------------------------------------*/
+.production_item_box
+{
+	float:none !important;
+	width:450px;
+	margin:0px auto;
+}
+
+.module_build form,
+.module_research form,
+.module_produce form
+{
+	display:inline;
+}
+
+.module_build form input,
+.module_research form input,
+.module_produce form input
+{
+	float:none;
+	margin-left:0px;
+}
+
+.module_build .rakuun_ressource,
+.module_research .rakuun_ressource,
+.module_produce .rakuun_ressource
+{
+	font-weight:bold;
+	color:#009f00;
+	margin-right:6px;
+}
+
+.module_build h2,
+.module_research h2,
+.module_produce h2
+{
+	display:inline;
+}
+
+/* $4  -  Alliances ----------------------------------------------------------*/
+.alliance_privilegelist .core_gui_checkbox,
+.alliance_privilegelist label,
+.alliance_userlist .core_gui_checkbox,
+.alliance_userlist label
+{
+	float:none;
+}
+
+/* TODO this needs some work... */
+ul.diplomacy-offer
+{
+	margin-bottom:1em;
+}
+
+ul.diplomacy-offer li
+{
+	margin-bottom:0.5em;
+}
+
+dl dt
+{
+	float: left;
+}
+
+dd
+{
+	margin-left: 10em;
+}
+
+table.boardview td {
+	padding-right:6px;
+}
+
+table.boardview td.posting_count {
+	text-align:right;
+}
+
+/* $5  -  Messages -----------------------------------------------------------*/
+.rakuun_messages_categories
+{
+	margin-bottom:4px;
+}
+
+.rakuun_messages_categories li
+{
+	display:inline;
+}
+
+.rakuun_messages_send textarea
+{
+	height:150px;
+	width:400px;
+}
+
+.rakuun_messages_send .core_gui_textbox
+{
+	width:400px;
+}
+
+.module_messages .core_gui_pageview
+{
+	margin-top:4px;
+}
+
+.rakuun_message_envelope
+{
+	border:1px solid #000000;
+	cursor:pointer;
+	margin-bottom:4px;
+	padding:4px;
+	width:500px;
+}
+
+.rakuun_message
+{
+	width:500px;
+}
+
+.rakuun_message_head
+{
+	border:1px solid #000000;
+	padding:4px;
+}
+
+.rakuun_message_head .sender
+{
+	float:left;
+}
+
+.rakuun_message_head .date
+{
+	float:right;
+}
+
+.rakuun_message_content
+{
+	border:1px solid #000000;
+	border-top:none;
+	padding:4px;
+}
+
+/* $6  -  Overview -----------------------------------------------------------*/
+#ctn_cityitems
+{
+	float:left;
+	margin-right:50px;
+	width:250px;
+}
+
+#ctn_cityitems .rakuun_box
+{
+	float:none;
+	margin-bottom:20px;
+}
+
+.shout_text
+{
+	overflow:hidden;
+	width:333px;
+	word-wrap:break-word;
+}
+
+/* $7  -  Techtree -----------------------------------------------------------*/
+.module_techtree h1
+{
+	font-size:14px;
+	font-weight:bold;
+}
+
+.module_techtree h2
+{
+	font-weight:bold;
+}
+
+/* $8  -  WarSim -------------------------------------------------------------*/
+.warsim_panels_attacker
+{
+	float:left;
+}
+
+.warsim_panels_defender
+{
+	float:left;
+	margin-left:10px;
+}
+
+#warsim_panels h1
+{
+	font-weight:bold;
+	font-size:14px;
+	margin-bottom:4px;
+}
+
+#warsim_panels label
+{
+	border-bottom:1px solid #222222;
+	padding-bottom:3px;
+	width:150px;
+}
+
+#warsim_panels .core_gui_digitbox
+{
+	width:50px;
+}
+
+#warsim_panels_buildings .warsim_panels_defender
+{
+	margin-left:214px;
+}

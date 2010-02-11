@@ -1,0 +1,111 @@
+@CHARSET "UTF-8";
+
+/*
+	IMPORTANT NOTE:
+	In skin files, all css selectors must be "prefixed" with the skin selector,
+	e.g.: .skin_original
+*/
+
+/*
+	$1  -  Common Elements
+	$2  -  Boxes
+	$3  -  Messages
+*/
+
+/* $1  -  Common Elements ----------------------------------------------------*/
+body.skin_tech
+{
+	background-color:#ffffff;
+}
+
+/* $2  -  Boxes --------------------------------------------------------------*/
+.skin_tech .rakuun_box {
+	background:#000000 url('../images/rakuun_box_left.gif') repeat-y left top;
+	color:#ffffff;
+	float:left;
+	padding:0px 0px 0px 16px;
+	position:relative;
+}
+
+.skin_tech .rakuun_box .head {
+	background:transparent url('../images/rakuun_box_top.gif') repeat-x left top;
+	padding-top:19px;
+}
+
+.skin_tech .rakuun_box .content {
+	background:transparent url('../images/rakuun_box_bottom.gif') repeat-x left bottom;
+	padding:3px;
+	padding-bottom:17px;
+}
+
+.skin_tech .rakuun_box .content_inner {
+	padding-bottom:7px;
+}
+
+.skin_tech .rakuun_box .head_inner {
+	border-bottom:1px solid #cccccc;
+	padding:3px;
+	padding-top:0px;
+}
+
+.skin_tech .rakuun_box_collapsible .head_inner {
+	background:transparent url('../images/collapse.gif') no-repeat 3px top;
+	cursor:pointer;
+	padding-left:19px;
+}
+
+.skin_tech .rakuun_box .body {
+	background:transparent url('../images/rakuun_box_right.gif') repeat-y right top;
+	padding-right:16px;
+}
+
+.skin_tech .rakuun_box .border,
+.skin_tech .rakuun_box .corner {
+	position:absolute;
+}
+
+.skin_tech .rakuun_box .topleft {
+	background:transparent url('../images/rakuun_box_topleft.png') no-repeat left top;
+	height:35px;
+	top:0px;
+	left:0px;
+	width:18px;
+}
+* html .skin_tech .rakuun_box .topleft {
+	background-image:none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='crop' src='../images/rakuun_box_topleft.png');
+}
+
+.skin_tech .rakuun_box .topright {
+	background:transparent url('../images/rakuun_box_topright.png') no-repeat left top;
+	height:35px;
+	top:0px;
+	right:0px;
+	width:18px;
+}
+
+.skin_tech .rakuun_box .bottomleft {
+	background:transparent url('../images/rakuun_box_bottomleft.png') no-repeat left top;
+	height:40px;
+	bottom:0px;
+	left:0px;
+	width:18px;
+}
+
+.skin_tech .rakuun_box .bottomright {
+	background:transparent url('../images/rakuun_box_bottomright.png') no-repeat left top;
+	height:40px;
+	bottom:0px;
+	right:0px;
+	width:18px;
+}
+
+.skin_tech .rakuun_box_note .head {
+	background-color:#FF0000;
+}
+
+/* $3  -  Messages -----------------------------------------------------------*/
+.skin_tech .rakuun_message_unread
+{
+	background-color:#CCCCCC;
+}

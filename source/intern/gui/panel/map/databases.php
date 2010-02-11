@@ -1,0 +1,39 @@
+<?php
+
+class Rakuun_Intern_GUI_Panel_Map_Databases extends GUI_Panel {
+	public function init() {
+		parent::init();
+		
+		$this->setTemplate(dirname(__FILE__).'/databases.tpl');
+		
+		$this->params->visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
+		$images = array(
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'db_blue',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'db_red',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'db_yellow',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'db_brown',
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'db_green'
+		);
+		$names = array(
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'Blau',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'Rot',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'Gelb',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'Braun',
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'Grün'
+		);
+		foreach ($this->params->visibleDatabases as $db) {
+			$this->addPanel(new GUI_Panel_Image('image_'.$db, Router::get()->getStaticRoute('images', $images[$db].'.gif')));
+			$options = array();
+			$options['conditions'][] = array('identifier = ?', $db);
+			$assoc = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->selectFirst($options);
+			if ($assoc) {
+				$this->addPanel(new Rakuun_GUI_Control_UserLink('link_'.$db, $assoc->user));
+			} else {
+				$koords = Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->selectFirst($options);
+				//TODO: change this to JS-Link with map-scrolling etc
+				$this->addPanel(new GUI_Control_Link('link_'.$db, $names[$db], App::get()->getInternModule()->getSubmodule('map')->getURL(array('cityX' => $koords->positionX, 'cityY' => $koords->positionY))));
+			}
+		}
+	}
+}
+?>

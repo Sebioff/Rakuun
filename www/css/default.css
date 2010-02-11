@@ -1,0 +1,122 @@
+@CHARSET "UTF-8";
+
+/*
+	$1  -  Common Elements
+	$2  -  Framework Elements
+*/
+
+/* $1  -  Common Elements ----------------------------------------------------*/
+body {
+	font-family:Verdana,Helvetica,sans-serif;
+	font-size:12px;
+	line-height:14px;
+}
+
+th,
+td {
+	padding-right:6px;
+}
+
+/*
+*:first-child+html form {
+	width:1%;
+	overflow:visible;
+}
+
+* html form {
+	width:1%;
+	overflow:visible;
+}
+*/
+
+.rakuun_box label {
+	float:left;
+	width:120px;
+}
+
+.rakuun_box input,
+.rakuun_box select,
+.rakuun_box textarea {
+	float:left;
+	margin-bottom:2px;
+}
+
+.rakuun_box li input,
+.rakuun_box li select,
+.rakuun_box li textarea,
+.rakuun_box li label {
+	float:none;
+}
+
+.rakuun_box .content_inner {
+	position:relative;
+}
+
+.rakuun_box_collapsible .content {
+	position:relative;
+}
+
+strong {
+	font-weight:bold;
+}
+
+input.ac_loading {
+	background:#FFFFFF url('../images/loading.gif') no-repeat right top;
+}
+
+/* $2  -  Framework Elements -------------------------------------------------*/
+.core_common_error_list {
+	background:#FF0000;
+}
+
+.core_common_error_list label {
+	cursor:pointer;
+	font-weight:bold;
+}
+
+.core_common_error {
+	border:1px solid #FF0000;
+	padding:1px;
+}
+
+.core_common_error_js_wrapper {
+	float:left;
+	left:2px;
+	position:relative;
+	z-index:1;
+}
+
+.core_common_error_js_wrapper label {
+	background:#000000;
+	color:#FFFFFF;
+	float:none;
+	position:absolute;
+	white-space:nowrap;
+	width:auto;
+}
+
+.core_gui_captcha {
+	float:left;
+}
+
+form div.core_common_error_list label {
+	float:none;
+	width:auto;
+}
+
+.rakuun_box form input.core_gui_submitbutton {
+	float:right;
+}
+
+.core_gui_hoverinfo {
+	background-color:#FFFFFF;
+	border:1px solid black;
+}
+
+.core_gui_pageview_pages {
+	display:inline;
+}
+
+.core_gui_pageview_pages .current_page {
+	font-weight:bold;
+}

@@ -1,0 +1,35 @@
+<?php
+
+class Rakuun_Intern_GUI_Panel_Summary_Units extends GUI_Panel {
+	public function init() {
+		parent::init();
+		
+		$this->setTemplate(dirname(__FILE__).'/summary.tpl');
+		
+		$table = new GUI_Panel_Table('summary');
+		$summeAtt = 0;
+		$summeDeff = 0;
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
+			if ($unit->getAmount() > 0) {
+				$table->addLine(
+					array(
+						new GUI_Control_Link('link'.$unit->getInternalName(), $unit->getName(), App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $unit->getType(), 'id' => $unit->getInternalName()))),
+						GUI_Panel_Number::formatNumber($unit->getAmount()),
+						GUI_Panel_Number::formatNumber($unit->getAttackValue()),
+						GUI_Panel_Number::formatNumber($unit->getDefenseValue())
+					)
+				);
+				$summeAtt += $unit->getAttackValue();
+				$summeDeff += $unit->getDefenseValue();
+			}
+		}
+		if (count($table->getLines()) == 0)
+			$this->addPanel(new GUI_Panel_Text('summary', 'Keine.'));
+		else {
+			$table->addHeader(array('Name', 'Anzahl', 'Att', 'Deff'));
+			$table->addFooter(array('Summe:', '', GUI_Panel_Number::formatNumber($summeAtt), GUI_Panel_Number::formatNumber($summeDeff)));
+			$this->addPanel($table);
+		}
+	}
+}
+?>

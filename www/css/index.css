@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+/*
+	$1  -  Index
+	$2  -  Registration
+	$3  -  Login
+	$4  -  News
+*/
+
+/* $1  -  Index --------------------------------------------------------------*/
+#ctn_index
+{
+	margin:0px auto;
+	width:1020px;
+}
+
+#ctn_navigation ul {
+	margin:10px;
+}
+
+#ctn_navigation ul li {
+	display:inline;
+	margin-right:20px;
+}
+
+#ctn_navigation ul li.core_navigation_node_inpath a {
+	text-decoration:underline;
+}
+
+/* $2  -  Registration -------------------------------------------------------*/
+
+/* $3  -  Login --------------------------------------------------------------*/
+
+/* $4  -  News ---------------------------------------------------------------*/
+#ctn_content .rakuun_news_item
+{
+	float:none;
+}
+
+#ctn_content .rakuun_news_item label
+{
+	float:none;
+}

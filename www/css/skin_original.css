@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+/*
+	IMPORTANT NOTE:
+	In skin files, all css selectors must be "prefixed" with the skin selector,
+	e.g.: .skin_original
+*/
+
+/*
+	$1  -  Common Elements
+	$2  -  Boxes
+	$3  -  Messages
+*/
+
+/* $1  -  Common Elements ----------------------------------------------------*/
+body.skin_original {
+	background-color:#486890;
+	font-family:Verdana,Helvetica,sans-serif;
+	color:#C0C0C0;
+}
+
+/* $2  -  Boxes --------------------------------------------------------------*/
+.skin_original .rakuun_box {
+	background-color:#405478;
+	border:1px solid #000000;
+	float:left;
+}
+
+.skin_original .rakuun_box .head {
+	background-color:#486890;
+	font-weight:bold;
+}
+
+.skin_original .rakuun_box .head_inner {
+	border-bottom:1px solid #000000;
+	padding:3px;
+}
+
+.skin_original .rakuun_box .content {
+	font-size:10px;
+	padding:0px 3px;
+}
+
+.skin_original .rakuun_box .content_inner {
+	padding:3px 0px;
+}
+
+.skin_original .rakuun_box_collapsible .head_inner {
+	background:transparent url('../images/collapse.gif') no-repeat 3px 3px;
+	cursor:pointer;
+	padding-left:19px;
+}
+
+.skin_original .rakuun_box_note .head {
+	background-color:#FF0000;
+}
+
+/* $3  -  Messages -----------------------------------------------------------*/
+.skin_original .rakuun_message_unread {
+	border:1px solid #808080;
+	background-color:#405478;
+}
+
+.skin_original .rakuun_message_content {
+	background-color:#405478;
+}

@@ -1,0 +1,9 @@
+#
+#  Test Tranlations
+#
+
+---
+
+register:
+    de: Anmelden
+    en: register

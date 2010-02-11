@@ -1,0 +1,1 @@
+<? $this->displayPanel('ressource_production'); ?>

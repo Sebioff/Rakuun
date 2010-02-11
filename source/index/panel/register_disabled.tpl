@@ -1,0 +1,1 @@
+Anmeldung derzeit nicht möglich.

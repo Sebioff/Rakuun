@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Panel displaying the "envelope" of a message -> short information
+ */
+abstract class Rakuun_Intern_GUI_Panel_Message_Envelope extends GUI_Panel {
+	private $message = null;
+	
+	public function __construct($name, DB_Record $message) {
+		parent::__construct($name, '');
+		
+		$this->message = $message;
+		$this->addClasses('rakuun_message_envelope');
+		if (!$this->message->hasBeenRead)
+			$this->addClasses('rakuun_message_unread');
+	}
+	
+	// GETTERS / SETTERS -------------------------------------------------------
+	/**
+	 * @return DB_Record
+	 */
+	public function getMessage() {
+		return $this->message;
+	}
+}
+
+?>
