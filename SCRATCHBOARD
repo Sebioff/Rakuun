@@ -1,0 +1,13 @@
+vgl. /CORE/SCRATCHBOARD
+
+Antwort:
+Das Edit-Modul hast du da ja schon, dann einfach über:
+$edit->contentPanel->edit->getTitle()
+
+Frage:
+Wie komme ich von hier ->
+	class Rakuun_Intern_Module_Alliance_Navigation
+	
+an den Titel 'Allianz Details bearbeiten' von hier ->
+	class Rakuun_Intern_Module_Alliance_Edit
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('edit', new Rakuun_Intern_GUI_Panel_Alliance_Edit('Bearbeiten'), 'Allianz Details bearbeiten'));
