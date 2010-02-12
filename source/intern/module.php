@@ -17,7 +17,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		}
 		
 		// has been inactive? end session
-		if (time() > $this->getUser()->isOnline + self::TIMEOUT_NOACTIVITY
+		if (time() > $this->getUser()->lastActivity + self::TIMEOUT_NOACTIVITY
 			&& Environment::getCurrentEnvironment() != Environment::DEVELOPMENT
 		) {
 			$params = array('return' => base64_encode($this->getUrl($this->getParams())));
@@ -37,7 +37,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		// update lastActivity/isOnline max. every 10 seconds - should be enough and saves some queries
 		if ($this->getUser()->lastActivity + 10 < time()) {
 			$this->getUser()->lastActivity = time();
-			$this->getUser()->isOnline = time();
+			if (!Rakuun_User_Manager::isSitting())
+				$this->getUser()->isOnline = time();
 			Rakuun_User_Manager::update($this->getUser());
 		}
 		$this->getUser()->produceRessources();

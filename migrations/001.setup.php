@@ -51,9 +51,9 @@ $queries[] = 'ALTER TABLE `metas_applications`
 
 /*
  * last_login = time the user logged in last (sitting doesn't count; used to check if the account is actively used)
- * last_activity = last activity in this account (just used for statistics)
+ * last_activity = last activity in this account (sitting counts, used for statistics)
  * last_bot_verification = last time someone verified this account is no bot
- * is_online = 0 if user is properly logged out, otherwhise identical to last_activity (used to actually control if the user is online or not)
+ * is_online = 0 if user is properly logged out, otherwhise identical to last_activity (used to actually check if the user is online or not)
  */
 $queries[] = 'CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

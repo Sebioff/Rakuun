@@ -80,13 +80,13 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		$timeCosts = $this->getBaseTimeCosts();
 		$reductionPercent = 0;
 		if ($this->getNeededBuilding('military_base') > 0)
-			$reductionPercent += Rakuun_Intern_Production_Building_MilitaryBase::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('military_base', $this->getUser())->getLevel();
+			$reductionPercent += Rakuun_Intern_Production_Building_MilitaryBase::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('military_base', $this->getDataSource()->buildings)->getLevel();
 		if ($this->getNeededBuilding('barracks') > 0)
-			$reductionPercent += Rakuun_Intern_Production_Building_Barracks::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('barracks', $this->getUser())->getLevel();
+			$reductionPercent += Rakuun_Intern_Production_Building_Barracks::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('barracks', $this->getDataSource()->buildings)->getLevel();
 		if ($this->getNeededBuilding('tank_factory') > 0)
-			$reductionPercent += Rakuun_Intern_Production_Building_TankFactory::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('tank_factory', $this->getUser())->getLevel();
+			$reductionPercent += Rakuun_Intern_Production_Building_TankFactory::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('tank_factory', $this->getDataSource()->buildings)->getLevel();
 		if ($this->getNeededBuilding('airport') > 0)
-			$reductionPercent += Rakuun_Intern_Production_Building_Airport::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('airport', $this->getUser())->getLevel();
+			$reductionPercent += Rakuun_Intern_Production_Building_Airport::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('airport', $this->getDataSource()->buildings)->getLevel();
 		
 		$productionDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW);
 		if ($productionDatabase->hasSpecial())
@@ -127,12 +127,14 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		$value = $baseValue;
 		
 		if ($this->getNeededTechnology('laser') > 0) {
-			$value += $baseValue / 100 * 7 * Rakuun_Intern_Production_Factory::getTechnology('laser', $this->getUser())->getLevel();
+			$value += $baseValue / 100 * 7 * Rakuun_Intern_Production_Factory::getTechnology('laser', $this->getDataSource()->technologies)->getLevel();
 		}
 		
-		$attackDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_RED);
-		if ($attackDatabase->hasSpecial())
-			$value += $baseValue / 100 * 4;
+		if ($this->getUser()) {
+			$attackDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_RED);
+			if ($attackDatabase->hasSpecial())
+				$value += $baseValue / 100 * 4;
+		}
 			
 		return $value * $amount;
 	}
@@ -145,15 +147,17 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		$value = $baseValue;
 		
 		if ($this->getNeededTechnology('laser') > 0)
-			$value += $baseValue / 100 * 7 * Rakuun_Intern_Production_Factory::getTechnology('laser', $this->getUser())->getLevel();
+			$value += $baseValue / 100 * 7 * Rakuun_Intern_Production_Factory::getTechnology('laser', $this->getDataSource()->technologies)->getLevel();
 		
 		if (!$this->isOfUnitType(self::TYPE_AIRCRAFT)) {
-			$value += $baseValue / 100 * Rakuun_Intern_Production_Building_CityWall::DEFENSE_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('city_wall', $this->getUser())->getLevel();
+			$value += $baseValue / 100 * Rakuun_Intern_Production_Building_CityWall::DEFENSE_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('city_wall', $this->getDataSource()->buildings)->getLevel();
 		}
 		
-		$defenseDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_GREEN);
-		if ($defenseDatabase->hasSpecial())
-			$value += $baseValue / 100 * 4;
+		if ($this->getUser()) {
+			$defenseDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_GREEN);
+			if ($defenseDatabase->hasSpecial())
+				$value += $baseValue / 100 * 4;
+		}
 		
 		return $value * $amount;
 	}
