@@ -134,13 +134,22 @@ body.skin_space2 {
 }
 
 /* $4  -  Messages -----------------------------------------------------------*/
-.skin_space2 .rakuun_message_unread {
+.skin_space2 .rakuun_message_envelope {
 	border:1px solid #808080;
-	background-color:#405478;
+}
+
+.skin_space2 .rakuun_message_unread {
+	background-color:#1d4346;
+}
+
+.skin_space2 .rakuun_message_head {
+	border:1px solid #808080;
+	background-color:#1d4346;
 }
 
 .skin_space2 .rakuun_message_content {
-	background-color:#405478;
+	border:1px solid #808080;
+	background-color:#000000;
 }
 
 /* $5  -  Navigation ---------------------------------------------------------*/
