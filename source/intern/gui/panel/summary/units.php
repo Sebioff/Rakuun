@@ -29,7 +29,8 @@ class Rakuun_Intern_GUI_Panel_Summary_Units extends GUI_Panel {
 			$table->addHeader(array('Name', 'Anzahl', 'Att', 'Deff'));
 			$table->addFooter(array('Summe:', '', GUI_Panel_Number::formatNumber($summeAtt), GUI_Panel_Number::formatNumber($summeDeff)));
 			$wall = Rakuun_Intern_Production_Factory::getBuilding('city_wall');
-			$table->addFooter(array('Summe ohne Mauer:', '', '', GUI_Panel_Number::formatNumber($summeDeff - ($summeDeff / (1 + (100 / ($wall->getLevel() * Rakuun_Intern_Production_Building_CityWall::DEFENSE_BONUS_PERCENT)))))));
+			if ($wall->getLevel() > 0)
+				$table->addFooter(array('Summe ohne Mauer:', '', '', GUI_Panel_Number::formatNumber($summeDeff - ($summeDeff / (1 + (100 / ($wall->getLevel() * Rakuun_Intern_Production_Building_CityWall::DEFENSE_BONUS_PERCENT)))))));
 			$this->addPanel($table);
 		}
 	}
