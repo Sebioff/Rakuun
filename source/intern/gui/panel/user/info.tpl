@@ -5,7 +5,7 @@
 	<? $this->displayPanel('picture'); ?>
 <? endif; ?>
 <br class="clear" />
-Username: 
+Username:
 <? $userlink = new Rakuun_GUI_Control_UserLink('userlink', $user); ?>
 <? $userlink->display(); ?>
 <br class="clear" />
@@ -27,22 +27,22 @@ Koordinaten:
 <br class="clear" />
 	Hinweis: Du befindest dich im Noobschutz!
 	Im Noobschutz kannst du nicht handeln und nicht angegriffen werden.
-	Du verlässt den Noobschutz, sobald deine Punktzahl 
+	Du verlässt den Noobschutz, sobald deine Punktzahl
 	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints(); ?>
 	<? $output = '>= '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_POINTS): ?>
-		<? $output .= $averagePoints; ?>
+		<? $output .= floor($averagePoints); ?>
 	<? else: ?>
 		<? $output .= RAKUUN_NOOB_START_LIMIT_OF_POINTS; ?>
-	<? endif; ?> 
+	<? endif; ?>
 	<?= $output; ?>
 	oder deine Armeestärke
 	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength(); ?>
 	<? $output = '>= '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH): ?>
-		<? $output .= $averagePoints; ?>
+		<? $output .= floor($averagePoints); ?>
 	<? else: ?>
 		<? $output .= RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH; ?>
 	<? endif; ?>
-	<?= $output; ?> ist oder du ein Datenbankteil eroberst oder ein Schildgenerator baust. 
+	<?= $output; ?> ist oder du ein Datenbankteil eroberst oder ein Schildgenerator baust.
 <? endif; ?>

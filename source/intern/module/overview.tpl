@@ -53,6 +53,26 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<? $this->displayPanel('buildings') ?>
 	<? $this->displayPanel('technologies') ?>
 	<? $this->displayPanel('units') ?>
+	
+	<a href="http://www.galaxy-news.de/?page=charts&op=vote&game_id=67" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
+	<br/>
+	<br/>
+	<!-- Beginning of Project Wonderful ad code: -->
+	<!-- Ad box ID: 42688 -->
+	<script type="text/javascript">
+	<!--
+	var pw_d=document;
+	pw_d.projectwonderful_adbox_id = "42688";
+	pw_d.projectwonderful_adbox_type = "4";
+	pw_d.projectwonderful_foreground_color = "";
+	pw_d.projectwonderful_background_color = "";
+	//-->
+	</script>
+	<script type="text/javascript" src="http://www.projectwonderful.com/ad_display.js"></script>
+	<noscript><map name="admap42688" id="admap42688"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=42688&amp;type=4" shape="rect" coords="0,0,125,125" title="" alt="" target="_blank" /></map>
+	<table cellpadding="0" border="0" cellspacing="0" width="125" bgcolor="#000000"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=42688&amp;type=4" width="125" height="125" usemap="#admap42688" border="0" alt="" /></td></tr><tr><td bgcolor="#000000" colspan="1"><center><a style="font-size:10px;color:#FFFFFF;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;" href="http://www.projectwonderful.com/advertisehere.php?id=42688&amp;type=4" target="_blank">Your ad could be here, right now.</a></center></td></tr></table>
+	</noscript>
+	<!-- End of Project Wonderful ad code. -->
 </div>
 
 <? if ($this->hasPanel('sitterbox')): ?>
