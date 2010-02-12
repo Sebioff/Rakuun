@@ -7,7 +7,7 @@
 	<div class="rakuun_board_postinfo">
 		<? $this->displayPanel('date'); ?><br />
 		<? $this->displayPanel('user'); ?>:
-		<? if ($this->params->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()): ?>
+		<? if ($this->hasPanel('editlink')): ?>
 			<? $this->displayPanel('editlink'); ?>
 		<? endif; ?>
 		<br />

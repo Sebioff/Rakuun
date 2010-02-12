@@ -44,11 +44,13 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		
 		if (Rakuun_User_Manager::getCurrentUser()->alliance && Rakuun_User_Manager::getCurrentUser()->alliance->buildings->databaseDetector > 0) {
 			$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
-			$options = array();
-			$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
-			foreach (Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->select($options) as $databasePosition) {
-				$this->addPanel($databasePanel = new Rakuun_Intern_GUI_Panel_Map_Database($this, $databasePosition->identifier, $databasePosition->positionX, $databasePosition->positionY));
-				$this->scrollItems[] = $databasePanel;
+			if (!empty($visibleDatabases)) {
+				$options = array();
+				$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
+				foreach (Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->select($options) as $databasePosition) {
+					$this->addPanel($databasePanel = new Rakuun_Intern_GUI_Panel_Map_Database($this, $databasePosition->identifier, $databasePosition->positionX, $databasePosition->positionY));
+					$this->scrollItems[] = $databasePanel;
+				}
 			}
 		}
 		

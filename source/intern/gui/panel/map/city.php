@@ -30,7 +30,7 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		parent::afterInit();
 		
 		$style = array(
-			'cursor:pointer',
+			'display:block',
 			'position:absolute',
 			'height:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
 			'width:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
@@ -38,6 +38,15 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 			'top:'.$this->map->realToViewPositionY($this->cityOwner->cityY).'px'
 		);
 		$this->setAttribute('style', implode(';', $style));
+		$this->setAttribute('onClick', sprintf('$(\'#%s\').val(\'%s\'); return false;', $this->map->target->target->target->getID(), $this->getCityOwner()->nameUncolored));
+	}
+	
+	// GETTERS / SETTERS -------------------------------------------------------
+	/**
+	 * @return Rakuun_DB_User
+	 */
+	public function getCityOwner() {
+		return $this->cityOwner;
 	}
 }
 

@@ -12,9 +12,13 @@
 <p><?= $this->params->alliance->intern ? $this->params->alliance->intern : 'Keine Beschreibung.' ?></p>
 
 <? $this->displayPanel('leave'); ?>
-<? $this->displayPanel('delete'); ?>
+<? if ($this->hasPanel('delete')): ?>
+	<? $this->displayPanel('delete'); ?>
+<? endif; ?>
 <br class="clear" />
-<? $this->displayPanel('account'); ?>
+<? if ($this->hasPanel('account')): ?>
+	<? $this->displayPanel('account'); ?>
+<? endif; ?>
 <? $this->displayPanel('deposit'); ?>
 <? if ($this->hasPanel('activity')): ?>
 	<br class="clear" />

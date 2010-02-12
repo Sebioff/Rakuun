@@ -30,14 +30,16 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 				else {
 					if ($army->user->alliance && $this->canTransportDatabase($army)) {
 						$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance($army->user->alliance);
-						$options = array();
-						$options['conditions'][] = array('position_x = ?', $army->targetX);
-						$options['conditions'][] = array('position_y = ?', $army->targetY);
-						$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
-						if ($database = Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->selectFirst($options)) {
-							$databaseSpecial = new Rakuun_User_Specials_Database($army->user, $database->identifier, true);
-							$databaseSpecial->giveSpecial();
-							$database->delete();
+						if (!empty($visibleDatabases)) {
+							$options = array();
+							$options['conditions'][] = array('position_x = ?', $army->targetX);
+							$options['conditions'][] = array('position_y = ?', $army->targetY);
+							$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
+							if ($database = Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->selectFirst($options)) {
+								$databaseSpecial = new Rakuun_User_Specials_Database($army->user, $database->identifier, true);
+								$databaseSpecial->giveSpecial();
+								$database->delete();
+							}
 						}
 					}
 					
@@ -271,16 +273,18 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 			
 			if (!$fightingSystem->getDefenderWon() && $army->user->alliance && $this->canTransportDatabase($army)) {
 				$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance($army->user->alliance);
-				$options = array();
-				$options['conditions'][] = array('user = ?', $army->target);
-				$options['conditions'][] = array('active = ?', true);
-				$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
-				if ($database = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->selectFirst($options)) {
-					$databaseSpecial = new Rakuun_User_Specials_Database($army->user, $database->identifier, true);
-					$databaseSpecial->giveSpecial();
-					
-					$looserReportText .= '<br/><br/>Es wurde ein Datenbankteil gestohlen!';
-					$winnerReportText .= '<br/><br/>Es wurde ein Datenbankteil erobert!';
+				if (!empty($visibleDatabases)) {
+					$options = array();
+					$options['conditions'][] = array('user = ?', $army->target);
+					$options['conditions'][] = array('active = ?', true);
+					$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
+					if ($database = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->selectFirst($options)) {
+						$databaseSpecial = new Rakuun_User_Specials_Database($army->user, $database->identifier, true);
+						$databaseSpecial->giveSpecial();
+						
+						$looserReportText .= '<br/><br/>Es wurde ein Datenbankteil gestohlen!';
+						$winnerReportText .= '<br/><br/>Es wurde ein Datenbankteil erobert!';
+					}
 				}
 			}
 			

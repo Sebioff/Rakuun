@@ -2,7 +2,11 @@
 
 Dies ist eine Testversion, in der noch einige Funktionen fehlen und die	insbesondere nicht so aussieht wie die fertige Version aussehen soll.
 <br />
-Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http://tickets.rakuun.de" target="_blank"><u>hier</u></a> melden (oder dem <a href="<?= App::get()->getInternModule()->getSubmodule('messages')->getURL(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS)); ?>"><u>Support</u></a>).
+Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http://tickets.rakuun.de" target="_blank"><u>hier</u></a> melden
+<? if (App::get()->getInternModule()->hasSubmodule('messages')): ?>
+(oder dem <a href="<?= App::get()->getInternModule()->getSubmodule('messages')->getURL(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS)); ?>"><u>Support</u></a>)
+<? endif; ?>
+.
 <br />
 <br />
 

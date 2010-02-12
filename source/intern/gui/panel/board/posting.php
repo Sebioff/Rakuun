@@ -8,7 +8,7 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 	
 	public function __construct($name, DB_Record $posting) {
 		$this->posting = $posting;
-		parent::__construct($name);		
+		parent::__construct($name);
 	}
 	
 	public function init() {
@@ -25,15 +25,15 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		$this->params->posting = $this->posting;
 		$this->addPanel(new GUI_Panel_Date('date', $this->posting->date));
 		$this->addPanel(new Rakuun_GUI_Control_Userlink('user', $this->posting->user));
-		if ($this->posting->editdate) 
+		if ($this->posting->editdate)
 			$this->addPanel(new GUI_Panel_Date('editdate', $this->posting->editdate));
-		if ($this->posting->user == Rakuun_User_Manager::getCurrentUser()) {
+		if ($this->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {
 			$this->addPanel(new GUI_Control_Link('editlink', '-edit-', Router::get()->getCurrentModule()->getUrl(array('board' => $this->posting->board->getPK(), 'edit' => $this->posting->getPK()))));
 		}
 	}
 	
 	public function onSubmit() {
-		if ($this->hasErrors()) 
+		if ($this->hasErrors())
 			return;
 		
 		$this->posting->text = $this->text->getValue();
