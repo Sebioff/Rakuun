@@ -57,7 +57,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 	
 	private function fight(DB_Record $army) {
 		$playersAreAllied =	($army->user->alliance && $army->target->alliance && $army->user->alliance->getPK() == $army->target->alliance->getPK());
-		if (!$playersAreAllied && $diplomacy = $army->user->alliance->getDiplomacy($army->target->alliance)) {
+		if (!$playersAreAllied && $army->user->alliance && $army->target->alliance && $diplomacy = $army->user->alliance->getDiplomacy($army->target->alliance)) {
 			$playersAreAllied = ($diplomacy->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_AUVB);
 		}
 		
