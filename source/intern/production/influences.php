@@ -42,7 +42,7 @@ class Rakuun_Intern_Production_Influences {
 		if ($user === null)
 			$user = Rakuun_User_Manager::getCurrentUser();
 		
-		$satisfaction = self::getPeopleSatisfaction($user);
+		$satisfaction = self::getPeopleSatisfaction($user) * RAKUUN_SPEED_SATISFACTION_MULTIPLIER;
 		if ($satisfaction >= 1250) {
 			return 0.85;
 		}

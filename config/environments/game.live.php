@@ -14,6 +14,7 @@ define('RAKUUN_REGISTRATION_ENABLED', true);
 define('RAKUUN_SPEED_BUILDING', 1);
 define('RAKUUN_SPEED_UNITPRODUCTION', 1);
 define('RAKUUN_SPEED_UNITMOVEMENT', 1);
+define('RAKUUN_SPEED_SATISFACTION_MULTIPLIER', 1);
 define('RAKUUN_SPEED_DANCERTIA_STARTTIME', 5 * 24 * 60 * 60);
 
 // $3  -  Ressources ///////////////////////////////////////////////////////////
