@@ -46,6 +46,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmy extends GUI_Panel {
 		// calculate armies current position
 		$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($this->army);
 		$pathCalculator->getPath();
+		Rakuun_DB_Containers::getArmiesPathsContainer()->deleteByArmy($this->army);
 		$this->army->targetX = $this->army->user->cityX;
 		$this->army->targetY = $this->army->user->cityY;
 		$this->army->tick = time();

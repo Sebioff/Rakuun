@@ -11,6 +11,7 @@
 	$6  -  Overview
 	$7  -  Techtree
 	$8  -  WarSim
+	$9  -  Map
 */
 
 /* $1  -  Common -------------------------------------------------------------*/
@@ -302,4 +303,15 @@ table.boardview td.posting_count {
 #warsim_panels_buildings .warsim_panels_defender
 {
 	margin-left:214px;
+}
+
+/* $9  -  Map ----------------------------------------------------------------*/
+.rakuun_city
+{
+	background-color:#008000;
+}
+
+.rakuun_city_own
+{
+	background-color:#FFFFFF;
 }

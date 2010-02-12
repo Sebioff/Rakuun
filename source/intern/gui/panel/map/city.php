@@ -10,6 +10,9 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		$this->cityOwner = $cityOwner;
 		$this->map = $map;
 		
+		if ($this->cityOwner->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK())
+			$this->addClasses('rakuun_city_own');
+		
 		$hoverText = $cityOwner->nameUncolored.
 			'<br/>'.Text::escapeHTML($cityOwner->cityName).
 			'<br/>Punkte: '.GUI_Panel_Number::formatNumber($cityOwner->points);
@@ -20,7 +23,7 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/city.tpl');
-		$this->addClasses('scroll_item');
+		$this->addClasses('scroll_item', 'rakuun_city');
 	}
 	
 	public function afterInit() {
@@ -29,7 +32,6 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		$style = array(
 			'cursor:pointer',
 			'position:absolute',
-			'background-color:green',
 			'height:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
 			'width:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
 			'left:'.$this->map->realToViewPositionX($this->cityOwner->cityX).'px',

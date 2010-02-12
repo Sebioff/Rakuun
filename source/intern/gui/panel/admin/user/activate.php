@@ -36,7 +36,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Activate extends GUI_Panel {
 		if ($this->hasErrors())
 			return;
 		
-		
+		Rakuun_DB_Containers::getUserActivationContainer()->deleteByUser($user);
 		$user->activationTime = time();
 		$user->save();
 	}
