@@ -10,6 +10,7 @@ class Rakuun_Intern_Module_Admin extends Rakuun_Intern_Module implements Scriptl
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/admin.tpl');
 		
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('board', new Rakuun_Intern_GUI_Panel_Admin_Board('board'), 'Admin Forum'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('cronjobs', new Rakuun_Intern_GUI_Panel_Admin_Cronjobs('cronjobs'), 'Cronjobs'));
 		
 		if (Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_GAMEUPDATE)) {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('update', new Rakuun_Intern_GUI_Panel_Admin_Update('update'), 'Spielupdate'));
