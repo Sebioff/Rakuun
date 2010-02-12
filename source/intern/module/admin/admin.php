@@ -34,6 +34,7 @@ class Rakuun_Intern_Module_Admin extends Rakuun_Intern_Module implements Scriptl
 			$param = $this->getParam('edit');
 			$edituser = Rakuun_DB_Containers::getUserContainer()->selectByPK($param);
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('useredit', new Rakuun_Intern_GUI_Panel_Admin_User_Edit('useredit', $edituser), 'User Bearbeiten'));
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('activateuser', new Rakuun_Intern_GUI_Panel_Admin_User_Activate('activateuser'), 'User aktivieren'));
 		}
 		if (Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_CAUTION)) {
 			$param = $this->getParam('caution');
