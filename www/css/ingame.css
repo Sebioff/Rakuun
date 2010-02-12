@@ -243,7 +243,8 @@ table.boardview td.posting_count {
 	margin-bottom:20px;
 }
 
-.shout_text
+.shout_text,
+.shout_header
 {
 	overflow:hidden;
 	width:333px;
@@ -252,7 +253,7 @@ table.boardview td.posting_count {
 
 #main-overview_content-info
 {
-	width:185px;
+	width:180px;
 }
 
 /* $7  -  Techtree -----------------------------------------------------------*/
