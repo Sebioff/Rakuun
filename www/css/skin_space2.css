@@ -134,12 +134,12 @@ body.skin_space2 {
 }
 
 /* $4  -  Messages -----------------------------------------------------------*/
-.skin_original .rakuun_message_unread {
+.skin_space2 .rakuun_message_unread {
 	border:1px solid #808080;
 	background-color:#405478;
 }
 
-.skin_original .rakuun_message_content {
+.skin_space2 .rakuun_message_content {
 	background-color:#405478;
 }
 
@@ -292,7 +292,8 @@ body.skin_space2 {
 .skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_statistics a,
 .skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_admin a,
 .skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_summary a,
-.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_multihunting a
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_multihunting a,
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_support a
 {
 	background-position:0px -325px;
 	font-size:inherit;
