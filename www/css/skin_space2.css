@@ -318,10 +318,31 @@ body.skin_space2 {
 }
 
 .skin_space2 #ctn_head #ctn_ressources .rakuun_ressource {
-	background:#000000 url('../images/space2/navigation/button_sprites.gif') no-repeat 0px -325px;
 	color:#AAAAAA;
 	display:block;
-	height:25px;
+	height:30px;
+	padding-right:40px;
+	text-align:right;
+}
+
+.skin_space2 #ctn_head #ctn_ressources .rakuun_ressource label {
+	display:none;
+}
+
+.skin_space2 #ctn_head #ctn_ressources .rakuun_ressource_iron {
+	background:#000000 url('../images/space2/navigation/button_sprites.gif') no-repeat 0px -385px;
+}
+
+.skin_space2 #ctn_head #ctn_ressources .rakuun_ressource_beryllium {
+	background:#000000 url('../images/space2/navigation/button_sprites.gif') no-repeat 0px -415px;
+}
+
+.skin_space2 #ctn_head #ctn_ressources .rakuun_ressource_energy {
+	background:#000000 url('../images/space2/navigation/button_sprites.gif') no-repeat 0px -445px;
+}
+
+.skin_space2 #ctn_head #ctn_ressources .rakuun_ressource_people {
+	background:#000000 url('../images/space2/navigation/button_sprites.gif') no-repeat 0px -475px;
 }
 
 .skin_space2 #ctn_head {
