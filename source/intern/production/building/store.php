@@ -17,7 +17,7 @@ class Rakuun_Intern_Production_Building_Store extends Rakuun_Intern_Production_B
 	}
 	
 	public function getSaveCapacity() {
-		return round($this->getCapacity() / 100 * RAKUUN_STORE_CAPACITY_SAVEPERCENT);
+		return ceil((time() - RAKUUN_ROUND_STARTTIME) / 60 / 60 / 24 / 7) * 1000 * RAKUUN_STORE_CAPACITY_SAVE_MULTIPLIER;
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

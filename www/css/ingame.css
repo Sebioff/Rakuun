@@ -250,6 +250,11 @@ table.boardview td.posting_count {
 	word-wrap:break-word;
 }
 
+#main-overview_content-info
+{
+	width:185px;
+}
+
 /* $7  -  Techtree -----------------------------------------------------------*/
 .module_techtree h1
 {

@@ -19,7 +19,7 @@ define('RAKUUN_SPEED_DANCERTIA_STARTTIME', 5 * 24 * 60 * 60);
 // $3  -  Ressources ///////////////////////////////////////////////////////////
 define('RAKUUN_RESSOURCEPRODUCTION_MULTIPLIER', 1);
 define('RAKUUN_STORE_CAPACITY_MULTIPLIER', 1);
-define('RAKUUN_STORE_CAPACITY_SAVEPERCENT', 10);
+define('RAKUUN_STORE_CAPACITY_SAVE_MULTIPLIER', 1);
 define('RAKUUN_TRADELIMIT_MULTIPLIER', 1);
 
 // $4 - Noob ///////////////////////////////////////////////////////////////////

@@ -98,8 +98,9 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('logout'), 'Logout', array('rakuun_navigation_node_logout'));
 			
 		$this->mainPanel->params->navigation = $navigation;
-		if (Rakuun_User_Manager::getCurrentUser()->tutorial)
-			$this->mainPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('tutor', new Rakuun_Intern_GUI_Panel_Tutor('tutor'), 'Tutor'));
+		// TODO re-activate as soon as tutorial steps have been implemented (ticket #68)
+//		if (Rakuun_User_Manager::getCurrentUser()->tutorial)
+//			$this->mainPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('tutor', new Rakuun_Intern_GUI_Panel_Tutor('tutor'), 'Tutor'));
 	}
 	
 	public function afterInit() {
