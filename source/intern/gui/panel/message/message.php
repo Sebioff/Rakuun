@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	public function init() {
 		parent::init();
 		
-		if ($this->message->user->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK())
+		if ($this->message->user->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK() && (!$this->message->sender || $this->message->sender->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK()))
 			return;
 		
 		if (!$this->message->hasBeenRead) {

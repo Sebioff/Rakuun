@@ -12,6 +12,6 @@
 		<br class="clear" />
 	</div>
 	<div class="rakuun_message_content">
-		<?= $this->getMessage()->text; ?>
+		<?= nl2br($this->getMessage()->text); ?>
 	</div>
 </div>
