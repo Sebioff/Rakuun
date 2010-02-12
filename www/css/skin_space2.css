@@ -287,27 +287,13 @@ body.skin_space2 {
 	height:42px;
 }
 
-.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_stockmarket a {
-	background-position:0px -325px;
-	font-size:inherit;
-}
-
-.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_vips a {
-	background-position:0px -325px;
-	font-size:inherit;
-}
-
-.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_statistics a {
-	background-position:0px -325px;
-	font-size:inherit;
-}
-
-.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_admin a {
-	background-position:0px -325px;
-	font-size:inherit;
-}
-
-.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_multihunting a {
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_stockmarket a,
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_vips a,
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_statistics a,
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_admin a,
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_summary a,
+.skin_space2 #ctn_head #ctn_navigation li.rakuun_navigation_node_multihunting a
+{
 	background-position:0px -325px;
 	font-size:inherit;
 }
