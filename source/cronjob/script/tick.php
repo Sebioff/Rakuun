@@ -16,7 +16,7 @@ class Rakuun_Cronjob_Script_Tick extends Rakuun_Cronjob_Script {
 			// produce units
 			new Rakuun_Intern_Production_Producer_Units(Rakuun_DB_Containers::getUnitsContainer(), Rakuun_DB_Containers::getUnitsWIPContainer(), $user);
 			// TODO quickfix: noob protection calculation isn't done everytime that is needed yet (e.g. when finishing units or the noob protection limits are raised)
-			$user->reachNoob();
+			$user->recalculatePoints();
 			DB_Connection::get()->commit();
 		}
 		
