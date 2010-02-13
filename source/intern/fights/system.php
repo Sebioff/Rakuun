@@ -109,6 +109,7 @@ class Rakuun_Intern_Fights_System {
 			
 			$fightingUnit = Rakuun_Intern_Production_Factory::getUnit($fightingUnitName, $winnerUnitSource);
 			
+			//FIXME Fatal error! Call to a member function getAmount() on a non-object 
 			if ($fightingUnit->getAmount() <= 0)
 				continue;
 			
