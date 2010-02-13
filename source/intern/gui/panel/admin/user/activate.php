@@ -18,7 +18,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Activate extends GUI_Panel {
 		
 		// get only users who are not activated
 		$notactivatedusers = array();
-		$options[] = 'activation_time == 0';
+		$options['conditions'][] = array('activation_time = 0');
 		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $user) {
 			$notactivatedusers[$user->getPK()] = $user->nameUncolored;
 		}
