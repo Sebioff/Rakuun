@@ -17,5 +17,6 @@
 			<? endif; ?>
 		</li>
 	<? endforeach ?>
+	<li>Anzahl: <?= count($this->params->members); ?></li>
 	</ul>
 <? endif ?>
