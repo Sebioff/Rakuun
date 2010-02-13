@@ -27,7 +27,6 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 			$this->addSubmodule(new Rakuun_Intern_Module_FightDetails('fightdetails'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance('alliance'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta('meta'));
-			
 			$this->addSubmodule(new Rakuun_Intern_Module_Map('map'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Messages('messages'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Profile('profile'));
@@ -43,7 +42,7 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 		}
 		// modules that are only accessible by sitter
 		else {
-			$this->addSubmodule(new Rakuun_Intern_Module_LogoutSitter('logout'));
+			$this->addSubmodule(new Rakuun_Intern_Module_LogoutSitter('sitterlogout'));
 		}
 	}
 	

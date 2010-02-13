@@ -48,7 +48,8 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		foreach ($this->panelsForDefenders as $unitName => $panel) {
 			$defenders->{Text::underscoreToCamelCase($unitName)} = $panel->getValue();
 		}
-		$defenders->fightingSequence = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret|pezetto';
+		// TODO re-add pezetto at end of list if pezetto gets implemented
+		$defenders->fightingSequence = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret';
 		$defenderTechnology = new DB_Record();
 		foreach ($this->panelsForDefendersTechnology as $technologyName => $panel) {
 			$defenderTechnology->{Text::underscoreToCamelCase($technologyName)} = $panel->getValue();

@@ -96,6 +96,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('support'), 'Support', array('rakuun_navigation_node_support'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('logout'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('logout'), 'Logout', array('rakuun_navigation_node_logout'));
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('sitterlogout'))
+			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('sitterlogout'), 'Zu eigenem Account', array('rakuun_navigation_node_logout'));
 			
 		$this->mainPanel->params->navigation = $navigation;
 		// TODO re-activate as soon as tutorial steps have been implemented (ticket #68)

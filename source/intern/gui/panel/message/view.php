@@ -60,7 +60,8 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 				self::ACTION_MARK_AS_READ	=> 'als gelesen markieren'
 			);
 			$this->addPanel(new GUI_Control_DropDownBox('actions', $actions));
-			$this->addPanel(new GUI_Control_SubmitButton('execute_actions', 'OK'));
+			$this->addPanel($executeActionsButton = new GUI_Control_SubmitButton('execute_actions', 'OK'));
+			$executeActionsButton->setConfirmationMessage('Wirklich die gewählte Aktion durchführen?');
 		}
 		
 		$this->setTemplate(dirname(__FILE__).'/view.tpl');
@@ -83,6 +84,8 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 			$options['properties'] = 'has_been_read = 1';
 			$this->getMessagesContainer()->updateByOptions($options);
 		}
+		
+		$this->getModule()->invalidate();
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
