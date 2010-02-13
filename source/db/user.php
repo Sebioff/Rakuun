@@ -182,9 +182,9 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
 		$armyStrength = 0;
 		foreach ($units as $unit) {
-			$armyStrength += $unit->getArmyStrength();
+			$armyStrength += $unit->getPoints();
 		}
-
+		
 		$this->isInNoob = ($this->points <= $nooblimit	// points below point limit
 						&& $armyStrength <= $armyStrengthLimit //armystrength below armystrength limit
 						&& $this->buildings->shieldGenerator == 0	// no shield generator
