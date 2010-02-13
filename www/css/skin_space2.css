@@ -360,10 +360,27 @@ body.skin_space2 {
 /* $6  -  Overview -----------------------------------------------------------*/
 .skin_space2 #ctn_cityitems
 {
-	margin-right:15px;
+	margin-right:5px;
 }
 
 .skin_space2 #main-overview_content-info
 {
-	margin-right:15px;
+	margin-right:5px;
+	width:310px;
+}
+
+.skin_space2 #main-overview_content-sitterbox textarea
+{
+	width:230px;
+}
+
+.skin_space2 #main-overview_content-sbbox {
+	width:240px;
+}
+
+.skin_space2 #main-overview_content-sbbox .shout_header,
+.skin_space2 #main-overview_content-sbbox .shout_text,
+.skin_space2 #main-overview_content-sbbox textarea
+{
+	width:230px;
 }

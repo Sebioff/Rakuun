@@ -57,9 +57,8 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<? $this->displayPanel('buildings') ?>
 	<? $this->displayPanel('technologies') ?>
 	<? $this->displayPanel('units') ?>
-	<? $this->displayPanel('info'); ?>
 	
-	<a href="http://www.galaxy-news.de/?page=charts&op=vote&game_id=67" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
+	<a href="http://www.galaxy-news.de/?page=charts&amp;op=vote&amp;game_id=67" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
 	<br/>
 	<br/>
 	<!-- Beginning of Project Wonderful ad code: -->
@@ -78,17 +77,19 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<table cellpadding="0" border="0" cellspacing="0" width="125" bgcolor="#000000"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=42688&amp;type=4" width="125" height="125" usemap="#admap42688" border="0" alt="" /></td></tr><tr><td bgcolor="#000000" colspan="1"><center><a style="font-size:10px;color:#FFFFFF;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;" href="http://www.projectwonderful.com/advertisehere.php?id=42688&amp;type=4" target="_blank">Your ad could be here, right now.</a></center></td></tr></table>
 	</noscript>
 	<!-- End of Project Wonderful ad code. -->
+
+	<? if ($this->hasPanel('sitterbox')): ?>
+		<? $this->displayPanel('sitterbox'); ?>
+	<? endif; ?>
+	
+	<? if ($this->hasPanel('sitterswitch')): ?>
+		<? $this->displayPanel('sitterswitch'); ?>
+	<? endif; ?>
 </div>
 
+<? $this->displayPanel('info'); ?>
 
 <? if ($this->hasPanel('sbbox')): ?>
 	<? $this->displayPanel('sbbox'); ?>
-<? endif; ?>
-
-<? if ($this->hasPanel('sitterbox')): ?>
-	<? $this->displayPanel('sitterbox'); ?>
-<? endif; ?>
-
-<? if ($this->hasPanel('sitterswitch')): ?>
-	<? $this->displayPanel('sitterswitch'); ?>
+	<br class="clear" />
 <? endif; ?>
