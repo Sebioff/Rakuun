@@ -7,6 +7,7 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->addSubmodule(new Rakuun_Intern_Module_Overview('overview'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Build('build'));
+		$this->addSubmodule(new Rakuun_Intern_Module_Produce('produce'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Research('research'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Techtree('techtree'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Ressources('ressources'));
@@ -26,7 +27,7 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 			$this->addSubmodule(new Rakuun_Intern_Module_FightDetails('fightdetails'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance('alliance'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta('meta'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Produce('produce'));
+			
 			$this->addSubmodule(new Rakuun_Intern_Module_Map('map'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Messages('messages'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Profile('profile'));
