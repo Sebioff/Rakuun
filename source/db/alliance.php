@@ -73,6 +73,16 @@ class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_O
 		}
 		$this->save();
 	}
+	
+	public function getAverageMilitaryStrength() {
+		$sum = 0;
+		$count = 0;
+		foreach ($this->getMembers() as $member) {
+			$sum += $member->getArmyStrength();
+			$count++;
+		}
+		return $sum / $count;
+	}
 }
 
 ?>

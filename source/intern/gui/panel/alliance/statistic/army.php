@@ -30,8 +30,6 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			$units = Rakuun_Intern_Production_Factory::getAllUnits($user);
 			$i = 0;
 			$line = array(new Rakuun_GUI_Control_UserLink('user'.$user->getPK(), $user));
-			$att = 0;
-			$deff = 0;
 			$header[++$i] = 'Online';
 			$online = new GUI_Panel_Text('online'.$user->getPK(), $user->isOnline() ? 1 : 0);
 			$online->addClasses($user->isOnline() ? 'user_online' : 'user_offline');
@@ -54,8 +52,6 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 				if (!$unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY))
 					$lineText .= ' / '.GUI_Panel_Number::formatNumber($notAtHome);
 				$line[$unit->getInternalName()] = $lineText;
-				$att += $unit->getAttackValue();
-				$deff += $unit->getDefenseValue();
 			}
 			$header[++$i] = 'Stadtmauer';
 			$line[] = $user->buildings->cityWall;
@@ -64,15 +60,15 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			$line[] = $user->technologies->laser;
 			$summe['Laser'] = '';
 			$header[++$i] = 'Att';
-			$line[] = GUI_Panel_Number::formatNumber($att);
+			$line[] = GUI_Panel_Number::formatNumber($user->att);
 			if (!isset($summe['att']))
 				$summe['att'] = 0;
-			$summe['att'] += $att;
+			$summe['att'] += $user->att;
 			$header[++$i] = 'Deff';
-			$line[] = GUI_Panel_Number::formatNumber($deff);
+			$line[] = GUI_Panel_Number::formatNumber($user->deff);
 			if (!isset($summe['deff']))
 				$summe['deff'] = 0;
-			$summe['deff'] += $deff;
+			$summe['deff'] += $user->deff;
 			$header[++$i] = 'Punkte';
 			$line[] = GUI_Panel_Number::formatNumber($user->points);
 			if (!isset($summe['points']))

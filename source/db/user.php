@@ -10,6 +10,8 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$this->setVirtualProperty('units', array($this, 'getUnits'));
 		$this->setVirtualProperty('armies', array($this, 'getArmies'));
 		$this->setVirtualProperty('name_uncolored', array($this, 'getNameUncolored'));
+		$this->setVirtualProperty('att', array($this, 'getAttackValue'));
+		$this->setVirtualProperty('deff', array($this, 'getDefenseValue'));
 		//check for user callbacks
 		Rakuun_User_Callbacks::get($this)->run();
 	}
@@ -228,6 +230,34 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		 	$ressources->save();
 		}
 	 	DB_Connection::get()->commit();
+	}
+	
+	public function getAttackValue() {
+		$att = 0;
+		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
+		foreach ($units as $unit) {
+			$att += $unit->getAttackValue();
+		}
+		return $att;
+	}
+	
+	public function getDefenseValue() {
+		$deff = 0;
+		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
+		foreach ($units as $unit) {
+			$deff += $unit->getDefenseValue();
+		}
+		return $deff;
+	}
+	
+	public function getArmyStrength() {
+		$sum = 0;
+		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
+		foreach ($units as $unit) {
+			$sum += $unit->getAttackValue();
+			$sum += $unit->getDefenseValue();
+		}
+		return $sum / 2;
 	}
 	
 	/**
