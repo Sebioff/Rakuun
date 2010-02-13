@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/posting.tpl');
 		if (Router::get()->getCurrentModule()->getParam('edit') == $this->posting->getPK()
-			&& Rakuun_User_Manager::getCurrentUser() == $this->posting->user
+			&& Rakuun_User_Manager::getCurrentUser()->getPK() == $this->posting->user->getPK()
 		) {
 			$this->addPanel($text = new GUI_Control_TextArea('text', $this->posting->text, 'Posting'));
 			$text->addValidator(new GUI_Validator_Mandatory());

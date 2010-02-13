@@ -29,6 +29,7 @@ class Rakuun_Intern_GUI_Panel_Board_Addposting extends GUI_Panel {
 		$posting->text = $this->text;
 		$posting->date = time();
 		Rakuun_DB_Containers::getBoardsPostingsContainer()->save($posting);
+		$this->text->setValue('');
 	}
 }
 

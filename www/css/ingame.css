@@ -12,6 +12,7 @@
 	$7  -  Techtree
 	$8  -  WarSim
 	$9  -  Map
+	$10 -  Boards
 */
 
 /* $1  -  Common -------------------------------------------------------------*/
@@ -314,4 +315,10 @@ table.boardview td.posting_count {
 .rakuun_city_own
 {
 	background-color:#FFFFFF;
+}
+
+/* $10 -  Boards -------------------------------------------------------------*/
+.rakuun_board_postcontent
+{
+	border-bottom:1px solid #222222;
 }

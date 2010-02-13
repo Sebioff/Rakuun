@@ -18,7 +18,7 @@
 			<br class="clear" />
 			<? $this->displayPanel('submit'); ?>
 		<? else: ?>
-			<?= Text::escapeHTML($this->params->posting->text); ?>
+			<?=  Text::format(Text::escapeHTML($this->params->posting->text)); ?>
 			<? if ($this->hasPanel('editdate')): ?>
 			<br />
 			<i>

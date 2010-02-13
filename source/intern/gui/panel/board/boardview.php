@@ -87,8 +87,10 @@ class Rakuun_Intern_GUI_Panel_Board_Boardview extends GUI_Panel {
 			$order = new DB_Order($boards, $postings);
 			$boards = $order->desc();
 		}
-		foreach ($boards as $board) {
-			$this->onAddBoard($board);
+		if (is_array($boards)) {
+			foreach ($boards as $board) {
+				$this->onAddBoard($board);
+			}
 		}
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Addboard('addboard', $this->boardtype), 'Board hinzufügen');
 	}
