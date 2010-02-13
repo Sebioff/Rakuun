@@ -66,6 +66,8 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', ''));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Down('scroll_down', ''));
 		$this->addPanel($legend = new Rakuun_GUI_Panel_Box('legend', new Rakuun_Intern_GUI_Panel_Map_Legend('legend'), 'Legende'));
+		
+		$this->addClasses('rakuun_map');
 	}
 	
 	public function afterInit() {
@@ -131,7 +133,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 							y -= dy;
 						$(this).css("background-position", x + "px " + y + "px");
 					});
-					$(".scroll_item").each(function() {
+					$(".rakuun_map .scroll_item").each(function() {
 						x = parseInt($(this).css("left"));
 						y = parseInt($(this).css("top"));
 						//if (globalX < 0 && globalX > -%4$d)
