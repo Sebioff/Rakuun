@@ -48,8 +48,11 @@ class Rakuun_Intern_GUI_Panel_Production_Research extends Rakuun_Intern_GUI_Pane
 		$record->technology = $this->getProductionItem()->getInternalName();
 		$record->level = $nextBuildableLevel;
 		$record->starttime = time();
-		$record->position = time();
 		Rakuun_DB_Containers::getTechnologiesWIPContainer()->save($record);
+		// FIXME changing properties of newly-saved records isn't possible atm
+		$record = Rakuun_DB_Containers::getTechnologiesWIPContainer()->selectByPK($record->getPK());
+		$record->position = $record->getPK();
+		$record->save();
 		DB_Connection::get()->commit();
 		Router::get()->getCurrentModule()->invalidate();
 	}

@@ -59,10 +59,10 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		$second = abs($this->second->getValue());
 		$tradable = self::getTradable();
 		if ($amount > $tradable) {
-			$this->addError('Du kannst maximal '.$tradable.' Ressourcen pro Tag über die Börse handeln.');
+			$this->addError('Du kannst maximal '.GUI_Panel_Number::formatNumber($tradable).' Ressourcen pro Tag über die Börse handeln.');
 		}
 		if ($amount > $tradable - $user->stockmarkettrade) {
-			$this->addError('Du kannst heute nur noch '.self::getTradableLeft().' Ressourcen über die Börse handeln.');
+			$this->addError('Du kannst heute nur noch '.GUI_Panel_Number::formatNumber(self::getTradableLeft()).' Ressourcen über die Börse handeln.');
 		}
 		$options = array();
 		$options['order'] = 'date DESC';
