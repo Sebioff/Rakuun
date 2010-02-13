@@ -41,6 +41,7 @@ abstract class Rakuun_DB_Containers {
 	private static $pollsAnswersContainer = null;
 	private static $pollsAnswersUsersAssocContainer = null;
 	private static $shoutboxContainer = null;
+	private static $shoutboxAlliancesContainer = null;
 	private static $cautionContainer = null;
 	private static $specialsUsersAssocContainer = null;
 	private static $specialsParamsContainer = null;
@@ -510,6 +511,20 @@ abstract class Rakuun_DB_Containers {
 		self::$shoutboxContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		
 		return self::$shoutboxContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getShoutboxAlliancesContainer() {
+		if (self::$shoutboxAlliancesContainer)
+			return self::$shoutboxAlliancesContainer;
+		
+		self::$shoutboxAlliancesContainer = new DB_Container('shoutbox_alliances');
+		self::$shoutboxAlliancesContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$shoutboxAlliancesContainer->addReferencedContainer(self::getAlliancesContainer());
+		
+		return self::$shoutboxAlliancesContainer;
 	}
 	
 	/**

@@ -6,10 +6,10 @@
 class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 	const SHOUT_MAX_LENGTH = 250;
 	
-	public function __construct($name, $title = '') {
+	public function __construct($name, DB_Container $container = null, $title = '') {
 		$this->setItemsPerPage(10);
 		$options['order'] = 'date DESC';
-		parent::__construct($name, Rakuun_DB_Containers::getShoutboxContainer()->getFilteredContainer($options), $title);
+		parent::__construct($name, $container === null ? Rakuun_DB_Containers::getShoutboxContainer()->getFilteredContainer($options) : $container->getFilteredContainer($options), $title);
 	}
 	
 	public function init() {
@@ -66,7 +66,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 		$shout->user = Rakuun_User_Manager::getCurrentUser();
 		$shout->text = $this->shoutarea->getValue();
 		$shout->date = time();
-		Rakuun_DB_Containers::getShoutboxContainer()->save($shout);
+		$this->getContainer()->save($shout);
 		$this->shoutarea->resetValue();
 		
 		// kinda wtf :/...only works with sub-sub-query

@@ -53,9 +53,10 @@ class Rakuun_Intern_Module_Alliance extends Rakuun_Intern_Module_Alliance_Naviga
 			}
 		}
 		
-		if ($user->alliance != null)
+		if ($user->alliance != null) {
 			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Alliance_Profile_Own('profile'));
-		else
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('shoutbox', new Rakuun_Intern_GUI_Panel_Shoutbox_Alliance('shoutbox'), 'Allianzshoutbox'));
+		} else
 			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Alliance_Profile_None('profile'));
 	}
 }
