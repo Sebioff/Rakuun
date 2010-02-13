@@ -46,10 +46,28 @@ abstract class Rakuun_Intern_Statistics {
 		return $armyStrength / Rakuun_Intern_Statistics::noOfPlayers();
 	}
 	
+	/**
+	 * @return Number of all atts which are done since beginning
+	 */
+	static public function noOfAtts() {
+		$options['properties'] = 'MAX(id) AS max';
+		return Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options)->max;
+	}
+	
+	static public function noOfRunningAtts() {
+		return Rakuun_DB_Containers::getArmiesContainer()->count();
+	}
+	
+	/**
+	 * @return Number of all alliances
+	 */
 	public static function noOfAllies() {
 		return Rakuun_DB_Containers::getAlliancesContainer()->count();
 	}
 	
+	/**
+	 * @return Number of all Metas
+	 */
 	public static function noOfMetas() {
 		return Rakuun_DB_Containers::getMetasContainer()->count();
 	}

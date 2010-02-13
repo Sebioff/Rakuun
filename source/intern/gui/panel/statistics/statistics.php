@@ -18,6 +18,12 @@ class Rakuun_Intern_GUI_Panel_Statistics extends GUI_Panel {
 		$line = array('Durchschnittliche Armeestärke:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::averageArmyStrength()));
 		$table->addLine($line);
 		
+		$line = array('bisher durchgeführte Angriffe:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::NoOfAtts()));
+		$table->addLine($line);
+		
+		$line = array('laufende Angriffe:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::NoOfRunningAtts()));
+		$table->addLine($line);
+		
 		$line = array('Anzahl Allianzen:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::noOfAllies()));
 		$table->addLine($line);
 		

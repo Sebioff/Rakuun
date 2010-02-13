@@ -16,6 +16,13 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		$hoverText = $cityOwner->nameUncolored.
 			'<br/>'.Text::escapeHTML($cityOwner->cityName).
 			'<br/>Punkte: '.GUI_Panel_Number::formatNumber($cityOwner->points);
+			if ($cityOwner->alliance)
+				$hoverText .= '<br/>Allianz: '.$cityOwner->alliance->name;
+			$hoverText .= '<br/>Spieler ist ';
+			if ($cityOwner->isOnline())
+				$hoverText .= 'online';
+			else
+				$hoverText .= 'offline';
 		$this->setHoverText($hoverText);
 	}
 	
