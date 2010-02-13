@@ -10,8 +10,7 @@ class Rakuun_Intern_Production_Building_Alliances_DatabaseDetector extends Rakuu
 		$this->setBaseBerylliumCosts(10000);
 		$this->setBaseTimeCosts(24*60*60);
 		$this->setMaximumLevel(5);
-		// TODO add proper short description
-		$this->setShortDescription('Der Flughafen dient als Produktionsanlage und Start- und Landeplatz von Flugeinheiten.<br />Ein Ausbau bewirkt eine schnellere Produktion.');
+		$this->setShortDescription('Der Datenbank-Detektor wird benötigt, um die Datenbankteile finden und transportieren zu können.<br />Pro Ausbaustufe wird ein weiteres Datenbankteil sichtbar und kann erobert werden.');
 	}
 }
 
