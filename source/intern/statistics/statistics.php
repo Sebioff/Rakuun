@@ -49,12 +49,12 @@ abstract class Rakuun_Intern_Statistics {
 	/**
 	 * @return Number of all atts which are done since beginning
 	 */
-	static public function noOfAtts() {
+	public static function noOfAtts() {
 		$options['properties'] = 'MAX(id) AS max';
 		return Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options)->max;
 	}
 	
-	static public function noOfRunningAtts() {
+	public static function noOfRunningAtts() {
 		return Rakuun_DB_Containers::getArmiesContainer()->count();
 	}
 	

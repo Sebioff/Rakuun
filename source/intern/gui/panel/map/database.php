@@ -28,15 +28,20 @@ class Rakuun_Intern_GUI_Panel_Map_Database extends GUI_Panel_HoverInfo {
 		parent::afterInit();
 		
 		$style = array(
-			'cursor:pointer',
-			'position:absolute',
 			'background-color:yellow',
-			'height:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
-			'width:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
 			'left:'.$this->map->realToViewPositionX($this->positionX).'px',
 			'top:'.$this->map->realToViewPositionY($this->positionY).'px'
 		);
 		$this->setAttribute('style', implode(';', $style));
+	}
+	
+	// GETTERS / SETTERS -------------------------------------------------------
+	public function getPositionX() {
+		return $this->positionX;
+	}
+	
+	public function getPositionY() {
+		return $this->positionY;
 	}
 }
 

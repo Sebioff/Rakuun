@@ -1,2 +1,2 @@
-<div id="<?= $this->getID() ?>" <?= $this->getAttributeString() ?>>
-</div>
+<a id="<?= $this->getID() ?>" <?= $this->getAttributeString() ?> href="<?= $this->getModule()->getUrl(array('cityX' => $this->getPositionX(), 'cityY' => $this->getPositionY())); ?>">
+</a>

@@ -15,7 +15,8 @@ class Rakuun_Intern_GUI_Panel_User_Online extends GUI_Panel {
 		$options = array();
 		$options['conditions'][] = array('is_online > ?', time() - Rakuun_Intern_Module::TIMEOUT_NOACTIVITY);
 		$options['order'] = 'name ASC';
-		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $user){
+		$onlineUsers = Rakuun_DB_Containers::getUserContainer()->select($options);
+		foreach ($onlineUsers as $user){
 			$line = array();
 			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$user->getPK(), $user);
 			if ($user->alliance) {
@@ -25,6 +26,7 @@ class Rakuun_Intern_GUI_Panel_User_Online extends GUI_Panel {
 			}
 			$onlineusers->addLine($line);
 		}
+		$this->params->onlineCount = count($onlineUsers);
 	}
 }
 

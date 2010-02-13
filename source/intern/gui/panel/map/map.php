@@ -65,6 +65,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Right('scroll_right', ''));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', ''));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Down('scroll_down', ''));
+		$this->addPanel($legend = new Rakuun_GUI_Panel_Box('legend', new Rakuun_Intern_GUI_Panel_Map_Legend('legend'), 'Legende'));
 	}
 	
 	public function afterInit() {

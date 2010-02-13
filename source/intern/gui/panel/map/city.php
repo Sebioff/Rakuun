@@ -12,6 +12,19 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		
 		if ($this->cityOwner->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK())
 			$this->addClasses('rakuun_city_own');
+		if ($this->cityOwner->alliance && Rakuun_User_Manager::getCurrentUser()->alliance) {
+			if ($this->cityOwner->alliance->getPK() == Rakuun_User_Manager::getCurrentUser()->alliance)
+				$this->addClasses('rakuun_city_allied');
+			$diplomacy = $this->cityOwner->alliance->getDiplomacy(Rakuun_User_Manager::getCurrentUser()->alliance);
+			if ($diplomacy) {
+				if ($diplomacy->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_AUVB)
+					$this->addClasses('rakuun_city_allied');
+				if ($diplomacy->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR)
+					$this->addClasses('rakuun_city_hostile');
+				if ($diplomacy->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_NAP)
+					$this->addClasses('rakuun_city_friendly');
+			}
+		}
 		
 		$hoverText = $cityOwner->nameUncolored.
 			'<br/>'.Text::escapeHTML($cityOwner->cityName).
@@ -37,10 +50,6 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 		parent::afterInit();
 		
 		$style = array(
-			'display:block',
-			'position:absolute',
-			'height:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
-			'width:'.Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
 			'left:'.$this->map->realToViewPositionX($this->cityOwner->cityX).'px',
 			'top:'.$this->map->realToViewPositionY($this->cityOwner->cityY).'px'
 		);

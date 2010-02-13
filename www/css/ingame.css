@@ -307,14 +307,40 @@ table.boardview td.posting_count {
 }
 
 /* $9  -  Map ----------------------------------------------------------------*/
+.rakuun_map_legend_description
+{
+	margin-left:15px;
+}
+
+.scroll_item
+{
+	display:block;
+	position:absolute;
+}
+
 .rakuun_city
 {
-	background-color:#008000;
+	background-color:#ABABAB;
 }
 
 .rakuun_city_own
 {
 	background-color:#FFFFFF;
+}
+
+.rakuun_city_friendly
+{
+	background-color:#FFBF00;
+}
+
+.rakuun_city_allied
+{
+	background-color:#008000;
+}
+
+.rakuun_city_hostile
+{
+	background-color:#E00000;
 }
 
 /* $10 -  Boards -------------------------------------------------------------*/
