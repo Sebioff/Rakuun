@@ -267,10 +267,14 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 	}
 	
 	public function getAmountNotAtHome() {
+		if ($this->isOfUnitType(self::TYPE_STATIONARY))
+			return 0;
+		
 		$options = array();
 		$options['properties'] = 'SUM('.$this->getInternalName().') AS `amount`';
 		$options['conditions'][] = array('user = ?', $this->getUser());
-		return (int)Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options)->amount;
+		$result = Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options);
+		return $result ? $result->amount : 0;
 	}
 	
 	/**

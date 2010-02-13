@@ -236,7 +236,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$att = 0;
 		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
 		foreach ($units as $unit) {
-			$att += $unit->getAttackValue();
+			$att += $unit->getAttackValue($unit->getAmount() + $unit->getAmountNotAtHome());
 		}
 		return $att;
 	}
@@ -245,7 +245,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$deff = 0;
 		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
 		foreach ($units as $unit) {
-			$deff += $unit->getDefenseValue();
+			$deff += $unit->getDefenseValue($unit->getAmount() + $unit->getAmountNotAtHome());
 		}
 		return $deff;
 	}
@@ -254,8 +254,8 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$sum = 0;
 		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
 		foreach ($units as $unit) {
-			$sum += $unit->getAttackValue();
-			$sum += $unit->getDefenseValue();
+			$sum += $unit->getAttackValue($unit->getAmount() + $unit->getAmountNotAtHome());
+			$sum += $unit->getDefenseValue($unit->getAmount() + $unit->getAmountNotAtHome());
 		}
 		return $sum / 2;
 	}
