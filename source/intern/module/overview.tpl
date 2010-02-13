@@ -57,6 +57,7 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<? $this->displayPanel('buildings') ?>
 	<? $this->displayPanel('technologies') ?>
 	<? $this->displayPanel('units') ?>
+	<? $this->displayPanel('info'); ?>
 	
 	<a href="http://www.galaxy-news.de/?page=charts&op=vote&game_id=67" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
 	<br/>
@@ -79,16 +80,15 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<!-- End of Project Wonderful ad code. -->
 </div>
 
+
+<? if ($this->hasPanel('sbbox')): ?>
+	<? $this->displayPanel('sbbox'); ?>
+<? endif; ?>
+
 <? if ($this->hasPanel('sitterbox')): ?>
 	<? $this->displayPanel('sitterbox'); ?>
 <? endif; ?>
 
 <? if ($this->hasPanel('sitterswitch')): ?>
 	<? $this->displayPanel('sitterswitch'); ?>
-<? endif; ?>
-
-<? $this->displayPanel('info'); ?>
-
-<? if ($this->hasPanel('sbbox')): ?>
-	<? $this->displayPanel('sbbox'); ?>
 <? endif; ?>
