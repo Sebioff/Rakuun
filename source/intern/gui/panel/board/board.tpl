@@ -2,7 +2,7 @@
 	<? $this->displayErrors() ?>
 <? endif ?>
 <tr>
-	<td><a href="<?= Router::get()->getCurrentModule()->getUrl(array('board' => $this->params->board->id)) ?>"><?= Text::escapeHTML($this->params->board->name) ?></a></td>
+	<td><? $this->displayPanel('boardlink'); ?></td>
 	<td class="posting_count"><?= $this->params->count; ?></td>
 	<td>
 		<? if ($this->hasPanel('date')): ?>

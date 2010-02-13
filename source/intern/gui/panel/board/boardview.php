@@ -122,7 +122,7 @@ class Rakuun_Intern_GUI_Panel_Board_Boardview extends GUI_Panel {
 			$visitedOptions['conditions'][] = array('user = ?', $user);
 			$lastVisited = $lastVisitedContainer->selectFirst($visitedOptions);
 			$posting = $postingsContainer->selectFirst($options);
-			if ($lastVisited == null || ($posting && $posting->date > $lastVisited->date)) {
+			if ($lastVisited === null || ($posting && $posting->date > $lastVisited->date)) {
 				$count++;
 			}
 		}
