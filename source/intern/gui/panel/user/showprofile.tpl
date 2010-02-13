@@ -69,6 +69,10 @@
 		Der Spieler befindet sich im Noobschutz und kann nicht angegriffen werden.
 		<br class="clear" />
 	<? endif; ?>
+	<? if($user->isOnline()): ?>
+		Der Spieler ist gerade online
+		<br class="clear" />
+	<? endif; ?>
 <? else: ?>
 	<br class="clear" />
 	Spieler existiert nicht!

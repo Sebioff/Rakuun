@@ -36,6 +36,8 @@ class Rakuun_Intern_GUI_Panel_Map_City extends GUI_Panel_HoverInfo {
 				$hoverText .= 'online';
 			else
 				$hoverText .= 'offline';
+			if ($cityOwner->isInNoob())
+				$hoverText .= '<br/>Spieler befindet sich im Noobschutz';
 		$this->setHoverText($hoverText);
 	}
 	
