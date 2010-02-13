@@ -25,6 +25,16 @@ class Rakuun_Intern_GUI_Panel_Support_Answer extends GUI_Panel {
 		$this->addPanel($message = new GUI_Control_TextArea('message', "\n\n---letzte Nachricht von ".$this->ticket->user->nameUncolored.' am '.$date->getValue()." ---\n".$this->ticket->text, 'Nachricht'));
 		$message->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
+		$this->addPanel(new GUI_Control_SubmitButton('addepted', 'als bearbeitet markieren'));
+	}
+	
+	public function onAddepted() {
+		if ($this->hasErrors())
+			return;
+		$this->ticket->isAnswered = true;
+		$this->ticket->save();
+		$this->setSuccessMessage('Nachricht als erledigt markiert');
+		
 	}
 	
 	public function onSend() {

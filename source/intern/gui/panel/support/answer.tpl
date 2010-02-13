@@ -8,5 +8,6 @@
 	<br class="clear" />
 	<? $this->displayLabelForPanel('message') ?> <? $this->displayPanel('message') ?>
 	<br class="clear" />
+	<? $this->displayPanel('addepted') ?>
 	<? $this->displayPanel('send') ?>
 </div>
