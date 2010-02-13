@@ -31,14 +31,17 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$ironPriority->addItem('Niedrig', 1, true);
 		$ironPriority->addItem('Mittel', 2, false);
 		$ironPriority->addItem('Hoch', 3, false);
+		$ironPriority->addClasses('rakuun_map_target_priorities');
 		$this->addPanel($berylliumPriority = new GUI_Control_RadioButtonList('beryllium_priority', 'Priorität Beryllium'));
 		$berylliumPriority->addItem('Niedrig', 1, true);
 		$berylliumPriority->addItem('Mittel', 2, false);
 		$berylliumPriority->addItem('Hoch', 3, false);
+		$berylliumPriority->addClasses('rakuun_map_target_priorities');
 		$this->addPanel($energyPriority = new GUI_Control_RadioButtonList('energy_priority', 'Priorität Energie'));
 		$energyPriority->addItem('Niedrig', 1, true);
 		$energyPriority->addItem('Mittel', 2, false);
 		$energyPriority->addItem('Hoch', 3, false);
+		$energyPriority->addClasses('rakuun_map_target_priorities');
 		$this->addPanel(new Rakuun_GUI_Panel_Info('destroy_buildings_label', 'Gebäude zerstören', 'Je größer die Angriffskraft, desto größer die Wahrscheinlichkeit das eine Stufe eines Gebäudes zerstört wird. Die maximale Wahrscheinlichkeit beträgt '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_MAX_PROBABILITY.'% und kann mit einer Angriffskraft von '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_NEEDED_FORCE_FOR_MAX.' erreicht werden. Gegen Feinde, mit denen man sich im Krieg befindet, wird nur die Hälfte dessen benötigt.'));
 		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Abschicken'));
 	}

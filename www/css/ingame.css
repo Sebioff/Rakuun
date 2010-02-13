@@ -253,6 +253,11 @@ table.boardview td.posting_count {
 	word-wrap:break-word;
 }
 
+.shout_header
+{
+	font-weight:bold;
+}
+
 #main-overview_content-info
 {
 	width:180px;
@@ -341,6 +346,16 @@ table.boardview td.posting_count {
 .rakuun_city_hostile
 {
 	background-color:#E00000;
+}
+
+.rakuun_map_target_priorities
+{
+	float:left;
+}
+
+.rakuun_map_target_priorities li
+{
+	display:inline;
 }
 
 /* $10 -  Boards -------------------------------------------------------------*/

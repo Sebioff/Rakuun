@@ -31,6 +31,13 @@ body.skin_space2 {
 	text-indent:0;
 }
 
+.skin_space2 hr {
+	background-color:#99A7AA;
+	border:0 none;
+	color:#99A7AA;
+	height:1px;
+}
+
 /* $2  -  Main Containers ----------------------------------------------------*/
 .skin_space2 #ctn_head {
 	border:0px none;

@@ -3,7 +3,7 @@
 <? endif ?>
 <? $this->displayLabelForPanel('target'); ?> <? $this->displayPanel('target'); ?>
 <br class="clear" />
-Koordinaten: <? $this->displayPanel('target_x'); ?>:<? $this->displayPanel('target_y'); ?>
+<label>Koordinaten</label> <? $this->displayPanel('target_x'); ?><? $this->displayPanel('target_y'); ?>
 <br class="clear" />
 <? $this->displayPanel('unit_input'); ?>
 <? if ($this->hasPanel('spydrone') || $this->hasPanel('cloaked_spydrone')): ?>
@@ -18,11 +18,11 @@ Koordinaten: <? $this->displayPanel('target_x'); ?>:<? $this->displayPanel('targ
 	<? endif; ?>
 <? endif; ?>
 <br class="clear" />
-<? $this->displayPanel('iron_priority'); ?>
+<? $this->displayLabelForPanel('iron_priority'); ?> <? $this->displayPanel('iron_priority'); ?>
 <br class="clear" />
-<? $this->displayPanel('beryllium_priority'); ?>
+<? $this->displayLabelForPanel('beryllium_priority'); ?> <? $this->displayPanel('beryllium_priority'); ?>
 <br class="clear" />
-<? $this->displayPanel('energy_priority'); ?>
+<? $this->displayLabelForPanel('energy_priority'); ?> <? $this->displayPanel('energy_priority'); ?>
 <br class="clear" />
 <? $this->displayPanel('destroy_buildings_label'); ?> <? $this->displayPanel('destroy_buildings'); ?>
 <br class="clear" />
