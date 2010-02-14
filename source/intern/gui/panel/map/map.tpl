@@ -11,9 +11,11 @@
 <div id="<?= $this->getID() ?>" <?= $this->getAttributeString() ?>>
 	<?= $this->getMapLayer(); ?>
 	<? $this->displayPanel('path'); ?>
-	<? foreach ($this->getScrollItems() as $scrollItem): ?>
-		<? $scrollItem->display(); ?>
-	<? endforeach; ?>
+	<div id="rakuun_map_scroll_panels" style="position:absolute;left:<?= (-$this->getViewRectX() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE); ?>px;top:<?= (-$this->getViewRectY() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE); ?>px">
+		<? foreach ($this->getScrollItems() as $scrollItem): ?>
+			<? $scrollItem->display(); ?>
+		<? endforeach; ?>
+	</div>
 </div>
 
 <? $this->displayPanel('scroll_right'); ?>

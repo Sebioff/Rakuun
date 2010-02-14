@@ -21,7 +21,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Alliance extends Rakuun_Intern_GUI_Panel_
 		$this->getContainer()->save($shout);
 		$this->shoutarea->resetValue();
 		
-		// kinda wtf :/...only works with sub-sub-query
+		// FIXME kinda wtf :/...only works with sub-sub-query
 		$this->getContainer()->deleteByQuery('
 			DELETE FROM '.$this->getContainer()->getTable().'
 			WHERE ID <= (

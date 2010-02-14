@@ -7,7 +7,7 @@ class Rakuun_Intern_GUI_Panel_Map_UnitInput extends GUI_Control {
 		$this->setTemplate(dirname(__FILE__).'/unitinput.tpl');
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
 			if ($unit->getBaseAttackValue() > 0 && $unit->getAmount() > 0) {
-				$this->addPanel(new GUI_Control_DigitBox($unit->getInternalName(), 0, $unit->getName().' ('.$unit->getAmount().')', 0, $unit->getAmount()));
+				$this->addPanel(new GUI_Control_DigitBox($unit->getInternalName(), 0, $unit->getName().' ('.GUI_Panel_Number::formatNumber($unit->getAmount()).')', 0, $unit->getAmount()));
 			}
 		}
 	}

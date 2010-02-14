@@ -222,8 +222,21 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		return $this->baseDefenseValue;
 	}
 	
-	public function getArmyStrength() {
+	/**
+	 * @return float army strength without any boni for technologies etc.
+	 */
+	public function getBaseArmyStrength() {
 		return ($this->getBaseAttackValue() + $this->getBaseDefenseValue()) / 2;
+	}
+	
+	/**
+	 * @return float army strength including all types of boni.
+	 */
+	public function getArmyStrength($amount = null) {
+		if ($amount === null)
+			$amount = $this->getAmount();
+		
+		return ($this->getAttackValue($amount) + $this->getDefenseValue($amount)) / 2;
 	}
 	
 	public function setRessourceTransportCapacity($ressourceTransportCapacity) {
@@ -278,11 +291,12 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 	}
 	
 	/**
+	 * The points this unit gets in highscores (e.g. end-highscore)
 	 * Override function getPoints() from upperclass
 	 * @see source/intern/production/Rakuun_Intern_Production_Base#getPoints()
 	 */
 	public function getPoints() {
-		return ($this->getAttackValue() + $this->getDefenseValue()) / 2;
+		return $this->getBaseArmyStrength();
 	}
 	
 	protected function getBoniPercentAgainst($unitType) {

@@ -120,3 +120,8 @@ form div.core_common_error_list label {
 .core_gui_pageview_pages .current_page {
 	font-weight:bold;
 }
+
+.core_gui_hoverinfo
+{
+	padding:2px;
+}

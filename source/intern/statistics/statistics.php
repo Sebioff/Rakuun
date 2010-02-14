@@ -41,7 +41,7 @@ abstract class Rakuun_Intern_Statistics {
 		$unitSums = Rakuun_DB_Containers::getUnitsContainer()->selectFirst($options);
 		
 		foreach ($units as $unit)
-			$armyStrength += $unitSums->{Text::underscoreToCamelCase('sum_'.$unit->getInternalName())} * $unit->getArmyStrength();
+			$armyStrength += $unitSums->{Text::underscoreToCamelCase('sum_'.$unit->getInternalName())} * $unit->getBaseArmyStrength();
 		
 		return $armyStrength / Rakuun_Intern_Statistics::noOfPlayers();
 	}

@@ -133,7 +133,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 							y -= dy;
 						$(this).css("background-position", x + "px " + y + "px");
 					});
-					$(".rakuun_map .scroll_item").each(function() {
+					$("#rakuun_map_scroll_panels, #rakuun_map_map_layer").each(function() {
 						x = parseInt($(this).css("left"));
 						y = parseInt($(this).css("top"));
 						//if (globalX < 0 && globalX > -%4$d)
@@ -228,7 +228,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	}
 	
 	public function getMapLayer() {
-		return '<div style="width:'.(self::MAP_WIDTH * self::MAP_RECT_SIZE).'px; height:'.(self::MAP_HEIGHT * self::MAP_RECT_SIZE).'px; background:#2D78BE url('.Router::get()->getStaticRoute('images', 'map_large.png').') no-repeat left top; position:absolute; left:'.(-$this->getViewRectX() * self::MAP_RECT_SIZE).'px; top:'.(-$this->getViewRectY() * self::MAP_RECT_SIZE).'px;" class="scroll_item"></div>';
+		return '<div style="width:'.(self::MAP_WIDTH * self::MAP_RECT_SIZE).'px; height:'.(self::MAP_HEIGHT * self::MAP_RECT_SIZE).'px; background:#2D78BE url('.Router::get()->getStaticRoute('images', 'map_large.png').') no-repeat left top; position:absolute; left:'.(-$this->getViewRectX() * self::MAP_RECT_SIZE).'px; top:'.(-$this->getViewRectY() * self::MAP_RECT_SIZE).'px;" id="rakuun_map_map_layer"></div>';
 	}
 }
 

@@ -179,11 +179,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$armyStrengthLimit = $average;
 		if ($armyStrengthLimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
 			$armyStrengthLimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
-		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
-		$armyStrength = 0;
-		foreach ($units as $unit) {
-			$armyStrength += $unit->getPoints();
-		}
+		$armyStrength = $this->getArmyStrength();
 		
 		$this->isInNoob = ($this->points <= $nooblimit	// points below point limit
 						&& $armyStrength <= $armyStrengthLimit //armystrength below armystrength limit
@@ -254,10 +250,9 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		$sum = 0;
 		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
 		foreach ($units as $unit) {
-			$sum += $unit->getAttackValue($unit->getAmount() + $unit->getAmountNotAtHome());
-			$sum += $unit->getDefenseValue($unit->getAmount() + $unit->getAmountNotAtHome());
+			$sum += $unit->getArmyStrength($unit->getAmount() + $unit->getAmountNotAtHome());
 		}
-		return $sum / 2;
+		return $sum;
 	}
 	
 	/**

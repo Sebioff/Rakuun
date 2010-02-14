@@ -8,11 +8,12 @@
 
 /*
 	$1  -  Common Elements
-	$2  -  Main Containers
-	$3  -  Boxes
-	$4  -  Messages
-	$5  -  Navigation
-	$6  -  Overview
+	$2  -  Framework Elements
+	$3  -  Main Containers
+	$4  -  Boxes
+	$5  -  Messages
+	$6  -  Navigation
+	$7  -  Overview
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -38,7 +39,15 @@ body.skin_space2 {
 	height:1px;
 }
 
-/* $2  -  Main Containers ----------------------------------------------------*/
+/* $2  -  Framework Elements -------------------------------------------------*/
+
+.skin_space2 .core_gui_hoverinfo
+{
+	background-color:#000000;
+	border-color:#99A7AA;
+}
+
+/* $3  -  Main Containers ----------------------------------------------------*/
 .skin_space2 #ctn_head {
 	border:0px none;
 	float:left;
@@ -61,7 +70,7 @@ body.skin_space2 {
 	width:834px;
 }
 
-/* $3  -  Boxes --------------------------------------------------------------*/
+/* $4  -  Boxes --------------------------------------------------------------*/
 .skin_space2 .rakuun_box {
 	background:#000000 url('../images/space2/rakuun_box_left.png') repeat-y left top;
 	float:left;
@@ -140,7 +149,7 @@ body.skin_space2 {
 	background-color:#FF0000;
 }
 
-/* $4  -  Messages -----------------------------------------------------------*/
+/* $5  -  Messages -----------------------------------------------------------*/
 .skin_space2 .rakuun_message_envelope {
 	border:1px solid #808080;
 }
@@ -159,7 +168,7 @@ body.skin_space2 {
 	background-color:#000000;
 }
 
-/* $5  -  Navigation ---------------------------------------------------------*/
+/* $6  -  Navigation ---------------------------------------------------------*/
 .skin_space2 #ctn_head #ctn_navigation {
 	background:#000000 url('../images/space2/navigation/menu_01.png') no-repeat left top;
 	padding-top:66px;
@@ -357,30 +366,9 @@ body.skin_space2 {
 	padding-bottom:139px;
 }
 
-/* $6  -  Overview -----------------------------------------------------------*/
-.skin_space2 #ctn_cityitems
+/* $7  -  Overview -----------------------------------------------------------*/
+.skin_space2 #ctn_cityitems,
+.skin_space2 #ctn_info
 {
 	margin-right:5px;
-}
-
-.skin_space2 #main-overview_content-info
-{
-	margin-right:5px;
-	width:310px;
-}
-
-.skin_space2 #main-overview_content-sitterbox textarea
-{
-	width:230px;
-}
-
-.skin_space2 #main-overview_content-sbbox {
-	width:240px;
-}
-
-.skin_space2 #main-overview_content-sbbox .shout_header,
-.skin_space2 #main-overview_content-sbbox .shout_text,
-.skin_space2 #main-overview_content-sbbox textarea
-{
-	width:230px;
 }

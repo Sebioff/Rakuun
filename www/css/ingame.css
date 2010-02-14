@@ -239,6 +239,12 @@ table.boardview td.posting_count {
 	width:250px;
 }
 
+#ctn_info
+{
+	float:left;
+	width:280px;
+}
+
 #ctn_cityitems .rakuun_box
 {
 	float:none;
@@ -249,7 +255,6 @@ table.boardview td.posting_count {
 .shout_header
 {
 	overflow:hidden;
-	width:333px;
 	word-wrap:break-word;
 }
 
@@ -258,9 +263,16 @@ table.boardview td.posting_count {
 	font-weight:bold;
 }
 
-#main-overview_content-info
+.shout_text,
+.shout_header,
+#main-overview_content-sbbox-shoutbox-shoutarea
 {
-	width:180px;
+	width:268px;
+}
+
+#main-overview_content-sitterbox textarea
+{
+	width:280px;
 }
 
 /* $7  -  Techtree -----------------------------------------------------------*/

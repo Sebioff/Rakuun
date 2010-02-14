@@ -22,10 +22,10 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
 		$spydrone = Rakuun_Intern_Production_Factory::getUnit('spydrone');
 		if ($spydrone->getAmount() > 0)
-			$this->addPanel(new GUI_Control_DigitBox($spydrone->getInternalName(), 0, $spydrone->getName().' ('.$spydrone->getAmount().')', 0, $spydrone->getAmount()));
+			$this->addPanel(new GUI_Control_DigitBox($spydrone->getInternalName(), 0, $spydrone->getName().' ('.GUI_Panel_Number::formatNumber($spydrone->getAmount()).')', 0, $spydrone->getAmount()));
 		$cloakedSpydrone = Rakuun_Intern_Production_Factory::getUnit('cloaked_spydrone');
 		if ($cloakedSpydrone->getAmount() > 0)
-			$this->addPanel(new GUI_Control_DigitBox($cloakedSpydrone->getInternalName(), 0, $cloakedSpydrone->getName().' ('.$cloakedSpydrone->getAmount().')', 0, $cloakedSpydrone->getAmount()));
+			$this->addPanel(new GUI_Control_DigitBox($cloakedSpydrone->getInternalName(), 0, $cloakedSpydrone->getName().' ('.GUI_Panel_Number::formatNumber($cloakedSpydrone->getAmount()).')', 0, $cloakedSpydrone->getAmount()));
 		$this->addPanel(new GUI_Control_CheckBox('destroy_buildings'));
 		$this->addPanel($ironPriority = new GUI_Control_RadioButtonList('iron_priority', 'Priorität Eisen'));
 		$ironPriority->addItem('Niedrig', 1, true);

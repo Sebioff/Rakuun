@@ -6,10 +6,10 @@
 class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 	const SHOUT_MAX_LENGTH = 250;
 	
-	public function __construct($name, DB_Container $container = null, $title = '') {
+	public function __construct($name, DB_Container $container, $title = '') {
 		$this->setItemsPerPage(10);
 		$options['order'] = 'date DESC';
-		parent::__construct($name, $container === null ? Rakuun_DB_Containers::getShoutboxContainer()->getFilteredContainer($options) : $container->getFilteredContainer($options), $title);
+		parent::__construct($name, $container->getFilteredContainer($options), $title);
 	}
 	
 	public function init() {
