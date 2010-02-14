@@ -23,7 +23,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Sell_Energy extends Rakuun_Intern_GUI_
 		parent::afterInit();
 		
 		$this->getModule()->addJsAfterContent(
-			$this->getSliderJS(
+			$this->getSellSliderJS(
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_ENERGY,
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_IRON,
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_BERYLLIUM

@@ -77,7 +77,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 				$this->addError('So viel Eisen ist nicht mehr im Ressourcenpool vorhanden!');
 		} else {
 			// user pays with iron
-			if ($user->ressources->iron < $iron)
+			if ($user->ressources->iron < $iron * -1)
 				$this->addError('So viel Eisen hast du nicht!');
 		}
 		if ($beryllium > 0) {
@@ -88,7 +88,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 				$this->addError('So viel Beryllium ist nicht mehr im Ressourcenpool vorhanden!');
 		} else {
 			// user pays with beryllium
-			if ($user->ressources->beryllium < $beryllium)
+			if ($user->ressources->beryllium < $beryllium * -1)
 				$this->addError('So viel Beryllium hast du nicht!');
 		}
 		if ($energy > 0) {
@@ -99,7 +99,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 				$this->addError('So viel Energie ist nicht mehr im Ressourcenpool vorhanden!');
 		} else {
 			// user pays with energy
-			if ($user->ressources->energy < $energy)
+			if ($user->ressources->energy < $energy * -1)
 				$this->addError('So viel Energie hast du nicht!');
 		}
 	}
@@ -112,7 +112,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		return self::getTradable() - Rakuun_User_Manager::getCurrentUser()->stockmarkettrade;
 	}
 	
-	protected function getSliderJS($buy, $first, $second) {
+	protected function getBuySliderJS($buy, $first, $second) {
 		return str_replace(array("\r\n", "\n", "\t"), ' ', "
 			$('#".$this->first->getID()."').show().attr('readonly', 'readonly');
 			$('#".$this->second->getID()."').show().attr('readonly', 'readonly');
@@ -134,6 +134,35 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 						);
 						$('#".$this->second->getID()."').val(
 							Math.round((ui.value - 1) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $second).")
+						);
+					}
+				}
+			);
+		");
+	}
+	
+	protected function getSellSliderJS($sell, $first, $second) {
+		return str_replace(array("\r\n", "\n", "\t"), ' ', "
+			$('#".$this->first->getID()."').show().attr('readonly', 'readonly');
+			$('#".$this->second->getID()."').show().attr('readonly', 'readonly');
+		
+			$('#".$this->amount->getID()."').change(
+				function() {
+					$('#".$this->first->getID()."').val(
+						Math.round($('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($first, $sell).")
+					);
+				}
+			);
+			$('#".$this->slider->getID()."').slider(
+				{
+					min: 1,
+					max: 101,
+					slide: function(event, ui) {
+						$('#".$this->first->getID()."').val(
+							Math.round((101 - ui.value) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($first, $sell).")
+						);
+						$('#".$this->second->getID()."').val(
+							Math.round((ui.value - 1) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($second, $sell).")
 						);
 					}
 				}

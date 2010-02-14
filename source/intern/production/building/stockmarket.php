@@ -4,7 +4,7 @@ class Rakuun_Intern_Production_Building_StockMarket extends Rakuun_Intern_Produc
 	/**
 	 * defines how much the tradelimit increases by building the next stock market level
 	 */
-	const TRADELIMIT_PER_LEVEL = 2000;
+	const TRADELIMIT_PER_LEVEL = 2000000;
 	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);

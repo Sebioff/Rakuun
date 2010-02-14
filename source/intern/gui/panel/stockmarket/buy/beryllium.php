@@ -23,7 +23,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Buy_Beryllium extends Rakuun_Intern_GU
 		parent::afterInit();
 		
 		$this->getModule()->addJsAfterContent(
-			$this->getSliderJS(
+			$this->getBuySliderJS(
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_BERYLLIUM,
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_IRON,
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_ENERGY
