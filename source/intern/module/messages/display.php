@@ -31,9 +31,7 @@ class Rakuun_Intern_Module_Messages_Display extends Rakuun_Intern_Module {
 		
 		if ($ticket) {
 			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Message_Support_Ticket('ticket', $ticket));
-			if ($ticket->is_answered) {
 				$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('replyticket', new Rakuun_Intern_GUI_Panel_Message_Support('replyticket', 'Antworten', $ticket)), 'Antworten');
-			}
 		}
 	}
 }
