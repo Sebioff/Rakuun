@@ -7,7 +7,7 @@ class Rakuun_Intern_Module_Meta_Build extends Rakuun_Intern_Module_Meta_Navigati
 		$this->setPageTitle('Metagebäude bauen');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/build.tpl');
 		
-		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip', new Rakuun_Intern_Production_Producer_Metas(Rakuun_DB_Containers::getMetasBuildingsContainer(), Rakuun_DB_Containers::getMetasBuildingsWIPContainer(), Rakuun_User_Manager::getCurrentUser()->alliance->meta, 'meta'), 'Momentaner Bauvorgang');
+		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip', new Rakuun_Intern_Production_Producer_Metas(Rakuun_User_Manager::getCurrentUser()->alliance->meta), 'Momentaner Bauvorgang');
 		$this->contentPanel->addPanel($wipPanel, true);
 		
 		$canBuild = false;

@@ -4,6 +4,10 @@
  * Class that is responsible for producing items for alliances
  */
 class Rakuun_Intern_Production_Producer_Metas extends Rakuun_Intern_Production_Producer {
+	public function __construct(Rakuun_DB_Meta $meta) {
+		parent::__construct(Rakuun_DB_Containers::getMetasBuildingsContainer(), Rakuun_DB_Containers::getMetasBuildingsWIPContainer(), $meta, 'meta');
+	}
+	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------
 	public function addWIPItem(DB_Record $wipItem) {
 		$wipObject = Rakuun_Intern_Production_Factory_Metas::getBuilding($wipItem->building, $this->getProductionTarget());

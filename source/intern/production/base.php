@@ -5,6 +5,7 @@
  */
 abstract class Rakuun_Intern_Production_Base {
 	const ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK = 'Rakuun_Intern_Production_Base_indestructible_by_attack';
+	const ATTRIBUTE_INVISIBLE_FOR_SPIES = 'Rakuun_Intern_Production_Base_invisible_for_spies';
 	
 	private $internalName = '';
 	private $name = '';
@@ -28,6 +29,7 @@ abstract class Rakuun_Intern_Production_Base {
 		$this->setOwner($owner);
 		
 		$this->addAttribute(self::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK, false, 'Kann nicht durch Angriff zerstört werden');
+		$this->addAttribute(self::ATTRIBUTE_INVISIBLE_FOR_SPIES, false, 'Unsichtbar für Spione');
 	}
 	
 	// CUSTOM METHODS ----------------------------------------------------------

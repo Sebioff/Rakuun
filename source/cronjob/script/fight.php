@@ -339,6 +339,9 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 				$defenderReportText .= '<br/>Die Ausbaustufen unserer Gebäude';
 				$attackerReportText .= '<br/><br/>Folgende Gebäude hat euer Gegner:';
 				foreach (Rakuun_Intern_Production_Factory::getAllBuildings($army->target) as $building) {
+					if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES) === true)
+						continue;
+					
 					if ($building->getLevel() > 0)
 						$attackerReportText .= '<br/>'.$building->getName().' (Stufe '.$building->getLevel().')';
 				}
