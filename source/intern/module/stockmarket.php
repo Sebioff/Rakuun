@@ -5,8 +5,6 @@ class Rakuun_Intern_Module_StockMarket extends Rakuun_Intern_Module {
 		parent::init();
 		
 		$this->setPageTitle('Börse');
-		$this->contentPanel->addPanel(new GUI_Panel_Text('bla', 'Ausser Dienst'));
-		return;
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/stockmarket.tpl');
 		$ressources = Rakuun_Intern_GUI_Panel_StockMarket::getStockRessources();
 		$iron = new GUI_Panel_Number('iron', $ressources[Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_IRON]);

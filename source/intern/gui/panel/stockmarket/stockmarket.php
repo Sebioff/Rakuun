@@ -32,10 +32,12 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		$ressources = self::getStockRessources();
 		if ($ressources[$buy] == 0)
 			return 0;
-		if ($ressources[$sell] == 0)
+		
+		$price = round($ressources[$sell] / ($ressources[$buy]), 3);
+		if ($ressources[$sell] == 0 || $price > self::MAX_EXCHANGE_COURSE)
 			return self::MAX_EXCHANGE_COURSE;
 		
-		return round($ressources[$sell] / ($ressources[$buy]), 3);
+		return $price;
 	}
 	
 	/**
