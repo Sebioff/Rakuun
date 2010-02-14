@@ -24,7 +24,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			$options['conditions'][] = array('has_been_read = ?', 0);
 			if ($unreadTickets = Rakuun_DB_Containers::getSupportticketsContainer()->count($options)) {
 				$url = App::get()->getInternModule()->getSubmodule('messages')->getUrl(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS));
-				$this->contentPanel->addPanel($unreadTicketsLink = new GUI_Control_Link('unread_tickets', 'Du hast '.$unreadTickets.' ungelesene Supportnachrichten.', $url));
+				$this->contentPanel->addPanel($unreadTicketsLink = new GUI_Control_Link('unread_tickets_users', 'Du hast '.$unreadTickets.' ungelesene Supportnachrichten.', $url));
 				if ($unreadTickets == 1)
 					$unreadTicketsLink->setCaption('Du hast 1 ungelesene Supportnachricht.');
 			}
@@ -35,7 +35,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 				$options['conditions'][] = array('is_answered = ?', 0);
 				if ($unreadTickets = Rakuun_DB_Containers::getSupportticketsContainer()->count($options)) {
 					$url = App::get()->getInternModule()->getSubmodule('support')->getUrl();
-					$this->contentPanel->addPanel($unreadTicketsLink = new GUI_Control_Link('unread_tickets', $unreadTickets.' unbeantwortete Supportnachrichten.', $url));
+					$this->contentPanel->addPanel($unreadTicketsLink = new GUI_Control_Link('unread_tickets_supporters', $unreadTickets.' unbeantwortete Supportnachrichten.', $url));
 					if ($unreadTickets == 1)
 						$unreadTicketsLink->setCaption('1 unbeantwortete Supportnachricht.');
 				}

@@ -17,6 +17,6 @@
 <? $this->displayLabelForPanel('message') ?> <? $this->displayPanel('message') ?>
 <br class="clear" />
 <? $this->displayPanel('submit') ?>
-<? if ($this->hasBeenSubmitted() && !$this->hasErrors()): ?>
+<? if ($this->hasBeenSubmitted() && !$this->hasErrors() && $this->hasPanel('costs')): ?>
 	<? $this->displayPanel('costs'); ?>
 <? endif; ?>

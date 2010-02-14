@@ -15,8 +15,13 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<br />
 <? endif; ?>
 
-<? if ($this->hasPanel('unread_tickets')): ?>
-	<? $this->displayPanel('unread_tickets') ?>
+<? if ($this->hasPanel('unread_tickets_users')): ?>
+	<? $this->displayPanel('unread_tickets_users') ?>
+	<br />
+<? endif; ?>
+
+<? if ($this->hasPanel('unread_tickets_supporters')): ?>
+	<? $this->displayPanel('unread_tickets_supporters') ?>
 	<br />
 <? endif; ?>
 
