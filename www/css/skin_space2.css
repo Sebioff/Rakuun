@@ -14,6 +14,7 @@
 	$5  -  Messages
 	$6  -  Navigation
 	$7  -  Overview
+	$8  -  Production
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -387,4 +388,12 @@ body.skin_space2 {
 .skin_space2 .rakuun_info_profile_picture img
 {
 	width:256px;
+}
+
+/* $7  -  Production ---------------------------------------------------------*/
+.rakuun_production_item_description
+{
+	border-top:1px solid #99A7AA;
+	margin-top:4px;
+	padding:4px 0px 4px 0px;
 }

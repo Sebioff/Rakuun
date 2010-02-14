@@ -1,30 +1,47 @@
 <? /* @var $productionItem Rakuun_Intern_Production_Base */ ?>
 <? $productionItem = $this->getProductionItem() ?>
-<h2>
-	<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
-		<?= $productionItem->getName() ?>
-	</a>
-</h2> (Stufe <?= $productionItem->getLevel() ?><?= ($productionItem->getFutureLevels() > 0) ? ' + '.$productionItem->getFutureLevels() : '' ?>)
-<div class="headpanels">
-	<? foreach ($this->getHeadPanels() as $panel): ?>
-		<? $panel->display(); ?>
-	<? endforeach; ?>
+<div class="production_item_header">
+	<h2>
+		<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
+			<?= $productionItem->getName() ?>
+		</a>
+	</h2> (Stufe <?= $productionItem->getLevel() ?><?= ($productionItem->getFutureLevels() > 0) ? ' + '.$productionItem->getFutureLevels() : '' ?><?= ($productionItem->getMaximumLevel() > 0) ? ' / '.$productionItem->getMaximumLevel() : '' ?>)
 </div>
-<br />
-<?= $productionItem->getShortDescription() ?>
-<br />
-<br />
-<? if ($effects = $productionItem->getEffects()): ?>
-	<h3>Effekte</h3>
-	<ul>
-		<? foreach($effects as $effect): ?>
-			<li><?= $effect; ?></li>
+<div class="production_item_actions">
+	<? if (!$productionItem->reachedMaximumLevel()): ?>
+		<? if ($productionItem->canBuild()): ?>
+			<? if ($this->hasErrors()): ?>
+				<? $this->displayErrors(); ?>
+			<? endif; ?>
+			<? if ($this->hasPanel('produce')): ?>
+				<? $this->displayPanel('produce') ?>
+			<? endif; ?>
+		<? else: ?>
+			<span class="rakuun_requirements_failed">
+				<? if (!$productionItem->gotEnoughRessources()): ?>
+					Unzureichende Rohstoffe.
+				<? else: ?>
+					Fehlende Voraussetzungen.
+				<? endif; ?>
+			</span>
+		<? endif; ?>
+	<? else: ?>
+		Maximalstufe erreicht.
+	<? endif; ?>
+	<? if ($this->hasPanel('remove')): ?>
+		<? $this->displayPanel('remove') ?>
+	<? endif; ?>
+</div>
+<br class="clear" />
+<? if ($this->getHeadPanels()): ?>
+	<div class="headpanels">
+		<? foreach ($this->getHeadPanels() as $panel): ?>
+			<? $panel->display(); ?>
 		<? endforeach; ?>
-	</ul>
-	<br />
-	<br />
+	</div>
 <? endif; ?>
 <? if (!$productionItem->reachedMaximumLevel()): ?>
+	<br />
 	<? $nextBuildableLevel = $productionItem->getNextBuildableLevel() ?>
 	<? $ressources = $productionItem->getUser()->ressources ?>
 	<? $ironCosts = $productionItem->getIronCostsForLevel($nextBuildableLevel); ?>
@@ -61,25 +78,22 @@
 	<? endif ?>
 	<?= Rakuun_Date::formatCountDown($productionItem->getTimeCosts($nextBuildableLevel)) ?>
 	<br />
-	<? if ($productionItem->canBuild()): ?>
-		<? if ($this->hasErrors()): ?>
-			<? $this->displayErrors(); ?>
-		<? endif; ?>
-		<? if ($this->hasPanel('produce')): ?>
-			<? $this->displayPanel('produce') ?>
-		<? endif; ?>
-	<? else: ?>
-		<span class="rakuun_requirements_failed">
-			<? if (!$productionItem->gotEnoughRessources()): ?>
-				Unzureichende Rohstoffe.
-			<? else: ?>
-				Fehlende Voraussetzungen.
-			<? endif; ?>
-		</span>
+<? endif; ?>
+<div class="rakuun_production_item_description">
+	<a class="rakuun_production_item_description_toggle" href="#">
+		Kurzbeschreibung anzeigen
+	</a>
+	<div class="rakuun_production_item_description_content">
+	<?= $productionItem->getShortDescription() ?>
+	<? if ($effects = $productionItem->getEffects()): ?>
+		<br />
+		<br />
+		<h3>Effekte</h3>
+		<ul>
+			<? foreach($effects as $effect): ?>
+				<li><?= $effect; ?></li>
+			<? endforeach; ?>
+		</ul>
 	<? endif; ?>
-<? else: ?>
-	Maximalstufe erreicht.
-<? endif; ?>
-<? if ($this->hasPanel('remove')): ?>
-	<? $this->displayPanel('remove') ?>
-<? endif; ?>
+	</div>
+</div>

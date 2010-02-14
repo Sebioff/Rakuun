@@ -6,6 +6,7 @@ class Rakuun_Intern_Module_Research extends Rakuun_Intern_Module {
 		
 		$this->setPageTitle('Forschen');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/research.tpl');
+		$this->addJsRouteReference('js', 'production.js');
 		
 		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers::getTechnologiesWIPContainer()), 'Momentane Forschung');
 		$this->contentPanel->addPanel($wipPanel, true);

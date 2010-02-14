@@ -94,8 +94,23 @@
 .production_item_box
 {
 	float:none !important;
-	width:450px;
+	width:590px;
 	margin:0px auto;
+}
+
+.production_item_header
+{
+	float:left;
+}
+
+.production_item_actions
+{
+	float:right;
+}
+
+.rakuun_production_item_description_toggle
+{
+	display:block;
 }
 
 .module_build form,

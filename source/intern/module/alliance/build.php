@@ -6,6 +6,7 @@ class Rakuun_Intern_Module_Alliance_Build extends Rakuun_Intern_Module_Alliance_
 		
 		$this->setPageTitle('Allianzgebäude bauen');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/build.tpl');
+		$this->addJsRouteReference('js', 'production.js');
 		
 		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip', new Rakuun_Intern_Production_Producer_Alliances(Rakuun_User_Manager::getCurrentUser()->alliance), 'Momentaner Bauvorgang');
 		$this->contentPanel->addPanel($wipPanel, true);

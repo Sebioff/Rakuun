@@ -24,4 +24,3 @@
 <? $this->displayPanel('scroll_down'); ?>
 <br class="clear" />
 <? $this->displayPanel('target'); ?>
-<?= $this->getViewRectX(); ?>

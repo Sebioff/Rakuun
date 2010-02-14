@@ -6,6 +6,7 @@ class Rakuun_Intern_Module_Produce extends Rakuun_Intern_Module {
 		
 		$this->setPageTitle('Einheiten produzieren');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/produce.tpl');
+		$this->addJsRouteReference('js', 'production.js');
 		
 		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_Units('wip', new Rakuun_Intern_Production_Producer_Units(Rakuun_DB_Containers::getUnitsContainer(), Rakuun_DB_Containers::getUnitsWIPContainer()), 'Momentane Einheitenproduktion');
 		$this->contentPanel->addPanel($wipPanel, true);

@@ -16,11 +16,11 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	public function init() {
 		parent::init();
 		
-		$user = Rakuun_User_Manager::getCurrentUser()->getPK();
-		if ($this->message->user->getPK() != $user && (!$this->message->sender || $this->message->sender->getPK() != $user))
+		$userPK = Rakuun_User_Manager::getCurrentUser()->getPK();
+		if ($this->message->user->getPK() != $userPK && (!$this->message->sender || $this->message->sender->getPK() != $userPK))
 			return;
 		
-		if (!$this->message->hasBeenRead && $this->message->sender->getPK() != $user) {
+		if (!$this->message->hasBeenRead && (!$this->message->sender || $this->message->sender->getPK() != $userPK)) {
 			$this->message->hasBeenRead = true;
 			$this->message->save();
 		}
