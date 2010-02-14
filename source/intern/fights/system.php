@@ -104,13 +104,15 @@ class Rakuun_Intern_Fights_System {
 		$fightingSequence = explode('|', $winnerUnitSource->fightingSequence);
 		$survivingWinnerUnitAmounts = array();
 		foreach ($fightingSequence as $fightingUnitName) {
-			if ($winningPower <= 0)
-				break;
-			
 			$fightingUnit = Rakuun_Intern_Production_Factory::getUnit($fightingUnitName, $winnerUnitSource);
 			
 			if ($fightingUnit->getAmount() <= 0)
 				continue;
+			
+			if ($winningPower <= 0) {
+				$survivingWinnerUnitAmounts[$fightingUnitName] = 0;
+				break;
+			}
 			
 			// how much power does a single unit of this type have?
 			$fightingPowerOfSingleUnit = $winnerPowerByUnits[$fightingUnitName] / $fightingUnit->getAmount();
