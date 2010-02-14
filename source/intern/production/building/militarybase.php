@@ -12,6 +12,7 @@ class Rakuun_Intern_Production_Building_MilitaryBase extends Rakuun_Intern_Produ
 		$this->setBaseBerylliumCosts(500);
 		$this->setBasePeopleCosts(35);
 		$this->setBaseTimeCosts(10*60);
+		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('ironmine', 2);
 		$this->addNeededBuilding('berylliummine', 1);
 		$this->setShortDescription('Der Militärstützpunkt ist sowohl Versammlungsort aller militärischen Einheiten, als auch der "Bauplatz" (und somit eine Grundvorraussetzung) für alle militärischen Gebäude.');

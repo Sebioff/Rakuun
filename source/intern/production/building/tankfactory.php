@@ -12,6 +12,7 @@ class Rakuun_Intern_Production_Building_TankFactory extends Rakuun_Intern_Produc
 		$this->setBaseBerylliumCosts(2000);
 		$this->setBasePeopleCosts(80);
 		$this->setBaseTimeCosts(18*60);
+		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('ironmine', 10);
 		$this->addNeededBuilding('berylliummine', 8);
 		$this->addNeededBuilding('military_base', 2);

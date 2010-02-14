@@ -12,6 +12,7 @@ class Rakuun_Intern_Production_Building_Barracks extends Rakuun_Intern_Productio
 		$this->setBaseBerylliumCosts(350);
 		$this->setBasePeopleCosts(30);
 		$this->setBaseTimeCosts(10*60);
+		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('ironmine', 5);
 		$this->addNeededBuilding('berylliummine', 5);
 		$this->addNeededBuilding('military_base', 1);

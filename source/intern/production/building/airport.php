@@ -12,6 +12,7 @@ class Rakuun_Intern_Production_Building_Airport extends Rakuun_Intern_Production
 		$this->setBaseBerylliumCosts(1500);
 		$this->setBasePeopleCosts(200);
 		$this->setBaseTimeCosts(45*60);
+		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('military_base', 5);
 		$this->addNeededTechnology('antigravitation', 1);
 		$this->setShortDescription('Der Flughafen dient als Produktionsanlage und Start- und Landeplatz von Flugeinheiten.<br />Ein Ausbau bewirkt eine schnellere Produktion.');
