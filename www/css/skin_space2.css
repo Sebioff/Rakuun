@@ -47,6 +47,17 @@ body.skin_space2 {
 	border-color:#99A7AA;
 }
 
+.ac_results
+{
+	background-color:#000000;
+	border:1px solid #526A6F;
+}
+
+.ac_results .ac_odd
+{
+	background-color:#202020;
+}
+
 /* $3  -  Main Containers ----------------------------------------------------*/
 .skin_space2 #ctn_head {
 	border:0px none;

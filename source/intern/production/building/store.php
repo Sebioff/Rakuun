@@ -1,6 +1,8 @@
 <?php
 
 class Rakuun_Intern_Production_Building_Store extends Rakuun_Intern_Production_Building {
+	const SAVE_CAPACITY_RAISE_PER_WEEK = 1000;
+	
 	private $baseCapacity = 0;
 	
 	public function __construct($dataSource = null) {
@@ -17,7 +19,7 @@ class Rakuun_Intern_Production_Building_Store extends Rakuun_Intern_Production_B
 	}
 	
 	public function getSaveCapacity() {
-		return ceil((time() - RAKUUN_ROUND_STARTTIME) / 60 / 60 / 24 / 7) * 1000 * RAKUUN_STORE_CAPACITY_SAVE_MULTIPLIER;
+		return ceil((time() - RAKUUN_ROUND_STARTTIME) * self::SAVE_CAPACITY_RAISE_PER_WEEK / 7 / 24 / 60 / 60 * RAKUUN_STORE_CAPACITY_SAVE_MULTIPLIER);
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
