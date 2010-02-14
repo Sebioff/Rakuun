@@ -1,3 +1,6 @@
+<? if ($this->hasMessages()): ?>
+	<? $this->displayMessages(); ?>
+<? endif; ?>
 <? $this->displayPanel('poolbox'); ?>
 <? $this->displayPanel('displaybox'); ?>
 <br class="clear" />
