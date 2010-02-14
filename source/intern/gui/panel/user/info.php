@@ -5,10 +5,11 @@ class Rakuun_Intern_GUI_Panel_User_Info extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/info.tpl');
-		$user = Rakuun_User_Manager::getCurrentUser();	
-		if ($user)
-			$this->addPanel(new GUI_Panel_UploadedFile('picture', $user->picture, 'Profilbild von '.$user->nameUncolored));
-
+		$user = Rakuun_User_Manager::getCurrentUser();
+		if ($user) {
+			$this->addPanel($picture = new GUI_Panel_UploadedFile('picture', $user->picture, 'Profilbild von '.$user->nameUncolored));
+			$picture->addClasses('rakuun_info_profile_picture');
+		}
 	}
 }
 
