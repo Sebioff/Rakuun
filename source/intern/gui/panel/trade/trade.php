@@ -109,7 +109,6 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 			//TODO check sender is not in Noobschutz or KO
 			//TODO check recipient is not sitter
 			DB_Connection::get()->beginTransaction();
-			//TODO run a cronjob to reset the Tradelimit Value every day
 			$recipient->tradelimit = $recipient->tradelimit + $tradevolume;
 			$recipient->ressources->raise($this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), 0);
 			$sender->ressources->lower($ironcosts, $berylliumcosts, $energycosts, 0);

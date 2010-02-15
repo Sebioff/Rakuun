@@ -7,7 +7,8 @@ class Rakuun_Cronjob_Script_DailyCleanup extends Rakuun_Cronjob_Script_FixedTime
 		DB_Connection::get()->query($query);
 		
 		// RESET USER'S STOCKMARKET TRADEVOLUME --------------------------------
-		$query = 'UPDATE users SET stockmarkettrade = 0';
+		// TODO could easily be done without cronjob...
+		$query = 'UPDATE users SET stockmarkettrade = 0, tradelimit = 0';
 		DB_Connection::get()->query($query);
 		
 		// LITTLE CHEAT FOR STOCKMARKET PRICE DISPLAY --------------------------
