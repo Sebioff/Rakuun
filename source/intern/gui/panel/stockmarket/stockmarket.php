@@ -149,7 +149,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 			$('#".$this->amount->getID()."').change(
 				function() {
 					$('#".$this->first->getID()."').val(
-						Math.round($('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($first, $sell).")
+						Math.round($('#".$this->amount->getID()."').val() / ".$this->calculateStockExchangePrice($first, $sell).")
 					);
 				}
 			);
@@ -159,10 +159,11 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 					max: 101,
 					slide: function(event, ui) {
 						$('#".$this->first->getID()."').val(
-							Math.round((101 - ui.value) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($first, $sell).")
+							
+							Math.round((101 - ui.value) / 100 * $('#".$this->amount->getID()."').val() / ".$this->calculateStockExchangePrice($first, $sell).")
 						);
 						$('#".$this->second->getID()."').val(
-							Math.round((ui.value - 1) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($second, $sell).")
+							Math.round((ui.value - 1) / 100 * $('#".$this->amount->getID()."').val() / ".$this->calculateStockExchangePrice($second, $sell).")
 						);
 					}
 				}

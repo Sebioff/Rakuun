@@ -6,5 +6,5 @@
 , <? $this->displayPanel('answerlink'); ?>
 </div>
 <div class="shout_text">
-	<?= nl2br(Text::escapeHTML($this->params->shout->text)); ?>
+	<?= Text::format((Text::escapeHTML($this->params->shout->text))); ?>
 </div>
