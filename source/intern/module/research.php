@@ -14,7 +14,8 @@ class Rakuun_Intern_Module_Research extends Rakuun_Intern_Module {
 		$canResearch = false;
 		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
 			if ($technology->meetsTechnicalRequirements() || $technology->getLevel() > 0) {
-				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Research('build_'.$technology->getInternalName(), $technology));
+				$this->contentPanel->addPanel($itemBox = new Rakuun_GUI_Panel_Box('build_'.$technology->getInternalName(), new Rakuun_Intern_GUI_Panel_Production_Research('build_'.$technology->getInternalName(), $technology)));
+				$itemBox->addClasses('production_item_box');
 				$canResearch = true;
 			}
 		}

@@ -81,8 +81,9 @@ abstract class Rakuun_DB_Containers {
 	
 	// TODO remove with PHP 5.3 (use lambda-function instead)
 	public static function onUserDelete(Rakuun_DB_User $user = null) {
-		if ($user->picture)
-			IO_Utils::deleteFolder(dirname($user->picture));
+		// FIXME not permitted
+//		if ($user->picture)
+//			IO_Utils::deleteFolder(dirname($user->picture));
 		
 		if ($user->alliance && Rakuun_DB_Containers::getUserContainer()->countByAlliance($user->alliance) == 1) {
 			// delete alliance if last users is deleted

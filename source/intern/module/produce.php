@@ -14,7 +14,8 @@ class Rakuun_Intern_Module_Produce extends Rakuun_Intern_Module {
 		$canProduce = false;
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
 			if ($unit->meetsTechnicalRequirements()) {
-				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Unit('produce_'.$unit->getInternalName(), $unit));
+				$this->contentPanel->addPanel($itemBox = new Rakuun_GUI_Panel_Box('produce_'.$unit->getInternalName(), new Rakuun_Intern_GUI_Panel_Production_Unit('produce_'.$unit->getInternalName(), $unit)));
+				$itemBox->addClasses('production_item_box');
 				$canProduce = true;
 			}
 		}

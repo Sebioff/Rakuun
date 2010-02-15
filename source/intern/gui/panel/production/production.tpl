@@ -84,16 +84,16 @@
 		Kurzbeschreibung anzeigen
 	</a>
 	<div class="rakuun_production_item_description_content">
-	<?= $productionItem->getShortDescription() ?>
-	<? if ($effects = $productionItem->getEffects()): ?>
-		<br />
-		<br />
-		<h3>Effekte</h3>
-		<ul>
-			<? foreach($effects as $effect): ?>
-				<li><?= $effect; ?></li>
-			<? endforeach; ?>
-		</ul>
-	<? endif; ?>
+		<?= $productionItem->getShortDescription() ?>
+		<? if ($effects = $productionItem->getEffects()): ?>
+			<br />
+			<br />
+			<h3>Effekte</h3>
+			<ul>
+				<? foreach($effects as $effect): ?>
+					<li><?= $effect; ?></li>
+				<? endforeach; ?>
+			</ul>
+		<? endif; ?>
 	</div>
 </div>
