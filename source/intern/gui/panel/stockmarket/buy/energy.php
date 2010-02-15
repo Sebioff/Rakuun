@@ -1,7 +1,6 @@
 <?php
 
-class Rakuun_Intern_GUI_Panel_StockMarket_Buy_Energy extends Rakuun_Intern_GUI_Panel_StockMarket {
-	
+class Rakuun_Intern_GUI_Panel_StockMarket_Buy_Energy extends Rakuun_Intern_GUI_Panel_StockMarket_Buy {
 	public function init() {
 		parent::init();
 		
@@ -23,13 +22,12 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Buy_Energy extends Rakuun_Intern_GUI_P
 		parent::afterInit();
 		
 		$this->getModule()->addJsAfterContent(
-			$this->getBuySliderJS(
+			$this->getSliderJS(
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_ENERGY,
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_IRON,
 				Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_BERYLLIUM
 			)
 		);
-		$this->getModule()->addJsAfterContent("$('#".$this->first_radio->getID()."').hide(); $('#".$this->second_radio->getID()."').hide();");
 	}
 	
 	public function onSubmit() {

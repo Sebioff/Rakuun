@@ -22,6 +22,12 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		$this->addPanel(new GUI_Control_SubmitButton('submit', 'handeln'));
 	}
 	
+	public function afterInit() {
+		parent::afterInit();
+		
+		$this->getModule()->addJsAfterContent("$('#".$this->first_radio->getID()."').hide(); $('#".$this->second_radio->getID()."').hide();");
+	}
+	
 	/**
 	 * calculates the factor for buying one ressource with another.
 	 * Use self::RESSOURCE_* to identify the specific ressources.
@@ -29,10 +35,10 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 	 * @param $sell the ressource to pay with
 	 * @return factor
 	 */
-	public function calculateStockExchangePrice($buy, $sell) {
+	public function calculateStockExchangePrice2($buy, $sell) {
 		$ressources = self::getStockRessources();
 		if ($ressources[$buy] == 0)
-			return 0;
+			return self::MIN_EXCHANGE_COURSE;
 		
 		$price = $ressources[$sell] / $ressources[$buy];
 		if ($ressources[$sell] == 0 || $price > self::MAX_EXCHANGE_COURSE)
@@ -110,65 +116,6 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 	
 	public static function getTradableLeft() {
 		return self::getTradable() - Rakuun_User_Manager::getCurrentUser()->stockmarkettrade;
-	}
-	
-	protected function getBuySliderJS($buy, $first, $second) {
-		return str_replace(array("\r\n", "\n", "\t"), ' ', "
-			$('#".$this->first->getID()."').show().attr('readonly', 'readonly');
-			$('#".$this->second->getID()."').show().attr('readonly', 'readonly');
-		
-			$('#".$this->amount->getID()."').change(
-				function() {
-					$('#".$this->first->getID()."').val(
-						Math.round($('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $first).")
-					);
-				}
-			);
-			$('#".$this->slider->getID()."').slider(
-				{
-					min: 1,
-					max: 101,
-					slide: function(event, ui) {
-						$('#".$this->first->getID()."').val(
-							Math.round((101 - ui.value) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $first).")
-						);
-						$('#".$this->second->getID()."').val(
-							Math.round((ui.value - 1) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $second).")
-						);
-					}
-				}
-			);
-		");
-	}
-	
-	protected function getSellSliderJS($sell, $first, $second) {
-		return str_replace(array("\r\n", "\n", "\t"), ' ', "
-			$('#".$this->first->getID()."').show().attr('readonly', 'readonly');
-			$('#".$this->second->getID()."').show().attr('readonly', 'readonly');
-		
-			$('#".$this->amount->getID()."').change(
-				function() {
-					$('#".$this->first->getID()."').val(
-						Math.round($('#".$this->amount->getID()."').val() / ".$this->calculateStockExchangePrice($first, $sell).")
-					);
-				}
-			);
-			$('#".$this->slider->getID()."').slider(
-				{
-					min: 1,
-					max: 101,
-					slide: function(event, ui) {
-						$('#".$this->first->getID()."').val(
-							
-							Math.round((101 - ui.value) / 100 * $('#".$this->amount->getID()."').val() / ".$this->calculateStockExchangePrice($first, $sell).")
-						);
-						$('#".$this->second->getID()."').val(
-							Math.round((ui.value - 1) / 100 * $('#".$this->amount->getID()."').val() / ".$this->calculateStockExchangePrice($second, $sell).")
-						);
-					}
-				}
-			);
-		");
 	}
 }
 ?>
