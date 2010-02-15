@@ -41,14 +41,11 @@ class Rakuun_Intern_GUI_Panel_Meta_Application extends GUI_Panel {
 				$igm = new Rakuun_Intern_IGM('Neue Meta Bewerbung', $user);
 				$igm->type = Rakuun_Intern_IGM::TYPE_META;
 				$igm->setSenderName(Rakuun_Intern_IGM::SENDER_META);
-				Rakuun_Intern_Alliance_Security::push(Security_AllPrivileges::get());
 				$igm->setText(
 					'Hallo '.$user->name.',<br />
-					['.Rakuun_User_Manager::getCurrentUser()->alliance->tag.'] '.Rakuun_User_Manager::getCurrentUser()->alliance->name.' hat sich bei eurer Meta beworben.<br />
-					<a href="'.App::get()->getInternModule()->getSubmodule('meta')->getSubmodule('applications')->getURL().'">Bewerbungen</a>'
+					['.Rakuun_User_Manager::getCurrentUser()->alliance->tag.'] '.Rakuun_User_Manager::getCurrentUser()->alliance->name.' hat sich bei eurer Meta beworben.'
 				);
 				$igm->send();
-				Rakuun_Intern_Alliance_Security::pop();
 			}
 		}
 		DB_Connection::get()->commit();
