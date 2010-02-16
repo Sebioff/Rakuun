@@ -16,9 +16,7 @@
 	<? $this->displayPanel('delete'); ?>
 <? endif; ?>
 <br class="clear" />
-<? if ($this->hasPanel('account')): ?>
-	<? $this->displayPanel('account'); ?>
-<? endif; ?>
+<? $this->displayPanel('account'); ?>
 <? $this->displayPanel('deposit'); ?>
 <? if ($this->hasPanel('activity')): ?>
 	<br class="clear" />

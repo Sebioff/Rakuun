@@ -12,8 +12,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Profile_Own extends GUI_Panel {
 		
 		$this->addPanel(new Rakuun_GUI_Panel_Box('leave', new Rakuun_Intern_GUI_Panel_Alliance_Leave('leave'), 'Allianz verlassen'));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('deposit', new Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit('deposit'), 'Auf Allianzkonto einzahlen'));
-		if (Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_RESSOURCES))
-			$this->addPanel(new Rakuun_GUI_Panel_Box('account', new Rakuun_Intern_GUI_Panel_Alliance_Account('account'), 'Allianzkonto'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('account', new Rakuun_Intern_GUI_Panel_Alliance_Account('account'), 'Allianzkonto'));
 		if (Rakuun_Intern_Alliance_Security::get()->isInGroup($user, Rakuun_Intern_Alliance_Security::GROUP_LEADERS))
 			$this->addPanel(new Rakuun_GUI_Panel_Box('delete', new Rakuun_Intern_GUI_Panel_Alliance_Delete('delete_alliance'), 'Allianz löschen'));
 		if (Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_ACTIVITY))
