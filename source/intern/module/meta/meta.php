@@ -11,10 +11,11 @@ class Rakuun_Intern_Module_Meta extends Rakuun_Intern_Module_Meta_Navigation {
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Applications('applications'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Edit('edit'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Mail('mail'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Statistics('statistics'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Kick('kick'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Build('build'));
 		}
+		if ($user && Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_STATISTICS))
+			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Statistics('statistics'));
 	}
 	
 	public function init() {
