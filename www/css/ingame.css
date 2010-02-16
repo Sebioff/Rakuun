@@ -302,6 +302,13 @@ table.boardview td.posting_count {
 	font-weight:bold;
 }
 
+.module_techtree #ctn_content .rakuun_box
+{
+	float:none;
+	margin:0px auto;
+	width:330px;
+}
+
 /* $8  -  WarSim -------------------------------------------------------------*/
 .warsim_panels_attacker
 {

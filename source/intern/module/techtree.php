@@ -7,26 +7,23 @@ class Rakuun_Intern_Module_Techtree extends Rakuun_Intern_Module {
 		$this->setPageTitle('Techtree');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/techtree.tpl');
 
-		$items = array();
+		$buildingsPanel = new Rakuun_Intern_GUI_Panel_Techtree_Category('buildings');
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('buildings', $buildingsPanel, 'Gebäude'));
 		foreach (Rakuun_Intern_Production_Factory::getAllBuildings() as $building) {
-			$this->contentPanel->addPanel($item = new Rakuun_Intern_GUI_Panel_Techtree_Item('item_'.$building->getInternalName(), $building));
-			$items[] = $item;
+			$buildingsPanel->addPanel(new Rakuun_Intern_GUI_Panel_Techtree_Item('item_'.$building->getInternalName(), $building));
 		}
-		$this->contentPanel->params->buildings = $items;
 		
-		$items = array();
+		$technologiesPanel = new Rakuun_Intern_GUI_Panel_Techtree_Category('technologies');
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('technologies', $technologiesPanel, 'Forschungen'));
 		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
-			$this->contentPanel->addPanel($item = new Rakuun_Intern_GUI_Panel_Techtree_Item('item_'.$technology->getInternalName(), $technology));
-			$items[] = $item;
+			$technologiesPanel->addPanel(new Rakuun_Intern_GUI_Panel_Techtree_Item('item_'.$technology->getInternalName(), $technology));
 		}
-		$this->contentPanel->params->technologies = $items;
 		
-		$items = array();
+		$unitsPanel = new Rakuun_Intern_GUI_Panel_Techtree_Category('units');
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('units', $unitsPanel, 'Einheiten'));
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
-			$this->contentPanel->addPanel($item = new Rakuun_Intern_GUI_Panel_Techtree_Item('item_'.$unit->getInternalName(), $unit));
-			$items[] = $item;
+			$unitsPanel->addPanel(new Rakuun_Intern_GUI_Panel_Techtree_Item('item_'.$unit->getInternalName(), $unit));
 		}
-		$this->contentPanel->params->units = $items;
 	}
 }
 
