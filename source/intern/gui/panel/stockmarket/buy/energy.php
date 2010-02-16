@@ -43,8 +43,6 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Buy_Energy extends Rakuun_Intern_GUI_P
 		$iron = $first;
 		$beryllium = $second;
 		$energy = round(($energy_iron > 0 ? $first / $energy_iron : 0) + ($energy_beryllium > 0 ? $second / $energy_beryllium : 0));
-		if ($energy > $amount)
-			$energy = $amount;
 		if ($first + $second == 0) {
 			if ($this->first_radio->getSelected()) {
 				$iron = $amount * $energy_iron;

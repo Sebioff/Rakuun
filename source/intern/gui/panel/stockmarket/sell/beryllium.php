@@ -42,8 +42,6 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Sell_Beryllium extends Rakuun_Intern_G
 		$pool = Rakuun_DB_Containers::getStockmarketContainer()->selectFirst($options);
 		$iron = $first;
 		$beryllium = round(($beryllium_iron > 0 ? $first / $beryllium_iron : 0) + ($beryllium_energy > 0 ? $second / $beryllium_energy : 0));
-		if ($beryllium > $amount)
-			$beryllium = $amount;
 		$energy = $second;
 		if ($first + $second == 0) {
 			if ($this->first_radio->getSelected()) {

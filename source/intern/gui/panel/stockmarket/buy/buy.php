@@ -1,6 +1,13 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_StockMarket_Buy extends Rakuun_Intern_GUI_Panel_StockMarket {
+	/**
+	 * calculates the factor for buying one ressource with another.
+	 * Use self::RESSOURCE_* to identify the specific ressources.
+	 * @param $buy the ressource you want to buy
+	 * @param $sell the ressource to pay with
+	 * @return factor
+	 */
 	public function calculateStockExchangePrice($buy, $sell) {
 		$ressources = self::getStockRessources();
 		if ($ressources[$buy] == 0)
@@ -21,7 +28,10 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Buy extends Rakuun_Intern_GUI_Panel_St
 			$('#".$this->amount->getID()."').change(
 				function() {
 					$('#".$this->first->getID()."').val(
-						Math.round($('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $first).")
+						Math.round((101 - $('#".$this->slider->getID()."').slider('value')) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $first).")
+					);
+					$('#".$this->second->getID()."').val(
+						Math.round(($('#".$this->slider->getID()."').slider('value') - 1) / 100 * $('#".$this->amount->getID()."').val() * ".$this->calculateStockExchangePrice($buy, $second).")
 					);
 				}
 			);

@@ -29,25 +29,6 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 	}
 	
 	/**
-	 * calculates the factor for buying one ressource with another.
-	 * Use self::RESSOURCE_* to identify the specific ressources.
-	 * @param $buy the ressource you want to buy
-	 * @param $sell the ressource to pay with
-	 * @return factor
-	 */
-	public function calculateStockExchangePrice2($buy, $sell) {
-		$ressources = self::getStockRessources();
-		if ($ressources[$buy] == 0)
-			return self::MIN_EXCHANGE_COURSE;
-		
-		$price = $ressources[$sell] / $ressources[$buy];
-		if ($ressources[$sell] == 0 || $price > self::MAX_EXCHANGE_COURSE)
-			return self::MAX_EXCHANGE_COURSE;
-		
-		return $price < self::MIN_EXCHANGE_COURSE ? self::MIN_EXCHANGE_COURSE : $price;
-	}
-	
-	/**
 	 * get the amount of ressources tradable
 	 * @return array with self::RESSOURCE_* as index
 	 */

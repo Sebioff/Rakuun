@@ -41,8 +41,6 @@ class Rakuun_Intern_GUI_Panel_StockMarket_Sell_Iron extends Rakuun_Intern_GUI_Pa
 		$options['order'] = 'date DESC';
 		$pool = Rakuun_DB_Containers::getStockmarketContainer()->selectFirst($options);
 		$iron = round(($iron_beryllium > 0 ? $first / $iron_beryllium : 0) + ($iron_energy > 0 ? $second / $iron_energy : 0));
-		if ($iron > $amount)
-			$iron = $amount;
 		$beryllium = $first;
 		$energy = $second;
 		if ($first + $second == 0) {
