@@ -20,7 +20,7 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 		if ($this->message->user->getPK() != $userPK && (!$this->message->sender || $this->message->sender->getPK() != $userPK))
 			return;
 		
-		if (!$this->message->hasBeenRead && (!$this->message->sender || $this->message->sender->getPK() != $userPK)) {
+		if (!$this->message->hasBeenRead && (!$this->message->sender || $this->message->sender->getPK() != $userPK || $this->message->user->getPK() == $userPK)) {
 			$this->message->hasBeenRead = true;
 			$this->message->save();
 		}
