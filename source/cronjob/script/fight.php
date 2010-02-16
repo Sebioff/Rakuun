@@ -8,7 +8,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 	
 	public function execute() {
 		$options = array();
-		$options['order'] = 'ID ASC';
+		$options['order'] = 'target_time ASC, ID ASC';
 		foreach (Rakuun_DB_Containers::getArmiesContainer()->select($options) as $army) {
 			DB_Connection::get()->beginTransaction();
 			
