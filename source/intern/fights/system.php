@@ -111,7 +111,7 @@ class Rakuun_Intern_Fights_System {
 			
 			if ($winningPower <= 0) {
 				$survivingWinnerUnitAmounts[$fightingUnitName] = 0;
-				break;
+				continue;
 			}
 			
 			// how much power does a single unit of this type have?
