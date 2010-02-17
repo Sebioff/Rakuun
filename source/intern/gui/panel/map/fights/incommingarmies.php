@@ -13,7 +13,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies extends GUI_Panel {
 		$cloakingUnits = array();
 		$unCloakingUnits = array();
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
-			if ($unit->getBaseAttackValue() > 0) {
+			if (!$unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY)) {
 				if ($unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING)) {
 					$cloakingUnits[] = $unit->getInternalName();
 				}
@@ -24,7 +24,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies extends GUI_Panel {
 		}
 		$sensorfieldRange = Rakuun_Intern_Production_Factory::getBuilding('sensor_bay')->getRange();
 		// respect cloaked armies + sensorfield
-		$options['conditions'][] = array(implode('+',$cloakingUnits).' <= 0 OR target_time-'.$sensorfieldRange.' <= ? OR '.implode('+',$unCloakingUnits).' > 0', time());
+		$options['conditions'][] = array(implode('+',$cloakingUnits).' <= 0 OR (target_time-'.$sensorfieldRange.' <= ? && target_time > ?) OR '.implode('+',$unCloakingUnits).' > 0', time(), time());
 		$options['order'] = 'target_time ASC';
 		foreach (Rakuun_DB_Containers::getArmiesContainer()->select($options) as $army) {
 			$this->addPanel($countdownPanel = new Rakuun_GUI_Panel_CountDown('cd_'.$army->getPK(), $army->targetTime));
