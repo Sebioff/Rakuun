@@ -27,7 +27,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Leave extends GUI_Panel {
 		$user->alliance = null;
 		Rakuun_User_Manager::update($user);
 		DB_Connection::get()->commit();
-		Router::get()->getCurrentModule()->invalidate();
+		$this->getModule()->redirect(App::get()->getInternModule()->getURL());
 	}
 }
 

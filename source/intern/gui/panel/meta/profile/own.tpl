@@ -1,16 +1,13 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-
+<? $this->displayPanel('shoutbox'); ?>
 <? if ($this->hasPanel('picture')): ?>
 	<? $this->displayPanel('picture'); ?>
 <? endif; ?>
 <? $this->displayPanel('description'); ?>
-<br class="clear" />
 <? $this->displayPanel('intern'); ?>
-<br class="clear" />
 <? $this->displayPanel('membersbox'); ?>
-<br class="clear" />
 <? if ($this->hasPanel('leave')): ?>
 	<? $this->displayPanel('leave'); ?>
 	<br class="clear" />

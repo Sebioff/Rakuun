@@ -25,7 +25,7 @@ class Rakuun_Intern_GUI_Panel_Meta_Leave extends GUI_Panel {
 		$alliance->meta = null;
 		Rakuun_DB_Containers::getAlliancesContainer()->save($alliance);
 		DB_Connection::get()->commit();
-		$this->getModule()->invalidate();
+		$this->getModule()->redirect(App::get()->getInternModule()->getURL());
 	}
 }
 
