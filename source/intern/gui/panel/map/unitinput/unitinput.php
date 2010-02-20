@@ -18,8 +18,10 @@ class Rakuun_Intern_GUI_Panel_Map_UnitInput extends GUI_Panel {
 		$army = array();
 		
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
-			if ($this->hasPanel($unit->getInternalName()) && $this->{$unit->getInternalName()}->valuePanel->getValue() > 0) {
-				$army[$unit->getInternalName()] = $this->{$unit->getInternalName()}->valuePanel->getValue();
+			if ($this->hasPanel($unit->getInternalName()))
+			dump($unit->getInternalName(), $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue());
+			if ($this->hasPanel($unit->getInternalName()) && $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue() > 0) {
+				$army[$unit->getInternalName()] = $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue();
 			}
 		}
 		

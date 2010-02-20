@@ -1,1 +1,1 @@
-<? $this->displayLabelForPanel('value_panel'); ?> <? $this->displayPanel('value_panel'); ?> <? $this->displayPanel('move_up'); ?> <? $this->displayPanel('move_down'); ?>
+<? $this->displayLabelForPanel('value_panel'); ?> <? $this->displayPanel('value_panel'); ?> <? $this->hasPanel('move_up') ? $this->displayPanel('move_up') : ''; ?> <? $this->hasPanel('move_down') ? $this->displayPanel('move_down') : ''; ?>
