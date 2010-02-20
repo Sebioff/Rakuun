@@ -230,7 +230,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 						}
 						if ($destructibleBuildings) {
 							$shieldGenerator = Rakuun_Intern_Production_Factory::getBuilding('shield_generator', $army->target);
-							if ($shieldGenerator->getLevel() > 0)
+							if ($shieldGenerator->getLevel() > 0 && !$shieldGenerator->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK))
 								$destroyedBuilding = $shieldGenerator;
 							else
 								$destroyedBuilding = $destructibleBuildings[rand(0, count($destructibleBuildings) - 1)];
