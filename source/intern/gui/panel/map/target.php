@@ -19,13 +19,14 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', $this->user, 'Ziel'));
 		$this->addPanel(new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH));
 		$this->addPanel(new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT));
+		$this->addPanel(new GUI_Panel_Label('target_coords_label', $this->targetX, 'Koordinaten'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
 		$spydrone = Rakuun_Intern_Production_Factory::getUnit('spydrone');
 		if ($spydrone->getAmount() > 0)
-			$this->addPanel(new GUI_Control_DigitBox($spydrone->getInternalName(), 0, $spydrone->getName().' ('.GUI_Panel_Number::formatNumber($spydrone->getAmount()).')', 0, $spydrone->getAmount()));
+			$this->addPanel(new GUI_Control_DigitBox($spydrone->getInternalName(), 0, $spydrone->getName(), 0, $spydrone->getAmount()));
 		$cloakedSpydrone = Rakuun_Intern_Production_Factory::getUnit('cloaked_spydrone');
 		if ($cloakedSpydrone->getAmount() > 0)
-			$this->addPanel(new GUI_Control_DigitBox($cloakedSpydrone->getInternalName(), 0, $cloakedSpydrone->getName().' ('.GUI_Panel_Number::formatNumber($cloakedSpydrone->getAmount()).')', 0, $cloakedSpydrone->getAmount()));
+			$this->addPanel(new GUI_Control_DigitBox($cloakedSpydrone->getInternalName(), 0, $cloakedSpydrone->getName(), 0, $cloakedSpydrone->getAmount()));
 		$this->addPanel(new GUI_Control_CheckBox('destroy_buildings'));
 		$this->addPanel($ironPriority = new GUI_Control_RadioButtonList('iron_priority', 'Priorität Eisen'));
 		$ironPriority->addItem('Niedrig', 1, true);
@@ -123,7 +124,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		if (!$army->energyPriority)
 			$army->energyPriority = 1;
 		// TODO add proper fighting sequence from users' settings
-		$army->fightingSequence = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani';
+		$army->fightingSequence = $user->units->attackSequence;
 		$army->speed = 0;
 		// TODO refactor calculation of army speed, will probably be needed elsewhere
 		foreach ($this->unitInput->getArmy() as $unitname => $unitamount) {

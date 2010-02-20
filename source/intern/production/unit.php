@@ -4,6 +4,10 @@
  * Base class for all military units
  */
 abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_UserItem {
+	// TODO add pezetto to end of list if pezettos get implemented
+	const DEFAULT_DEFENSE_SEQUENCE = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret';
+	const DEFAULT_ATTACK_SEQUENCE = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani';
+	
 	const TYPE_FOOTSOLDIER = 1; // binary 0001
 	const TYPE_VEHICLE = 2; // binary 0010
 	const TYPE_AIRCRAFT = 4; // binary 0100

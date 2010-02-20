@@ -392,6 +392,16 @@ table.boardview td.posting_count {
 	display:inline;
 }
 
+.rakuun_map_target_panel .core_gui_label
+{
+	width:150px;
+}
+
+.rakuun_map_target_panel .core_gui_digitbox
+{
+	width:50px;
+}
+
 /* $10 -  Boards -------------------------------------------------------------*/
 .rakuun_board_postcontent
 {

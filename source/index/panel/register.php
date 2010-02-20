@@ -116,7 +116,8 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$units->user = $user;
 		$units->buildings = $buildings;
 		$units->technologies = $technologies;
-		$units->fightingSequence = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret|pezetto'; // defense fighting sequence
+		$units->fightingSequence = Rakuun_Intern_Production_Unit::DEFAULT_DEFENSE_SEQUENCE;
+		$units->attackSequence = Rakuun_Intern_Production_Unit::DEFAULT_ATTACK_SEQUENCE;
 		Rakuun_DB_Containers::getUnitsContainer()->save($units);
 		
 		Rakuun_Intern_Log_UserActivity::log($user, Rakuun_Intern_Log::ACTION_ACTIVITY_REGISTRATION, base64_decode($this->base64->getValue()));

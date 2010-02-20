@@ -48,8 +48,7 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		foreach ($this->panelsForDefenders as $unitName => $panel) {
 			$defenders->{Text::underscoreToCamelCase($unitName)} = $panel->getValue();
 		}
-		// TODO re-add pezetto at end of list if pezetto gets implemented
-		$defenders->fightingSequence = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret';
+		$defenders->fightingSequence = Rakuun_Intern_Production_Unit::DEFAULT_DEFENSE_SEQUENCE;
 		$defenderTechnology = new DB_Record();
 		foreach ($this->panelsForDefendersTechnology as $technologyName => $panel) {
 			$defenderTechnology->{Text::underscoreToCamelCase($technologyName)} = $panel->getValue();
@@ -65,7 +64,7 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		foreach ($this->panelsForAttackers as $unitName => $panel) {
 			$attackers->{Text::underscoreToCamelCase($unitName)} = $panel->getValue();
 		}
-		$attackers->fightingSequence = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani';
+		$attackers->fightingSequence = Rakuun_Intern_Production_Unit::DEFAULT_ATTACK_SEQUENCE;
 		$attackerTechnology = new DB_Record();
 		foreach ($this->panelsForAttackersTechnology as $technologyName => $panel) {
 			$attackerTechnology->{Text::underscoreToCamelCase($technologyName)} = $panel->getValue();
