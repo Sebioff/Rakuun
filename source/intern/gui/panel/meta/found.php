@@ -23,7 +23,7 @@ class Rakuun_Intern_GUI_Panel_Meta_Found extends GUI_Panel {
 		if ($this->hasErrors())
 			return;
 		
-		$meta = new DB_Record();
+		$meta = new Rakuun_DB_Meta();
 		$meta->name = $this->name;
 		Rakuun_DB_Containers::getMetasContainer()->save($meta);
 		$metaBuildings = new DB_Record();

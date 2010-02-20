@@ -5,7 +5,7 @@ class Rakuun_Intern_GUI_Panel_Meta_Profile_Own extends GUI_Panel {
 		parent::init();
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
-		$meta = Rakuun_DB_Containers::getMetasContainer()->selectByIdFirst($user->alliance->meta);
+		$meta = $user->alliance->meta;
 		$this->setTemplate(dirname(__FILE__).'/own.tpl');
 		$this->getModule()->setPageTitle('Meta - '.$meta->name);
 		$this->addPanel(new Rakuun_GUI_Panel_Box('description', new GUI_Panel_Text('description', $meta->description ? $meta->description : 'Keine Beschreibung'), 'Öffentliche Metabeschreibung'));

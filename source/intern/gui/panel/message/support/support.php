@@ -26,7 +26,7 @@ class Rakuun_Intern_GUI_Panel_Message_Support extends GUI_Panel {
 			$date = new GUI_Panel_Date('date', $this->ticket->date);
 		}
 		
-		$replyText = $this->ticket ? "\n\n--- letzte Nachricht am ".$date->getValue()." ---\n".$this->ticket->text : '';
+		$replyText = $this->ticket ? "\n\n--- letzte Nachricht von ".$this->ticket->supporter->nameUncolored.' am '.$date->getValue()." ---\n".$this->ticket->text : '';
 		$this->addPanel($message = new GUI_Control_TextArea('message', $replyText, 'Nachricht'));
 		$message->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
