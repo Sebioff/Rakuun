@@ -12,6 +12,7 @@ class Rakuun_Intern_Module_Map extends Rakuun_Intern_Module {
 		$paramY = $this->getParam('cityY');
 		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Map('map', $target, $paramX, $paramY));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('databasesbox', new Rakuun_Intern_GUI_Panel_Map_Databases('databases'), 'Datenbanken'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('units', new Rakuun_Intern_GUI_Panel_Map_DefendingUnits('units'), 'Einheiten'));
 	}
 }
 		
