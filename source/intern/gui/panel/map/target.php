@@ -124,7 +124,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		if (!$army->energyPriority)
 			$army->energyPriority = 1;
 		// TODO add proper fighting sequence from users' settings
-		$army->fightingSequence = $user->units->attackSequence;
+		$army->fightingSequence = $army->user->units->attackSequence;
 		$army->speed = 0;
 		// TODO refactor calculation of army speed, will probably be needed elsewhere
 		foreach ($this->unitInput->getArmy() as $unitname => $unitamount) {
