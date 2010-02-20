@@ -4,7 +4,7 @@ class Rakuun_Cronjob_Script_Tick extends Rakuun_Cronjob_Script {
 	public function execute() {
 		// finish productions for not logged-in players ------------------------
 		$options = array();
-		$options['conditions'][] = array('is_online < ?', time() - Rakuun_Intern_Module::TIMEOUT_NOACTIVITY);
+		$options['conditions'][] = array('is_online < ?', time() - Rakuun_Intern_Module::TIMEOUT_ISONLINE);
 		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $user) {
 			DB_Connection::get()->beginTransaction();
 			// produce ressources (needs to be done first due to mines and stores)

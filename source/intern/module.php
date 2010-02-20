@@ -5,7 +5,8 @@
  */
 class Rakuun_Intern_Module extends Rakuun_Module {
 	const TIMEOUT_BOTVERIFICATION = 3600; // time after which user has to verify he is no bot
-	const TIMEOUT_NOACTIVITY = 3600; // time after which user is automatically logged out
+	const TIMEOUT_NOACTIVITY = 3600; // time of inactivity after which user is automatically logged out
+	const TIMEOUT_ISONLINE = 300; // time after which a user is considered to be offline
 	
 	public function init() {
 		parent::init();

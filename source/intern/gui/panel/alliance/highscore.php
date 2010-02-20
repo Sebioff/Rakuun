@@ -9,13 +9,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
 		$options['order'] = 'points DESC';
 		$alliances = Rakuun_DB_Containers::getAlliancesContainer()->getFilteredContainer($options);
 		parent::__construct($name, $alliances, $title);
+		$this->setItemsPerPage(25);
 	}
 	
 	public function init() {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/highscore.tpl');
-		$this->setItemsPerPage(25);
 		$this->addPanel($table = new GUI_Panel_Table('highscore'));
 		$table->addHeader(array('Rang', 'Name', 'Meta', 'Punkte', 'Durchschnitt'));
 		$alliances = $this->getContainer()->select($this->getOptions());

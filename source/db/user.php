@@ -132,10 +132,10 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	/**
 	 * @return true if the user is logged in, false otherwhise.
 	 * A user is considered being logged in if his last activity has been less
-	 * than Rakuun_Intern_Module::TIMEOUT_NOACTIVITY seconds ago.
+	 * than Rakuun_Intern_Module::TIMEOUT_ISONLINE seconds ago.
 	 */
 	public function isOnline() {
-		return ($this->isOnline > time() - Rakuun_Intern_Module::TIMEOUT_NOACTIVITY);
+		return ($this->isOnline > time() - Rakuun_Intern_Module::TIMEOUT_ISONLINE);
 	}
 	
 	/**
