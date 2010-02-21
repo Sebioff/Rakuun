@@ -54,6 +54,7 @@ abstract class Rakuun_Intern_Production_Base {
 	}
 	
 	public function addNeededRequirement(Rakuun_Intern_Production_Requirement $requirement) {
+		$requirement->setProductionItem($this);
 		$this->neededRequirements[] = $requirement;
 	}
 	

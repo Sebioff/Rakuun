@@ -3,7 +3,7 @@
 /**
  * Checks if the meta doesn't own a dancertia yet
  */
-class Rakuun_Intern_Production_Requirement_Meta_GotNoDancertia implements Rakuun_Intern_Production_Requirement {
+class Rakuun_Intern_Production_Requirement_Meta_GotNoDancertia extends Rakuun_Intern_Production_Requirement_Base {
 	public function getDescription() {
 		return 'Meta darf noch keine Dancertia besitzen / bauen';
 	}

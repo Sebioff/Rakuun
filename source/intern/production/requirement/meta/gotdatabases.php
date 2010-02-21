@@ -3,7 +3,7 @@
 /**
  * Checks if the meta owns 3 databases
  */
-class Rakuun_Intern_Production_Requirement_Meta_GotDatabases implements Rakuun_Intern_Production_Requirement {
+class Rakuun_Intern_Production_Requirement_Meta_GotDatabases extends Rakuun_Intern_Production_Requirement_Base {
 	public function getDescription() {
 		return 'Meta muss drei Datenbankteile besitzen';
 	}

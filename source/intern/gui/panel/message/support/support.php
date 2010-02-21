@@ -26,7 +26,7 @@ class Rakuun_Intern_GUI_Panel_Message_Support extends GUI_Panel {
 			$date = new GUI_Panel_Date('date', $this->ticket->date);
 		}
 		
-		if ($this->ticket->supporter)
+		if (isset($this->ticket->supporter))
 			$lastSender = $this->ticket->supporter;
 		else
 			$lastSender = $this->ticket->user;

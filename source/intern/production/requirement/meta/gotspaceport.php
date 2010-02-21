@@ -3,7 +3,7 @@
 /**
  * Checks if the meta owns a space port
  */
-class Rakuun_Intern_Production_Requirement_Meta_GotSpacePort implements Rakuun_Intern_Production_Requirement {
+class Rakuun_Intern_Production_Requirement_Meta_GotSpacePort extends Rakuun_Intern_Production_Requirement_Base {
 	public function getDescription() {
 		return 'Meta muss einen Raumhafen besitzen';
 	}
