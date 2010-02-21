@@ -9,6 +9,7 @@ abstract class Rakuun_Intern_Production_Producer {
 	protected $productionTarget = null;
 	protected $foreignKeyColumn  = '';
 	protected $wip = array();
+	private $pauseOnMissingRequirements = true;
 
 	public function __construct(DB_Container $itemContainer, DB_Container $itemWIPContainer, DB_Record $productionTarget, $foreignKeyColumn) {
 		$this->itemContainer = $itemContainer;
@@ -27,6 +28,16 @@ abstract class Rakuun_Intern_Production_Producer {
 
 		$wipItems = $this->getWIP();
 		$firstItem = array_shift($wipItems);
+		
+		// pause production if requirements fail
+		if ($this->getPauseOnMissingRequirements() && !$firstItem->getWIPItem()->meetsTechnicalRequirements()) {
+			foreach ($wipItems as $wipItem) {
+				$wipItem->getRecord()->starttime = time();
+				$wipItem->getRecord()->save();
+			}
+			return;
+		}
+		
 		if ($firstItem->getRemainingTime() <= 0) {
 			DB_Connection::get()->beginTransaction();
 			// count building up
@@ -98,6 +109,14 @@ abstract class Rakuun_Intern_Production_Producer {
 	 */
 	public function getProductionTarget() {
 		return $this->productionTarget;
+	}
+	
+	public function setPauseOnMissingRequirements($pauseOnMissingRequirements) {
+		$this->pauseOnMissingRequirements = $pauseOnMissingRequirements;
+	}
+	
+	public function getPauseOnMissingRequirements() {
+		return $this->pauseOnMissingRequirements;
 	}
 }
 

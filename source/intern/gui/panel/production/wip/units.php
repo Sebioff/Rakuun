@@ -17,6 +17,18 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 			}
 		}
 		
+		$wipItems = $this->getProducer()->getWIP();
+		if ($wipItems) {
+			$firstWIP = $wipItems[0];
+			$this->contentPanel->cancel->setConfirmationMessage(
+				'Wirklich abbrechen?\nEs werden 50% der Kosten erstattet:'.
+				'\n'.round($firstWIP->getIronRepayForAmount()).' Eisen'.
+				'\n'.round($firstWIP->getBerylliumRepayForAmount()).' Beryllium'.
+				'\n'.round($firstWIP->getEnergyRepayForAmount()).' Energie'.
+				'\n'.round($firstWIP->getPeopleRepayForAmount()).' Leute'
+			);
+		}
+		
 		$this->contentPanel->addPanel($pauseButton = new GUI_Control_SubmitButton('pause', 'Produktion pausieren'));
 		if (Rakuun_User_Manager::getCurrentUser()->productionPaused)
 			$pauseButton->setValue('Produktion fortsetzen');
@@ -40,6 +52,16 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 		
 		Rakuun_User_Manager::update($user);
 		Router::get()->getCurrentModule()->invalidate();
+	}
+	
+	public function onCancel() {
+		$wipItems = $this->getProducer()->getWIP();
+		$firstWIP = $wipItems[0];
+		DB_Connection::get()->beginTransaction();
+		Rakuun_User_Manager::getCurrentUser()->ressources->raise($firstWIP->getIronRepayForAmount(), $firstWIP->getBerylliumRepayForAmount(), $firstWIP->getEnergyRepayForAmount(), $firstWIP->getPeopleRepayForAmount());
+		$firstWIP->getRecord()->delete();
+		DB_Connection::get()->commit();
+		$this->getModule()->invalidate();
 	}
 }
 

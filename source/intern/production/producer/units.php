@@ -22,6 +22,16 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 			
 		$wipItems = $this->getWIP();
 		$firstItem = $wipItems[0];
+		
+		// pause production if requirements fail
+		if ($this->getPauseOnMissingRequirements() && !$firstItem->getWIPItem()->meetsTechnicalRequirements()) {
+			foreach ($wipItems as $wipItem) {
+				$wipItem->getRecord()->starttime = time();
+				$wipItem->getRecord()->save();
+			}
+			return;
+		}
+		
 		if ($firstItem->getRemainingTime() <= 0) {
 			DB_Connection::get()->beginTransaction();
 			$finishedAmount = $firstItem->getAmountOfFinishedUnits();

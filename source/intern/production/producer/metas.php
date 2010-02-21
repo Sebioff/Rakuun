@@ -6,6 +6,7 @@
 class Rakuun_Intern_Production_Producer_Metas extends Rakuun_Intern_Production_Producer {
 	public function __construct(Rakuun_DB_Meta $meta) {
 		parent::__construct(Rakuun_DB_Containers::getMetasBuildingsContainer(), Rakuun_DB_Containers::getMetasBuildingsWIPContainer(), $meta, 'meta');
+		$this->setPauseOnMissingRequirements(false);
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

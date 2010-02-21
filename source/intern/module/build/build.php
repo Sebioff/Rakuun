@@ -14,7 +14,7 @@ class Rakuun_Intern_Module_Build extends Rakuun_Intern_Module {
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/build.tpl');
 		$this->addJsRouteReference('js', 'production.js');
 		
-		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Momentaner Bauvorgang');
+		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Momentaner Bauvorgang');
 		$this->contentPanel->addPanel($wipPanel, true);
 		
 		foreach (Rakuun_Intern_Production_Factory::getAllBuildings() as $building) {

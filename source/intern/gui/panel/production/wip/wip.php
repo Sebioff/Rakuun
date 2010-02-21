@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_Box {
+abstract class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_Box {
 	protected $producer = null;
 	protected $enableQueueView = true;
 		
@@ -22,6 +22,17 @@ class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_Box {
 			}
 			$countDown->enableHoverInfo(true);
 		}
+		
+		$this->contentPanel->addPanel($cancelButton = new GUI_Control_SecureSubmitButton('cancel', 'Abbrechen'));
+//		$wipItems = $this->getProducer()->getWIP();
+//		$firstWIP = $wipItems[0];
+//		$cancelButton->setConfirmationMessage(
+//			'Wirklich abbrechen?\nEs werden 50% der Kosten erstattet:'.
+//			'\n'.round($firstWIP->getIronRepayForLevel()).' Eisen'.
+//			'\n'.round($firstWIP->getBerylliumRepayForLevel()).' Beryllium'.
+//			'\n'.round($firstWIP->getEnergyRepayForLevel()).' Energie'.
+//			'\n'.round($firstWIP->getPeopleRepayForLevel()).' Leute'
+//		);
 		
 		$i = 0;
 		$wipItemsCount = count($this->getProducer()->getWIP());

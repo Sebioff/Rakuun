@@ -6,6 +6,7 @@
 class Rakuun_Intern_Production_Producer_Alliances extends Rakuun_Intern_Production_Producer {
 	public function __construct(Rakuun_DB_Alliance $alliance) {
 		parent::__construct(Rakuun_DB_Containers::getAlliancesBuildingsContainer(), Rakuun_DB_Containers::getAlliancesBuildingsWIPContainer(), $alliance, 'alliance');
+		$this->setPauseOnMissingRequirements(false);
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

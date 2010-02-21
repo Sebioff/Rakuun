@@ -95,12 +95,12 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$options = array();
 		$options['conditions'][] = array('user = ?', $this->getUser());
 		if (Rakuun_DB_Containers::getBuildingsWIPContainer()->selectFirst($options)) {
-			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip_buildings', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Momentaner Bauvorgang');
+			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip_buildings', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Momentaner Bauvorgang');
 			$wipPanel->enableQueueView(false);
 			$this->contentPanel->addPanel($wipPanel);
 		}
 		if (Rakuun_DB_Containers::getTechnologiesWIPContainer()->selectFirst($options)) {
-			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP('wip_technologies', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers::getTechnologiesWIPContainer()), 'Momentane Forschung');
+			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip_technologies', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers::getTechnologiesWIPContainer()), 'Momentane Forschung');
 			$wipPanel->enableQueueView(false);
 			$this->contentPanel->addPanel($wipPanel, true);
 		}

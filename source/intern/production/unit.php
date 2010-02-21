@@ -77,6 +77,30 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		return $this->getBasePeopleCosts() * $amount;
 	}
 	
+	public function getIronRepayForAmount($amount = null) {
+		if ($amount === null)
+			$amount = $this->getAmount();
+		return round($this->getIronCostsForAmount($amount) / 2);
+	}
+	
+	public function getBerylliumRepayForAmount($amount = null) {
+		if ($amount === null)
+			$amount = $this->getAmount();
+		return round($this->getBerylliumCostsForAmount($amount) / 2);
+	}
+	
+	public function getEnergyRepayForAmount($amount = null) {
+		if ($amount === null)
+			$amount = $this->getAmount();
+		return round($this->getEnergyCostsForAmount($amount) / 2);
+	}
+	
+	public function getPeopleRepayForAmount($amount = null) {
+		if ($amount === null)
+			$amount = $this->getAmount();
+		return round($this->getPeopleCostsForAmount($amount) / 2);
+	}
+	
 	public function getTimeCosts($amount = null) {
 		if ($amount === null)
 			$amount = $this->getAmount();
