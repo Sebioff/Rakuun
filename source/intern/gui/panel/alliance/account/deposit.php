@@ -8,7 +8,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 	public function init() {
 		parent::init();
 		
-		$this->setTemplate(dirname(__FILE__).'/accountformular.tpl');
+		$this->setTemplate(dirname(__FILE__).'/deposit.tpl');
 		$this->addPanel($iron = new GUI_Control_DigitBox('iron', 0));
 		$iron->setTitle('Eisen:');
 		$iron->addValidator(new GUI_Validator_Mandatory());
@@ -27,7 +27,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 	public function onSubmit() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$ressources = $user->ressources;
-		if ($this->iron->getValue() > $ressources->iron) 
+		if ($this->iron->getValue() > $ressources->iron)
 			$this->addError('So viel Eisen hast du nicht.');
 		if ($this->beryllium->getValue() > $ressources->beryllium)
 			$this->addError('So viel Beryllium hast du nicht.');

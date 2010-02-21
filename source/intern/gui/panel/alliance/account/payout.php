@@ -7,11 +7,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 	public function init() {
 		parent::init();
 		
-		$this->setTemplate(dirname(__FILE__).'/accountformular.tpl');
+		$this->setTemplate(dirname(__FILE__).'/payout.tpl');
 		$alliance = Rakuun_User_Manager::getCurrentUser()->alliance;
 		$users = $alliance->members;
 		$averageStrength = $alliance->getAverageMilitaryStrength();
 		$averagePoints = $alliance->points / count($users);
+		$this->params->averageStrength = $averageStrength;
+		$this->params->averagePoints = $averagePoints;
 		$_users = array();
 		foreach ($users as $user) {
 			if ($user->getArmyStrength() < $averageStrength && $user->points < $averagePoints)
