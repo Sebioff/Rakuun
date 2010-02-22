@@ -8,15 +8,13 @@
 <? $this->displayPanel('scroll_up'); ?>
 <? $this->displayPanel('scroll_left'); ?>
 
+
 <div id="<?= $this->getID() ?>" <?= $this->getAttributeString() ?>>
 	<?= $this->getMapLayer(); ?>
 	<? $this->displayPanel('path'); ?>
-	<div id="rakuun_map_scroll_panels" style="position:absolute;left:0px;top:0px">
-		<? foreach ($this->getScrollItems() as $scrollItem): ?>
-			<? $scrollItem->display(); ?>
-		<? endforeach; ?>
-	</div>
+	<? $this->displayPanel('items'); ?>
 </div>
+
 
 <? $this->displayPanel('scroll_right'); ?>
 <? $this->displayPanel('legend'); ?>

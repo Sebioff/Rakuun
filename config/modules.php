@@ -18,6 +18,7 @@ Security::register(Rakuun_Intern_Alliance_Security::get());
 $app->addModule(new Rakuun_GUI_Control_UserSelect_Scriptlet('user_select_scriptlet'));
 $app->addModule(new Rakuun_GUI_Panel_Box_Collapsible_Ajax('panel_collapse'));
 $app->addModule(new Rakuun_Intern_Map_Path('map_path'));
+$app->addModule(new Rakuun_Intern_Map_Items('map_items'));
 
 $app->addModule(new GUI_Panel_Plot_Image('plotimage'));
     

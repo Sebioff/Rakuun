@@ -31,7 +31,8 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 			$this->addPanel(new Rakuun_GUI_Control_UserLink('sender', $this->message->sender, 'Sender'));
 		else
 			$this->addPanel(new GUI_Panel_Text('sender', $this->message->getSenderName(), 'Sender'));
-		$this->addPanel(new GUI_Control_Submitbutton('delete', 'Löschen'));
+		if ($this->message->user->getPK() == $userPK)
+			$this->addPanel(new GUI_Control_Submitbutton('delete', 'Löschen'));
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

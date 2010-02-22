@@ -12,6 +12,6 @@
 		<br class="clear" />
 	</div>
 	<div class="rakuun_message_content">
-		<?= $this->getSupportticket()->text; ?>
+		<?= Text::format($this->getSupportticket()->text); ?>
 	</div>
 </div>

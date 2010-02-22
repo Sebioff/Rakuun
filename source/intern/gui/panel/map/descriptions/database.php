@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_GUI_Panel_Map_Database extends GUI_Panel_HoverInfo {
+class Rakuun_Intern_GUI_Panel_Map_Descriptions_Database extends GUI_Panel_HoverInfo {
 	private $databaseIdentifier = 0;
 	private $positionX = 0;
 	private $positionY = 0;
@@ -21,18 +21,6 @@ class Rakuun_Intern_GUI_Panel_Map_Database extends GUI_Panel_HoverInfo {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/database.tpl');
-		$this->addClasses('scroll_item');
-	}
-	
-	public function afterInit() {
-		parent::afterInit();
-		
-		$style = array(
-			'background-color:yellow',
-			'left:'.$this->map->realToViewPositionX($this->positionX).'px',
-			'top:'.$this->map->realToViewPositionY($this->positionY).'px'
-		);
-		$this->setAttribute('style', implode(';', $style));
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

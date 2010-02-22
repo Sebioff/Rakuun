@@ -26,6 +26,7 @@ class Rakuun_Intern_Map_Path extends Scriptlet {
 		foreach (Rakuun_User_Manager::getCurrentUser()->armies as $army) {
 			$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
 			$path = $pathCalculator->getPath($army->speed);
+			imagefilledellipse($image, $army->positionX * 10 + 5, $army->positionY * 10 + 5, 10, 10, $pathColor);
 			$pathNodeCount = count($path);
 			for ($i = 0; $i < $pathNodeCount - 1; $i++) {
 				$pathNodeA = $path[$i];

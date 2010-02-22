@@ -1,0 +1,1 @@
+<area shape="rect" alt="Armee" id="<?= $this->getID() ?>" <?= $this->getAttributeString() ?> href="<?= App::get()->getInternModule()->getSubmodule('fightdetails')->getUrl(array('id' => $this->getArmy()->getPK())); ?>"/>

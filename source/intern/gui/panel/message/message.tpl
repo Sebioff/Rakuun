@@ -12,7 +12,9 @@
 		<br class="clear" />
 	</div>
 	<div class="rakuun_message_content">
-		<?= nl2br($this->getMessage()->text); ?>
+		<?= Text::format($this->getMessage()->text); ?>
 	</div>
-	<? $this->displayPanel('delete'); ?>
+	<? if ($this->hasPanel('delete')): ?>
+		<? $this->displayPanel('delete'); ?>
+	<? endif; ?>
 </div>
