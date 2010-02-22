@@ -127,7 +127,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		$looserReportText = '<br/><br/>Folgende Verluste sind zu beklagen:'.$deadLooserUnitsText;
 		if ($deadWinnerUnitsText) {
 			$looserReportText .= '<br/><br/>Der gegnerischen Armee konnte folgender Schaden zugefügt werden:'.$deadWinnerUnitsText;
-			$looserReportText .= '<br/>Möglicherweiße besaß der Gegner sogar weitere Einheiten, die von unseren Truppen nicht einmal entdeckt werden konnten.';
+			$looserReportText .= '<br/>Möglicherweise besaß der Gegner sogar weitere Einheiten, die von unseren Truppen nicht einmal entdeckt werden konnten.';
 		}
 		else {
 			$looserReportText .= '<br/><br/>Es wurden keine gegnerischen Einheiten vernichtet.';

@@ -9,7 +9,10 @@
 	<br class="clear" />
 	<ul>
 		<? foreach ($this->params->metas as $meta): ?>
-			<li><a href="<?= App::get()->getInternModule()->getSubmodule('meta')->getUrl(array('meta' => $meta->id)) ?>"><?= $meta->name ?></a></li>
+			<li>
+				<? $memberPanel = new Rakuun_GUI_Control_MetaLink('metalink', $meta, 'Profil anzeigen'); ?>
+				<? $memberPanel->display() ?>
+			</li>
 		<? endforeach; ?>
 	</ul>
 <? endif; ?>

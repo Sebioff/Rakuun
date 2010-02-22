@@ -14,4 +14,5 @@
 	<div class="rakuun_message_content">
 		<?= nl2br($this->getMessage()->text); ?>
 	</div>
+	<? $this->displayPanel('delete'); ?>
 </div>
