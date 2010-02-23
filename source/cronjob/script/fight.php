@@ -215,7 +215,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 					// only half of the attack force needed for maximum probability if there is war
 					if ($army->user->alliance && $army->target->alliance) {
 						$diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
-						if ($diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR) {
+						if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR) {
 							$neededAttackForce /= 2;
 						}
 					}
