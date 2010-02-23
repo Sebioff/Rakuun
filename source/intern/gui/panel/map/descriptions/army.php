@@ -11,7 +11,7 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_Army extends GUI_Panel_HoverInfo 
 		$this->map = $map;
 		
 		if ($this->army->target && $this->army->target->cityX == $this->army->targetX && $this->army->target->cityY == $this->army->targetY) {
-			$hoverText = 'Angriff auf '.$this->army->target->name;
+			$hoverText = 'Angriff auf '.$this->army->target->nameUncolored;
 		}
 		elseif ($this->army->user->cityX == $this->army->targetX && $this->army->user->cityY == $this->army->targetY) {
 			$hoverText = 'Rückkehr';

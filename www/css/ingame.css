@@ -360,6 +360,7 @@ table.boardview td.posting_count {
 .rakuun_city
 {
 	background-color:#8B8B8B;
+	position:absolute;
 }
 
 .rakuun_city_own

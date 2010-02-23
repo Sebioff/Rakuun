@@ -35,17 +35,16 @@ class Rakuun_Intern_GUI_Panel_Map_Items extends GUI_Panel {
 			$this->addPanel($armyPanel = new Rakuun_Intern_GUI_Panel_Map_Descriptions_Army($army, $this->map));
 			$this->scrollItems[] = $armyPanel;
 		}
+		
+		$this->addClasses('scroll_item');
 	}
 	
 	public function afterInit() {
 		parent::afterInit();
 		
 		$style = array(
-			'position:absolute',
 			'height:'.Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
-			'width:'.Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px',
-			'left:'.(-$this->getMap()->getViewRectX() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE).'px',
-			'top:'.(-$this->getMap()->getViewRectY() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE).'px'
+			'width:'.Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px'
 		);
 		$this->setAttribute('src', App::get()->getMapItemsModule()->getURL().'?cb='.time());
 		$this->setAttribute('style', implode(';', $style));

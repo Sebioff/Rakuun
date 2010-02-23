@@ -1,5 +1,5 @@
 <style type="text/css">
-	.scroll_item {
+	.rakuun_city {
 		height:<?= Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE; ?>px;
 		width:<?= Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE; ?>px;
 	}

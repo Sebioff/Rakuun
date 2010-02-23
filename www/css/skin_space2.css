@@ -41,7 +41,6 @@ body.skin_space2 {
 }
 
 /* $2  -  Framework Elements -------------------------------------------------*/
-
 .skin_space2 .core_gui_hoverinfo
 {
 	background-color:#000000;
@@ -57,6 +56,11 @@ body.skin_space2 {
 .ac_results .ac_odd
 {
 	background-color:#202020;
+}
+
+.core_common_error_list li
+{
+	color:#FFFFFF;
 }
 
 /* $3  -  Main Containers ----------------------------------------------------*/

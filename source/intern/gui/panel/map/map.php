@@ -156,6 +156,11 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 				var pan = false;
 				var oldPageX = 0;
 				var oldPageY = 0;
+				
+				$(".scroll_item").each(function() {
+					$(this).css("left", globalX + "px");
+					$(this).css("top", globalY + "px");
+				});
 			', $this->getID(), $this->path->getID(), (self::MAP_HEIGHT - $this->viewRectSize) * self::MAP_RECT_SIZE, (self::MAP_WIDTH - $this->viewRectSize) * self::MAP_RECT_SIZE, - $this->viewRectX * self::MAP_RECT_SIZE, - $this->viewRectY * self::MAP_RECT_SIZE)
 		);
 	}
@@ -198,7 +203,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	}
 	
 	public function getMapLayer() {
-		return '<div style="width:'.(self::MAP_WIDTH * self::MAP_RECT_SIZE).'px; height:'.(self::MAP_HEIGHT * self::MAP_RECT_SIZE).'px; background:#2D78BE url('.Router::get()->getStaticRoute('images', 'map_large.png').') no-repeat left top; position:absolute; left:'.(-$this->getViewRectX() * self::MAP_RECT_SIZE).'px; top:'.(-$this->getViewRectY() * self::MAP_RECT_SIZE).'px;" id="rakuun_map_map_layer"></div>';
+		return '<div style="width:'.(self::MAP_WIDTH * self::MAP_RECT_SIZE).'px; height:'.(self::MAP_HEIGHT * self::MAP_RECT_SIZE).'px; background:#2D78BE url('.Router::get()->getStaticRoute('images', 'map_large.png').') no-repeat left top; position:absolute;" id="rakuun_map_map_layer" class="scroll_item"></div>';
 	}
 }
 
