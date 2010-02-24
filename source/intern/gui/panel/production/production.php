@@ -14,7 +14,7 @@ abstract class Rakuun_Intern_GUI_Panel_Production_Production extends GUI_Panel {
 		parent::init();
 		
 		$this->addPanel(new GUI_Control_SecureSubmitButton('produce'));
-		if ($this->getProductionItem() instanceof Rakuun_Intern_Production_CityItem && Rakuun_User_Manager::getCurrentUser()->isInNoob()) {
+		if ($this->getProductionItem() instanceof Rakuun_Intern_Production_CityItem) {
 			// TODO add additional checks if removing is possible (in noob, ...)
 			if ($this->getProductionItem()->getLevel() > $this->getProductionItem()->getMinimumLevel()) {
 				$this->addPanel($remove = new GUI_Control_SecureSubmitButton('remove'));
