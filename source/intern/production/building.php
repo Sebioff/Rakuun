@@ -1,11 +1,11 @@
 <?php
 
 abstract class Rakuun_Intern_Production_Building extends Rakuun_Intern_Production_CityItem {
-	public function __construct(DB_Record $dataSource = null) {+
+	public function __construct(DB_Record $dataSource = null) {
 		$user = null;
 		if (!$dataSource) {
-			$user = Rakuun_User_Manager::getCurrentUser();
-			$dataSource = $user->buildings;
+			if ($user = Rakuun_User_Manager::getCurrentUser())
+				$dataSource = $user->buildings;
 		}
 		elseif ($dataSource instanceof Rakuun_DB_User) {
 			$user = $dataSource;

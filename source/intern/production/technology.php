@@ -9,8 +9,8 @@ abstract class Rakuun_Intern_Production_Technology extends Rakuun_Intern_Product
 	public function __construct(DB_Record $dataSource = null) {
 		$user = null;
 		if (!$dataSource) {
-			$user = Rakuun_User_Manager::getCurrentUser();
-			$dataSource = $user->technologies;
+			if ($user = Rakuun_User_Manager::getCurrentUser())
+				$dataSource = $user->technologies;
 		}
 		elseif ($dataSource instanceof Rakuun_DB_User) {
 			$user = $dataSource;
