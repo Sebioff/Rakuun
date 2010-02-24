@@ -25,7 +25,7 @@ class Rakuun_Intern_Production_Unit_LaserRifleman extends Rakuun_Intern_Producti
 			<br/>
 			Bewaffnet mit stahlschneidenden Lasern modernster Technologie sind sie um einiges effektiver im Kampf als ihre relativ primitiven Vorgänger.
 			<br/>
-			Ihre Gewehre benötigen allerdings eine Menge moderner Baustoffe wie Beryllium und müssen zudem mit Energie geladen werden, was viele Armeebersitzer vor ihrer Anschaffung zurückschrecken lässt, ebenso die Aufladezeit, die ihre Bereitschaftszeit um fast das Dreifache zu der von Inras verlängert.');
+			Ihre Gewehre benötigen allerdings eine Menge moderner Baustoffe wie Beryllium und müssen zudem mit Energie geladen werden, was viele Armeebesitzer vor ihrer Anschaffung zurückschrecken lässt, ebenso die Aufladezeit, die ihre Bereitschaftszeit um fast das Dreifache zu der von Inras verlängert.');
 	}
 }
 

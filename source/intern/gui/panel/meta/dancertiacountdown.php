@@ -17,6 +17,8 @@ class Rakuun_Intern_GUI_Panel_Meta_DancertiaCountdown extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/dancertiacountdown.tpl');
 		$this->addPanel($countdown = new Rakuun_GUI_Panel_CountDown('countdown', $this->getMeta()->dancertiaStarttime + RAKUUN_SPEED_DANCERTIA_STARTTIME, 'Gestartet!'));
 		$countdown->enableHoverInfo(true);
+		$this->params->currentShieldHolder = $this->meta->getCurrentShieldGeneratorHolder();
+		$this->params->currentShieldCount = $this->meta->getShieldGeneratorCount();
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

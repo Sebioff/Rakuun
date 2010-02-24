@@ -12,6 +12,6 @@
 		<br class="clear" />
 	</div>
 	<div class="rakuun_message_content">
-		<?= $this->getTicket()->text; ?>
+		<?= Text::format($this->getTicket()->text); ?>
 	</div>
 </div>
