@@ -102,8 +102,8 @@ class Rakuun_DB_Meta extends DB_Record implements Rakuun_Intern_Production_Owner
 		$userTable = Rakuun_DB_Containers::getUserContainer()->getTable();
 		$alliancesTable = Rakuun_DB_Containers::getAlliancesContainer()->getTable();
 		$metasTable = Rakuun_DB_Containers::getMetasContainer()->getTable();
-		$options['join'] = array($userTable, $alliancesTable, $metasTable);
-		$options['order'] = $buildingsTable.'.user ASC';
+		$options['join'] = array($buildingsTable, $alliancesTable, $metasTable);
+		$options['order'] = $userTable.'.ID ASC';
 		$options['conditions'][] = array($buildingsTable.'.'.$shieldGenerator->getInternalName().' >= ?', 1);
 		$options['conditions'][] = array($buildingsTable.'.user = '.$userTable.'.id');
 		$options['conditions'][] = array($userTable.'.alliance = '.$alliancesTable.'.id');
