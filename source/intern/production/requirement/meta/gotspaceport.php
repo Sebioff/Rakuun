@@ -9,10 +9,10 @@ class Rakuun_Intern_Production_Requirement_Meta_GotSpacePort extends Rakuun_Inte
 	}
 	
 	public function fulfilled() {
-		if (!Rakuun_User_Manager::getCurrentUser()->alliance || !Rakuun_User_Manager::getCurrentUser()->alliance->meta)
+		if (!$this->getProductionItem()->getOwner()->alliance || !$this->getProductionItem()->getOwner()->alliance->meta)
 			return false;
 		
-		$spacePort = Rakuun_Intern_Production_Factory_Metas::getBuilding('space_port');
+		$spacePort = Rakuun_Intern_Production_Factory_Metas::getBuilding('space_port', $this->getProductionItem()->getOwner()->alliance->meta);
 		return ($spacePort->getLevel() >= 1);
 	}
 }

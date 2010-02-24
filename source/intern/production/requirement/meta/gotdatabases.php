@@ -20,7 +20,7 @@ class Rakuun_Intern_Production_Requirement_Meta_GotDatabases extends Rakuun_Inte
 		$options['conditions'][] = array($userSpecialsTable.'.user = '.$userTable.'.id');
 		$options['conditions'][] = array($userTable.'.alliance = '.$alliancesTable.'.id');
 		$options['conditions'][] = array($alliancesTable.'.meta = '.$metasTable.'.id');
-		$options['conditions'][] = array($metasTable.'.id = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
+		$options['conditions'][] = array($metasTable.'.id = ?', $this->getProductionItem()->getOwner());
 		return (Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->count($options) >= 3);
 	}
 }

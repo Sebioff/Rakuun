@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Requirement_Meta_GotShieldGenerator extends Rakuu
 	}
 	
 	public function fulfilled() {
-		return Rakuun_User_Manager::getCurrentUser()->alliance->meta->hasMemberWithShieldGenerator();
+		return $this->getProductionItem()->getOwner()->hasMemberWithShieldGenerator();
 	}
 }
 

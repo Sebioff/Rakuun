@@ -9,12 +9,12 @@ class Rakuun_Intern_Production_Requirement_Meta_GotNoDancertia extends Rakuun_In
 	}
 	
 	public function fulfilled() {
-		if (!Rakuun_User_Manager::getCurrentUser()->alliance || !Rakuun_User_Manager::getCurrentUser()->alliance->meta)
+		if (!$this->getProductionItem()->getOwner()->alliance || !$this->getProductionItem()->getOwner()->alliance->meta)
 			return false;
 		
 		$dancertia = Rakuun_Intern_Production_Factory_Metas::getBuilding('dancertia');
 		$options = array();
-		$options['conditions'][] = array('meta = ? ', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
+		$options['conditions'][] = array('meta = ? ', $this->getProductionItem()->getOwner()->alliance->meta);
 		$options['conditions'][] = array('building = ? ', $dancertia->getInternalName());
 		return ($dancertia->getLevel() == 0 && Rakuun_DB_Containers::getMetasBuildingsWIPContainer()->selectFirst($options) === null);
 	}
