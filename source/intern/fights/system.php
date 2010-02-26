@@ -106,6 +106,12 @@ class Rakuun_Intern_Fights_System {
 		foreach ($fightingSequence as $fightingUnitName) {
 			$fightingUnit = Rakuun_Intern_Production_Factory::getUnit($fightingUnitName, $winnerUnitSource);
 			
+			if (!$fightingUnit) {
+				$mail = new Net_Mail();
+				$mail->addRecipient('out-of-order1@gmx.de');
+				$mail->setMessage($fightingSequence."\n".$fightingUnitName);
+				$mail->send();
+			}
 			if ($fightingUnit->getAmount() <= 0)
 				continue;
 			
