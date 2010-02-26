@@ -102,16 +102,17 @@ class Rakuun_Intern_Fights_System {
 		}
 		
 		$fightingSequence = explode('|', $winnerUnitSource->fightingSequence);
-		$fightingSequence[] = 'pezetto'; //FIXME hack for missing pezettos in fighting sequences
 		$survivingWinnerUnitAmounts = array();
 		foreach ($fightingSequence as $fightingUnitName) {
 			$fightingUnit = Rakuun_Intern_Production_Factory::getUnit($fightingUnitName, $winnerUnitSource);
 			
 			if (!$fightingUnit) {
+				//FIXME: hack for pezettos in fighting sequence
 				$mail = new Net_Mail();
 				$mail->addRecipient('out-of-order1@gmx.de');
-				$mail->setMessage($fightingSequence."\n".$fightingUnitName);
+				$mail->setMessage($winnerUnitSource->fightingSequence."\n".$fightingUnitName);
 				$mail->send();
+				continue;
 			}
 			if ($fightingUnit->getAmount() <= 0)
 				continue;
