@@ -44,7 +44,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$energyPriority->addItem('Hoch', 3, false);
 		$energyPriority->addClasses('rakuun_map_target_priorities');
 		$this->addPanel(new Rakuun_GUI_Panel_Info('destroy_buildings_label', 'Gebäude zerstören', 'Je größer die Angriffskraft, desto größer die Wahrscheinlichkeit das eine Stufe eines Gebäudes zerstört wird. Die maximale Wahrscheinlichkeit beträgt '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_MAX_PROBABILITY.'% und kann mit einer Angriffskraft von '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_NEEDED_FORCE_FOR_MAX.' erreicht werden. Gegen Feinde, mit denen man sich im Krieg befindet, wird nur die Hälfte dessen benötigt.'));
-		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Abschicken'));
+		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Abschicken', true));
 	}
 	
 	public function onSubmit() {
