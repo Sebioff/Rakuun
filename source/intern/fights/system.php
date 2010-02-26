@@ -102,6 +102,7 @@ class Rakuun_Intern_Fights_System {
 		}
 		
 		$fightingSequence = explode('|', $winnerUnitSource->fightingSequence);
+		$fightingSequence[] = 'pezetto'; //FIXME hack for missing pezettos in fighting sequences
 		$survivingWinnerUnitAmounts = array();
 		foreach ($fightingSequence as $fightingUnitName) {
 			$fightingUnit = Rakuun_Intern_Production_Factory::getUnit($fightingUnitName, $winnerUnitSource);
