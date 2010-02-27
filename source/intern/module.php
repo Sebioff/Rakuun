@@ -30,7 +30,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		// only display if no action made or last verification long ago (to avoid abuse of first rule)
 		if (time() > $this->getUser()->lastBotVerification + self::TIMEOUT_BOTVERIFICATION
 			&& Router::get()->getRequestMode() != Router::REQUESTMODE_AJAX
-			//&& Environment::getCurrentEnvironment() != Environment::DEVELOPMENT
+			&& Environment::getCurrentEnvironment() != Environment::DEVELOPMENT
 			&& (empty($_POST) || time() > $this->getUser()->lastBotVerification + 2 * self::TIMEOUT_BOTVERIFICATION)
 		) {
 			$params = array('return' => base64_encode($this->getUrl($this->getParams())));

@@ -24,6 +24,7 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 	 */
 	public function onMoveUp() {
 		$options = array();
+		$options['conditions'][] = array('user = ?', $this->getRecord()->user);
 		$options['conditions'][] = array('position < ?', $this->getRecord()->position);
 		$options['order'] = 'position DESC';
 		$nextRecord = $this->getItemWIPContainer()->selectFirst($options);
@@ -44,6 +45,7 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 	 */
 	public function onMoveDown() {
 		$options = array();
+		$options['conditions'][] = array('user = ?', $this->getRecord()->user);
 		$options['conditions'][] = array('position > ?', $this->getRecord()->position);
 		$options['order'] = 'position ASC';
 		$nextRecord = $this->getItemWIPContainer()->selectFirst($options);
