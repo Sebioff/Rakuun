@@ -89,7 +89,7 @@ class Rakuun_Intern_GUI_Panel_Production_Building extends Rakuun_Intern_GUI_Pane
 		$building->getUser()->buildings->lower($building->getInternalName(), Rakuun_User_Manager::getCurrentUser());
 		// remove unneeded workers
 		if ($building instanceof Rakuun_Intern_Production_Building_RessourceProducer) {
-			$lowerLevel = $building->getLevel() - 1;
+			$lowerLevel = $building->getLevel();
 			if ($building->getWorkers() > $building->getRequiredWorkers($lowerLevel)) {
 				$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($building->getUser());
 				$building->getUser()->ressources->raise(0, 0, 0, $building->getWorkers() - $building->getRequiredWorkers($lowerLevel));
