@@ -70,10 +70,12 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		$targetAllianceLink = '';
 		if ($army->user->alliance) {
 			$link = new Rakuun_GUI_Control_AllianceLink('alliance_link', $army->user->alliance);
+			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$userAllianceLink = $link->render();
 		}
 		if ($army->target->alliance) {
 			$link = new Rakuun_GUI_Control_AllianceLink('alliance_link', $army->target->alliance);
+			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$targetAllianceLink = $link->render();
 		}
 		
@@ -326,10 +328,12 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		$targetAllianceLink = '';
 		if ($army->user->alliance) {
 			$link = new Rakuun_GUI_Control_AllianceLink('alliance_link', $army->user->alliance);
+			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$userAllianceLink = $link->render();
 		}
 		if ($army->target->alliance) {
 			$link = new Rakuun_GUI_Control_AllianceLink('alliance_link', $army->target->alliance);
+			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$targetAllianceLink = $link->render();
 		}
 		
