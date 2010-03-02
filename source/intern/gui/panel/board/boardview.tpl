@@ -4,6 +4,7 @@
 	<? if (isset($this->params->boardname)): ?>
 		<? $this->displayPanel($this->params->boardname); ?>
 	<? else: ?>
+		<? $this->displayPanel('markread'); ?>
 		<table summary="Forenübersicht" class="boardview">
 			<thead>
 				<tr>

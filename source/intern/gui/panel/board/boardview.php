@@ -55,7 +55,7 @@ class Rakuun_Intern_GUI_Panel_Board_Boardview extends GUI_Panel {
 				$this->addError('Unbekannter Boardtype: '.$this->boardtype);
 				return;
 			break;
-		}		
+		}
 		if (!$board) {
 			$this->addError('Du hast keinen Zugriff auf das Forum mit der ID '.$boardId);
 			return;
@@ -92,6 +92,8 @@ class Rakuun_Intern_GUI_Panel_Board_Boardview extends GUI_Panel {
 				$this->onAddBoard($board);
 			}
 		}
+		$this->addPanel($blanko = new GUI_Panel('markread'));
+		$blanko->addPanel(new GUI_Control_SubmitButton('markread', 'Alle als gelesen markieren'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Addboard('addboard', $this->boardtype), 'Board hinzufügen');
 	}
 	
@@ -127,6 +129,35 @@ class Rakuun_Intern_GUI_Panel_Board_Boardview extends GUI_Panel {
 			}
 		}
 		return $count;
+	}
+	
+	public function onMarkread() {
+		$user = Rakuun_User_Manager::getCurrentUser();
+		$boardsContainer = Rakuun_DB_Containers::getBoardsContainer();
+		$lastVisitedContainer = Rakuun_DB_Containers::getBoardsLastVisitedContainer();
+		$boards = array();
+		switch ($this->boardtype) {
+			case self::TYPE_ALLIANCE:
+				$boards = $boardsContainer->selectByType(self::TYPE_ALLIANCE, array('conditions' => array(array('alliance = ?', $user->alliance))));
+			break;
+			case self::TYPE_META:
+				$boards = $boardsContainer->selectByType(self::TYPE_META, array('conditions' => array(array('meta = ?', $user->alliance->meta))));
+			break;
+			case self::TYPE_ADMIN:
+				$boards = $boardsContainer->selectByType(self::TYPE_ADMIN);
+			break;
+		}
+		DB_Connection::get()->beginTransaction();
+		$lastVisitedContainer->deleteByUser($user);
+		foreach ($boards as $board) {
+			$newVisit = new DB_Record();
+			$newVisit->board = $board;
+			$newVisit->user = $user;
+			$newVisit->date = time();
+			$lastVisitedContainer->save($newVisit);
+		}
+		DB_Connection::get()->commit();
+		$this->getModule()->invalidate();
 	}
 	
 	// CALLBACKS ---------------------------------------------------------------
