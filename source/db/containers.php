@@ -86,8 +86,8 @@ abstract class Rakuun_DB_Containers {
 //		if ($user->picture)
 //			IO_Utils::deleteFolder(dirname($user->picture));
 		
-		if ($user->alliance && Rakuun_DB_Containers::getUserContainer()->countByAlliance($user->alliance) <= 1) {
-			// delete alliance if last users is deleted
+		if ($user->alliance && Rakuun_DB_Containers::getUserContainer()->countByAlliance($user->alliance) == 0) {
+			// delete alliance if last user is deleted
 			Rakuun_DB_Containers::getAlliancesContainer()->delete($user->alliance);
 		}
 		

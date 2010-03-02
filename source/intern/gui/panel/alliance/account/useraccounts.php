@@ -14,30 +14,32 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_UserAccounts extends GUI_Panel {
 		$users = array();
 		foreach ($logs as $log) {
 			$user = isset($log->receiver) ? $log->receiver : $log->sender;
-			if (!isset($users[$user->getPK()])) {
-				$users[$user->getPK()]['sum'] = array(
+			$pk = $user ? $user->getPK() : 0;
+			if (!isset($users[$pk])) {
+				$users[$pk]['sum'] = array(
 						'iron' => 0,
 						'beryllium' => 0,
 						'energy' => 0,
 						'people' => 0
 					);
 			}
-			$users[$user->getPK()]['sum']['iron'] += $log->iron * $log->type;
-			$users[$user->getPK()]['sum']['beryllium'] += $log->beryllium * $log->type;
-			$users[$user->getPK()]['sum']['energy'] += $log->energy * $log->type;
-			$users[$user->getPK()]['sum']['people'] += $log->people * $log->type;
-			$users[$user->getPK()]['user'] = $user;
+			$users[$pk]['sum']['iron'] += $log->iron * $log->type;
+			$users[$pk]['sum']['beryllium'] += $log->beryllium * $log->type;
+			$users[$pk]['sum']['energy'] += $log->energy * $log->type;
+			$users[$pk]['sum']['people'] += $log->people * $log->type;
+			$users[$pk]['user'] = $user;
 		}
 		$table = new GUI_Panel_Table('table');
 		$table->enableSortable();
 		$table->setAttribute('summary', 'Kontobewegungen');
 		$table->addHeader(array('Name', 'Eisen', 'Beryllium', 'Energie', 'Leute'));
 		foreach ($users as $user) {
-			$userlink = new Rakuun_GUI_Control_UserLink('moves-userlink'.$user['user']->getPK(), $user['user']);
-			$iron = new GUI_Panel_Number('moves-iron'.$user['user']->getPK(), $user['sum']['iron']);
-			$beryllium = new GUI_Panel_Number('moves-beryllium'.$user['user']->getPK(), $user['sum']['beryllium']);
-			$energy = new GUI_Panel_Number('moves-energy'.$user['user']->getPK(), $user['sum']['energy']);
-			$people = new GUI_Panel_Number('moves-people'.$user['user']->getPK(), $user['sum']['people']);
+			$pk = $user['user'] ? $user['user']->getPK() : 0;
+			$userlink = new Rakuun_GUI_Control_UserLink('moves-userlink'.$pk, $user['user']);
+			$iron = new GUI_Panel_Number('moves-iron'.$pk, $user['sum']['iron']);
+			$beryllium = new GUI_Panel_Number('moves-beryllium'.$pk, $user['sum']['beryllium']);
+			$energy = new GUI_Panel_Number('moves-energy'.$pk, $user['sum']['energy']);
+			$people = new GUI_Panel_Number('moves-people'.$pk, $user['sum']['people']);
 			$table->addLine(array($userlink, $iron, $beryllium, $energy, $people));
 		}
 		$sorterheaders = array();
