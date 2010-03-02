@@ -3,3 +3,7 @@
 <? $this->displayPanel('technologiesbox'); ?>
 <br class="clear" />
 <? $this->displayPanel('unitsbox'); ?>
+<br class="clear" />
+<? $this->displayPanel('lostbuildings'); ?>
+<br class="clear" />
+<? $this->displayPanel('buildingevents'); ?>

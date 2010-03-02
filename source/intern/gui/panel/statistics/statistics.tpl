@@ -1,1 +1,1 @@
-<? $this->displayPanel('statistics') ?>
+<? $this->displayPanel('statistics'); ?>

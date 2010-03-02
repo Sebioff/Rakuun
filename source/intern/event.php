@@ -61,6 +61,20 @@ class Rakuun_Intern_Event {
 			Rakuun_User_Manager::update($userTechnologies->user);
 		}
 	}
+	
+	public static function getTextForEvent(DB_Record $event) {
+		switch ($event->eventType) {
+			case self::EVENT_TYPE_BUILDING_PRODUCE:
+				$building = Rakuun_Intern_Production_Factory::getBuilding($event->building);
+				return $building->getName().' Stufe '.$event->level.' fertiggestellt.';
+			case self::EVENT_TYPE_BUILDING_REMOVE:
+				$building = Rakuun_Intern_Production_Factory::getBuilding($event->building);
+				return $building->getName().' Stufe '.($event->level + 1).' abgerissen.';
+			case self::EVENT_TYPE_BUILDING_DESTROY:
+				$building = Rakuun_Intern_Production_Factory::getBuilding($event->building);
+				return $building->getName().' Stufe '.($event->level + 1).' zerstört.';
+		}
+	}
 }
 
 ?>
