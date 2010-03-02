@@ -148,8 +148,8 @@ class Rakuun_Intern_GUI_Panel_Board_Boardview extends GUI_Panel {
 			break;
 		}
 		DB_Connection::get()->beginTransaction();
-		$lastVisitedContainer->deleteByUser($user);
 		foreach ($boards as $board) {
+			$lastVisitedContainer->deleteByBoard($board);
 			$newVisit = new DB_Record();
 			$newVisit->board = $board;
 			$newVisit->user = $user;
