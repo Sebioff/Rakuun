@@ -108,10 +108,6 @@ class Rakuun_Intern_Fights_System {
 			
 			if (!$fightingUnit) {
 				//FIXME: hack for pezettos in fighting sequence
-				$mail = new Net_Mail();
-				$mail->addRecipient('out-of-order1@gmx.de');
-				$mail->setMessage($winnerUnitSource->fightingSequence."\n".$fightingUnitName);
-				$mail->send();
 				continue;
 			}
 			if ($fightingUnit->getAmount() <= 0)
