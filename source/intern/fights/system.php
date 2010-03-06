@@ -120,6 +120,10 @@ class Rakuun_Intern_Fights_System {
 			
 			// how much power does a single unit of this type have?
 			$fightingPowerOfSingleUnit = $winnerPowerByUnits[$fightingUnitName] / $fightingUnit->getAmount();
+			
+			if ($fightingPowerOfSingleUnit <= 0)
+				continue;
+			
 			// how many units of this type survive?
 			$survivingAmount = round($winningPower / $fightingPowerOfSingleUnit);
 			if ($survivingAmount > $fightingUnit->getAmount())
