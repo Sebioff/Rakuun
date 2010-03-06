@@ -78,22 +78,26 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$targetAllianceLink = $link->render();
 		}
+		$link = new Rakuun_GUI_Control_UserLink('user_link', $army->user);
+		$userLink = $link->render();
+		$link = new Rakuun_GUI_Control_UserLink('target_link', $army->target);
+		$targetLink = $link->render();
 		
 		if ($fightingSystem->getDefenderWon()) {
 			$winnerUnitSource = $army->target->units;
 			$looserUnitSource = $army;
 			$survivingWinnerUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
 			$survivingLooserUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
-			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$army->user->name.$userAllianceLink.' versuchte unsere Stadt zu überfallen, doch wir konnten den Feind erfolgreich abwehren.';
-			$attackerReportText = 'Einer Ihrer Angriffe war eine Niederlage!<br/>Beim Überfall auf '.$army->target->name.$targetAllianceLink.' wurde unsere Armee vernichtend geschlagen.';
+			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' versuchte unsere Stadt zu überfallen, doch wir konnten den Feind erfolgreich abwehren.';
+			$attackerReportText = 'Einer Ihrer Angriffe war eine Niederlage!<br/>Beim Überfall auf '.$targetLink.$targetAllianceLink.' wurde unsere Armee vernichtend geschlagen.';
 		}
 		else {
 			$winnerUnitSource = $army;
 			$looserUnitSource = $army->target->units;
 			$survivingWinnerUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
 			$survivingLooserUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
-			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$army->user->name.$userAllianceLink.' überfiel unsere Stadt und vernichtete unsere Armee.';
-			$attackerReportText = 'Einer Ihrer Angriffe war ein Erfolg!<br/>Beim Überfall auf '.$army->target->name.$targetAllianceLink.' wurde die gegnerische Armee vernichtend geschlagen.';
+			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' überfiel unsere Stadt und vernichtete unsere Armee.';
+			$attackerReportText = 'Einer Ihrer Angriffe war ein Erfolg!<br/>Beim Überfall auf '.$targetLink.$targetAllianceLink.' wurde die gegnerische Armee vernichtend geschlagen.';
 		}
 			
 		// WINNER ----------------------------------------------
@@ -336,16 +340,20 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$targetAllianceLink = $link->render();
 		}
+		$link = new Rakuun_GUI_Control_UserLink('user_link', $army->user);
+		$userLink = $link->render();
+		$link = new Rakuun_GUI_Control_UserLink('target_link', $army->target);
+		$targetLink = $link->render();
 		
 		// the higher $reportCompletenessIndicator, the incompleter the report
 		$reportCompletenessIndicator = $defendingPower / ($army->spydrone + $army->cloakedSpydrone * Rakuun_Intern_Production_Unit_CloakedSpydrone::ROBUSTNESS_FACTOR);
 		if ($reportCompletenessIndicator >= 4000) {
-			$defenderReportText = 'Soeben versuchte '.$army->user->name.$userAllianceLink.' geheime Daten unserer Stadt auszuspionieren - glücklicherweiße gelang es unserer Armee die feindlichen Spionagesonden zu zerstören, bevor diese Daten übermitteln konnten.';
-			$attackerReportText = 'Leider schlug die Ausspionierung von '.$army->target->name.$targetAllianceLink.' fehl - die gegnerische Armee zerstöre sämtliche Spionagesonden, bevor diese Daten übermitteln konnten.';
+			$defenderReportText = 'Soeben versuchte '.$userLink.$userAllianceLink.' geheime Daten unserer Stadt auszuspionieren - glücklicherweiße gelang es unserer Armee die feindlichen Spionagesonden zu zerstören, bevor diese Daten übermitteln konnten.';
+			$attackerReportText = 'Leider schlug die Ausspionierung von '.$targetLink.$targetAllianceLink.' fehl - die gegnerische Armee zerstöre sämtliche Spionagesonden, bevor diese Daten übermitteln konnten.';
 		}
 		else {
-			$defenderReportText = 'Soeben wurden geheime Daten unserer Stadt von '.$army->user->name.$userAllianceLink.' ausspioniert!';
-			$attackerReportText = 'Soeben gelang es einigen unserer Spionagesonden, geheime Daten von '.$army->target->name.$targetAllianceLink.' zu übermitteln!';
+			$defenderReportText = 'Soeben wurden geheime Daten unserer Stadt von '.$userLink.$userAllianceLink.' ausspioniert!';
+			$attackerReportText = 'Soeben gelang es einigen unserer Spionagesonden, geheime Daten von '.$targetLink.$targetAllianceLink.' zu übermitteln!';
 			
 			if ($reportCompletenessIndicator <= 2000) {
 				$defenderReportText .= '<br/>Folgende Informationen konnten die gegnerischen Sonden übermitteln:';

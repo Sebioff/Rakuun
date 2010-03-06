@@ -24,7 +24,7 @@ class Rakuun_Intern_Production_Building_TankFactory extends Rakuun_Intern_Produc
 			<br/>
 			Gleichzeitig werden Modellen im weiteren Verlauf der Produktion mit mächtigen Waffen bestückt, die das Markenzeichen aller aus den Panzerfabriken kommenden Einheiten sind: die leichten Raketenwerfer der Tegos, die gigantischen Artilleriegeschütze der Buhoganis...
 			<br/>
-			Um Ingenieur in einer solchen Anlage zu werden, benötigt man beachtliche Referenzen. Peinlichste Genauigkeit im Nachprüfen der Chassis ist Pflicht. Kleinste Fehler in der Vermeßung würden die Karriere eines Ingenieurs drastisch beenden.
+			Um Ingenieur in einer solchen Anlage zu werden, benötigt man beachtliche Referenzen. Peinlichste Genauigkeit im Nachprüfen der Chassis ist Pflicht. Kleinste Fehler in der Vermessung würden die Karriere eines Ingenieurs drastisch beenden.
 			<br/>
 			Den Wert ihres Berufes erkennen die Mechaniker dann, wenn die wuchtigen Maschinen mit lautem Rasseln aus den Garagen rollen um alles niederzuwälzen, was sich ihnen in den Weg stellt.');
 		$this->setPoints(10);
