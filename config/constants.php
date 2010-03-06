@@ -11,7 +11,7 @@ define('PROJECT_NAME', 'Rakuun');
 define('CALLBACK_ERROR', 'Rakuun_Module::onError');
 define('CALLBACK_ONAFTERRESET', 'Rakuun_Module::onSetup');
 define('CALLBACK_MAINTENANCE', 'Rakuun_Module::maintenanceMode');
-if (PHP_SAPI == 'cli' && Environment::getCurrentEnvironment() == Environment::LIVE)
+if (PHP_SAPI == 'cli')
 	define('PROJECT_ROOTURI', 'http://www.rakuun.de/v4');
 
 // PROJECT SPECIFIC CONSTANTS --------------------------------------------------
