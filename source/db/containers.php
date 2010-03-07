@@ -27,6 +27,12 @@ abstract class Rakuun_DB_Containers {
 	private static $boardsContainer = null;
 	private static $boardsPostingsContainer = null;
 	private static $boardsLastVisitedContainer = null;
+	private static $boardsAllianceContainer = null;
+	private static $boardsAlliancePostingsContainer = null;
+	private static $boardsAllianceLastVisitedContainer = null;
+	private static $boardsMetaContainer = null;
+	private static $boardsMetaPostingsContainer = null;
+	private static $boardsMetaLastVisitedContainer = null;
 	private static $alliancesDiplomaciesContainer = null;
 	private static $metasContainer = null;
 	private static $metasApplicationsContainer = null;
@@ -298,30 +304,6 @@ abstract class Rakuun_DB_Containers {
 		self::$alliancesBuildingsWIPContainer = new DB_Container('alliances_buildings_wip');
 		
 		return self::$alliancesBuildingsWIPContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getBoardsContainer() {
-		if (self::$boardsContainer)
-			return self::$boardsContainer;
-			
-		self::$boardsContainer = new DB_Container('boards');
-		
-		return self::$boardsContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getBoardsPostingsContainer() {
-		if (self::$boardsPostingsContainer)
-			return self::$boardsPostingsContainer;
-			
-		self::$boardsPostingsContainer = new DB_Container('boards_postings');
-		
-		return self::$boardsPostingsContainer;
 	}
 	
 	/**
@@ -799,6 +781,30 @@ abstract class Rakuun_DB_Containers {
 	/**
 	 * @return DB_Container
 	 */
+	public static function getBoardsContainer() {
+		if (self::$boardsContainer)
+			return self::$boardsContainer;
+			
+		self::$boardsContainer = new DB_Container('boards');
+		
+		return self::$boardsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsPostingsContainer() {
+		if (self::$boardsPostingsContainer)
+			return self::$boardsPostingsContainer;
+			
+		self::$boardsPostingsContainer = new DB_Container('boards_postings');
+		
+		return self::$boardsPostingsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
 	public static function getBoardsLastVisitedContainer() {
 		if (self::$boardsLastVisitedContainer)
 			return self::$boardsLastVisitedContainer;
@@ -807,6 +813,80 @@ abstract class Rakuun_DB_Containers {
 		self::$boardsLastVisitedContainer->addReferencedContainer(self::getBoardsContainer());
 		
 		return self::$boardsLastVisitedContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsAllianceContainer() {
+		if (self::$boardsAllianceContainer)
+			return self::$boardsAllianceContainer;
+			
+		self::$boardsAllianceContainer = new DB_Container('boards_alliance');
+		
+		return self::$boardsAllianceContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsAlliancePostingsContainer() {
+		if (self::$boardsAlliancePostingsContainer)
+			return self::$boardsAlliancePostingsContainer;
+			
+		self::$boardsAlliancePostingsContainer = new DB_Container('boards_alliance_postings');
+		
+		return self::$boardsAlliancePostingsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsAllianceLastVisitedContainer() {
+		if (self::$boardsAllianceLastVisitedContainer)
+			return self::$boardsAllianceLastVisitedContainer;
+		
+		self::$boardsAllianceLastVisitedContainer = new DB_Container('boards_alliance_visited');
+		self::$boardsAllianceLastVisitedContainer->addReferencedContainer(self::getBoardsAllianceContainer());
+		
+		return self::$boardsAllianceLastVisitedContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsMetaContainer() {
+		if (self::$boardsMetaContainer)
+			return self::$boardsMetaContainer;
+			
+		self::$boardsMetaContainer = new DB_Container('boards_meta');
+		
+		return self::$boardsMetaContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsMetaPostingsContainer() {
+		if (self::$boardsMetaPostingsContainer)
+			return self::$boardsMetaPostingsContainer;
+			
+		self::$boardsMetaPostingsContainer = new DB_Container('boards_meta_postings');
+		
+		return self::$boardsMetaPostingsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsMetaLastVisitedContainer() {
+		if (self::$boardsMetaLastVisitedContainer)
+			return self::$boardsMetaLastVisitedContainer;
+		
+		self::$boardsMetaLastVisitedContainer = new DB_Container('boards_meta_visited');
+		self::$boardsMetaLastVisitedContainer->addReferencedContainer(self::getBoardsMetaContainer());
+		
+		return self::$boardsMetaLastVisitedContainer;
 	}
 }
 

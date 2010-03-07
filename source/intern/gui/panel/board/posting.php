@@ -7,20 +7,21 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 	private $posting = null;
 	
 	public function __construct($name, DB_Record $posting) {
-		$this->posting = $posting;
 		parent::__construct($name);
+		$this->posting = $posting;
 	}
 	
 	public function init() {
 		parent::init();
-		
+		 
 		$this->setTemplate(dirname(__FILE__).'/posting.tpl');
 		if (Router::get()->getCurrentModule()->getParam('edit') == $this->posting->getPK()
 			&& Rakuun_User_Manager::getCurrentUser()->getPK() == $this->posting->user->getPK()
 		) {
-			$this->addPanel($text = new GUI_Control_TextArea('text', $this->posting->text, 'Posting'));
+			$this->addPanel($blanko = new GUI_Panel('form'));
+			$blanko->addPanel($text = new GUI_Control_TextArea('text', $this->posting->text, 'Posting'));
 			$text->addValidator(new GUI_Validator_Mandatory());
-			$this->addPanel(new GUI_Control_SubmitButton('submit', 'speichern'));
+			$blanko->addPanel(new GUI_Control_SubmitButton('edit', 'speichern'));
 		}
 		$this->params->posting = $this->posting;
 		$this->addPanel(new GUI_Panel_Date('date', $this->posting->date));
@@ -32,13 +33,14 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		}
 	}
 	
-	public function onSubmit() {
+	public function onEdit() {
 		if ($this->hasErrors())
 			return;
 		
-		$this->posting->text = $this->text->getValue();
+		$this->posting->text = $this->form->text->getValue();
 		$this->posting->editdate = time();
-		Rakuun_DB_Containers::getBoardsPostingsContainer()->save($this->posting);
+		$this->posting->save();
+		$this->getModule()->redirect($this->getModule()->getUrl(array('board' => $this->posting->board)));
 	}
 }
 

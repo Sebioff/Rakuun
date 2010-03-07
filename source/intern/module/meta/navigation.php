@@ -16,7 +16,7 @@ class Rakuun_Intern_Module_Meta_Navigation extends Rakuun_Intern_Module implemen
 		if ($parent->hasSubmodule('kick'))
 			$navigation->addModuleNode($parent->getSubmodule('kick'), 'Allianz kicken');
 		if ($parent->hasSubmodule('board'))
-			$navigation->addModuleNode($parent->getSubmodule('board'), 'Forum ('.Rakuun_Intern_GUI_Panel_Board_Boardview::getNewPostingsCount(Rakuun_Intern_GUI_Panel_Board_Boardview::TYPE_META).')');
+			$navigation->addModuleNode($parent->getSubmodule('board'), 'Forum ('.Rakuun_Intern_GUI_Panel_Meta_Board::getNewPostingsCount().')');
 		if ($parent->hasSubmodule('statistics'))
 			$navigation->addModuleNode($parent->getSubmodule('statistics'), 'Statistiken');
 		if ($parent->hasSubmodule('polls'))

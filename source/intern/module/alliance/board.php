@@ -7,7 +7,7 @@ class Rakuun_Intern_Module_Alliance_Board extends Rakuun_Intern_Module_Alliance_
 		$this->setPageTitle('Forum - ['.$this->getUser()->alliance->tag.'] '.$this->getUser()->alliance->name);
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/board.tpl');
 		
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('board', new Rakuun_Intern_GUI_Panel_Board_Boardview('Forum', Rakuun_Intern_GUI_Panel_Board_Boardview::TYPE_ALLIANCE), 'Allianz Forum'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('board', new Rakuun_Intern_GUI_Panel_Alliance_Board('Forum'), 'Allianz Forum'));
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Board extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/board.tpl');
 		
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Boardview('board', Rakuun_Intern_GUI_Panel_Board_Boardview::TYPE_ADMIN), 'Admin Forum');
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board('board'), 'Admin Forum');
 	}	
 }
 

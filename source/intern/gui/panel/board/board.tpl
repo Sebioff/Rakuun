@@ -1,12 +1,19 @@
-<? if($this->hasErrors()): ?>
-	<? $this->displayErrors() ?>
-<? endif ?>
-<tr>
-	<td><? $this->displayPanel('boardlink'); ?></td>
-	<td class="posting_count"><?= $this->params->count; ?></td>
-	<td>
-		<? if ($this->hasPanel('date')): ?>
-			<? $this->displayPanel('date'); ?>
-		<? endif; ?>
-	</td>
-</tr>
+<? if ($this->hasMessages()): ?>
+	<? $this->displayMessages(); ?>
+<? endif; ?>
+
+<? if ($this->hasPanel('markread')): ?>
+	<? $this->displayPanel('markread'); ?>
+<? endif; ?>
+<? $this->displayPanel('board'); ?>
+<? if ($this->getPageCount() > 1): ?>
+	<? $this->displayLabelForPanel('pages'); ?>: <? $this->displayPanel('pages'); ?>
+	<hr />
+<? endif; ?>
+<hr />
+<? if ($this->hasPanel('name')): ?>
+	<? $this->displayPanel('name'); ?>
+<? endif; ?>
+<? if ($this->hasPanel('addboard')): ?>
+	<? $this->displayPanel('addboard'); ?>
+<? endif; ?>
