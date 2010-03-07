@@ -42,7 +42,7 @@ class Rakuun_Intern_GUI_Panel_Message_Support extends GUI_Panel {
 			return;
 			
 		$ticket = new Rakuun_Intern_Support_Ticket($this->subject, $this->message, $this->categories->getKey(), true);
-		if ($this->ticket) {
+		if (isset($this->ticket->supporter)) {
 			$ticket->setSupporter($this->ticket->supporter);
 		}
 		$ticket->send();
