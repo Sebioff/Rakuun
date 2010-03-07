@@ -5,7 +5,7 @@
  */
 class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 	public function __construct($name, DB_Container $container = null, $title = '') {
-		$this->setItemsPerPage(10);
+		$this->setItemsPerPage(20);
 		if ($container === null)
 			$container = Rakuun_DB_Containers::getBoardsContainer();
 			
@@ -108,6 +108,10 @@ class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 				$count++;
 		}
 		return $count;
+	}
+	
+	public function showPages() {
+		return ($this->getPageCount() > 1 && Router::get()->getCurrentModule()->getParam('board') === null);
 	}
 	
 	public function onMarkRead() {

@@ -25,7 +25,7 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		}
 		$this->params->posting = $this->posting;
 		$this->addPanel(new GUI_Panel_Date('date', $this->posting->date));
-		$this->addPanel(new Rakuun_GUI_Control_Userlink('user', $this->posting->user));
+		$this->addPanel(new Rakuun_GUI_Control_Userlink('user', $this->posting->user, $this->posting->get('user')));
 		if ($this->posting->editdate)
 			$this->addPanel(new GUI_Panel_Date('editdate', $this->posting->editdate));
 		if ($this->posting->user && $this->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {

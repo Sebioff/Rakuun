@@ -6,7 +6,7 @@
 	<? $this->displayPanel('markread'); ?>
 <? endif; ?>
 <? $this->displayPanel('board'); ?>
-<? if ($this->getPageCount() > 1): ?>
+<? if ($this->showPages()): ?>
 	<? $this->displayLabelForPanel('pages'); ?>: <? $this->displayPanel('pages'); ?>
 	<hr />
 <? endif; ?>

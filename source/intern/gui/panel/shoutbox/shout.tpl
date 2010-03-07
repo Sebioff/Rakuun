@@ -3,7 +3,7 @@
 <? endif; ?>
 <div class="shout_header">
 <? $this->displayPanel('userlink'); ?>, am <? $this->displayPanel('date'); ?>
-, <? $this->displayPanel('answerlink'); ?>
+, <? if ($this->hasPanel('answerlink')): $this->displayPanel('answerlink'); endif; ?>
 </div>
 <div class="shout_text">
 	<?= Text::format((Text::escapeHTML($this->params->shout->text))); ?>

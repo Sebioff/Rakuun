@@ -835,6 +835,8 @@ abstract class Rakuun_DB_Containers {
 			return self::$boardsAlliancePostingsContainer;
 			
 		self::$boardsAlliancePostingsContainer = new DB_Container('boards_alliance_postings');
+		self::$boardsAlliancePostingsContainer->addReferencedContainer(self::getBoardsAllianceContainer());
+		self::$boardsAlliancePostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		
 		return self::$boardsAlliancePostingsContainer;
 	}
@@ -872,6 +874,8 @@ abstract class Rakuun_DB_Containers {
 			return self::$boardsMetaPostingsContainer;
 			
 		self::$boardsMetaPostingsContainer = new DB_Container('boards_meta_postings');
+		self::$boardsMetaPostingsContainer->addReferencedContainer(self::getBoardsMetaContainer());
+		self::$boardsMetaPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		
 		return self::$boardsMetaPostingsContainer;
 	}
