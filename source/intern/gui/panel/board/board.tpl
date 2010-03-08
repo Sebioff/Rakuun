@@ -17,3 +17,6 @@
 <? if ($this->hasPanel('addboard')): ?>
 	<? $this->displayPanel('addboard'); ?>
 <? endif; ?>
+<? if ($this->hasPanel('suchen')): ?>
+	<? $this->displayPanel('suchen'); ?>
+<? endif; ?>

@@ -69,6 +69,7 @@ class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 		$blanko->addPanel(new GUI_Control_SubmitButton('addboard', 'anlegen'));
 		$this->addPanel($blanko = new GUI_Panel('markread'));
 		$blanko->addPanel(new GUI_Control_SubmitButton('markread', 'Alle als gelesen markieren'));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Search('suchen', $this->getBoardsContainer()));
 	}
 	
 	public function onAddBoard() {
