@@ -49,7 +49,8 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Edit extends GUI_Panel {
 			$this->user->nameColored = '';
 		}
 		$this->user->cityName = $this->cityname;
-		$this->user->description = $this->description;
+		if ($this->hasPanel('description'))
+			$this->user->description = $this->description;
 		$this->user->mail = $this->mail;
 		$this->user->skin = $this->skin->getKey();
 		Rakuun_User_Manager::update($this->user);
