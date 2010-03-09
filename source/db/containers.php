@@ -798,6 +798,7 @@ abstract class Rakuun_DB_Containers {
 			return self::$boardsPostingsContainer;
 			
 		self::$boardsPostingsContainer = new DB_Container('boards_postings');
+		self::$boardsPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		
 		return self::$boardsPostingsContainer;
 	}

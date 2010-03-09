@@ -21,7 +21,7 @@ class Rakuun_Intern_GUI_Panel_Board_Search extends GUI_Panel {
 	public function onSearch() {
 		$options = array();
 		$options['conditions'][] = array('`name` LIKE ?', '%'.str_replace('*', '%', $this->board->getValue()).'%');
-		$options['order'] = 'date DESC';
+		$options['order'] = 'name ASC, date DESC';
 		$boards = $this->boardContainer->select($options);
 		if (!empty($boards)) {
 			$list = new GUI_Panel_List('result');
