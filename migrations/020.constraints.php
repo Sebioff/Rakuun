@@ -1,6 +1,6 @@
 <?php
 
-//$queries[] = 'ALTER TABLE `shoutbox_alliances` DROP FOREIGN KEY `shoutbox_alliances_ibfk_3` ;';
+$queries[] = 'ALTER TABLE `shoutbox_alliances` DROP FOREIGN KEY `shoutbox_alliances_ibfk_3` ;';
 
 $queries[] = 'ALTER TABLE `shoutbox_alliances` ADD FOREIGN KEY ( `alliance` ) REFERENCES `alliances` (`id`) ON DELETE CASCADE ;';
 
