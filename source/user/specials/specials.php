@@ -98,5 +98,51 @@ abstract class Rakuun_User_Specials {
 	public function canReceive() {
 		return !(bool)$this->loadFromDB();
 	}
+	
+	/**
+	 * @return names for the Specials
+	 */
+	static public function getNames() {
+		$names = array(
+			Rakuun_User_Specials::SPECIAL_WARPGATE => 'Warpgate',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'Blaues DB',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'Rotes DB',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'Gelbes DB',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'Braunes DB',
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'Grünes DB'
+		);
+		return $names;	
+	}
+	
+	/**
+	 * @return effects of the Specials
+	 */
+	static public function getEffects() {
+		$effectValues = Rakuun_User_Specials::getEffectValues();
+		$effects = array(
+			Rakuun_User_Specials::SPECIAL_WARPGATE => 'reduziert eigene Armeebewegungszeit um '.$effectValues[Rakuun_User_Specials::SPECIAL_WARPGATE] * 100 .'%',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'wirkt wie ein Warpgate',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'erhöht Angriffskraft um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED] * 100 .'%',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'reduziert Einheitenproduktionszeit um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100 .'%',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'erhöht Ressourcenproduktion um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'%',
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'erhöht Verteidigungskraft um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN] * 100 .'%'
+		);
+		return $effects;
+	}
+	
+	/**
+	 * @return effectvalues of the Specials
+	 */
+	static public function getEffectValues() {
+		$effectsValues = array(
+			Rakuun_User_Specials::SPECIAL_WARPGATE => 0.5,
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => Rakuun_User_Specials::SPECIAL_WARPGATE,
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 0.04,
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW =>0.1,
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 0.1,
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 0.04
+		);
+		return $effectsValues;
+	}
 }
 ?>

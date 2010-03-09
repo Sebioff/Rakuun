@@ -49,6 +49,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			Rakuun_User_Manager::update(Rakuun_User_Manager::getCurrentUser());
 		}
 		
+		//Dancertia Countdown
 		$options = array();
 		$options['conditions'][] = array('dancertia_starttime > 0');
 		$options['order'] = 'dancertia_starttime ASC';
@@ -149,6 +150,10 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		
 		//Info Panel
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('info', new Rakuun_Intern_GUI_Panel_User_Info('info'), 'Informationen'));
+		
+		//Specials
+		$this->contentPanel->AddPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
+		
 	}
 }
 

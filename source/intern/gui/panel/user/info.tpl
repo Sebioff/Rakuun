@@ -29,7 +29,7 @@ Koordinaten:
 	Im Noobschutz kannst du nicht handeln und nicht angegriffen werden.
 	Du verlässt den Noobschutz, sobald deine Punktzahl
 	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints(); ?>
-	<? $output = '>= '; ?>
+	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_POINTS): ?>
 		<? $output .= floor($averagePoints); ?>
 	<? else: ?>
@@ -38,7 +38,7 @@ Koordinaten:
 	<?= $output; ?>
 	oder deine Armeestärke
 	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength(); ?>
-	<? $output = '>= '; ?>
+	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH): ?>
 		<? $output .= floor($averagePoints); ?>
 	<? else: ?>

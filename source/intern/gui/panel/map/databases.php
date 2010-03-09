@@ -14,13 +14,9 @@ class Rakuun_Intern_GUI_Panel_Map_Databases extends GUI_Panel {
 			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'db_brown',
 			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'db_green'
 		);
-		$names = array(
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'Blau',
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'Rot',
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'Gelb',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'Braun',
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'Grün'
-		);
+		
+		$names = Rakuun_User_Specials::getNames();
+		
 		foreach ($this->params->visibleDatabases as $db) {
 			$this->addPanel(new GUI_Panel_Image('image_'.$db, Router::get()->getStaticRoute('images', $images[$db].'.gif')));
 			$options = array();

@@ -7,7 +7,8 @@
 <br/>
 <? $ressourceProductionDatabase = new Rakuun_User_Specials_Database(Rakuun_User_Manager::getCurrentUser(), Rakuun_User_Specials::SPECIAL_DATABASE_BROWN); ?>
 <? if ($ressourceProductionDatabase->hasSpecial()): ?>
-	Produktionsrate von Eisen und Beryllium durch Ressourcenproduktions-Datenbankteil um 10% erhöht
+	<? $effectValues = Rakuun_User_Specials::getEffectValues(); ?>
+	<?= 'Produktionsrate von Eisen und Beryllium durch Ressourcenproduktions-Datenbankteil um '.($effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100).'% erhöht';?>
 	<br/>
 <? endif; ?>
 <br/>

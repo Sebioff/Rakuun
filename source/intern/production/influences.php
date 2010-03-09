@@ -17,8 +17,10 @@ class Rakuun_Intern_Production_Influences {
 		$rate *= self::getPeopleSatisfactionRate($user);
 		if ($ressourceType == self::RESSOURCE_IRON || $ressourceType == self::RESSOURCE_BERYLLIUM) {
 			$ressourceProductionDatabase = new Rakuun_User_Specials_Database($user, Rakuun_User_Specials::SPECIAL_DATABASE_BROWN);
-			if ($ressourceProductionDatabase->hasSpecial())
-				$rate *= 1.1;
+			if ($ressourceProductionDatabase->hasSpecial()) {
+				$effectValues = Rakuun_User_Specials::getEffectValues();
+				$rate *= ($effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] + 1);
+			}
 		}
 		
 		return $rate;

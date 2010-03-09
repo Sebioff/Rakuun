@@ -117,8 +117,10 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 			$reductionPercent += Rakuun_Intern_Production_Building_Airport::PRODUCTION_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getBuilding('airport', $this->getDataSource()->buildings)->getLevel();
 		
 		$productionDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW);
-		if ($productionDatabase->hasSpecial())
-			$reductionPercent += 10;
+		if ($productionDatabase->hasSpecial()) {
+			$effectValues = Rakuun_User_Specials::getEffectValues();
+			$reductionPercent += $effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100;
+		}
 			
 		if ($reductionPercent > 100)
 			$reductionPercent = 100;
@@ -160,8 +162,10 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		
 		if ($this->getUser()) {
 			$attackDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_RED);
-			if ($attackDatabase->hasSpecial())
-				$value += $baseValue / 100 * 4;
+			if ($attackDatabase->hasSpecial()) {
+				$effectValues = Rakuun_User_Specials::getEffectValues();	
+				$value += $baseValue * $effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED];
+			}
 		}
 			
 		return $value * $amount;
@@ -183,8 +187,10 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		
 		if ($this->getUser()) {
 			$defenseDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_GREEN);
-			if ($defenseDatabase->hasSpecial())
-				$value += $baseValue / 100 * 4;
+			if ($defenseDatabase->hasSpecial()) {
+				$effectValues = Rakuun_User_Specials::getEffectValues();
+				$value += $baseValue * $effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN];
+			}
 		}
 		
 		return $value * $amount;

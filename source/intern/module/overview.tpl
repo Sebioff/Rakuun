@@ -43,6 +43,11 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 	<br />
 <? endif; ?>
 
+<? if ($this->hasPanel('specials')): ?>
+	<br class="clear" />
+	<? $this->displayPanel('specials'); ?>
+<? endif; ?>
+
 <? $this->hasPanel('wip_buildings') ? $this->displayPanel('wip_buildings') : '' ?>
 <? $this->hasPanel('wip_technologies') ? $this->displayPanel('wip_technologies') : '' ?>
 <? $this->hasPanel('wip_units') ? $this->displayPanel('wip_units') : '' ?>
