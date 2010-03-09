@@ -44,13 +44,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 					}
 					
 					// make army return home
-					$army->targetX = $army->user->cityX;
-					$army->targetY = $army->user->cityY;
-					$army->tick = time();
-					$army->targetTime = 0;
-					$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
-					$pathCalculator->getPath();
-					$army->save();
+					$this->moveHome($army);
 				}
 			}
 			DB_Connection::get()->commit();
@@ -159,12 +153,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		}
 		else {
 			// make army return home
-			$army->targetX = $army->user->cityX;
-			$army->targetY = $army->user->cityY;
-			$army->tick = time();
-			$army->targetTime = 0;
-			$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
-			$pathCalculator->getPath();
+			$this->moveHome($army);
 			
 			// STEALING RESSOURCES ---------------------------------
 			if (!$playersAreAllied) {
@@ -413,13 +402,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		}
 		
 		if ($spyDronesSurvive) {
-			$army->targetX = $army->user->cityX;
-			$army->targetY = $army->user->cityY;
-			$army->tick = time();
-			$army->targetTime = 0;
-			$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
-			$pathCalculator->getPath();
-			$army->save();
+			$this->moveHome($army);
 		}
 		else {
 			$army->delete();
@@ -430,6 +413,9 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		$attackerReport->send();
 	}
 	
+	/**
+	 * Executed if an army returns home
+	 */
 	private function returnHome(DB_Record $army) {
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
 			if ($unit->getAmount() > 0) {
@@ -440,6 +426,20 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		$userUnits->save();
 		$army->user->ressources->raise($army->iron, $army->beryllium, $army->energy);
 		$army->delete();
+	}
+	
+	/**
+	 * Makes the army calculate a path home
+	 */
+	private function moveHome(DB_Record $army) {
+		Rakuun_DB_Containers::getArmiesPathsContainer()->deleteByArmy($army);
+		$army->targetX = $army->user->cityX;
+		$army->targetY = $army->user->cityY;
+		$army->tick = time();
+		$army->targetTime = 0;
+		$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
+		$pathCalculator->getPath();
+		$army->save();
 	}
 	
 	private function canTransportDatabase(DB_Record $army) {
