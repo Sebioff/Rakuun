@@ -88,6 +88,9 @@ abstract class Rakuun_DB_Containers {
 	
 	// TODO remove with PHP 5.3 (use lambda-function instead)
 	public static function onUserDelete(Rakuun_DB_User $user = null) {
+		if ($user === null)
+			return;
+		
 		// FIXME not permitted
 //		if ($user->picture)
 //			IO_Utils::deleteFolder(dirname($user->picture));
@@ -104,6 +107,14 @@ abstract class Rakuun_DB_Containers {
 		$deletedUser->mail = $user->mail;
 		
 		self::getUserDeletedContainer()->save($deletedUser);
+		
+		//remove this user as sitter and his notice
+		$sitted = Rakuun_DB_Containers::getUserContainer()->selectBySitterFirst($user);
+		if ($sitted) {
+			$sitted->sitter = null;
+			$sitted->sitterNotice = '';
+			$sitted->save();
+		}
 	}
 	
 	/**
