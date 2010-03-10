@@ -22,7 +22,7 @@ abstract class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_B
 			}
 			$countDown->enableHoverInfo(true);
 			
-			$this->contentPanel->addPanel($cancelButton = new GUI_Control_SecureSubmitButton('cancel', 'Abbrechen'));
+			$this->contentPanel->addPanel(new GUI_Control_SecureSubmitButton('cancel', 'Abbrechen'));
 		}
 		
 //		$wipItems = $this->getProducer()->getWIP();

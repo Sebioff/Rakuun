@@ -16,8 +16,22 @@ class Rakuun_Intern_GUI_Panel_Production_Alliance extends Rakuun_Intern_GUI_Pane
 		
 		$options = array();
 		$options['conditions'][] = array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
-		if (Rakuun_DB_Containers::getAlliancesBuildingsWIPContainer()->count($options) >= self::WIP_ITEM_MAXAMOUNT) {
+		if (Rakuun_DB_Containers::getAlliancesBuildingsWIPContainer()->count($options) >= self::WIP_ITEM_MAXAMOUNT || !$this->getProductionItem()->canBuild()) {
 			$this->removePanel($this->produce);
+		}
+		
+		$requirements = $this->getProductionItem()->getNeededRequirements();
+		$i = 0;
+		if ($requirements) {
+			$this->addHeadPanel(new GUI_Panel_Text('requirements', 'Voraussetzungen:<br/>'));
+			foreach ($requirements as $requirement) {
+				$this->addHeadPanel($requirementPanel = new GUI_Panel_Text('requirement'.$i, $requirement->getDescription().'<br/>'));
+				if ($requirement->fulfilled())
+					$requirementPanel->addClasses('rakuun_requirements_met');
+				else
+					$requirementPanel->addClasses('rakuun_requirements_failed');
+				$i++;
+			}
 		}
 	}
 	

@@ -152,8 +152,10 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('info', new Rakuun_Intern_GUI_Panel_User_Info('info'), 'Informationen'));
 		
 		//Specials
-		$this->contentPanel->AddPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
-		
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', $specialsPanel = new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
+		// TODO kinda stupid...
+		if (!$specialsPanel->gotSpecials())
+			$this->contentPanel->removePanel($this->contentPanel->specials);
 	}
 }
 

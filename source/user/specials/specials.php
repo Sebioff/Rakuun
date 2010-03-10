@@ -111,7 +111,7 @@ abstract class Rakuun_User_Specials {
 			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'Braunes DB',
 			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'Grünes DB'
 		);
-		return $names;	
+		return $names;
 	}
 	
 	/**
@@ -136,9 +136,9 @@ abstract class Rakuun_User_Specials {
 	static public function getEffectValues() {
 		$effectsValues = array(
 			Rakuun_User_Specials::SPECIAL_WARPGATE => 0.5,
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => Rakuun_User_Specials::SPECIAL_WARPGATE,
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 0.5,
 			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 0.04,
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW =>0.1,
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 0.1,
 			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 0.1,
 			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 0.04
 		);

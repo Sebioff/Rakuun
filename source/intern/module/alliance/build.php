@@ -11,15 +11,9 @@ class Rakuun_Intern_Module_Alliance_Build extends Rakuun_Intern_Module_Alliance_
 		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_Alliance('wip', new Rakuun_Intern_Production_Producer_Alliances(Rakuun_User_Manager::getCurrentUser()->alliance), 'Momentaner Bauvorgang');
 		$this->contentPanel->addPanel($wipPanel, true);
 		
-		$canBuild = false;
 		foreach (Rakuun_Intern_Production_Factory_Alliances::getAllBuildings() as $building) {
-			if ($building->meetsTechnicalRequirements() || $building->getLevel() > 0) {
-				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Alliance('build_'.$building->getInternalName(), $building));
-				$canBuild = true;
-			}
-		}
-		if (!$canBuild) {
-			$this->contentPanel->addPanel(new GUI_Panel_Text('information', 'Bauen derzeit nicht möglich - es wurden noch keine Vorraussetzungen für ein Allianzgebäude erfüllt.'));
+			$this->contentPanel->addPanel($itemBox = new Rakuun_GUI_Panel_Box('build_'.$building->getInternalName(), new Rakuun_Intern_GUI_Panel_Production_Alliance('build_'.$building->getInternalName(), $building)));
+			$itemBox->addClasses('production_item_box');
 		}
 	}
 	

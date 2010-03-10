@@ -11,15 +11,9 @@ class Rakuun_Intern_Module_Meta_Build extends Rakuun_Intern_Module_Meta_Navigati
 		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_Alliance('wip', new Rakuun_Intern_Production_Producer_Metas(Rakuun_User_Manager::getCurrentUser()->alliance->meta), 'Momentaner Bauvorgang');
 		$this->contentPanel->addPanel($wipPanel, true);
 		
-		$canBuild = false;
 		foreach (Rakuun_Intern_Production_Factory_Metas::getAllBuildings() as $building) {
-			if ($building->meetsTechnicalRequirements() || $building->getLevel() > 0) {
-				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Meta('build_'.$building->getInternalName(), $building));
-				$canBuild = true;
-			}
-		}
-		if (!$canBuild) {
-			$this->contentPanel->addPanel(new GUI_Panel_Text('information', 'Bauen derzeit nicht möglich - es wurden noch keine Vorraussetzungen für ein Metagebäude erfüllt.'));
+			$this->contentPanel->addPanel($itemBox = new Rakuun_GUI_Panel_Box('build_'.$building->getInternalName(), new Rakuun_Intern_GUI_Panel_Production_Meta('build_'.$building->getInternalName(), $building)));
+			$itemBox->addClasses('production_item_box');
 		}
 	}
 	
