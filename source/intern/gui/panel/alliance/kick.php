@@ -24,7 +24,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 			
 		foreach ($this->params->members as $member) {
 			if ($this->{'blanko'.$member->getPK()}->hasBeenSubmitted()) {
-				//Check requirements to kick the user
+				// check requirements to kick the user
 				DB_Connection::get()->beginTransaction();
 				$user = Rakuun_DB_Containers::getUserContainer()->selectByPK($this->{'blanko'.$member->getPK()}->id->getValue(), array('conditions' => array(array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance))));
 				if (!$user) {
@@ -42,9 +42,9 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 					DB_Connection::get()->rollback();
 					return;
 				}
-				//delete users privileges
-				Rakuun_Intern_Alliance_Security::get()->getContainerGroupsUsersAssoc()->deleteByUser($user);
-				//send information message to the user
+				// delete users privileges
+				Rakuun_Intern_Alliance_Security::get()->removeFromAllGroups($user);
+				// send information message to the user
 				$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', Rakuun_User_Manager::getCurrentUser()->alliance);
 				$aktUserLink = new Rakuun_GUI_Control_UserLink('userlink', Rakuun_User_Manager::getCurrentUser());
 				$allianceModuleLink = new GUI_Control_Link('allianceslink', 'Allianzen', App::get()->getInternModule()->getSubmodule('alliance')->getURL());
@@ -56,7 +56,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 					$allianceModuleLink->render()
 				);
 				$igm->send();
-				//kick the user from alliance
+				// kick the user from alliance
 				$user->alliance = null;
 				Rakuun_User_Manager::update($user);
 				$this->getModule()->invalidate();

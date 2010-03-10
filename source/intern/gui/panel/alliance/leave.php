@@ -26,6 +26,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Leave extends GUI_Panel {
 		
 		$user->alliance = null;
 		Rakuun_User_Manager::update($user);
+		Rakuun_Intern_Alliance_Security::get()->removeFromAllGroups($user);
 		DB_Connection::get()->commit();
 		$this->getModule()->redirect(App::get()->getInternModule()->getURL());
 	}
