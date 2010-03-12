@@ -2,10 +2,22 @@
 	<? if ($this->hasErrors()): ?>
 		<? $this->displayErrors(); ?>
 	<? endif ?>
-	<? $this->displayLabelForPanel('target'); ?> <? $this->displayPanel('target'); ?>
+	<? if ($this->state->getValue() == Rakuun_Intern_GUI_Panel_Map_Target::STATE_REVIEWING): ?>
+		<? if (!($target = $this->getTargetUser())): ?>
+			<? $target = $this->targetX->getValue().':'.$this->targetY->getValue(); ?>
+		<? else: ?>
+			<? $target = $target->name; ?>
+		<? endif; ?>
+		Ziel: <?= $target; ?>
+		<br/>
+		Dauer: <?= Rakuun_Date::formatCountDown($this->getArmy()->targetTime - time()); ?>
+	<? else: ?>
+		<? $this->displayLabelForPanel('target'); ?> <? $this->displayPanel('target'); ?>
+		<br class="clear" />
+		<? $this->displayPanel('target_coords_label'); ?> <? $this->displayPanel('target_x'); ?><? $this->displayPanel('target_y'); ?>
+	<? endif; ?>
 	<br class="clear" />
-	<? $this->displayPanel('target_coords_label'); ?> <? $this->displayPanel('target_x'); ?><? $this->displayPanel('target_y'); ?>
-	<br class="clear" />
+	<hr />
 	<? $this->displayPanel('unit_input'); ?>
 	<? if ($this->hasPanel('spydrone') || $this->hasPanel('cloaked_spydrone')): ?>
 		<hr/>
@@ -27,5 +39,6 @@
 	<br class="clear" />
 	<? $this->displayPanel('destroy_buildings_label'); ?> <? $this->displayPanel('destroy_buildings'); ?>
 	<br class="clear" />
+	<? $this->displayPanel('state'); ?>
 	<? $this->displayPanel('submit'); ?>
 </div>

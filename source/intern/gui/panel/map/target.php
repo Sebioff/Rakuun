@@ -1,9 +1,13 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
+	const STATE_PREPARING = 1;
+	const STATE_REVIEWING = 2;
+	
 	private $user = null;
 	private $cityX = 0;
 	private $cityY = 0;
+	private $army = null;
 	
 	public function __construct($name, Rakuun_DB_User $user = null, $cityX = 0, $cityY = 0) {
 		parent::__construct($name);
@@ -17,8 +21,11 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/target.tpl');
 		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', $this->user, 'Ziel'));
-		$this->addPanel(new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH));
-		$this->addPanel(new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT));
+		$target->setPreserveValue();
+		$this->addPanel($targetX = new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH));
+		$targetX->setPreserveValue();
+		$this->addPanel($targetY = new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT));
+		$targetY->setPreserveValue();
 		$this->addPanel(new GUI_Panel_Label('target_coords_label', $this->targetX, 'Koordinaten'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
 		$spydrone = Rakuun_Intern_Production_Factory::getUnit('spydrone');
@@ -44,7 +51,8 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$energyPriority->addItem('Hoch', 3, false);
 		$energyPriority->addClasses('rakuun_map_target_priorities');
 		$this->addPanel(new Rakuun_GUI_Panel_Info('destroy_buildings_label', 'Gebäude zerstören', 'Je größer die Angriffskraft, desto größer die Wahrscheinlichkeit das eine Stufe eines Gebäudes zerstört wird. Die maximale Wahrscheinlichkeit beträgt '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_MAX_PROBABILITY.'% und kann mit einer Angriffskraft von '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_NEEDED_FORCE_FOR_MAX.' erreicht werden. Gegen Feinde, mit denen man sich im Krieg befindet, wird nur die Hälfte dessen benötigt.'));
-		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Abschicken'));
+		$this->addPanel($state = new GUI_Control_HiddenBox('state', self::STATE_PREPARING));
+		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Vorbereiten...'));
 	}
 	
 	public function onSubmit() {
@@ -59,13 +67,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			$this->addError('Keine Einheiten ausgewählt.');
 		}
 		
-		$targetUser = $this->target->getUser();
-		if (!$targetUser) {
-			$options = array();
-			$options['conditions'][] = array('city_x = ?', $this->targetX);
-			$options['conditions'][] = array('city_Y = ?', $this->targetY);
-			$targetUser = Rakuun_DB_Containers::getUserContainer()->selectFirst($options);
-		}
+		$targetUser = $this->getTargetUser();
 		
 		if ($targetUser) {
 			$targetX = $targetUser->cityX;
@@ -163,9 +165,38 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			return;
 		}
 		
+		if ($this->state->getValue() == self::STATE_PREPARING) {
+			$this->army = $army;
+			$this->state->setValue(self::STATE_REVIEWING);
+			$this->submit->setValue('Abschicken');
+			return;
+		}
+		else {
+			$this->state->setValue(self::STATE_PREPARING);
+		}
+		
 		$userUnits->save();
 		
 		DB_Connection::get()->commit();
+	}
+	
+	/**
+	 * @return Rakuun_DB_User user if there has been a user specified / there is
+	 * a user at the target coordinates
+	 */
+	public function getTargetUser() {
+		$targetUser = $this->target->getUser();
+		if (!$targetUser) {
+			$options = array();
+			$options['conditions'][] = array('city_x = ?', $this->targetX);
+			$options['conditions'][] = array('city_Y = ?', $this->targetY);
+			$targetUser = Rakuun_DB_Containers::getUserContainer()->selectFirst($options);
+		}
+		return $targetUser;
+	}
+	
+	public function getArmy() {
+		return $this->army;
 	}
 }
 
