@@ -351,7 +351,7 @@ table.boardview td.posting_count {
 	margin-left:15px;
 }
 
-.scroll_item
+.scroll_item, .scrolling_item
 {
 	display:block;
 	position:absolute;
@@ -401,6 +401,13 @@ table.boardview td.posting_count {
 .rakuun_map_target_panel .core_gui_digitbox
 {
 	width:50px;
+}
+
+#rakuun_map_indicator
+{
+	background:transparent url('../images/map_indicator.gif') no-repeat left top;
+	height:15px;
+	width:15px;
 }
 
 /* $10 -  Boards -------------------------------------------------------------*/
