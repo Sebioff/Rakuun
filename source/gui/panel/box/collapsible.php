@@ -1,13 +1,10 @@
 <?php
 
 class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
-	private static $firstLoad = true;
-	
 	public function __construct($name, GUI_Panel $contentPanel = null, $title = '') {
 		parent::__construct($name, $contentPanel, $title);
 		
 		$this->addClasses('rakuun_box_collapsible');
-		
 	}
 	
 	public function afterInit() {
