@@ -4,6 +4,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Alliance extends Rakuun_Intern_GUI_Panel_
 	private $alliance = null;
 	
 	public function __construct($name, $title = '') {
+		$this->shoutMaxLength = 1000;
 		$this->alliance = Rakuun_User_Manager::getCurrentUser()->alliance;
 		$options['conditions'][] = array('alliance = ?', $this->alliance);
 		parent::__construct($name, Rakuun_DB_Containers::getShoutboxAlliancesContainer()->getFilteredContainer($options), $title);

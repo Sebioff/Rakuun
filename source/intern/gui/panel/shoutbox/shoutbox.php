@@ -4,7 +4,7 @@
  * Display a shoutbox.
  */
 class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
-	const SHOUT_MAX_LENGTH = 250;
+	protected $shoutMaxLength = 250;
 	
 	public function __construct($name, DB_Container $container, $title = '') {
 		$this->setItemsPerPage(10);
@@ -18,7 +18,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 		$this->setTemplate(dirname(__FILE__).'/shoutbox.tpl');
 		$this->addPanel($text = new GUI_Control_TextArea('shoutarea', '', 'Text'));
 		$text->addValidator(new GUI_Validator_Mandatory());
-		$text->addValidator(new GUI_Validator_Maxlength(self::SHOUT_MAX_LENGTH));
+		$text->addValidator(new GUI_Validator_Maxlength($this->shoutMaxLength));
 		if (Router::get()->getCurrentModule()->getParam('answerid') > 0) {
 			$user = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
 			$text->setValue('@'.$user->nameUncolored.': ');
@@ -54,7 +54,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 					shoutboxCountCharactersDown();
 				});
 			',
-			$this->shoutarea->getID(), self::SHOUT_MAX_LENGTH
+			$this->shoutarea->getID(), $this->shoutMaxLength
 		));
 	}
 	

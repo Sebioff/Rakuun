@@ -4,6 +4,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Meta extends Rakuun_Intern_GUI_Panel_Shou
 	private $meta = null;
 	
 	public function __construct($name, $title = '') {
+		$this->shoutMaxLength = 1000;
 		$this->meta = Rakuun_User_Manager::getCurrentUser()->alliance->meta;
 		$options['conditions'][] = array('meta = ?', $this->meta);
 		parent::__construct($name, Rakuun_DB_Containers::getShoutboxMetasContainer()->getFilteredContainer($options), $title);
