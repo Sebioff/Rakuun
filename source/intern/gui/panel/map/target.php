@@ -20,12 +20,18 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/target.tpl');
-		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', $this->user, 'Ziel'));
+		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', null, 'Ziel'));
 		$target->setPreserveValue();
+		if ($this->user)
+			$target->setValue($this->user->nameUncolored);
 		$this->addPanel($targetX = new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH));
 		$targetX->setPreserveValue();
+		if ($this->cityX)
+			$targetX->setValue($this->cityX);
 		$this->addPanel($targetY = new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT));
 		$targetY->setPreserveValue();
+		if ($this->cityY)
+			$targetY->setValue($this->cityY);
 		$this->addPanel(new GUI_Panel_Label('target_coords_label', $this->targetX, 'Koordinaten'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
 		$spydrone = Rakuun_Intern_Production_Factory::getUnit('spydrone');
@@ -165,8 +171,9 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			return;
 		}
 		
+		$this->army = $army;
+		
 		if ($this->state->getValue() == self::STATE_PREPARING) {
-			$this->army = $army;
 			$this->state->setValue(self::STATE_REVIEWING);
 			$this->submit->setValue('Abschicken');
 			return;

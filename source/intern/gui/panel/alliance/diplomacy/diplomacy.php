@@ -12,5 +12,16 @@ class Rakuun_Intern_GUI_Panel_Alliance_Diplomacy extends GUI_Panel {
 	const STATUS_NEW = 0;
 	const STATUS_ACTIVE = 1;
 	const STATUS_DELETED = 2;
+	
+	public function getNameForRelation($relation) {
+		switch ($relation) {
+			case self::RELATION_AUVB:
+				return 'AuVB';
+			case self::RELATION_NAP:
+				return 'NAP';
+			case self::RELATION_WAR:
+				return 'Krieg';
+		}
+	}
 }
 ?>

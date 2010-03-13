@@ -9,13 +9,13 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	private $viewRectSize = 60;
 	private $viewRectX = 0;
 	private $viewRectY = 0;
-	private $target = null;
+	private $targetUser = null;
 	private $cityX = 0;
 	private $cityY = 0;
 	
-	public function __construct($name, Rakuun_DB_User $target = null, $cityX = 0, $cityY = 0) {
+	public function __construct($name, Rakuun_DB_User $targetUser = null, $cityX = 0, $cityY = 0) {
 		parent::__construct($name);
-		$this->target = $target;
+		$this->targetUser = $targetUser;
 		$this->cityX = $cityX;
 		$this->cityY = $cityY;
 		$this->viewRectX = $cityX;
@@ -43,7 +43,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_Path('path', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_Items('items', $this));
-		$this->addPanel(new Rakuun_GUI_Panel_Box('target', new Rakuun_Intern_GUI_Panel_Map_Target('target', $this->target, $this->cityX, $this->cityY), 'Zielauswahl'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('target', new Rakuun_Intern_GUI_Panel_Map_Target('target', $this->targetUser, $this->cityX, $this->cityY), 'Zielauswahl'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Left('scroll_left', ''));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Right('scroll_right', ''));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', ''));
@@ -148,6 +148,12 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 						oldPageY = e.pageY;
 					}
 					return false;
+				}).click(function(e) {
+					position = $(this).position();
+					clickX = Math.floor((e.pageX - position.left - globalX) / MAP_RECT_SIZE);
+					clickY = Math.floor((e.pageY - position.top - globalY) / MAP_RECT_SIZE);
+					$("#'.$this->target->target->targetX->getID().'").val(clickX);
+					$("#'.$this->target->target->targetY->getID().'").val(clickY);
 				});
 				
 				var scrollTimer;
@@ -156,6 +162,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 				var pan = false;
 				var oldPageX = 0;
 				var oldPageY = 0;
+				var MAP_RECT_SIZE = '.self::MAP_RECT_SIZE.';
 				
 				$(".scroll_item").each(function() {
 					$(this).css("left", globalX + "px");

@@ -63,7 +63,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Diplomacy_Actives extends Rakuun_Intern_G
 					$igm->setSenderName(Rakuun_Intern_IGM::SENDER_ALLIANCE);
 					$igm->setText(
 						'Hallo '.$user->name.',<br />'.
-						$allianceLink->render().' hat eure diplomatische Beziehung ('.($active->type == self::RELATION_AUVB ? 'AuVB' : 'NAP').') aufgelöst!<br />'.
+						$allianceLink->render().' hat eure diplomatische Beziehung ('.$this->getNameForRelation($active->type).') aufgelöst!<br />'.
 						'In '.Rakuun_Date::formatCountDown($active->notice * 60 * 60).' wird euer Status annuliert.<br />'.
 						$diploLink->render()
 					);
