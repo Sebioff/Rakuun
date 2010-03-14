@@ -59,11 +59,11 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 		$firstWIP = $wipItems[0];
 		DB_Connection::get()->beginTransaction();
 		Rakuun_User_Manager::getCurrentUser()->ressources->raise($firstWIP->getIronRepayForAmount(), $firstWIP->getBerylliumRepayForAmount(), $firstWIP->getEnergyRepayForAmount(), $firstWIP->getPeopleRepayForAmount());
-		$firstWIP->getRecord()->delete();
 		foreach ($wipItems as $wipItem) {
 			$wipItem->getRecord()->starttime = time();
 			$wipItem->getRecord()->save();
 		}
+		$firstWIP->getRecord()->delete();
 		DB_Connection::get()->commit();
 		$this->getModule()->invalidate();
 	}

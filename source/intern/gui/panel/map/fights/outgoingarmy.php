@@ -26,7 +26,10 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmy extends GUI_Panel {
 		}
 		elseif ($this->army->user->cityX == $this->army->targetX && $this->army->user->cityY == $this->army->targetY) {
 			$target = self::TARGET_HOME;
-			$this->addPanel(new GUI_Control_Link('text', 'Rückkehr', $detailUrl));
+			if ($this->army->target)
+				$this->addPanel(new GUI_Control_Link('text', 'Rückkehr von '.$this->army->target->name, $detailUrl));
+			else
+				$this->addPanel(new GUI_Control_Link('text', 'Rückkehr von '.$this->army->targetX.':'.$this->army->targetY, $detailUrl));
 		}
 		else {
 			$target = self::TARGET_MAP;
