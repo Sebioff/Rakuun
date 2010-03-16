@@ -20,6 +20,8 @@ class Rakuun_Intern_GUI_Panel_Polls extends GUI_Panel {
 		$options['conditions'][] = array('type = ?', $this->polltype);
 		if ($this->polltype == self::POLL_ALLIANCE)
 			$options['conditions'][] = array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
+		if ($this->polltype == self::POLL_META)
+			$options['conditions'][] = array('meta = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
 		$polls = Rakuun_DB_Containers::getPollsContainer()->select($options);
 		foreach ($polls as $poll) {
 			$this->addPanel(new Rakuun_Intern_GUI_Panel_Polls_Poll('poll'.$poll->getPK(), $poll));
