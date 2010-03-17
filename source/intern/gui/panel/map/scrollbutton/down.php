@@ -10,7 +10,7 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton_Down extends Rakuun_Intern_GUI_Pa
 			background-color:#CCCCCC;
 			display:block;
 			height:10px;
-			width:620px;
+			width:'.($this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE + 20).'px;
 			text-align:center;
 		');
 	}

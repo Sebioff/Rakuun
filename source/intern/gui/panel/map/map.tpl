@@ -20,8 +20,8 @@
 
 
 <? $this->displayPanel('scroll_right'); ?>
-<? $this->displayPanel('legend'); ?>
+<? $this->displayPanel('target'); ?>
 <br class="clear" />
 <? $this->displayPanel('scroll_down'); ?>
 <br class="clear" />
-<? $this->displayPanel('target'); ?>
+<? $this->displayPanel('legend'); ?>

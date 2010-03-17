@@ -9,9 +9,9 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton_Left extends Rakuun_Intern_GUI_Pa
 		$this->setAttribute('style', '
 			background-color:#CCCCCC;
 			float:left;
-			height:600px;
+			height:'.($this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE).'px;
 			width:10px;
-			line-height:600px;
+			line-height:'.($this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE).'px;
 		');
 	}
 }

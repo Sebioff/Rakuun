@@ -17,14 +17,6 @@ class Rakuun_Intern_Fights_System {
 	}
 	
 	public function fight(DB_Record $attackerUnitSource, DB_Record $defenderUnitSource) {
-		// attacking units amounts
-		$attackingUnitTypeAmounts = $this->getAmountsByUnitType($attackerUnitSource);
-		$amountAttackingUnits = $attackingUnitTypeAmounts['footsoldiers'] + $attackingUnitTypeAmounts['vehicles'] + $attackingUnitTypeAmounts['aircraft'];
-		
-		// defending units amounts
-		$defendingUnitTypeAmounts = $this->getAmountsByUnitType($defenderUnitSource);
-		$amountDefendingUnits = $defendingUnitTypeAmounts['footsoldiers'] + $defendingUnitTypeAmounts['vehicles'] + $defendingUnitTypeAmounts['aircraft'] + $defendingUnitTypeAmounts['stationary'];
-		
 		$att = $this->getAttackByUnitType($attackerUnitSource);
 		$attTotal = $att['footsoldiers'] + $att['vehicles'] + $att['aircraft'];
 		
@@ -114,7 +106,10 @@ class Rakuun_Intern_Fights_System {
 				continue;
 			
 			if ($winningPower <= 0) {
-				$survivingWinnerUnitAmounts[$fightingUnitName] = 0;
+				if ($this->calculateForAlliedPlayers)
+					$survivingWinnerUnitAmounts[$fightingUnitName] = $fightingUnit->getAmount();
+				else
+					$survivingWinnerUnitAmounts[$fightingUnitName] = 0;
 				continue;
 			}
 			
@@ -220,8 +215,10 @@ class Rakuun_Intern_Fights_System {
 			$amounts['aircraft'] += $unit->getDefenseValue();
 		}
 		$amounts['stationary'] = 0;
-		foreach (Rakuun_Intern_Production_Unit_Factory::getAllOfType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY, $unitSource) as $unit) {
-			$amounts['stationary'] += $unit->getDefenseValue();
+		if (!$this->calculateForAlliedPlayers) {
+			foreach (Rakuun_Intern_Production_Unit_Factory::getAllOfType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY, $unitSource) as $unit) {
+				$amounts['stationary'] += $unit->getDefenseValue();
+			}
 		}
 		
 		return $amounts;

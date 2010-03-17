@@ -5,6 +5,12 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton extends GUI_Panel_Text {
 	
 	private $scrollDeltaX = 0;
 	private $scrollDeltaY = 0;
+	private $map = null;
+	
+	public function __construct($name, $text, Rakuun_Intern_GUI_Panel_Map $map, $title = '') {
+		parent::__construct($name, $text, $title);
+		$this->map = $map;
+	}
 	
 	public function init() {
 		parent::init();
@@ -12,8 +18,8 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton extends GUI_Panel_Text {
 		$this->setAttribute('style', '
 			background-color:#CCCCCC;
 			float:left;
-			height:600px;
-			line-height:600px;
+			height:'.$this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px;
+			line-height:'.$this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px;
 		');
 	}
 	
@@ -38,12 +44,20 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton extends GUI_Panel_Text {
 		);
 	}
 	
+	// GETTERS / SETTERS -------------------------------------------------------
 	public function setScrollDeltaX($scrollDeltaX) {
 		$this->scrollDeltaX = $scrollDeltaX;
 	}
 	
 	public function setScrollDeltaY($scrollDeltaY) {
 		$this->scrollDeltaY = $scrollDeltaY;
+	}
+	
+	/**
+	 * @return Rakuun_Intern_GUI_Panel_Map
+	 */
+	public function getMap() {
+		return $this->map;
 	}
 }
 

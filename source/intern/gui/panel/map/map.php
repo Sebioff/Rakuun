@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	const MAP_RECT_SIZE = 10;
 
 	private $zoom = 1;
-	private $viewRectSize = 60;
+	private $viewRectSize = 47;
 	private $viewRectX = 0;
 	private $viewRectY = 0;
 	private $targetUser = null;
@@ -44,10 +44,10 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_Path('path', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_Items('items', $this));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('target', new Rakuun_Intern_GUI_Panel_Map_Target('target', $this->targetUser, $this->cityX, $this->cityY), 'Zielauswahl'));
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Left('scroll_left', ''));
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Right('scroll_right', ''));
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', ''));
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Down('scroll_down', ''));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Left('scroll_left', '', $this));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Right('scroll_right', '', $this));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', '', $this));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Down('scroll_down', '', $this));
 		$this->addPanel($legend = new Rakuun_GUI_Panel_Box('legend', new Rakuun_Intern_GUI_Panel_Map_Legend('legend'), 'Legende'));
 		
 		$this->addClasses('rakuun_map');
