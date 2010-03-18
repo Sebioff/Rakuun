@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Profile_Own extends GUI_Panel {
 		if (Rakuun_Intern_Alliance_Security::get()->isInGroup($user, Rakuun_Intern_Alliance_Security::GROUP_LEADERS))
 			$this->addPanel(new Rakuun_GUI_Panel_Box('delete', new Rakuun_Intern_GUI_Panel_Alliance_Delete('delete_alliance'), 'Allianz löschen'));
 		if (Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_ACTIVITY))
-			$this->addPanel(new Rakuun_GUI_Panel_Box('activity', new Rakuun_Intern_GUI_Panel_Alliance_Activity('activityoverview'), 'Last Member Activities'));
+			$this->addPanel(new Rakuun_GUI_Panel_Box('activity', new Rakuun_Intern_GUI_Panel_Alliance_Activity('activityoverview'), 'Letzte Aktivitäten'));
 		if ($user->alliance->picture)
 			$this->addPanel(new Rakuun_GUI_Panel_Box('picture', new GUI_Panel_UploadedFile('alliancepicture', $user->alliance->picture, 'Allianzbild der Allianz '.$user->alliance->name), 'Allianzbild'));
 	}

@@ -45,6 +45,7 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	
 	public function onDelete() {
 		Rakuun_DB_Containers::getMessagesContainer()->delete($this->message);
+		$this->getModule()->redirect(App::get()->getInternModule()->getSubmodule('messages')->getUrl());
 	}
 }
 

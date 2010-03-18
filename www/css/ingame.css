@@ -7,12 +7,13 @@
 	$2b -  Head / Ressources
 	$3  -  Production
 	$4  -  Alliances
-	$5  -  Messages
-	$6  -  Overview
-	$7  -  Techtree
-	$8  -  WarSim
-	$9  -  Map
-	$10 -  Boards
+	$5  -  Metas
+	$6  -  Messages
+	$7  -  Overview
+	$8  -  Techtree
+	$9  -  WarSim
+	$10  -  Map
+	$11 -  Boards
 */
 
 /* $1  -  Common -------------------------------------------------------------*/
@@ -74,7 +75,7 @@
 	margin-right:20px;
 }
 
-#ctn_head #ctn_navigation .core_navigation_node_inpath a {
+.core_navigation_node_inpath a {
 	text-decoration:underline;
 }
 
@@ -91,11 +92,12 @@
 }
 
 /* $3  -  Production ---------------------------------------------------------*/
-.production_item_box
+#ctn_content .production_item_box
 {
-	float:none !important;
+	float:none;
 	width:590px;
 	margin:0px auto;
+	margin-bottom:10px;
 }
 
 .production_item_header
@@ -182,7 +184,38 @@ table.boardview td.posting_count {
 	text-align:right;
 }
 
-/* $5  -  Messages -----------------------------------------------------------*/
+.module_alliance #ctn_content .core_navigation {
+	border:1px solid #666666;
+	margin-bottom:8px;
+}
+
+.module_alliance #ctn_content .core_navigation li {
+	border-right:1px solid #666666;
+	display:inline;
+	margin-right:4px;
+}
+
+#ctn_alliance_profile {
+	float:left;
+}
+
+#ctn_alliance_shoutbox {
+	float:right;
+}
+
+/* $5  -  Metas --------------------------------------------------------------*/
+.module_meta #ctn_content .core_navigation {
+	border:1px solid #666666;
+	margin-bottom:8px;
+}
+
+.module_meta #ctn_content .core_navigation li {
+	border-right:1px solid #666666;
+	display:inline;
+	margin-right:4px;
+}
+
+/* $6  -  Messages -----------------------------------------------------------*/
 .rakuun_messages_categories
 {
 	margin-bottom:4px;
@@ -199,9 +232,10 @@ table.boardview td.posting_count {
 	width:400px;
 }
 
-.rakuun_messages_send .core_gui_textbox
+.rakuun_messages_send .core_gui_textbox,
+.rakuun_messages_send .core_gui_textarea
 {
-	width:400px;
+	width:380px;
 }
 
 .module_messages .core_gui_pageview
@@ -246,7 +280,7 @@ table.boardview td.posting_count {
 	padding:4px;
 }
 
-/* $6  -  Overview -----------------------------------------------------------*/
+/* $7  -  Overview -----------------------------------------------------------*/
 #ctn_cityitems
 {
 	float:left;
@@ -257,13 +291,12 @@ table.boardview td.posting_count {
 #ctn_info
 {
 	float:left;
-	width:280px;
+	width:265px;
 }
 
 #ctn_cityitems .rakuun_box
 {
 	float:none;
-	margin-bottom:20px;
 }
 
 .shout_text,
@@ -290,7 +323,7 @@ table.boardview td.posting_count {
 	width:280px;
 }
 
-/* $7  -  Techtree -----------------------------------------------------------*/
+/* $8  -  Techtree -----------------------------------------------------------*/
 .module_techtree h1
 {
 	font-size:14px;
@@ -309,7 +342,7 @@ table.boardview td.posting_count {
 	width:330px;
 }
 
-/* $8  -  WarSim -------------------------------------------------------------*/
+/* $9  -  WarSim -------------------------------------------------------------*/
 .warsim_panels_attacker
 {
 	float:left;
@@ -345,7 +378,7 @@ table.boardview td.posting_count {
 	margin-left:214px;
 }
 
-/* $9  -  Map ----------------------------------------------------------------*/
+/* $10  -  Map ----------------------------------------------------------------*/
 .rakuun_map_legend_description
 {
 	margin-left:15px;
@@ -410,8 +443,14 @@ table.boardview td.posting_count {
 	width:15px;
 }
 
-/* $10 -  Boards -------------------------------------------------------------*/
-.rakuun_board_postcontent
+/* $11 -  Boards -------------------------------------------------------------*/
+.rakuun_board_name
 {
-	border-bottom:1px solid #222222;
+	font-weight:bold;
+	text-align:center;
+}
+
+.rakuun_board_postinfo
+{
+	font-weight:bold;
 }

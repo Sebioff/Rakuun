@@ -90,6 +90,7 @@ body.skin_space2 {
 .skin_space2 .rakuun_box {
 	background:#000000 url('../images/space2/rakuun_box_left.png') repeat-y left top;
 	float:left;
+	margin:0px 11px 11px 0px;
 	padding:0px 0px 0px 9px;
 	position:relative;
 }

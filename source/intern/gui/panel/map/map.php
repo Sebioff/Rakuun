@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	const MAP_RECT_SIZE = 10;
 
 	private $zoom = 1;
-	private $viewRectSize = 47;
+	private $viewRectSize = 46;
 	private $viewRectX = 0;
 	private $viewRectY = 0;
 	private $targetUser = null;

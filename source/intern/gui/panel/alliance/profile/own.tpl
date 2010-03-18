@@ -1,6 +1,3 @@
-<? if ($this->hasErrors()): ?>
-	<? $this->displayErrors(); ?>
-<? endif; ?>
 <? if ($this->hasPanel('picture')): ?>
 	<? $this->displayPanel('picture'); ?>
 	<br class="clear" />
@@ -11,14 +8,17 @@
 <h2>Interne Beschreibung:</h2>
 <p><?= $this->params->alliance->intern ? $this->params->alliance->intern : 'Keine Beschreibung.' ?></p>
 
+<? $this->displayPanel('account'); ?>
+<br class="clear" />
+<? $this->displayPanel('deposit'); ?>
+<br class="clear" />
 <? $this->displayPanel('leave'); ?>
+<br class="clear" />
 <? if ($this->hasPanel('delete')): ?>
 	<? $this->displayPanel('delete'); ?>
-<? endif; ?>
-<br class="clear" />
-<? $this->displayPanel('account'); ?>
-<? $this->displayPanel('deposit'); ?>
-<? if ($this->hasPanel('activity')): ?>
 	<br class="clear" />
+<? endif; ?>
+<? if ($this->hasPanel('activity')): ?>
 	<? $this->displayPanel('activity'); ?>
+	<br class="clear" />
 <? endif; ?>

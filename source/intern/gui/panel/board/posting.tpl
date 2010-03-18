@@ -1,6 +1,5 @@
 <div class="rakuun_board_postinfo">
-	<? $this->displayPanel('date'); ?><br />
-	<? $this->displayPanel('user'); ?>:
+	<? $this->displayPanel('user'); ?>, am <? $this->displayPanel('date'); ?>
 	<? if ($this->hasPanel('editlink')): ?>
 		<? $this->displayPanel('editlink'); ?>
 	<? endif; ?>
@@ -20,3 +19,4 @@
 		<? endif; ?>
 	<? endif; ?>
 </div>
+<hr/>
