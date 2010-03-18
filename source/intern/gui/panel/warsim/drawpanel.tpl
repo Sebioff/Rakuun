@@ -1,8 +1,6 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-<? $this->displayPanel('dropwarsim'); ?>
-<br /><br />
 <div id="warsim_panels">
 	<div id="warsim_panels_units">
 		<h1>Einheiten</h1>

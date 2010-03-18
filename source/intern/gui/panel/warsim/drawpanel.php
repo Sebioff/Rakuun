@@ -1,7 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
-	private $spy = array();
 	private $panelsForDefenders = array();
 	private $panelsForDefendersTechnology = array();
 	private $panelsForDefendersBuildings = array();
@@ -34,7 +33,6 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		$this->addPanel($panel = new GUI_Control_DigitBox('deffbuild'.$cityWall->getInternalName(), $cityWall->getLevel(), $cityWall->getName(), 0, $cityWall->getMaximumLevel()));
 		$this->panelsForDefendersBuildings[$cityWall->getInternalName()] = $panel;
 		
-		$this->addPanel(new GUI_Control_DropDownBox('dropwarsim', $this->spy));
 		$this->addPanel(new GUI_Control_Submitbutton('calcwarsim', 'Berechnen'));
 		$this->setTemplate(dirname(__FILE__).'/drawpanel.tpl');
 	}

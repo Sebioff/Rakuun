@@ -384,12 +384,6 @@ body.skin_space2 {
 }
 
 /* $7  -  Overview -----------------------------------------------------------*/
-.skin_space2 #ctn_cityitems,
-.skin_space2 #ctn_info
-{
-	margin-right:5px;
-}
-
 .skin_space2 .rakuun_info_profile_picture img
 {
 	width:256px;

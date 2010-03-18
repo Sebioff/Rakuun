@@ -18,6 +18,7 @@
 <? endif; ?>
 <br/>
 <? $this->displayPanel('pause'); ?>
+<br class="clear"/>
 <? $queueItems = count($wip); ?>
 <? if ($queueItems > 1 && $this->getEnableQueueView()): ?>
 	<hr />

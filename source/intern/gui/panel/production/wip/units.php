@@ -42,7 +42,7 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 		if (Rakuun_User_Manager::getCurrentUser()->productionPaused) {
 			$wipContainer = Rakuun_DB_Containers::getUnitsWIPContainer();
 			// TODO urgh, hard-coded query
-			$query = 'UPDATE `'.$wipContainer->getTable().'` SET starttime = starttime + ' . (time() - Rakuun_User_Manager::getCurrentUser()->productionPaused).' WHERE user = \''.$user->getPK().'\'';
+			$query = 'UPDATE `'.$wipContainer->getTable().'` SET starttime = '.time().' WHERE user = \''.$user->getPK().'\'';
 			$wipContainer->update($query);
 			$user->productionPaused = 0;
 		}

@@ -17,12 +17,15 @@ class Rakuun_Intern_Module_Build extends Rakuun_Intern_Module {
 		$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Momentaner Bauvorgang');
 		$this->contentPanel->addPanel($wipPanel, true);
 		
+		$wipPanels = array();
 		foreach (Rakuun_Intern_Production_Factory::getAllBuildings() as $building) {
 			if ($building->meetsTechnicalRequirements() || $building->getLevel() > 0) {
 				$this->contentPanel->addPanel($itemBox = new Rakuun_GUI_Panel_Box('build_'.$building->getInternalName(), new Rakuun_Intern_GUI_Panel_Production_Building('build_'.$building->getInternalName(), $building)));
 				$itemBox->addClasses('production_item_box');
+				$wipPanels[] = $itemBox;
 			}
 		}
+		$this->contentPanel->params->wipPanels = $wipPanels;
 	}
 }
 

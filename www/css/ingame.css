@@ -284,14 +284,13 @@ table.boardview td.posting_count {
 #ctn_cityitems
 {
 	float:left;
-	margin-right:50px;
 	width:250px;
 }
 
 #ctn_info
 {
 	float:left;
-	width:265px;
+	width:275px;
 }
 
 #ctn_cityitems .rakuun_box
