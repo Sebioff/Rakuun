@@ -110,10 +110,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 		$igm->setText(
 			'Dir wurden durch '.Rakuun_User_Manager::getCurrentUser()->name.' folgende Rohstoffe aus der Allianzkasse überwiesen:
 			<ul>
-				<li>'.$this->iron->getValue().' Eisen</li>
-				<li>'.$this->beryllium->getValue().' Beryllium</li>
-				<li>'.$this->energy->getValue().' Energie</li>
-				<li>'.$this->people->getValue().' Leute</li>
+				<li>'.GUI_Panel_Number::formatNumber($this->iron->getValue()).' Eisen</li>
+				<li>'.GUI_Panel_Number::formatNumber($this->beryllium->getValue()).' Beryllium</li>
+				<li>'.GUI_Panel_Number::formatNumber($this->energy->getValue()).' Energie</li>
+				<li>'.GUI_Panel_Number::formatNumber($this->people->getValue()).' Leute</li>
 			</ul>'
 		);
 		$igm->send();
