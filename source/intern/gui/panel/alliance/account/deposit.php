@@ -36,7 +36,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 		if ($this->people->getValue() > $ressources->people)
 			$this->addError('So viele Leute hast du nicht.');
 		if (!($user->buildings->moleculartransmitter > 0))
-			$this->addError('Du benötigste einen Moleculartransmitter, um in die Allianzkasse einzahlen zu können.');
+			$this->addError('Du benötigste einen Molekulartransmitter, um in die Allianzkasse einzahlen zu können.');
 		if ($user->isInNoob())
 			$this->addError('Du darfst dich nicht im Noobschutz befinden, um in die Allianzkasse einzahlen zu können');
 			

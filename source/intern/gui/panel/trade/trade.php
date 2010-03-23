@@ -102,11 +102,13 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 				$this->energy->setValue($capacity);
 			}
 			
+			if ($sender->isInNoob())
+				$this->addError('Du darfst dich nicht im Noobschutz befinden, um den Molekulartransmitter benutzen zu können');
+			
 			// we have to check here for another time
 			if ($this->hasErrors())
 				return;
 				
-			//TODO check sender is not in Noobschutz or KO
 			//TODO check recipient is not sitter
 			DB_Connection::get()->beginTransaction();
 			$recipient->tradelimit = $recipient->tradelimit + $tradevolume;

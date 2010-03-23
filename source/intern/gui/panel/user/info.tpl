@@ -31,18 +31,18 @@ Koordinaten:
 	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints(); ?>
 	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_POINTS): ?>
-		<? $output .= floor($averagePoints); ?>
+		<? $output .= GUI_Panel_Number::formatNumber(floor($averagePoints)); ?>
 	<? else: ?>
-		<? $output .= RAKUUN_NOOB_START_LIMIT_OF_POINTS; ?>
+		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_POINTS); ?>
 	<? endif; ?>
 	<?= $output; ?>
 	oder deine Armeestärke
 	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength(); ?>
 	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH): ?>
-		<? $output .= floor($averagePoints); ?>
+		<? $output .= GUI_Panel_Number::formatNumber(floor($averagePoints)); ?>
 	<? else: ?>
-		<? $output .= RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH; ?>
+		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
 	<? endif; ?>
 	<?= $output; ?> ist oder du ein Datenbankteil eroberst oder ein Schildgenerator baust.
 <? endif; ?>
