@@ -49,11 +49,6 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		if (preg_match('/[<>,]+/', $this->username->getValue()))
 			$this->addError('Dieser Name enhält nicht erlaubte Zeichen', $this->username);
 
-		$options = array();
-		$options['conditions'][] = array('address LIKE ?', $this->mail->getValue());
-		if (!Rakuun_DB_Containers::getUserKnownAddressesContainer()->selectFirst($options))
-			$this->addError('Bitte melde dich mit der gleichen<br/>Mailadresse wie in der letzten normalen Runde<br/>oder Speedrunde an. Nur Spieler aus diesen<br/>Runden können an dieser Testrunde teilnehmen.', $this->mail);
-		
 		if ($this->hasErrors())
 			return;
 		

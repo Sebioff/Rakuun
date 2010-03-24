@@ -9,6 +9,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `metas` (
   `beryllium` mediumint(9) NOT NULL DEFAULT \'0\',
   `energy` mediumint(9) NOT NULL DEFAULT \'0\',
   `people` mediumint(9) NOT NULL DEFAULT \'0\',
+  `dancertia_starttime` int(10) unsigned NOT NULL DEFAULT \'0\',
   `picture` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
@@ -20,10 +21,10 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `alliances` (
   `meta` smallint(5) unsigned DEFAULT NULL,
   `description` text NOT NULL,
   `intern` text NOT NULL,
-  `iron` mediumint(9) NOT NULL DEFAULT \'0\',
-  `beryllium` mediumint(9) NOT NULL DEFAULT \'0\',
-  `energy` mediumint(9) NOT NULL DEFAULT \'0\',
-  `people` mediumint(9) NOT NULL DEFAULT \'0\',
+  `iron` int(10) NOT NULL DEFAULT \'0\',
+  `beryllium` int(10) NOT NULL DEFAULT \'0\',
+  `energy` int(10) NOT NULL DEFAULT \'0\',
+  `people` int(10) NOT NULL DEFAULT \'0\',
   `points` mediumint(5) unsigned NOT NULL,
   `picture` text,
   `invitations` tinyint(1) NOT NULL DEFAULT \'0\',
@@ -71,8 +72,8 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `users` (
   `description` text NOT NULL,
   `collapsed_panels` text NOT NULL,
   `skin` varchar(32) NOT NULL,
-  `tradelimit` smallint(5) unsigned NOT NULL,
-  `stockmarkettrade` smallint(5) unsigned NOT NULL,
+  `tradelimit` mediumint(9) unsigned NOT NULL,
+  `stockmarkettrade` mediumint(9) unsigned NOT NULL,
   `alliance` smallint(5) unsigned DEFAULT NULL,
   `last_activity` int(10) unsigned NOT NULL,
   `last_login` int(10) unsigned NOT NULL,
@@ -86,6 +87,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `users` (
   `sitter_note` text NOT NULL,
   `tutorial` tinyint(1) NOT NULL DEFAULT \'1\',
   `is_in_noob`tinyint(1) unsigned NOT NULL DEFAULT \'1\',
+  `production_paused` int(10) unsigned NOT NULL DEFAULT \'0\',
   PRIMARY KEY (`id`),
   KEY `alliance` (`alliance`),
   KEY `sitter` (`sitter`)
@@ -188,10 +190,10 @@ $queries[] = 'ALTER TABLE `alliances_diplomacy`
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `ressources` (
   `user` int(10) unsigned NOT NULL,
-  `iron` mediumint(9) NOT NULL,
-  `beryllium` mediumint(9) NOT NULL,
-  `energy` mediumint(9) NOT NULL,
-  `people` mediumint(9) NOT NULL,
+  `iron` int(10) NOT NULL,
+  `beryllium` int(10) NOT NULL,
+  `energy` int(10) NOT NULL,
+  `people` int(10) NOT NULL,
   `produced_iron` float unsigned NOT NULL,
   `produced_beryllium` float unsigned NOT NULL,
   `produced_energy` float unsigned NOT NULL,
@@ -316,6 +318,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `units` (
   `buildings` int(10) unsigned NOT NULL,
   `technologies` int(10) unsigned NOT NULL,
   `fighting_sequence` text NOT NULL,
+  `attack_sequence` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `buildings` (`buildings`),
@@ -388,6 +391,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `armies` (
   `iron_priority` tinyint(1) unsigned NOT NULL,
   `beryllium_priority` tinyint(1) unsigned NOT NULL,
   `energy_priority` tinyint(1) unsigned NOT NULL,
+  `speed_multiplier` float unsigned NOT NULL DEFAULT \'1\',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `target` (`target`),
@@ -396,8 +400,19 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `armies` (
 
 $queries[] = 'ALTER TABLE `armies`
   ADD CONSTRAINT `armies_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `armies_ibfk_2` FOREIGN KEY (`target`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `armies_ibfk_3` FOREIGN KEY (`technologies`) REFERENCES `armies_technologies` (`id`);';
+  ADD CONSTRAINT `armies_ibfk_2` FOREIGN KEY (`technologies`) REFERENCES `armies_technologies` (`id`);';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `armies_paths` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `army` int(10) unsigned NOT NULL ,
+  `x` tinyint(3) unsigned NOT NULL,
+  `y` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `army` (`army`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8';
+
+$queries[] = 'ALTER TABLE `armies_paths`
+  ADD CONSTRAINT `armies_paths_ibfk_1` FOREIGN KEY (`army`) REFERENCES `armies` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_users_activity` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -753,4 +768,12 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `stockmarket` (
 
 $queries[] = 'INSERT INTO `stockmarket` (`id`, `date`, `iron`, `beryllium`, `energy`) VALUES
 (1, '.mktime(12, 0, 0).', '.Rakuun_Intern_GUI_Panel_StockMarket::BASE_IRON.', '.Rakuun_Intern_GUI_Panel_StockMarket::BASE_BERYLLIUM.', '.Rakuun_Intern_GUI_Panel_StockMarket::BASE_ENERGY.');';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `databases_startpositions` (
+  `identifier` tinyint(1) unsigned NOT NULL,
+  `position_x` smallint(5) unsigned NOT NULL,
+  `position_y` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
+
 ?>

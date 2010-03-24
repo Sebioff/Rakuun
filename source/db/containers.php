@@ -10,7 +10,6 @@ abstract class Rakuun_DB_Containers {
 	private static $userContainer = null;
 	private static $userDeletedContainer = null;
 	private static $userActivationContainer = null;
-	private static $userKnownAddressesContainer = null;
 	private static $ressourcesContainer = null;
 	private static $buildingsContainer = null;
 	private static $buildingsWIPContainer = null;
@@ -139,18 +138,6 @@ abstract class Rakuun_DB_Containers {
 		self::$userActivationContainer = new DB_Container('users_activations');
 		
 		return self::$userActivationContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getUserKnownAddressesContainer() {
-		if (self::$userKnownAddressesContainer)
-			return self::$userKnownAddressesContainer;
-			
-		self::$userKnownAddressesContainer = new DB_Container('users_known_addresses');
-		
-		return self::$userKnownAddressesContainer;
 	}
 	
 	/**

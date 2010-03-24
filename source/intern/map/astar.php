@@ -4,12 +4,14 @@ class Rakuun_Intern_Map_AStar {
 	private $bitMap;
 	private $map;
 	private $movementCosts = 0;
+	private $unitTypes = 0;
 	private static $height = 100;
 	private static $width = 100;
 
-	public function __construct($movementCosts) {
+	public function __construct($movementCosts, $unitTypes) {
 		$this->bitMap = imagecreatefrompng(PROJECT_PATH.'/www/images/map.png');
 		$this->movementCosts = $movementCosts;
+		$this->unitTypes = $unitTypes;
 	}
 	
 	public function run($startX, $startY, $endX, $endY) {
@@ -23,13 +25,8 @@ class Rakuun_Intern_Map_AStar {
 		if ($targetNode['walkable'])
 			$openNodes[] = &$startNode;
 		while (!empty($openNodes)) {
-//			foreach ($openNodes as $key => &$row) {
-//				$f[$key] = $row['f'];
-//			}
-//			@array_multisort($f, SORT_NUMERIC, SORT_ASC, $openNodes);
 			$i = $this->linearSearch($openNodes);
 			$bestNode = &$openNodes[$i];
-			//array_shift($openNodes);
 			array_splice($openNodes, $i, 1);
 			$bestNode['open'] = false;
 			if ($bestNode['x'] == $targetNode['x'] && $bestNode['y'] == $targetNode['y']) {
@@ -71,7 +68,7 @@ class Rakuun_Intern_Map_AStar {
 			$deltaX = abs($reachableNode['x'] - $targetNode['x']);
 			$deltaY = abs($reachableNode['y'] - $targetNode['y']);
 			
-			if (!$reachableNode['walkable'] || $reachableNode['expanded']) {
+			if ((!$reachableNode['walkable'] && $this->unitTypes != Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT) || $reachableNode['expanded']) {
 				continue;
 			}
 			

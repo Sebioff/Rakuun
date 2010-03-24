@@ -8,7 +8,17 @@ class Rakuun_Intern_Map_ArmyPathCalculator {
 	}
 	
 	public function getPath() {
-		$astar = new Rakuun_Intern_Map_AStar($this->army->speed);
+		$speed = 0;
+		$unitTypes = 0;
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($this->army) as $unit) {
+			if ($unit->getAmount() <= 0)
+				continue;
+			$unitTypes = Rakuun_Intern_Production_Unit::getJoinedUnitType($unitTypes, $unit->getUnitType());
+			if ($unit->getBaseSpeed() > $speed)
+				$speed = $unit->getBaseSpeed();
+		}
+		$speed *= $this->army->speedMultiplier;
+		$astar = new Rakuun_Intern_Map_AStar($speed, $unitTypes);
 		$options = array();
 		$options['order'] = 'ID ASC';
 		$pathNodes = Rakuun_DB_Containers::getArmiesPathsContainer()->selectByArmy($this->army, $options);

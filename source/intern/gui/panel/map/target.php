@@ -131,34 +131,24 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$army->energyPriority = $this->energyPriority->getValue();
 		if (!$army->energyPriority)
 			$army->energyPriority = 1;
-		// TODO add proper fighting sequence from users' settings
+			
 		$army->fightingSequence = $army->user->units->attackSequence;
-		$army->speed = 0;
-		// TODO refactor calculation of army speed, will probably be needed elsewhere
-		foreach ($this->unitInput->getArmy() as $unitname => $unitamount) {
+		
+		// update home unit amounts
+		$sendedUnits = $this->unitInput->getArmy();
+		if ($this->hasPanel('spydrone'))
+			$sendedUnits['spydrone'] = $this->spydrone->getValue();
+		if ($this->hasPanel('cloaked_spydrone'))
+			$sendedUnits['cloaked_spydrone'] = $this->cloakedSpydrone->getValue();
+		foreach ($sendedUnits as $unitname => $unitamount) {
 			$army->{Text::underscoreToCamelCase($unitname)} = $unitamount;
 			$userUnits->{Text::underscoreToCamelCase($unitname)} -= $unitamount;
 			$unit = Rakuun_Intern_Production_Factory::getUnit($unitname);
-			if ($unit->getBaseSpeed() > $army->speed)
-				$army->speed = $unit->getBaseSpeed();
 		}
-		if ($this->hasPanel('spydrone')) {
-			$army->spydrone = $this->spydrone->getValue();
-			$userUnits->spydrone -= $this->spydrone->getValue();
-			$unit = Rakuun_Intern_Production_Factory::getUnit('spydrone');
-			if ($unit->getBaseSpeed() > $army->speed)
-				$army->speed = $unit->getBaseSpeed();
-		}
-		if ($this->hasPanel('cloaked_spydrone')) {
-			$army->cloakedSpydrone = $this->cloakedSpydrone->getValue();
-			$userUnits->cloakedSpydrone -= $this->cloakedSpydrone->getValue();
-			$unit = Rakuun_Intern_Production_Factory::getUnit('cloaked_spydrone');
-			if ($unit->getBaseSpeed() > $army->speed)
-				$army->speed = $unit->getBaseSpeed();
-		}
+		
 		$warpgateDatabase = new Rakuun_User_Specials_Database($army->user, Rakuun_User_Specials::SPECIAL_DATABASE_BLUE);
 		if ($warpgateDatabase->hasSpecial())
-			$army->speed /= 2;
+			$army->speedMultiplier = 0.5;
 		
 		Rakuun_DB_Containers::getArmiesContainer()->save($army);
 		
