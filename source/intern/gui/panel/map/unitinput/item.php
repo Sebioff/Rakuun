@@ -15,10 +15,14 @@ class Rakuun_Intern_GUI_Panel_Map_UnitInput_Item extends GUI_Panel {
 		$this->addPanel(new GUI_Control_DigitBox('value_panel', 0, $this->unit->getNameForAmount(2), 0, $this->unit->getAmount()));
 		$attackSequence = explode('|', Rakuun_User_Manager::getCurrentUser()->units->attackSequence);
 		$position = array_search($this->unit->getInternalName(), $attackSequence);
-		if ($position < count($attackSequence) - 1)
-			$this->addPanel(new GUI_Control_SubmitButton('move_up', '^'));
-		if ($position > 0)
-			$this->addPanel(new GUI_Control_SubmitButton('move_down', 'v'));
+		if ($position < count($attackSequence) - 1) {
+			$this->addPanel($upButton = new GUI_Control_SubmitButton('move_up'));
+			$upButton->addClasses('rakuun_btn_move_up');
+		}
+		if ($position > 0) {
+			$this->addPanel($downButton = new GUI_Control_SubmitButton('move_down'));
+			$downButton->addClasses('rakuun_btn_move_down');
+		}
 	}
 	
 	public function onMoveUp() {

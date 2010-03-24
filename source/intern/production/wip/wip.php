@@ -15,8 +15,10 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 		$this->itemWIPContainer = $itemWIPContainer;
 		$this->wipItem = $wipItem;
 		$this->setTemplate(dirname(__FILE__).'/wip.tpl');
-		$this->addPanel(new GUI_Control_SubmitButton('move_up', '^'));
-		$this->addPanel(new GUI_Control_SubmitButton('move_down', 'v'));
+		$this->addPanel($upButton = new GUI_Control_SubmitButton('move_up'));
+		$upButton->addClasses('rakuun_btn_move_up');
+		$this->addPanel($downButton = new GUI_Control_SubmitButton('move_down'));
+		$downButton->addClasses('rakuun_btn_move_down');
 	}
 	
 	/**

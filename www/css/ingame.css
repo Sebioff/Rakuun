@@ -57,6 +57,25 @@
 	color:red;
 }
 
+.rakuun_btn_move_up
+{
+	background:transparent url('../images/up.gif') no-repeat 3px 2px;
+	border:0px none !important;
+	height:12px;
+	margin-bottom:0px !important;
+	width:16px;
+}
+
+.rakuun_btn_move_down
+{
+	background:transparent url('../images/down.gif') no-repeat 3px 2px;
+	border:0px none !important;
+	height:14px;
+	margin-bottom:0px !important;
+	width:14px;
+}
+
+
 /* $2  -  Head ---------------------------------------------------------------*/
 #ctn_head
 {
