@@ -53,6 +53,8 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 			$userUnits = $this->getItemContainer()->selectByUserFirst($firstItem->getUser());
 			$userUnits->{Text::underscoreToCamelCase($firstItem->getInternalName())} += $finishedAmount;
 			$userUnits->save();
+			// log production
+			Rakuun_Intern_Log_UnitsProduction::log($firstItem->getUser(), $firstItem->getInternalName(), $finishedAmount);
 			//update remaining unitWIPs to new starttime
 			foreach ($wipItems as $wipItem) {
 				if ($wipItem->getRecord()->getPK() == $firstItem->getRecord()->getPK())

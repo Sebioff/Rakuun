@@ -469,6 +469,107 @@ $queries[] = 'ALTER TABLE `log_multiactions_users_assoc`
   ADD CONSTRAINT `log_multiactions_users_assoc_ibfk_1` FOREIGN KEY (`multi_action`) REFERENCES `log_multiactions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `log_multiactions_users_assoc_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
+$queries[] = 'CREATE TABLE IF NOT EXISTS `log_units_production` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(10) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  `pezetto` mediumint(9) NOT NULL,
+  `inra` mediumint(9) NOT NULL,
+  `laser_rifleman` mediumint(9) NOT NULL,
+  `tego` mediumint(9) NOT NULL,
+  `minigani` mediumint(9) NOT NULL,
+  `mandrogani` mediumint(9) NOT NULL,
+  `buhogani` mediumint(9) NOT NULL,
+  `donany` mediumint(9) NOT NULL,
+  `tertor` mediumint(9) NOT NULL,
+  `stormok` mediumint(9) NOT NULL,
+  `laser_turret` mediumint(9) NOT NULL,
+  `telaturri` mediumint(9) NOT NULL,
+  `spydrone` mediumint(9) NOT NULL,
+  `cloaked_spydrone` mediumint(9) NOT NULL,
+  `lorica` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(10) unsigned DEFAULT NULL,
+  `time` int(10) unsigned NOT NULL,
+  `fight_id` int(10) unsigned NOT NULL,
+  `type` tinyint(1) unsigned NOT NULL,
+  `pezetto` mediumint(9) NOT NULL,
+  `inra` mediumint(9) NOT NULL,
+  `laser_rifleman` mediumint(9) NOT NULL,
+  `tego` mediumint(9) NOT NULL,
+  `minigani` mediumint(9) NOT NULL,
+  `mandrogani` mediumint(9) NOT NULL,
+  `buhogani` mediumint(9) NOT NULL,
+  `donany` mediumint(9) NOT NULL,
+  `tertor` mediumint(9) NOT NULL,
+  `stormok` mediumint(9) NOT NULL,
+  `laser_turret` mediumint(9) NOT NULL,
+  `telaturri` mediumint(9) NOT NULL,
+  `spydrone` mediumint(9) NOT NULL,
+  `cloaked_spydrone` mediumint(9) NOT NULL,
+  `lorica` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
+
+$queries[] = 'ALTER TABLE `log_fights`
+  ADD CONSTRAINT `log_fights_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `log_spies` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(10) unsigned NOT NULL,
+  `spied_user` int(10) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  `pezetto` mediumint(9) NOT NULL,
+  `inra` mediumint(9) NOT NULL,
+  `laser_rifleman` mediumint(9) NOT NULL,
+  `tego` mediumint(9) NOT NULL,
+  `minigani` mediumint(9) NOT NULL,
+  `mandrogani` mediumint(9) NOT NULL,
+  `buhogani` mediumint(9) NOT NULL,
+  `donany` mediumint(9) NOT NULL,
+  `tertor` mediumint(9) NOT NULL,
+  `stormok` mediumint(9) NOT NULL,
+  `laser_turret` mediumint(9) NOT NULL,
+  `telaturri` mediumint(9) NOT NULL,
+  `spydrone` mediumint(9) NOT NULL,
+  `cloaked_spydrone` mediumint(9) NOT NULL,
+  `lorica` mediumint(9) NOT NULL,
+  `ironmine` mediumint(9) NOT NULL,
+  `berylliummine` mediumint(9) NOT NULL,
+  `ironstore` mediumint(9) NOT NULL,
+  `berylliumstore` mediumint(9) NOT NULL,
+  `energystore` mediumint(9) NOT NULL,
+  `house` mediumint(9) NOT NULL,
+  `themepark` mediumint(9) NOT NULL,
+  `clonomat` mediumint(9) NOT NULL,
+  `laboratory` mediumint(9) NOT NULL,
+  `hydropower_plant` mediumint(9) NOT NULL,
+  `stock_market` mediumint(9) NOT NULL,
+  `moleculartransmitter` mediumint(9) NOT NULL,
+  `military_base` mediumint(9) NOT NULL,
+  `tank_factory` mediumint(9) NOT NULL,
+  `barracks` mediumint(9) NOT NULL,
+  `city_wall` mediumint(9) NOT NULL,
+  `airport` mediumint(9) NOT NULL,
+  `sensor_bay` mediumint(9) NOT NULL,
+  `shield_generator` mediumint(9) NOT NULL,
+  `iron` int(10) NOT NULL,
+  `beryllium` int(10) NOT NULL,
+  `energy` int(10) NOT NULL,
+  `people` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
+
+$queries[] = 'ALTER TABLE `log_spies`
+  ADD CONSTRAINT `log_spies_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
+
 $queries[] = 'CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` int(10) unsigned DEFAULT NULL,

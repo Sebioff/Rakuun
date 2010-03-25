@@ -13,7 +13,7 @@ $queries[] = 'INSERT INTO `buildings_workers` (`user`) VALUES (1);';
 
 $queries[] = 'INSERT INTO `technologies` (`user`) VALUES (1);';
 
-$queries[] = 'INSERT INTO `units` (`user`, `buildings`, `technologies`, `fighting_sequence`) VALUES (1, 1, 1, \'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret|pezetto\');';
+$queries[] = 'INSERT INTO `units` (`user`, `buildings`, `technologies`, `fighting_sequence`, `attack_sequence`) VALUES (1, 1, 1, \''.Rakuun_Intern_Production_Unit::DEFAULT_DEFENSE_SEQUENCE.'\', \''.Rakuun_Intern_Production_Unit::DEFAULT_ATTACK_SEQUENCE.'\');';
 
 
 // USER "someoneelse"
@@ -29,6 +29,6 @@ $queries[] = 'INSERT INTO `buildings_workers` (`user`) VALUES (2);';
 
 $queries[] = 'INSERT INTO `technologies` (`user`) VALUES (2);';
 
-$queries[] = 'INSERT INTO `units` (`user`, `buildings`, `technologies`, `fighting_sequence`) VALUES (2, 2, 2, \'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret|pezetto\');';
+$queries[] = 'INSERT INTO `units` (`user`, `buildings`, `technologies`, `fighting_sequence`, `attack_sequence`) VALUES (2, 2, 2, \''.Rakuun_Intern_Production_Unit::DEFAULT_DEFENSE_SEQUENCE.'\', \''.Rakuun_Intern_Production_Unit::DEFAULT_ATTACK_SEQUENCE.'\');';
 
 ?>

@@ -65,25 +65,25 @@ class Rakuun_Intern_Fights_System {
 			$winnerUnitSource = $defenderUnitSource;
 			$winnerTotalPower = $totalDefendingPower;
 			$winnerPowerByUnits = $defendingPowerByUnits;
-			$looserUnitSource = $attackerUnitSource;
-			$looserTotalPower = $totalAttackingPower;
-			$looserPowerByUnits = $attackingPowerByUnits;
+			$loserUnitSource = $attackerUnitSource;
+			$loserTotalPower = $totalAttackingPower;
+			$loserPowerByUnits = $attackingPowerByUnits;
 			$this->defenderWon = true;
 		}
 		else {
 			$winnerUnitSource = $attackerUnitSource;
 			$winnerTotalPower = $totalAttackingPower;
 			$winnerPowerByUnits = $attackingPowerByUnits;
-			$looserUnitSource = $defenderUnitSource;
-			$looserTotalPower = $totalDefendingPower;
-			$looserPowerByUnits = $defendingPowerByUnits;
+			$loserUnitSource = $defenderUnitSource;
+			$loserTotalPower = $totalDefendingPower;
+			$loserPowerByUnits = $defendingPowerByUnits;
 			$this->defenderWon = false;
 			$winningPower *= -1;
 		}
 		
 		// add superiority bonus (0 - 5%)
-		if ($looserTotalPower > 0)
-			$superiority = $winnerTotalPower / $looserTotalPower;
+		if ($loserTotalPower > 0)
+			$superiority = $winnerTotalPower / $loserTotalPower;
 		else
 			$superiority = $winnerTotalPower;
 		// map superiority onto numbers from -x to 5
@@ -130,22 +130,22 @@ class Rakuun_Intern_Fights_System {
 			$winningPower -= $winnerPowerByUnits[$fightingUnitName];
 		}
 		
-		$survivingLooserUnitAmounts = array();
-		foreach (Rakuun_Intern_Production_Factory::getAllUnits($looserUnitSource) as $unit) {
+		$survivingLoserUnitAmounts = array();
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($loserUnitSource) as $unit) {
 			if ($unit->getAmount() > 0) {
 				if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY) && $this->calculateForAlliedPlayers)
-					$survivingLooserUnitAmounts[$unit->getInternalName()] = $unit->getAmount();
+					$survivingLoserUnitAmounts[$unit->getInternalName()] = $unit->getAmount();
 				else
-					$survivingLooserUnitAmounts[$unit->getInternalName()] = 0;
+					$survivingLoserUnitAmounts[$unit->getInternalName()] = 0;
 			}
 		}
 		
 		if ($this->defenderWon) {
 			$this->survivingDefendingUnitAmounts = $survivingWinnerUnitAmounts;
-			$this->survivingAttackingUnitAmounts = $survivingLooserUnitAmounts;
+			$this->survivingAttackingUnitAmounts = $survivingLoserUnitAmounts;
 		}
 		else {
-			$this->survivingDefendingUnitAmounts = $survivingLooserUnitAmounts;
+			$this->survivingDefendingUnitAmounts = $survivingLoserUnitAmounts;
 			$this->survivingAttackingUnitAmounts = $survivingWinnerUnitAmounts;
 		}
 		

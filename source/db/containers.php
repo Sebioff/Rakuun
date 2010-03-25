@@ -16,6 +16,9 @@ abstract class Rakuun_DB_Containers {
 	private static $buildingsWorkersContainer = null;
 	private static $technologiesContainer = null;
 	private static $technologiesWIPContainer = null;
+	private static $logUnitsProductionContainer = null;
+	private static $logFightsContainer = null;
+	private static $logSpiesContainer = null;
 	private static $unitsContainer = null;
 	private static $unitsWIPContainer = null;
 	private static $alliancesContainer = null;
@@ -407,6 +410,43 @@ abstract class Rakuun_DB_Containers {
 		self::$logUserRessourcetransferContainer->addReferencedContainer(self::getUserContainer(), 'sender', 'id');
 		
 		return self::$logUserRessourcetransferContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getLogUnitsProductionContainer() {
+		if (self::$logUnitsProductionContainer)
+			return self::$logUnitsProductionContainer;
+			
+		self::$logUnitsProductionContainer = new DB_Container('log_units_production');
+		
+		return self::$logUnitsProductionContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getLogFightsContainer() {
+		if (self::$logFightsContainer)
+			return self::$logFightsContainer;
+			
+		self::$logFightsContainer = new DB_Container('log_fights');
+		
+		return self::$logFightsContainer;
+	}
+	
+		/**
+	 * @return DB_Container
+	 */
+	public static function getLogSpiesContainer() {
+		if (self::$logSpiesContainer)
+			return self::$logSpiesContainer;
+			
+		self::$logSpiesContainer = new DB_Container('log_spies');
+		self::$logSpiesContainer->addReferencedContainer(self::getUserContainer(), 'spied_user', 'id');
+		
+		return self::$logSpiesContainer;
 	}
 	
 	/**

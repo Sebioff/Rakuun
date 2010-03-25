@@ -79,17 +79,17 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		
 		if ($fightingSystem->getDefenderWon()) {
 			$winnerUnitSource = $army->target->units;
-			$looserUnitSource = $army;
+			$loserUnitSource = $army;
 			$survivingWinnerUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
-			$survivingLooserUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
+			$survivingLoserUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
 			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' versuchte unsere Stadt zu überfallen, doch wir konnten den Feind erfolgreich abwehren.';
 			$attackerReportText = 'Einer Ihrer Angriffe war eine Niederlage!<br/>Beim Überfall auf '.$targetLink.$targetAllianceLink.' wurde unsere Armee vernichtend geschlagen.';
 		}
 		else {
 			$winnerUnitSource = $army;
-			$looserUnitSource = $army->target->units;
+			$loserUnitSource = $army->target->units;
 			$survivingWinnerUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
-			$survivingLooserUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
+			$survivingLoserUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
 			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' überfiel unsere Stadt und vernichtete unsere Armee.';
 			$attackerReportText = 'Einer Ihrer Angriffe war ein Erfolg!<br/>Beim Überfall auf '.$targetLink.$targetAllianceLink.' wurde die gegnerische Armee vernichtend geschlagen.';
 		}
@@ -98,6 +98,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		// report for winner
 		$winnerReportText = '<br/><br/>Folgende Verluste sind zu beklagen:';
 		$deadWinnerUnitsText = '';
+		$winnerLostUnits = array();
 		foreach ($survivingWinnerUnitAmounts as $unitName => $unitAmount) {
 			$unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $winnerUnitSource);
 			$deadUnitAmount = $unit->getAmount() - $unitAmount;
@@ -105,48 +106,54 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 				$deadWinnerUnitsText .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).'/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
 				// delete winner units
 				$winnerUnitSource->{Text::underscoreToCamelCase($unitName)} -= $deadUnitAmount;
+				$winnerLostUnits[$unitName] = $deadUnitAmount;
 			}
 		}
 		$winnerUnitSource->save();
+		
 		if ($deadWinnerUnitsText)
 			$winnerReportText .= $deadWinnerUnitsText;
 		else
 			$winnerReportText .= '<br/>Keine.';
-		$deadLooserUnitsText = '';
-		foreach (Rakuun_Intern_Production_Factory::getAllUnits($looserUnitSource) as $unit) {
+		$deadLoserUnitsText = '';
+		$loserLostUnits = array();
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($loserUnitSource) as $unit) {
 			if ($unit->getAmount() > 0 && !$unit->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK)) {
 				$deadUnitAmount = $unit->getAmount();
-				if (isset($survivingLooserUnitAmounts[$unit->getInternalName()]))
-					$deadUnitAmount = $unit->getAmount() - $survivingLooserUnitAmounts[$unit->getInternalName()];
+				if (isset($survivingLoserUnitAmounts[$unit->getInternalName()]))
+					$deadUnitAmount = $unit->getAmount() - $survivingLoserUnitAmounts[$unit->getInternalName()];
 				if ($deadUnitAmount > 0) {
-					$deadLooserUnitsText .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).' '.$unit->getNameForAmount($deadUnitAmount);
-					// delete looser units
-					$looserUnitSource->{Text::underscoreToCamelCase($unit->getInternalName())} -= $deadUnitAmount;
+					$deadLoserUnitsText .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).' '.$unit->getNameForAmount($deadUnitAmount);
+					// delete loser units
+					$loserUnitSource->{Text::underscoreToCamelCase($unit->getInternalName())} -= $deadUnitAmount;
+					$loserLostUnits[$unit->getInternalName()] = $deadUnitAmount;
 				}
 			}
 		}
-		$looserUnitSource->save();
-		if ($deadLooserUnitsText)
-			$winnerReportText .= '<br/><br/>Die gegnerische Armee wurde vollständig vernichtet:'.$deadLooserUnitsText;
+		$loserUnitSource->save();
+		if ($deadLoserUnitsText)
+			$winnerReportText .= '<br/><br/>Die gegnerische Armee wurde vollständig vernichtet:'.$deadLoserUnitsText;
 		else
 			$winnerReportText .= '<br/><br/>Es wurden keine gegnerischen Einheiten vernichtet.';
-		
-		// LOOSER ----------------------------------------------
-		//report for looser
-		if (!$deadLooserUnitsText)
-			$deadLooserUnitsText = '<br/>Keine.';
-		$looserReportText = '<br/><br/>Folgende Verluste sind zu beklagen:'.$deadLooserUnitsText;
+			
+		Rakuun_Intern_Log_Fights::log($winnerUnitSource->user, $loserUnitSource->user, $winnerLostUnits, $loserLostUnits, $army->getPK());
+			
+		// LOSER ----------------------------------------------
+		//report for loser
+		if (!$deadLoserUnitsText)
+			$deadLoserUnitsText = '<br/>Keine.';
+		$loserReportText = '<br/><br/>Folgende Verluste sind zu beklagen:'.$deadLoserUnitsText;
 		if ($deadWinnerUnitsText) {
-			$looserReportText .= '<br/><br/>Der gegnerischen Armee konnte folgender Schaden zugefügt werden:'.$deadWinnerUnitsText;
-			$looserReportText .= '<br/>Möglicherweise besaß der Gegner sogar weitere Einheiten, die von unseren Truppen nicht einmal entdeckt werden konnten.';
+			$loserReportText .= '<br/><br/>Der gegnerischen Armee konnte folgender Schaden zugefügt werden:'.$deadWinnerUnitsText;
+			$loserReportText .= '<br/>Möglicherweise besaß der Gegner sogar weitere Einheiten, die von unseren Truppen nicht einmal entdeckt werden konnten.';
 		}
 		else {
-			$looserReportText .= '<br/><br/>Es wurden keine gegnerischen Einheiten vernichtet.';
+			$loserReportText .= '<br/><br/>Es wurden keine gegnerischen Einheiten vernichtet.';
 		}
 		
 		if ($fightingSystem->getDefenderWon()) {
 			$defenderReportText .= $winnerReportText;
-			$attackerReportText .= $looserReportText;
+			$attackerReportText .= $loserReportText;
 			
 			// delete attacking army
 			$army->delete();
@@ -189,27 +196,28 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 					$stolenEnergy = $takeableEnergy;
 					
 				if ($stolenIron > 0 || $stolenBeryllium > 0 || $stolenEnergy > 0) {
-					$looserReportText .= '<br/><br/>Die gegnerischen Truppen erbeuteten folgende Rohstoffe:';
+					$loserReportText .= '<br/><br/>Die gegnerischen Truppen erbeuteten folgende Rohstoffe:';
 					$winnerReportText .= '<br/><br/>Die folgenden Rohstoffe konnten erbeutet werden:';
 					if ($stolenIron > 0) {
-						$looserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenIron).' Eisen';
+						$loserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenIron).' Eisen';
 						$winnerReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenIron).' Eisen';
 					}
 					if ($stolenBeryllium > 0) {
-						$looserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenBeryllium).' Beryllium';
+						$loserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenBeryllium).' Beryllium';
 						$winnerReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenBeryllium).' Beryllium';
 					}
 					if ($stolenEnergy > 0) {
-						$looserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenEnergy).' Energie';
+						$loserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenEnergy).' Energie';
 						$winnerReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenEnergy).' Energie';
 					}
 					$army->target->ressources->lower($stolenIron, $stolenBeryllium, $stolenEnergy);
 					$army->iron = $stolenIron;
 					$army->beryllium = $stolenBeryllium;
 					$army->energy = $stolenEnergy;
+					Rakuun_Intern_Log_Ressourcetransfer::log($army->user, Rakuun_Intern_Log::ACTION_RESSOURCES_FIGHT, $army->target, $stolenIron, $stolenBeryllium, $stolenEnergy);
 				}
 				else {
-					$looserReportText .= '<br/><br/>Die gegnerischen Truppen haben keine Rohstoffe gestohlen.';
+					$loserReportText .= '<br/><br/>Die gegnerischen Truppen haben keine Rohstoffe gestohlen.';
 					$winnerReportText .= '<br/><br/>Es konnten leider keine Rohstoffe erbeutet werden.';
 				}
 			
@@ -268,7 +276,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 									$igm->send();
 								}
 							}
-							$looserReportText .= '<br/><br/>Eine Stufe des Gebäudes '.$destroyedBuilding->getName().' wurde zerstört!';
+							$loserReportText .= '<br/><br/>Eine Stufe des Gebäudes '.$destroyedBuilding->getName().' wurde zerstört!';
 							$winnerReportText .= '<br/><br/>Eine Stufe des Gebäudes '.$destroyedBuilding->getName().' konnte zerstört werden!';
 						}
 					}
@@ -289,14 +297,14 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 						$databaseSpecial = new Rakuun_User_Specials_Database($army->user, $database->identifier, true);
 						$databaseSpecial->giveSpecial();
 						
-						$looserReportText .= '<br/><br/>Es wurde ein Datenbankteil gestohlen!';
+						$loserReportText .= '<br/><br/>Es wurde ein Datenbankteil gestohlen!';
 						$winnerReportText .= '<br/><br/>Es wurde ein Datenbankteil erobert!';
 					}
 				}
 			}
 			
 			// assign report texts to defender / attacker
-			$defenderReportText .= $looserReportText;
+			$defenderReportText .= $loserReportText;
 			$attackerReportText .= $winnerReportText;
 		}
 		
@@ -341,6 +349,10 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 			$attackerReportText = 'Leider schlug die Ausspionierung von '.$targetLink.$targetAllianceLink.' fehl - die gegnerische Armee zerstöre sämtliche Spionagesonden, bevor diese Daten übermitteln konnten.';
 		}
 		else {
+			$spiedRessourcesContainer = $army->target->ressources;
+			$spiedBuildings = array();
+			$spiedUnits = array();
+			
 			$defenderReportText = 'Soeben wurden geheime Daten unserer Stadt von '.$userLink.$userAllianceLink.' ausspioniert!';
 			$attackerReportText = 'Soeben gelang es einigen unserer Spionagesonden, geheime Daten von '.$targetLink.$targetAllianceLink.' zu übermitteln!';
 			
@@ -360,18 +372,22 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 			$attackerReportText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->energy).' Energie';
 			
 			if ($reportCompletenessIndicator <= 3000) {
+				$spiedBuildingsContainer = $army->target->buildings;
 				$defenderReportText .= '<br/>Die Ausbaustufen unserer Gebäude';
 				$attackerReportText .= '<br/><br/>Folgende Gebäude hat euer Gegner:';
 				foreach (Rakuun_Intern_Production_Factory::getAllBuildings($army->target) as $building) {
 					if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES) === true)
 						continue;
 					
-					if ($building->getLevel() > 0)
+					if ($building->getLevel() > 0) {
 						$attackerReportText .= '<br/>'.$building->getName().' (Stufe '.$building->getLevel().')';
+						$spiedBuildings[$building->getInternalName()] = $building->getLevel();
+					}
 				}
 			}
 			
 			if ($reportCompletenessIndicator <= 2000) {
+				$spiedUnitsContainer = $army->target->units;
 				$defenderReportText .= '<br/>Die Anzahl unserer Einheiten';
 				$attackerReportText .= '<br/><br/>Folgende Einheiten wurden entdeckt:';
 				
@@ -381,8 +397,10 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 				
 				$unitsText = '';
 				foreach (Rakuun_Intern_Production_Factory::getAllUnits($army->target) as $unit) {
-					if ($unit->getAmount() > 0 && (!$successfullEnhancedCloaking || !$unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING)))
+					if ($unit->getAmount() > 0 && (!$successfullEnhancedCloaking || !$unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING))) {
 						$unitsText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$unit->getAmount()).' '.$unit->getNameForAmount();
+						$spiedUnits[$unit->getInternalName()] = $unit->getAmount();
+					}
 				}
 				if (!$unitsText)
 					$unitsText = '<br/>Keine.';
@@ -393,6 +411,8 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 				
 				$spyDronesSurvive = true;
 			}
+			
+			Rakuun_Intern_Log_Spies::log($army->user, $army->target, $spiedRessourcesContainer, $spiedBuildings, $spiedUnits);
 		}
 		
 		if (!$successfullCloakedSpy) {
