@@ -432,6 +432,8 @@ abstract class Rakuun_DB_Containers {
 			return self::$logFightsContainer;
 			
 		self::$logFightsContainer = new DB_Container('log_fights');
+		self::$logFightsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$logFightsContainer->addReferencedContainer(self::getUserContainer(), 'opponent', 'id');
 		
 		return self::$logFightsContainer;
 	}
@@ -608,6 +610,8 @@ abstract class Rakuun_DB_Containers {
 			return self::$logBuildingsContainer;
 		
 		self::$logBuildingsContainer = new DB_Container('log_buildings');
+		self::$logBuildingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$logBuildingsContainer->addReferencedContainer(self::getUserContainer(), 'executing_user', 'id');
 		
 		return self::$logBuildingsContainer;
 	}

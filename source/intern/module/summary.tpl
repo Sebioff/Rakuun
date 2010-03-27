@@ -4,6 +4,12 @@
 <br class="clear" />
 <? $this->displayPanel('unitsbox'); ?>
 <br class="clear" />
+<? $this->displayPanel('lostunits'); ?>
+<br class="clear" />
+<? $this->displayPanel('destroyedunits'); ?>
+<br class="clear" />
 <? $this->displayPanel('lostbuildings'); ?>
+<br class="clear" />
+<? $this->displayPanel('destroyedbuildings'); ?>
 <br class="clear" />
 <? $this->displayPanel('buildingevents'); ?>

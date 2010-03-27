@@ -495,9 +495,11 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_units_production` (
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` int(10) unsigned DEFAULT NULL,
+  `opponent` int(10) unsigned DEFAULT NULL,
   `time` int(10) unsigned NOT NULL,
   `fight_id` int(10) unsigned NOT NULL,
   `type` tinyint(1) unsigned NOT NULL,
+  `role` tinyint(1) unsigned NOT NULL,
   `pezetto` mediumint(9) NOT NULL,
   `inra` mediumint(9) NOT NULL,
   `laser_rifleman` mediumint(9) NOT NULL,
@@ -516,9 +518,6 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
-
-$queries[] = 'ALTER TABLE `log_fights`
-  ADD CONSTRAINT `log_fights_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_spies` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -732,6 +731,7 @@ $queries[] = 'ALTER TABLE `specials_params`
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_buildings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` int(10) unsigned NOT NULL,
+  `executing_user` int(10) unsigned NOT NULL,
   `time` int(15) unsigned NOT NULL,
   `building` varchar(30) NOT NULL,
   `level` mediumint(9) NOT NULL,
@@ -740,9 +740,6 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_buildings` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
-
-$queries[] = 'ALTER TABLE `log_buildings`
-  ADD CONSTRAINT `log_buildings_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_technologies` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

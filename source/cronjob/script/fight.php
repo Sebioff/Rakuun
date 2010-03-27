@@ -136,7 +136,7 @@ class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
 		else
 			$winnerReportText .= '<br/><br/>Es wurden keine gegnerischen Einheiten vernichtet.';
 			
-		Rakuun_Intern_Log_Fights::log($winnerUnitSource->user, $loserUnitSource->user, $winnerLostUnits, $loserLostUnits, $army->getPK());
+		Rakuun_Intern_Log_Fights::log($winnerUnitSource->user, $loserUnitSource->user, $army->user, $winnerLostUnits, $loserLostUnits, $army->getPK());
 			
 		// LOSER ----------------------------------------------
 		//report for loser

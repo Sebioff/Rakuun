@@ -24,7 +24,8 @@ class Rakuun_Intern_Event {
 			else
 				$record->eventType = self::EVENT_TYPE_BUILDING_DESTROY;
 		}
-		// TODO save executing user (note: not neccessarily set)
+		if ($executingUser)
+			$record->executingUser = $executingUser;
 		Rakuun_DB_Containers::getLogBuildingsContainer()->save($record);
 		$userBuildings->user->recalculatePoints();
 		// if user is offline, save the news
@@ -72,7 +73,7 @@ class Rakuun_Intern_Event {
 				return $building->getName().' Stufe '.($event->level + 1).' abgerissen.';
 			case self::EVENT_TYPE_BUILDING_DESTROY:
 				$building = Rakuun_Intern_Production_Factory::getBuilding($event->building);
-				return $building->getName().' Stufe '.($event->level + 1).' zerstört.';
+				return $building->getName().' Stufe '.($event->level + 1).' zerstört durch '.$event->executingUser->name.'.';
 		}
 	}
 }
