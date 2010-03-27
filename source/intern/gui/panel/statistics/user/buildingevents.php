@@ -14,7 +14,6 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_BuildingEvents extends GUI_Panel_P
 		
 		$this->params->events = $this->getContainer()->select($this->getOptions());
 	}
-
 }
 
 ?>

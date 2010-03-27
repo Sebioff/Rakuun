@@ -8,6 +8,10 @@
 <br class="clear" />
 <? $this->displayPanel('destroyedunits'); ?>
 <br class="clear" />
+<? $this->displayPanel('ressources'); ?>
+<br class="clear" />
+<? $this->displayPanel('fights'); ?>
+<br class="clear" />
 <? $this->displayPanel('lostbuildings'); ?>
 <br class="clear" />
 <? $this->displayPanel('destroyedbuildings'); ?>

@@ -20,7 +20,6 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_DestroyedBuildings extends GUI_Pan
 			$table->addLine($line);
 		}
 	}
-
 }
 
 ?>

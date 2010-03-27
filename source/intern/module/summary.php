@@ -29,6 +29,12 @@ class Rakuun_Intern_Module_Summary extends Rakuun_Intern_Module {
 			new Rakuun_GUI_Panel_Box('lostbuildings', new Rakuun_Intern_GUI_Panel_Statistics_User_LostBuildings('lostbuildings'), 'Verlorene Gebäude')
 		);
 		$this->contentPanel->addPanel(
+			new Rakuun_GUI_Panel_Box('ressources', new Rakuun_Intern_GUI_Panel_Statistics_User_Ressources('ressources'), 'Ressourcen')
+		);
+		$this->contentPanel->addPanel(
+			new Rakuun_GUI_Panel_Box('fights', new Rakuun_Intern_GUI_Panel_Statistics_User_Fights('fights'), 'Kämpfe')
+		);
+		$this->contentPanel->addPanel(
 			new Rakuun_GUI_Panel_Box('destroyedbuildings', new Rakuun_Intern_GUI_Panel_Statistics_User_DestroyedBuildings('destroyedbuildings'), 'Vernichtete Gebäude')
 		);
 		$this->contentPanel->addPanel(
