@@ -2,7 +2,9 @@
 <hr/>
 <h3>Einheiten</h3>
 <ul>
-	<? foreach (Rakuun_Intern_Production_Factory::getAllUnits($this->getArmy()) as $unit): ?>
+	<? $attackSequence = array_reverse(explode('|', $this->getArmy()->fightingSequence)); ?>
+	<? foreach ($attackSequence as $unitName): ?>
+		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName); ?>
 		<? if ($unit->getAmount() > 0): ?>
 			<li>
 				<?= $unit->getAmount(); ?>
