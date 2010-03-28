@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Cronjob_Script_Tick extends Rakuun_Cronjob_Script {
+class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 	public function execute() {
 		// finish productions for not logged-in players ------------------------
 		$options = array();

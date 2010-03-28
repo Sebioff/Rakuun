@@ -141,18 +141,10 @@ $queries[] = 'ALTER TABLE `alliances_applications`
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `boards` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `alliance` smallint(5) unsigned DEFAULT NULL,
-  `meta` smallint(5) unsigned DEFAULT NULL,
   `name` varchar(25) NOT NULL,
-  `type` smallint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `alliance` (`alliance`),
-  KEY `meta` (`meta`)
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=0;';
-
-$queries[] = 'ALTER TABLE `boards`
-  ADD CONSTRAINT `boards_ibfk_2` FOREIGN KEY (`meta`) REFERENCES `metas` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `boards_ibfk_1` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_postings` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -167,8 +159,21 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_postings` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=0;';
 
 $queries[] = 'ALTER TABLE `boards_postings`
-  ADD CONSTRAINT `boards_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `boards_postings_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
+  ADD CONSTRAINT `boards_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_visited` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned NOT NULL,
+  `user` int(10) unsigned NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8';
+
+$queries[] = 'ALTER TABLE `boards_visited`
+  ADD CONSTRAINT `boards_visited_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `boards_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_diplomacy` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -847,14 +852,6 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `tutor` (
 $queries[] = 'ALTER TABLE `tutor`
   ADD CONSTRAINT `tutor_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
-$queries[] = 'CREATE TABLE IF NOT EXISTS `cronjobs` (
-  `identifier` varchar(25) NOT NULL,
-  `last_execution` int(10) unsigned NOT NULL,
-  `last_execution_duration` float unsigned NOT NULL,
-  `last_execution_successful` tinyint(1) NOT NULL DEFAULT \'0\',
-  PRIMARY KEY (`identifier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
-
 $queries[] = 'CREATE TABLE IF NOT EXISTS `stockmarket` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `date` int(10) unsigned NOT NULL,
@@ -873,5 +870,84 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `databases_startpositions` (
   `position_y` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `shoutbox_alliances` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `alliance` smallint(5) unsigned NOT NULL,
+  `user` int(10) unsigned DEFAULT NULL,
+  `text` text NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`),
+  KEY `alliance` (`alliance`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8';
+
+$queries[] = 'ALTER TABLE `shoutbox_alliances`
+  ADD CONSTRAINT `shoutbox_alliances_ibfk_1` FOREIGN KEY ( `alliance` ) REFERENCES `alliances` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `shoutbox_metas` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `meta` smallint(5) unsigned NOT NULL,
+  `user` int(10) unsigned DEFAULT NULL,
+  `text` text NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`),
+  KEY `meta` (`meta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `shoutbox_metas`
+  ADD CONSTRAINT `shoutbox_metas_ibfk_1` FOREIGN KEY (`meta`) REFERENCES `metas` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_buildings` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `alliance` smallint(5) unsigned NOT NULL,
+  `database_detector` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `alliance` (`alliance`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
+
+$queries[] = 'ALTER TABLE `alliances_buildings`
+  ADD CONSTRAINT `alliances_buildings_ibfk_1` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_buildings_wip` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `alliance` smallint(5) unsigned NOT NULL,
+  `building` varchar(30) NOT NULL,
+  `starttime` int(10) unsigned NOT NULL,
+  `position` int(10) unsigned NOT NULL,
+  `level` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `alliance` (`alliance`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
+
+$queries[] = 'ALTER TABLE `alliances_buildings_wip`
+  ADD CONSTRAINT `alliances_buildings_wip_ibfk_1` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `metas_buildings` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `meta` smallint(5) unsigned NOT NULL,
+  `space_port` mediumint(9) NOT NULL,
+  `dancertia` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `meta` (`meta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
+
+$queries[] = 'ALTER TABLE `metas_buildings`
+  ADD CONSTRAINT `metas_buildings_ibfk_1` FOREIGN KEY (`meta`) REFERENCES `metas` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `metas_buildings_wip` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `meta` smallint(5) unsigned NOT NULL,
+  `building` varchar(30) NOT NULL,
+  `starttime` int(10) unsigned NOT NULL,
+  `position` int(10) unsigned NOT NULL,
+  `level` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `meta` (`meta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
+
+$queries[] = 'ALTER TABLE `metas_buildings_wip`
+  ADD CONSTRAINT `metas_buildings_wip_ibfk_1` FOREIGN KEY (`meta`) REFERENCES `metas` (`id`) ON DELETE CASCADE;';
 
 ?>

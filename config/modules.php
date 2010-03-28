@@ -6,7 +6,7 @@ $app->addModule(new Rakuun_Index_Module_Register('register'));
 $app->addModule(new Rakuun_Index_Module_Login('login'));
 $app->addModule(new Rakuun_Index_Module_Activation('activation'));
 $app->addModule(new Rakuun_Index_Module_Master('master'));
-$app->addModule(new Rakuun_Cronjob('cronjob'));
+$app->addModule(new Rakuun_Cronjob('cronjob', 'cronjobs'));
 $app->addModule(Rakuun_Intern_Modules::get());
   
 // setup security features

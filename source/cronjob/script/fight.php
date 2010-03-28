@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Cronjob_Script_Fight extends Rakuun_Cronjob_Script {
+class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 	/** the maximum reachable probability that a building is destructed */
 	const DESTRUCTION_MAX_PROBABILITY = 75;
 	/** the needed attack force to reach DESTRUCTION_MAX_PROBABILITY */

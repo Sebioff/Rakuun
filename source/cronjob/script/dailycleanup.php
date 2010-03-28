@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Cronjob_Script_DailyCleanup extends Rakuun_Cronjob_Script_FixedTime {
+class Rakuun_Cronjob_Script_DailyCleanup extends Cronjob_Script_FixedTime {
 	public function execute() {
 		// RESET ALLIANCE INVITATION COUNTER -----------------------------------
 		$query = 'UPDATE alliances SET invitations = 0';

@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Cronjob_Script_Cleanup extends Rakuun_Cronjob_Script {
+class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 	const CLEANUP_INACTIVE_YIMTAY = 1814400; // 3 weeks
 	const CLEANUP_INACTIVE_DELETE = 6048000; // 10 weeks
 	const CLEANUP_NOTACTIVATED_REMEMBER = 86400; // 1 day
