@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->setBaseEnergyCosts(700);
 		$this->setBasePeopleCosts(40);
 		$this->setBaseTimeCosts(18*60);
-		$this->setBaseAttackValue(60);
+		$this->setBaseAttackValue(70);
 		$this->setBaseDefenseValue(20);
 		$this->setBaseSpeed(324);
 		$this->setRessourceTransportCapacity(80);

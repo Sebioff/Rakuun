@@ -16,6 +16,7 @@ class Rakuun_Intern_Production_Unit_CloakedSpydrone extends Rakuun_Intern_Produc
 		$this->setBaseSpeed(170);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('barracks', 5);
+		$this->addNeededBuilding('airport', 1);
 		$this->addNeededTechnology('cloaking', 2);
 		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING, true);
 		$this->setAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK, true);

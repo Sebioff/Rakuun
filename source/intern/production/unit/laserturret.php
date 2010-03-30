@@ -14,12 +14,12 @@ class Rakuun_Intern_Production_Unit_LaserTurret extends Rakuun_Intern_Production
 		$this->setBaseTimeCosts(10*60);
 		$this->setBaseDefenseValue(37);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY);
-		$this->addNeededBuilding('military_base', 5);
+		$this->addNeededBuilding('military_base', 8);
 		$this->addNeededBuilding('city_wall', 1);
 		$this->addNeededBuilding('hydropower_plant', 3);
 		$this->addNeededTechnology('heavy_weaponry', 1);
 		$this->addNeededTechnology('heavy_plating', 3);
-		$this->addNeededTechnology('laser', 2);
+		$this->addNeededTechnology('laser', 6);
 		$this->setShortDescription('Laserturm');
 		$this->setLongDescription('Lasertürme sind größere Türme mit rotierbarem Kopf die man mit ziemlich intensiven Lasern ausgestattet hat.
 			<br/>

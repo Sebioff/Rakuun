@@ -10,8 +10,8 @@ class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_T
 		$this->setBaseBerylliumCosts(700);
 		$this->setBaseEnergyCosts(600);
 		$this->setBasePeopleCosts(80);
-		$this->setBaseTimeCosts(480*60);
-		$this->addNeededBuilding('laboratory', 8);
+		$this->setBaseTimeCosts(720*60);
+		$this->addNeededBuilding('laboratory', 9);
 		$this->addNeededBuilding('airport', 1);
 		$this->addNeededTechnology('engine', 5);
 		$this->setMaximumLevel(3);
