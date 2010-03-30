@@ -1,6 +1,8 @@
 <?php
 
 class Rakuun_Intern_Production_Technology_Laser extends Rakuun_Intern_Production_Technology {
+	const FORCE_BONUS_PERCENT = 7;
+	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
 		
@@ -24,6 +26,10 @@ class Rakuun_Intern_Production_Technology_Laser extends Rakuun_Intern_Production
 			<br/>
 			Nur Top-Forschungslabore mit Präzisionsmaschinen sind überhaupt in der Lage, einen einfachen Prototypen herzustellen.');
 		$this->setPoints(8);
+	}
+	
+	protected function defineEffects() {
+		$this->addEffect('Erhöht Kampfkraft um '.(self::FORCE_BONUS_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
 	}
 }
 

@@ -1,6 +1,8 @@
 <?php
 
 class Rakuun_Intern_Production_Technology_Engine extends Rakuun_Intern_Production_Technology {
+	const SPEED_BONUS_PERCENT = 5;
+	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
 		
@@ -21,6 +23,10 @@ class Rakuun_Intern_Production_Technology_Engine extends Rakuun_Intern_Productio
 			<br/>
 			Diese Forschung befasst sich hauptsächlich mit der Perfektionierung des Kanalisierungsprozesses, ohne den die ganze Anlage lediglich ein energieverbrauchendes Objekt ohne Wirkung wäre.');
 		$this->setPoints(9);
+	}
+	
+	protected function defineEffects() {
+		$this->addEffect('Erhöht Einheitengeschwindigkeit um '.(self::SPEED_BONUS_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
 	}
 }
 

@@ -14,8 +14,8 @@ class Rakuun_Intern_Map_ArmyPathCalculator {
 			if ($unit->getAmount() <= 0)
 				continue;
 			$unitTypes = Rakuun_Intern_Production_Unit::getJoinedUnitType($unitTypes, $unit->getUnitType());
-			if ($unit->getBaseSpeed() > $speed)
-				$speed = $unit->getBaseSpeed();
+			if ($unit->getSpeed() > $speed)
+				$speed = $unit->getSpeed();
 		}
 		$speed *= $this->army->speedMultiplier;
 		$astar = new Rakuun_Intern_Map_AStar($speed, $unitTypes);

@@ -1,6 +1,8 @@
 <?php
 
 class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_Technology {
+	const SPEED_BONUS_PERCENT = 5;
+	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
 		
@@ -14,7 +16,7 @@ class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_T
 		$this->addNeededBuilding('laboratory', 9);
 		$this->addNeededBuilding('airport', 1);
 		$this->addNeededTechnology('engine', 5);
-		$this->setMaximumLevel(3);
+		$this->setMaximumLevel(5);
 		$this->setShortDescription('Eine verbesserte Version der Standard-Antriebs-Form. Der Düsenantrieb ist absolut notwendig zur Produktion von Flugeinheiten.');
 		$this->setLongDescription('Der Düsenantrieb ist für die Fortbewegung der Gleiter verantwortlich.
 			<br/>
@@ -22,6 +24,10 @@ class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_T
 			<br/>
 			Deshalb wird hier ein spezieller Düsenantrieb verwendet. Seine Hauptfunktionsweise besteht darin, durch speziell geformte, rotierende Blätter innerhalb der Düse Luft von vorne heranzusaugen und nach hinten abzustoßen, zusätzlich wird ein hochexplosiver Treibstoff im inneren entzündet und die Explosion kontrolliert nach hinten geleitet.');
 		$this->setPoints(8);
+	}
+	
+	protected function defineEffects() {
+		$this->addEffect('Erhöht Einheitengeschwindigkeit um '.(self::SPEED_BONUS_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
 	}
 }
 
