@@ -396,7 +396,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `armies` (
   `iron_priority` tinyint(1) unsigned NOT NULL,
   `beryllium_priority` tinyint(1) unsigned NOT NULL,
   `energy_priority` tinyint(1) unsigned NOT NULL,
-  `speed_multiplier` float unsigned NOT NULL DEFAULT \'1\',
+  `speed_multiplier` float unsigned NOT NULL DEFAULT \'0\',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `target` (`target`),

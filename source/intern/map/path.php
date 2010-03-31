@@ -5,9 +5,9 @@ class Rakuun_Intern_Map_Path extends Scriptlet {
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: image/gif');
-		$image = imagecreatetruecolor(1000, 1000);
+		$image = imagecreatetruecolor(Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE);
 		$white = imagecolorallocate($image, 255, 255, 255);
-		imagefilledrectangle($image, 0, 0, 1000, 1000, $white);
+		imagefilledrectangle($image, 0, 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, $white);
 		imagesetthickness($image, 2);
 		
 		$enemyColor = imagecolorallocatealpha($image, 120, 0, 0, 30);
@@ -25,12 +25,12 @@ class Rakuun_Intern_Map_Path extends Scriptlet {
 			$dotColor = $enemyColor;
 			if ($army->targetX == Rakuun_User_Manager::getCurrentUser()->cityX &&$army->targetY == Rakuun_User_Manager::getCurrentUser()->cityY)
 				$dotColor = $homeColor;
-			imagefilledellipse($image, $army->positionX * 10 + 5, $army->positionY * 10 + 5, 10, 10, $dotColor);
+			imagefilledellipse($image, $army->positionX * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE + 5, $army->positionY * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE + 5, Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, $dotColor);
 			$pathNodeCount = count($path);
 			for ($i = 0; $i < $pathNodeCount - 1; $i++) {
 				$pathNodeA = $path[$i];
 				$pathNodeB = $path[$i + 1];
-				imageline($image, $pathNodeA['x'] * 10 + 5, $pathNodeA['y'] * 10 + 5, $pathNodeB['x'] * 10 + 5, $pathNodeB['y'] * 10 + 5, $pathColor);
+				imageline($image, $pathNodeA['x'] * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE + 5, $pathNodeA['y'] * 10 + 5, $pathNodeB['x'] * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE + 5, $pathNodeB['y'] * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE + 5, $pathColor);
 			}
 		}
 		

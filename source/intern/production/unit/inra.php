@@ -13,7 +13,7 @@ class Rakuun_Intern_Production_Unit_Inra extends Rakuun_Intern_Production_Unit {
 		$this->setBaseTimeCosts(3*60);
 		$this->setBaseAttackValue(5);
 		$this->setBaseDefenseValue(8);
-		$this->setBaseSpeed(694);
+		$this->setBaseSpeed(332);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER);
 		$this->addNeededBuilding('barracks', 1);

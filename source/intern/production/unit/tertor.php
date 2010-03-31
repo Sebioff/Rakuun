@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_Tertor extends Rakuun_Intern_Production_Unit
 		$this->setBaseTimeCosts(16*60);
 		$this->setBaseAttackValue(88);
 		$this->setBaseDefenseValue(9);
-		$this->setBaseSpeed(420);
+		$this->setBaseSpeed(169);
 		$this->setRessourceTransportCapacity(80);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('airport', 3);

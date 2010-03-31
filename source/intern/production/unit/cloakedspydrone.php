@@ -13,7 +13,7 @@ class Rakuun_Intern_Production_Unit_CloakedSpydrone extends Rakuun_Intern_Produc
 		$this->setBaseBerylliumCosts(250);
 		$this->setBaseEnergyCosts(500);
 		$this->setBaseTimeCosts(5*60);
-		$this->setBaseSpeed(170);
+		$this->setBaseSpeed(20);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('barracks', 5);
 		$this->addNeededBuilding('airport', 1);

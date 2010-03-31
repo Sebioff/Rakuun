@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Unit_Lorica extends Rakuun_Intern_Production_Unit
 		$this->setBaseEnergyCosts(100);
 		$this->setBasePeopleCosts(5);
 		$this->setBaseTimeCosts(15*60);
-		$this->setBaseSpeed(268);
+		$this->setBaseSpeed(78);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
 		$this->addNeededBuilding('tank_factory', 1);
 		$this->addNeededTechnology('light_plating', 3);

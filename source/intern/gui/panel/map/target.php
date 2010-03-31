@@ -146,9 +146,11 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			$unit = Rakuun_Intern_Production_Factory::getUnit($unitname);
 		}
 		
+		$army->speedMultiplier = 1;
+		
 		$warpgateDatabase = new Rakuun_User_Specials_Database($army->user, Rakuun_User_Specials::SPECIAL_DATABASE_BLUE);
 		if ($warpgateDatabase->hasSpecial())
-			$army->speedMultiplier = 0.5;
+			$army->speedMultiplier *= 0.5;
 		
 		Rakuun_DB_Containers::getArmiesContainer()->save($army);
 		

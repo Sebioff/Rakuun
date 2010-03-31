@@ -5,8 +5,6 @@ class Rakuun_Intern_Map_AStar {
 	private $map;
 	private $movementCosts = 0;
 	private $unitTypes = 0;
-	private static $height = 100;
-	private static $width = 100;
 
 	public function __construct($movementCosts, $unitTypes) {
 		$this->bitMap = imagecreatefrompng(PROJECT_PATH.'/www/images/map.png');
@@ -47,11 +45,11 @@ class Rakuun_Intern_Map_AStar {
 		$reachableNodes = array();
 		if ($expandedNode['x'] - 1 >= 0)
 			$reachableNodes[] = &$this->getMapNode($expandedNode['x'] - 1, $expandedNode['y']);
-		if ($expandedNode['x'] + 1 < self::$width)
+		if ($expandedNode['x'] + 1 < Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH)
 			$reachableNodes[] = &$this->getMapNode($expandedNode['x'] + 1, $expandedNode['y']);
 		if ($expandedNode['y'] - 1 >= 0)
 			$reachableNodes[] = &$this->getMapNode($expandedNode['x'], $expandedNode['y'] - 1);
-		if ($expandedNode['y'] + 1 < self::$height)
+		if ($expandedNode['y'] + 1 < Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT)
 			$reachableNodes[] = &$this->getMapNode($expandedNode['x'], $expandedNode['y'] + 1);
 		
 		// diagonal
@@ -59,9 +57,9 @@ class Rakuun_Intern_Map_AStar {
 //			$reachableNodes[] = &self::$map[$expandedNode['x'] - 1][$expandedNode['y'] - 1];
 //		if ($expandedNode['x'] + 1 < self::$width && $expandedNode['y'] - 1 >= 0)
 //			$reachableNodes[] = &self::$map[$expandedNode['x'] + 1][$expandedNode['y'] - 1];
-//		if ($expandedNode['x'] - 1 >= 0 && $expandedNode['y'] + 1 < self::$height)
+//		if ($expandedNode['x'] - 1 >= 0 && $expandedNode['y'] + 1 < Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT)
 //			$reachableNodes[] = &self::$map[$expandedNode['x'] - 1][$expandedNode['y'] + 1];
-//		if ($expandedNode['x'] + 1 < self::$width && $expandedNode['y'] + 1 < self::$height)
+//		if ($expandedNode['x'] + 1 < self::$width && $expandedNode['y'] + 1 < Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT)
 //			$reachableNodes[] = &self::$map[$expandedNode['x'] + 1][$expandedNode['y'] + 1];
 			
 		foreach ($reachableNodes as &$reachableNode) {

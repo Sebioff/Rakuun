@@ -11,7 +11,7 @@ class Rakuun_Intern_Production_Unit_Spydrone extends Rakuun_Intern_Production_Un
 		$this->setBaseBerylliumCosts(100);
 		$this->setBaseEnergyCosts(100);
 		$this->setBaseTimeCosts(3*60);
-		$this->setBaseSpeed(162);
+		$this->setBaseSpeed(15);
 		$this->addNeededBuilding('barracks', 3);
 		$this->setAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK, true);
 		$this->setShortDescription('Spionagesonde');

@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_Tego extends Rakuun_Intern_Production_Unit {
 		$this->setBaseTimeCosts(12*60);
 		$this->setBaseAttackValue(14);
 		$this->setBaseDefenseValue(21);
-		$this->setBaseSpeed(368);
+		$this->setBaseSpeed(138);
 		$this->setRessourceTransportCapacity(150);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
 		$this->addNeededBuilding('tank_factory', 1);

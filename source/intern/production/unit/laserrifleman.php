@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_LaserRifleman extends Rakuun_Intern_Producti
 		$this->setBaseTimeCosts(8*60);
 		$this->setBaseAttackValue(14);
 		$this->setBaseDefenseValue(10);
-		$this->setBaseSpeed(694);
+		$this->setBaseSpeed(332);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER);
 		$this->addNeededBuilding('barracks', 3);

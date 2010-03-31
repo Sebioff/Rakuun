@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_Mandrogani extends Rakuun_Intern_Production_
 		$this->setBaseTimeCosts(15*60);
 		$this->setBaseAttackValue(44);
 		$this->setBaseDefenseValue(14);
-		$this->setBaseSpeed(390);
+		$this->setBaseSpeed(150);
 		$this->setRessourceTransportCapacity(350);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
 		$this->addNeededBuilding('tank_factory', 4);
