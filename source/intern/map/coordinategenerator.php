@@ -3,8 +3,6 @@
 class Rakuun_Intern_Map_CoordinateGenerator {
 	private $bitMap;
 	private $map;
-	private static $height = 100;
-	private static $width = 100;
 
 	public function __construct() {
 		$this->bitMap = imagecreatefrompng(PROJECT_PATH.'/www/images/map.png');
@@ -13,8 +11,8 @@ class Rakuun_Intern_Map_CoordinateGenerator {
 	public function getRandomFreeCoordinate() {
 		do {
 			$freePosition = false;
-			$x = rand(0, self::$width - 1);
-			$y = rand(0, self::$height - 1);
+			$x = rand(0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH - 1);
+			$y = rand(0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT - 1);
 			$mapNode = &$this->getMapNode($x, $y);
 			$freePosition = $mapNode['walkable'];
 			if ($freePosition) {

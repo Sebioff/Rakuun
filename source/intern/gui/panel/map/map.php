@@ -1,8 +1,8 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
-	const MAP_WIDTH = 100;
-	const MAP_HEIGHT = 100;
+	const MAP_WIDTH = 125;
+	const MAP_HEIGHT = 125;
 	const MAP_RECT_SIZE = 10;
 
 	private $zoom = 1;

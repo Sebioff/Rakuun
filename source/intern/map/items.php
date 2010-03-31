@@ -5,7 +5,7 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: image/gif');
-		$image = imagecreate(1000, 1000);
+		$image = imagecreate(Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE);
 		$black = imagecolorallocate($image, 0, 0, 0);
 		imagecolortransparent($image, $black);
 		
