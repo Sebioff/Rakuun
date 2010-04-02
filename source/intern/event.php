@@ -34,6 +34,24 @@ class Rakuun_Intern_Event {
 			$userBuildings->user->news = $building->getName() . ' Stufe ' . $building->getLevel() . ' fertiggestellt.<br/>' . $userBuildings->user->news;
 			Rakuun_User_Manager::update($userBuildings->user);
 		}
+		
+		// award quests
+		if ($record->eventType == self::EVENT_TYPE_BUILDING_PRODUCE) {
+			if ($internalName == 'momo') {
+				$momo = Rakuun_Intern_Production_Factory::getBuilding('momo', $userBuildings);
+				if ($momo->getLevel() == $momo->getMaximumLevel()) {
+					$quest = new Rakuun_Intern_Quest_FirstCompleteMomo();
+					$quest->awardIfPossible($record->user);
+				}
+			}
+			
+			if ($internalName == 'laboratory') {
+				if ($record->level == 10) {
+					$quest = new Rakuun_Intern_Quest_FirstLaboratory10();
+					$quest->awardIfPossible($record->user);
+				}
+			}
+		}
 	}
 	
 	public static function onChangeTechnologyLevel(Rakuun_DB_Technologies $userTechnologies, $internalName, $deltaLevel, Rakuun_DB_User $executingUser = null) {

@@ -71,6 +71,7 @@ abstract class Rakuun_DB_Containers {
 	private static $cronjobsContainer = null;
 	private static $stockmarketContainer = null;
 	private static $databasesStartpositionsContainer = null;
+	private static $questsContainer = null;
 	
 	// GETTERS / SETTERS -------------------------------------------------------
 	/**
@@ -934,6 +935,18 @@ abstract class Rakuun_DB_Containers {
 		self::$boardsMetaLastVisitedContainer->addReferencedContainer(self::getBoardsMetaContainer());
 		
 		return self::$boardsMetaLastVisitedContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getQuestsContainer() {
+		if (self::$questsContainer)
+			return self::$questsContainer;
+		
+		self::$questsContainer = new DB_Container('quests');
+		
+		return self::$questsContainer;
 	}
 }
 

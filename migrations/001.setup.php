@@ -950,4 +950,12 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `metas_buildings_wip` (
 $queries[] = 'ALTER TABLE `metas_buildings_wip`
   ADD CONSTRAINT `metas_buildings_wip_ibfk_1` FOREIGN KEY (`meta`) REFERENCES `metas` (`id`) ON DELETE CASCADE;';
 
+$queries[] = 'CREATE TABLE IF NOT EXISTS `quests` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `owner` int(10) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  `identifier` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
+
 ?>

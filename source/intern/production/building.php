@@ -31,11 +31,20 @@ abstract class Rakuun_Intern_Production_Building extends Rakuun_Intern_Productio
 	public function getTimeCosts($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
+			
 		$costs = $this->getBaseTimeCosts() * $level;
 		$costs -= $costs / 100 * Rakuun_Intern_Production_Technology_Momo::BUILDING_TIME_REDUCTION_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('momo', $this->getUser())->getLevel();
+		
+		// quest award
+		$quest = new Rakuun_Intern_Quest_FirstCompleteMomo();
+		if ($quest->isOwnedBy($this->getUser()))
+			$costs -= $costs / 100 * Rakuun_Intern_Quest_FirstCompleteMomo::BUILD_TIME_REDUCTION_PERCENT;
+		
 		$costs = round($costs / RAKUUN_SPEED_BUILDING);
+		
 		if ($costs < 1)
 			$costs = 1;
+		
 		return $costs;
 	}
 }
