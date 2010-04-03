@@ -27,7 +27,7 @@ class Rakuun_Intern_GUI_Panel_Admin_NewRound extends GUI_Panel {
 		
 		$startTime = $this->date->getValue() + $this->hour->getValue() * 60 * 60;
 		
-		$ssh->exec('chmod 666 www/v4/Rakuun/config/revision.php');
+		$ssh->exec('chmod 666 www/Rakuun/config/revision.php');
 		$file = PROJECT_PATH.'/config/revision.php';
 		$file_contents = file_get_contents($file);
 		
@@ -35,7 +35,7 @@ class Rakuun_Intern_GUI_Panel_Admin_NewRound extends GUI_Panel {
 		$file_contents = preg_replace('=\(\'RAKUUN_ROUND_STARTTIME\', \d+\)=', '(\'RAKUUN_ROUND_STARTTIME\', '.$startTime.')', $file_contents);
 		fwrite($fh, $file_contents);
 		fclose($fh);
-		$ssh->exec('chmod 644 www/v4/Rakuun/config/revision.php');
+		$ssh->exec('chmod 644 www/Rakuun/config/revision.php');
 	}
 }
 

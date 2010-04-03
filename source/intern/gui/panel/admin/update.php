@@ -30,7 +30,8 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		// update core
 		$this->params->conflicts = false;
 		$log .= '<br /><strong>Updating CORE...</strong><br />';
-		$updateActions = explode("\n", $ssh->exec('svn update www/v4/CORE'));
+		// FIXME hardcoded paths suck!
+		$updateActions = explode("\n", $ssh->exec('svn update www/CORE'));
 		foreach ($updateActions as $action) {
 			if (isset($action[0]) && $action[0] == 'C') {
 				$log .= '<span style="color:#ff0000">'.$action.'</span><br />';
@@ -43,7 +44,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		
 		// update rakuun
 		$log .= '<br /><strong>Updating Rakuun...</strong><br />';
-		$updateActions = explode("\n", $ssh->exec('svn update www/v4/Rakuun'));
+		$updateActions = explode("\n", $ssh->exec('svn update www/Rakuun'));
 		foreach ($updateActions as $action) {
 			if (isset($action[0]) && $action[0] == 'C') {
 				$log .= '<span style="color:#ff0000">'.$action.'</span><br />';
@@ -75,7 +76,8 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		
 		if ($this->createNews->getSelected()) {
 			// get changes
-			$history = explode("\n", $ssh->exec('svn log www/v4/Rakuun -r '.$revisionNumber.':'.(PROJECT_VERSION + 1)));
+			// FIXME hardcoded paths suck!
+			$history = explode("\n", $ssh->exec('svn log www/Rakuun -r '.$revisionNumber.':'.(PROJECT_VERSION + 1)));
 			$formatHistory = $this->formatHistory($history);
 			
 			// add news entry
@@ -87,7 +89,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		}
 		
 		// update revision number
-		$ssh->exec('chmod 666 www/v4/Rakuun/config/revision.php');
+		$ssh->exec('chmod 666 www/Rakuun/config/revision.php');
 		$file = PROJECT_PATH.'/config/revision.php';
 		$file_contents = file_get_contents($file);
 		
@@ -95,7 +97,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		$file_contents = preg_replace('=\(\'PROJECT_VERSION\', \d+\)=', '(\'PROJECT_VERSION\', '.$revisionNumber.')', $file_contents);
 		fwrite($fh, $file_contents);
 		fclose($fh);
-		$ssh->exec('chmod 644 www/v4/Rakuun/config/revision.php');
+		$ssh->exec('chmod 644 www/Rakuun/config/revision.php');
 	}
 	
 	private function formatHistory(array $history) {
