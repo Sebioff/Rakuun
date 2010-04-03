@@ -20,7 +20,7 @@
 	<br />
 <? endif; ?>
 
-<? if ($user->activationTime == 0): ?>
+<? if ($user->activationTime == 0 && !Rakuun_User_Manager::isSitting()): ?>
 	Dein Account wurde noch nicht aktiviert. Falls der Account 3 Tage
 	nach Anmeldung nicht aktiviert ist, wird er automatisch gelöscht. Wende dich an den <a href="<?= App::get()->getInternModule()->getSubmodule('messages')->getURL(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS)); ?>"><u>Support</u></a>, falls
 	du nach 24 Stunden noch keine Aktivierungsmail erhalten hast.
