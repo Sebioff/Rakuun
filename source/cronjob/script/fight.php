@@ -39,6 +39,10 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 								$databaseSpecial = new Rakuun_User_Specials_Database($army->user, $database->identifier, true);
 								$databaseSpecial->giveSpecial();
 								$database->delete();
+								
+								// award quest
+								$quest = new Rakuun_Intern_Quest_FirstCapturedDatabase();
+								$quest->awardIfPossible($army->user);
 							}
 						}
 					}

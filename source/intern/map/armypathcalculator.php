@@ -17,7 +17,7 @@ class Rakuun_Intern_Map_ArmyPathCalculator {
 			if ($unit->getSpeed() > $speed)
 				$speed = $unit->getSpeed();
 		}
-		$speed *= $this->army->speedMultiplier;
+		$speed /= $this->army->speedMultiplier;
 		$astar = new Rakuun_Intern_Map_AStar($speed, $unitTypes);
 		$options = array();
 		$options['order'] = 'ID ASC';
