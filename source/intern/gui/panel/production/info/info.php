@@ -21,13 +21,13 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$productionTime = time() - 60 * 5;
 			for ($i = $startLevel; $i <= $endLevel; $i++) {
 				if ($this->getProductionItem()->getBaseIronProduction() > 0)
-					$production->addLine(array($i, $this->getProductionItem()->getProducedIron($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i)));
+					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedIron($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 				else if ($this->getProductionItem()->getBaseBerylliumProduction() > 0)
-					$production->addLine(array($i, $this->getProductionItem()->getProducedBeryllium($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i)));
+					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedBeryllium($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 				else if ($this->getProductionItem()->getBaseEnergyProduction() > 0)
-					$production->addLine(array($i, $this->getProductionItem()->getProducedEnergy($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i)));
+					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedEnergy($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 				else if ($this->getProductionItem()->getBasePeopleProduction() > 0)
-					$production->addLine(array($i, $this->getProductionItem()->getProducedPeople($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i)));
+					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedPeople($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 			}
 			$this->contentPanel->setTemplate(dirname(__FILE__).'/ressourceproducer.tpl');
 		}
@@ -40,10 +40,10 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$costs->addHeader(array('Eisen', 'Beryllium', 'Energie', 'Leute', 'Zeit'));
 			$costs->addLine(
 				array(
-					$this->getProductionItem()->getBaseIronCosts(),
-					$this->getProductionItem()->getBaseBerylliumCosts(),
-					$this->getProductionItem()->getBaseEnergyCosts(),
-					$this->getProductionItem()->getBasePeopleCosts(),
+					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBaseIronCosts()),
+					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBaseBerylliumCosts()),
+					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBaseEnergyCosts()),
+					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBasePeopleCosts()),
 					Rakuun_Date::formatCountDown($this->getProductionItem()->getBaseTimeCosts())
 				)
 			);

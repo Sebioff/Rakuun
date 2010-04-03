@@ -1,15 +1,5 @@
 <? $user = Rakuun_User_Manager::getCurrentUser(); ?>
 
-Dies ist eine Testversion, in der noch einige Funktionen fehlen und die	insbesondere nicht so aussieht wie die fertige Version aussehen soll.
-<br />
-Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http://tickets.rakuun.de" target="_blank"><u>hier</u></a> melden
-<? if (App::get()->getInternModule()->hasSubmodule('messages')): ?>
-(oder dem <a href="<?= App::get()->getInternModule()->getSubmodule('messages')->getURL(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS)); ?>"><u>Support</u></a>)
-<? endif; ?>
-.
-<br />
-<br />
-
 <? if ($this->hasPanel('unread_messages')): ?>
 	<? $this->displayPanel('unread_messages') ?>
 	<br />
@@ -31,9 +21,8 @@ Falls Fehler auftreten gibt es keine Erstattungen. Probleme bitte <a href="http:
 <? endif; ?>
 
 <? if ($user->activationTime == 0): ?>
-	<? // TODO add link to support ?>
 	Dein Account wurde noch nicht aktiviert. Falls der Account 3 Tage
-	nach Anmeldung nicht aktiviert ist, wird er automatisch gelöscht. Wende dich an den Support, falls
+	nach Anmeldung nicht aktiviert ist, wird er automatisch gelöscht. Wende dich an den <a href="<?= App::get()->getInternModule()->getSubmodule('messages')->getURL(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS)); ?>"><u>Support</u></a>, falls
 	du nach 24 Stunden noch keine Aktivierungsmail erhalten hast.
 	<br />
 <? endif; ?>
