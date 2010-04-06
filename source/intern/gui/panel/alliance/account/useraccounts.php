@@ -10,6 +10,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_UserAccounts extends GUI_Panel {
 		$options = array();
 		$options['order'] = 'date DESC';
 		$options['conditions'][] = array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
+		$options['conditions'][] = array('sender != ?', 'NULL');
 		$logs = Rakuun_DB_Containers::getAlliancesAccountlogContainer()->select($options);
 		$users = array();
 		foreach ($logs as $log) {

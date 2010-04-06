@@ -329,6 +329,8 @@ abstract class Rakuun_DB_Containers {
 			
 		self::$alliancesAccountlogContainer = new DB_Container('alliances_accountlog');
 		self::$alliancesAccountlogContainer->addReferencedContainer(self::getAlliancesContainer());
+		self::$alliancesAccountlogContainer->addReferencedContainer(self::getUserContainer(), 'sender', 'id');
+		self::$alliancesAccountlogContainer->addReferencedContainer(self::getUserContainer(), 'receiver', 'id');
 		return self::$alliancesAccountlogContainer;
 	}
 	

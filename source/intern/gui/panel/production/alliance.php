@@ -43,6 +43,7 @@ class Rakuun_Intern_GUI_Panel_Production_Alliance extends Rakuun_Intern_GUI_Pane
 		}
 		
 		DB_Connection::get()->beginTransaction();
+		
 		$nextBuildableLevel = $this->getProductionItem()->getNextBuildableLevel();
 		$ironCosts = $this->getProductionItem()->getIronCostsForLevel($nextBuildableLevel);
 		$berylliumCosts = $this->getProductionItem()->getBerylliumCostsForLevel($nextBuildableLevel);
@@ -56,6 +57,18 @@ class Rakuun_Intern_GUI_Panel_Production_Alliance extends Rakuun_Intern_GUI_Pane
 		$record->starttime = time();
 		$record->position = time();
 		Rakuun_DB_Containers::getAlliancesBuildingsWIPContainer()->save($record);
+		
+		// add alliance ressource log entry
+		$log = new DB_Record();
+		$log->alliance = $this->getProductionItem()->getOwner();
+		$log->iron = $ironCosts;
+		$log->beryllium = $berylliumCosts;
+		$log->energy = $energyCosts;
+		$log->people = $peopleCosts;
+		$log->date = time();
+		$log->type = Rakuun_Intern_GUI_Panel_Alliance_Account::TYPE_ALLIANCE_BUILDING;
+		Rakuun_DB_Containers::getAlliancesAccountlogContainer()->save($log);
+		
 		DB_Connection::get()->commit();
 		Router::get()->getCurrentModule()->invalidate();
 	}

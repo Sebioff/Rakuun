@@ -6,6 +6,8 @@
 class Rakuun_Intern_GUI_Panel_Alliance_Account extends GUI_Panel {
 	const TYPE_USER_TO_ALLIANCE = 1;
 	const TYPE_ALLIANCE_TO_USER = -1;
+	const TYPE_ALLIANCE_BUILDING = 2;
+	const TYPE_ALLIANCE_QUEST = 3;
 	
 	public function init() {
 		parent::init();
