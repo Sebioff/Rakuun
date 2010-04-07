@@ -4,7 +4,7 @@
 <ul>
 	<? $attackSequence = array_reverse(explode('|', $this->getArmy()->fightingSequence)); ?>
 	<? foreach ($attackSequence as $unitName): ?>
-		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName); ?>
+		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $this->getArmy()); ?>
 		<? if ($unit->getAmount() > 0): ?>
 			<li>
 				<?= $unit->getAmount(); ?>
