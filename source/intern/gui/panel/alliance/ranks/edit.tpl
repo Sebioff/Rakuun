@@ -3,7 +3,9 @@
 <? endif ?>
 <? $this->displayLabelForPanel('name') ?> <? $this->displayPanel('name') ?>
 <br class="clear" />
-<? $this->displayPanel('privileges') ?>
+<? if ($this->hasPanel('privileges')): ?>
+	<? $this->displayPanel('privileges') ?>
+<? endif; ?>
 <h2>Mitglieder</h2>
 <? $this->displayPanel('members') ?>
 <? $this->displayPanel('submit') ?>

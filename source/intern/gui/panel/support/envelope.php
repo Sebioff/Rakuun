@@ -20,7 +20,7 @@ class Rakuun_Intern_GUI_Panel_Support_Envelope extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/envelope.tpl');
 		$this->addPanel(new GUI_Panel_Date('date', $this->supportticket->time, 'Datum'));
-		$this->addPanel(new GUI_Panel_Text('user', $this->supportticket->user->name, 'User'));
+		$this->addPanel(new Rakuun_GUI_Control_UserLink('user', $this->supportticket->user, $this->supportticket->get('user'), 'User'));
 		$this->params->url = App::get()->getInternModule()->getSubmodule('support')->getSubmodule('display')->getURL(array('id' => $this->getTicket()->getPK()));
 	}
 	

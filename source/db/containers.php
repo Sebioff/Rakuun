@@ -677,6 +677,7 @@ abstract class Rakuun_DB_Containers {
 			return self::$supportticketsContainer;
 		
 		self::$supportticketsContainer = new DB_Container('supporttickets');
+		self::$supportticketsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		
 		return self::$supportticketsContainer;
 	}
