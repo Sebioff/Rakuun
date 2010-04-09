@@ -93,6 +93,26 @@ class Rakuun_DB_Meta extends DB_Record implements Rakuun_Intern_Production_Owner
 	}
 	
 	/**
+	 * @return array of Rakuun_DB_User, sorted by defense sequence
+	 */
+	public function getCurrentShieldGeneratorOwners() {
+		$options = array();
+		$shieldGenerator = new Rakuun_Intern_Production_Building_ShieldGenerator();
+		$buildingsTable = Rakuun_DB_Containers::getBuildingsContainer()->getTable();
+		$userTable = Rakuun_DB_Containers::getUserContainer()->getTable();
+		$alliancesTable = Rakuun_DB_Containers::getAlliancesContainer()->getTable();
+		$metasTable = Rakuun_DB_Containers::getMetasContainer()->getTable();
+		$options['join'] = array($buildingsTable, $alliancesTable, $metasTable);
+		$options['order'] = $userTable.'.ID ASC';
+		$options['conditions'][] = array($buildingsTable.'.'.$shieldGenerator->getInternalName().' >= ?', 1);
+		$options['conditions'][] = array($buildingsTable.'.user = '.$userTable.'.id');
+		$options['conditions'][] = array($userTable.'.alliance = '.$alliancesTable.'.id');
+		$options['conditions'][] = array($alliancesTable.'.meta = '.$metasTable.'.id');
+		$options['conditions'][] = array($metasTable.'.id = ?', $this->getPK());
+		return Rakuun_DB_Containers::getUserContainer()->select($options);
+	}
+	
+	/**
 	 * @return Rakuun_DB_User
 	 */
 	public function getCurrentShieldGeneratorHolder() {

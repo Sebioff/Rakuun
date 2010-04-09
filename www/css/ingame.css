@@ -12,7 +12,7 @@
 	$7  -  Overview
 	$8  -  Techtree
 	$9  -  WarSim
-	$10  -  Map
+	$10 -  Map
 	$11 -  Boards
 */
 
@@ -57,21 +57,23 @@
 	color:red;
 }
 
-.rakuun_btn_move_up
+#ctn_content .rakuun_btn_move_up
 {
 	background:transparent url('../images/up.gif') no-repeat 3px 2px;
-	border:0px none !important;
+	border:0px none;
 	height:12px;
-	margin-bottom:0px !important;
+	margin-bottom:0px;
+	margin-left:0px;
 	width:16px;
 }
 
-.rakuun_btn_move_down
+#ctn_content .rakuun_btn_move_down
 {
 	background:transparent url('../images/down.gif') no-repeat 3px 2px;
-	border:0px none !important;
+	border:0px none;
 	height:14px;
-	margin-bottom:0px !important;
+	margin-bottom:0px;
+	margin-left:0px;
 	width:14px;
 }
 
@@ -164,6 +166,15 @@
 {
 	display:inline;
 }
+
+.module_build .core_gui_submitbutton,
+.module_research .core_gui_submitbutton,
+.module_produce .core_gui_submitbutton,
+.module_workers .core_gui_submitbutton
+{
+	margin-left:0px;
+}
+
 
 /* $4  -  Alliances ----------------------------------------------------------*/
 .alliance_privilegelist .core_gui_checkbox,
@@ -331,9 +342,14 @@ table.boardview td.posting_count {
 
 .shout_text,
 .shout_header,
-#main-overview_content-sbbox-shoutbox-shoutarea
+.module_overview .core_gui_textarea
 {
 	width:268px;
+}
+
+.module_overview .core_gui_submitbutton
+{
+	margin-left:68px;
 }
 
 #main-overview_content-sitterbox textarea
@@ -449,6 +465,11 @@ table.boardview td.posting_count {
 	width:150px;
 }
 
+.rakuun_map_target_panel .core_gui_submitbutton
+{
+	margin-left:150px;
+}
+
 .rakuun_map_target_panel .core_gui_digitbox
 {
 	width:50px;
@@ -471,4 +492,9 @@ table.boardview td.posting_count {
 .rakuun_board_postinfo
 {
 	font-weight:bold;
+}
+
+.ctn_board_content .core_gui_submitbutton
+{
+	margin-left:0px;
 }

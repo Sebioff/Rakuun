@@ -104,8 +104,9 @@ form div.core_common_error_list label {
 	width:auto;
 }
 
-.rakuun_box form input.core_gui_submitbutton {
-	float:right;
+.rakuun_box .core_gui_submitbutton {
+	float:none;
+	margin-left:120px;
 }
 
 .core_gui_hoverinfo {

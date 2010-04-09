@@ -8,7 +8,7 @@
 			<? endif; ?>
 		</div>
 		<div class="content">
-			<div class="content_inner clearfix">
+			<div class="content_inner">
 				<? $this->contentPanel->display() ?>
 			</div>
 		</div>

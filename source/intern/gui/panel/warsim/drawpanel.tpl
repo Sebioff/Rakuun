@@ -19,6 +19,7 @@
 			<? endforeach; ?>
 		</div>
 	</div>
+	<br class="clear"/>
 	<div>
 		<h1>Technologie</h1>
 		<div class="warsim_panels_attacker">
@@ -36,19 +37,20 @@
 			<? endforeach; ?>
 		</div>
 	</div>
+	<br class="clear"/>
 	<div id="warsim_panels_buildings">
 		<h1>Gebäude</h1>
-		<div class="warsim_panels_defender">
+		<div class="warsim_panels_defender clearfix">
 			<h1>Verteidiger</h1>
 			<? foreach ($this->getPanelsForDefendersBuildings() as $panel): ?>
 				<? $this->displayLabelForPanel($panel->getName()); ?> <? $panel->display(); ?>
 				<br class="clear" />
 			<? endforeach; ?>
+		<? $this->displayPanel('calcwarsim'); ?>
 		</div>
 	</div>
+	<br class="clear"/>
 </div>
-<br />
-<? $this->displayPanel('calcwarsim'); ?>
 <? if ($this->hasBeenSubmitted() && !$this->hasErrors()): ?>
 	<br class="clear" />
 	<hr/>

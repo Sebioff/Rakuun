@@ -40,28 +40,7 @@ class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel {
 			$list->addItem($item = new Rakuun_Intern_GUI_Panel_Board_Posting('posting'.$posting->getPK(), $posting));
 		}
 		$this->params->boardname = $this->board->name;
-		$this->addPanel($blanko = new GUI_Panel('post'));
-		$blanko->addPanel($text = new GUI_Control_TextArea('text', null, 'Posting'));
-		$text->addValidator(new GUI_Validator_Mandatory());
-		$blanko->addPanel(new GUI_Control_SubmitButton('submit', 'posten'));
-	}
-	
-	public function onSubmit() {
-		if ($this->hasErrors())
-			return;
-		
-		DB_Connection::get()->beginTransaction();
-		$posting = new DB_Record();
-		$posting->board = $this->board;
-		$posting->user = Rakuun_User_Manager::getCurrentUser();
-		$posting->text = $this->post->text;
-		$posting->date = time();
-		$this->postingsContainer->save($posting);
-		$this->board->date = time();
-		$this->board->save();
-		DB_Connection::get()->commit();
-		$this->post->text->resetValue();
-		$this->getModule()->invalidate();
+		$this->addPanel($addPost = new Rakuun_Intern_GUI_Panel_Board_AddPost('post', $this->board, $this->postingsContainer));
 	}
 }
 ?>

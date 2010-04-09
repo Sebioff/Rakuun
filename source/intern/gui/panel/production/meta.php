@@ -33,6 +33,10 @@ class Rakuun_Intern_GUI_Panel_Production_Meta extends Rakuun_Intern_GUI_Panel_Pr
 				$i++;
 			}
 		}
+		
+		// FIXME kinda hacky
+		if ($this->getProductionItem() instanceof Rakuun_Intern_Production_Building_Metas_Dancertia)
+			$this->addHeadPanel(new Rakuun_Intern_GUI_Panel_Production_Meta_Defenders('defenders'));
 	}
 	
 	public function onProduce() {
