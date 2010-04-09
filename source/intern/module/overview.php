@@ -142,10 +142,10 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		}
 		
 		if (Rakuun_User_Manager::getCurrentUser()->sitter)
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_User_Sitterbox('sitterbox'));
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('sitterbox', new Rakuun_Intern_GUI_Panel_User_Sitterbox('sitterbox')));
 		
 		if (!Rakuun_User_Manager::isSitting() && $sitting = Rakuun_DB_Containers::getUserContainer()->selectBySitterFirst(Rakuun_User_Manager::getCurrentUser())) {
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_User_SitterSwitch('sitterswitch', $sitting));
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('sitterswitch', new Rakuun_Intern_GUI_Panel_User_SitterSwitch('sitterswitch', $sitting)));
 		}
 		
 		//Info Panel

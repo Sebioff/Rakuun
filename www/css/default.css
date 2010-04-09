@@ -64,6 +64,10 @@ input.ac_loading {
 	background:#FFFFFF url('../images/loading.gif') no-repeat right top;
 }
 
+.multi_buttons .core_gui_submitbutton {
+	margin-left:0px;
+}
+
 /* $2  -  Framework Elements -------------------------------------------------*/
 .core_common_error_list {
 	background:#FF0000;

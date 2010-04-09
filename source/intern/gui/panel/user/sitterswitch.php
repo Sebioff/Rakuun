@@ -13,10 +13,14 @@ class Rakuun_Intern_GUI_Panel_User_SitterSwitch extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/sitterswitch.tpl');
+		$this->addClasses('rakuun_sitter_switchbox');
 		
 		$this->addPanel(new Rakuun_GUI_Control_UserLink('sittingname', $this->getSitting()));
-		$this->addPanel(new GUI_Control_SubmitButton('switch', 'Wechseln'));
-		$this->addPanel(new GUI_Control_SubmitButton('delete', 'Löschen'));
+		$this->addPanel($switchButton = new GUI_Control_SubmitButton('switch', 'Wechseln'));
+		$switchButton->addClasses('rakuun_sitter_switchbutton');
+		$this->addPanel($deleteButton = new GUI_Control_SubmitButton('delete', 'Löschen'));
+		$deleteButton->setConfirmationMessage($this->getSitting()->nameUncolored.' wirklich nicht mehr sitten?');
+		$deleteButton->addClasses('rakuun_sitter_deletebutton');
 	}
 	
 	public function onDelete() {

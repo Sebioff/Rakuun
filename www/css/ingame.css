@@ -357,6 +357,18 @@ table.boardview td.posting_count {
 	width:280px;
 }
 
+.module_overview .rakuun_sitter_switchbutton {
+	margin-left:0px;
+}
+
+.module_overview .rakuun_sitter_deletebutton {
+	margin-left:110px;
+}
+
+#main-overview_content-sitterswitch {
+	width:255px;
+}
+
 /* $8  -  Techtree -----------------------------------------------------------*/
 .module_techtree h1
 {
