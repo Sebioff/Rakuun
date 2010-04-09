@@ -113,6 +113,10 @@ form div.core_common_error_list label {
 	margin-left:120px;
 }
 
+.rakuun_box .no_margin {
+	margin:0px;
+}
+
 .core_gui_hoverinfo {
 	background-color:#FFFFFF;
 	border:1px solid black;

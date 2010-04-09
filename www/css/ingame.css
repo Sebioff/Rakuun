@@ -347,14 +347,14 @@ table.boardview td.posting_count {
 	width:268px;
 }
 
-.module_overview .core_gui_submitbutton
+.module_overview .ctn_shoutbox .core_gui_submitbutton
 {
 	margin-left:68px;
 }
 
 #main-overview_content-sitterbox textarea
 {
-	width:280px;
+	width:238px;
 }
 
 .module_overview .rakuun_sitter_switchbutton {
