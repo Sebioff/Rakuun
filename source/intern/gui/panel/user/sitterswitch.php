@@ -37,7 +37,8 @@ class Rakuun_Intern_GUI_Panel_User_SitterSwitch extends GUI_Panel {
 		$_SESSION['isSitting'] = true;
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$user->lastActivity = time();
-		$user->lastBotVerification = $originalUser->lastBotVerification;
+		if ($originalUser->lastBotVerification > $user->lastBotVerification)
+			$user->lastBotVerification = $originalUser->lastBotVerification;
 		Rakuun_User_Manager::update($user);
 		$this->getModule()->invalidate();
 	}

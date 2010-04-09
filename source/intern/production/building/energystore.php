@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Building_Energystore extends Rakuun_Intern_Produc
 		$this->setBaseTimeCosts(18*60);
 		$this->setBaseCapacity(10000);
 		$this->setMinimumLevel(1);
-		$this->setShortDescription('Durch den Ausbau des Energiespeichers wird die Menge der speicherbaren Energie erhöht. Außerdem können 10% der speicherbaren Energie nicht geplündert werden.');
+		$this->setShortDescription('Durch den Ausbau des Energiespeichers wird die Menge der speicherbaren Energie erhöht.');
 		$this->setLongDescription('Ein Energiespeicher besteht aus einer gigantischen Anzahl hochkapazitärer Kondensatoren in einer magnetisch isolierenden Hülle und wird speziell zum Speichern von Energie gebaut.');
 		$this->setPoints(5);
 	}
