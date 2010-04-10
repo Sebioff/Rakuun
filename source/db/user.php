@@ -181,12 +181,38 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 			$armyStrengthLimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
 		$armyStrength = $this->getArmyStrength();
 		
+		$oldNoobState = $this->isInNoob();
 		$this->isInNoob = ($this->points <= $nooblimit	// points below point limit
 						&& $armyStrength <= $armyStrengthLimit //armystrength below armystrength limit
 						&& $this->buildings->shieldGenerator == 0	// no shield generator
 						&& $this->getDatabaseCount() == 0	// no databases
 						&& !Rakuun_DB_Containers::getArmiesContainer()->selectByUserFirst($this));	// no armies
-		$this->save();
+						
+		if ($oldNoobState != $this->isInNoob) {
+			$this->save();
+			
+			// cancel all incomming attacks when falling back to noob
+			if ($this->isInNoob) {
+				$attackers = array();
+				foreach (Rakuun_DB_Containers::getArmiesContainer()->selectByTarget($this) as $army) {
+					$attackers[] = $army->user;
+					Rakuun_DB_Containers::getArmiesPathsContainer()->deleteByArmy($army);
+					$army->targetX = $army->user->cityX;
+					$army->targetY = $army->user->cityY;
+					$army->tick = time();
+					$army->targetTime = 0;
+					$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
+					$pathCalculator->getPath();
+					$army->save();
+				}
+				
+				foreach ($attackers as $attacker) {
+					$text = 'Die Stadt '.$this->cityName.' von '.$this->name.' ist nicht mehr angreifbar. Sämtliche unserer Armeen sind auf dem Rückweg.';
+					$igm = new Rakuun_Intern_IGM('Ziel nicht angreifbar', $attacker, $text, Rakuun_Intern_IGM::TYPE_FIGHT);
+					$igm->send();
+				}
+			}
+		}
 	}
 	
 	/**
