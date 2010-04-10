@@ -499,8 +499,8 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_units_production` (
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user` int(10) unsigned DEFAULT NULL,
-  `opponent` int(10) unsigned DEFAULT NULL,
+  `user` int(10) unsigned NOT NULL,
+  `opponent` int(10) unsigned NOT NULL,
   `time` int(10) unsigned NOT NULL,
   `fight_id` int(10) unsigned NOT NULL,
   `type` tinyint(1) unsigned NOT NULL,
