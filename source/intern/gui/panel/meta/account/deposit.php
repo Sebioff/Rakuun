@@ -34,6 +34,9 @@ class Rakuun_Intern_GUI_Panel_Meta_Account_Deposit extends GUI_Panel {
 			$this->addError('So viel Energie hat deine Allianz nicht.');
 		if ($this->people->getValue() > $ressources->people)
 			$this->addError('So viele Leute hat deine Allianz nicht.');
+		if ($this->iron->getValue() + $this->beryllium->getValue() + $this->energy->getValue() + $this->people->getValue() == 0)
+			$this->addError('Deine Allianz kann nicht nichts einzahlen!');
+			
 		if ($this->hasErrors())
 			return;
 			
