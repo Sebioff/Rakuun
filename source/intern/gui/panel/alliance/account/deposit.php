@@ -39,6 +39,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 			$this->addError('Du benötigste einen Molekulartransmitter, um in die Allianzkasse einzahlen zu können.');
 		if ($user->isInNoob())
 			$this->addError('Du darfst dich nicht im Noobschutz befinden, um in die Allianzkasse einzahlen zu können');
+		if ($this->iron->getValue() + $this->beryllium->getValue() + $this->energy->getValue() + $this->people->getValue() == 0)
+			$this->addError('Du kannst nicht nichts einzahlen!');
 			
 		if ($this->hasErrors())
 			return;
