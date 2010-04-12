@@ -37,6 +37,18 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Activate extends GUI_Panel {
 			return;
 		
 		Rakuun_DB_Containers::getUserActivationContainer()->deleteByUser($user);
+		
+		$igm = new Rakuun_Intern_IGM('Aktivierung!', $user);
+		$igm->setText(
+			'Hi '.$user->name.',
+			<br/>
+			Dein Account wurde manuell aktiviert!
+			<br/>
+			Viel Spass bei Rakuun!'
+		);
+		$igm->setSenderName(Rakuun_Intern_IGM::SENDER_SYSTEM);
+		$igm->send();
+		
 		$user->activationTime = time();
 		$user->save();
 	}
