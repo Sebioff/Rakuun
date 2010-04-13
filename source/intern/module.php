@@ -106,15 +106,15 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		// TODO re-activate as soon as tutorial steps have been implemented (ticket #68)
 //		if (Rakuun_User_Manager::getCurrentUser()->tutorial)
 //			$this->mainPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('tutor', new Rakuun_Intern_GUI_Panel_Tutor('tutor'), 'Tutor'));
+		
+		$this->mainPanel->addPanel(new Rakuun_Intern_GUI_Panel_Ressources_Amount('iron', $this->getUser()->ressources->iron, Rakuun_Intern_Production_Factory::getBuilding('ironmine')->getProducedIron(time() - 1), $this->getUser()->ressources->getCapacityIron(), 'Eisen'));
+		$this->mainPanel->addPanel(new Rakuun_Intern_GUI_Panel_Ressources_Amount('beryllium', (int)$this->getUser()->ressources->beryllium , Rakuun_Intern_Production_Factory::getBuilding('berylliummine')->getProducedBeryllium(time() - 1), $this->getUser()->ressources->getCapacityBeryllium(), 'Beryllium'));
+		$this->mainPanel->addPanel(new Rakuun_Intern_GUI_Panel_Ressources_Amount('energy', (int)$this->getUser()->ressources->energy, Rakuun_Intern_Production_Factory::getBuilding('hydropower_plant')->getProducedEnergy(time() - 1), $this->getUser()->ressources->getCapacityEnergy(), 'Energie'));
+		$this->mainPanel->addPanel(new Rakuun_Intern_GUI_Panel_Ressources_Amount('people', (int)$this->getUser()->ressources->people, Rakuun_Intern_Production_Factory::getBuilding('clonomat')->getProducedPeople(time() - 1), $this->getUser()->ressources->getCapacityPeople(), 'Leute'));
 	}
 	
 	public function afterInit() {
 		parent::afterInit();
-		
-		$this->mainPanel->addPanel(new GUI_Panel_Number('iron', (int)$this->getUser()->ressources->iron, 'Eisen'));
-		$this->mainPanel->addPanel(new GUI_Panel_Number('beryllium', (int)$this->getUser()->ressources->beryllium, 'Beryllium'));
-		$this->mainPanel->addPanel(new GUI_Panel_Number('energy', (int)$this->getUser()->ressources->energy, 'Energie'));
-		$this->mainPanel->addPanel(new GUI_Panel_Number('people', (int)$this->getUser()->ressources->people, 'Leute'));
 		
 		// add skin-specific css files
 		foreach (Rakuun_GUI_Skinmanager::get()->getCssRouteReferences() as $route) {
