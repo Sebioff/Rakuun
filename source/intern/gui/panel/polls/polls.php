@@ -17,6 +17,7 @@ class Rakuun_Intern_GUI_Panel_Polls extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/polls.tpl');
+		$options = array();
 		$options['order'] = 'date DESC';
 		$options['conditions'][] = array('type = ?', $this->polltype);
 		if ($this->polltype == self::POLL_ALLIANCE)
