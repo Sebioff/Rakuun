@@ -15,15 +15,24 @@ class Rakuun_Intern_GUI_Panel_Statistics_Military extends GUI_Panel {
 		$line = array('Bisher durchgeführte Angriffe:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::noOfAtts()));
 		$table->addLine($line);
 		
-		$options = array();
-		$properties = array();
+		$propertiesUnits = array();
+		$propertiesArmies = array();
 		$units = Rakuun_Intern_Production_Factory::getAllUnits();
-		foreach ($units as $unit)
-			$properties[] = 'SUM('.$unit->getInternalName().') AS '.$unit->getInternalName().'_sum';
-		$options['properties'] = implode(', ', $properties);
-		$unitAmounts = Rakuun_DB_Containers::getUnitsContainer()->selectFirst($options);
 		foreach ($units as $unit) {
-			$line = array($unit->getNameForAmount(2), GUI_Panel_Number::formatNumber($unitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')}));
+			$sumProperty = 'SUM('.$unit->getInternalName().') AS '.$unit->getInternalName().'_sum';
+			$propertiesUnits[] = $sumProperty;
+			if (!$unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY))
+				$propertiesArmies[] = $sumProperty;
+		}
+		$options = array();
+		$options['properties'] = implode(', ', $propertiesUnits);
+		$unitAmounts = Rakuun_DB_Containers::getUnitsContainer()->selectFirst($options);
+		$options = array();
+		$options['properties'] = implode(', ', $propertiesArmies);
+		$armyUnitAmounts = Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options);
+		foreach ($units as $unit) {
+			$amount = $unitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')} + $armyUnitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')};
+			$line = array($unit->getNameForAmount(2), GUI_Panel_Number::formatNumber($amount));
 			$table->addLine($line);
 		}
 		
