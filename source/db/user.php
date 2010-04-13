@@ -209,6 +209,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 				foreach ($attackers as $attacker) {
 					$text = 'Die Stadt '.$this->cityName.' von '.$this->name.' ist nicht mehr angreifbar. Sämtliche unserer Armeen sind auf dem Rückweg.';
 					$igm = new Rakuun_Intern_IGM('Ziel nicht angreifbar', $attacker, $text, Rakuun_Intern_IGM::TYPE_FIGHT);
+					$igm->setSenderName(Rakuun_Intern_IGM::SENDER_FIGHTS);
 					$igm->send();
 				}
 			}

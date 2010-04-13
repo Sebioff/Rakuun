@@ -10,7 +10,7 @@ class Rakuun_Intern_Module_Multihunting extends Rakuun_Intern_Module implements 
 		$param = $this->getParam('user');
 		$user = Rakuun_DB_Containers::getUserContainer()->selectByPK($param);
 		
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('activity', new Rakuun_Intern_GUI_Panel_Multihunting_ActivityLog('activity', $user, 'AktivitÃ¤tslog'), 'AktivitÃ¤tslog'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('activity', new Rakuun_Intern_GUI_Panel_Multihunting_ActivityLog('activity', $user, 'Aktivitätslog'), 'Aktivitätslog'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('ressource', new Rakuun_Intern_GUI_Panel_Multihunting_RessourceLog('ressource', $user, 'Ressourcen-Transfer'), 'Ressourcen-Transfer'));
 	}
 	
