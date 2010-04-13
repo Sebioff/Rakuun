@@ -124,7 +124,7 @@ abstract class Rakuun_User_Specials {
 			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'wirkt wie ein Warpgate',
 			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'erhöht Angriffskraft um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED] * 100 .'%',
 			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'reduziert Einheitenproduktionszeit um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100 .'%',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'erhöht Ressourcenproduktion um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'%',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'erhöht Ressourcenproduktion von Eisen und Beryllium um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'%',
 			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'erhöht Verteidigungskraft um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN] * 100 .'%'
 		);
 		return $effects;

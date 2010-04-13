@@ -64,6 +64,12 @@
 		<? $useredit->display() ?>
 		<br class="clear" />
 	<? endif;?>
+	<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
+		<? $useredit = new Rakuun_GUI_Control_MultiLogLink('multiloglink', $user, 'Multilog anschauen'); ?>
+		<? $useredit->display() ?>
+		<br class="clear" />
+	<? endif;?>
+	
 	<br class="clear" />
 	<? if($user->isInNoob()): ?>
 		Der Spieler befindet sich im Noobschutz und kann nicht angegriffen werden.
