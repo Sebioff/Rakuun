@@ -91,7 +91,8 @@ class Rakuun_Intern_Event {
 				return $building->getName().' Stufe '.($event->level + 1).' abgerissen.';
 			case self::EVENT_TYPE_BUILDING_DESTROY:
 				$building = Rakuun_Intern_Production_Factory::getBuilding($event->building);
-				return $building->getName().' Stufe '.($event->level + 1).' zerstört durch '.$event->executingUser->name.'.';
+				$label = new Rakuun_GUI_Control_UserLink('event_user_'.$event->getPK(), $event->executingUser, $event->get('executing_user'));
+				return $building->getName().' Stufe '.($event->level + 1).' zerstört durch '.$label->render().'.';
 		}
 	}
 }
