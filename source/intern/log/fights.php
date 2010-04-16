@@ -23,7 +23,7 @@ class Rakuun_Intern_Log_Fights {
 		$loserLogEntry->opponent = $winner;
 		$loserLogEntry->time = time();
 		$loserLogEntry->type = self::TYPE_LOST;
-		$winnerLogEntry->role = ($loser->getPK() == $attacker->getPK()) ? self::ROLE_ATTACKER : self::ROLE_DEFENDER;
+		$loserLogEntry->role = ($loser->getPK() == $attacker->getPK()) ? self::ROLE_ATTACKER : self::ROLE_DEFENDER;
 		$loserLogEntry->fightID = $fightID;
 		foreach ($loserLostUnits as $internalUnitName => $lostAmount)
 			$loserLogEntry->{Text::underscoreToCamelCase($internalUnitName)} = $lostAmount;
