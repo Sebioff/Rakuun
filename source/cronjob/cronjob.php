@@ -1,8 +1,8 @@
 <?php
 
 class Rakuun_Cronjob extends Cronjob_Manager {
-	public function init() {
-		parent::init();
+	public function __construct($moduleName, $databaseTableName) {
+		parent::__construct($moduleName, $databaseTableName);
 		
 		$this->addScript(new Rakuun_Cronjob_Script_DailyCleanup('daily_cleanup', 0, 0)); // daily at 00:00
 		$this->addScript(new Rakuun_Cronjob_Script_Cleanup('cleanup', 6 * 60 * 60)); // every 6 hours
