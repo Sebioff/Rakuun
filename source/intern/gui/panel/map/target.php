@@ -64,13 +64,18 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 	public function onSubmit() {
 		$targetX = 0;
 		$targetY = 0;
+		$sendedUnits = $this->unitInput->getArmy();
 		
 		if (Rakuun_User_Manager::getCurrentUser()->isInNoob()) {
 			$this->addError('Du kannst keine Angriffe starten, so lange du dich im Noobschutz befindest.');
 		}
 		
-		if (!$this->unitInput->getArmy() && (!$this->hasPanel('spydrone') || $this->spydrone->getValue() == 0) && (!$this->hasPanel('cloaked_spydrone') || $this->cloakedSpydrone->getValue() == 0)) {
+		if (empty($sendedUnits) && (!$this->hasPanel('spydrone') || $this->spydrone->getValue() == 0) && (!$this->hasPanel('cloaked_spydrone') || $this->cloakedSpydrone->getValue() == 0)) {
 			$this->addError('Keine Einheiten ausgewählt.');
+		}
+		
+		if (!empty($sendedUnits) && (($this->hasPanel('spydrone') && $this->spydrone->getValue() > 0) || ($this->hasPanel('cloaked_spydrone') && $this->cloakedSpydrone->getValue() > 0))) {
+			$this->addError('Einheiten und Sonden können nicht zusammen verschickt werden.');
 		}
 		
 		$targetUser = $this->getTargetUser();
@@ -84,7 +89,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			}
 			
 			// noobprotection only if it's gonna be an attack with units
-			if ($this->unitInput->getArmy()) {
+			if (!empty($sendedUnits)) {
 				if ($targetUser->isInNoob()) {
 					$this->addError('Der Spieler befindet sich im Noobschutz');
 				}
@@ -135,7 +140,6 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$army->fightingSequence = $army->user->units->attackSequence;
 		
 		// update home unit amounts
-		$sendedUnits = $this->unitInput->getArmy();
 		if ($this->hasPanel('spydrone'))
 			$sendedUnits['spydrone'] = $this->spydrone->getValue();
 		if ($this->hasPanel('cloaked_spydrone'))

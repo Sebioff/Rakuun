@@ -15,6 +15,8 @@ class Rakuun_Intern_GUI_Panel_Production_Workers extends Rakuun_GUI_Panel_Box {
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/workers.tpl');
 		
 		$missingWorkers = $this->getProductionItem()->getRequiredWorkers() - $this->getProductionItem()->getWorkers();
+		if ($missingWorkers > $this->getProductionItem()->getUser()->ressources->people)
+			$missingWorkers = $this->getProductionItem()->getUser()->ressources->people;
 		$this->contentPanel->addPanel(new GUI_Control_DigitBox('workers_add_amount', $missingWorkers));
 		$this->contentPanel->addPanel(new GUI_Control_SubmitButton('workers_add', 'Arbeiter einstellen'));
 		
