@@ -27,7 +27,9 @@ class Rakuun_Index_Panel_News_Item_Content extends Rakuun_GUI_Panel_Box_Content 
 		$this->setTemplate(dirname(__FILE__).'/item.tpl');
 		$this->addPanel(new GUI_Panel_Date('date', $this->getRecord()->time, 'Datum'));
 		$this->addPanel(new GUI_Panel_Text('writer', $this->getRecord()->writer, 'Author'));
-		$this->addPanel(new GUI_Panel_Text('text', $this->getRecord()->text, 'Text'));
+		$text = preg_replace('/#(\d+)\b/i', '<a href="http://tickets.rakuun.de/view.php?id=$1" target="_blank">$0</a>', $this->getRecord()->text);
+		$text = Text::format($text);
+		$this->addPanel(new GUI_Panel_Text('text', $text, 'Text'));
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
