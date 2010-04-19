@@ -31,8 +31,8 @@ class Rakuun_Intern_GUI_Panel_Statistics_Military extends GUI_Panel {
 		$options['properties'] = implode(', ', $propertiesArmies);
 		$armyUnitAmounts = Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options);
 		foreach ($units as $unit) {
-			$amount = $unitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')} + $armyUnitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')};
-			$line = array($unit->getNameForAmount(2), GUI_Panel_Number::formatNumber($amount));
+			$unitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')} += $armyUnitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')};
+			$line = array($unit->getNameForAmount(2), GUI_Panel_Number::formatNumber($unitAmounts->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')}));
 			$table->addLine($line);
 		}
 		
