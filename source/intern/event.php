@@ -37,14 +37,6 @@ class Rakuun_Intern_Event {
 		
 		// award quests
 		if ($record->eventType == self::EVENT_TYPE_BUILDING_PRODUCE) {
-			if ($internalName == 'momo') {
-				$momo = Rakuun_Intern_Production_Factory::getBuilding('momo', $userBuildings);
-				if ($momo->getLevel() == $momo->getMaximumLevel()) {
-					$quest = new Rakuun_Intern_Quest_FirstCompleteMomo();
-					$quest->awardIfPossible($record->user);
-				}
-			}
-			
 			if ($internalName == 'laboratory') {
 				if ($record->level == 10) {
 					$quest = new Rakuun_Intern_Quest_FirstLaboratory10();
@@ -78,6 +70,17 @@ class Rakuun_Intern_Event {
 			$technology = Rakuun_Intern_Production_Factory::getTechnology($internalName, $userTechnologies->user);
 			$userTechnologies->user->news = $technology->getName() . ' Stufe ' . $technology->getLevel() . ' fertiggestellt.<br/>' . $userTechnologies->user->news;
 			Rakuun_User_Manager::update($userTechnologies->user);
+		}
+		
+		// award quests
+		if ($record->eventType == self::EVENT_TYPE_TECHNOLOGY_PRODUCE) {
+			if ($internalName == 'momo') {
+				$momo = Rakuun_Intern_Production_Factory::getTechnology('momo', $userTechnologies);
+				if ($momo->getLevel() == $momo->getMaximumLevel()) {
+					$quest = new Rakuun_Intern_Quest_FirstCompleteMomo();
+					$quest->awardIfPossible($record->user);
+				}
+			}
 		}
 	}
 	
