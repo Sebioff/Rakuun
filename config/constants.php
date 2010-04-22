@@ -1,9 +1,9 @@
 <?php
 
 require_once dirname(__FILE__).'/revision.php';
+require_once dirname(__FILE__).'/local.php';
 
 // CORE CONFIGURATION ----------------------------------------------------------
-define('CORE_PATH', realpath(dirname(__FILE__).'/../../CORE'));
 define('CORE_MAILSENDER', 'Rakuun <service@rakuun.de>');
 
 // PROJECT CONFIGURATION -------------------------------------------------------
