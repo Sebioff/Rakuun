@@ -4,14 +4,12 @@
  * Displays form for adding a post
  */
 class Rakuun_Intern_GUI_Panel_Board_AddPost extends GUI_Panel {
-	private $board = null;
-	private $postingsContainer = null;
+	private $config = null;
 	
-	public function __construct($name, DB_Record $board, DB_Container $postingsContainer) {
+	public function __construct($name, Board_Config $config) {
 		parent::__construct($name);
 		
-		$this->board = $board;
-		$this->postingsContainer = $postingsContainer;
+		$this->config = $config;
 	}
 	
 	public function init() {
@@ -29,14 +27,13 @@ class Rakuun_Intern_GUI_Panel_Board_AddPost extends GUI_Panel {
 			return;
 		
 		DB_Connection::get()->beginTransaction();
-		$posting = new DB_Record();
-		$posting->board = $this->board;
-		$posting->user = Rakuun_User_Manager::getCurrentUser();
+		$posting = $this->config->getPostingRecord();
+		$posting->board = $this->config->getBoardRecord();
 		$posting->text = $this->text;
 		$posting->date = time();
-		$this->postingsContainer->save($posting);
-		$this->board->date = time();
-		$this->board->save();
+		$this->config->getPostingsContainer()->save($posting);
+		$this->config->getBoardRecord()->date = time();
+		$this->config->getBoardRecord()->save();
 		DB_Connection::get()->commit();
 		$this->text->resetValue();
 		$this->getModule()->invalidate();

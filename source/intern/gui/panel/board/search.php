@@ -1,12 +1,12 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Board_Search extends GUI_Panel {
-	private $boardContainer = null;
+	private $config = null;
 	
-	public function __construct($name, DB_Container $container, $title = '') {
+	public function __construct($name, Board_Config $config, $title = '') {
 		parent::__construct($name, $title);
 		
-		$this->boardContainer = $container;
+		$this->config = $config;
 	}
 	
 	public function init() {
@@ -22,7 +22,7 @@ class Rakuun_Intern_GUI_Panel_Board_Search extends GUI_Panel {
 		$options = array();
 		$options['conditions'][] = array('`name` LIKE ?', '%'.str_replace('*', '%', $this->board->getValue()).'%');
 		$options['order'] = 'name ASC, date DESC';
-		$boards = $this->boardContainer->select($options);
+		$boards = $this->config->getBoardsContainer()->select($options);
 		if (!empty($boards)) {
 			$list = new GUI_Panel_List('result');
 			$module = $this->getModule();

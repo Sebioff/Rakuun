@@ -5,7 +5,6 @@ class Rakuun_Intern_Module_Meta extends Rakuun_Intern_Module_Meta_Navigation {
 		parent::__construct($name);
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
-		$this->addSubmodule(new Rakuun_Intern_Module_Meta_Board('board'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Meta_Polls('polls'));
 		if ($user && Rakuun_Intern_Alliance_Security::get()->isInGroup($user, Rakuun_Intern_Alliance_Security::GROUP_LEADERS)) {
 			$this->addSubmodule(new Rakuun_Intern_Module_Meta_Applications('applications'));

@@ -26,12 +26,15 @@ abstract class Rakuun_DB_Containers {
 	private static $alliancesAccountlogContainer = null;
 	private static $alliancesBuildingsContainer = null;
 	private static $alliancesBuildingsWIPContainer = null;
-	private static $boardsContainer = null;
-	private static $boardsPostingsContainer = null;
-	private static $boardsLastVisitedContainer = null;
+	private static $boardsAdminContainer = null;
+	private static $boardsAdminPostingsContainer = null;
+	private static $boardsAdminLastVisitedContainer = null;
 	private static $boardsAllianceContainer = null;
 	private static $boardsAlliancePostingsContainer = null;
 	private static $boardsAllianceLastVisitedContainer = null;
+	private static $boardsGlobalContainer = null;
+	private static $boardsGlobalPostingsContainer = null;
+	private static $boardsGlobalLastVisitedContainer = null;
 	private static $boardsMetaContainer = null;
 	private static $boardsMetaPostingsContainer = null;
 	private static $boardsMetaLastVisitedContainer = null;
@@ -827,39 +830,80 @@ abstract class Rakuun_DB_Containers {
 	/**
 	 * @return DB_Container
 	 */
-	public static function getBoardsContainer() {
-		if (self::$boardsContainer)
-			return self::$boardsContainer;
+	public static function getBoardsAdminContainer() {
+		if (self::$boardsAdminContainer)
+			return self::$boardsAdminContainer;
 			
-		self::$boardsContainer = new DB_Container('boards');
+		self::$boardsAdminContainer = new DB_Container('boards_admin');
 		
-		return self::$boardsContainer;
+		return self::$boardsAdminContainer;
 	}
 	
 	/**
 	 * @return DB_Container
 	 */
-	public static function getBoardsPostingsContainer() {
-		if (self::$boardsPostingsContainer)
-			return self::$boardsPostingsContainer;
+	public static function getBoardsAdminPostingsContainer() {
+		if (self::$boardsAdminPostingsContainer)
+			return self::$boardsAdminPostingsContainer;
 			
-		self::$boardsPostingsContainer = new DB_Container('boards_postings');
-		self::$boardsPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$boardsAdminPostingsContainer = new DB_Container('boards_admin_postings');
+		self::$boardsAdminPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		
-		return self::$boardsPostingsContainer;
+		return self::$boardsAdminPostingsContainer;
 	}
 	
 	/**
 	 * @return DB_Container
 	 */
-	public static function getBoardsLastVisitedContainer() {
-		if (self::$boardsLastVisitedContainer)
-			return self::$boardsLastVisitedContainer;
+	public static function getBoardsAdminLastVisitedContainer() {
+		if (self::$boardsAdminLastVisitedContainer)
+			return self::$boardsAdminLastVisitedContainer;
 		
-		self::$boardsLastVisitedContainer = new DB_Container('boards_visited');
-		self::$boardsLastVisitedContainer->addReferencedContainer(self::getBoardsContainer());
+		self::$boardsAdminLastVisitedContainer = new DB_Container('boards_admin_visited');
+		self::$boardsAdminLastVisitedContainer->addReferencedContainer(self::getBoardsAdminContainer());
 		
-		return self::$boardsLastVisitedContainer;
+		return self::$boardsAdminLastVisitedContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsGlobalContainer() {
+		if (self::$boardsGlobalContainer)
+			return self::$boardsGlobalContainer;
+			
+		//TODO: Move to rakuun-static-db
+		self::$boardsGlobalContainer = new DB_Container('boards_global');
+		
+		return self::$boardsGlobalContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsGlobalPostingsContainer() {
+		if (self::$boardsGlobalPostingsContainer)
+			return self::$boardsGlobalPostingsContainer;
+			
+		//TODO: Move to rakuun-static-db
+		self::$boardsGlobalPostingsContainer = new DB_Container('boards_global_postings');
+		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		
+		return self::$boardsGlobalPostingsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsGlobalLastVisitedContainer() {
+		if (self::$boardsGlobalLastVisitedContainer)
+			return self::$boardsGlobalLastVisitedContainer;
+		
+		// Has to stay in rakuun-round-db
+		self::$boardsGlobalLastVisitedContainer = new DB_Container('boards_global_visited');
+		self::$boardsGlobalLastVisitedContainer->addReferencedContainer(self::getBoardsGlobalContainer());
+		
+		return self::$boardsGlobalLastVisitedContainer;
 	}
 	
 	/**

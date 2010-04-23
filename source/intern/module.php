@@ -75,16 +75,18 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('trade'), 'Handeln', array('rakuun_navigation_node_trade'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('alliance'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
-		if (Rakuun_Intern_Modules::get()->hasSubmodule('stockmarket'))
-			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('stockmarket'), 'Börse', array('rakuun_navigation_node_stockmarket'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('meta'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('stockmarket'))
+			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('stockmarket'), 'Börse', array('rakuun_navigation_node_stockmarket'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('messages'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('messages'), 'Nachrichten', array('rakuun_navigation_node_messages'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('profile'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('profile'), 'Profil', array('rakuun_navigation_node_profile'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('suchen'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Suchen', array('rakuun_navigation_node_search'));
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('boards'))
+			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('boards'), 'Foren', array('rakuun_navigation_node_boards'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('highscores'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('highscores'), 'Highscores', array('rakuun_navigation_node_highscores'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('vips'))

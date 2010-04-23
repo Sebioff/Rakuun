@@ -3,13 +3,13 @@
 /**
  * Displays all or one specific board.
  */
-class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
-	public function __construct($name, DB_Container $container = null, $title = '') {
+abstract class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
+	protected $config = null;
+	
+	public function __construct($name, $title = '') {
 		$this->setItemsPerPage(20);
-		if ($container === null)
-			$container = Rakuun_DB_Containers::getBoardsContainer();
 			
-		parent::__construct($name, $container, $title);
+		parent::__construct($name, $this->config->getBoardsContainer(), $title);
 	}
 	
 	public function init() {
@@ -18,50 +18,32 @@ class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 		$this->setTemplate(dirname(__FILE__).'/board.tpl');
 		if (($boardId = Router::get()->getCurrentModule()->getParam('board')) > 0) {
 			// Board darstellen
-			$board = $this->getContainer()->selectByIdFirst($boardId);
+			$board = $this->config->getBoardsContainer()->selectByIdFirst($boardId);
 			if ($board === null) {
 				$this->addError('Du hast keinen Zugriff auf das Forum mit der ID '.$boardId);
 				return;
 			}
-			$this->initWithSingleBoard($board);
+			$this->config->setBoardRecord($board);
+			$this->initWithSingleBoard();
 		} else {
 			$this->initWithBoards();
 		}
 	}
 	
-	protected function initWithSingleBoard(DB_Record $board) {
+	protected function initWithSingleBoard() {
 		$this->addPanel(
 			new Rakuun_Intern_GUI_Panel_Board_PostingView(
 				'board',
-				$board,
-				$this->getPostingsContainer(),
-				$this->getVisitedContainer()
+				$this->config
 			)
 		);
 	}
 	
 	private function initWithBoards() {
-		$user = Rakuun_User_Manager::getCurrentUser();
 		$options = array();
 		$options['order'] = 'date DESC';
 		$boards = $this->getContainer()->select(DB_Container::mergeOptions($this->getOptions(), $options));
-		$this->addPanel($table = new GUI_Panel_Table('board'));
-		$table->addHeader(array('Name', 'Beiträge', 'Letzte Änderung'));
-		$module = Router::get()->getCurrentModule();
-		foreach ($boards as $board) {
-			$line = array();
-			$link = new GUI_Control_Link('boardlink', $board->name, $module->getUrl(array('board' => $board->id)));
-			$options = array();
-			$options['conditions'][] = array('user = ?', $user);
-			$options['conditions'][] = array('board = ?', $board);
-			$lastVisit = $this->getVisitedContainer()->selectFirst($options);
-			if (!$lastVisit || $lastVisit->date < $board->date)
-				$link->setAttribute('style', 'font-weight:bold');
-			$line[] = $link;
-			$line[] = $this->getPostingsContainer()->countByBoard($board);
-			$line[] = new GUI_Panel_Date('date'.$board->getPK(), $board->date);
-			$table->addLine($line);
-		}
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('board', $this->config, $boards));
 		$this->addPanel($blanko = new GUI_Panel('addboard'));
 		$blanko->addPanel($name = new GUI_Control_TextBox('name', null, 'Boardname'));
 		$name->addValidator(new GUI_Validator_Mandatory());
@@ -69,30 +51,22 @@ class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 		$blanko->addPanel(new GUI_Control_SubmitButton('addboard', 'anlegen'));
 		$this->addPanel($blanko = new GUI_Panel('markread'));
 		$blanko->addPanel(new GUI_Control_SubmitButton('markread', 'Alle als gelesen markieren'));
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Search('suchen', $this->getBoardsContainer()));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Search('suchen', $this->config));
 	}
 	
 	public function onAddBoard() {
 		if ($this->hasErrors())
 			return;
 		
-		$board = $this->getFilteredRecord();
+		$board = $this->config->getBoardRecord();
 		$board->name = $this->addboard->name->getValue();
 		$board->date = time();
-		$this->getContainer()->save($board);
+		$this->config->getBoardsContainer()->save($board);
 		$this->addboard->name->resetValue();
 		$this->getModule()->invalidate();
 	}
 	
-	protected function getFilteredRecord() {
-		return new DB_Record();
-	}
-	
 	public static function getNewPostingsCount(DB_Container $boardsContainer = null, DB_Container $visitedContainer = null) {
-		if ($boardsContainer === null)
-			$boardsContainer = Rakuun_DB_Containers::getBoardsContainer();
-		if ($visitedContainer === null)
-			$visitedContainer = Rakuun_DB_Containers::getBoardsLastVisitedContainer();
 		$options = array();
 		$options['conditions'][] = array('user = ?', Rakuun_User_Manager::getCurrentUser());
 		$_visited = $visitedContainer->select($options);
@@ -117,35 +91,99 @@ class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 	
 	public function onMarkRead() {
 		$user = Rakuun_User_Manager::getCurrentUser();
-		$lastVisitedContainer = $this->getVisitedContainer();
-		$boards = $this->getBoardsContainer()->select();
+		$lastVisitedContainer = $this->config->getVisitedContainer();
+		$boards = $this->config->getBoardsContainer()->select();
 		DB_Connection::get()->beginTransaction();
 		foreach ($boards as $board) {
 			$options = array();
 			$options['conditions'][] = array('board = ?', $board);
-			$options['conditions'][] = array('user = ?', $user);
+			if ($this->config->getIsGlobal()) {
+				$options['conditions'][] = array('user_name = ?', $user->name);
+				$options['conditions'][] = array('round_number = ?', RAKUUN_ROUND_NAME);
+			} else {
+				$options['conditions'][] = array('user = ?', $user);
+			}
 			$newVisit = $lastVisitedContainer->selectFirst($options);
 			if ($newVisit === null)
 				$newVisit = new DB_Record();
 			$newVisit->board = $board;
-			$newVisit->user = $user;
+			if ($this->config->getIsGlobal()) {
+				$newVisit->userName = $user->nameUncolored;
+				$newVisit->roundNumber = RAKUUN_ROUND_NAME;
+			} else {
+				$newVisit->user = $user;
+			}
 			$newVisit->date = time();
 			$lastVisitedContainer->save($newVisit);
 		}
 		DB_Connection::get()->commit();
 		$this->getModule()->invalidate();
 	}
-	
-	protected function getBoardsContainer() {
-		return $this->getContainer();
+}
+
+class Board_Config {
+	private $boardsContainer = null;
+	private $boardRecord = null;
+	private $module = null;
+	private $postingsContainer = null;
+	private $postingRecord = null;
+	private $visitedContainer = null;
+	private $isGlobal = false;
+
+	public function getBoardsContainer() {
+		return $this->boardsContainer;
 	}
 	
-	protected function getPostingsContainer() {
-		return Rakuun_DB_Containers::getBoardsPostingsContainer();
+	public function setBoardsContainer(DB_Container $container) {
+		$this->boardsContainer = $container;
 	}
 	
-	protected function getVisitedContainer() {
-		return Rakuun_DB_Containers::getBoardsLastVisitedContainer();
+	public function getBoardRecord() {
+		return $this->boardRecord;
+	}
+	
+	public function setBoardRecord(DB_Record $record) {
+		$this->boardRecord = $record;
+	}
+	
+	public function getPostingsContainer() {
+		return $this->postingsContainer;
+	}
+	
+	public function setPostingsContainer(DB_Container $container) {
+		$this->postingsContainer = $container;
+	}
+	
+	public function getPostingRecord() {
+		return $this->postingRecord;
+	}
+	
+	public function setPostingRecord(DB_Record $record) {
+		$this->postingRecord = $record;
+	}
+	
+	public function getVisitedContainer() {
+		return $this->visitedContainer;
+	}
+	
+	public function setVisitedContainer(DB_Container $container) {
+		$this->visitedContainer = $container;
+	}
+	
+	public function setIsGlobal($global) {
+		$this->isGlobal = (bool)$global;
+	}
+	
+	public function getIsGlobal() {
+		return $this->isGlobal;
+	}
+	
+	public function setBoardModule(Rakuun_Intern_Module $module) {
+		$this->module = $module;
+	}
+	
+	public function getBoardModule() {
+		return $this->module;
 	}
 }
 ?>

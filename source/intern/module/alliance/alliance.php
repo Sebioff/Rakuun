@@ -14,7 +14,6 @@ class Rakuun_Intern_Module_Alliance extends Rakuun_Intern_Module_Alliance_Naviga
 		
 		if (Rakuun_User_Manager::getCurrentUser()) {
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Applications('applications'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Board('board'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Edit('edit'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Diplomacy('diplomacy'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Members('members'));

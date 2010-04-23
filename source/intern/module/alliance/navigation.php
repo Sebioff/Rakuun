@@ -25,8 +25,6 @@ class Rakuun_Intern_Module_Alliance_Navigation extends Rakuun_Intern_Module {
 		}
 		if ($parent->hasSubmodule('diplomacy'))
 			$navigation->addModuleNode($parent->getSubmodule('diplomacy'), 'Diplomatie');
-		if ($parent->hasSubmodule('board'))
-			$navigation->addModuleNode($parent->getSubmodule('board'), 'Forum ('.Rakuun_Intern_GUI_Panel_Alliance_Board::getNewPostingsCount().')');
 		if ($parent->hasSubmodule('statistics'))
 			$navigation->addModuleNode($parent->getSubmodule('statistics'), 'Statistiken');
 		if ($parent->hasSubmodule('polls'))
