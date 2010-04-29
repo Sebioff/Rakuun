@@ -28,7 +28,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Applications_Application extends GUI_Pane
 		$count = Rakuun_DB_Containers::getAlliancesApplicationsContainer()->count($options);
 		if ($count > 0) 
 			$this->addError('Es liegt noch eine nicht bearbeitete Bewerbung von dir bei dieser Allianz vor!');
-			
+		
+		if (Rakuun_User_Manager::isSitting())
+			$this->addError('Als Sitter kannst du dich nicht bei einer Allianz bewerben.');
+		
 		if ($this->hasErrors())
 			return;
 		
