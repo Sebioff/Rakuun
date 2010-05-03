@@ -135,7 +135,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			$this->contentPanel->addPanel(
 				new Rakuun_GUI_Panel_Box(
 					'sbbox',
-					new Rakuun_Intern_GUI_Panel_Shoutbox('shoutbox', Rakuun_DB_Containers::getShoutboxContainer()),
+					new Rakuun_Intern_GUI_Panel_Shoutbox_Global('shoutbox'),
 				'Shoutbox'
 				)
 			);

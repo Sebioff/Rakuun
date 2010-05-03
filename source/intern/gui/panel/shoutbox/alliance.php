@@ -1,42 +1,35 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Shoutbox_Alliance extends Rakuun_Intern_GUI_Panel_Shoutbox {
-	private $alliance = null;
-	
 	public function __construct($name, $title = '') {
-		$this->shoutMaxLength = 1000;
-		$this->alliance = Rakuun_User_Manager::getCurrentUser()->alliance;
-		$options['conditions'][] = array('alliance = ?', $this->alliance);
-		parent::__construct($name, Rakuun_DB_Containers::getShoutboxAlliancesContainer()->getFilteredContainer($options), $title);
-	}
-	
-	public function onSubmit() {
-		if ($this->hasErrors())
-			return;
-			
+		$this->config = new Shoutbox_Config();
+		$user = Rakuun_User_Manager::getCurrentUser();
+		$options = array();
+		$options['conditions'][] = array('alliance = ?', $user->alliance);
+		$this->config->setShoutContainer(Rakuun_DB_Containers::getShoutboxAlliancesContainer()->getFilteredContainer($options));
 		$shout = new DB_Record();
-		$shout->alliance = $this->alliance;
-		$shout->user = Rakuun_User_Manager::getCurrentUser();
-		$shout->text = $this->shoutarea->getValue();
-		$shout->date = time();
-		$this->getContainer()->save($shout);
-		$this->shoutarea->resetValue();
-		
-		// FIXME kinda wtf :/...only works with sub-sub-query
-		$this->getContainer()->deleteByQuery('
-			DELETE FROM '.$this->getContainer()->getTable().'
+		$shout->user = $user;
+		$shout->alliance = $user->alliance;
+		$this->config->setShoutRecord($shout);
+		$this->config->setShoutMaxLength(1000);
+		$this->config->setDeleteQuery('
+			DELETE FROM '.$this->config->getShoutContainer()->getTable().'
 			WHERE ID <= (
 				SELECT MIN(ID)
 				FROM(
 					SELECT ID
-					FROM '.$this->getContainer()->getTable().'
-					WHERE alliance = '.$this->alliance->getPK().'
+					FROM '.$this->config->getShoutContainer()->getTable().'
+					WHERE alliance = '.$user->alliance->getPK().'
 					ORDER BY date DESC
 					LIMIT 1
 					OFFSET 100
 				) as temp
-			) AND alliance = '.$this->alliance->getPK().'
+			) AND alliance = '.$user->alliance->getPK().'
 		');
+		$this->config->setUserIsMod(Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_SBMODERATION));
+		$this->config->setIsGlobal(false);
+		
+		parent::__construct($name, $title);
 	}
 }
 ?>

@@ -4,10 +4,13 @@
  * Class to display a single shout.
  */
 class Rakuun_Intern_GUI_Panel_Shoutbox_Shout extends GUI_Panel {
+	private $config = null;
 	private $shout = null;
 	
-	public function __construct($name, DB_Record $shout, $title = '') {
+	public function __construct($name, Shoutbox_Config $config, DB_Record $shout, $title = '') {
+		$this->config = $config;
 		$this->shout = $shout;
+		
 		parent::__construct($name, $title);
 	}
 	
@@ -23,6 +26,8 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Shout extends GUI_Panel {
 			$params[$this->getParent()->getName().'-page'] = $this->getParent()->getPage();
 			$this->addPanel(new GUI_Control_JsLink('answerlink', '-antworten-', '$(\'#'.$this->getParent()->shoutarea->getID().'\').val(\'@'.$this->shout->user->nameUncolored.': \').focus(); return false;', Router::get()->getCurrentModule()->getUrl($params)));
 		}
+		if ($this->config->getUserIsMod() && $this->getModule()->getParam('moderate') == Rakuun_User_Manager::getCurrentUser()->getPK())
+			$this->addPanel(new Rakuun_Intern_GUI_Panel_Shoutbox_Moderate('moderate', $this->config, $this->shout));
 	}
 }
 

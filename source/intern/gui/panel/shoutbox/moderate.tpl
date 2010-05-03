@@ -1,0 +1,1 @@
+<? $this->displayPanel('delete'); ?> <? $this->displayPanel('timeban'); ?>

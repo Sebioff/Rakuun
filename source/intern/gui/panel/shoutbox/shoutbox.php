@@ -3,37 +3,41 @@
 /**
  * Display a shoutbox.
  */
-class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
-	protected $shoutMaxLength = 250;
+abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
+	protected $config = null;
 	
-	public function __construct($name, DB_Container $container, $title = '') {
+	public function __construct($name, $title = '') {
 		$this->setItemsPerPage(10);
+		
 		$options['order'] = 'date DESC';
-		parent::__construct($name, $container->getFilteredContainer($options), $title);
+		parent::__construct($name, $this->config->getShoutContainer()->getFilteredContainer($options), $title);
 	}
 	
 	public function init() {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/shoutbox.tpl');
-		$this->addPanel($text = new GUI_Control_TextArea('shoutarea', '', 'Text'));
-		$text->addValidator(new GUI_Validator_Mandatory());
-		$text->addValidator(new GUI_Validator_Maxlength($this->shoutMaxLength));
+		$user = Rakuun_User_Manager::getCurrentUser();
 		if (Router::get()->getCurrentModule()->getParam('answerid') > 0) {
-			$user = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
-			$text->setValue('@'.$user->nameUncolored.': ');
+			$answer = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
+			$text->setValue('@'.$answer->nameUncolored.': ');
 			$text->setFocus();
 		}
 		$this->addPanel(new GUI_Control_Link('refresh', 'Aktualisieren', $this->getModule()->getUrl()));
+		if ($this->config->getUserIsMod())
+			$this->addPanel(new GUI_Control_Link('moderatelink', 'Moderieren', $this->getModule()->getUrl(array('moderate' => $user->getPK()))));
+		$this->addPanel($text = new GUI_Control_TextArea('shoutarea', '', 'Text'));
+		$text->addValidator(new GUI_Validator_Mandatory());
+		$text->addValidator(new GUI_Validator_Maxlength($this->config->getShoutMaxLength()));
 		$this->addPanel(new GUI_Control_AjaxSubmitButton('submit', 'shout!'));
 	}
 	
 	public function afterInit() {
 		parent::afterInit();
 		
-		$shouts = $this->getContainer()->select($this->getOptions());
+		$shouts = $this->config->getShoutContainer()->select($this->getOptions());
 		foreach ($shouts as $shout) {
-			$this->addPanel(new Rakuun_Intern_GUI_Panel_Shoutbox_Shout('shout_'.$shout->getPK(), $shout));
+			$this->addPanel(new Rakuun_Intern_GUI_Panel_Shoutbox_Shout('shout_'.$shout->getPK(), $this->config, $shout));
 		}
 		
 		$this->refresh->setAttribute('onclick', sprintf('$.core.refreshPanels([\'%s\']); return false;', $this->getParent()->getID()));
@@ -54,7 +58,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 					shoutboxCountCharactersDown();
 				});
 			',
-			$this->shoutarea->getID(), $this->shoutMaxLength
+			$this->shoutarea->getID(), $this->config->getShoutMaxLength()
 		));
 	}
 	
@@ -62,16 +66,71 @@ class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 		if ($this->hasErrors())
 			return;
 			
-		$shout = new DB_Record();
-		$shout->user = Rakuun_User_Manager::getCurrentUser();
+		$shout = $this->config->getShoutRecord();
 		$shout->text = $this->shoutarea->getValue();
 		$shout->date = time();
-		$this->getContainer()->save($shout);
+		$this->config->getShoutContainer()->save($shout);
 		$this->shoutarea->resetValue();
 		
 		// kinda wtf :/...only works with sub-sub-query
-		$this->getContainer()->deleteByQuery('DELETE FROM '.$this->getContainer()->getTable().' WHERE ID <= (SELECT MIN(ID) FROM(SELECT ID FROM '.$this->getContainer()->getTable().' ORDER BY date DESC LIMIT 1 OFFSET 100) as temp)');
+		$this->config->getShoutContainer()->deleteByQuery($this->config->getDeleteQuery());
 	}
 }
 
+class shoutbox_config {
+	private $shoutContainer = null;
+	private $shoutRecord = null;
+	private $shoutMaxLength = 0;
+	private $deleteQuery = '';
+	private $userIsMod = false;
+	private $isGlobal = false;
+	
+	public function getShoutContainer() {
+		return $this->shoutContainer;
+	}
+	
+	public function setShoutContainer(DB_Container $container) {
+		$this->shoutContainer = $container;
+	}
+	
+	public function getShoutRecord() {
+		return $this->shoutRecord;
+	}
+	
+	public function setShoutRecord(DB_Record $record) {
+		$this->shoutRecord = $record;
+	}
+	
+	public function getShoutMaxLength() {
+		return $this->shoutMaxLength;
+	}
+	
+	public function setShoutMaxLength($maxLength) {
+		$this->shoutMaxLength = (int)$maxLength;
+	}
+	
+	public function getDeleteQuery() {
+		return $this->deleteQuery;
+	}
+	
+	public function setDeleteQuery($query) {
+		$this->deleteQuery = (string)$query;
+	}
+	
+	public function getUserIsMod() {
+		return $this->userIsMod;
+	}
+	
+	public function setUserIsMod($mod) {
+		$this->userIsMod = (bool)$mod;
+	}
+	
+	public function getIsGlobal() {
+		return $this->isGlobal;
+	}
+	
+	public function setIsGlobal($global) {
+		$this->isGlobal = (bool)$global;
+	}
+}
 ?>

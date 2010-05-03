@@ -11,7 +11,7 @@ class Rakuun_Cronjob extends Cronjob_Manager {
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------
-	protected function onScriptException(Core_Exception $ce, Cronjob_Script $script) {
+	public function onScriptException(Core_Exception $ce, Cronjob_Script $script) {
 		try {
 			Rakuun_Module::onError($ce->getTrace(), 'Cronjob: '.$script->getIdentifier().'. '.$ce->getMessage(), 'Fehler bei Cronjob');
 		}
