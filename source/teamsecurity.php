@@ -28,7 +28,7 @@ class Rakuun_TeamSecurity extends Security {
 	const PRIVILEGE_REPORTEDMESSAGES = 13;
 	const PRIVILEGE_RAPOL = 14;
 	const PRIVILEGE_MULTIHUNTING = 15;
-	const PRIVILEGE_SBMODERATION = 16;
+	const PRIVILEGE_MODERATION = 16;
 	
 	protected function __construct() {
 		// Singleton
@@ -55,7 +55,7 @@ class Rakuun_TeamSecurity extends Security {
 		$this->getContainerGroups()->save($groupSBMods);
 		$this->setPrivilege(self::PRIVILEGE_BACKENDACCESS, $groupSBMods);
 		$this->setPrivilege(self::PRIVILEGE_CAUTION, $groupSBMods);
-		$this->setPrivilege(self::PRIVILEGE_SBMODERATION, $groupSBMods);
+		$this->setPrivilege(self::PRIVILEGE_MODERATION, $groupSBMods);
 		
 		$groupSupporters = new DB_Record();
 		$groupSupporters->name = 'Supporter';

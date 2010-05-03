@@ -21,7 +21,7 @@ class Rakuun_Intern_Alliance_Security extends Security {
 	const PRIVILEGE_DIPLOMACY = 9;
 	const PRIVILEGE_SEE_STATISTICS = 10;
 	const PRIVILEGE_SEE_ACTIVITY = 11;
-	const PRIVILEGE_SBMODERATION = 12;
+	const PRIVILEGE_MODERATION = 13;
 	
 	// not public changeable privileges
 	const PRIVILEGE_APPLYFORMETA = 12;
@@ -45,7 +45,7 @@ class Rakuun_Intern_Alliance_Security extends Security {
 		$this->definePrivilege(self::PRIVILEGE_DIPLOMACY, 'Diplomatische Aktionen durchführen', 'Darf Bündnisse und Kriege mit anderen Allianzen vorschlagen und annehmen');
 		$this->definePrivilege(self::PRIVILEGE_SEE_STATISTICS, 'Statistiken einsehen', 'Darf Statistiken über die Armee und Rohstoffe der Allianzmitglieder einsehen');
 		$this->definePrivilege(self::PRIVILEGE_SEE_ACTIVITY, 'Aktivität einsehen', 'Darf sehen, wann Allianzmitglieder zum letzten Mal aktiv waren');
-		$this->definePrivilege(self::PRIVILEGE_SBMODERATION, 'Shoutbox-Mod', 'Darf Shouts löschen');
+		$this->definePrivilege(self::PRIVILEGE_MODERATION, 'Moderator', 'Darf Shoutbox und Foren bearbeiten');
 	}
 	
 	/**

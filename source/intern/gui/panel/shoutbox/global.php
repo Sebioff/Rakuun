@@ -22,7 +22,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Global extends Rakuun_Intern_GUI_Panel_Sh
 				) as temp
 			)
 		');
-		$this->config->setUserIsMod(Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_SBMODERATION));
+		$this->config->setUserIsMod(Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_MODERATION));
 		$this->config->setIsGlobal(true);
 		
 		parent::__construct($name, $title);

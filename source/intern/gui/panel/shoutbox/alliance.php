@@ -26,7 +26,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Alliance extends Rakuun_Intern_GUI_Panel_
 				) as temp
 			) AND alliance = '.$user->alliance->getPK().'
 		');
-		$this->config->setUserIsMod(Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_SBMODERATION));
+		$this->config->setUserIsMod(Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_MODERATION));
 		$this->config->setIsGlobal(false);
 		
 		parent::__construct($name, $title);
