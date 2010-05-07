@@ -46,7 +46,9 @@ class Rakuun_Intern_GUI_Panel_Board_Overview extends GUI_Panel {
 		foreach ($_visited as $v) {
 			$visited[$v->board->getPK()] = $v;
 		}
-		$_boards = $boardsContainer->select();
+		$options = array();
+		$options['order'] = 'date DESC';
+		$_boards = $boardsContainer->select($options);
 		$boards = array();
 		foreach ($_boards as $board) {
 			if (isset($visited[$board->getPK()]) && $visited[$board->getPK()]->date < $board->date)

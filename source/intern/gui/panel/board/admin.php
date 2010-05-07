@@ -15,15 +15,18 @@ class Rakuun_Intern_GUI_Panel_Board_Admin extends Rakuun_Intern_GUI_Panel_Board 
 	}
 	
 	public static function getConfig() {
+		$user = Rakuun_User_Manager::getCurrentUser();
 		$config = new Board_Config();
 		$config->setBoardsContainer(Rakuun_DB_Containers::getBoardsAdminContainer());
 		$config->setBoardRecord(new DB_Record);
 		$config->setPostingsContainer(Rakuun_DB_Containers::getBoardsAdminPostingsContainer());
 		$posting = new DB_Record();
-		$posting->user = Rakuun_User_Manager::getCurrentUser();
+		$posting->user = $user;
 		$config->setPostingRecord($posting);
 		$config->setVisitedContainer(Rakuun_DB_Containers::getBoardsAdminLastVisitedContainer());
 		$config->setBoardModule(App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('admin'));
+		$config->setUserIsMod(Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_MODERATION));
+		
 		return $config;
 	}
 }

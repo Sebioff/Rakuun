@@ -6,6 +6,9 @@
 	<? if ($this->hasPanel('markread')): ?>
 		<? $this->displayPanel('markread'); ?>
 	<? endif; ?>
+	<? if ($this->hasPanel('moderatelink')): ?>
+		<? $this->displayPanel('moderatelink'); ?>
+	<? endif; ?>
 	<? $this->displayPanel('board'); ?>
 	<? if ($this->showPages()): ?>
 		<? $this->displayLabelForPanel('pages'); ?>: <? $this->displayPanel('pages'); ?>

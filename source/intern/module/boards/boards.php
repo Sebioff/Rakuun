@@ -21,7 +21,7 @@ class Rakuun_Intern_Module_Boards extends Rakuun_Intern_Module_Boards_Navigation
 		parent::init();
 		
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/boards.tpl');
-		$this->setPageTitle('Ãœbersicht');
+		$this->setPageTitle('Übersicht');
 		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Board_Overview('overview'));
 	}
 }
