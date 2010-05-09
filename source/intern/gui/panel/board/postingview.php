@@ -44,10 +44,17 @@ class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel {
 		$postings = $this->config->getPostingsContainer()->select($options);
 		$this->addPanel($list = new GUI_Panel_List('board'));
 		foreach ($postings as $posting) {
-			$list->addItem($item = new Rakuun_Intern_GUI_Panel_Board_Posting('posting'.$posting->getPK(), $posting));
+			$list->addItem(new Rakuun_Intern_GUI_Panel_Board_Posting('posting'.$posting->getPK(), $posting, $this->config));
 		}
 		$this->params->boardname = $this->config->getBoardRecord()->name;
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_AddPost('post', $this->config));
+		if ($this->config->getUserIsMod()) {
+			$module = $this->getModule();
+			if ($module->getParam('moderate') == $user->getPK())
+				$this->addPanel(new GUI_Control_Link('moderatelink', '-zurück-', $module->getUrl(array('board' => $module->getParam('board')))));
+			else
+				$this->addPanel(new GUI_Control_Link('moderatelink', '-moderate-', $module->getUrl(array('board' => $module->getParam('board'), 'moderate' => $user->getPK()))));
+		}
 	}
 }
 ?>

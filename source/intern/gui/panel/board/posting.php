@@ -5,10 +5,13 @@
  */
 class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 	private $posting = null;
+	private $config = null;
 	
-	public function __construct($name, DB_Record $posting) {
+	public function __construct($name, DB_Record $posting, Board_Config $config) {
 		parent::__construct($name);
+		
 		$this->posting = $posting;
+		$this->config = $config;
 	}
 	
 	public function init() {
@@ -17,6 +20,7 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/posting.tpl');
 		if (Router::get()->getCurrentModule()->getParam('edit') == $this->posting->getPK()
 			&& Rakuun_User_Manager::getCurrentUser()->getPK() == $this->posting->user->getPK()
+			&& $this->posting->deleted == 0
 		) {
 			$this->addPanel($blanko = new GUI_Panel('form'));
 			$blanko->addPanel($text = new GUI_Control_TextArea('text', $this->posting->text, 'Posting'));
@@ -24,8 +28,10 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 			$blanko->addPanel(new GUI_Control_SubmitButton('edit', 'speichern'));
 		}
 		$this->params->posting = $this->posting;
+		$this->params->config = $this->config;
+		
 		$this->addPanel(new GUI_Panel_Date('date', $this->posting->date));
-		if ($this->posting->roundNumber) {
+		if ($this->config->getIsGlobal()) {
 			// posting is from global board
 			if ($this->posting->roundNumber == RAKUUN_ROUND_NAME) {
 				// user belongs to actual rakuun-round
@@ -40,8 +46,15 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		}
 		if ($this->posting->editdate)
 			$this->addPanel(new GUI_Panel_Date('editdate', $this->posting->editdate));
-		if ($this->posting->user && $this->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {
+		if ($this->posting->user
+			&& $this->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()
+			&& $this->posting->deleted == 0) 
+		{
 			$this->addPanel(new GUI_Control_Link('editlink', '-edit-', Router::get()->getCurrentModule()->getUrl(array('board' => $this->posting->board->getPK(), 'edit' => $this->posting->getPK()))));
+		}
+		if ($this->getModule()->getParam('moderate') == Rakuun_User_Manager::getCurrentUser()->getPK()) {
+			$this->addPanel($deleteButton = new GUI_Control_SubmitButton('delete', 'Löschen'));
+			$deleteButton->setConfirmationMessage('Das Posting von '.date(GUI_Panel_Date::FORMAT_DATETIME, $this->posting->date).' wirklich löschen?');
 		}
 	}
 	
@@ -53,6 +66,34 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		$this->posting->editdate = time();
 		$this->posting->save();
 		$this->getModule()->redirect($this->getModule()->getUrl(array('board' => $this->posting->board)));
+	}
+	
+	public function onDelete() {
+		if ($this->hasErrors())
+			return;
+		
+		$this->posting->deleted = 1;
+		if ($this->config->getIsGlobal()) {
+			$this->posting->deletedByName = Rakuun_User_Manager::getCurrentUser()->nameUncolored;
+			$this->posting->deletedByRoundNumber = RAKUUN_ROUND_NAME;
+		} else {
+			$this->posting->deletedBy = Rakuun_User_Manager::getCurrentUser();
+		}
+		$this->posting->save();
+		$this->getModule()->redirect($this->getModule()->getUrl(array('board' => $this->posting->board)));
+	}
+	
+	public function checkDisplayPosting() {
+		if ($this->config->getIsGlobal()) {
+			if (($this->params->posting->deleted == 1 && (($this->params->posting->userName == Rakuun_User_Manager::getCurrentUser()->nameUncolored && $this->params->posting->roundNumber == RAKUUN_ROUND_NAME) || $this->params->config->getUserIsMod()))
+			|| $this->params->posting->deleted == 0)
+				return true;
+		} else {
+			if (($this->params->posting->deleted == 1 && ($this->params->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK() || $this->params->config->getUserIsMod()))
+			|| $this->params->posting->deleted == 0)
+				return true;
+		}
+		return false;
 	}
 }
 

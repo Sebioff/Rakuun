@@ -45,8 +45,13 @@ abstract class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 		$options['order'] = 'date DESC';
 		$boards = $this->getContainer()->select(DB_Container::mergeOptions($this->getOptions(), $options));
 		$module = $this->getModule();
-		if ($this->config->getUserIsMod())
-			$this->addPanel(new GUI_Control_Link('moderatelink', '-moderieren-', $module->getUrl(array('moderate' => $user->getPK()))));
+		if ($this->config->getUserIsMod()) {
+			if ($module->getParam('moderate') == $user->getPK()) {
+				$this->addPanel(new GUI_Control_Link('moderatelink', '-zurück-', $module->getUrl()));
+			} else {
+				$this->addPanel(new GUI_Control_Link('moderatelink', '-moderieren-', $module->getUrl(array('moderate' => $user->getPK()))));
+			}
+		}	
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('board', $this->config, $boards));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_AddBoard('addboard', $this->config));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_MarkRead('markread', $this->config));

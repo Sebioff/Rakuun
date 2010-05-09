@@ -848,6 +848,7 @@ abstract class Rakuun_DB_Containers {
 			
 		self::$boardsAdminPostingsContainer = new DB_Container('boards_admin_postings');
 		self::$boardsAdminPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$boardsAdminPostingsContainer->addReferencedContainer(self::getUserContainer(), 'deleted_by', 'id');
 		
 		return self::$boardsAdminPostingsContainer;
 	}
@@ -888,6 +889,7 @@ abstract class Rakuun_DB_Containers {
 		//TODO: Move to rakuun-static-db
 		self::$boardsGlobalPostingsContainer = new DB_Container('boards_global_postings');
 		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'deleted_by', 'id');
 		
 		return self::$boardsGlobalPostingsContainer;
 	}
@@ -928,6 +930,7 @@ abstract class Rakuun_DB_Containers {
 		self::$boardsAlliancePostingsContainer = new DB_Container('boards_alliance_postings');
 		self::$boardsAlliancePostingsContainer->addReferencedContainer(self::getBoardsAllianceContainer());
 		self::$boardsAlliancePostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$boardsAlliancePostingsContainer->addReferencedContainer(self::getUserContainer(), 'deleted_by', 'id');
 		
 		return self::$boardsAlliancePostingsContainer;
 	}
@@ -967,6 +970,7 @@ abstract class Rakuun_DB_Containers {
 		self::$boardsMetaPostingsContainer = new DB_Container('boards_meta_postings');
 		self::$boardsMetaPostingsContainer->addReferencedContainer(self::getBoardsMetaContainer());
 		self::$boardsMetaPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$boardsMetaPostingsContainer->addReferencedContainer(self::getUserContainer(), 'deleted_by', 'id');
 		
 		return self::$boardsMetaPostingsContainer;
 	}
