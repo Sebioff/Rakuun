@@ -11,6 +11,8 @@
 		Ziel: <?= $target; ?>
 		<br/>
 		Dauer: <?= Rakuun_Date::formatCountDown($this->getArmy()->targetTime - time()); ?>
+		<br/>
+		voraussichtliche Ankunft: <? $date = new GUI_Panel_Date('arrivingtime', $this->getArmy()->targetTime, '', GUI_Panel_Date::FORMAT_TIME); $date->display(); ?>
 	<? else: ?>
 		<? $this->displayLabelForPanel('target'); ?> <? $this->displayPanel('target'); ?>
 		<br class="clear" />
