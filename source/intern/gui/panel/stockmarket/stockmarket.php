@@ -45,6 +45,9 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 	protected function checkTradable($amount) {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$tradable = self::getTradable();
+		if ($user->isInNoob()) {
+			$this->addError('Du befindest dich im Noobschutz und darfst die Börse daher nicht nutzen!');
+		}
 		if ($amount > $tradable) {
 			$this->addError('Du kannst maximal '.GUI_Panel_Number::formatNumber($tradable).' Ressourcen pro Tag über die Börse handeln.');
 		}
