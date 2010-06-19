@@ -22,6 +22,8 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 				$hoverText .= 'offline';
 			if ($cityOwner->isInNoob())
 				$hoverText .= '<br/>Spieler befindet sich im Noobschutz';
+			if ($cityOwner->isYimtay())
+				$hoverText .= '<br/>Der Spieler ist inaktiv';	
 		$this->setHoverText($hoverText);
 	}
 	

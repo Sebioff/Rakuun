@@ -79,6 +79,10 @@
 		Der Spieler ist gerade online
 		<br class="clear" />
 	<? endif; ?>
+	<? if($user->isYimtay()): ?>
+		Der Spieler war inaktiv und zum Yimtay geworden
+		<br class="clear" />
+	<? endif; ?>
 <? else: ?>
 	<br class="clear" />
 	Spieler existiert nicht!
