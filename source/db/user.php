@@ -145,6 +145,10 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		return $this->isInNoob;
 	}
 	
+	public function isYimtay() {
+		return $this->isYimtay;
+	}
+	
 	/**
 	 * @return number of Databases the user have
 	 */
