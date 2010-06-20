@@ -178,19 +178,13 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				$maxBerylliumCapacity = $totalCapacity * $army->berylliumPriority / $totalPriority;
 				$maxEnergyCapacity = $totalCapacity * $army->energyPriority / $totalPriority;
 				
-				$takeableIron = $army->target->ressources->iron;
-				$takeableBeryllium = $army->target->ressources->beryllium;
-				$takeableEnergy = $army->target->ressources->energy;
-				//save Capacity only for users
-				if (!$army->target->isYimtay()) {
-					$takeableIron -= $army->target->ressources->getSaveCapacityIron();
-					$takeableBeryllium -= $army->target->ressources->getSaveCapacityBeryllium();
-					$takeableEnergy -= $army->target->ressources->getSaveCapacityEnergy();
-				}
+				$takeableIron = $army->target->ressources->iron - $army->target->ressources->getSaveCapacityIron();
 				if ($takeableIron < 0)
 					$takeableIron = 0;
+				$takeableBeryllium = $army->target->ressources->beryllium - $army->target->ressources->getSaveCapacityBeryllium();
 				if ($takeableBeryllium < 0)
 					$takeableBeryllium = 0;
+				$takeableEnergy = $army->target->ressources->energy - $army->target->ressources->getSaveCapacityEnergy();
 				if ($takeableEnergy < 0)
 					$takeableEnergy = 0;
 					

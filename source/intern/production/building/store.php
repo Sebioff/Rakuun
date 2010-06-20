@@ -19,7 +19,10 @@ class Rakuun_Intern_Production_Building_Store extends Rakuun_Intern_Production_B
 	}
 	
 	public function getSaveCapacity() {
-		return round(((time() - RAKUUN_ROUND_STARTTIME) * self::SAVE_CAPACITY_RAISE_PER_WEEK / 7 / 24 / 60 / 60 + self::SAVE_CAPACITY_RAISE_PER_WEEK) * RAKUUN_STORE_CAPACITY_SAVE_MULTIPLIER);
+		if ($this->getUser()->isYimtay())
+			return 0;
+		else
+			return round(((time() - RAKUUN_ROUND_STARTTIME) * self::SAVE_CAPACITY_RAISE_PER_WEEK / 7 / 24 / 60 / 60 + self::SAVE_CAPACITY_RAISE_PER_WEEK) * RAKUUN_STORE_CAPACITY_SAVE_MULTIPLIER);
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
