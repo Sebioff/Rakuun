@@ -65,8 +65,13 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$targetX = 0;
 		$targetY = 0;
 		$sendedUnits = $this->unitInput->getArmy();
+		$user = Rakuun_User_Manager::getCurrentUser(); 
 		
-		if (Rakuun_User_Manager::getCurrentUser()->isInNoob()) {
+		if ($user->buildings->militaryBase == 0) {
+			$this->addError('Du brauchst einen Militärstützpunkt, um deine Armee loszuschicken');
+		}
+		
+		if ($user->isInNoob()) {
 			$this->addError('Du kannst keine Angriffe starten, so lange du dich im Noobschutz befindest.');
 		}
 		
