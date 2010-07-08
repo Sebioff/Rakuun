@@ -7,11 +7,25 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		parent::__construct($name, $title);
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Start());
+		
+		//build up for first economy
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Build1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_People1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources2());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Profile());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Build2());
+		
+		// start to produce energy
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Techtree());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Buildflab());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Watertechnic());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Energy());
+		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Firstmilitary());
+		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Satisfaction());
+		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Alliance());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Finish());
 	}
