@@ -32,6 +32,10 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 			$yimtayUser->alliance = null;
 			Rakuun_User_Manager::update($yimtayUser);
 			Rakuun_User_Manager::lock($yimtayUser);
+			if ($sittedUser = Rakuun_DB_Containers::getUserContainer()->selectBySitterFirst($yimtayUser)) {
+				$sittedUser->sitter = null;
+				$sittedUser->save();
+			}
 			if ($alliance) {
 				if (Rakuun_DB_Containers::getUserContainer()->countByAlliance($alliance) == 0) {
 					Rakuun_DB_Containers::getAlliancesContainer()->delete($alliance);
