@@ -47,6 +47,14 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Edit extends GUI_Panel {
 		if ($this->user->nameUncolored != $this->username->getValue()) {
 			$this->user->name = $this->username;
 			$this->user->nameColored = '';
+			
+			$mail = new Net_Mail();
+			$mail->setSubject('Rakuun: Nickname geändert');
+			$mail->addRecipients($this->user->nameUncolored.' <'.$this->mail->getValue().'>');
+			$templateEngine = new GUI_TemplateEngine();
+			$templateEngine->username = $user->nameUncolored;
+			$mail->setMessage($templateEngine->render(dirname(__FILE__).'/edit_nick_mail.tpl'));
+			$mail->send();
 		}
 		$this->user->cityName = $this->cityname;
 		if ($this->hasPanel('description'))
