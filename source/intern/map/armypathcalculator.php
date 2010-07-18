@@ -3,7 +3,7 @@
 class Rakuun_Intern_Map_ArmyPathCalculator {
 	private $army = null;
 	
-	public function __construct(DB_Record $army) {
+	public function __construct(Rakuun_DB_Army $army) {
 		$this->army = $army;
 	}
 	

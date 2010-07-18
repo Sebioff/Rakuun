@@ -23,12 +23,13 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 						$this->fight($army);
 				}
 				// army returns home
-				else if($army->targetX == $army->user->cityX && $army->targetY == $army->user->cityY) {
+				else if ($army->targetX == $army->user->cityX && $army->targetY == $army->user->cityY) {
 					$this->returnHome($army);
 				}
 				// army reached some target anywhere on the map
 				else {
-					if ($army->user->alliance && $this->canTransportDatabase($army)) {
+					// check if there's a free database
+					if ($army->user->alliance && $army->canTransportDatabase()) {
 						$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance($army->user->alliance);
 						if (!empty($visibleDatabases)) {
 							$options = array();
@@ -48,14 +49,14 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					}
 					
 					// make army return home
-					$this->moveHome($army);
+					$army->moveHome();
 				}
 			}
 			DB_Connection::get()->commit();
 		}
 	}
 	
-	private function fight(DB_Record $army) {
+	private function fight(Rakuun_DB_Army $army) {
 		$playersAreAllied =	($army->user->alliance && $army->target->alliance && $army->user->alliance->getPK() == $army->target->alliance->getPK());
 		if (!$playersAreAllied && $army->user->alliance && $army->target->alliance && $diplomacy = $army->user->alliance->getDiplomacy($army->target->alliance)) {
 			$playersAreAllied = ($diplomacy->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_AUVB);
@@ -164,7 +165,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		}
 		else {
 			// make army return home
-			$this->moveHome($army);
+			$army->moveHome();
 			
 			// STEALING RESSOURCES ---------------------------------
 			if (!$playersAreAllied) {
@@ -290,7 +291,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			// save any changes to the army
 			$army->save();
 			
-			if (!$fightingSystem->getDefenderWon() && $army->user->alliance && $this->canTransportDatabase($army)) {
+			if (!$fightingSystem->getDefenderWon() && $army->user->alliance && $army->canTransportDatabase()) {
 				$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance($army->user->alliance);
 				if (!empty($visibleDatabases)) {
 					$options = array();
@@ -321,7 +322,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		$attackerReport->send();
 	}
 	
-	private function spy(DB_Record $army) {
+	private function spy(Rakuun_DB_Army $army) {
 		$spyDronesSurvive = false;
 		$successfullCloakedSpy = false;
 		$defendingPower = 0;
@@ -440,7 +441,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 	/**
 	 * Executed if an army returns home
 	 */
-	private function returnHome(DB_Record $army) {
+	private function returnHome(Rakuun_DB_Army $army) {
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
 			if ($unit->getAmount() > 0) {
 				$userUnits = $army->user->units;
@@ -450,28 +451,6 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		$userUnits->save();
 		$army->user->ressources->raise($army->iron, $army->beryllium, $army->energy);
 		$army->delete();
-	}
-	
-	/**
-	 * Makes the army calculate a path home
-	 */
-	private function moveHome(DB_Record $army) {
-		Rakuun_DB_Containers::getArmiesPathsContainer()->deleteByArmy($army);
-		$army->targetX = $army->user->cityX;
-		$army->targetY = $army->user->cityY;
-		$army->tick = time();
-		$army->targetTime = 0;
-		$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($army);
-		$pathCalculator->getPath();
-		$army->save();
-	}
-	
-	private function canTransportDatabase(DB_Record $army) {
-		$attackPower = 0;
-		foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
-			$attackPower += $unit->getAttackValue();
-		}
-		return ($attackPower >= 1000);
 	}
 }
 

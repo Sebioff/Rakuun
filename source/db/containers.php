@@ -121,6 +121,15 @@ abstract class Rakuun_DB_Containers {
 			$sitted->sitterNotice = '';
 			$sitted->save();
 		}
+		
+		foreach (Rakuun_DB_Containers::getArmiesContainer()->selectByTarget($user) as $attackingArmy) {
+			$text = 'Eure Spione meldeten soeben, dass die Stadt, die unter der Herrschaft von '.$user->name.' stand, nicht mehr existiert - deshalb machte sich Eure Armee auf den Rückweg.';
+			$igm = new Rakuun_Intern_IGM('Angriff auf '.$user->nameUncolored, $attackingArmy->user, $text, Rakuun_Intern_IGM::TYPE_FIGHT);
+			$igm->setSenderName(Rakuun_Intern_IGM::SENDER_FIGHTS);
+			$igm->send();
+			Rakuun_DB_Containers::getArmiesPathsContainer()->deleteByArmy($attackingArmy);
+			$attackingArmy->moveHome();
+		}
 	}
 	
 	/**
@@ -754,7 +763,7 @@ abstract class Rakuun_DB_Containers {
 		if (self::$armiesContainer)
 			return self::$armiesContainer;
 		
-		self::$armiesContainer = new DB_Container('armies');
+		self::$armiesContainer = new DB_Container('armies', 'Rakuun_DB_Army');
 		self::$armiesContainer->addReferencedContainer(self::getUserContainer(), 'target', 'id');
 		// TODO use lambda-function with PHP 5.3
 		self::$armiesContainer->addDeleteCallback('Rakuun_DB_Containers::onArmyDelete');
