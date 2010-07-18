@@ -8,13 +8,6 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 			$this->contentPanel->countdown->setJSCallback('null');
 			$this->contentPanel->addPanel($countDownTotal = new Rakuun_GUI_Panel_CountDown('countdown_total', $wip[0]->getTotalTargetTime()));
 			$countDownTotal->enableHoverInfo(true);
-			if (Router::get()->getCurrentModule() instanceof Rakuun_Intern_Module_Overview) {
-				// FIXME evil, hardcoded panel ids
-				$countDownTotal->setJSCallback(sprintf('function (){$.core.refreshPanels(["%s", "%s"]);}', 'main-overview_content-wip_units', 'main-overview_content-units'));
-			}
-			else {
-				$countDownTotal->setJSCallback('function (){window.location.assign(location.href)}');
-			}
 		}
 		
 		$wipItems = $this->getProducer()->getWIP();
@@ -34,6 +27,32 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 			$pauseButton->setValue('Produktion fortsetzen');
 		
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/units.tpl');
+	}
+	
+	public function init() {
+		parent::init();
+		
+		if ($this->contentPanel->hasPanel('countdown')) {
+			$countDown = $this->contentPanel->countdown;
+			if (Router::get()->getCurrentModule() instanceof Rakuun_Intern_Module_Overview) {
+				// FIXME evil, hardcoded panel id
+				$countDown->setJSCallback(sprintf('function (){$.core.refreshPanels(["%s", "%s"]);}', $this->getID(), 'main-overview_content-units'));
+			}
+			else {
+				$countDown->setJSCallback(sprintf('function (){$.core.refreshPanels(["%s"]);}', $this->getID()));
+			}
+		}
+		
+		if ($this->contentPanel->hasPanel('countdown_total')) {
+			$countDownTotal = $this->contentPanel->countdownTotal;
+			if (Router::get()->getCurrentModule() instanceof Rakuun_Intern_Module_Overview) {
+				// FIXME evil, hardcoded panel id
+				$countDownTotal->setJSCallback(sprintf('function (){$.core.refreshPanels(["%s", "%s"]);}', $this->getID(), 'main-overview_content-units'));
+			}
+			else {
+				$countDownTotal->setJSCallback('function (){window.location.assign(location.href)}');
+			}
+		}
 	}
 	
 	public function onPause() {

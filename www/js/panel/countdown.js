@@ -2,6 +2,7 @@ function GUI_Control_CountDown(controlID, currentTime, targetTime, enableHoverIn
 	var self = this;
 	var restTime = targetTime - currentTime;
 	var interval = setInterval(function(){self.tick();}, 1000);
+	var timerID = currentTime;
 	
 	if (enableHoverInfo == 1) {
 		$("#" + controlID).mouseover(function() {
@@ -20,6 +21,20 @@ function GUI_Control_CountDown(controlID, currentTime, targetTime, enableHoverIn
 	}
 	
 	this.tick = function() {
+		// clean up timers that might still be active e.g. after this panel has been reloaded using ajax
+		if ($("#" + controlID).data('activeTimer')) {
+			// there exists another active, newer timer
+			if ($("#" + controlID).data('activeTimer') > timerID) {
+				clearInterval(interval);
+				return;
+			}
+			else if ($("#" + controlID).data('activeTimer') < timerID)
+				$("#" + controlID).data('activeTimer', timerID);
+		}
+		else {
+			$("#" + controlID).data('activeTimer', timerID);
+		}
+		
 		restTime -= 1;
 		if (restTime < 0) {
 			restTime = 0;

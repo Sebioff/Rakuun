@@ -17,6 +17,6 @@ if (PHP_SAPI == 'cli')
 // PROJECT SPECIFIC CONSTANTS --------------------------------------------------
 define('RAKUUN_ERRORMAIL_RECIPIENTS', 'sebioff@gmx.de');
 define('RAKUUN_VERSION', '4.1.0');
-define('RAKUUN_ROUND_NAME', '24');
+define('RAKUUN_ROUND_NAME', '25');
 
 ?>
