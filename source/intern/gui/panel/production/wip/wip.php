@@ -42,7 +42,7 @@ abstract class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_B
 				$wipPanel->removePanel($wipPanel->moveUp);
 			if ($i >= $wipItemsCount - 1)
 				$wipPanel->removePanel($wipPanel->moveDown);
-			$this->addPanel($wipPanel);
+			$this->contentPanel->addPanel($wipPanel);
 			$i++;
 		}
 		
