@@ -15,6 +15,8 @@ class Rakuun_Intern_Log_Spies {
 		foreach ($units as $internalName => $amount)
 			$logEntry->{Text::underscoreToCamelCase($internalName)} = $amount;
 		Rakuun_DB_Containers::getLogSpiesContainer()->save($logEntry);
+		
+		return $logEntry;
 	}
 }
 

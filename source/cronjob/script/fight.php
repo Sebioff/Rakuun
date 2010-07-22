@@ -323,8 +323,10 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 	}
 	
 	private function spy(Rakuun_DB_Army $army) {
+		$spyReportLogEntry = null;
 		$spyDronesSurvive = false;
 		$successfullCloakedSpy = false;
+		
 		$defendingPower = 0;
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($army->target) as $unit) {
 			$defendingPower += $unit->getDefenseValue();
@@ -417,7 +419,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				$spyDronesSurvive = true;
 			}
 			
-			Rakuun_Intern_Log_Spies::log($army->user, $army->target, $spiedRessourcesContainer, $spiedBuildings, $spiedUnits);
+			$spyReportLogEntry = Rakuun_Intern_Log_Spies::log($army->user, $army->target, $spiedRessourcesContainer, $spiedBuildings, $spiedUnits);
 		}
 		
 		if (!$successfullCloakedSpy) {
@@ -435,6 +437,8 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		
 		$attackerReport = new Rakuun_Intern_IGM('Ausspionierung von '.$army->target->nameUncolored, $army->user, $attackerReportText, Rakuun_Intern_IGM::TYPE_SPY);
 		$attackerReport->setSenderName(Rakuun_Intern_IGM::SENDER_FIGHTS);
+		if ($spyReportLogEntry)
+			$attackerReport->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_SPYREPORTLOG, $spyReportLogEntry->getPK());
 		$attackerReport->send();
 	}
 	

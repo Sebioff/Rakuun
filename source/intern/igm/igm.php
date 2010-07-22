@@ -13,6 +13,11 @@ class Rakuun_Intern_IGM extends DB_Record {
 	const SENDER_SYSTEM = 'System';
 	const SENDER_FIGHTS = 'Spionagezentrum';
 	
+	const ATTACHMENT_TYPE_COPYRECIPIENT = 1;
+	const ATTACHMENT_TYPE_SPYREPORTLOG = 2;
+	
+	private $attachments = array();
+	
 	public function __construct($subject = '', Rakuun_DB_User $recipient = null, $text = '', $type = self::TYPE_PRIVATE) {
 		$this->subject = $subject;
 		$this->text = $text;
@@ -36,6 +41,14 @@ class Rakuun_Intern_IGM extends DB_Record {
 			$this->senderName = $this->sender->nameUncolored;
 			
 		Rakuun_DB_Containers::getMessagesContainer()->save($this);
+		
+		foreach ($this->attachments as $attachment) {
+			$attachmentRecord = new DB_Record();
+			$attachmentRecord->message = $this;
+			$attachmentRecord->type = $attachment[0];
+			$attachmentRecord->value = $attachment[1];
+			Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
+		}
 	}
 	
 	public static function getMessageTypes() {
@@ -47,6 +60,10 @@ class Rakuun_Intern_IGM extends DB_Record {
 			self::TYPE_FIGHT => 'Kampf',
 			self::TYPE_SPY => 'Spionage'
 		);
+	}
+	
+	public function addAttachment($type, $value) {
+		$this->attachments[] = array($type, $value);
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

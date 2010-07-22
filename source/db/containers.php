@@ -47,6 +47,7 @@ abstract class Rakuun_DB_Containers {
 	private static $logUserActivityContainer = null;
 	private static $logUserRessourcetransferContainer = null;
 	private static $messagesContainer = null;
+	private static $messagesAttachmentsContainer = null;
 	private static $newsContainer = null;
 	private static $pollsContainer = null;
 	private static $pollsAnswersContainer = null;
@@ -476,6 +477,18 @@ abstract class Rakuun_DB_Containers {
 		self::$messagesContainer = new DB_Container('messages', 'Rakuun_Intern_IGM');
 		
 		return self::$messagesContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getMessagesAttachmentsContainer() {
+		if (self::$messagesAttachmentsContainer)
+			return self::$messagesAttachmentsContainer;
+			
+		self::$messagesAttachmentsContainer = new DB_Container('messages_attachments');
+		
+		return self::$messagesAttachmentsContainer;
 	}
 	
 	/**

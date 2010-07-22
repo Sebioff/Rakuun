@@ -47,6 +47,10 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 				$this->newmessage
 			);
 			$igm->setSender(Rakuun_User_Manager::getCurrentUser());
+			foreach ($this->recipients->getUser() as $copyRecipient) {
+				if ($copyRecipient != $recipient)
+					$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_COPYRECIPIENT, $copyRecipient);
+			}
 			$igm->send();
 		}
 		DB_Connection::get()->commit();
