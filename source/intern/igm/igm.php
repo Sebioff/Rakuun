@@ -66,6 +66,23 @@ class Rakuun_Intern_IGM extends DB_Record {
 		$this->attachments[] = array($type, $value);
 	}
 	
+	/**
+	 * Returns all attachments associated with this IGM.
+	 */
+	public function getAttachments() {
+		return Rakuun_DB_Containers::getMessagesAttachmentsContainer()->selectByMessage($this->getPK());
+	}
+	
+	/**
+	 * Returns all attachments of the given type associated with this IGM.
+	 */
+	public function getAttachmentsOfType($type) {
+		$options = array();
+		$options['conditions'][] = array('message = ?', $this->getPK());
+		$options['conditions'][] = array('type = ?', $type);
+		return Rakuun_DB_Containers::getMessagesAttachmentsContainer()->select($options);
+	}
+	
 	// GETTERS / SETTERS -------------------------------------------------------
 	public static function getReservedNames() {
 		$reflection = new ReflectionClass(__CLASS__);

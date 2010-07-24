@@ -6,7 +6,7 @@
 class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	private $message = null;
 	
-	public function __construct($name, DB_Record $message) {
+	public function __construct($name, Rakuun_Intern_IGM $message) {
 		parent::__construct($name, '');
 		
 		$this->message = $message;
@@ -37,7 +37,7 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	
 	// GETTERS / SETTERS -------------------------------------------------------
 	/**
-	 * @return DB_Record
+	 * @return Rakuun_Intern_IGM
 	 */
 	public function getMessage() {
 		return $this->message;

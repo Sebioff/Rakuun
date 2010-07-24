@@ -29,6 +29,7 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 		// TODO disable answering options for non-answerable messages
 		$this->addPanel($newmessage = new GUI_Control_TextArea('newmessage', ($this->message && $this->message->sender) ? "\n\n--- Nachricht von ".$this->message->sender->nameUncolored.' am '.$time->getValue()." ---\n".$this->message->text : '', 'Nachricht'));
 		$newmessage->addValidator(new GUI_Validator_Mandatory());
+		$this->addPanel(new GUI_Control_CheckBox('blindcopies', '', false, 'Blindkopien'));
 		$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
 	}
 	
@@ -47,9 +48,11 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 				$this->newmessage
 			);
 			$igm->setSender(Rakuun_User_Manager::getCurrentUser());
-			foreach ($this->recipients->getUser() as $copyRecipient) {
-				if ($copyRecipient != $recipient)
-					$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_COPYRECIPIENT, $copyRecipient);
+			if (!$this->blindcopies->getSelected()) {
+				foreach ($this->recipients->getUser() as $copyRecipient) {
+					if ($copyRecipient->getPK() != $recipient->getPK())
+						$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_COPYRECIPIENT, $copyRecipient);
+				}
 			}
 			$igm->send();
 		}

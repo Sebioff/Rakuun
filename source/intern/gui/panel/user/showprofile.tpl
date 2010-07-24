@@ -71,15 +71,15 @@
 	<? endif;?>
 	
 	<br class="clear" />
-	<? if($user->isInNoob()): ?>
+	<? if ($user->isInNoob()): ?>
 		Der Spieler befindet sich im Noobschutz und kann nicht angegriffen werden.
 		<br class="clear" />
 	<? endif; ?>
-	<? if($user->isOnline()): ?>
+	<? if ($user->isOnline()): ?>
 		Der Spieler ist gerade online
 		<br class="clear" />
 	<? endif; ?>
-	<? if($user->isYimtay()): ?>
+	<? if ($user->isYimtay()): ?>
 		Der Spieler war inaktiv und zum Yimtay geworden
 		<br class="clear" />
 	<? endif; ?>
