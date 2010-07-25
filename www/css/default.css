@@ -56,6 +56,15 @@ td {
 	position:relative;
 }
 
+.collapsed .content {
+	height: 0px;
+	overflow: hidden;
+}
+
+.collapsed .content_inner {
+	visibility: hidden;
+}
+
 strong {
 	font-weight:bold;
 }
