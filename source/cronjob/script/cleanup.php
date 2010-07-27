@@ -41,6 +41,16 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 					Rakuun_DB_Containers::getAlliancesContainer()->delete($alliance);
 				}
 			}
+			$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($yimtayUser);
+			$ironmine = Rakuun_Intern_Production_Factory::getBuilding('ironmine', $yimtayUser);
+			$berylliummine = Rakuun_Intern_Production_Factory::getBuilding('berylliummine', $yimtayUser);
+			$hydropowerPlant = Rakuun_Intern_Production_Factory::getBuilding('hydropower_plant', $yimtayUser);
+			$clonomat = Rakuun_Intern_Production_Factory::getBuilding('clonomat', $yimtayUser);
+			$workers->ironmine = $ironmine->getRequiredWorkers();
+			$workers->berylliummine = $berylliummine->getRequiredWorkers();
+			$workers->hydropowerPlant = $hydropowerPlant->getRequiredWorkers();
+			$workers->clonomat = $clonomat->getRequiredWorkers();
+			$workers->save();
 		}
 		DB_Connection::get()->commit();
 		
