@@ -22,6 +22,11 @@
 		<? endforeach; ?>
 		<? if (!empty($userLinks)): ?>
 			Kopien: <?= implode(', ', $userLinks); ?>
+			<? $replyAllUrlParams = $this->getModule()->getParams(); ?>
+			<? $replyAllUrlParams['replyTo'] = 'all'; ?>
+			<? $replyAllUrl = $this->getModule()->getUrl($replyAllUrlParams); ?>
+			<? $replyLink = new GUI_Control_Link('reply_all_link', 'Allen Antworten', $replyAllUrl); ?>
+			<?= $replyLink->render(); ?>
 		<? endif; ?>
 	<? endif; ?>
 	<? if ($this->hasPanel('delete')): ?>

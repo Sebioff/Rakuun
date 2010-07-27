@@ -83,6 +83,11 @@ class Rakuun_Intern_IGM extends DB_Record {
 		return Rakuun_DB_Containers::getMessagesAttachmentsContainer()->select($options);
 	}
 	
+	public function canBeRepliedTo() {
+		return (($this->type == self::TYPE_PRIVATE || $this->type == self::TYPE_ALLIANCE || $this->type == self::TYPE_META)
+			&& ($this->sender && $this->sender->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK()));
+	}
+	
 	// GETTERS / SETTERS -------------------------------------------------------
 	public static function getReservedNames() {
 		$reflection = new ReflectionClass(__CLASS__);

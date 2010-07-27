@@ -25,8 +25,15 @@ class Rakuun_Intern_Module_Messages_Display extends Rakuun_Intern_Module {
 		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Message_Categories('categories', 'Nachrichtenkategorien'));
 		if ($message) {
 			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Message('message', $message));
-			if ($message->sender && $message->sender->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK())
-				$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('reply', new Rakuun_Intern_GUI_Panel_Message_Send('reply', 'Antworten', $message)), 'Antworten');
+			if ($message->canBeRepliedTo()) {
+				$replyTo = array($message->sender);
+				if ($message->type == Rakuun_Intern_IGM::TYPE_PRIVATE && $this->getParam('replyTo') == 'all') {
+					foreach ($message->getAttachmentsOfType(Rakuun_Intern_IGM::ATTACHMENT_TYPE_COPYRECIPIENT) as $copyRecipient) {
+						$replyTo[] = Rakuun_DB_Containers::getUserContainer()->selectByPK($copyRecipient->value);
+					}
+				}
+				$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('reply', new Rakuun_Intern_GUI_Panel_Message_Send('reply', 'Antworten', $message, $replyTo)), 'Antworten');
+			}
 		}
 		
 		if ($ticket) {

@@ -4,14 +4,14 @@
  * Panel for sending IGMs
  */
 class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
-	private $message = null;
-	private $user = null;
+	private $replyToMessage = null;
+	private $sendToUsers = array();
 	
-	public function __construct($name, $title = '', DB_Record $message = null, Rakuun_DB_User $user = null) {
+	public function __construct($name, $title = '', DB_Record $replyToMessage = null, array $sendToUsers = array()) {
 		parent::__construct($name, $title);
 			
-		$this->message = $message;
-		$this->user = $user;
+		$this->replyToMessage = $replyToMessage;
+		$this->sendToUsers = $sendToUsers;
 	}
 	
 	public function init() {
@@ -20,14 +20,17 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/send.tpl');
 		$this->addClasses('rakuun_messages_send');
 		
-		$this->addPanel($recipient = new Rakuun_GUI_Control_MultiUserSelect('recipients', $this->message ? $this->message->sender : $this->user , 'Empfänger'));
-		$recipient->addValidator(new GUI_Validator_Mandatory());
-		$this->addPanel(new GUI_Control_TextBox('subject', $this->message ? 'RE: '.Text::escapeHTML($this->message->subject) : '', 'Betreff'));
-		if ($this->message) {
-			$time = new GUI_Panel_Date('date', $this->message->time);
+		$this->addPanel($recipients = new Rakuun_GUI_Control_MultiUserSelect('recipients', null, 'Empfänger'));
+		$recipients->addValidator(new GUI_Validator_Mandatory());
+		$recipientNames = array();
+		foreach ($this->sendToUsers as $user)
+			$recipientNames[] = $user->nameUncolored;
+		$recipients->setValue(implode(', ', $recipientNames));
+		$this->addPanel(new GUI_Control_TextBox('subject', $this->replyToMessage ? 'RE: '.Text::escapeHTML($this->replyToMessage->subject) : '', 'Betreff'));
+		if ($this->replyToMessage) {
+			$time = new GUI_Panel_Date('date', $this->replyToMessage->time);
 		}
-		// TODO disable answering options for non-answerable messages
-		$this->addPanel($newmessage = new GUI_Control_TextArea('newmessage', ($this->message && $this->message->sender) ? "\n\n--- Nachricht von ".$this->message->sender->nameUncolored.' am '.$time->getValue()." ---\n".$this->message->text : '', 'Nachricht'));
+		$this->addPanel($newmessage = new GUI_Control_TextArea('newmessage', ($this->replyToMessage && $this->replyToMessage->sender) ? "\n\n--- Nachricht von ".$this->replyToMessage->sender->nameUncolored.' am '.$time->getValue()." ---\n".$this->replyToMessage->text : '', 'Nachricht'));
 		$newmessage->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel(new GUI_Control_CheckBox('blindcopies', '', false, 'Blindkopien'));
 		$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
