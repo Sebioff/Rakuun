@@ -4,7 +4,6 @@
  * Panel to send an invitation to users without an alliance.
  */
 class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
-	
 	public function init() {
 		parent::init();
 		
@@ -13,12 +12,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
 		}
 		
 		$this->setTemplate(dirname(__FILE__).'/invite.tpl');
-		$options['conditions'][] = array('alliance is NULL');
+		$options = $this->getPossibleRecipientOptions();
 		$options['order'] = 'name ASC';
 		$users = Rakuun_DB_Containers::getUserContainer()->select($options);
 		$_users = array();
 		foreach ($users as $user) {
-			$_users[$user->getPK()] = $user->nameUncolored;
+			if (!Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_LOCKED))
+				$_users[$user->getPK()] = $user->nameUncolored;
 		}
 		if (empty($_users)) {
 			$this->addError('no users without an alliance found');
@@ -39,10 +39,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
 		
 		DB_Connection::get()->beginTransaction();
 		$user = Rakuun_User_Manager::getCurrentUser();
+		$options = $this->getPossibleRecipientOptions();
 		$options['conditions'][] = array('id = ?', $this->users->getKey());
-		$options['conditions'][] = array('alliance is NULL');
 		$recipient = Rakuun_DB_Containers::getUserContainer()->selectFirst($options);
-		if (!$recipient) {
+		if (!$recipient || Rakuun_GameSecurity::get()->isInGroup($recipient, Rakuun_GameSecurity::GROUP_LOCKED)) {
 			$this->addError('No User found');
 			return;
 		}
@@ -80,5 +80,16 @@ class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
 		DB_Connection::get()->commit();
 		$this->getModule()->invalidate();
 	}
+	
+	/**
+	 * @return array of options
+	 */
+	private function getPossibleRecipientOptions() {
+		$options = array();
+		$options['conditions'][] = array('alliance is NULL');
+		$options['conditions'][] = array('is_yimtay = ?', false);
+		return $options;
+	}
 }
+
 ?>
