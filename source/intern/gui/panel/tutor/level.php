@@ -10,9 +10,7 @@ abstract class Rakuun_Intern_GUI_Panel_Tutor_Level {
 	 * check if level's requirements are fulfilled
 	 * @return bool
 	 */
-	public function completed() {
-		return false;
-	}
+	abstract public function completed();
 	
 	/**
 	 * get description text

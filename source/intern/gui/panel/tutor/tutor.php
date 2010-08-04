@@ -16,6 +16,8 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Profile());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Build2());
 		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Irc());
+		
 		// start to produce energy
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Techtree());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Buildflab());
@@ -26,7 +28,12 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Satisfaction());
 		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Tickets());		
+		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Alliance());
+		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Faq());
+		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Finish());
 	}
 	
