@@ -54,6 +54,13 @@ abstract class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_B
 			parent::display();
 	}
 	
+	public function onCancel() {
+		$wipItems = $this->getProducer()->getWIP();
+		$firstWIP = $wipItems[0];
+		$this->getProducer()->cancelWIPItem($firstWIP);
+		$this->getModule()->invalidate();
+	}
+	
 	// GETTERS / SETTERS -------------------------------------------------------
 	/**
 	 * @return Rakuun_Intern_Production_Producer

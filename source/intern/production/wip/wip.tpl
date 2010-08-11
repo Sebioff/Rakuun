@@ -9,3 +9,6 @@
 <? if ($this->hasPanel('move_down')): ?>
 	<? $this->displayPanel('move_down'); ?>
 <? endif; ?>
+<? if ($this->hasPanel('cancel')): ?>
+	<? $this->displayPanel('cancel'); ?>
+<? endif; ?>

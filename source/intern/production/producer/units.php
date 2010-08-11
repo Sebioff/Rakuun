@@ -4,11 +4,6 @@
  * Class that is responsible for producing units
  */
 class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_Producer {
-	protected $itemContainer = null;
-	protected $itemWIPContainer = null;
-	protected $user = null;
-	protected $wip = array();
-	
 	public function __construct(DB_Container $itemContainer, DB_Container $itemWIPContainer, Rakuun_DB_User $user = null) {
 		if (!$user)
 			$user = Rakuun_User_Manager::getCurrentUser();
@@ -74,7 +69,7 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 	}
 
 	public function addWIPItem(DB_Record $wipItem) {
-		$newWip = new Rakuun_Intern_Production_WIP_Unit($wipItem->getPK(), $this->getItemWIPContainer(), Rakuun_Intern_Production_Factory::getUnit($wipItem->unit, $this->getProductionTarget()));
+		$newWip = new Rakuun_Intern_Production_WIP_Unit($wipItem->getPK(), $this, Rakuun_Intern_Production_Factory::getUnit($wipItem->unit, $this->getProductionTarget()));
 //		if ($i <= 1)
 //			$newWip->removePanel($newWip->moveUp);
 //		if ($i >= $wipItemsCount - 1)
@@ -84,6 +79,19 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 		$newWip->setRecord($wipItem);
 		$this->wip[] = $newWip;
 //		$i++;
+	}
+	
+	public function cancelWIPItem(Rakuun_Intern_Production_WIP $wipItem) {
+		DB_Connection::get()->beginTransaction();
+		$this->getProductionTarget()->ressources->raise($wipItem->getWIPItem()->getIronRepayForAmount(), $wipItem->getWIPItem()->getBerylliumRepayForAmount(), $wipItem->getWIPItem()->getEnergyRepayForAmount(), $wipItem->getWIPItem()->getPeopleRepayForAmount());
+		$options = $this->getWIPItemsOptions();
+		$options['conditions'][] = array('position > ?', $wipItem->getRecord()->position);
+		foreach ($this->getItemWIPContainer()->select($options) as $wipRecord) {
+			$wipRecord->starttime = time();
+			$wipRecord->save();
+		}
+		$wipItem->getRecord()->delete();
+		DB_Connection::get()->commit();
 	}
 }
 

@@ -8,19 +8,17 @@ abstract class Rakuun_Intern_GUI_Panel_Tutor_Level {
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------
 	/**
 	 * check if level's requirements are fulfilled
-	 * @return bool
+	 * @return boolean
 	 */
-	abstract public function completed();
+	public abstract function completed();
 	
 	/**
 	 * get description text
 	 * @return string
 	 */
-	public function getDescription() {
-		return '';
-	}
+	public abstract function getDescription();
 	
-	// CUSTOM METHODS ----------------------------------------------------------	
+	// CUSTOM METHODS ----------------------------------------------------------
 	public function finish() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$level = Rakuun_DB_Containers::getTutorContainer()->selectByUserFirst($user);

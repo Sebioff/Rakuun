@@ -4,11 +4,11 @@
  * Class that is responsible for producing items
  */
 abstract class Rakuun_Intern_Production_Producer {
-	protected $itemContainer = null;
-	protected $itemWIPContainer = null;
-	protected $productionTarget = null;
-	protected $foreignKeyColumn  = '';
 	protected $wip = array();
+	private $itemContainer = null;
+	private $itemWIPContainer = null;
+	private $productionTarget = null;
+	private $foreignKeyColumn  = '';
 	private $pauseOnMissingRequirements = true;
 
 	public function __construct(DB_Container $itemContainer, DB_Container $itemWIPContainer, DB_Record $productionTarget, $foreignKeyColumn) {
@@ -72,18 +72,22 @@ abstract class Rakuun_Intern_Production_Producer {
 	}
 
 	protected function fillWIPItems() {
-		$options = array();
-		$options['conditions'][] = array($this->foreignKeyColumn.' = ?', $this->getProductionTarget());
+		$options = $this->getWIPItemsOptions();
 		$options['order'] = 'position ASC';
 		$wipItems = $this->getItemWIPContainer()->select($options);
-		$i = 0;
-		$wipItemsCount = count($wipItems);
 		foreach ($wipItems as $wipItem) {
 			$this->addWIPItem($wipItem);
 		}
 	}
+	
+	public function getWIPItemsOptions() {
+		$options = array();
+		$options['conditions'][] = array($this->foreignKeyColumn.' = ?', $this->getProductionTarget());
+		return $options;
+	}
 
 	public abstract function addWIPItem(DB_Record $wipItem);
+	public abstract function cancelWIPItem(Rakuun_Intern_Production_WIP $wipItem);
 
 	// GETTERS / SETTERS -------------------------------------------------------
 	public function getWIP() {

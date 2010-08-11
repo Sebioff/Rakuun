@@ -7,29 +7,30 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 	private $wipItem = null;
 	private $startTime = 0;
 	private $record = 0;
-	private $itemWIPContainer = null;
+	private $producer = null;
 	
-	public function __construct($name, DB_Container $itemWIPContainer, Rakuun_Intern_Production_Base $wipItem) {
+	public function __construct($name, Rakuun_Intern_Production_Producer $producer, Rakuun_Intern_Production_Base $wipItem) {
 		parent::__construct($name);
 		
-		$this->itemWIPContainer = $itemWIPContainer;
+		$this->producer = $producer;
 		$this->wipItem = $wipItem;
 		$this->setTemplate(dirname(__FILE__).'/wip.tpl');
 		$this->addPanel($upButton = new GUI_Control_SubmitButton('move_up'));
 		$upButton->addClasses('rakuun_btn_move_up');
 		$this->addPanel($downButton = new GUI_Control_SubmitButton('move_down'));
 		$downButton->addClasses('rakuun_btn_move_down');
+		$this->addPanel($cancelButton = new GUI_Control_SubmitButton('cancel', 'Abbrechen'));
+		$cancelButton->addClasses('rakuun_btn_cancel');
 	}
 	
 	/**
 	 * Moves this item up in the queue
 	 */
 	public function onMoveUp() {
-		$options = array();
-		$options['conditions'][] = array('user = ?', $this->getRecord()->user);
+		$options = $this->getProducer()->getWIPItemsOptions();
 		$options['conditions'][] = array('position < ?', $this->getRecord()->position);
 		$options['order'] = 'position DESC';
-		$nextRecord = $this->getItemWIPContainer()->selectFirst($options);
+		$nextRecord = $this->getProducer()->getItemWIPContainer()->selectFirst($options);
 		if ($nextRecord) {
 			DB_Connection::get()->beginTransaction();
 			$tempPosition = $nextRecord->position;
@@ -46,11 +47,10 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 	 * Moves this item down in the queue
 	 */
 	public function onMoveDown() {
-		$options = array();
-		$options['conditions'][] = array('user = ?', $this->getRecord()->user);
+		$options = $this->getProducer()->getWIPItemsOptions();
 		$options['conditions'][] = array('position > ?', $this->getRecord()->position);
 		$options['order'] = 'position ASC';
-		$nextRecord = $this->getItemWIPContainer()->selectFirst($options);
+		$nextRecord = $this->getProducer()->getItemWIPContainer()->selectFirst($options);
 		if ($nextRecord) {
 			DB_Connection::get()->beginTransaction();
 			$tempPosition = $nextRecord->position;
@@ -61,6 +61,14 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 			DB_Connection::get()->commit();
 			$this->getModule()->invalidate();
 		}
+	}
+	
+	/**
+	 * Removes this item from the queue
+	 */
+	public function onCancel() {
+		$this->getProducer()->cancelWIPItem($this);
+		$this->getModule()->invalidate();
 	}
 	
 	// CUSTOM METHODS ----------------------------------------------------------
@@ -117,10 +125,10 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 	}
 	
 	/**
-	 * @return DB_Container
+	 * @return Rakuun_Intern_Production_Producer
 	 */
-	public function getItemWIPContainer() {
-		return $this->itemWIPContainer;
+	public function getProducer() {
+		return $this->producer;
 	}
 }
 

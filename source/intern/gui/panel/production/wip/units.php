@@ -72,20 +72,6 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 		Rakuun_User_Manager::update($user);
 		Router::get()->getCurrentModule()->invalidate();
 	}
-	
-	public function onCancel() {
-		$wipItems = $this->getProducer()->getWIP();
-		$firstWIP = $wipItems[0];
-		DB_Connection::get()->beginTransaction();
-		Rakuun_User_Manager::getCurrentUser()->ressources->raise($firstWIP->getIronRepayForAmount(), $firstWIP->getBerylliumRepayForAmount(), $firstWIP->getEnergyRepayForAmount(), $firstWIP->getPeopleRepayForAmount());
-		foreach ($wipItems as $wipItem) {
-			$wipItem->getRecord()->starttime = time();
-			$wipItem->getRecord()->save();
-		}
-		$firstWIP->getRecord()->delete();
-		DB_Connection::get()->commit();
-		$this->getModule()->invalidate();
-	}
 }
 
 ?>
