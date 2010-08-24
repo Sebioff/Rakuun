@@ -65,7 +65,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$targetX = 0;
 		$targetY = 0;
 		$sendedUnits = $this->unitInput->getArmy();
-		$user = Rakuun_User_Manager::getCurrentUser(); 
+		$user = Rakuun_User_Manager::getCurrentUser();
 		
 		if ($user->buildings->militaryBase == 0) {
 			$this->addError('Du brauchst einen Militärstützpunkt, um deine Armee loszuschicken');
@@ -122,7 +122,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		
 		$userUnits = Rakuun_User_Manager::getCurrentUser()->units;
 		
-		$army = new DB_Record();
+		$army = new Rakuun_DB_Army();
 		$army->user = Rakuun_User_Manager::getCurrentUser();
 		$army->positionX = $army->user->cityX;
 		$army->positionY = $army->user->cityY;

@@ -10,11 +10,11 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 		imagecolortransparent($image, $black);
 		
 		// colors
-		$colorCityNeutral = imagecolorallocate($image, 139, 139, 139);
-		$colorCityOwn = imagecolorallocate($image, 255, 255, 255);
-		$colorCityFriendly = imagecolorallocate($image, 255, 191, 0);
-		$colorCityAllied = imagecolorallocate($image, 0, 128, 0);
-		$colorCityHostile = imagecolorallocate($image, 225, 0, 0);
+		$colorCityNeutral = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_neutral.gif');
+		$colorCityOwn = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_own.gif');
+		$colorCityFriendly = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_friendly.gif');
+		$colorCityAllied = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_allied.gif');
+		$colorCityHostile = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_hostile.gif');
 		$colorDatabase = imagecolorallocate($image, 255, 255, 0);
 		
 		if (Rakuun_User_Manager::getCurrentUser()->alliance && Rakuun_User_Manager::getCurrentUser()->alliance->buildings->databaseDetector > 0) {
@@ -45,7 +45,8 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 						$color = $colorCityFriendly;
 				}
 			}
-			$this->drawItem($image, $user->cityX, $user->cityY, $color);
+			//$this->drawItem($image, $user->cityX, $user->cityY, $color);
+			imagecopy($image, $color, $user->cityX * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, $user->cityY * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE,  0, 0, 10, 10);
 		}
 		
 		imagegif($image);
