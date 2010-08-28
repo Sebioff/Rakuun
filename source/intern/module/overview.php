@@ -66,26 +66,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			}
 			
 			// panel for incomming armies
-			// TODO booh, duplicate code. See Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies
-			$options = array();
-			$options['conditions'][] = array('target = ?', Rakuun_User_Manager::getCurrentUser());
-			$options['conditions'][] = array('target_x = ?', Rakuun_User_Manager::getCurrentUser()->cityX);
-			$options['conditions'][] = array('target_y = ?', Rakuun_User_Manager::getCurrentUser()->cityY);
-			$cloakingUnits = array();
-			$unCloakingUnits = array();
-			foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
-				if (!$unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY)) {
-					if ($unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING)) {
-						$cloakingUnits[] = $unit->getInternalName();
-					}
-					else {
-						$unCloakingUnits[] = $unit->getInternalName();
-					}
-				}
-			}
-			$sensorfieldRange = Rakuun_Intern_Production_Factory::getBuilding('sensor_bay')->getRange();
-			// respect cloaked armies + sensorfield
-			$options['conditions'][] = array(implode('+',$cloakingUnits).' <= 0 OR (target_time-'.$sensorfieldRange.' <= ? && target_time > ?) OR '.implode('+',$unCloakingUnits).' > 0', time(), time());
+			$options = Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies::getOptionsForVisibleArmies();
 			if (Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options)) {
 				$incommingArmiesPanel = new Rakuun_GUI_Panel_Box_Collapsible('incomming_armies', new Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies('incomming_armies', 'Eingehende Angriffe'), 'Eingehende Angriffe');
 				$this->contentPanel->addPanel($incommingArmiesPanel);
