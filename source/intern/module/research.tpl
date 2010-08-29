@@ -1,5 +1,6 @@
 <? $this->displayPanel('wip'); ?>
 <br class="clear" />
-<? foreach($this->params->wipPanels as $panel): ?>
-	<? $panel->display(); ?>
-<? endforeach ?>
+<? if ($this->hasPanel('information')): ?>
+	<? $this->displayPanel('information'); ?>
+<? endif; ?>
+<? $this->displayPanel('sortpane'); ?>

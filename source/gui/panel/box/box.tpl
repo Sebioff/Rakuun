@@ -13,6 +13,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="border_decorator decorator1"></div>
+	<div class="border_decorator decorator2"></div>
+	<div class="border_decorator decorator3"></div>
+	<div class="border_decorator decorator4"></div>
 	<div class="corner topleft"></div>
 	<div class="corner bottomleft"></div>
 	<div class="corner topright"></div>

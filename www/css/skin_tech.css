@@ -8,22 +8,77 @@
 
 /*
 	$1  -  Common Elements
-	$2  -  Boxes
-	$3  -  Messages
+	$2  -  Main Containers
+	$3  -  Boxes
+	$4  -  Navigation
+	$5  -  Messages
+	$6  -  Overview
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
 body.skin_tech
 {
-	background-color:#ffffff;
+	background:#000000 url('../images/background.png') repeat-x left top;
 }
 
-/* $2  -  Boxes --------------------------------------------------------------*/
+.skin_tech .rakuun_box .head {
+	position:relative;
+}
+
+.skin_tech .rakuun_box .head h2 span {
+	background:url('../images/h_text_gradient.png') repeat-x;
+	position:absolute;
+	display:block;
+	width:80%;
+	height:20px;
+	bottom:0px;
+}
+
+* html .skin_tech .rakuun_box .head h2 span {
+	background:none;
+}
+
+hr {
+	color:#78787D;
+}
+
+input,
+textarea,
+select {
+	color:#FFFFFF;
+	background-color:#363840;
+	border:1px solid #848387;
+}
+
+/* $2  -  Main Containers ----------------------------------------------------*/
+.skin_tech #ctn_main {
+	background:transparent url('../images/background_starfield.png') no-repeat center top;
+}
+
+.skin_tech #ctn_ingame
+{
+	width:996px;
+}
+
+.skin_tech #ctn_content
+{
+	background:transparent url('../images/background_content.gif') repeat-y left top;
+	padding:6px 10px;
+}
+
+.skin_tech #ctn_head
+{
+	background:transparent url('../images/background_menu.png') no-repeat left top;
+	height:74px;
+	border:0px none;
+}
+
+/* $3  -  Boxes --------------------------------------------------------------*/
 .skin_tech .rakuun_box {
-	background:#000000 url('../images/rakuun_box_left.gif') repeat-y left top;
+	background:#363840 url('../images/rakuun_box_left.gif') repeat-y left top;
 	color:#ffffff;
 	float:left;
-	padding:0px 0px 0px 16px;
+	padding:0px 0px 0px 14px;
 	position:relative;
 }
 
@@ -39,24 +94,25 @@ body.skin_tech
 }
 
 .skin_tech .rakuun_box .content_inner {
-	padding-bottom:7px;
+	padding-bottom:3px;
 }
 
 .skin_tech .rakuun_box .head_inner {
-	border-bottom:1px solid #cccccc;
+	color:#4e82c2;
+	font-size:18px;
 	padding:3px;
 	padding-top:0px;
 }
 
 .skin_tech .rakuun_box_collapsible .head_inner {
-	background:transparent url('../images/collapse.gif') no-repeat 3px top;
+	background:transparent url('../images/collapse_tech.gif') no-repeat 3px 1px;
 	cursor:pointer;
 	padding-left:19px;
 }
 
 .skin_tech .rakuun_box .body {
 	background:transparent url('../images/rakuun_box_right.gif') repeat-y right top;
-	padding-right:16px;
+	padding-right:11px;
 }
 
 .skin_tech .rakuun_box .border,
@@ -65,47 +121,157 @@ body.skin_tech
 }
 
 .skin_tech .rakuun_box .topleft {
-	background:transparent url('../images/rakuun_box_topleft.png') no-repeat left top;
-	height:35px;
+	background:transparent url('../images/rakuun_box_topleft.gif') no-repeat left top;
+	height:18px;
 	top:0px;
 	left:0px;
 	width:18px;
 }
-* html .skin_tech .rakuun_box .topleft {
-	background-image:none;
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='crop' src='../images/rakuun_box_topleft.png');
-}
 
 .skin_tech .rakuun_box .topright {
-	background:transparent url('../images/rakuun_box_topright.png') no-repeat left top;
-	height:35px;
+	background:transparent url('../images/rakuun_box_topright.gif') no-repeat left top;
+	height:18px;
 	top:0px;
 	right:0px;
 	width:18px;
 }
 
 .skin_tech .rakuun_box .bottomleft {
-	background:transparent url('../images/rakuun_box_bottomleft.png') no-repeat left top;
-	height:40px;
+	background:transparent url('../images/rakuun_box_bottomleft.gif') no-repeat left top;
+	height:20px;
 	bottom:0px;
 	left:0px;
-	width:18px;
+	width:14px;
 }
 
 .skin_tech .rakuun_box .bottomright {
-	background:transparent url('../images/rakuun_box_bottomright.png') no-repeat left top;
-	height:40px;
+	background:transparent url('../images/rakuun_box_bottomright.gif') no-repeat left top;
+	height:20px;
 	bottom:0px;
 	right:0px;
-	width:18px;
+	width:14px;
 }
 
 .skin_tech .rakuun_box_note .head {
 	background-color:#FF0000;
 }
 
-/* $3  -  Messages -----------------------------------------------------------*/
+
+.skin_tech .rakuun_box .border_decorator {
+	position:absolute;
+}
+
+.skin_tech .rakuun_box .decorator1 {
+	background:#363840 url('../images/rakuun_box_left1.gif') repeat-y left top;
+	height:50%;
+	left:0px;
+	top:0px;
+	width:11px;
+}
+
+.skin_tech .rakuun_box .decorator2 {
+	background:#363840 url('../images/rakuun_box_gradient_left.gif') no-repeat left center;
+	height:20px;
+	left:0px;
+	margin-top:-10px;
+	top:50%;
+	width:11px;
+}
+
+.skin_tech .rakuun_box .decorator3 {
+	background:#363840 url('../images/rakuun_box_right1.gif') repeat-y left top;
+	height:50%;
+	top:0px;
+	right:0px;
+	width:11px;
+}
+
+.skin_tech .rakuun_box .decorator4 {
+	background:#363840 url('../images/rakuun_box_gradient_right.gif') no-repeat left center;
+	height:20px;
+	margin-top:-10px;
+	right:0px;
+	top:50%;
+	width:11px;
+}
+
+.skin_tech .module_build .ui-sortable .head,
+.skin_tech .module_research .ui-sortable .head,
+.skin_tech .module_produce .ui-sortable .head {
+	cursor:move;
+}
+
+/* $4  -  Navigation ---------------------------------------------------------*/
+.skin_tech #ctn_head #ctn_navigation {
+	padding-left:7px;
+}
+
+.skin_tech #ctn_head #ctn_navigation li {
+	background:transparent url('../images/navigation_separator.gif') no-repeat right top;
+	margin:0px;
+	padding-right:2px;
+}
+
+.skin_tech #ctn_head #ctn_navigation li a {
+	color:#FFFFFF;
+	display:block;
+	font-size:18px;
+	line-height:46px;
+	padding:0px 10px;
+	position:relative;
+	text-decoration:none;
+}
+
+.skin_tech #ctn_head #ctn_navigation li a span {
+	background:url('../images/navigation_text_gradient.png') repeat-x;
+	position:absolute;
+	display:block;
+	width:100%;
+	height:46px;
+	left:0px;
+	top:0px;
+}
+
+* html .skin_tech #ctn_head #ctn_navigation li a span {
+	background:none;
+}
+
+.skin_tech #ctn_head #ctn_navigation li.core_navigation_node_first a {
+	padding-left:3px;
+}
+
+.skin_tech #ctn_head #ctn_navigation li a:hover {
+	background:transparent url('../images/navigation_hover_background.gif') repeat-x left top;
+}
+
+.skin_tech #ctn_head #ctn_ressources .rakuun_ressource label {
+	color:#a09898;
+	display:block;
+	float:left;
+	text-align:right;
+	width:100px;
+}
+
+.skin_tech #ctn_head #ctn_ressources .rakuun_ressource span {
+	color:#FFFFFF;
+	display:block;
+	float:left;
+	text-align:right;
+	width:60px;
+}
+
+/* $5  -  Messages -----------------------------------------------------------*/
 .skin_tech .rakuun_message_unread
 {
 	background-color:#CCCCCC;
+}
+
+/* $6  -  Overview -----------------------------------------------------------*/
+.shout_header a.answerlink {
+	background:transparent url('../images/shoutbox_reply_icon.gif') no-repeat left top;
+	display:block;
+	float:right;
+	font-size:0px;
+	height:14px;
+	width:10px;
 }

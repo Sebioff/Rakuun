@@ -45,7 +45,6 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 						$color = $colorCityFriendly;
 				}
 			}
-			//$this->drawItem($image, $user->cityX, $user->cityY, $color);
 			imagecopy($image, $color, $user->cityX * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, $user->cityY * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE,  0, 0, 10, 10);
 		}
 		

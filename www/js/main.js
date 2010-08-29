@@ -1,11 +1,11 @@
-function GUI_Control_Box_Collapsible(collapseStatusScriptletURL, controlID) {
+function GUI_Control_Box_Collapsible(controlID) {
 	$("#" + controlID + " .head").click(
 		function() {
 			var element = $("#" + controlID);
 			
 			if (!element.hasClass("animating")) {
 				element.addClass("animating");
-				$.get(collapseStatusScriptletURL, { panel: controlID });
+				$.core.ajaxRequest(controlID, "ajaxCollapse");
 				var contentInner = element.find(".content_inner");
 				var content = element.find(".content");
 				
@@ -42,3 +42,8 @@ function GUI_Control_Box_Collapsible(collapseStatusScriptletURL, controlID) {
 		}
 	);
 }
+
+$(document).ready(function(){
+	$(".skin_tech #ctn_head #ctn_navigation li a").prepend("<span></span>");
+	$(".skin_tech .rakuun_box .head h2").prepend("<span></span>");
+});
