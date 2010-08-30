@@ -69,8 +69,9 @@ select {
 .skin_tech #ctn_head
 {
 	background:transparent url('../images/background_menu.png') no-repeat left top;
-	height:74px;
 	border:0px none;
+	height:74px;
+	position:relative;
 }
 
 /* $3  -  Boxes --------------------------------------------------------------*/
@@ -212,12 +213,41 @@ select {
 	padding-right:2px;
 }
 
+.skin_tech #ctn_head #ctn_navigation ul ul li {
+	background:none;
+}
+
+.skin_tech #ctn_navigation ul ul {
+	background:transparent url('../images/navigation_sub_background.gif') no-repeat right top;
+	display:none;
+	height:22px;
+	left:0px;
+	position:absolute;
+	bottom:3px;
+	width:823px;
+}
+
+.skin_tech #ctn_navigation ul li.core_navigation_node_inpath ul  {
+	display:block;
+}
+
 .skin_tech #ctn_head #ctn_navigation li a {
 	color:#FFFFFF;
 	display:block;
 	font-size:18px;
 	line-height:46px;
 	padding:0px 10px;
+	position:relative;
+	text-decoration:none;
+}
+
+.skin_tech #ctn_head #ctn_navigation ul ul li a {
+	color:#FFFFFF;
+	display:block;
+	font-size:12px;
+	font-weight:bold;
+	line-height:20px;
+	padding:0px 5px;
 	position:relative;
 	text-decoration:none;
 }
@@ -232,6 +262,10 @@ select {
 	top:0px;
 }
 
+.skin_tech #ctn_head #ctn_navigation ul ul li a span {
+	display:none;
+}
+
 * html .skin_tech #ctn_head #ctn_navigation li a span {
 	background:none;
 }
@@ -240,8 +274,22 @@ select {
 	padding-left:3px;
 }
 
-.skin_tech #ctn_head #ctn_navigation li a:hover {
+.skin_tech #ctn_head #ctn_navigation ul ul li.core_navigation_node_first a,
+.skin_tech #ctn_head #ctn_navigation ul ul li.core_navigation_node_single a {
+	padding-left:11px;
+}
+
+.skin_tech #ctn_head #ctn_navigation li a:hover,
+.skin_tech #ctn_head #ctn_navigation li.core_navigation_node_inpath a {
 	background:transparent url('../images/navigation_hover_background.gif') repeat-x left top;
+}
+
+.skin_tech #ctn_head #ctn_navigation ul ul li.core_navigation_node a {
+	background:none;
+}
+
+.skin_tech #ctn_head #ctn_ressources {
+	padding:7px 10px 0px 0px;
 }
 
 .skin_tech #ctn_head #ctn_ressources .rakuun_ressource label {
@@ -249,7 +297,7 @@ select {
 	display:block;
 	float:left;
 	text-align:right;
-	width:100px;
+	width:60px;
 }
 
 .skin_tech #ctn_head #ctn_ressources .rakuun_ressource span {

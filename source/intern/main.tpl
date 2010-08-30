@@ -14,7 +14,7 @@
 				<span class="rakuun_ressource rakuun_ressource_people"><? $this->displayLabelForPanel('people'); ?> <? $this->displayPanel('people'); ?></span>
 			</div>
 		</div>
-		<div id="ctn_content">
+		<div id="ctn_content" class="clearfix">
 			<? if ($this->hasPanel('tutor')): ?>
 				<? $this->displayPanel('tutor'); ?>
 				<br class="clear" />
