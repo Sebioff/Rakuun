@@ -46,4 +46,8 @@ function GUI_Control_Box_Collapsible(controlID) {
 $(document).ready(function(){
 	$(".skin_tech #ctn_head #ctn_navigation li a").prepend("<span></span>");
 	$(".skin_tech .rakuun_box .head h2").prepend("<span></span>");
+	$(".skin_tech #ctn_head #ctn_navigation li").mouseover(function() {
+		$(".skin_tech #ctn_head #ctn_navigation li").removeClass("core_navigation_node_inpath");
+		$(this).addClass("core_navigation_node_inpath");
+	});
 });

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property Rakuun_DB_User $user
+ */
 class Rakuun_DB_Army extends DB_Record {
 	/**
 	 * Makes the army calculate a path home

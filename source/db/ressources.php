@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property Rakuun_DB_User $user
+ */
 class Rakuun_DB_Ressources extends DB_Record {
 	/**
 	 * Lowers the ressources. Note that you can't lower the ressources below 0.

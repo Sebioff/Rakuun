@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property Rakuun_DB_User $user
+ */
 class Rakuun_DB_Buildings extends Rakuun_DB_CityItems {
 	/**
 	 * Lowers the item level.

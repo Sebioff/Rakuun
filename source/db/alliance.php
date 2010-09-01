@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property Rakuun_DB_Meta $meta
+ */
 class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_Owner {
 	public function __construct() {
 		$this->setVirtualProperty('members', array($this, 'getMembers'));
@@ -74,11 +77,11 @@ class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_O
 		$this->save();
 	}
 	
-	public function getAverageMilitaryStrength() {
+	public function getAverageMilitaryStrength($includingUnitsInProduction = false) {
 		$sum = 0;
 		$count = 0;
 		foreach ($this->getMembers() as $member) {
-			$sum += $member->getArmyStrength();
+			$sum += $member->getArmyStrength($includingUnitsInProduction);
 			$count++;
 		}
 		return $sum / $count;

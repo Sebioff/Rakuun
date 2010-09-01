@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @property Rakuun_DB_Ressources $ressources
+ * @property Rakuun_DB_Buildings $buildings
+ * @property Rakuun_DB_Technologies $technologies
+ * @property Rakuun_DB_Alliance $alliance
+ */
 class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner {
 	const DELETED_USER_NAME = 'gelöschter User';
 	
@@ -277,11 +283,20 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		return $deff;
 	}
 	
-	public function getArmyStrength() {
+	public function getArmyStrength($includingUnitsInProduction = false) {
 		$sum = 0;
 		$units = Rakuun_Intern_Production_Factory::getAllUnits($this);
 		foreach ($units as $unit) {
 			$sum += $unit->getArmyStrength($unit->getAmount() + $unit->getAmountNotAtHome());
+		}
+		if ($includingUnitsInProduction) {
+			$options = array();
+			$options['properties'] = 'unit, SUM(amount) AS amount';
+			$options['conditions'][] = array('user = ?', $this);
+			$options['group'] = 'unit';
+			foreach (Rakuun_DB_Containers::getUnitsWIPContainer()->select($options) as $unitInProduction) {
+				$sum += Rakuun_Intern_Production_Factory::getUnit($unitInProduction->unit)->getArmyStrength($unitInProduction->amount);
+			}
 		}
 		return $sum;
 	}

@@ -10,13 +10,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/payout.tpl');
 		$alliance = Rakuun_User_Manager::getCurrentUser()->alliance;
 		$users = $alliance->members;
-		$averageStrength = $alliance->getAverageMilitaryStrength();
+		$averageStrength = $alliance->getAverageMilitaryStrength(true);
 		$averagePoints = $alliance->points / count($users);
 		$this->params->averageStrength = $averageStrength;
 		$this->params->averagePoints = $averagePoints;
 		$_users = array();
 		foreach ($users as $user) {
-			if ($user->getArmyStrength() < $averageStrength && $user->points < $averagePoints)
+			if ($user->getArmyStrength(true) < $averageStrength && $user->points < $averagePoints)
 				$_users[$user->getPK()] = $user->name;
 		}
 		$this->addPanel($userbox = new GUI_Control_DropDownBox('userbox', $_users));
@@ -80,7 +80,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 			$this->addError('So viele Leute befinden sich nicht in der Allianzkasse.');
 		
 		//check if user armee is below alliance average
-		if ($user->getArmyStrength() >= $user->alliance->getAverageMilitaryStrength())
+		if ($user->getArmyStrength(true) >= $user->alliance->getAverageMilitaryStrength(true))
 			$this->addError('Dieser Nutzer besitzt eine zu starke Armee, um noch mit Ressourcen gestärkt werden zu müssen.');
 
 		if ($user->points >= $alliance->points / count($alliance->members))
