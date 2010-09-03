@@ -29,6 +29,12 @@
 			<?= $replyLink->render(); ?>
 		<? endif; ?>
 	<? endif; ?>
+	<? if ($this->getMessage()->type == Rakuun_Intern_IGM::TYPE_SPY && $reportIDs = $this->getMessage()->getAttachmentsOfType(Rakuun_Intern_IGM::ATTACHMENT_TYPE_SPYREPORTLOG)): ?>
+		<? $reportID = $reportIDs[0]->value; ?>
+		<? $warsimLinkUrl = App::get()->getInternModule()->getSubmodule('warsim')->getUrl(array('spyreport' => $reportID)); ?>
+		<? $warsimLink = new GUI_Control_Link('warsim_link', 'In WarSim übernehmen', $warsimLinkUrl); ?>
+		<?= $warsimLink->render(); ?>
+	<? endif; ?>
 	<? if ($this->hasPanel('delete')): ?>
 		<? $this->displayPanel('delete'); ?>
 	<? endif; ?>

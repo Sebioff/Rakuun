@@ -35,6 +35,41 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		
 		$this->addPanel(new GUI_Control_Submitbutton('calcwarsim', 'Berechnen'));
 		$this->setTemplate(dirname(__FILE__).'/drawpanel.tpl');
+		
+		// set default values from spy report
+		if (($spyreport = $this->getModule()->getParam('spyreport')) && !$this->calcwarsim->hasBeenSubmitted()) {
+			$report = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK($spyreport);
+			if (Rakuun_Intern_GUI_Panel_User_Reports::hasPrivilegesToSeeReport($report)) {
+				foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
+					if ($amount = $report->{Text::underscoreToCamelCase($unit->getInternalName())}) {
+						if (isset($this->panelsForAttackers[$unit->getInternalName()]))
+							$this->panelsForAttackers[$unit->getInternalName()]->setValue($amount);
+						if (isset($this->panelsForDefenders[$unit->getInternalName()]))
+							$this->panelsForDefenders[$unit->getInternalName()]->setValue($amount);
+					}
+					else {
+						if (isset($this->panelsForAttackers[$unit->getInternalName()]))
+							$this->panelsForAttackers[$unit->getInternalName()]->setValue(0);
+						if (isset($this->panelsForDefenders[$unit->getInternalName()]))
+							$this->panelsForDefenders[$unit->getInternalName()]->setValue(0);
+					}
+				}
+				
+				foreach (Rakuun_Intern_Production_Factory::getAllBuildings() as $building) {
+					if ($level = $report->{Text::underscoreToCamelCase($building->getInternalName())}) {
+						if (isset($this->panelsForDefendersBuildings[$building->getInternalName()]))
+							$this->panelsForDefendersBuildings[$building->getInternalName()]->setValue($level);
+					}
+					else {
+						if (isset($this->panelsForDefendersBuildings[$building->getInternalName()]))
+							$this->panelsForDefendersBuildings[$building->getInternalName()]->setValue(0);
+					}
+				}
+			}
+			
+			$this->addPanel(new GUI_Control_Submitbutton('use_own_for_att', 'Eigene übernehmen'));
+			$this->addPanel(new GUI_Control_Submitbutton('use_own_for_deff', 'Eigene übernehmen'));
+		}
 	}
 	
 	public function onCalcwarsim() {
@@ -69,6 +104,35 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		}
 		$attackers->technologies = $attackerTechnology;
 		$this->fightingSystem->fight($attackers, $defenders);
+	}
+	
+	public function onUseOwnForAtt() {
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
+			if (isset($this->panelsForAttackers[$unit->getInternalName()]))
+				$this->panelsForAttackers[$unit->getInternalName()]->setValue($unit->getAmount());
+		}
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
+			if (isset($this->panelsForAttackersTechnology[$technology->getInternalName()]))
+				$this->panelsForAttackersTechnology[$technology->getInternalName()]->setValue($technology->getLevel());
+		}
+	}
+	
+	public function onUseOwnForDeff() {
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
+			if (isset($this->panelsForDefenders[$unit->getInternalName()]))
+				$this->panelsForDefenders[$unit->getInternalName()]->setValue($unit->getAmount());
+		}
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllBuildings() as $building) {
+			if (isset($this->panelsForDefendersBuildings[$building->getInternalName()]))
+				$this->panelsForDefendersBuildings[$building->getInternalName()]->setValue($building->getLevel());
+		}
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
+			if (isset($this->panelsForDefendersTechnology[$technology->getInternalName()]))
+				$this->panelsForDefendersTechnology[$technology->getInternalName()]->setValue($technology->getLevel());
+		}
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

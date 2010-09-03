@@ -82,7 +82,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$allianceNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('messages'))
-			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('overview'), 'Nachrichten', array('rakuun_navigation_node_overview'));
+			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('messages'), 'Nachrichten', array('rakuun_navigation_node_messages'));
 		
 		$infoNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Infos', array('rakuun_navigation_node_search'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('highscores'))

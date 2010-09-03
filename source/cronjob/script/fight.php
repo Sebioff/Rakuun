@@ -429,7 +429,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		}
 		
 		if ($spyDronesSurvive) {
-			$this->moveHome($army);
+			$army->moveHome();
 		}
 		else {
 			$army->delete();

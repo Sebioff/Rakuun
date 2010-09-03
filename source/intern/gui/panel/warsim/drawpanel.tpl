@@ -4,8 +4,13 @@
 <div id="warsim_panels">
 	<div id="warsim_panels_units">
 		<h1>Einheiten</h1>
+		<br class="clear" />
 		<div class="warsim_panels_attacker">
 			<h1>Angreifer</h1>
+			<? if ($this->hasPanel('use_own_for_att')): ?>
+				<? $this->displayPanel('use_own_for_att'); ?>
+			<? endif; ?>
+			<br class="clear" />
 			<? foreach ($this->getPanelsForAttackers() as $panel): ?>
 				<? $this->displayLabelForPanel($panel->getName()); ?> <? $panel->display(); ?>
 				<br class="clear" />
@@ -13,6 +18,10 @@
 		</div>
 		<div class="warsim_panels_defender">
 			<h1>Verteidiger</h1>
+			<? if ($this->hasPanel('use_own_for_deff')): ?>
+				<? $this->displayPanel('use_own_for_deff'); ?>
+			<? endif; ?>
+			<br class="clear" />
 			<? foreach ($this->getPanelsForDefenders() as $panel): ?>
 				<? $this->displayLabelForPanel($panel->getName()); ?> <? $panel->display(); ?>
 				<br class="clear" />
@@ -46,12 +55,12 @@
 				<? $this->displayLabelForPanel($panel->getName()); ?> <? $panel->display(); ?>
 				<br class="clear" />
 			<? endforeach; ?>
-		<? $this->displayPanel('calcwarsim'); ?>
+			<? $this->displayPanel('calcwarsim'); ?>
 		</div>
 	</div>
 	<br class="clear"/>
 </div>
-<? if ($this->hasBeenSubmitted() && !$this->hasErrors()): ?>
+<? if ($this->calcwarsim->hasBeenSubmitted() && !$this->hasErrors()): ?>
 	<br class="clear" />
 	<hr/>
 	<? if ($this->getFightingSystem()->getDefenderWon()): ?>

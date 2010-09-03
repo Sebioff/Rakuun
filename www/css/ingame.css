@@ -413,6 +413,12 @@ table.boardview td.posting_count {
 	width:150px;
 }
 
+#warsim_panels .core_gui_submitbutton
+{
+	float:right;
+	margin:0px;
+}
+
 #warsim_panels .core_gui_digitbox
 {
 	width:50px;
@@ -421,6 +427,11 @@ table.boardview td.posting_count {
 #warsim_panels_buildings .warsim_panels_defender
 {
 	margin-left:214px;
+}
+
+#warsim_panels_units h1
+{
+	float:left;
 }
 
 /* $10  -  Map ----------------------------------------------------------------*/

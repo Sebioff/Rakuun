@@ -19,7 +19,7 @@ class Rakuun_Intern_GUI_Panel_User_Reports_View extends Rakuun_Intern_GUI_Panel_
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
 		foreach ($spies as $spy) {
 			$line = array();
-			$line[] = date(GUI_Panel_Date::FORMAT_DATETIME, $spy->time);
+			$line[] = new GUI_Control_Link('warsim_link'.$spy->getPK(), date(GUI_Panel_Date::FORMAT_DATETIME, $spy->time), App::get()->getInternModule()->getSubmodule('warsim')->getUrl(array('spyreport' => $spy->getPK())));
 			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$spy->getPK(), $spy->user);
 			foreach ($units as $unit) {
 				$line[] = $spy->{Text::underscoreToCamelCase($unit->getInternalName())};
