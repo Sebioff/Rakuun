@@ -309,6 +309,11 @@ table.boardview td.posting_count {
 	padding:4px;
 }
 
+img.rakuun_fightreport_marker
+{
+	float:right;
+}
+
 /* $7  -  Overview -----------------------------------------------------------*/
 #ctn_cityitems
 {

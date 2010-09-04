@@ -15,6 +15,12 @@ class Rakuun_Intern_IGM extends DB_Record {
 	
 	const ATTACHMENT_TYPE_COPYRECIPIENT = 1;
 	const ATTACHMENT_TYPE_SPYREPORTLOG = 2;
+	const ATTACHMENT_TYPE_FIGHTREPORTMARKERS = 3;
+	
+	const ATTACHMENT_FIGHTREPORTMARKER_LOST = 'lost';
+	const ATTACHMENT_FIGHTREPORTMARKER_WON = 'won';
+	const ATTACHMENT_FIGHTREPORTMARKER_LOSTUNITS = 'lostunits';
+	const ATTACHMENT_FIGHTREPORTMARKER_LOSTBUILDINGS = 'lostbuildings';
 	
 	private $attachments = array();
 	
@@ -121,6 +127,21 @@ class Rakuun_Intern_IGM extends DB_Record {
 			return $this->sender->name;
 		else
 			return $this->senderName;
+	}
+	
+	public static function getDescriptionForFightReportMarker($marker) {
+		switch ($marker) {
+			case self::ATTACHMENT_FIGHTREPORTMARKER_LOST:
+				return 'Kampf verloren';
+			case self::ATTACHMENT_FIGHTREPORTMARKER_WON:
+				return 'Kampf gewonnen';
+			case self::ATTACHMENT_FIGHTREPORTMARKER_LOSTUNITS:
+				return 'Einheiten verloren';
+			case self::ATTACHMENT_FIGHTREPORTMARKER_LOSTBUILDINGS:
+				return 'Gebäude verloren';
+			default:
+				return '';
+		}
 	}
 }
 

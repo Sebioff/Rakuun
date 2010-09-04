@@ -77,6 +77,8 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			$targetAllianceLink = $link->render();
 		}
+		$defenderReportMarkers = array();
+		$attackerReportMarkers = array();
 		$link = new Rakuun_GUI_Control_UserLink('user_link', $army->user);
 		$userLink = $link->render();
 		$link = new Rakuun_GUI_Control_UserLink('target_link', $army->target);
@@ -89,6 +91,8 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$survivingLoserUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
 			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' versuchte unsere Stadt zu überfallen, doch wir konnten den Feind erfolgreich abwehren.';
 			$attackerReportText = 'Einer Ihrer Angriffe war eine Niederlage!<br/>Beim Überfall auf '.$targetLink.$targetAllianceLink.' wurde unsere Armee vernichtend geschlagen.';
+			$defenderReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_WON;
+			$attackerReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOST;
 		}
 		else {
 			$winnerUnitSource = $army;
@@ -97,29 +101,33 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$survivingLoserUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
 			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' überfiel unsere Stadt und vernichtete unsere Armee.';
 			$attackerReportText = 'Einer Ihrer Angriffe war ein Erfolg!<br/>Beim Überfall auf '.$targetLink.$targetAllianceLink.' wurde die gegnerische Armee vernichtend geschlagen.';
+			$defenderReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOST;
+			$attackerReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_WON;
 		}
 			
 		// WINNER ----------------------------------------------
 		// report for winner
 		$winnerReportText = '<br/><br/>Folgende Verluste sind zu beklagen:';
-		$deadWinnerUnitsText = '';
+		$deadWinnerUnitsTextForWinner = '';
+		$deadWinnerUnitsTextForLoser = '';
 		$winnerLostUnits = array();
 		foreach ($survivingWinnerUnitAmounts as $unitName => $unitAmount) {
 			$unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $winnerUnitSource);
 			$deadUnitAmount = $unit->getAmount() - $unitAmount;
 			if ($deadUnitAmount > 0) {
-				$deadWinnerUnitsText .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).'/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
+				$deadWinnerUnitsTextForWinner .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).'/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
+				$deadWinnerUnitsTextForLoser .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).'/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
 				// delete winner units
 				$winnerUnitSource->{Text::underscoreToCamelCase($unitName)} -= $deadUnitAmount;
 				$winnerLostUnits[$unitName] = $deadUnitAmount;
 			}
+			elseif ($unit->getAmount() > 0) {
+				$deadWinnerUnitsTextForWinner .= '<br/>0/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
+			}
 		}
 		$winnerUnitSource->save();
+		$winnerReportText .= $deadWinnerUnitsTextForWinner;
 		
-		if ($deadWinnerUnitsText)
-			$winnerReportText .= $deadWinnerUnitsText;
-		else
-			$winnerReportText .= '<br/>Keine.';
 		$deadLoserUnitsText = '';
 		$loserLostUnits = array();
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($loserUnitSource) as $unit) {
@@ -148,8 +156,8 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		if (!$deadLoserUnitsText)
 			$deadLoserUnitsText = '<br/>Keine.';
 		$loserReportText = '<br/><br/>Folgende Verluste sind zu beklagen:'.$deadLoserUnitsText;
-		if ($deadWinnerUnitsText) {
-			$loserReportText .= '<br/><br/>Der gegnerischen Armee konnte folgender Schaden zugefügt werden:'.$deadWinnerUnitsText;
+		if ($deadWinnerUnitsTextForLoser) {
+			$loserReportText .= '<br/><br/>Der gegnerischen Armee konnte folgender Schaden zugefügt werden:'.$deadWinnerUnitsTextForLoser;
 			$loserReportText .= '<br/>Möglicherweise besaß der Gegner sogar weitere Einheiten, die von unseren Truppen nicht einmal entdeckt werden konnten.';
 		}
 		else {
@@ -160,10 +168,20 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$defenderReportText .= $winnerReportText;
 			$attackerReportText .= $loserReportText;
 			
+			if (!empty($winnerLostUnits))
+				$defenderReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOSTUNITS;
+			if (!empty($loserLostUnits))
+				$attackerReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOSTUNITS;
+			
 			// delete attacking army
 			$army->delete();
 		}
 		else {
+			if (!empty($loserLostUnits))
+				$defenderReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOSTUNITS;
+			if (!empty($winnerLostUnits))
+				$attackerReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOSTUNITS;
+			
 			// make army return home
 			$army->moveHome();
 			
@@ -283,6 +301,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 							}
 							$loserReportText .= '<br/><br/>Eine Stufe des Gebäudes '.$destroyedBuilding->getName().' wurde zerstört!';
 							$winnerReportText .= '<br/><br/>Eine Stufe des Gebäudes '.$destroyedBuilding->getName().' konnte zerstört werden!';
+							$defenderReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_LOSTBUILDINGS;
 						}
 					}
 				}
@@ -315,10 +334,12 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		
 		$defenderReport = new Rakuun_Intern_IGM('Verteidigung gegen '.$army->user->nameUncolored, $army->target, $defenderReportText, Rakuun_Intern_IGM::TYPE_FIGHT);
 		$defenderReport->setSenderName(Rakuun_Intern_IGM::SENDER_FIGHTS);
+		$defenderReport->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_FIGHTREPORTMARKERS, implode(',', $defenderReportMarkers));
 		$defenderReport->send();
 		
 		$attackerReport = new Rakuun_Intern_IGM('Angriff auf '.$army->target->nameUncolored, $army->user, $attackerReportText, Rakuun_Intern_IGM::TYPE_FIGHT);
 		$attackerReport->setSenderName(Rakuun_Intern_IGM::SENDER_FIGHTS);
+		$attackerReport->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_FIGHTREPORTMARKERS, implode(',', $attackerReportMarkers));
 		$attackerReport->send();
 	}
 	
@@ -372,30 +393,36 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				$attackerReportText .= '<br/>Leider wurden unsere Sonden zerstört, doch zuvor erhielten wir folgende Informationen:';
 			}
 				
-			$defenderReportText .= '<br/>Die Menge der in unseren Lagern befindlichen Rohstoffe';
+			$defenderReportText .= '<br/><br/>Die Menge der in unseren Lagern befindlichen Rohstoffe:';
 			$attackerReportText .= '<br/><br/>Folgende Rohstoffe konnten ausfindig gemacht werden:';
-			$attackerReportText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->iron).' Eisen';
-			$attackerReportText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->beryllium).' Beryllium';
-			$attackerReportText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->energy).' Energie';
+			$spiedRessourcesText = '';
+			$spiedRessourcesText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->iron).' Eisen';
+			$spiedRessourcesText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->beryllium).' Beryllium';
+			$spiedRessourcesText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->energy).' Energie';
+			$defenderReportText .= $spiedRessourcesText;
+			$attackerReportText .= $spiedRessourcesText;
 			
 			if ($reportCompletenessIndicator <= 3000) {
 				$spiedBuildingsContainer = $army->target->buildings;
-				$defenderReportText .= '<br/>Die Ausbaustufen unserer Gebäude';
+				$defenderReportText .= '<br/><br/>Die Ausbaustufen unserer Gebäude:';
 				$attackerReportText .= '<br/><br/>Folgende Gebäude hat euer Gegner:';
+				$spiedBuildingsReportText = '';
 				foreach (Rakuun_Intern_Production_Factory::getAllBuildings($army->target) as $building) {
 					if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES) === true)
 						continue;
 					
 					if ($building->getLevel() > 0) {
-						$attackerReportText .= '<br/>'.$building->getName().' (Stufe '.$building->getLevel().')';
+						$spiedBuildingsReportText .= '<br/>'.$building->getName().' (Stufe '.$building->getLevel().')';
 						$spiedBuildings[$building->getInternalName()] = $building->getLevel();
 					}
 				}
+				$defenderReportText .= $spiedBuildingsReportText;
+				$attackerReportText .= $spiedBuildingsReportText;
 			}
 			
 			if ($reportCompletenessIndicator <= 2000) {
 				$spiedUnitsContainer = $army->target->units;
-				$defenderReportText .= '<br/>Die Anzahl unserer Einheiten';
+				$defenderReportText .= '<br/><br/>Die Anzahl unserer Einheiten:';
 				$attackerReportText .= '<br/><br/>Folgende Einheiten wurden entdeckt:';
 				
 				$successfullEnhancedCloaking = false;
@@ -411,6 +438,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				}
 				if (!$unitsText)
 					$unitsText = '<br/>Keine.';
+				$defenderReportText .= $unitsText;
 				$attackerReportText .= $unitsText;
 				
 				if ($army->cloakedSpydrone > 0 && $army->spydrone == 0)
