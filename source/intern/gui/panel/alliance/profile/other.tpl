@@ -10,6 +10,8 @@ Allianz "<?= $this->params->alliance->name ?>"
 <?= $this->params->alliance->description ?>
 <? $this->displayPanel('memberbox') ?>
 <br class="clear" />
+<? $this->displayPanel('databases') ?>
+<br class="clear" />
 <? if ($this->hasPanel('application')): ?>
 	<? $this->displayPanel('application'); ?>
 <? endif; ?>

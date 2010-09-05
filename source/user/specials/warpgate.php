@@ -14,16 +14,8 @@ class Rakuun_User_Specials_Warpgate extends Rakuun_User_Specials {
 		DB_Connection::get()->beginTransaction();
 		$special = parent::giveSpecial();
 		if ($special) {
-			$ironRecord = new DB_Record();
-			$ironRecord->specialsUsers = $special;
-			$ironRecord->key = 'iron';
-			$ironRecord->value = round(self::BASE_IRON_COSTS * $this->getMultiplicator());
-			Rakuun_DB_Containers::getSpecialsParamsContainer()->save($ironRecord);
-			$berylliumRecord = new DB_Record();
-			$berylliumRecord->specialsUsers = $special;
-			$berylliumRecord->key = 'beryllium';
-			$berylliumRecord->value = round(self::BASE_BERYLLIUM_COSTS * $this->getMultiplicator());
-			Rakuun_DB_Containers::getSpecialsParamsContainer()->save($berylliumRecord);
+			$this->setParam('iron', round(self::BASE_IRON_COSTS * $this->getMultiplicator()));
+			$this->setParam('beryllium', round(self::BASE_BERYLLIUM_COSTS * $this->getMultiplicator()));
 			DB_Connection::get()->commit();
 		} else {
 			DB_Connection::get()->rollback();

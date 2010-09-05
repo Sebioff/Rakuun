@@ -10,6 +10,10 @@ abstract class Rakuun_User_Specials {
 	const SPECIAL_PRESENT = 7;
 	const SPECIAL_WALKOUT = 8;
 	
+	const PARAM_DATABASE_MOVED = 1;
+	
+	const EFFECTVALUE_DATABASE_DEFENSE = 0.04;
+	
 	protected $active = true;
 	protected $identifier = null;
 	protected $user = null;
@@ -62,6 +66,30 @@ abstract class Rakuun_User_Specials {
 		Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->save($special);
 		Rakuun_DB_Containers::getSpecialsParamsContainer()->deleteBySpecialsUsers($special);
 		DB_Connection::get()->commit();
+	}
+	
+	public function setParam($key, $value) {
+		if ($param = $this->getParam($key)) {
+			$param->value = $value;
+			$param->save();
+		}
+		else {
+			$record = new DB_Record();
+			$record->specialsUsers = $this->loadFromDB();
+			$record->key = $key;
+			$record->value = $value;
+			Rakuun_DB_Containers::getSpecialsParamsContainer()->save($record);
+		}
+	}
+	
+	/**
+	 * @return DB_Record
+	 */
+	public function getParam($key) {
+		$options = array();
+		$options['conditions'][] = array('specials_users = ?', $this->loadFromDB());
+		$options['conditions'][] = array('`key` = ?', $key);
+		return Rakuun_DB_Containers::getSpecialsParamsContainer()->selectFirst($options);
 	}
 	
 	/**
@@ -121,11 +149,11 @@ abstract class Rakuun_User_Specials {
 		$effectValues = Rakuun_User_Specials::getEffectValues();
 		$effects = array(
 			Rakuun_User_Specials::SPECIAL_WARPGATE => 'reduziert eigene Armeebewegungszeit um '.$effectValues[Rakuun_User_Specials::SPECIAL_WARPGATE] * 100 .'%',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'wirkt wie ein Warpgate',
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'erhöht Angriffskraft um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED] * 100 .'%',
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'reduziert Einheitenproduktionszeit um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100 .'%',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'erhöht Ressourcenproduktion von Eisen und Beryllium um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'%',
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'erhöht Verteidigungskraft um '.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN] * 100 .'%'
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft und reduziert Armeebewegungszeit aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BLUE] * 100 .'% täglich',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft und erhöht Angriffskraft aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED] * 100 .'% täglich',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft und reduziert Einheitenproduktionszeit aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100 .'% täglich',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft und erhöht Ressourcenproduktion von Eisen und Beryllium aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'% täglich',
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft und erhöht Verteidigungskraft aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN] * 100 .'% täglich'
 		);
 		return $effects;
 	}
@@ -133,14 +161,14 @@ abstract class Rakuun_User_Specials {
 	/**
 	 * @return effectvalues of the Specials
 	 */
-	static public function getEffectValues() {
+	public static function getEffectValues() {
 		$effectsValues = array(
 			Rakuun_User_Specials::SPECIAL_WARPGATE => 0.5,
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 0.5,
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 0.04,
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 0.1,
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 0.1,
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 0.04
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 0.03,
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 0.0025,
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 0.0025,
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 0.0025,
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 0.0025
 		);
 		return $effectsValues;
 	}

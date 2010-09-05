@@ -18,8 +18,7 @@ class Rakuun_Intern_Production_Influences {
 		if ($ressourceType == self::RESSOURCE_IRON || $ressourceType == self::RESSOURCE_BERYLLIUM) {
 			$ressourceProductionDatabase = new Rakuun_User_Specials_Database($user, Rakuun_User_Specials::SPECIAL_DATABASE_BROWN);
 			if ($ressourceProductionDatabase->hasSpecial()) {
-				$effectValues = Rakuun_User_Specials::getEffectValues();
-				$rate *= ($effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] + 1);
+				$rate *= ($ressourceProductionDatabase->getEffectValue() + 1);
 			}
 		}
 		

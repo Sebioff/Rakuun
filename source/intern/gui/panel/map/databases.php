@@ -7,13 +7,7 @@ class Rakuun_Intern_GUI_Panel_Map_Databases extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/databases.tpl');
 		
 		$this->params->visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
-		$images = array(
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'db_blue',
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'db_red',
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'db_yellow',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'db_brown',
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'db_green'
-		);
+		$images = Rakuun_User_Specials_Database::getDatabaseImages();
 		
 		$names = Rakuun_User_Specials::getNames();
 		

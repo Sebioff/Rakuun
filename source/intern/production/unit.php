@@ -118,8 +118,7 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		
 		$productionDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW);
 		if ($productionDatabase->hasSpecial()) {
-			$effectValues = Rakuun_User_Specials::getEffectValues();
-			$reductionPercent += $effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100;
+			$reductionPercent += $productionDatabase->getEffectValue() * 100;
 		}
 			
 		if ($reductionPercent > 100)
@@ -163,8 +162,7 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		if ($this->getUser()) {
 			$attackDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_RED);
 			if ($attackDatabase->hasSpecial()) {
-				$effectValues = Rakuun_User_Specials::getEffectValues();
-				$value += $baseValue * $effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED];
+				$value += $baseValue * $attackDatabase->getEffectValue();
 			}
 		}
 			
@@ -186,10 +184,13 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		}
 		
 		if ($this->getUser()) {
+			if (($databaseCount = $this->getUser()->getDatabaseCount()) > 0) {
+				$value += $baseValue * Rakuun_User_Specials::EFFECTVALUE_DATABASE_DEFENSE * $databaseCount;
+			}
+			
 			$defenseDatabase = new Rakuun_User_Specials_Database($this->getUser(), Rakuun_User_Specials::SPECIAL_DATABASE_GREEN);
 			if ($defenseDatabase->hasSpecial()) {
-				$effectValues = Rakuun_User_Specials::getEffectValues();
-				$value += $baseValue * $effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN];
+				$value += $baseValue * $defenseDatabase->getEffectValue();
 			}
 		}
 		
