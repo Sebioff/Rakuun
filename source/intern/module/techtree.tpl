@@ -1,5 +1,5 @@
-<? $this->displayPanel('buildings'); ?>
-<br class="clear" />
-<? $this->displayPanel('technologies'); ?>
-<br class="clear" />
-<? $this->displayPanel('units'); ?>
+<div id="ctn_techtree_rows">
+	<? $this->displayPanel('buildings'); ?>
+	<? $this->displayPanel('technologies'); ?>
+	<? $this->displayPanel('units'); ?>
+</div>

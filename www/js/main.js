@@ -50,4 +50,5 @@ $(document).ready(function(){
 		$(".skin_tech #ctn_head #ctn_navigation li").removeClass("core_navigation_node_inpath");
 		$(this).addClass("core_navigation_node_inpath");
 	});
+	$(".skin_tech .core_gui_submitbutton").wrap("<span class=\"core_gui_submitbutton_wrapper\"></span>").after("<div></div>");
 });

@@ -2,3 +2,6 @@
 	<? $panel->display(); ?>
 	<br class="clear"/>
 <? endforeach; ?>
+<? if (!empty($this->panels)): ?>
+	<hr/>
+<? endif; ?>

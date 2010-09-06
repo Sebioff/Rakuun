@@ -35,8 +35,8 @@
 
 .rakuun_gui_infopanel
 {
-	background:transparent url('../images/info.png') no-repeat left top;
-	padding-left:20px;
+	background:transparent url('../images/info.png') no-repeat 2px 1px;
+	padding-left:16px;
 }
 
 .core_gui_table_sortable th.header, .core_gui_table_sortable th.headerSortUp, .core_gui_table_sortable th.headerSortDown
@@ -385,7 +385,7 @@ img.rakuun_fightreport_marker
 	font-weight:bold;
 }
 
-.module_techtree #ctn_content .rakuun_box
+#ctn_techtree_rows .rakuun_box
 {
 	float:none;
 	margin:0px auto;

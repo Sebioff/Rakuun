@@ -13,12 +13,14 @@
 	$4  -  Navigation
 	$5  -  Messages
 	$6  -  Overview
+	$7  -  Techtree
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
 body.skin_tech
 {
 	background:#000000 url('../images/background.png') repeat-x left top;
+	color:#FFFFFF;
 }
 
 .skin_tech .rakuun_box .head {
@@ -38,16 +40,42 @@ body.skin_tech
 	background:none;
 }
 
-hr {
+.skin_tech hr {
 	color:#78787D;
 }
 
-input,
-textarea,
-select {
+.skin_tech input,
+.skin_tech textarea,
+.skin_tech select {
 	color:#FFFFFF;
 	background-color:#363840;
 	border:1px solid #848387;
+}
+
+.skin_tech input.core_gui_submitbutton {
+	background:transparent url('../images/button_background.gif') no-repeat left top;
+	border:0px none;
+	height:23px;
+	padding:0px 3px 5px 3px;
+}
+
+
+.skin_tech .core_gui_submitbutton_wrapper {
+	position:relative;
+}
+
+.skin_tech .core_gui_submitbutton_wrapper div {
+	background:transparent url('../images/button_background_right.gif') no-repeat right top;
+	height:23px;
+	position:absolute;
+	right:0px;
+	top:-4px;
+	width:4px;
+}
+
+.skin_tech .core_gui_hoverinfo {
+	background-color:#363840;
+	border:1px solid #78787D;
 }
 
 /* $2  -  Main Containers ----------------------------------------------------*/
@@ -74,11 +102,23 @@ select {
 	position:relative;
 }
 
+.skin_tech #ctn_info
+{
+	margin:0px 5px;
+	width:414px;
+}
+
+.skin_tech #ctn_info .rakuun_box
+{
+	float:none;
+}
+
 /* $3  -  Boxes --------------------------------------------------------------*/
 .skin_tech .rakuun_box {
 	background:#363840 url('../images/rakuun_box_left.gif') repeat-y left top;
 	color:#ffffff;
 	float:left;
+	margin-bottom:5px;
 	padding:0px 0px 0px 14px;
 	position:relative;
 }
@@ -311,7 +351,17 @@ select {
 /* $5  -  Messages -----------------------------------------------------------*/
 .skin_tech .rakuun_message_unread
 {
-	background-color:#CCCCCC;
+	background-color:#363840;
+}
+
+.skin_tech .rakuun_message_envelope
+{
+	margin:0px auto 4px auto;
+}
+
+.skin_tech #ctn_messages_actions
+{
+	text-align:center;
 }
 
 /* $6  -  Overview -----------------------------------------------------------*/
@@ -322,4 +372,11 @@ select {
 	font-size:0px;
 	height:14px;
 	width:10px;
+}
+
+/* $7  -  Techtree -----------------------------------------------------------*/
+.skin_tech #ctn_techtree_rows .rakuun_box {
+	float:left;
+	margin:0px 2px;
+	width:307px;
 }

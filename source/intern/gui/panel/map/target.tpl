@@ -22,7 +22,6 @@
 	<hr />
 	<? $this->displayPanel('unit_input'); ?>
 	<? if ($this->hasPanel('spydrone') || $this->hasPanel('cloaked_spydrone')): ?>
-		<hr/>
 		<h2>Spionage</h2>
 		<? if ($this->hasPanel('spydrone')): ?>
 			<? $this->displayLabelForPanel('spydrone'); ?> <? $this->displayPanel('spydrone'); ?>
@@ -31,6 +30,7 @@
 		<? if ($this->hasPanel('cloaked_spydrone')): ?>
 			<? $this->displayLabelForPanel('cloaked_spydrone'); ?> <? $this->displayPanel('cloaked_spydrone'); ?>
 		<? endif; ?>
+		<hr/>
 	<? endif; ?>
 	<br class="clear" />
 	<? $this->displayLabelForPanel('iron_priority'); ?> <? $this->displayPanel('iron_priority'); ?>
