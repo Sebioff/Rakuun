@@ -87,18 +87,22 @@
 	<hr/>
 	<h1>Kampfkraft</h1>
 	<br/>
-	<h1>Angreifer (<?= $this->getFightingSystem()->getTotalAttackingPower(); ?>)</h1>
+	<h1>Angreifer (<?= GUI_Panel_Number::formatNumber($this->getFightingSystem()->getTotalAttackingPower()); ?>)</h1>
 	<? foreach ($this->getFightingSystem()->getAttackingPowerByUnits() as $unitName => $attackingPower): ?>
 		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $this->getFightingSystem()->getAttackerUnitSource()); ?>
-		<?= $unit->getAmount() ?> <?= $unit->getNameForAmount() ?> (<?= $attackingPower; ?>)
-		<br />
+		<? if ($unit->getAmount() > 0): ?>
+			<?= $unit->getAmount() ?> <?= $unit->getNameForAmount() ?> (<?= GUI_Panel_Number::formatNumber($attackingPower); ?>)
+			<br />
+		<? endif; ?>
 	<? endforeach; ?>
 	<br/>
-	<h1>Verteidiger (<?= $this->getFightingSystem()->getTotalDefendingPower(); ?>)</h1>
+	<h1>Verteidiger (<?= GUI_Panel_Number::formatNumber($this->getFightingSystem()->getTotalDefendingPower()); ?>)</h1>
 	<? foreach ($this->getFightingSystem()->getDefendingPowerByUnits() as $unitName => $defendingPower): ?>
 		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $this->getFightingSystem()->getDefenderUnitSource()); ?>
-		<?= $unit->getAmount() ?> <?= $unit->getNameForAmount() ?> (<?= $defendingPower; ?>)
-		<br />
+		<? if ($unit->getAmount() > 0): ?>
+			<?= $unit->getAmount() ?> <?= $unit->getNameForAmount() ?> (<?= GUI_Panel_Number::formatNumber($defendingPower); ?>)
+			<br />
+		<? endif; ?>
 	<? endforeach; ?>
 	<hr/>
 	<h1>Boni</h1>
