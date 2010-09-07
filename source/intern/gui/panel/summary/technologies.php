@@ -27,6 +27,7 @@ class Rakuun_Intern_GUI_Panel_Summary_Technologies extends GUI_Panel {
 			$table->addFooter(array('Summe:', '', GUI_Panel_Number::formatNumber($summe)));
 			$this->addPanel($table);
 		}
+		$table->addTableCssClass('align_left', 0);
 	}
 }
 ?>

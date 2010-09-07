@@ -31,6 +31,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_LostUnits extends GUI_Panel {
 			$total = $unitsLostInAttack + $unitsLostInDefense;
 			$table->addLine(array($unit->getNameForAmount(2), GUI_Panel_Number::formatNumber($unitsLostInAttack), GUI_Panel_Number::formatNumber($unitsLostInDefense), GUI_Panel_Number::formatNumber($total)));
 		}
+		$table->addTableCssClass('align_left', 0);
 	}
 }
 

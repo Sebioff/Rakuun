@@ -20,6 +20,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_Fights extends GUI_Panel {
 		$wonDefense = Rakuun_DB_Containers::getLogFightsContainer()->count($options);
 		
 		$wonTable->addLine(array(GUI_Panel_Number::formatNumber($wonAttack), GUI_Panel_Number::formatNumber($wonDefense)));
+		$wonTable->addTableCssClass('align_left', 0);
 		
 		$this->addPanel($lostTable = new GUI_Panel_Table('lost_statistics'));
 		$lostTable->addHeader(array('Angriff', 'Verteidigung'));
@@ -36,6 +37,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_Fights extends GUI_Panel {
 		$lostDefense = Rakuun_DB_Containers::getLogFightsContainer()->count($options);
 		
 		$lostTable->addLine(array(GUI_Panel_Number::formatNumber($lostAttack), GUI_Panel_Number::formatNumber($lostDefense)));
+		$lostTable->addTableCssClass('align_left', 0);
 	}
 }
 

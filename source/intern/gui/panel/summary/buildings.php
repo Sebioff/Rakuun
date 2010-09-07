@@ -22,6 +22,7 @@ class Rakuun_Intern_GUI_Panel_Summary_Buildings extends GUI_Panel {
 		}
 		$table->addHeader(array('Name', 'Level', 'Punkte'));
 		$table->addFooter(array('Summe:', '', GUI_Panel_Number::formatNumber($summe)));
+		$table->addTableCssClass('align_left', 0);
 	}
 }
 ?>

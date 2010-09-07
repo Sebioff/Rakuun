@@ -1,19 +1,20 @@
-<? $this->displayPanel('buildingsbox'); ?>
+<div id="ctn_summary_pointlists">
+	<? $this->displayPanel('buildingsbox'); ?>
+	<? $this->displayPanel('technologiesbox'); ?>
+	<? $this->displayPanel('unitsbox'); ?>
+</div>
 <br class="clear" />
-<? $this->displayPanel('technologiesbox'); ?>
+<div id="ctn_summary_unitstats">
+	<? $this->displayPanel('lostunits'); ?>
+	<? $this->displayPanel('destroyedunits'); ?>
+</div>
 <br class="clear" />
-<? $this->displayPanel('unitsbox'); ?>
-<br class="clear" />
-<? $this->displayPanel('lostunits'); ?>
-<br class="clear" />
-<? $this->displayPanel('destroyedunits'); ?>
-<br class="clear" />
-<? $this->displayPanel('ressources'); ?>
-<br class="clear" />
-<? $this->displayPanel('fights'); ?>
-<br class="clear" />
-<? $this->displayPanel('lostbuildings'); ?>
-<br class="clear" />
-<? $this->displayPanel('destroyedbuildings'); ?>
-<br class="clear" />
-<? $this->displayPanel('buildingevents'); ?>
+<div id="ctn_summary_buildingstats">
+	<? $this->displayPanel('lostbuildings'); ?>
+	<? $this->displayPanel('destroyedbuildings'); ?>
+</div>
+<div id="ctn_summary_mixedstats">
+	<? $this->displayPanel('buildingevents'); ?>
+	<? $this->displayPanel('ressources'); ?>
+	<? $this->displayPanel('fights'); ?>
+</div>

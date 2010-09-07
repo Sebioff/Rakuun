@@ -14,6 +14,7 @@
 	$5  -  Messages
 	$6  -  Overview
 	$7  -  Techtree
+	$8  -  Summary
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -378,5 +379,62 @@ body.skin_tech
 .skin_tech #ctn_techtree_rows .rakuun_box {
 	float:left;
 	margin:0px 2px;
+	width:307px;
+}
+
+/* $8  -  Summary ------------------------------------------------------------*/
+.skin_tech .module_summary .rakuun_box {
+	margin-bottom:5px;
+}
+
+.skin_tech .module_summary .rakuun_box table {
+	width:100%;
+}
+
+.skin_tech .module_summary .rakuun_box table th,
+.skin_tech .module_summary .rakuun_box table td {
+	text-align:right;
+}
+
+.skin_tech .module_summary .rakuun_box table th.align_left,
+.skin_tech .module_summary .rakuun_box table td.align_left {
+	text-align:left;
+}
+
+.skin_tech #ctn_summary_mixedstats .rakuun_box {
+	margin-left:2px;
+	margin-right:2px;
+}
+
+.skin_tech #ctn_summary_mixedstats .rakuun_box_summary_fights,
+.skin_tech #ctn_summary_mixedstats .rakuun_box_summary_ressources {
+	width:200px;
+}
+
+.skin_tech #ctn_summary_mixedstats .rakuun_box_summary_fights h3,
+.skin_tech #ctn_summary_mixedstats .rakuun_box_summary_ressources h3 {
+	font-weight:bold;
+}
+
+.skin_tech #ctn_summary_mixedstats .rakuun_box_summary_fights table,
+.skin_tech #ctn_summary_mixedstats .rakuun_box_summary_ressources table {
+	margin-bottom:5px;
+}
+
+.test
+{
+	background-color:green;
+}
+
+.skin_tech #ctn_summary_unitstats .rakuun_box,
+.skin_tech #ctn_summary_buildingstats .rakuun_box {
+	margin-left:2px;
+	margin-right:2px;
+	width:470px;
+}
+
+.skin_tech #ctn_summary_pointlists .rakuun_box {
+	margin-left:2px;
+	margin-right:2px;
 	width:307px;
 }

@@ -19,6 +19,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_DestroyedBuildings extends GUI_Pan
 			$line = array($building->getName(), GUI_Panel_Number::formatNumber(abs($lostBuildingLevels->lostLevels)));
 			$table->addLine($line);
 		}
+		$table->addTableCssClass('align_left', 0);
 	}
 }
 

@@ -17,6 +17,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_Ressources extends GUI_Panel {
 		$capturedTable->addLine(array('Eisen', GUI_Panel_Number::formatNumber($capturedRessources->iron)));
 		$capturedTable->addLine(array('Beryllium', GUI_Panel_Number::formatNumber($capturedRessources->beryllium)));
 		$capturedTable->addLine(array('Energie', GUI_Panel_Number::formatNumber($capturedRessources->energy)));
+		$capturedTable->addTableCssClass('align_left', 0);
 		
 		$this->addPanel($lostTable = new GUI_Panel_Table('lost_statistics'));
 		$lostTable->addHeader(array('Ressource', 'Anzahl'));
@@ -30,6 +31,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_Ressources extends GUI_Panel {
 		$lostTable->addLine(array('Eisen', GUI_Panel_Number::formatNumber($lostRessources->iron)));
 		$lostTable->addLine(array('Beryllium', GUI_Panel_Number::formatNumber($lostRessources->beryllium)));
 		$lostTable->addLine(array('Energie', GUI_Panel_Number::formatNumber($lostRessources->energy)));
+		$lostTable->addTableCssClass('align_left', 0);
 	}
 }
 
