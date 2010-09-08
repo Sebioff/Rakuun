@@ -15,6 +15,8 @@
 	$6  -  Overview
 	$7  -  Techtree
 	$8  -  Summary
+	$9  -  Ressources
+	$10 -  Statistics
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -77,6 +79,15 @@ body.skin_tech
 .skin_tech .core_gui_hoverinfo {
 	background-color:#363840;
 	border:1px solid #78787D;
+}
+
+.skin_tech .rakuun_box table th.align_left,
+.skin_tech .rakuun_box table td.align_left {
+	text-align:left;
+}
+
+.skin_tech .rakuun_box table {
+	width:100%;
 }
 
 /* $2  -  Main Containers ----------------------------------------------------*/
@@ -387,18 +398,9 @@ body.skin_tech
 	margin-bottom:5px;
 }
 
-.skin_tech .module_summary .rakuun_box table {
-	width:100%;
-}
-
 .skin_tech .module_summary .rakuun_box table th,
 .skin_tech .module_summary .rakuun_box table td {
 	text-align:right;
-}
-
-.skin_tech .module_summary .rakuun_box table th.align_left,
-.skin_tech .module_summary .rakuun_box table td.align_left {
-	text-align:left;
 }
 
 .skin_tech #ctn_summary_mixedstats .rakuun_box {
@@ -437,4 +439,37 @@ body.skin_tech
 	margin-left:2px;
 	margin-right:2px;
 	width:307px;
+}
+
+/* $9  -  Ressources ---------------------------------------------------------*/
+.skin_tech .module_ressources .rakuun_box th,
+.skin_tech .module_ressources .rakuun_box td {
+	text-align:right;
+}
+
+.skin_tech #ctn_ressource_stocks .rakuun_box {
+	margin-left:2px;
+	margin-right:2px;
+	width:470px;
+}
+
+.skin_tech #ctn_ressource_stocks table.rakuun_fullstocks_table th,
+.skin_tech #ctn_ressource_stocks table.rakuun_fullstocks_table td {
+	text-align:center;
+}
+
+/* $10 -  Statistics ---------------------------------------------------------*/
+.skin_tech .module_statistics .rakuun_box th,
+.skin_tech .module_statistics .rakuun_box td {
+	text-align:right;
+}
+
+.skin_tech #ctn_statistics_leftcol {
+	float:left;
+}
+
+.skin_tech #ctn_statistics .rakuun_box {
+	margin-left:2px;
+	margin-right:2px;
+	width:470px;
 }

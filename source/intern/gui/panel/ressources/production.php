@@ -38,6 +38,7 @@ class Rakuun_Intern_GUI_Panel_Ressources_Production extends GUI_Panel {
 				GUI_Panel_Number::formatNumber(Rakuun_Intern_Production_Factory::getBuilding('clonomat')->getProducedPeople(time() - 24 * 60 * 60))
 			)
 		);
+		$ressourceProductionTable->addTableCssClass('align_left', 0);
 	}
 }
 

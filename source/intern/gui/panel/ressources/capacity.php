@@ -7,6 +7,7 @@ class Rakuun_Intern_GUI_Panel_Ressources_Capacity extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/capacity.tpl');
 		
 		$this->addPanel($ressourceProductionTable = new GUI_Panel_Table('ressource_capacity'));
+		$ressourceProductionTable->addTableCssClass('align_left', 0);
 		$ressourceProductionTable->addHeader(array('', 'Eisen', 'Beryllium', 'Energie', 'Leute'));
 		
 		$ressourceProductionTable->addLine(

@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_Economy extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/economy.tpl');
 		
 		$this->addPanel($table = new GUI_Panel_Table('statistics'));
-		
+		$table->addTableCssClass('align_left', 0);
 		$table->addHeader(array('Name', 'Wert'));
 		
 		$options = array();

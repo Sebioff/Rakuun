@@ -7,6 +7,7 @@ class Rakuun_Intern_GUI_Panel_Ressources_FullStocks extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/fullstocks.tpl');
 		
 		$this->addPanel($ressourceProductionTable = new GUI_Panel_Table('ressource_fullstocks'));
+		$ressourceProductionTable->addClasses('rakuun_fullstocks_table');
 		$ressourceProductionTable->addHeader(array('Eisen', 'Beryllium', 'Energie', 'Leute'));
 		
 		$ironPerSecond = Rakuun_Intern_Production_Factory::getBuilding('ironmine')->getProducedIron(time() - 1);

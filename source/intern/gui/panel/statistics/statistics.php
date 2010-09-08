@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Statistics extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/statistics.tpl');
 		
 		$this->addPanel($table = new GUI_Panel_Table('statistics'));
-		
+		$table->addTableCssClass('align_left', 0);
 		$table->addHeader(array('Name', 'Wert'));
 		
 		$line = array('Anzahl Spieler:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::noOfPlayers()));

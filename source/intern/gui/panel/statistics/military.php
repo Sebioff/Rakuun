@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_Military extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/military.tpl');
 		
 		$this->addPanel($table = new GUI_Panel_Table('statistics'));
-		
+		$table->addTableCssClass('align_left', 0);
 		$table->addHeader(array('Name', 'Wert'));
 		
 		$line = array('Laufende Angriffe:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::noOfRunningAtts()));
