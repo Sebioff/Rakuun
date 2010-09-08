@@ -6,6 +6,10 @@
 		<? if (!($target = $this->getTargetUser())): ?>
 			<? $target = $this->targetX->getValue().':'.$this->targetY->getValue(); ?>
 		<? else: ?>
+			<? if (Rakuun_User_Manager::getCurrentUser()->alliance && $target->alliance && Rakuun_User_Manager::getCurrentUser()->alliance->getPK() == $target->alliance->getPK()): ?>
+				Achtung: du greifst ein Mitglied deiner Allianz an!
+				<br/>
+			<? endif; ?>
 			<? $target = $target->name; ?>
 		<? endif; ?>
 		Ziel: <?= $target; ?>
