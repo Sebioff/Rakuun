@@ -8,7 +8,7 @@
 <? if (Rakuun_User_Manager::getCurrentUser()->productionPaused): ?>
 	Produktion pausiert.
 <? elseif (!$currentWIP->meetsTechnicalRequirements()): ?>
-	Fehlende technische Vorraussetzungen.
+	<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $currentWIP->getWIPItem()->getInternalName(); ?>">Fehlende technische Vorraussetzungen.</a>
 <? else: ?>
 	<? if ($currentWIP->getAmount() > 1): ?>
 		Nächste Einheit fertiggestellt in: <? $this->displayPanel('countdown'); ?>

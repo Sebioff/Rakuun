@@ -2,6 +2,7 @@
 
 /**
  * @property Rakuun_DB_User $user
+ * @property Rakuun_DB_User $target
  */
 class Rakuun_DB_Army extends DB_Record {
 	/**

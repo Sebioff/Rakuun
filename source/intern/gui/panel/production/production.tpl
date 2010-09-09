@@ -21,7 +21,7 @@
 				<? if (!$productionItem->gotEnoughRessources()): ?>
 					Unzureichende Rohstoffe.
 				<? else: ?>
-					Fehlende Voraussetzungen.
+					<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $productionItem->getInternalName(); ?>">Fehlende Voraussetzungen.</a>
 				<? endif; ?>
 			</span>
 		<? endif; ?>

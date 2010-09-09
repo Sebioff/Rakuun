@@ -3,6 +3,7 @@
 class Rakuun_Intern_Log_Fights {
 	const TYPE_WON = 0;
 	const TYPE_LOST = 1;
+	const TYPE_SPY = 2;
 	
 	const ROLE_ATTACKER = 0;
 	const ROLE_DEFENDER = 1;
@@ -28,6 +29,19 @@ class Rakuun_Intern_Log_Fights {
 		foreach ($loserLostUnits as $internalUnitName => $lostAmount)
 			$loserLogEntry->{Text::underscoreToCamelCase($internalUnitName)} = $lostAmount;
 		Rakuun_DB_Containers::getLogFightsContainer()->save($loserLogEntry);
+	}
+	
+	public static function logSpy(Rakuun_DB_User $attacker, Rakuun_DB_User $defender, array $attackerLostUnits, $fightID) {
+		$attackerLogEntry = new DB_Record();
+		$attackerLogEntry->user = $attacker;
+		$attackerLogEntry->opponent = $defender;
+		$attackerLogEntry->time = time();
+		$attackerLogEntry->type = self::TYPE_SPY;
+		$attackerLogEntry->role = self::ROLE_ATTACKER;
+		$attackerLogEntry->fightID = $fightID;
+		foreach ($attackerLostUnits as $internalUnitName => $lostAmount)
+			$attackerLogEntry->{Text::underscoreToCamelCase($internalUnitName)} = $lostAmount;
+		Rakuun_DB_Containers::getLogFightsContainer()->save($attackerLogEntry);
 	}
 }
 

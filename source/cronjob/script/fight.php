@@ -460,6 +460,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$army->moveHome();
 		}
 		else {
+			Rakuun_Intern_Log_Fights::logSpy($army->user, $army->target, array('spydrone' => $army->spydrone, 'cloaked_spydrone' => $army->cloakedSpydrone), $army->getPK());
 			$army->delete();
 		}
 		

@@ -3,13 +3,14 @@
 <a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $currentWIP->getType(), 'id' => $currentWIP->getInternalName())); ?>">
 	<?= $currentWIP->getWIPItem()->getName(); ?>
 </a>
-(Stufe <?= $currentWIP->getLevel(); ?>) <? $this->hasPanel('cancel') ? $this->displayPanel('cancel') : ''; ?>
-<br />
+(Stufe <?= $currentWIP->getLevel(); ?>)
+ -
 <? if (!$currentWIP->meetsTechnicalRequirements()): ?>
-	Fehlende technische Vorraussetzungen.
+	<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $currentWIP->getWIPItem()->getInternalName(); ?>">Fehlende technische Vorraussetzungen.</a>
 <? else: ?>
 	<? $this->displayPanel('countdown'); ?>
 <? endif; ?>
+ <? $this->hasPanel('cancel') ? $this->displayPanel('cancel') : ''; ?>
 <? $queueItems = count($wip); ?>
 <? if ($queueItems > 1 && $this->getEnableQueueView()): ?>
 	<hr />
