@@ -11,6 +11,9 @@ abstract class Rakuun_DB_Containers_Persistent {
 	private static $logUserRessourcetransferContainer = null;
 	private static $roundInformationContainer = null;
 	private static $newsContainer = null;
+	private static $boardsGlobalContainer = null;
+	private static $boardsGlobalPostingsContainer = null;
+	private static $boardsGlobalLastVisitedContainer = null;
 	
 	private static $persistentConnection = null;
 	
@@ -148,6 +151,51 @@ abstract class Rakuun_DB_Containers_Persistent {
 		self::$newsContainer->setConnection(self::getPersistentConnection());
 		
 		return self::$newsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsGlobalContainer() {
+		if (self::$boardsGlobalContainer)
+			return self::$boardsGlobalContainer;
+			
+		//TODO: Move to rakuun-static-db
+		self::$boardsGlobalContainer = new DB_Container('boards_global');
+		self::$boardsGlobalContainer->setConnection(self::getPersistentConnection());
+		
+		return self::$boardsGlobalContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsGlobalPostingsContainer() {
+		if (self::$boardsGlobalPostingsContainer)
+			return self::$boardsGlobalPostingsContainer;
+			
+		//TODO: Move to rakuun-static-db
+		self::$boardsGlobalPostingsContainer = new DB_Container('boards_global_postings');
+		self::$boardsGlobalPostingsContainer->setConnection(self::getPersistentConnection());
+		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
+		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'deleted_by', 'id');
+		
+		return self::$boardsGlobalPostingsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getBoardsGlobalLastVisitedContainer() {
+		if (self::$boardsGlobalLastVisitedContainer)
+			return self::$boardsGlobalLastVisitedContainer;
+		
+		// Has to stay in rakuun-round-db
+		self::$boardsGlobalLastVisitedContainer = new DB_Container('boards_global_visited');
+		self::$boardsGlobalLastVisitedContainer->setConnection(self::getPersistentConnection());
+		self::$boardsGlobalLastVisitedContainer->addReferencedContainer(self::getBoardsGlobalContainer());
+		
+		return self::$boardsGlobalLastVisitedContainer;
 	}
 	
 	// -------------------------------------------------------------------------

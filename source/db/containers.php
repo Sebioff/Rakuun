@@ -32,9 +32,6 @@ abstract class Rakuun_DB_Containers {
 	private static $boardsAllianceContainer = null;
 	private static $boardsAlliancePostingsContainer = null;
 	private static $boardsAllianceLastVisitedContainer = null;
-	private static $boardsGlobalContainer = null;
-	private static $boardsGlobalPostingsContainer = null;
-	private static $boardsGlobalLastVisitedContainer = null;
 	private static $boardsMetaContainer = null;
 	private static $boardsMetaPostingsContainer = null;
 	private static $boardsMetaLastVisitedContainer = null;
@@ -873,48 +870,6 @@ abstract class Rakuun_DB_Containers {
 		self::$boardsAdminLastVisitedContainer->addReferencedContainer(self::getBoardsAdminContainer());
 		
 		return self::$boardsAdminLastVisitedContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getBoardsGlobalContainer() {
-		if (self::$boardsGlobalContainer)
-			return self::$boardsGlobalContainer;
-			
-		//TODO: Move to rakuun-static-db
-		self::$boardsGlobalContainer = new DB_Container('boards_global');
-		
-		return self::$boardsGlobalContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getBoardsGlobalPostingsContainer() {
-		if (self::$boardsGlobalPostingsContainer)
-			return self::$boardsGlobalPostingsContainer;
-			
-		//TODO: Move to rakuun-static-db
-		self::$boardsGlobalPostingsContainer = new DB_Container('boards_global_postings');
-		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
-		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'deleted_by', 'id');
-		
-		return self::$boardsGlobalPostingsContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getBoardsGlobalLastVisitedContainer() {
-		if (self::$boardsGlobalLastVisitedContainer)
-			return self::$boardsGlobalLastVisitedContainer;
-		
-		// Has to stay in rakuun-round-db
-		self::$boardsGlobalLastVisitedContainer = new DB_Container('boards_global_visited');
-		self::$boardsGlobalLastVisitedContainer->addReferencedContainer(self::getBoardsGlobalContainer());
-		
-		return self::$boardsGlobalLastVisitedContainer;
 	}
 	
 	/**
