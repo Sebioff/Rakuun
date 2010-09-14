@@ -20,7 +20,7 @@ class Rakuun_Intern_GUI_Panel_User_Online extends GUI_Panel {
 			$line = array();
 			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$user->getPK(), $user);
 			if ($user->alliance) {
-				$line[] = new Rakuun_GUI_Control_AllianceLink('alliance'.$user->alliance->getPK(), $user->alliance);
+				$line[] = new Rakuun_GUI_Control_AllianceLink('alliance'.$user->getPK(), $user->alliance);
 			} else {
 				$line[] = '';
 			}

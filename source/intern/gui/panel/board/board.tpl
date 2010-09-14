@@ -1,4 +1,4 @@
-<div class="ctn_board_content">
+<div id="<?= $this->getID(); ?>" class="ctn_board_content">
 	<? if ($this->hasMessages()): ?>
 		<? $this->displayMessages(); ?>
 	<? endif; ?>

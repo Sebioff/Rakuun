@@ -54,6 +54,7 @@ class Rakuun_Intern_Log {
 				$user->multiPoints += self::$multiPoints[$action];
 				$user->save();
 				
+				DB_Connection::get()->beginTransaction();
 				$multiactionLog = new DB_Record();
 				$multiactionLog->action = $action;
 				$multiactionLog->multiaction = self::MULTIACTION_SAME_COOKIE;
@@ -67,6 +68,7 @@ class Rakuun_Intern_Log {
 				$multiactionAssoc->multiAction = $multiactionLog;
 				$multiactionAssoc->user = $user;
 				Rakuun_DB_Containers::getLogMultiactionsUsersAssocContainer()->save($multiactionAssoc);
+				DB_Connection::get()->commit();
 			}
 		}
 		

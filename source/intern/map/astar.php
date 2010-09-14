@@ -123,7 +123,7 @@ class Rakuun_Intern_Map_AStar {
 	}
 	
 	public function getMovementCosts(array $fromNode, array $toNode) {
-		return abs($toNode['x'] - $fromNode['x']) + abs($toNode['y'] - $fromNode['y']) + $toNode['costs'] / RAKUUN_SPEED_UNITMOVEMENT;
+		return round(abs($toNode['x'] - $fromNode['x']) + abs($toNode['y'] - $fromNode['y']) + $toNode['costs'] / RAKUUN_SPEED_UNITMOVEMENT);
 	}
 }
 

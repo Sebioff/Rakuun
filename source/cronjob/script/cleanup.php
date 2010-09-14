@@ -25,11 +25,14 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 		// uses last_login instead of last_activity, because last_activity is updated by sitter as well
 		$options['conditions'][] = array('last_login < ?', time() - self::CLEANUP_INACTIVE_YIMTAY);
 		$options['conditions'][] = array('registration_time < ?', time() - self::CLEANUP_INACTIVE_YIMTAY);
+		$options['conditions'][] = array('is_yimtay = ?', false);
 		DB_Connection::get()->beginTransaction();
 		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $yimtayUser) {
 			$alliance = $yimtayUser->alliance;
-			$yimtayUser->cityName = 'Yimtay-City'; // TODO not good, inactive players need to be marked differently
+			$yimtayUser->cityName = 'Yimtay-City';
 			$yimtayUser->alliance = null;
+			$yimtayUser->isYimtay = 1;
+			$yimtayUser->isInNoob = 0;
 			Rakuun_User_Manager::update($yimtayUser);
 			Rakuun_User_Manager::lock($yimtayUser);
 			if ($sittedUser = Rakuun_DB_Containers::getUserContainer()->selectBySitterFirst($yimtayUser)) {

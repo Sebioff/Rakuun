@@ -5,7 +5,7 @@
  */
 class Rakuun_Intern_GUI_Panel_Meta_Account_AllianceAccounts extends GUI_Panel_PageView {
 	
-	public function __construct($name, $title = '') {		
+	public function __construct($name, $title = '') {
 		$options['conditions'][] = array('meta = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
 		$logs = Rakuun_DB_Containers::getMetasAccountlogContainer()->getFilteredContainer($options);
 		parent::__construct($name, $logs, $title);
@@ -39,11 +39,11 @@ class Rakuun_Intern_GUI_Panel_Meta_Account_AllianceAccounts extends GUI_Panel_Pa
 		$table->setAttribute('summary', 'Kontobewegungen');
 		$table->addHeader(array('Allianz', 'Eisen', 'Beryllium', 'Energie', 'Leute'));
 		foreach ($alliances as $alliance) {
-			$alliancelink = new Rakuun_GUI_Control_AllianceLink('moves-alliancelink'.$alliance['alliance']->getPK(), $alliance['alliance']);
-			$iron = new GUI_Panel_Number('moves-iron'.$alliance['alliance']->getPK(), $alliance['sum']['iron']);
-			$beryllium = new GUI_Panel_Number('moves-beryllium'.$alliance['alliance']->getPK(), $alliance['sum']['beryllium']);
-			$energy = new GUI_Panel_Number('moves-energy'.$alliance['alliance']->getPK(), $alliance['sum']['energy']);
-			$people = new GUI_Panel_Number('moves-people'.$alliance['alliance']->getPK(), $alliance['sum']['people']);
+			$alliancelink = new Rakuun_GUI_Control_AllianceLink('moves_alliancelink'.$alliance['alliance']->getPK(), $alliance['alliance']);
+			$iron = new GUI_Panel_Number('moves_iron'.$alliance['alliance']->getPK(), $alliance['sum']['iron']);
+			$beryllium = new GUI_Panel_Number('moves_beryllium'.$alliance['alliance']->getPK(), $alliance['sum']['beryllium']);
+			$energy = new GUI_Panel_Number('moves_energy'.$alliance['alliance']->getPK(), $alliance['sum']['energy']);
+			$people = new GUI_Panel_Number('moves_people'.$alliance['alliance']->getPK(), $alliance['sum']['people']);
 			$table->addLine(array($alliancelink, $iron, $beryllium, $energy, $people));
 		}
 		$this->addPanel($table);

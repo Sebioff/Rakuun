@@ -24,6 +24,9 @@ abstract class Rakuun_User_Manager {
 
 		if (!Rakuun_GameSecurity::get()->hasPrivilege($user, Rakuun_GameSecurity::PRIVILEGE_LOGIN) && !Rakuun_User_Manager::isMasterUser())
 			return 'Login dieses Spielers ist gesperrt';
+			
+		if ($user->isYimtay() && !Rakuun_User_Manager::isMasterUser())
+			return 'Dieser Account ist inaktiv und wird demnächst gelöscht';
 		
 		$user->lastLogin = time();
 		$user->lastActivity = time();

@@ -1,4 +1,4 @@
-<div <?= $this->getAttributeString() ?>>
+<div id="<?= $this->getID(); ?>" <?= $this->getAttributeString() ?>>
 	<? foreach ($this->getEnvelopes() as $envelope): ?>
 		<? $envelope->display(); ?>
 	<? endforeach; ?>

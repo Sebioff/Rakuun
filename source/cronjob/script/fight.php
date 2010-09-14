@@ -475,9 +475,9 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 	 * Executed if an army returns home
 	 */
 	private function returnHome(Rakuun_DB_Army $army) {
+		$userUnits = $army->user->units;
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
 			if ($unit->getAmount() > 0) {
-				$userUnits = $army->user->units;
 				$userUnits->{Text::underscoreToCamelCase($unit->getInternalName())} += $unit->getAmount();
 			}
 		}

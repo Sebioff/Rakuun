@@ -99,7 +99,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 					$this->addError('Der Spieler befindet sich im Noobschutz');
 				}
 
-				if ($this->destroyBuildings->getSelected() && !$targetUser->canBeAttacked(Rakuun_User_Manager::getCurrentUser())) {
+				if ($this->destroyBuildings->getSelected() && !$targetUser->canBeBashed(Rakuun_User_Manager::getCurrentUser())) {
 					$this->addError(sprintf('Der Spieler hat weniger als %d%% deiner eigenen Punktzahl, daher können seine Gebäude nicht zerstört werden.', RAKUUN_NOOB_SECURE_PERCENTAGE * 100));
 				}
 			}
@@ -109,8 +109,11 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			$targetY = $this->targetY->getValue();
 		}
 		
-		if ($this->hasErrors())
+		if ($this->hasErrors()) {
+			$this->state->setValue(self::STATE_PREPARING);
+			$this->submit->setValue('Vorbereiten...');
 			return;
+		}
 		
 		DB_Connection::get()->beginTransaction();
 		$armyTechnologies = new DB_Record();

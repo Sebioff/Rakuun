@@ -4,11 +4,10 @@
  * Panel to display the User Highscore.
  */
 class Rakuun_Intern_GUI_Panel_User_Highscore extends GUI_Panel_PageView {
-	
-	public function __construct($name, $title = '') {
+	public function __construct($name, DB_Container $userContainer, $title = '') {
 		$options['order'] = 'points DESC';
 		$options['conditions'][] = array('last_login > 0');
-		$users = Rakuun_DB_Containers::getUserContainer()->getFilteredContainer($options);
+		$users = $userContainer->getFilteredContainer($options);
 		parent::__construct($name, $users, $title);
 		$this->setItemsPerPage(25);
 	}
@@ -33,4 +32,5 @@ class Rakuun_Intern_GUI_Panel_User_Highscore extends GUI_Panel_PageView {
 		$table->setAttribute('summary', 'User Highscore');
 	}
 }
+
 ?>

@@ -4,10 +4,9 @@
  * Panel to display the Alliance Highscore.
  */
 class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
-	
-	public function __construct($name, $title = '') {
+	public function __construct($name, DB_Container $alliancesContainer, $title = '') {
 		$options['order'] = 'points DESC';
-		$alliances = Rakuun_DB_Containers::getAlliancesContainer()->getFilteredContainer($options);
+		$alliances = $alliancesContainer->getFilteredContainer($options);
 		parent::__construct($name, $alliances, $title);
 		$this->setItemsPerPage(25);
 	}

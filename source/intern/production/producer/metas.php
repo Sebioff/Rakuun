@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Producer_Metas extends Rakuun_Intern_Production_P
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------
 	public function addWIPItem(DB_Record $wipItem) {
 		$wipObject = Rakuun_Intern_Production_Factory_Metas::getBuilding($wipItem->building, $this->getProductionTarget());
-		$newWip = new Rakuun_Intern_Production_WIP($wipObject->getInternalName().$wipItem->level, $this, $wipObject);
+		$newWip = new Rakuun_Intern_Production_WIP($wipObject->getInternalName().$wipItem->getPK(), $this, $wipObject);
 		$newWip->setLevel($wipItem->level);
 		$newWip->setStartTime($wipItem->starttime);
 		$newWip->setRecord($wipItem);

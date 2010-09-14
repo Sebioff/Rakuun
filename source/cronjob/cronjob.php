@@ -1,13 +1,15 @@
 <?php
 
 class Rakuun_Cronjob extends Cronjob_Manager {
+	const FIGHT_DURATION = 300; // 5 minutes
+	
 	public function __construct($moduleName, $databaseTableName) {
 		parent::__construct($moduleName, $databaseTableName);
 		
 		$this->addScript(new Rakuun_Cronjob_Script_DailyCleanup('daily_cleanup', 0, 0)); // daily at 00:00
 		$this->addScript(new Rakuun_Cronjob_Script_Cleanup('cleanup', 6 * 60 * 60)); // every 6 hours
 		$this->addScript(new Rakuun_Cronjob_Script_Tick('tick', 2 * 60)); // every 2 minutes
-		$this->addScript(new Rakuun_Cronjob_Script_Fight('fight', 5 * 60)); // every 5 minutes
+		$this->addScript(new Rakuun_Cronjob_Script_Fight('fight', Rakuun_Cronjob::FIGHT_DURATION)); // every 5 minutes
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

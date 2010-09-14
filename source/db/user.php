@@ -151,8 +151,11 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		return $this->isInNoob;
 	}
 	
+	/**
+	 * @return true, if user is an yimtay, false otherwise.
+	 */
 	public function isYimtay() {
-		return $this->isYimtay;
+		return (bool)$this->isYimtay;
 	}
 	
 	/**
@@ -179,13 +182,13 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	 */
 	private function reachNoob() {
 		// calc average points
-		$average = Rakuun_Intern_Statistics::averagePoints();
+		$average = Rakuun_Intern_Statistics::averagePoints() * 0.6;
 		$nooblimit = $average;
 		if ($average < RAKUUN_NOOB_START_LIMIT_OF_POINTS)
 			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_POINTS;
 		
 		// calc armystrength
-		$average = Rakuun_Intern_Statistics::averageArmyStrength();
+		$average = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6;
 		$armyStrengthLimit = $average;
 		if ($armyStrengthLimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
 			$armyStrengthLimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
@@ -196,7 +199,8 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 						&& $armyStrength <= $armyStrengthLimit //armystrength below armystrength limit
 						&& $this->buildings->shieldGenerator == 0	// no shield generator
 						&& $this->getDatabaseCount() == 0	// no databases
-						&& !Rakuun_DB_Containers::getArmiesContainer()->selectByUserFirst($this));	// no armies
+						&& !Rakuun_DB_Containers::getArmiesContainer()->selectByUserFirst($this)	// no armies
+						&& !$this->isYimtay());
 						
 		if ($oldNoobState != $this->isInNoob) {
 			$this->save();
@@ -204,7 +208,13 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 			// cancel all incomming attacks when falling back to noob
 			if ($this->isInNoob) {
 				$attackers = array();
-				foreach (Rakuun_DB_Containers::getArmiesContainer()->selectByTarget($this) as $army) {
+				$options = array();
+				$options['conditions'][] = array('target = ?', $this);
+				$options['conditions'][] = array('target_x = ?', $this->cityX);
+				$options['conditions'][] = array('target_y = ?', $this->cityY);
+				$options['conditions'][] = array('spydrone = 0');
+				$options['conditions'][] = array('cloaked_spydrone = 0');
+				foreach (Rakuun_DB_Containers::getArmiesContainer()->select($options) as $army) {
 					$attackers[] = $army->user;
 					Rakuun_DB_Containers::getArmiesPathsContainer()->deleteByArmy($army);
 					$army->targetX = $army->user->cityX;
@@ -227,15 +237,17 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	}
 	
 	/**
-	 * checks if the targetuser can be attacked by the attacker.
-	 * @param[in] user User who wants to attack
-	 * @return true, if user can be attacked by the other user, false otherwise
+	 * Checks the given user can destroy buildings of this user
+	 * @param[in] Rakuun_DB_User user who wants to attack
+	 * @return boolean true, if the given user can destroy buildings of this user,
+	 * false otherwise
 	 */
-	public function canBeAttacked(Rakuun_DB_User $user) {
+	public function canBeBashed(Rakuun_DB_User $user) {
 		return (($user->points * RAKUUN_NOOB_SECURE_PERCENTAGE <= $this->points
 			&& $user->points / RAKUUN_NOOB_SECURE_PERCENTAGE >= $this->points)
 			|| $this->getDatabaseCount() > 0
-			|| $this->buildings->shieldGenerator > 0);
+			|| $this->buildings->shieldGenerator > 0
+			|| $this->isYimtay());
 	}
 	
 	public function produceRessources() {

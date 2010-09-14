@@ -12,10 +12,17 @@ class Rakuun_Intern_GUI_Panel_Statistics extends GUI_Panel {
 		$line = array('Anzahl Spieler:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::noOfPlayers()));
 		$table->addLine($line);
 		
-		$line = array('Durchschnittliche Punktzahl:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::averagePoints()));
+		$nooblimit = Rakuun_Intern_Statistics::averagePoints() * 0.6;
+		if ($nooblimit < RAKUUN_NOOB_START_LIMIT_OF_POINTS)
+			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_POINTS;
+		$line = array('Noobschutz Punktegrenze:', GUI_Panel_Number::formatNumber($nooblimit));
 		$table->addLine($line);
 		
-		$line = array('Durchschnittliche Armeestärke:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::averageArmyStrength()));
+		// calc armystrength
+		$nooblimit = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6;
+		if ($nooblimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
+			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
+		$line = array('Noobschutz Armeestärkegrenze:', GUI_Panel_Number::formatNumber($nooblimit));
 		$table->addLine($line);
 		
 		$line = array('Anzahl Allianzen:', GUI_Panel_Number::formatNumber(Rakuun_Intern_Statistics::noOfAllies()));

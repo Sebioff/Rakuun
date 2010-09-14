@@ -1,7 +1,7 @@
 <div class="rakuun_map_target_panel">
 	<? if ($this->hasErrors()): ?>
 		<? $this->displayErrors(); ?>
-	<? endif ?>
+	<? endif; ?>
 	<? if ($this->state->getValue() == Rakuun_Intern_GUI_Panel_Map_Target::STATE_REVIEWING): ?>
 		<? if (!($target = $this->getTargetUser())): ?>
 			<? $target = $this->targetX->getValue().':'.$this->targetY->getValue(); ?>

@@ -55,7 +55,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 		foreach (Rakuun_DB_Containers::getCautionContainer()->select() as $caution) {
 			$date = new GUI_Panel_Date('date', $caution->date);
 			if (self::isResetable($caution)) {
-				$link = new GUI_Control_Link('cautiondelete', 'Verwarnung zurücknehmen', $this->getModule()->getURL(array('cautionreset' => $caution->id)));
+				$link = new GUI_Control_Link('cautiondelete_'.$caution->getPK(), 'Verwarnung zurücknehmen', $this->getModule()->getURL(array('cautionreset' => $caution->id)));
 				$link->setConfirmationMessage('Verwarnung vom '.$date->getValue().' an den User '.$caution->user->name.'wirklich zurücknehmen?');
 			} else {
 				$link = '';

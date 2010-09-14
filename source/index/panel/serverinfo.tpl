@@ -1,6 +1,14 @@
 <h1 class="slogan">Rakuun - kostenloses SciFi-Browsergame</h1>
 <h2>Baue, forsche, handle, kämpfe!</h2>
 
+<? if ($roundInformation = Rakuun_DB_Containers_Persistent::getRoundInformationContainer()->selectByRoundNameFirst(RAKUUN_ROUND_NAME)): ?>
+	<br/>
+	Die aktuelle Runde wurde durch einen Sieg der Meta "<?= $roundInformation->winningMeta; ?>" gewonnen.
+	<br/>
+	<a href="<?= App::get()->getModule('endscore')->getUrl(); ?>">Zum Endhighscore</a>
+	<br/>
+<? endif; ?>
+
 <? if ($this->hasPanel('start_countdown')): ?>
 	<br/>
 	<u>Start der nächsten Runde:</u>
@@ -41,7 +49,7 @@
 <span class="copyright">
 	Rakuun, Codes, Ideen und Grafiken:
 	<br />
-	&copy; 2002-<?= date('Y') ?> by Rakuun-Team
+	&copy; 2002-<?= date('Y'); ?> by Rakuun-Team
 	<br />
-	Rakuun Version <?= RAKUUN_VERSION ?>, revision <?= PROJECT_VERSION ?>
+	Rakuun Version <?= RAKUUN_VERSION; ?>, revision <?= PROJECT_VERSION; ?>
 </span>

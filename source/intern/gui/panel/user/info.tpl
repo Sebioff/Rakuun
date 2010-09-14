@@ -28,7 +28,7 @@ Koordinaten:
 	Hinweis: Du befindest dich im Noobschutz!
 	Im Noobschutz kannst du nicht handeln und nicht angegriffen werden.
 	Du verlässt den Noobschutz, sobald deine Punktzahl
-	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints(); ?>
+	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints() * 0.6; ?>
 	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_POINTS): ?>
 		<? $output .= GUI_Panel_Number::formatNumber(floor($averagePoints)); ?>
@@ -37,12 +37,12 @@ Koordinaten:
 	<? endif; ?>
 	<?= $output; ?>
 	oder deine Armeestärke
-	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength(); ?>
+	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6; ?>
 	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH): ?>
 		<? $output .= GUI_Panel_Number::formatNumber(floor($averagePoints)); ?>
 	<? else: ?>
 		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
 	<? endif; ?>
-	<?= $output; ?> ist oder du ein Datenbankteil eroberst oder ein Schildgenerator baust.
+	<?= $output; ?>.
 <? endif; ?>

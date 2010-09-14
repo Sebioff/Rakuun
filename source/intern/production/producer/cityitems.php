@@ -16,7 +16,7 @@ class Rakuun_Intern_Production_Producer_CityItems extends Rakuun_Intern_Producti
 			$wipObject = Rakuun_Intern_Production_Factory::getBuilding($wipItem->building, $this->getProductionTarget());
 		else
 			$wipObject = Rakuun_Intern_Production_Factory::getTechnology($wipItem->technology, $this->getProductionTarget());
-		$newWip = new Rakuun_Intern_Production_WIP_CityItem($wipObject->getInternalName().$wipItem->level, $this, $wipObject);
+		$newWip = new Rakuun_Intern_Production_WIP_CityItem($wipObject->getInternalName().$wipItem->getPK(), $this, $wipObject);
 		$newWip->setLevel($wipItem->level);
 		$newWip->setStartTime($wipItem->starttime);
 		$newWip->setRecord($wipItem);

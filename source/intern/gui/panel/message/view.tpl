@@ -1,4 +1,4 @@
-<div <?= $this->getAttributeString() ?>>
+<div id="<?= $this->getID(); ?>" <?= $this->getAttributeString(); ?>>
 	<? if ($this->hasPanel('selections')): ?>
 		<div id="ctn_messages_actions">
 			<? $this->displayPanel('selections'); ?> <? $this->displayPanel('actions'); ?> <? $this->displayPanel('execute_actions'); ?>

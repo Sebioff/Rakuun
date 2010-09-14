@@ -49,7 +49,7 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 			$this->addEnvelope(new $envelope('message_'.$message->getPK(), $message));
 		}
 		
-		if ($this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SENT || Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS) {
+		if ($this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SENT && $this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS) {
 			$selections = array(
 				self::SELECTION_ALL			=> 'Alle Nachrichten in "'.Rakuun_Intern_GUI_Panel_Message_Categories::getNameForCategory($this->category).'"'//,
 				//self::SELECTION_SELECTED	=> 'Markierte Nachrichten'

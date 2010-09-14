@@ -74,10 +74,9 @@ class Rakuun_Intern_Map_ArmyPathCalculator {
 			for ($i = 0; $i < $pathNodeCount - 1; $i++) {
 				$targetTime += $astar->getMovementCosts($path[$i], $path[$i + 1]);
 			}
-
 			$this->army->positionX = $path[0]['x'];
 			$this->army->positionY = $path[0]['y'];
-			$this->army->tick = time();
+			$this->army->tick = time() - $movedTime;
 			$this->army->targetTime = $targetTime;
 			$this->army->save();
 		}

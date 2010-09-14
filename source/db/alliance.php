@@ -29,7 +29,7 @@ class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_O
 	 * @return DB_Record
 	 */
 	public function getDiplomacy(Rakuun_DB_Alliance $other) {
-		$options['conditions'][] = array('status = ?', Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::STATUS_ACTIVE);
+		$options['conditions'][] = array('status != ?', Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::STATUS_NEW);
 		$options['conditions'][] = array('(alliance_active = ? AND alliance_passive = ?) OR (alliance_active = ? AND alliance_passive = ?)', $other, $this, $this, $other);
 		return Rakuun_DB_Containers::getAlliancesDiplomaciesContainer()->selectFirst($options);
 	}

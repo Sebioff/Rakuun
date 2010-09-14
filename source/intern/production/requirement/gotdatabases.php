@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Requirement_GotDatabases extends Rakuun_Intern_Pr
 	}
 	
 	public function fulfilled() {
-		$user = Rakuun_User_Manager::getCurrentUser();
+		$user = $this->getProductionItem()->getOwner();
 		return $user->getDatabaseCount() >= 3;
 	}
 }

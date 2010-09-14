@@ -30,8 +30,8 @@ abstract class Rakuun_Game {
 		$message .= 'URL: '.$currentModule->getUrl($params)."\n\n";
 		$message .= $errorType.'! '.$customMessage."\n\n";
 		foreach ($backtrace as $backtraceMessage) {
-			$message .= '#'.$traceCount-$nr.':\t';
-			$message .= isset($backtraceMessage['class'])?$backtraceMessage['class'].$backtraceMessage['type'].$backtraceMessage['function']:$backtraceMessage['function'].'('.(isset($backtraceMessage['args']) ? implode(', ', $backtraceMessage['args']) : '').')';
+			$message .= '#'.($traceCount - $nr).':'."\t";
+			$message .= (isset($backtraceMessage['class']) ? $backtraceMessage['class'].$backtraceMessage['type'].$backtraceMessage['function'] : $backtraceMessage['function']).'('.(isset($backtraceMessage['args']) ? implode(', ', $backtraceMessage['args']) : '').')';
 			if (isset($backtraceMessage['file'])) {
 				$message .= ' in '.$backtraceMessage['file'].'('.$backtraceMessage['line'].')';
 			}

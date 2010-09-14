@@ -48,7 +48,6 @@ abstract class Rakuun_DB_Containers {
 	private static $logUserRessourcetransferContainer = null;
 	private static $messagesContainer = null;
 	private static $messagesAttachmentsContainer = null;
-	private static $newsContainer = null;
 	private static $pollsContainer = null;
 	private static $pollsAnswersContainer = null;
 	private static $pollsAnswersUsersAssocContainer = null;
@@ -502,18 +501,6 @@ abstract class Rakuun_DB_Containers {
 		self::$metasAccountlogContainer->addReferencedContainer(self::getAlliancesContainer());
 		self::$metasAccountlogContainer->addReferencedContainer(self::getMetasContainer());
 		return self::$metasAccountlogContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getNewsContainer() {
-		if (self::$newsContainer)
-			return self::$newsContainer;
-			
-		self::$newsContainer = new DB_Container('news');
-		
-		return self::$newsContainer;
 	}
 	
 	/**

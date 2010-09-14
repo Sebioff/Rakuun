@@ -1,4 +1,4 @@
-<div class="ctn_shoutbox">
+<div id="<?= $this->getID(); ?>" class="ctn_shoutbox">
 	<? if ($this->hasErrors()): ?>
 		<? $this->displayErrors(); ?>
 	<? endif; ?>

@@ -85,7 +85,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 			$newsEntry->subject = 'Update';
 			$newsEntry->text = 'Das Spiel wurde gerade aktualisiert. Folgende Änderungen wurden vorgenommen:<br/><br/>'.$formatHistory;
 			$newsEntry->time = time();
-			Rakuun_DB_Containers::getNewsContainer()->save($newsEntry);
+			Rakuun_DB_Containers_Persistent::getNewsContainer()->save($newsEntry);
 		}
 		
 		// update revision number

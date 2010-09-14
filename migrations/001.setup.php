@@ -90,7 +90,9 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `users` (
   `sitter_note` text NOT NULL,
   `tutorial` tinyint(1) NOT NULL DEFAULT \'1\',
   `is_in_noob`tinyint(1) unsigned NOT NULL DEFAULT \'1\',
+  `is_yimtay` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
   `production_paused` int(10) unsigned NOT NULL DEFAULT \'0\',
+  `shoutbox_timeban` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `alliance` (`alliance`),
   KEY `sitter` (`sitter`)
@@ -142,29 +144,31 @@ $queries[] = 'ALTER TABLE `alliances_applications`
   ADD CONSTRAINT `alliances_applications_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `alliances_applications_ibfk_2` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;';
 
-$queries[] = 'CREATE TABLE IF NOT EXISTS `boards` (
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_admin` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `date` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=0;';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 
-$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_postings` (
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_admin_postings` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `board` mediumint(8) unsigned DEFAULT NULL,
   `user` int(10) unsigned DEFAULT NULL,
   `text` text NOT NULL,
   `date` int(10) unsigned NOT NULL,
   `editdate` int(10) unsigned DEFAULT NULL,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
+  `deleted_by` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `board` (`board`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT AUTO_INCREMENT=0;';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 
-$queries[] = 'ALTER TABLE `boards_postings`
-  ADD CONSTRAINT `boards_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards` (`id`) ON DELETE CASCADE;';
+$queries[] = 'ALTER TABLE `boards_admin_postings`
+  ADD CONSTRAINT `boards_admin_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_admin` (`id`) ON DELETE CASCADE;';
 
-$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_visited` (
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_admin_visited` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `board` mediumint(8) unsigned NOT NULL,
   `user` int(10) unsigned NOT NULL,
@@ -172,11 +176,135 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_visited` (
   PRIMARY KEY (`id`),
   KEY `board` (`board`),
   KEY `user` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
 
-$queries[] = 'ALTER TABLE `boards_visited`
-  ADD CONSTRAINT `boards_visited_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `boards_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards` (`id`) ON DELETE CASCADE;';
+$queries[] = 'ALTER TABLE `boards_admin_visited`
+  ADD CONSTRAINT `boards_admin_visited_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `boards_admin_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_admin` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global_postings` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned DEFAULT NULL,
+  `user_name` varchar(25) NOT NULL,
+  `round_number` tinyint(4) unsigned NOT NULL,
+  `text` text NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  `editdate` int(10) unsigned DEFAULT NULL,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
+  `deleted_by_name` varchar(25) NOT NULL,
+  `deleted_by_round_number` tinyint(4) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_global_postings`
+  ADD CONSTRAINT `boards_global_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_global` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global_visited` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned NOT NULL,
+  `user_name` varchar(25) NOT NULL,
+  `round_number` tinyint(4) unsigned NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_global_visited`
+  ADD CONSTRAINT `boards_global_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_global` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_alliance` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `alliance` smallint(5) unsigned DEFAULT NULL,
+  `name` varchar(25) NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `alliance` (`alliance`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_alliance`
+  ADD CONSTRAINT `boards_alliance_ibfk_1` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_alliance_postings` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned DEFAULT NULL,
+  `user` int(10) unsigned DEFAULT NULL,
+  `text` text NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  `editdate` int(10) unsigned DEFAULT NULL,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
+  `deleted_by` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_alliance_postings`
+  ADD CONSTRAINT `boards_alliance_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_alliance` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_alliance_visited` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned NOT NULL,
+  `user` int(10) unsigned NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_alliance_visited`
+  ADD CONSTRAINT `boards_alliance_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_alliance` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `boards_alliance_visited_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_meta` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `meta` smallint(5) unsigned DEFAULT NULL,
+  `name` varchar(25) NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `meta` (`meta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_meta`
+  ADD CONSTRAINT `boards_meta_ibfk_1` FOREIGN KEY (`meta`) REFERENCES `metas` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_meta_postings` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned DEFAULT NULL,
+  `user` int(10) unsigned DEFAULT NULL,
+  `text` text NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  `editdate` int(10) unsigned DEFAULT NULL,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
+  `deleted_by` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_meta_postings`
+  ADD CONSTRAINT `boards_meta_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_meta` (`id`) ON DELETE CASCADE;';
+
+$queries[] = 'CREATE TABLE IF NOT EXISTS `boards_meta_visited` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `board` mediumint(8) unsigned NOT NULL,
+  `user` int(10) unsigned NOT NULL,
+  `date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `board` (`board`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `boards_meta_visited`
+  ADD CONSTRAINT `boards_meta_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_meta` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `boards_meta_visited_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_diplomacy` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -596,6 +724,16 @@ $queries[] = 'ALTER TABLE `messages`
   ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`sender`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
 
+$queries[] = 'CREATE TABLE IF NOT EXISTS `messages_attachments` (
+  `message` int(10) unsigned NOT NULL,
+  `type` int(10) unsigned NOT NULL,
+  `value` text NOT NULL,
+  KEY `message` (`message`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+
+$queries[] = 'ALTER TABLE `messages_attachments`
+  ADD CONSTRAINT `messages_attachments_ibfk_1` FOREIGN KEY (`message`) REFERENCES `messages` (`id`) ON DELETE CASCADE;';
+
 $queries[] = 'CREATE TABLE IF NOT EXISTS `polls` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `type` tinyint(1) NOT NULL,
@@ -638,15 +776,6 @@ $queries[] = 'ALTER TABLE `polls_answers_users_assoc`
   ADD CONSTRAINT `polls_answers_users_assoc_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `polls_answers_users_assoc_ibfk_1` FOREIGN KEY (`answer`) REFERENCES `polls_answers` (`id`) ON DELETE CASCADE;';
  
-$queries[] = 'CREATE TABLE IF NOT EXISTS `news` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `writer` varchar(25) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `text` text NOT NULL,
-  `time` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
-
 $queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_accountlog` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `alliance` smallint(5) unsigned NOT NULL,
@@ -665,9 +794,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_accountlog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';
 
 $queries[] = 'ALTER TABLE `alliances_accountlog`
-  ADD CONSTRAINT `alliances_accountlog_ibfk_3` FOREIGN KEY (`receiver`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `alliances_accountlog_ibfk_1` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `alliances_accountlog_ibfk_2` FOREIGN KEY (`sender`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
+  ADD CONSTRAINT `alliances_accountlog_ibfk_1` FOREIGN KEY (`alliance`) REFERENCES `alliances` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `metas_accountlog` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -792,8 +919,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `supporttickets` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
 
 $queries[] = 'ALTER TABLE `supporttickets`
-  ADD CONSTRAINT `supporttickets_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `supporttickets_ibfk_2` FOREIGN KEY (`supporter`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
+  ADD CONSTRAINT `supporttickets_ibfk_1` FOREIGN KEY (`supporter`) REFERENCES `users` (`id`) ON DELETE SET NULL;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `users_directory_messages_groups` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

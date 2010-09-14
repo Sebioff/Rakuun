@@ -36,11 +36,11 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_UserAccounts extends GUI_Panel {
 		$table->addHeader(array('Name', 'Eisen', 'Beryllium', 'Energie', 'Leute'));
 		foreach ($users as $user) {
 			$pk = $user['user'] ? $user['user']->getPK() : 0;
-			$userlink = new Rakuun_GUI_Control_UserLink('moves-userlink'.$pk, $user['user']);
-			$iron = new GUI_Panel_Number('moves-iron'.$pk, $user['sum']['iron']);
-			$beryllium = new GUI_Panel_Number('moves-beryllium'.$pk, $user['sum']['beryllium']);
-			$energy = new GUI_Panel_Number('moves-energy'.$pk, $user['sum']['energy']);
-			$people = new GUI_Panel_Number('moves-people'.$pk, $user['sum']['people']);
+			$userlink = new Rakuun_GUI_Control_UserLink('moves_userlink'.$pk, $user['user']);
+			$iron = new GUI_Panel_Number('moves_iron'.$pk, $user['sum']['iron']);
+			$beryllium = new GUI_Panel_Number('moves_beryllium'.$pk, $user['sum']['beryllium']);
+			$energy = new GUI_Panel_Number('moves_energy'.$pk, $user['sum']['energy']);
+			$people = new GUI_Panel_Number('moves_people'.$pk, $user['sum']['people']);
 			$table->addLine(array($userlink, $iron, $beryllium, $energy, $people));
 		}
 		$sorterheaders = array();

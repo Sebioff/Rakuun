@@ -398,8 +398,8 @@ body.skin_tech
 	margin-bottom:5px;
 }
 
-.skin_tech .module_summary .rakuun_box table th,
-.skin_tech .module_summary .rakuun_box table td {
+.skin_tech .module_summary .rakuun_box th,
+.skin_tech .module_summary .rakuun_box td {
 	text-align:right;
 }
 
