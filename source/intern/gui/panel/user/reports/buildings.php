@@ -1,7 +1,9 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_User_Reports_Buildings extends Rakuun_Intern_GUI_Panel_User_Reports_Display {
-	public function init() {
+	public function beforeInit() {
+		parent::beforeInit();
+		
 		$reports = $this->getReports();
 		if (!empty($reports)) {
 			$buildings = Rakuun_Intern_Production_Factory::getAllBuildings();
@@ -16,8 +18,6 @@ class Rakuun_Intern_GUI_Panel_User_Reports_Buildings extends Rakuun_Intern_GUI_P
 			$data['date'] = $date;
 			$this->setData($data);
 		}
-		
-		parent::init();
 	}
 }
 ?>
