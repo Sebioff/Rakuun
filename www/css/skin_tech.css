@@ -26,6 +26,11 @@ body.skin_tech
 	color:#FFFFFF;
 }
 
+.skin_tech a:hover
+{
+	color:#4E82C2;
+}
+
 .skin_tech .rakuun_box .head {
 	position:relative;
 }

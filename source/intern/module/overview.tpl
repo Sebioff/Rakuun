@@ -32,8 +32,6 @@
 	<br />
 <? endif; ?>
 
-<? $this->displayPanel('end') ?>
-
 <? if ($this->hasPanel('dancertia_countdown')): ?>
 	<? $this->displayPanel('dancertia_countdown') ?>
 	<br />

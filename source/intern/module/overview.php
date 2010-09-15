@@ -140,22 +140,6 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		// TODO kinda stupid...
 		if (!$specialsPanel->gotSpecials())
 			$this->contentPanel->removePanel($this->contentPanel->specials);
-			
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('end', new End_Panel('end'), 'Das Ende ist nah...'));
-	}
-}
-
-class End_Panel extends GUI_Panel {
-	private $cd;
-	public function init() {
-		parent::init();
-		$this->cd = new Rakuun_GUI_Panel_CountDown('cd', 1285084800);
-		$this->cd->enableHoverInfo(true);
-		$this->addPanel($this->cd);
-	}
-	
-	public function display() {
-		echo 'Großes Unheil erwartet uns! Sollte es keiner Meta gelingen, innerhalb der nächsten '.$this->cd->render().' drei Datenbankteile in ihren Besitz zu bringen, besteht keine Hoffnung mehr für das Volk der Rakuuraner. Rettet uns!';
 	}
 }
 
