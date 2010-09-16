@@ -18,7 +18,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Start extends Rakuun_Intern_GUI_Panel_
 			Wir befinden uns hier auf der Übersichtsseite.
 			Hier findest du alle wichtigen Informationen auf einen Blick und kannst mit anderen
 			Stadtoberhäuptern über die Shoutbox kommunizieren.<br />
-			<i>- add informations about environment -</i>
+			<b>klicke auf "weiter" um fortzufahren!</b>
 		';
 	}
 }

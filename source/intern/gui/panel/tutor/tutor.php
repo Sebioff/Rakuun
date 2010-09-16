@@ -8,7 +8,7 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Start());
 		
-		//build up for first economy
+		// build up for first economy
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Build1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_People1());
@@ -18,20 +18,35 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Irc());
 		
-		// start to produce energy
+		// start to produce energy and people
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Techtree());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Buildflab());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Watertechnic());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Energy());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_People());
 		
+		// first military
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Firstmilitary());
-		
-		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Satisfaction());
-		
-		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Tickets());		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Attdef());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Map());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Spydrones());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Warsim());
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Alliance());
 		
+		// additional buildings
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Satisfaction());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Trade());
+		
+		// advanced military
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tegos());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Advancedmilitary());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Citywall());
+		
+		// some more Tipps
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Tickets());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sensorbay());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Goal());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Faq());
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Finish());
