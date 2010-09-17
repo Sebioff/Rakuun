@@ -7,6 +7,7 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 		parent::__construct($name, null, $productionItem->getName());
 		
 		$this->productionItem = $productionItem;
+		$this->addClasses('rakuun_production_info_box');
 	}
 	
 	public function init() {

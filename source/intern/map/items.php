@@ -21,10 +21,11 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 			if (Rakuun_User_Manager::getCurrentUser()->alliance && Rakuun_User_Manager::getCurrentUser()->alliance->buildings->databaseDetector > 0) {
 				$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
 				if (!empty($visibleDatabases)) {
+					$images = Rakuun_User_Specials_Database::getDatabaseImages();
 					$options = array();
 					$options['conditions'][] = array('identifier IN ('.implode(', ', $visibleDatabases).')');
 					foreach (Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->select($options) as $databasePosition) {
-						$this->drawItem($image, $databasePosition->positionX, $databasePosition->positionY, $colorDatabase);
+						imagecopy($image, imagecreatefromgif(PROJECT_PATH.DS.'www/images/'.$images[$databasePosition->identifier].'.gif'), $databasePosition->positionX * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE - 1, $databasePosition->positionY * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE,  0, 0, 12, 10);
 					}
 				}
 			}

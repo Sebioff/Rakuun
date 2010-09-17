@@ -11,6 +11,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies extends GUI_Panel {
 		foreach (Rakuun_DB_Containers::getArmiesContainer()->select($options) as $army) {
 			$this->addPanel($countdownPanel = new Rakuun_GUI_Panel_CountDown('cd_'.$army->getPK(), $army->targetTime));
 			$countdownPanel->enableHoverInfo(true);
+			$countdownPanel->setFinishedMessage('Kürze...');
 			$this->armiesPanels[] = array(
 				'countdownPanel' => $countdownPanel,
 				'army' => $army

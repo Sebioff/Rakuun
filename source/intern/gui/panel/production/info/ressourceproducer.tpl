@@ -9,4 +9,6 @@
 <br/>
 Punkte / Stufe: <?= $this->getProductionItem()->getPoints(); ?>
 <br/>
+<br/>
+<h3>Produktionsrate</h3>
 <? $this->displayPanel('production'); ?>

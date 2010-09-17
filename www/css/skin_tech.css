@@ -18,6 +18,7 @@
 	$9  -  Ressources
 	$10 -  Statistics
 	$11 -  Production
+	$12 -  Info
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -506,4 +507,20 @@ body.skin_tech
 
 .skin_tech .rakuun_wip_panel .controls .core_gui_submitbutton_wrapper div {
 	background:none;
+}
+
+/* $12 -  Info ---------------------------------------------------------------*/
+.skin_tech .module_info .rakuun_production_info_box {
+	float:none;
+	margin:0px auto;
+	width:500px;
+}
+
+.skin_tech .module_info .rakuun_production_info_box h3 {
+	font-weight:bold;
+}
+
+.skin_tech .module_info .rakuun_production_info_box table th,
+.skin_tech .module_info .rakuun_production_info_box table td {
+	text-align:right;
 }

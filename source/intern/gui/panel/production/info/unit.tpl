@@ -70,4 +70,5 @@ Grundverteidigungskraft: <?= $unit->getBaseDefenseValue(); ?>
 	<? endif; ?>
 <? endif; ?>
 <br/>
+<h3>Kosten</h3>
 <? $this->displayPanel('costs'); ?>

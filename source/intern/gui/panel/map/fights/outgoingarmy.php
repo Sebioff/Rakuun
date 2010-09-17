@@ -16,6 +16,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmy extends GUI_Panel {
 		parent::init();
 		
 		$this->addPanel($countdownPanel = new Rakuun_GUI_Panel_CountDown('countdown', $this->army->targetTime));
+		$countdownPanel->setFinishedMessage('Kürze...');
 		$countdownPanel->enableHoverInfo(true);
 		
 		$target = 0;
