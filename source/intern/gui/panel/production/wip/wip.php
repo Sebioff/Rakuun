@@ -8,6 +8,7 @@ abstract class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_B
 		parent::__construct($name, null, $title);
 		
 		$this->producer = $producer;
+		$this->addClasses('rakuun_wip_panel');
 		//$this->producer->getItemWIPContainer()->addInsertCallback(array($this, 'addWIPItem'));
 		
 		// checking if there are WIPs, since after produce() it might have changed
@@ -22,7 +23,9 @@ abstract class Rakuun_Intern_GUI_Panel_Production_WIP extends Rakuun_GUI_Panel_B
 			}
 			$countDown->enableHoverInfo(true);
 			
-			$this->contentPanel->addPanel(new GUI_Control_SecureSubmitButton('cancel', 'Abbrechen'));
+			$this->contentPanel->addPanel($cancelButton = new GUI_Control_SecureSubmitButton('cancel'));
+			$cancelButton->addClasses('rakuun_btn_cancel');
+			$cancelButton->setTitle('Abbrechen');
 		}
 		
 //		$wipItems = $this->getProducer()->getWIP();

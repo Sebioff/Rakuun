@@ -17,6 +17,7 @@
 	$8  -  Summary
 	$9  -  Ressources
 	$10 -  Statistics
+	$11 -  Production
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -39,7 +40,7 @@ body.skin_tech
 	background:url('../images/h_text_gradient.png') repeat-x;
 	position:absolute;
 	display:block;
-	width:80%;
+	width:100%;
 	height:20px;
 	bottom:0px;
 }
@@ -477,4 +478,32 @@ body.skin_tech
 	margin-left:2px;
 	margin-right:2px;
 	width:470px;
+}
+
+/* $11 -  Production ---------------------------------------------------------*/
+.skin_tech .rakuun_wip_panel {
+	float:none;
+	margin:0px auto;
+	width:440px;
+}
+
+.skin_tech .module_overview .rakuun_wip_panel {
+	float:left;
+	margin:0px 5px 5px 0px;
+	width:auto;
+}
+
+.skin_tech .rakuun_wip_panel .controls {
+	float:right;
+}
+
+.skin_tech .rakuun_wip_panel .controls .rakuun_btn_pause {
+	background:none;
+	height:auto;
+	margin:0px;
+	padding:0px;
+}
+
+.skin_tech .rakuun_wip_panel .controls .core_gui_submitbutton_wrapper div {
+	background:none;
 }

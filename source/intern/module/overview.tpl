@@ -32,19 +32,16 @@
 	<br />
 <? endif; ?>
 
+<br class="clear" />
+
 <? if ($this->hasPanel('dancertia_countdown')): ?>
 	<? $this->displayPanel('dancertia_countdown') ?>
 	<br />
 <? endif; ?>
 
-<? if ($this->hasPanel('specials')): ?>
-	<br class="clear" />
-	<? $this->displayPanel('specials'); ?>
-<? endif; ?>
-
 <? $this->hasPanel('wip_buildings') ? $this->displayPanel('wip_buildings') : '' ?>
-<? $this->hasPanel('wip_technologies') ? $this->displayPanel('wip_technologies') : '' ?>
 <? $this->hasPanel('wip_units') ? $this->displayPanel('wip_units') : '' ?>
+<? $this->hasPanel('wip_technologies') ? $this->displayPanel('wip_technologies') : '' ?>
 <br class="clear" />
 
 <? if ($this->hasPanel('incomming_armies')): ?>
@@ -80,6 +77,11 @@
 
 <div id="ctn_info">
 	<? $this->displayPanel('info'); ?>
+	
+	<? if ($this->hasPanel('specials')): ?>
+		<? $this->displayPanel('specials'); ?>
+		<br class="clear" />
+	<? endif; ?>
 	
 	<? if ($this->hasPanel('sitterbox')): ?>
 		<br class="clear" />

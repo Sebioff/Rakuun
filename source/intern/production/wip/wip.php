@@ -17,10 +17,13 @@ class Rakuun_Intern_Production_WIP extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/wip.tpl');
 		$this->addPanel($upButton = new GUI_Control_SubmitButton('move_up'));
 		$upButton->addClasses('rakuun_btn_move_up');
+		$upButton->setTitle('Nach oben');
 		$this->addPanel($downButton = new GUI_Control_SubmitButton('move_down'));
 		$downButton->addClasses('rakuun_btn_move_down');
-		$this->addPanel($cancelButton = new GUI_Control_SubmitButton('cancel', 'Abbrechen'));
+		$downButton->setTitle('Nach unten');
+		$this->addPanel($cancelButton = new GUI_Control_SubmitButton('cancel'));
 		$cancelButton->addClasses('rakuun_btn_cancel');
+		$cancelButton->setTitle('Abbrechen');
 	}
 	
 	/**

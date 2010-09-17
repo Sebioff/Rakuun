@@ -22,9 +22,10 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 			);
 		}
 		
-		$this->contentPanel->addPanel($pauseButton = new GUI_Control_SubmitButton('pause', 'Produktion pausieren'));
+		$this->contentPanel->addPanel($pauseButton = new GUI_Control_SubmitButton('pause', 'Pausieren'));
+		$pauseButton->addClasses('rakuun_btn_pause');
 		if (Rakuun_User_Manager::getCurrentUser()->productionPaused)
-			$pauseButton->setValue('Produktion fortsetzen');
+			$pauseButton->setValue('Fortsetzen');
 		
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/units.tpl');
 	}

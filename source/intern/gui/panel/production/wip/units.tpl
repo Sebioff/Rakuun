@@ -3,8 +3,12 @@
 <a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $currentWIP->getType(), 'id' => $currentWIP->getInternalName())); ?>">
 	<?= $currentWIP->getWIPItem()->getNameForAmount(); ?>
 </a>
-(x<?= GUI_Panel_Number::formatNumber($currentWIP->getAmount()); ?>)  <? $this->displayPanel('cancel'); ?>
-<br />
+(x<?= GUI_Panel_Number::formatNumber($currentWIP->getAmount()); ?>)
+<div class="controls">
+	<? $this->displayPanel('pause'); ?>
+	<? $this->displayPanel('cancel'); ?>
+</div>
+<br class="clear" />
 <? if (Rakuun_User_Manager::getCurrentUser()->productionPaused): ?>
 	Produktion pausiert.
 <? elseif (!$currentWIP->meetsTechnicalRequirements()): ?>
@@ -16,8 +20,6 @@
 	<? endif; ?>
 	Alle Einheiten fertiggestellt in: <? $this->displayPanel('countdown_total'); ?>
 <? endif; ?>
-<br/>
-<? $this->displayPanel('pause'); ?>
 <br class="clear"/>
 <? $queueItems = count($wip); ?>
 <? if ($queueItems > 1 && $this->getEnableQueueView()): ?>
@@ -28,6 +30,7 @@
 	<? for ($i = 1; $i < $queueItems; $i++): ?>
 		<li>
 			<? $wip[$i]->display(); ?>
+			<br class="clear"/>
 		</li>
 		<? $totalQueueTime += $wip[$i]->getTimeCosts(); ?>
 	<? endfor; ?>

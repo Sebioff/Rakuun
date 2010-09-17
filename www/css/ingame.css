@@ -74,7 +74,17 @@
 	height:14px;
 	margin-bottom:0px;
 	margin-left:0px;
-	width:14px;
+	width:16px;
+}
+
+#ctn_content .rakuun_btn_cancel
+{
+	background:transparent url('../images/cancel.gif') no-repeat 1px 1px;
+	border:0px none;
+	height:14px;
+	margin-bottom:0px;
+	margin-left:0px;
+	width:16px;
 }
 
 

@@ -10,7 +10,12 @@
 <? else: ?>
 	<? $this->displayPanel('countdown'); ?>
 <? endif; ?>
- <? $this->hasPanel('cancel') ? $this->displayPanel('cancel') : ''; ?>
+<? if ($this->hasPanel('cancel')): ?>
+	<div class="controls">
+		<? $this->displayPanel('cancel'); ?>
+	</div>
+	<br class="clear"/>
+<? endif; ?>
 <? $queueItems = count($wip); ?>
 <? if ($queueItems > 1 && $this->getEnableQueueView()): ?>
 	<hr />
@@ -20,6 +25,7 @@
 	<? for ($i = 1; $i < $queueItems; $i++): ?>
 		<li>
 			<? $wip[$i]->display(); ?>
+			<br class="clear"/>
 		</li>
 		<? $totalQueueTime += $wip[$i]->getTimeCosts(); ?>
 	<? endfor; ?>
