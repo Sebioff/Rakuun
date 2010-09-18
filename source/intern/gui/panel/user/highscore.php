@@ -18,6 +18,7 @@ class Rakuun_Intern_GUI_Panel_User_Highscore extends GUI_Panel_PageView {
 		$this->setTemplate(dirname(__FILE__).'/highscore.tpl');
 		$this->addPanel($table = new GUI_Panel_Table('highscore'));
 		$table->addHeader(array('Rang', 'Name', 'Allianz', 'Punkte'));
+		$table->addTableCssClass('align_right', 3);
 		$users = $this->getContainer()->select($this->getOptions());
 		$i = 1 + (($this->getPage() - 1) * $this->getItemsPerPage());
 		foreach ($users as $user) {

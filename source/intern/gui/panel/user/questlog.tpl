@@ -1,9 +1,9 @@
 <? foreach (Rakuun_Intern_Quest_Factory::getAllQuests() as $quest): ?>
-	Aufgabe: <?= $quest->getDescription(); ?>
+	<strong>Aufgabe</strong>: <?= $quest->getDescription(); ?>
 	<br/>
-	Belohnung: <?= $quest->getRewardDescription(); ?>
+	<strong>Belohnung</strong>: <?= $quest->getRewardDescription(); ?>
 	<br/>
-	Status:
+	<strong>Status</strong>:
 	<? if (!$quest->exists()): ?>
 		Nicht vergeben.
 	<? else: ?>

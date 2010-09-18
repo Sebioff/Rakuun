@@ -17,6 +17,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
 		$this->setTemplate(dirname(__FILE__).'/highscore.tpl');
 		$this->addPanel($table = new GUI_Panel_Table('highscore'));
 		$table->addHeader(array('Rang', 'Name', 'Meta', 'Punkte', 'Durchschnitt'));
+		$table->addTableCssClass('align_right', 3);
+		$table->addTableCssClass('align_right', 4);
 		$alliances = $this->getContainer()->select($this->getOptions());
 		$i = 1 + (($this->getPage() - 1) * $this->getItemsPerPage());
 		foreach ($alliances as $alliance) {

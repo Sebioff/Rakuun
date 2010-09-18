@@ -19,6 +19,8 @@
 	$10 -  Statistics
 	$11 -  Production
 	$12 -  Info
+	$13 -  Profile
+	$14 -  Highscores
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -93,8 +95,17 @@ body.skin_tech
 	text-align:left;
 }
 
+.skin_tech .rakuun_box table th.align_right,
+.skin_tech .rakuun_box table td.align_right {
+	text-align:right;
+}
+
 .skin_tech .rakuun_box table {
 	width:100%;
+}
+
+.skin_tech .rakuun_box table th {
+	font-weight:bold;
 }
 
 /* $2  -  Main Containers ----------------------------------------------------*/
@@ -367,6 +378,10 @@ body.skin_tech
 	width:60px;
 }
 
+.skin_tech #ctn_navigation ul.core_navigation_level1 li.core_navigation_node_active {
+	text-decoration:underline;
+}
+
 /* $5  -  Messages -----------------------------------------------------------*/
 .skin_tech .rakuun_message_unread
 {
@@ -384,13 +399,17 @@ body.skin_tech
 }
 
 /* $6  -  Overview -----------------------------------------------------------*/
-.shout_header a.answerlink {
+.skin_tech .shout_header a.answerlink {
 	background:transparent url('../images/shoutbox_reply_icon.gif') no-repeat left top;
 	display:block;
 	float:right;
 	font-size:0px;
 	height:14px;
 	width:10px;
+}
+
+.skin_tech .shout_announcement {
+	color:#a15c5c;
 }
 
 /* $7  -  Techtree -----------------------------------------------------------*/
@@ -523,4 +542,25 @@ body.skin_tech
 .skin_tech .module_info .rakuun_production_info_box table th,
 .skin_tech .module_info .rakuun_production_info_box table td {
 	text-align:right;
+}
+
+/* $13 -  Profile ------------------------------------------------------------*/
+.skin_tech .module_showprofile .rakuun_user_profile_box {
+	float:none;
+	margin:0px auto;
+	width:414px;
+}
+
+/* $14 -  Highscores ---------------------------------------------------------*/
+.skin_tech .module_highscores .rakuun_userhighscore,
+.skin_tech .module_highscores .rakuun_alliancehighscore {
+	margin:0px 2px;
+	margin-bottom:5px;
+	width:470px;
+}
+
+.skin_tech .module_highscores .rakuun_questbox {
+	float:none;
+	margin:0px auto;
+	width:550px;
 }

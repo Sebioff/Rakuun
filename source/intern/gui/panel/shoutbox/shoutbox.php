@@ -4,6 +4,8 @@
  * Display a shoutbox.
  */
 abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
+	const ANNOUNCER_USERID = 0;
+	
 	protected $config = null;
 	
 	public function __construct($name, $title = '') {
@@ -35,7 +37,7 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 	public function afterInit() {
 		parent::afterInit();
 		
-		$shouts = $this->config->getShoutContainer()->select($this->getOptions());
+		$shouts = $this->getContainer()->select($this->getOptions());
 		foreach ($shouts as $shout) {
 			$this->addPanel(new Rakuun_Intern_GUI_Panel_Shoutbox_Shout('shout_'.$shout->getPK(), $this->config, $shout));
 		}
@@ -77,7 +79,7 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 	}
 }
 
-class shoutbox_config {
+class Shoutbox_Config {
 	private $shoutContainer = null;
 	private $shoutRecord = null;
 	private $shoutMaxLength = 0;

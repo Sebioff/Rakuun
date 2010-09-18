@@ -18,6 +18,13 @@ abstract class Rakuun_Intern_Quest {
 		$questRecord->owner = $awardTo->getPK();
 		$questRecord->time = time();
 		Rakuun_DB_Containers::getQuestsContainer()->save($questRecord);
+		
+		// add announcement to shoutbox
+		$announcementRecord = new DB_Record();
+		$announcementRecord->user = Rakuun_Intern_GUI_Panel_Shoutbox::ANNOUNCER_USERID;
+		$announcementRecord->text = 'Quest "'.$this->getDescription().'" wurde vergeben an '.$this->getOwnerName();
+		$announcementRecord->date = time();
+		Rakuun_DB_Containers::getShoutboxContainer()->save($announcementRecord);
 	}
 	
 	public function exists() {

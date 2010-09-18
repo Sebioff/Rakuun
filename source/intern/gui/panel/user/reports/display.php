@@ -9,7 +9,7 @@ abstract class Rakuun_Intern_GUI_Panel_User_Reports_Display extends Rakuun_Inter
 		$this->setTemplate(dirname(__FILE__).'/display.tpl');
 		
 		if (!empty($this->data)) {
-			$graph = new GUI_Panel_Plot_Lines('graph_'.$this->getName());
+			$graph = new GUI_Panel_Plot_Lines('graph_'.$this->getName(), 450);
 			$graph->setLegendPosition(GUI_Panel_Plot::LEGEND_POSITION_EAST);
 			foreach ($this->data['reports'] as $name => $set) {
 				$graph->addLine($set, $name);
