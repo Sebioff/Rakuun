@@ -41,7 +41,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Global extends Rakuun_Intern_GUI_Panel_Sh
 	
 	public function onSubmit() {
 		if ($this->config->getIsGlobal() &&	Rakuun_User_Manager::getCurrentUser()->shoutboxTimeban > 0)
-			$this->addError('Du wurdest aus dieser Shoutbox gebannt!');
+			$this->addError('Du wurdest für '.Rakuun_Date::formatCountDown((Rakuun_User_Manager::getCurrentUser()->shoutboxTimeban + Rakuun_Intern_GUI_Panel_Shoutbox_Moderate::TIMEBAN_LENGTH) - time()).' aus dieser Shoutbox gebannt!');
 			
 		parent::onSubmit();
 	}

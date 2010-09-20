@@ -2,6 +2,9 @@
 	<? $this->displayErrors(); ?>
 <? endif; ?>
 <? $this->displayPanel('question'); ?>
+<? if ($this->hasPanel('delete')): ?>
+	<? $this->displayPanel('delete'); ?>
+<? endif; ?>
 <ul>
 	<? for ($i = 0; $i < $this->params->anz; $i++): ?>
 		<li>

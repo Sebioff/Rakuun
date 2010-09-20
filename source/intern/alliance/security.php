@@ -46,7 +46,7 @@ class Rakuun_Intern_Alliance_Security extends Security {
 		$this->definePrivilege(self::PRIVILEGE_DIPLOMACY, 'Diplomatische Aktionen durchführen', 'Darf Bündnisse und Kriege mit anderen Allianzen vorschlagen und annehmen');
 		$this->definePrivilege(self::PRIVILEGE_SEE_STATISTICS, 'Statistiken einsehen', 'Darf Statistiken über die Armee und Rohstoffe der Allianzmitglieder einsehen');
 		$this->definePrivilege(self::PRIVILEGE_SEE_ACTIVITY, 'Aktivität einsehen', 'Darf sehen, wann Allianzmitglieder zum letzten Mal aktiv waren');
-		$this->definePrivilege(self::PRIVILEGE_MODERATION, 'Moderator', 'Darf Shoutbox und Foren bearbeiten');
+		$this->definePrivilege(self::PRIVILEGE_MODERATION, 'Moderator', 'Darf Shoutbox, Foren und Umfragen bearbeiten');
 		$this->definePrivilege(self::PRIVILEGE_SEE_REPORTS, 'Spionageberichte einsehen', 'Darf die Spionageberichte der ganzen Allianz einsehen');
 	}
 	

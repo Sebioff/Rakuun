@@ -12,12 +12,22 @@ class Rakuun_Intern_GUI_Panel_Polls_Poll extends GUI_Panel {
 		parent::init();
 		
 		$this->addPanel(new GUI_Panel_Text('question', $this->poll->question, 'Frage:'));
+		$user = Rakuun_User_Manager::getCurrentUser();
 		//did actual user already vote?
 		$options['join'][] = 'polls_answers';
-		$options['conditions'][] = array('polls_answers_users_assoc.user = ?', Rakuun_User_Manager::getCurrentUser());
+		$options['conditions'][] = array('polls_answers_users_assoc.user = ?', $user);
 		$options['conditions'][] = array('polls_answers.id = polls_answers_users_assoc.answer');
 		$options['conditions'][] = array('polls_answers.poll = ?', $this->poll->getPK());
 		$count = Rakuun_DB_Containers::getPollsAnswersUsersAssocContainer()->count($options);
+		//delete-link
+		if (Rakuun_Intern_Alliance_Security::getForAlliance($user->alliance)->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_MODERATION)) {
+			$this->addPanel($link = new GUI_Control_Link('delete', '-Umfrage Löschen-', $this->getModule()->getUrl(array('id' => $this->poll->getPK()))));
+			$link->setConfirmationMessage('Diese Umfrage wirklich löschen?');
+			if ($this->getModule()->getParam('id') == $this->poll->getPK()) {
+				$this->poll->delete();
+				return;
+			}
+		}
 		//is poll still in its runtime?
 		if ($this->poll->date + ($this->poll->runtime * 3600) > time()
 			&& $count === 0
@@ -74,8 +84,10 @@ class Rakuun_Intern_GUI_Panel_Polls_Poll extends GUI_Panel {
 		$selected = $this->answers->getValue();
 		if (!$selected) {
 			$this->addError('Keine Antwort ausgewählt.');
-			return;
 		}
+		if ($this->hasErrors())
+			return;
+	
 		$answer = new DB_Record();
 		$answer->answer = $selected;
 		$answer->user = Rakuun_User_Manager::getCurrentUser();
