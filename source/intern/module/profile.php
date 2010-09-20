@@ -13,10 +13,10 @@ class Rakuun_Intern_Module_Profile extends Rakuun_Intern_Module {
 			}
 		}
 		
-		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Profile_Edit('edit'));		
+		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Profile_Edit('edit'));
 		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Profile_ChangePassword('change_password'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('delete', new Rakuun_Intern_GUI_Panel_Profile_Delete('link'), 'Account löschen'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('options', new Rakuun_Intern_GUI_Panel_Profile_Options('options'), 'Optionen'));		
+		$this->contentPanel->addPanel($deleteBox = new Rakuun_GUI_Panel_Box('delete', new Rakuun_Intern_GUI_Panel_Profile_Delete('link'), 'Account löschen'));
+		$deleteBox->addClasses('rakuun_box_delete');
 	}
 }
 

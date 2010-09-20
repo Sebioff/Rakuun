@@ -551,6 +551,10 @@ body.skin_tech
 	width:414px;
 }
 
+.skin_tech .module_profile .rakuun_box_delete {
+	width:470px;
+}
+
 /* $14 -  Highscores ---------------------------------------------------------*/
 .skin_tech .module_highscores .rakuun_userhighscore,
 .skin_tech .module_highscores .rakuun_alliancehighscore {

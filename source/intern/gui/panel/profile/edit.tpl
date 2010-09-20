@@ -19,4 +19,6 @@
 <br class="clear" />
 <? $this->displayLabelForPanel('picture'); ?> <? $this->displayPanel('picture'); ?>
 <br class="clear" />
+<? $this->displayLabelForPanel('tutorial'); ?> <? $this->displayPanel('tutorial'); ?>
+<br class="clear" />
 <? $this->displayPanel('submit'); ?>

@@ -59,7 +59,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$user->password = Rakuun_User_Manager::cryptPassword($this->password, $user->salt);
 		$user->registrationTime = time();
 		$user->mail = $this->mail;
-		$user->skin = 'space2';
+		$user->skin = 'tech';
 		$user->isInNoob = true;
 		if ($user->name[Text::length($user->name) - 1] == 's')
 			$user->cityName = $user->name.'\' Stadt';

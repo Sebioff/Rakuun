@@ -22,5 +22,7 @@ $app->addModule(new Rakuun_Intern_Map_Items('map_items'));
 $app->addModule(new GUI_Panel_Plot_Image());
 
 Core_MigrationsLoader::addMigrationFolder(dirname(__FILE__).'/../migrations/persistent', array(), Rakuun_DB_Containers_Persistent::getPersistentConnection());
+if (Environment::getCurrentEnvironment() == Environment::DEVELOPMENT)
+	Core_MigrationsLoader::addMigrationFolder(dirname(__FILE__).'/../migrations/testdata');
 
 ?>
