@@ -69,6 +69,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			if (!isset($summe['deff']))
 				$summe['deff'] = 0;
 			$summe['deff'] += $user->deff;
+			
+			$header[++$i] = 'AS';
+			$line[] = GUI_Panel_Number::formatNumber(($user->att + $user->deff) / 2.0);
+			if (!isset($summe['as']))
+				$summe['as'] = 0;
+			$summe['as'] += ($user->att + $user->deff) / 2.0;
+			
 			$header[++$i] = 'Punkte';
 			$line[] = GUI_Panel_Number::formatNumber($user->points);
 			if (!isset($summe['points']))
@@ -111,8 +118,9 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			'18: { sorter: \'separatedDigit\' }',	//Laser
 			'19: { sorter: \'separatedDigit\' }',	//Att
 			'20: { sorter: \'separatedDigit\' }',	//Deff
-			'21: { sorter: \'separatedDigit\' }',	//Punkte
-			'22: { sorter: \'mapkoords\' }'			//Karte
+			'21: { sorter: \'separatedDigit\' }',	//Armeestärke
+			'22: { sorter: \'separatedDigit\' }',	//Punkte
+			'23: { sorter: \'mapkoords\' }'			//Karte
 		);
 		$table->addSorterOption('headers: { '.implode(', ', $sorterheaders).' }');
 		$table->addFooter(
