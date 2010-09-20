@@ -7,3 +7,5 @@
 <div class="rakuun_city rakuun_city_allied"></div><span class="rakuun_map_legend_description">Verbündet</span>
 <br/>
 <div class="rakuun_city rakuun_city_hostile"></div><span class="rakuun_map_legend_description">Feindlich</span>
+<br/>
+<div class="rakuun_city rakuun_city_inactive"></div><span class="rakuun_map_legend_description">inaktiv / gesperrt</span>

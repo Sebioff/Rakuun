@@ -487,6 +487,11 @@ img.rakuun_fightreport_marker
 	background-color:#E00000;
 }
 
+.rakuun_city_inactive
+{
+	background-color:#8B4513;
+}
+
 .rakuun_map_target_priorities
 {
 	float:left;

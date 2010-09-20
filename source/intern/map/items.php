@@ -15,6 +15,7 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 		$colorCityFriendly = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_friendly.gif');
 		$colorCityAllied = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_allied.gif');
 		$colorCityHostile = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_hostile.gif');
+		$colorCityInactive = imagecreatefromgif(PROJECT_PATH.DS.'www/images/map_city_inactive.gif');
 		$colorDatabase = imagecolorallocate($image, 255, 255, 0);
 		
 		if (Rakuun_User_Manager::getCurrentUser()) {
@@ -47,6 +48,8 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 							$color = $colorCityFriendly;
 					}
 				}
+				elseif ($user->isYimtay)
+					$color = $colorCityInactive;
 				imagecopy($image, $color, $user->cityX * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE, $user->cityY * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE,  0, 0, 10, 10);
 			}
 		}
