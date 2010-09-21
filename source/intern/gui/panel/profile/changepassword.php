@@ -26,6 +26,7 @@ class Rakuun_Intern_GUI_Panel_Profile_ChangePassword extends Rakuun_GUI_Panel_Bo
 			return;
 		
 		$user->password = Rakuun_User_Manager::cryptPassword($this->contentPanel->password->getValue(), $user->salt);
+		Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_PASSWORD, $user->password);
 		Rakuun_User_Manager::update($user);
 		$this->contentPanel->setSuccessMessage('Neues Passwort gespeichert');
 	}

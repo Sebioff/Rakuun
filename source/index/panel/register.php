@@ -116,6 +116,8 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		Rakuun_DB_Containers::getUnitsContainer()->save($units);
 		
 		Rakuun_Intern_Log_UserActivity::log($user, Rakuun_Intern_Log::ACTION_ACTIVITY_REGISTRATION, base64_decode($this->base64->getValue()));
+		Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_EMAIL, $user->mail);
+		Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_PASSWORD, $user->password);
 		DB_Connection::get()->commit();
 		
 		try {

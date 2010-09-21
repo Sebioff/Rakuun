@@ -12,6 +12,7 @@ class Rakuun_Intern_Module_Multihunting extends Rakuun_Intern_Module implements 
 		
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('activity', new Rakuun_Intern_GUI_Panel_Multihunting_ActivityLog('activity', $user, 'Aktivitätslog'), 'Aktivitätslog'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('ressource', new Rakuun_Intern_GUI_Panel_Multihunting_RessourceLog('ressource', $user, 'Ressourcen-Transfer'), 'Ressourcen-Transfer'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('userdata', new Rakuun_Intern_GUI_Panel_Multihunting_UserdataLog('userdata', $user, 'Userdaten'), 'Userdaten'));
 	}
 	
 	public function checkPrivileges() {

@@ -549,6 +549,23 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_users_ressourcetransfer` (
 $queries[] = 'ALTER TABLE `log_users_ressourcetransfer`
   ADD CONSTRAINT `log_users_ressourcetransfer_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
+$queries[] = 'CREATE TABLE IF NOT EXISTS `log_users_data` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(10) unsigned NOT NULL,
+  `action` tinyint(1) unsigned NOT NULL,
+  `data` varchar(255) NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  `ip` varchar(20) NOT NULL,
+  `hostname` int(60) unsigned NOT NULL,
+  `browser` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
+
+$queries[] = 'ALTER TABLE `log_users_data`
+  ADD CONSTRAINT `log_users_data_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
+
+
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_multiactions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `action` tinyint(1) unsigned NOT NULL,

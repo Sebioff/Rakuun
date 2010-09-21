@@ -80,6 +80,8 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 		if ($this->contentPanel->hasPanel('description'))
 			$user->description = $this->contentPanel->description;
 			
+		if ($this->contentPanel->mail != $user->mail)	
+			Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_EMAIL, $this->contentPanel->mail);
 		$user->mail = $this->contentPanel->mail;
 		$user->skin = $this->contentPanel->skin->getKey();
 		
@@ -103,6 +105,9 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 			$igm->setSenderName(Rakuun_Intern_IGM::SENDER_SYSTEM);
 			$igm->setText('Du wurdest von '.$user->name.' als Sitter eingetragen.');
 			$igm->send();
+			Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_SITTER, $sitter->name);
+		} else {
+			Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_SITTER, 'kein Sitter');
 		}
 		$user->sitter = $sitter;
 		$user->tutorial = $this->contentPanel->tutorial->getSelected();
