@@ -1,6 +1,4 @@
-<? $this->params->navigation->display(); ?>
-
 <? foreach($this->panels as $panel): ?>
 	<? $panel->display(); ?>
-	<hr />
+	<br class="clear"/>
 <? endforeach ?>

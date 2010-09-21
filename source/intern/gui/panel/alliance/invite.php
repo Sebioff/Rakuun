@@ -4,11 +4,16 @@
  * Panel to send an invitation to users without an alliance.
  */
 class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
+	const MAX_INVITATIONS_PER_DAY = 3;
+	
 	public function init() {
 		parent::init();
 		
-		if (Rakuun_User_Manager::getCurrentUser()->alliance->invitations >= Rakuun_Intern_Module_Alliance_Invite::MAX_INVITATIONS_PER_DAY) {
-			$this->addError('Heute wurden schon '.Rakuun_Intern_Module_Alliance_Invite::MAX_INVITATIONS_PER_DAY.' Einladungen verschickt!');
+		if (Rakuun_User_Manager::getCurrentUser()->alliance->invitations >= self::MAX_INVITATIONS_PER_DAY) {
+			$this->addError('Heute wurden schon '.self::MAX_INVITATIONS_PER_DAY.' Einladungen verschickt!');
+		}
+		else {
+			$this->addPanel(new GUI_Panel_Text('counter', 'Heute können noch '.(self::MAX_INVITATIONS_PER_DAY - Rakuun_User_Manager::getCurrentUser()->alliance->invitations).' Einladungen verschickt werden.'));
 		}
 		
 		$this->setTemplate(dirname(__FILE__).'/invite.tpl');

@@ -90,12 +90,14 @@ class Rakuun_Module extends Module {
 			Rakuun_DB_Containers::getDatabasesStartpositionsContainer()->save($record);
 		}
 		
-		// TODO remove this standard data (only used for testing purposes)
-		$testUser = Rakuun_DB_Containers::getUserContainer()->selectByPK(1);
-		Rakuun_GameSecurity::get()->addToGroup($testUser, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_TEAM));
-		Rakuun_GameSecurity::get()->addToGroup($testUser, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_SPONSORS));
-		Rakuun_TeamSecurity::get()->addToGroup($testUser, Rakuun_TeamSecurity::get()->getGroup(Rakuun_TeamSecurity::GROUP_ADMINS));
-		Rakuun_TeamSecurity::get()->addToGroup($testUser, Rakuun_TeamSecurity::get()->getGroup(Rakuun_TeamSecurity::GROUP_USERMANAGERS));
+		if (Environment::getCurrentEnvironment() == Environment::DEVELOPMENT) {
+			// promote test user to admin
+			$testUser = Rakuun_DB_Containers::getUserContainer()->selectByPK(1);
+			Rakuun_GameSecurity::get()->addToGroup($testUser, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_TEAM));
+			Rakuun_GameSecurity::get()->addToGroup($testUser, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_SPONSORS));
+			Rakuun_TeamSecurity::get()->addToGroup($testUser, Rakuun_TeamSecurity::get()->getGroup(Rakuun_TeamSecurity::GROUP_ADMINS));
+			Rakuun_TeamSecurity::get()->addToGroup($testUser, Rakuun_TeamSecurity::get()->getGroup(Rakuun_TeamSecurity::GROUP_USERMANAGERS));
+		}
 		
 		// Remove upload directory and its content
 		IO_Utils::deleteFolder(GUI_Control_FileUpload::getUploadDirectory());

@@ -41,8 +41,22 @@
 
 .core_gui_table_sortable th.header, .core_gui_table_sortable th.headerSortUp, .core_gui_table_sortable th.headerSortDown
 {
-	background:transparent url('../images/sort.gif') no-repeat left top;
-	padding-left:20px;
+	padding-left:15px;
+}
+
+.core_gui_table_sortable th.header
+{
+	background:transparent url('../images/sort.gif') no-repeat 1px 1px;
+}
+
+.core_gui_table_sortable th.headerSortUp
+{
+	background:transparent url('../images/sort_up.gif') no-repeat 1px 1px;
+}
+
+.core_gui_table_sortable th.headerSortDown
+{
+	background:transparent url('../images/sort_down.gif') no-repeat 1px 1px;
 }
 
 .user_online

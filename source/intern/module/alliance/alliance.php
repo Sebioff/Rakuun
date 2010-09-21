@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_Alliance extends Rakuun_Intern_Module_Alliance_Navigation {
+class Rakuun_Intern_Module_Alliance extends Rakuun_Intern_Module {
 	const FOUNDINGCOSTS_IRON = 100;
 	const FOUNDINGCOSTS_BERYLLIUM = 100;
 	
@@ -16,14 +16,10 @@ class Rakuun_Intern_Module_Alliance extends Rakuun_Intern_Module_Alliance_Naviga
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Applications('applications'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Edit('edit'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Diplomacy('diplomacy'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Members('members'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Ranks('ranks'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Kick('kick'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Statistics('statistics'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Polls('polls'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Mail('mail'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Account('account'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Invite('invite'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Build('build'));
 		}
 	}

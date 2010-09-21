@@ -20,10 +20,6 @@ Leiter: <?= implode(', ', $leaderNames); ?>
 <br class="clear" />
 <? $this->displayPanel('leave'); ?>
 <br class="clear" />
-<? if ($this->hasPanel('delete')): ?>
-	<? $this->displayPanel('delete'); ?>
-	<br class="clear" />
-<? endif; ?>
 <? if ($this->hasPanel('activity')): ?>
 	<? $this->displayPanel('activity'); ?>
 	<br class="clear" />

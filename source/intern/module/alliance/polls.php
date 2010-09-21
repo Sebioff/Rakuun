@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_Alliance_Polls extends Rakuun_Intern_Module_Alliance_Navigation implements Scriptlet_Privileged {
+class Rakuun_Intern_Module_Alliance_Polls extends Rakuun_Intern_Module implements Scriptlet_Privileged {
 	public function init() {
 		parent::init();
 

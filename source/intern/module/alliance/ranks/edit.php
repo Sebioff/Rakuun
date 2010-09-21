@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_Alliance_Ranks_Edit extends Rakuun_Intern_Module_Alliance_Navigation {
+class Rakuun_Intern_Module_Alliance_Ranks_Edit extends Rakuun_Intern_Module {
 	public function __construct($name) {
 		parent::__construct($name);
 	}
