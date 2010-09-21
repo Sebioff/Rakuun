@@ -8,6 +8,8 @@
 	<br class="clear" />
 	<? $this->displayLabelForPanel('cityname') ?> <? $this->displayPanel('cityname') ?>
 	<br class="clear" />
+	<? $this->displayLabelForPanel('adminnews') ?> <? $this->displayPanel('adminnews') ?>
+	<br class="clear" />
 	<? if ($this->hasPanel('description')): ?> 
 		<? $this->displayLabelForPanel('description') ?> <? $this->displayPanel('description') ?>
 		<br class="clear" />

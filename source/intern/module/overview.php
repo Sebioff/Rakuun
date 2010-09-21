@@ -7,6 +7,8 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$this->setPageTitle('Übersicht');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/overview.tpl');
 		
+		$user = Rakuun_User_Manager::getCurrentUser();
+		
 		if (!Rakuun_User_Manager::isSitting()) {
 			$options = array();
 			$options['conditions'][] = array('user = ?', Rakuun_User_Manager::getCurrentUser());
@@ -122,7 +124,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			);
 		}
 		
-		if (Rakuun_User_Manager::getCurrentUser()->sitter)
+		if ($user->sitter)
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('sitterbox', new Rakuun_Intern_GUI_Panel_User_Sitterbox('sitterbox')));
 		
 		if (!Rakuun_User_Manager::isSitting() && $sitting = Rakuun_DB_Containers::getUserContainer()->selectBySitterFirst(Rakuun_User_Manager::getCurrentUser())) {
@@ -140,6 +142,10 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		// TODO kinda stupid...
 		if (!$specialsPanel->gotSpecials())
 			$this->contentPanel->removePanel($this->contentPanel->specials);
+		
+		//Adminnews
+		if ($user->adminnews)
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('adminnews', new Rakuun_Intern_GUI_Panel_User_Adminnews('adminnews'), 'Nachricht von den Admins'));
 	}
 }
 

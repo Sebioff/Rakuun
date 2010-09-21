@@ -34,6 +34,11 @@
 
 <br class="clear" />
 
+<? if ($this->hasPanel('adminnews')): ?>
+	<? $this->displayPanel('adminnews') ?>
+	<br />
+<? endif; ?>
+
 <? if ($this->hasPanel('dancertia_countdown')): ?>
 	<? $this->displayPanel('dancertia_countdown') ?>
 	<br />

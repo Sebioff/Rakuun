@@ -24,6 +24,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Edit extends GUI_Panel {
 		$this->addPanel($cityname = new GUI_Control_TextBox('cityname', $this->user->cityName, 'Stadtname'));
 		$cityname->addValidator(new GUI_Validator_Mandatory());
 		$cityname->addValidator(new GUI_Validator_MaxLength(20));
+		$this->addPanel($adminnews = new GUI_Control_Textarea('adminnews', $this->user->adminnews, 'Adminnews'));
 		
 		// FIXME create a privilege for this
 		if (Rakuun_GameSecurity::get()->isInGroup($this->user, Rakuun_GameSecurity::GROUP_SPONSORS)) {
@@ -57,6 +58,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Edit extends GUI_Panel {
 			$mail->send();
 		}
 		$this->user->cityName = $this->cityname;
+		$this->user->adminnews = $this->adminnews;
 		if ($this->hasPanel('description'))
 			$this->user->description = $this->description;
 		$this->user->mail = $this->mail;

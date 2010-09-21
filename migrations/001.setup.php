@@ -93,6 +93,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `users` (
   `is_yimtay` tinyint(1) unsigned NOT NULL DEFAULT \'0\',
   `production_paused` int(10) unsigned NOT NULL DEFAULT \'0\',
   `shoutbox_timeban` int(10) unsigned NOT NULL,
+  `adminnews` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `alliance` (`alliance`),
   KEY `sitter` (`sitter`)
