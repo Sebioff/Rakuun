@@ -16,7 +16,13 @@
 	<br class="clear" />
 	Stadtname: <?= Text::escapeHTML($user->cityName); ?>
 	<br class="clear" />
+	ICQ: <?= $user->icq; ?>
+	<br class="clear" />
 	Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
+	<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
+	<br class="clear" />
+	Multipunkte: <?= GUI_Panel_Number::formatNumber((int)$user->multiPoints); ?>
+	<? endif;?>
 	<? if ($user->alliance): ?>
 		<br class="clear" />
 		Allianz:

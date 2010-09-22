@@ -31,6 +31,9 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 		$cityname->addValidator(new GUI_Validator_Mandatory());
 		$cityname->addValidator(new GUI_Validator_MaxLength(20));
 		
+		$this->contentPanel->addPanel($icq = new GUI_Control_DigitBox('icq', $user->icq, 'ICQ'));
+		$cityname->addValidator(new GUI_Validator_MaxLength(9));
+		
 		if (Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_SPONSORS)) {
 			$this->contentPanel->addPanel($description = new GUI_Control_Textarea('description', $user->description, 'Beschreibung'));
 			$description->addValidator(new GUI_Validator_HTML());
@@ -76,6 +79,7 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 		if ($this->contentPanel->hasPanel('namecolored'))
 			$user->nameColored = $this->contentPanel->namecolored;
 		$user->cityName = trim($this->contentPanel->cityname);
+		$user->icq = $this->contentPanel->icq;
 		
 		if ($this->contentPanel->hasPanel('description'))
 			$user->description = $this->contentPanel->description;

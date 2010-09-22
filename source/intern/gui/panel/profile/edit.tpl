@@ -6,6 +6,8 @@
 	<br class="clear" />
 <? endif; ?>
 <? $this->displayLabelForPanel('cityname'); ?> <? $this->displayPanel('cityname'); ?>
+<br class="clear" />
+<? $this->displayLabelForPanel('icq'); ?> <? $this->displayPanel('icq'); ?>
 <? if ($this->hasPanel('description')): ?>
 	<br class="clear" />
 	<? $this->displayLabelForPanel('description'); ?> <? $this->displayPanel('description'); ?>

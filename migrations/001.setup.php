@@ -66,6 +66,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `users` (
   `activation_time` int(10) unsigned NOT NULL,
   `mail` varchar(50) NOT NULL,
   `city_name` varchar(20) NOT NULL,
+  `icq` int(9) NOT NULL,
   `points` mediumint(9) unsigned NOT NULL,
   `multi_points` mediumint(9) unsigned NOT NULL,
   `ip` varchar(20) NOT NULL,

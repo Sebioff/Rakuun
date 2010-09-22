@@ -1,3 +1,4 @@
+<? $this->displayPanel('multiscore'); ?>
 <? $this->displayPanel('activity'); ?>
-<? $this->displayPanel('ressource'); ?>
 <? $this->displayPanel('userdata'); ?>
+<? $this->displayPanel('ressource'); ?>
