@@ -11,7 +11,6 @@ class Rakuun_Index_Panel_Endscore_ProducedUnits extends GUI_Panel_Plot_Lines {
 		$graph = $this->getGraph();
 		$graph->legend->SetLayout(LEGEND_VERT);
 		$graph->legend->Pos(0.78, 0.12, 'left', 'top');
-		$graph->legend->SetFont(FF_ARIAL);
 		$graph->SetMargin(60, 180, 35, 65);
 		
 		$properties = array();
@@ -36,6 +35,7 @@ class Rakuun_Index_Panel_Endscore_ProducedUnits extends GUI_Panel_Plot_Lines {
 		}
 		
 		$this->setXNames($markers);
+		$this->setXTickInterval(10);
 	}
 }
 

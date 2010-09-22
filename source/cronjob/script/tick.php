@@ -47,12 +47,13 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 	}
 	
 	private function onDancertiaStarted(Rakuun_DB_Meta $meta) {
-		foreach (Rakuun_DB_Containers::getUserContainer()->select() as $user) {
-			// send IGM
-			$igm = new Rakuun_Intern_IGM('Ende der Runde', $user);
-			$igm->setText('Glückwunsch an die Meta '.$meta->name.' zum Sieg der Runde!');
-			$igm->send();
-		}
+//		foreach (Rakuun_DB_Containers::getUserContainer()->select() as $user) {
+//			// send IGM
+//			$igm = new Rakuun_Intern_IGM('Ende der Runde', $user);
+//			$igm->setSender(Rakuun_Intern_IGM::SENDER_SYSTEM);
+//			$igm->setText('Glückwunsch an die Meta '.$meta->name.' zum Sieg der Runde!');
+//			$igm->send();
+//		}
 		
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->beginTransaction();
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getAlliancesContainer(), Rakuun_DB_Containers_Persistent::getAlliancesContainer());
@@ -115,7 +116,14 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 				$user->points += $technology->getPoints() * $technology->getLevel();
 			}
 			
-			$units = Rakuun_DB_Containers_Persistent::getUnitsContainer()->selectByUserFirst($user);
+			$options = array();
+			$properties = array();
+			foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
+				$properties[] = 'SUM('.$unit->getInternalName().') AS '.$unit->getInternalName();
+			}
+			$options['properties'] = implode(', ', $properties);
+			$options['conditions'][] = array('user = ?', $user);
+			$units = Rakuun_DB_Containers_Persistent::getLogUnitsProductionContainer()->selectFirst($options);
 			foreach (Rakuun_Intern_Production_Factory::getAllUnits($units) as $unit) {
 				$user->points += $unit->getPoints() * $unit->getAmount();
 			}

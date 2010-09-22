@@ -53,6 +53,7 @@ abstract class Rakuun_DB_Containers_Persistent {
 			return self::$buildingsContainer;
 			
 		self::$buildingsContainer = new DB_Container('buildings', 'Rakuun_DB_Buildings');
+		self::$buildingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		self::$buildingsContainer->setConnection(self::getPersistentConnection());
 		
 		return self::$buildingsContainer;
@@ -66,6 +67,7 @@ abstract class Rakuun_DB_Containers_Persistent {
 			return self::$technologiesContainer;
 			
 		self::$technologiesContainer = new DB_Container('technologies', 'Rakuun_DB_Technologies');
+		self::$technologiesContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		self::$technologiesContainer->setConnection(self::getPersistentConnection());
 		
 		return self::$technologiesContainer;

@@ -8,6 +8,7 @@ class Rakuun_Index_Panel_Endscore_BiggestRaids extends GUI_Panel {
 		$options['properties'] = 'user, sender, time, iron, beryllium, energy';
 		$options['order'] = 'iron + beryllium + energy DESC';
 		$options['limit'] = '20';
+		$options['conditions'][] = array('action = ?', Rakuun_Intern_Log::ACTION_RESSOURCES_FIGHT);
 		$this->params->raids = Rakuun_DB_Containers_Persistent::getLogUserRessourcetransferContainer()->select($options);
 	}
 }
