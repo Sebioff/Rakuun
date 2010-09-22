@@ -21,12 +21,18 @@
 	$12 -  Info
 	$13 -  Profile
 	$14 -  Highscores
+	$15 -  Alliances
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
 body.skin_tech
 {
 	background:#000000 url('../images/background.png') repeat-x left top;
+	color:#FFFFFF;
+}
+
+.skin_tech a
+{
 	color:#FFFFFF;
 }
 
@@ -179,6 +185,10 @@ body.skin_tech
 	background:transparent url('../images/collapse_tech.gif') no-repeat 3px 1px;
 	cursor:pointer;
 	padding-left:19px;
+}
+
+.skin_tech .collapsed .head_inner {
+	background:transparent url('../images/collapse_collapsed_tech.gif') no-repeat 3px 1px;
 }
 
 .skin_tech .rakuun_box .body {
@@ -567,4 +577,26 @@ body.skin_tech
 	float:none;
 	margin:0px auto;
 	width:550px;
+}
+
+/* $15 -  Alliances ----------------------------------------------------------*/
+.skin_tech .module_applications .rakuun_box_applications {
+	margin-left:2px;
+	margin-right:2px;
+	width:350px;
+}
+
+.skin_tech .module_applications .rakuun_box_applicationshistory {
+	margin-left:2px;
+	margin-right:2px;
+	width:590px;
+}
+
+.skin_tech .module_diplomacy .right_col {
+	float:left;
+	width:400px;
+}
+
+.skin_tech .module_diplomacy .right_col .rakuun_box {
+	float:none;
 }

@@ -1,5 +1,5 @@
 <? $this->displayPanel('newoffer'); ?>
-<br class="clear" />
-<? $this->displayPanel('offers'); ?>
-<br class="clear" />
-<? $this->displayPanel('actives'); ?>
+<div class="right_col">
+	<? $this->displayPanel('offers'); ?>
+	<? $this->displayPanel('actives'); ?>
+</div>

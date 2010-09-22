@@ -66,12 +66,14 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$productionNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('techtree'), 'Techtree', array('rakuun_navigation_node_techtree'));
 		
 		$ressourcesNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('ressources'), 'Rohstoffe', array('rakuun_navigation_node_ressources'));
+		$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('ressources'), 'Übersicht');
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('trade'))
 			$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('trade'), 'Handeln', array('rakuun_navigation_node_trade'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('stockmarket'))
 			$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('stockmarket'), 'Börse', array('rakuun_navigation_node_stockmarket'));
 		
 		$militaryNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('map'), 'Militär', array('rakuun_navigation_node_map'));
+		$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('map'), 'Karte');
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('warsim'))
 			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('warsim'), 'WarSim', array('rakuun_navigation_node_warsim'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('summary'))
@@ -101,13 +103,27 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Allianz-Gebäude');
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('meta')) {
-			$metaNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
+			$metaNode = $navigation->addModuleNode($metaModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
+			$metaNode->addModuleNode($metaModule, 'Übersicht');
+			if ($metaModule->hasSubmodule('edit'))
+				$metaNode->addModuleNode($metaModule->getSubmodule('edit'), 'Verwaltung');
+			if ($metaModule->hasSubmodule('applications')) {
+				$count = Rakuun_DB_Containers::getMetasApplicationsContainer()->countByMeta(Rakuun_User_Manager::getCurrentUser()->alliance->meta);
+				$metaNode->addModuleNode($metaModule->getSubmodule('applications'), 'Bewerbungen ('.$count.')');
+			}
+			if ($metaModule->hasSubmodule('statistics'))
+				$metaNode->addModuleNode($metaModule->getSubmodule('statistics'), 'Statistiken');
+			if ($metaModule->hasSubmodule('polls'))
+				$metaNode->addModuleNode($metaModule->getSubmodule('polls'), 'Umfragen');
+			if ($metaModule->hasSubmodule('build'))
+				$metaNode->addModuleNode($metaModule->getSubmodule('build'), 'Meta-Gebäude');
 		}
 			
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('messages'))
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('messages'), 'Nachrichten', array('rakuun_navigation_node_messages'));
 		
 		$infoNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Infos', array('rakuun_navigation_node_search'));
+		$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Suche');
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('highscores'))
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('highscores'), 'Highscores', array('rakuun_navigation_node_highscores'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('boards'))

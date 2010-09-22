@@ -1,2 +1,2 @@
-<? $this->displayPanel('ranks') ?>
-<? $this->displayPanel('new_rank') ?>
+<? $this->displayPanel('ranks'); ?>
+<? $this->displayPanel('new_rank'); ?>

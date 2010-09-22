@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_Meta_Applications extends Rakuun_Intern_Module_Meta_Navigation {
+class Rakuun_Intern_Module_Meta_Applications extends Rakuun_Intern_Module_Meta_Common {
 	public function init() {
 		parent::init();
 

@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_Meta_Build extends Rakuun_Intern_Module_Meta_Navigation implements Scriptlet_Privileged {
+class Rakuun_Intern_Module_Meta_Build extends Rakuun_Intern_Module_Meta_Common {
 	public function init() {
 		parent::init();
 		
@@ -15,11 +15,6 @@ class Rakuun_Intern_Module_Meta_Build extends Rakuun_Intern_Module_Meta_Navigati
 			$this->contentPanel->addPanel($itemBox = new Rakuun_GUI_Panel_Box('build_'.$building->getInternalName(), new Rakuun_Intern_GUI_Panel_Production_Meta('build_'.$building->getInternalName(), $building)));
 			$itemBox->addClasses('production_item_box');
 		}
-	}
-	
-	// OVERRIDES / IMPLEMENTS --------------------------------------------------
-	public function checkPrivileges() {
-		return (isset($this->getUser()->alliance->meta));
 	}
 }
 

@@ -7,8 +7,10 @@ class Rakuun_Intern_Module_Alliance_Applications extends Rakuun_Intern_Module im
 		$this->setPageTitle('Bewerbungen - ['.$this->getUser()->alliance->tag.'] '.$this->getUser()->alliance->name);
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/applications.tpl');
 		
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('applications', new Rakuun_Intern_GUI_Panel_Alliance_Applications('applications'), 'Bewerbungen'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('history', new Rakuun_Intern_GUI_Panel_Alliance_Applications_History('history'), 'Bewerbungs-Historie'));
+		$this->contentPanel->addPanel($applicationsBox = new Rakuun_GUI_Panel_Box('applications', new Rakuun_Intern_GUI_Panel_Alliance_Applications('applications'), 'Bewerbungen'));
+		$applicationsBox->addClasses('rakuun_box_applications');
+		$this->contentPanel->addPanel($historyBox = new Rakuun_GUI_Panel_Box('history', new Rakuun_Intern_GUI_Panel_Alliance_Applications_History('history'), 'Bewerbungs-Historie'));
+		$historyBox->addClasses('rakuun_box_applicationshistory');
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

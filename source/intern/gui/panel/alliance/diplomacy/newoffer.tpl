@@ -6,7 +6,7 @@
 <br class="clear" />
 <? $this->displayLabelForPanel('type'); ?> <? $this->displayPanel('type'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('notice'); ?> <? $this->displayPanel('notice'); ?>
+<? $this->displayLabelForPanel('notice'); ?> <? $this->displayPanel('notice'); ?>&nbsp;Stunden
 <br class="clear" />
 <? $this->displayLabelForPanel('text'); ?> <? $this->displayPanel('text'); ?>
 <br class="clear" />

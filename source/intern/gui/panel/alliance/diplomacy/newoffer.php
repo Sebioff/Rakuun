@@ -15,7 +15,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Diplomacy_NewOffer extends Rakuun_Intern_
 		}
 		$this->addPanel(new GUI_Control_DropDownBox('alliances', $_alliances, null, 'Empfänger'));
 		$this->addPanel(new GUI_Control_DropDownBox('type', array(self::RELATION_AUVB => 'Angriffs- und Verteidigungsbündnis anbieten', self::RELATION_NAP => 'Nicht-Angriffs-Pakt anbieten', self::RELATION_WAR => 'Krieg erklären'), null, 'Typ'));
-		$this->addPanel($notice = new GUI_Control_DigitBox('notice', 24, 'Kündigungsfrist (in Stunden)'));
+		$this->addPanel($notice = new GUI_Control_DigitBox('notice', 24, 'Kündigungsfrist'));
 		$notice->setAttribute('maxlength', 2);
 		$notice->addValidator(new GUI_Validator_Mandatory());
 		$notice->addValidator(new GUI_Validator_MaxLength(2));

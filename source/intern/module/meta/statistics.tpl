@@ -1,4 +1,3 @@
-<? $this->params->navigation->display(); ?>
 <? foreach ($this->params->panels as $panel): ?>
 	<? $panel['alliancelink']->display(); ?>
 	<br />

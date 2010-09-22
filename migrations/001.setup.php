@@ -632,7 +632,8 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
   `cloaked_spydrone` mediumint(9) NOT NULL,
   `lorica` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user` (`user`)
+  KEY `user` (`user`),
+  INDEX ( `fight_id` )
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_spies` (
