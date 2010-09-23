@@ -1,5 +1,5 @@
 <div id="<?= $this->getID(); ?>" <?= $this->getAttributeString(); ?>>
-	Seite: <? $this->displayPanel('pages'); ?>
+	<div class="pageview_pages">Seite: <? $this->displayPanel('pages'); ?></div>
 	<br class="clear"/>
 
 	<? foreach ($this->params->news as $newsEntry): ?>
@@ -7,5 +7,5 @@
 		<br class="clear"/>
 	<? endforeach; ?>
 	
-	Seite: <? $this->displayPanel('pages'); ?>
+	<div class="pageview_pages">Seite: <? $this->displayPanel('pages'); ?></div>
 </div>

@@ -9,19 +9,29 @@
 
 /* $1  -  Index --------------------------------------------------------------*/
 body {
-	background:#000000 url('../images/background_index.jpg') no-repeat center bottom;
-	background-attachment:fixed;
+	background-color:#000000;
 	color:#888888;
+}
+
+a {
+	color:#888888
+}
+
+img.background_image {
+	bottom:0px;
+	float:left;
+	position:fixed;
+	z-index:-1;
 }
 
 #ctn_index
 {
 	margin:0px auto;
-	width:1020px;
+	width:1010px;
 }
 
 #ctn_navigation ul {
-	margin:10px;
+	margin:10px 10px 10px 125px;
 }
 
 #ctn_navigation ul li {
@@ -38,7 +48,12 @@ body {
 	border:1px solid #163250;
 	margin-bottom:5px;
 	padding:3px;
+	width:429px;
+}
+
+body.index_main .rakuun_box {
 	width:268px;
+	margin-right:161px;
 }
 
 .rakuun_box .body {
@@ -81,6 +96,11 @@ input {
 
 /* $4  -  News ---------------------------------------------------------------*/
 .rakuun_box_news
+{
+	float:right;
+}
+
+.pageview_pages
 {
 	float:right;
 }

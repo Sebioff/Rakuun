@@ -3,6 +3,7 @@
 		<? $this->params->navigation->display() ?>
 	</div>
 	<div id="ctn_content">
-		<? $this->displayPage() ?>
+		<? $this->displayPage(); ?>
+		<img class="background_image" alt="Rakuun" src="<?= Router::get()->getStaticRoute('images', 'background_index.jpg'); ?>"/>
 	</div>
 </div>
