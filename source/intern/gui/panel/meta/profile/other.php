@@ -8,11 +8,12 @@ class Rakuun_Intern_GUI_Panel_Meta_Profile_Other extends GUI_Panel {
 		$this->getModule()->setPageTitle('Meta - '.$meta->name);
 		$this->setTemplate(dirname(__FILE__).'/other.tpl');
 		
-		$this->addPanel(new Rakuun_GUI_Panel_Box('description', $text = new GUI_Panel_Text('description', $meta->description ? $meta->description : 'Keine Beschreibung'), 'Öffentliche Metabeschreibung'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('description', new GUI_Panel_Text('description', $meta->description ? Text::format($meta->description) : 'Keine Beschreibung'), 'Öffentliche Metabeschreibung'));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('memberbox', new Rakuun_Intern_GUI_Panel_Meta_Member('member', $meta), 'Mitglieder'));
 		if ($meta->picture)
-			$this->addPanel(new Rakuun_GUI_Panel_Box('picture', new GUI_Panel_UploadedFile('metapicture', $meta->picture, 'Metabild der meta '.$meta->name), 'Metabild'));
-			
+			$this->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_UploadedFile('metapicture', $meta->picture, 'Metabild der meta '.$meta->name), 'Metabild'));
+		else
+			$this->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_Text('dummy', 'Kein Bild'), 'Metabild'));
 		$user = Rakuun_User_Manager::getCurrentUser();
 		if (!$user->alliance)
 			return;

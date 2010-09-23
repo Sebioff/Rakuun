@@ -1,19 +1,10 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-<? if ($this->hasPanel('image')): ?>
-	<? $this->displayPanel('image'); ?>
+<? if ($this->hasPanel('picture')): ?>
+	<? $this->displayPanel('picture'); ?>
 <? endif; ?>
-Allianz "<?= $this->params->alliance->name; ?>"
-<br/>
-<? $leaderNames = array(); ?>
-<? foreach (Rakuun_Intern_Alliance_Security::getForAlliance($this->params->alliance)->getGroupUsers(Rakuun_Intern_Alliance_Security::GROUP_LEADERS) as $leader): ?>
-	<? $leaderNames[] = $leader->name; ?>
-<? endforeach; ?>
-Leiter: <?= implode(', ', $leaderNames); ?>
-
-<h2>Allianzbeschreibung:</h2>
-<?= $this->params->alliance->description; ?>
+<? $this->displayPanel('externbox'); ?>
 <? $this->displayPanel('memberbox'); ?>
 <br class="clear" />
 <? $this->displayPanel('databases'); ?>

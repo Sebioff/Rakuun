@@ -15,15 +15,15 @@ class Rakuun_Intern_GUI_Panel_Alliance_Profile_Other extends GUI_Panel {
 		if (!$alliance) {
 			return;
 		}
-		$this->params->alliance = $alliance;
 		
 		$this->getModule()->setPageTitle('Allianz - ['.$alliance->tag.'] '.$alliance->name);
 		$this->setTemplate(dirname(__FILE__).'/other.tpl');
 		
+		$this->addPanel(new Rakuun_GUI_Panel_Box('externbox', new GUI_Panel_Text('extern', Text::format($alliance->description)), '['.$alliance->tag.'] '.$alliance->name));
 		if ($alliance->picture)
-			$this->addPanel(new Rakuun_GUI_Panel_Box('image', new GUI_Panel_UploadedFile('allianceimage', $alliance->picture, 'Allianzbild der Allianz '.$alliance->name), 'Allianzbild'));
+			$this->addPanel(new Rakuun_GUI_Panel_Box('picture', new GUI_Panel_UploadedFile('allianceimage', $alliance->picture, 'Allianzbild der Allianz '.$alliance->name), 'Allianzbild'));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('memberbox', new Rakuun_Intern_GUI_Panel_Alliance_Members('members', $alliance), 'Mitglieder'));
-		$this->addPanel(new Rakuun_GUI_Panel_Box('databases', new Rakuun_Intern_GUI_Panel_Alliance_Databases('databases', $alliance), 'Datenbankteile der Meta'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('databases', new Rakuun_Intern_GUI_Panel_Alliance_Databases('databases', $alliance), 'Datenbankteile der Allianz'));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('diplomacy', new Rakuun_Intern_GUI_Panel_Alliance_Diplomacy_Overview('diplomacy_extern'), 'Diplomatische Beziehungen'));
 		if (!Rakuun_User_Manager::getCurrentUser()->alliance)
 			$this->addPanel(new Rakuun_GUI_Panel_Box('application', new Rakuun_Intern_GUI_Panel_Alliance_Applications_Application('application'), 'Bei Allianz bewerben'));

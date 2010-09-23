@@ -2,10 +2,9 @@
 	<? $this->displayErrors(); ?>
 <? endif; ?>
 
-<? if ($this->hasPanel('picture')): ?>
-	<? $this->displayPanel('picture'); ?>
-<? endif; ?>
+<? $this->displayPanel('picturebox'); ?>
 <? $this->displayPanel('description'); ?>
+<br class="clear" />
 <? $this->displayPanel('memberbox'); ?>
 <? if ($this->hasPanel('application')): ?>
 	<br class="clear" />
