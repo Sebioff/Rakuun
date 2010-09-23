@@ -20,7 +20,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Ranks_View extends GUI_Panel {
 			)
 				continue;
 			
-			$url = App::get()->getInternModule()->getSubmodule('alliance')->getSubmodule('ranks')->getURL(array('rank' => $group->getPK()));
+			$url = Router::get()->getCurrentModule()->getUrl(array('rank' => $group->getPK()));
 			$this->addPanel(new GUI_Control_Link('group_'.$group->getPK(), Text::escapeHTML($group->name), $url));
 		}
 		

@@ -22,11 +22,19 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 		
 		// modules that aren't accessible by sitter
 		if (!Rakuun_User_Manager::isSitting()) {
-			if ($user && $user->buildings->moleculartransmitter > 0)
-				$this->addSubmodule(new Rakuun_Intern_Module_Trade('trade'));
+			if ($user) {
+				if ($user->buildings->moleculartransmitter > 0)
+					$this->addSubmodule(new Rakuun_Intern_Module_Trade('trade'));
+
+				if ($user->alliance != null) {
+					$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Profile_Own('alliance'));
+					$this->addSubmodule(new Rakuun_Intern_Module_Meta('meta'));
+				} else {
+					$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Profile_None('alliance'));
+				}
+			}
+				
 			$this->addSubmodule(new Rakuun_Intern_Module_FightDetails('fightdetails'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Alliance('alliance'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Meta('meta'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Map('map'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Messages('messages'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Profile('profile'));

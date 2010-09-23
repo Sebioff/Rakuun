@@ -81,6 +81,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		
 		$allianceNode = $navigation->addModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
 		$allianceNode->addModuleNode($allianceModule, 'Übersicht');
+		$allianceNode->addModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen');
 		if ($allianceModule->hasSubmodule('edit'))
 			$allianceNode->addModuleNode($allianceModule->getSubmodule('edit'), 'Verwaltung');
 		if ($allianceModule->hasSubmodule('ranks'))
@@ -100,11 +101,13 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		if ($allianceModule->hasSubmodule('account'))
 			$allianceNode->addModuleNode($allianceModule->getSubmodule('account'), 'Allianzkonto');
 		if ($allianceModule->hasSubmodule('build'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Allianz-Gebäude');
+			$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Gebäude');
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('meta')) {
 			$metaNode = $navigation->addModuleNode($metaModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
 			$metaNode->addModuleNode($metaModule, 'Übersicht');
+			if ($metaModule->hasSubmodule('interaction'))
+				$metaNode->addModuleNode($metaModule->getSubmodule('interaction'), 'Aktionen');
 			if ($metaModule->hasSubmodule('edit'))
 				$metaNode->addModuleNode($metaModule->getSubmodule('edit'), 'Verwaltung');
 			if ($metaModule->hasSubmodule('applications')) {
@@ -116,7 +119,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			if ($metaModule->hasSubmodule('polls'))
 				$metaNode->addModuleNode($metaModule->getSubmodule('polls'), 'Umfragen');
 			if ($metaModule->hasSubmodule('build'))
-				$metaNode->addModuleNode($metaModule->getSubmodule('build'), 'Meta-Gebäude');
+				$metaNode->addModuleNode($metaModule->getSubmodule('build'), 'Gebäude');
 		}
 			
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('messages'))

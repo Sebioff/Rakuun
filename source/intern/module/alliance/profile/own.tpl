@@ -1,3 +1,6 @@
+<? if ($this->hasErrors()): ?>
+	<? $this->displayErrors(); ?>
+<? endif; ?>
 <? $this->displayPanel('picturebox'); ?>
 <? $this->displayPanel('internbox'); ?>
 <br class="clear" />
