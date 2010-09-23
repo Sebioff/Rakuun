@@ -14,7 +14,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		// not logged in? redirect to login page
 		if (!$this->getUser()) {
 			$params = array('return' => base64_encode($this->getUrl($this->getParams())));
-			Scriptlet::redirect(App::get()->getLoginModule()->getUrl($params));
+			Scriptlet::redirect(App::get()->getIndexModule()->getUrl($params));
 		}
 		
 		// has been inactive? end session
@@ -23,7 +23,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		) {
 			$params = array('return' => base64_encode($this->getUrl($this->getParams())));
 			$params['logout-reason'] = 'noactivity';
-			Scriptlet::redirect(App::get()->getLoginModule()->getUrl($params));
+			Scriptlet::redirect(App::get()->getIndexModule()->getUrl($params));
 		}
 		
 		// need to re-verify you are no bot? redirect to bot protection page

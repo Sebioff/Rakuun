@@ -2,8 +2,9 @@
 
 $app = App::get();
 $app->addModule(new Rakuun_Index_Module_Index('index'));
-$app->addModule(new Rakuun_Index_Module_Register('register'));
-$app->addModule(new Rakuun_Index_Module_Login('login'));
+$app->addModule(new Rakuun_Index_Module_News('news'));
+$app->addModule(new Rakuun_Index_Module_Story('story'));
+$app->addModule(new Rakuun_Index_Module_Screenshots('screenshots'));
 $app->addModule(new Rakuun_Index_Module_Activation('activation'));
 $app->addModule(new Rakuun_Index_Module_Master('master'));
 $app->addModule(new Rakuun_Index_Module_Endscore('endscore'));

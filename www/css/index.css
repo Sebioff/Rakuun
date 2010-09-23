@@ -8,6 +8,12 @@
 */
 
 /* $1  -  Index --------------------------------------------------------------*/
+body {
+	background:#000000 url('../images/background_index.jpg') no-repeat center bottom;
+	background-attachment:fixed;
+	color:#888888;
+}
+
 #ctn_index
 {
 	margin:0px auto;
@@ -27,14 +33,56 @@
 	text-decoration:underline;
 }
 
+.rakuun_box {
+	background:#000000;
+	border:1px solid #163250;
+	margin-bottom:5px;
+	padding:3px;
+	width:268px;
+}
+
+.rakuun_box .body {
+	background:#07101A;
+	padding:3px;
+}
+
+.rakuun_box .head h2 {
+	color:#EEEEEE;
+	font-weight:bold;
+	margin-bottom:4px;
+}
+
+.rakuun_box_note .head h2 {
+	color:#FF0000;
+}
+
+#ctn_content {
+	width:1005px;
+	margin:0px auto;
+}
+
+#ctn_content .rakuun_box {
+	float:right;
+}
+
+.rakuun_box_register .core_gui_submitbutton {
+	color:#d1a362;
+}
+
+input {
+	background-color:#000000;
+	border:1px solid #163250;
+	color:#888888;
+}
+
 /* $2  -  Registration -------------------------------------------------------*/
 
 /* $3  -  Login --------------------------------------------------------------*/
 
 /* $4  -  News ---------------------------------------------------------------*/
-#ctn_content .rakuun_news_item
+.rakuun_box_news
 {
-	float:none;
+	float:right;
 }
 
 #ctn_content .rakuun_news_item label

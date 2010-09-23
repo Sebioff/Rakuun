@@ -1,7 +1,7 @@
 <div id="loginform">
-	<? if($this->hasErrors()): ?>
+	<? if ($this->hasErrors()): ?>
 		<? $this->displayErrors(); ?>
-	<? endif ?>
+	<? endif; ?>
 	<? $this->displayLabelForPanel('username'); ?> <? $this->displayPanel('username'); ?>
 	<br class="clear" />
 	<? $this->displayLabelForPanel('password'); ?> <? $this->displayPanel('password'); ?>

@@ -89,13 +89,13 @@ input.ac_loading {
 
 .core_common_error {
 	border:1px solid #FF0000;
-	padding:1px;
 }
 
 .core_common_error_js_wrapper {
 	float:left;
 	left:2px;
 	position:relative;
+	top:-1px;
 	z-index:1;
 }
 
@@ -103,6 +103,7 @@ input.ac_loading {
 	background:#000000;
 	color:#FFFFFF;
 	float:none;
+	padding:1px;
 	position:absolute;
 	white-space:nowrap;
 	width:auto;

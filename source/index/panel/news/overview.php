@@ -9,6 +9,7 @@ class Rakuun_Index_Panel_News_Overview extends GUI_Panel_PageView {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/overview.tpl');
+		$this->setItemsPerPage(5);
 		
 		$news = array();
 		$options = $this->getOptions();
