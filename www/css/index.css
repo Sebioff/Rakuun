@@ -27,7 +27,7 @@ img.background_image {
 #ctn_index
 {
 	margin:0px auto;
-	width:1010px;
+	width:995px;
 }
 
 #ctn_navigation ul {
@@ -48,12 +48,12 @@ img.background_image {
 	border:1px solid #163250;
 	margin-bottom:5px;
 	padding:3px;
-	width:429px;
+	width:419px;
 }
 
 body.index_main .rakuun_box {
 	width:268px;
-	margin-right:161px;
+	margin-right:151px;
 }
 
 .rakuun_box .body {
@@ -72,7 +72,7 @@ body.index_main .rakuun_box {
 }
 
 #ctn_content {
-	width:1005px;
+	width:995px;
 	margin:0px auto;
 }
 
