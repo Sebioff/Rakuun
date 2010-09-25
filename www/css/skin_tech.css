@@ -127,6 +127,7 @@ body.skin_tech
 .skin_tech #ctn_content
 {
 	background:transparent url('../images/background_content.gif') repeat-y left top;
+	min-height:450px;
 	padding:6px 10px;
 }
 

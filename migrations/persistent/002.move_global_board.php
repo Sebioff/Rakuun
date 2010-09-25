@@ -19,11 +19,9 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global_postings` (
   `deleted_by_name` varchar(25) NOT NULL,
   `deleted_by_round_number` tinyint(4) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `board` (`board`)
+  KEY `board` (`board`),
+  CONSTRAINT `boards_global_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_global` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-
-$queries[] = 'ALTER TABLE `boards_global_postings`
-  ADD CONSTRAINT `boards_global_postings_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_global` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global_visited` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -32,10 +30,8 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global_visited` (
   `round_number` varchar(15) NOT NULL,
   `date` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `board` (`board`)
+  KEY `board` (`board`),
+  CONSTRAINT `boards_global_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_global` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-
-$queries[] = 'ALTER TABLE `boards_global_visited`
-  ADD CONSTRAINT `boards_global_visited_ibfk_1` FOREIGN KEY (`board`) REFERENCES `boards_global` (`id`) ON DELETE CASCADE;';
 
 ?>
