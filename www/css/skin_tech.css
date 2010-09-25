@@ -422,6 +422,31 @@ body.skin_tech
 	color:#a15c5c;
 }
 
+.skin_tech .rakuun_box_outgoingarmies,
+.skin_tech .rakuun_box_incommingarmies {
+	width:412px;
+}
+
+.skin_tech .rakuun_box_outgoingarmies .core_gui_submitbutton_wrapper div {
+	background:none;
+}
+
+.skin_tech .rakuun_box_outgoingarmies .core_gui_submitbutton {
+	float:right;
+}
+
+.skin_tech .rakuun_tutor {
+	float:none;
+}
+
+.skin_tech #ctn_tutor_controls {
+	float:right;
+}
+
+.skin_tech #ctn_tutor_controls .core_gui_submitbutton {
+	margin-left:0px;
+}
+
 /* $7  -  Techtree -----------------------------------------------------------*/
 .skin_tech #ctn_techtree_rows .rakuun_box {
 	float:left;

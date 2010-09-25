@@ -9,49 +9,9 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
 		
-		if (!Rakuun_User_Manager::isSitting()) {
-			$options = array();
-			$options['conditions'][] = array('user = ?', Rakuun_User_Manager::getCurrentUser());
-			$options['conditions'][] = array('has_been_read = ?', 0);
-			if ($unreadMessages = Rakuun_DB_Containers::getMessagesContainer()->count($options)) {
-				$url = App::get()->getInternModule()->getSubmodule('messages')->getUrl(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_UNREAD));
-				$this->contentPanel->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_messages', 'Du hast '.$unreadMessages.' ungelesene Nachrichten.', $url));
-				if ($unreadMessages == 1)
-					$unreadMessagesLink->setCaption('Du hast 1 ungelesene Nachricht.');
-			}
-			
-			// notification of new support tickets for users
-			$options = array();
-			$options['conditions'][] = array('user = ?', Rakuun_User_Manager::getCurrentUser());
-			$options['conditions'][] = array('has_been_read = ?', 0);
-			if ($unreadTickets = Rakuun_DB_Containers::getSupportticketsContainer()->count($options)) {
-				$url = App::get()->getInternModule()->getSubmodule('messages')->getUrl(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS));
-				$this->contentPanel->addPanel($unreadTicketsLink = new GUI_Control_Link('unread_tickets_users', 'Du hast '.$unreadTickets.' ungelesene Supportnachrichten.', $url));
-				if ($unreadTickets == 1)
-					$unreadTicketsLink->setCaption('Du hast 1 ungelesene Supportnachricht.');
-			}
-			
-			// notification of new support tickets for supporters
-			if (Rakuun_TeamSecurity::get()->isInGroup(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::GROUP_SUPPORTERS)) {
-				$options = array();
-				$options['conditions'][] = array('is_answered = ?', 0);
-				if ($unreadTickets = Rakuun_DB_Containers::getSupportticketsContainer()->count($options)) {
-					$url = App::get()->getInternModule()->getSubmodule('support')->getUrl();
-					$this->contentPanel->addPanel($unreadTicketsLink = new GUI_Control_Link('unread_tickets_supporters', $unreadTickets.' unbeantwortete Supportnachrichten.', $url));
-					if ($unreadTickets == 1)
-						$unreadTicketsLink->setCaption('1 unbeantwortete Supportnachricht.');
-				}
-			}
-		}
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('news', new Rakuun_Intern_GUI_Panel_User_News('news'), 'Aktuelles'));
 		
-		// news panel
-		if (Rakuun_User_Manager::getCurrentUser()->news) {
-			$this->contentPanel->addPanel(new GUI_Panel_Text('news', Rakuun_User_Manager::getCurrentUser()->news, 'News'));
-			Rakuun_User_Manager::getCurrentUser()->news = '';
-			Rakuun_User_Manager::update(Rakuun_User_Manager::getCurrentUser());
-		}
-		
-		//Dancertia Countdown
+		// dancertia countdown
 		$options = array();
 		$options['conditions'][] = array('dancertia_starttime > 0');
 		$options['order'] = 'dancertia_starttime ASC';
@@ -64,6 +24,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			// panel for outgoing armies
 			if (Rakuun_DB_Containers::getArmiesContainer()->selectByUserFirst($this->getUser())) {
 				$outgoingArmiesPanel = new Rakuun_GUI_Panel_Box_Collapsible('outgoing_armies', new Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmies('outgoing_armies', 'Laufende Angriffe'), 'Laufende Angriffe');
+				$outgoingArmiesPanel->addClasses('rakuun_box_outgoingarmies');
 				$this->contentPanel->addPanel($outgoingArmiesPanel);
 			}
 			
@@ -71,6 +32,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			$options = Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies::getOptionsForVisibleArmies();
 			if (Rakuun_DB_Containers::getArmiesContainer()->selectFirst($options)) {
 				$incommingArmiesPanel = new Rakuun_GUI_Panel_Box_Collapsible('incomming_armies', new Rakuun_Intern_GUI_Panel_Map_Fights_IncommingArmies('incomming_armies', 'Eingehende Angriffe'), 'Eingehende Angriffe');
+				$incommingArmiesPanel->addClasses('rakuun_box_incommingarmies');
 				$this->contentPanel->addPanel($incommingArmiesPanel);
 			}
 		}
@@ -131,19 +93,19 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('sitterswitch', new Rakuun_Intern_GUI_Panel_User_SitterSwitch('sitterswitch', $sitting)));
 		}
 		
-		//Info Panel
+		// info panel
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('info', new Rakuun_Intern_GUI_Panel_User_Info('info'), 'Informationen'));
 		
-		//Fight Tick
+		// fight tick
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('fight_tick', new Rakuun_Intern_GUI_Panel_Tick_Fight('fight_tick'), 'Kampftick'));
 		
-		//Specials
+		// specials
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', $specialsPanel = new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
 		// TODO kinda stupid...
 		if (!$specialsPanel->gotSpecials())
 			$this->contentPanel->removePanel($this->contentPanel->specials);
 		
-		//Adminnews
+		// admin news
 		if ($user->adminnews)
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('adminnews', new Rakuun_Intern_GUI_Panel_User_Adminnews('adminnews'), 'Nachricht von den Admins'));
 	}

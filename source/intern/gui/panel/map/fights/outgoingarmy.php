@@ -38,7 +38,8 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmy extends GUI_Panel {
 		}
 		
 		if ($target == self::TARGET_ENEMY || $target == self::TARGET_MAP) {
-			$this->addPanel($cancelButton = new GUI_Control_SecureSubmitButton('cancel', 'Abbrechen'));
+			$this->addPanel($cancelButton = new GUI_Control_SecureSubmitButton('cancel'));
+			$cancelButton->addClasses('rakuun_btn_cancel');
 			$cancelButton->setConfirmationMessage('Armee zurückrufen?');
 		}
 		

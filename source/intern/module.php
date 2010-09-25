@@ -81,7 +81,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		
 		$allianceNode = $navigation->addModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
 		$allianceNode->addModuleNode($allianceModule, 'Übersicht');
-		$allianceNode->addModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen');
+		if ($allianceModule->hasSubmodule('interact'))
+			$allianceNode->addModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen');
 		if ($allianceModule->hasSubmodule('edit'))
 			$allianceNode->addModuleNode($allianceModule->getSubmodule('edit'), 'Verwaltung');
 		if ($allianceModule->hasSubmodule('ranks'))
@@ -152,8 +153,10 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('sitterlogout'), 'Zu eigenem Account', array('rakuun_navigation_node_logout'));
 		
 		$this->mainPanel->params->navigation = $navigation;
-		if (Rakuun_User_Manager::getCurrentUser()->tutorial)
-			$this->mainPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('tutor', new Rakuun_Intern_GUI_Panel_Tutor('tutor'), 'Tutor'));
+		if (Rakuun_User_Manager::getCurrentUser()->tutorial) {
+			$this->mainPanel->addPanel($tutor = new Rakuun_GUI_Panel_Box_Collapsible('tutor', new Rakuun_Intern_GUI_Panel_Tutor('tutor'), 'Tutor'));
+			$tutor->addClasses('rakuun_tutor');
+		}
 		
 		$this->mainPanel->addPanel(new Rakuun_Intern_GUI_Panel_Ressources_Amount('iron', $this->getUser()->ressources->iron, Rakuun_Intern_Production_Factory::getBuilding('ironmine')->getProducedIron(time() - 1), $this->getUser()->ressources->getCapacityIron(), 'Eisen'));
 		$this->mainPanel->addPanel(new Rakuun_Intern_GUI_Panel_Ressources_Amount('beryllium', (int)$this->getUser()->ressources->beryllium , Rakuun_Intern_Production_Factory::getBuilding('berylliummine')->getProducedBeryllium(time() - 1), $this->getUser()->ressources->getCapacityBeryllium(), 'Beryllium'));

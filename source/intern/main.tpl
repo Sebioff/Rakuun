@@ -1,8 +1,8 @@
 <div id="ctn_main">
-	<div id="ctn_ingame" class="module_<?= Router::get()->getCurrentModule()->getName() ?>">
+	<div id="ctn_ingame" class="module_<?= Router::get()->getCurrentModule()->getName(); ?>">
 		<div id="ctn_head" class="clearfix">
 			<div id="ctn_navigation">
-				<? $this->params->navigation->display() ?>
+				<? $this->params->navigation->display(); ?>
 			</div>
 			<div id="ctn_ressources">
 				<span class="rakuun_ressource rakuun_ressource_iron"><? $this->displayLabelForPanel('iron'); ?> <? $this->displayPanel('iron'); ?></span>
@@ -17,9 +17,8 @@
 		<div id="ctn_content" class="clearfix">
 			<? if ($this->hasPanel('tutor')): ?>
 				<? $this->displayPanel('tutor'); ?>
-				<br class="clear" />
 			<? endif; ?>
-			<? $this->displayPage() ?>
+			<? $this->displayPage(); ?>
 		</div>
 	</div>
 </div>
