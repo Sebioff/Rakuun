@@ -140,6 +140,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		
 		//Links
 		$supportlink = new GUI_Control_Link('supportlink', 'Support', App::get()->getInternModule()->getSubmodule('messages')->getUrl());
+		$ticketlink = new GUI_Control_Link('ticketlink', 'Ticketsystem', 'http://tickets.rakuun.de');
 		
 		$igm = new Rakuun_Intern_IGM('Willkommen!', $user);
 		$igm->setText(
@@ -152,7 +153,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 			Falls du Probleme bei Rakuun hast, kannst du den '.$supportlink->render()
 			.' anschreiben - wir beantworten alle deine Fragen gerne! 
 			Ansonsten kann du deine Fragen auch in der Shoutbox stellen.  
-			Du kannst auch gerne in unser Ticketsystem (<a href="http://tickets.rakuun.de" target="_blank"><u>http://tickets.rakuun.de</u></a>) 
+			Du kannst auch gerne in unser '.$ticketlink->render().'
 			oder in unseren IRC-Channel (Server: Gamesurge (irc.gamesurge.net), Channel: #rakuun) kommen!
 			<br/>
 			Zur Zeit steht dein Account unter <b>Schutz</b>, d.h. er kann nicht 
