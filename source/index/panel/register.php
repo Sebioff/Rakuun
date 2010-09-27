@@ -141,9 +141,6 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		//Links
 		$supportlink = new GUI_Control_Link('supportlink', 'Support', App::get()->getInternModule()->getSubmodule('messages')->getUrl());
 		
-		//Bilder
-		$infoimage = new Rakuun_GUI_Panel_Info('help_label', 'Hilfetext', 'Schon gewusst? Es gibt noch mehr solche Hilfen');
-		
 		$igm = new Rakuun_Intern_IGM('Willkommen!', $user);
 		$igm->setText(
 			'Hi '.$user->name.',<br/>
