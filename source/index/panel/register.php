@@ -138,33 +138,33 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 			IO_Log::get()->error($e->getTraceAsString());
 		}
 		
+		//Links
+		$supportlink = new GUI_Control_Link('supportlink', 'Support', App::get()->getInternModule()->getSubmodule('messages')->getUrl());
+		
+		//Bilder
+		$infoimage = new Rakuun_GUI_Panel_Info('help_label', 'Hilfetext', 'Schon gewusst? Es gibt noch mehr solche Hilfen');
+		
 		$igm = new Rakuun_Intern_IGM('Willkommen!', $user);
-		// TODO modify content (might not be correct in the new version)
 		$igm->setText(
 			'Hi '.$user->name.',<br/>
-			willkommen auf Rakuun!
-			<br>
-			Falls du Probleme bei Rakuun hast, kannst du den <a href="nachrichten.php?derempf=Support"><u>Support</u></a> anschreiben
-			 - wir beantworten alle deine Fragen gerne! Ansonsten kann dir auch die <span class="rahelp" help="help">Rakuun Hilfe</span> weiterhelfen: durch einen Klick auf unterstrichelte und mit dem <img src="Grafik/space2/help.gif" alt="" border="0">-Symbol markierte Begriffe erhältst du mehr Informationen zum entsprechenden Thema. Probier es doch direkt mal aus, indem du hier auf "<span class="rahelp" help="help">Rakuun Hilfe</span>" klickst!
+			<b>willkommen auf Rakuun!</b>
 			<br/>
+			Als erstes solltest du das Tutorial meistern. Der Tutor (immer oben auf jeder Seite) wird dir alles, was du für den Anfang brauchst, genau erklären. 
+			Hier werden dir auch schon viele Tipps gegeben.
 			<br/>
-			<a href="http://www.rakuun.de/eoleon/phpBB2/viewtopic.php?t=704" target="_blank"><u>Hier</u></a> findest du einen Artikel aus dem <a href="http://infocenter.rakuun.de" target="_blank">Rakuun Infocenter</a>, der neuen Spielern den Einstieg erleichtern soll.
+			Falls du Probleme bei Rakuun hast, kannst du den '.$supportlink->render()
+			.' anschreiben - wir beantworten alle deine Fragen gerne! 
+			Ansonsten kann du deine Fragen auch in der Shoutbox stellen.  
+			Du kannst auch gerne in unser Ticketsystem (<a href="http://tickets.rakuun.de" target="_blank"><u>http://tickets.rakuun.de</u></a>) 
+			oder in unseren IRC-Channel (Server: Gamesurge (irc.gamesurge.net), Channel: #rakuun) kommen!
 			<br/>
-			<br/>
-			Du kannst auch gerne in unser Forum (<a href="http://forum.rakuun.de" target="_blank"><u>http://forum.rakuun.de</u></a>) oder in unseren IRC-Channel (Server: Gamesurge (irc.gamesurge.net), Channel: #rakuun) kommen!
-			<br/>
-			<br/>
-			Zur Zeit steht dein Account unter <b>Schutz</b>, d.h. er kann nicht angegriffen werden!
-			<br/>
+			Zur Zeit steht dein Account unter <b>Schutz</b>, d.h. er kann nicht 
+			angegriffen werden!
 			Wie lange dieser Schutz besteht, kannst du auf deiner Startseite sehen.
+			Früher oder später wird er allerdings verfallen. Sobald du den Schutz verlassen hast, kannst du jederzeit in den Schutz
+			zurückkehren, wenn du die Voraussetzungen wieder erfüllst.
 			<br/>
-			Früher oder später wird er allerdings verfallen. Vielleicht willst du ja einer <a href="allianzen.php">Allianz</a> beitreten? Diese können zum Schutz gegen ressourcenhungrige Nachbarn sehr nützlich sein.
-			<br/>
-			Falls du nicht mehr im Noobschutz bist und ständig angegriffen wirst und keine Chance siehst, dich zu verteidigen, jedoch trotzdem weiterspielen willst, kannst du in den <b>Kriegsopfermodus</b> wechseln.
-			<br/>
-			Dieser Modus erlaubt dir, weiterzuspielen, ohne angegriffen zu werden - allerdings kannst du selbst auch nicht mehr angreifen und Ressourcen übertragen oder erhalten.
-			<br/>
-			Viel Spass bei Rakuun!'
+			<i>Viel Spass bei Rakuun wünscht das Rakuun-Team!</i>'
 		);
 		$igm->setSenderName(Rakuun_Intern_IGM::SENDER_SYSTEM);
 		$igm->send();
