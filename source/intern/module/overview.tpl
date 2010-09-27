@@ -37,20 +37,21 @@
 	<? $this->displayPanel('technologies'); ?>
 	<? $this->displayPanel('units'); ?>
 	
-	<a href="http://www.galaxy-news.de/?page=charts&amp;op=vote&amp;game_id=67" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
-	<br/>
-	<br/>
-	<script type="text/javascript"><!--
-		google_ad_client = "pub-6454371224576770";
-		/* 200x200, Erstellt 17.08.10 */
-		google_ad_slot = "0237291473";
-		google_ad_width = 200;
-		google_ad_height = 200;
-		//-->
-	</script>
-	<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
+	<div id="ctn_ad_buttons">
+		<a href="http://www.galaxy-news.de/?page=charts&amp;op=vote&amp;game_id=67" class="gnews_link" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
+		<br/>
+		<script type="text/javascript"><!--
+			google_ad_client = "pub-6454371224576770";
+			/* 200x200, Erstellt 17.08.10 */
+			google_ad_slot = "0237291473";
+			google_ad_width = 200;
+			google_ad_height = 200;
+			//-->
+		</script>
+		<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+	</div>
 </div>
 
 <div id="ctn_info">

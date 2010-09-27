@@ -448,6 +448,14 @@ body.skin_tech
 	margin-left:0px;
 }
 
+.skin_tech #ctn_ad_buttons {
+	text-align:center;
+}
+
+.skin_tech #ctn_ad_buttons .gnews_link img {
+	margin:5px 0px;
+}
+
 /* $7  -  Techtree -----------------------------------------------------------*/
 .skin_tech #ctn_techtree_rows .rakuun_box {
 	float:left;

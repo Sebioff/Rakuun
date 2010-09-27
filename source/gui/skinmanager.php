@@ -12,9 +12,9 @@ class Rakuun_GUI_Skinmanager {
 	public function __construct() {
 		// TODO: probably it's not neccessary to construct all the skin classes here.
 		// maybe only save the names of the classes?
-		$this->addSkin($default = new Rakuun_GUI_Skin_Space2());
+		//$this->addSkin($default = new Rakuun_GUI_Skin_Space2());
 		$this->addSkin($default = new Rakuun_GUI_Skin_Tech());
-		$this->addSkin(new Rakuun_GUI_Skin_Original());
+		//$this->addSkin(new Rakuun_GUI_Skin_Original());
 		$this->setCurrentSkin($default->getNameID());
 	}
 	
