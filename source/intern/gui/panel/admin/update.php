@@ -33,7 +33,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 				// FIXME hardcoded paths suck!
 				$history = explode("\n", $ssh->exec('svn log www/Rakuun -r BASE:HEAD'));
 				$formatHistory = $this->formatHistory($history);
-				$this->addPanel(new GUI_Control_TextArea('newstext', 'Das Spiel wurde gerade aktualisiert. Folgende Änderungen wurden vorgenommen:\n<br>\n<br>\n'.$formatHistory, 'Newseintrag'));
+				$this->addPanel(new GUI_Control_TextArea('newstext', 'Das Spiel wurde gerade aktualisiert. Folgende Änderungen wurden vorgenommen:'."\n".'<br/>'."\n".'<br/>'."\n".$formatHistory, 'Newseintrag'));
 				$this->addPanel($tweet = new GUI_Control_TextArea('tweet', 'Update: '.$formatHistory, 'Tweet'));
 				$tweet->setAttribute('rows', 5);
 				// FIXME remove duplicated code, copied from shoutbox
@@ -165,14 +165,14 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 			else {
 				preg_match('=-{15,}=', $historyEntry, $matches);
 				if (isset($matches[0])) {
-					$formatHistory .= '<strong>revision '.$revision.'</strong>:<ul>'.$revisionHistory.'</ul><br/>';
+					$formatHistory .= '<strong>revision '.$revision.'</strong>:'."\n".'<ul>'.$revisionHistory.'</ul><br/>'."\n";
 					$revision = -1;
 					$revisionHistory = '';
 					continue;
 				}
 				
 				if ($historyEntry)
-					$revisionHistory .= '<li>'.$historyEntry.'</li>';
+					$revisionHistory .= '<li>'.$historyEntry.'</li>'."\n";
 			}
 		}
 		
