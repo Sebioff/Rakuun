@@ -28,9 +28,9 @@ class Rakuun_Intern_Quest_FirstLaboratory10 extends Rakuun_Intern_Quest {
 	
 	public function getOwnerName() {
 		if ($owner = Rakuun_DB_Containers::getUserContainer()->selectByPK($this->getRecord()->owner))
-			return $owner->name;
+			return $owner->nameUncolored;
 		else
-			return Rakuun_DB_Containers::getUserDeletedContainer()->selectByIDFirst($this->getRecord()->owner)->name;
+			return Rakuun_DB_Containers::getUserDeletedContainer()->selectByIDFirst($this->getRecord()->owner)->nameUncolored;
 	}
 }
 

@@ -40,7 +40,7 @@ class Rakuun_Intern_Quest_FirstCapturedDatabase extends Rakuun_Intern_Quest {
 	}
 	
 	public function getOwnerName() {
-		return Rakuun_DB_Containers::getAlliancesContainer()->selectByPK($this->getRecord()->owner)->name;
+		return Rakuun_DB_Containers::getAlliancesContainer()->selectByPK($this->getRecord()->owner)->nameUncolored;
 	}
 }
 
