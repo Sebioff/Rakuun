@@ -134,9 +134,9 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 				$newsEntry->time = time();
 				Rakuun_DB_Containers_Persistent::getNewsContainer()->save($newsEntry);
 			}
-			if ($this->twitter->getValue()) {
+			if ($this->tweet->getValue()) {
 				$object = new twitter(RAKUUN_TWITTER_USER, RAKUUN_TWITTER_PASSWORD);
-				$object->post_tweet($this->twitter->getValue());
+				$object->post_tweet($this->tweet->getValue());
 			}
 		}
 		
