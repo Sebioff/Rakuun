@@ -31,7 +31,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		else {
 			if ($this->createNews->getSelected()) {
 				// FIXME hardcoded paths suck!
-				$history = explode("\n", $ssh->exec('svn log www/Rakuun -r '.$revisionNumber.':'.(PROJECT_VERSION + 1)));
+				$history = explode("\n", $ssh->exec('svn log www/Rakuun -r BASE:HEAD'));
 				$formatHistory = $this->formatHistory($history);
 				$this->addPanel(new GUI_Control_TextArea('newstext', 'Das Spiel wurde gerade aktualisiert. Folgende Änderungen wurden vorgenommen:\n<br>\n<br>\n'.$formatHistory, 'Newseintrag'));
 				$this->addPanel($tweet = new GUI_Control_TextArea('tweet', 'Update: '.$formatHistory, 'Tweet'));
