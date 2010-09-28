@@ -18,10 +18,10 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 	}
 	
 	public function onUpdate() {
-//		$ssh = new Net_SSH2(RAKUUN_SSH_ADDRESS);
-//		if (!$ssh->login(RAKUUN_SSH_USER, RAKUUN_SSH_PASSWORD)) {
-//			$this->addError('SSH login failed');
-//		}
+		$ssh = new Net_SSH2(RAKUUN_SSH_ADDRESS);
+		if (!$ssh->login(RAKUUN_SSH_USER, RAKUUN_SSH_PASSWORD)) {
+			$this->addError('SSH login failed');
+		}
 		
 		if ($this->hasErrors()) {
 			$this->state->setValue(self::STATE_PREPARING);
@@ -67,10 +67,6 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 			$this->state->setValue(self::STATE_PREPARING);
 		}
 		
-		dump($this->newstext->getValue());
-		
-		return;
-			
 		$log = '';
 		
 		// enable maintenance mode
