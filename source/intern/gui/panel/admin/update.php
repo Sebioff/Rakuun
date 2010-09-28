@@ -1,7 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/3rdparty/Net/SSH2.php';
-require_once dirname(__FILE__).'/3rdparty/class.twitter.php';
+require_once dirname(__FILE__).'/3rdparty/Twitter/twitter.class.php';
 
 class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 	const STATE_PREPARING = 1;
@@ -135,8 +135,8 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 				Rakuun_DB_Containers_Persistent::getNewsContainer()->save($newsEntry);
 			}
 			if ($this->tweet->getValue()) {
-				$object = new twitter(RAKUUN_TWITTER_USER, RAKUUN_TWITTER_PASSWORD);
-				$object->post_tweet($this->tweet->getValue());
+				$object = new Twitter(RAKUUN_TWITTER_CONSUMERKEY, RAKUUN_TWITTER_CONSUMERSECRET, RAKUUN_TWITTER_ACCESSTOKEN, RAKUUN_TWITTER_ACCESSTOKENSECRET);
+				$object->send($this->tweet->getValue());
 			}
 		}
 		
