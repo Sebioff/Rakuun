@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Military2 extends Rakuun_Intern_GUI_Panel_Tutor_Level {
-	public function __construct() {
-		$this->internal = 'military2';
-	}
-	
 	public function completed() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		return ($user->units->inra >= 200);

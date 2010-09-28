@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Trade extends Rakuun_Intern_GUI_Panel_Tutor_Level {
-	public function __construct() {
-		$this->internal = 'trade';
-	}
-	
 	public function completed() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		return ($user->buildings->moleculartransmitter >= 1)

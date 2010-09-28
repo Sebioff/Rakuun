@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_People extends Rakuun_Intern_GUI_Panel_Tutor_Level {
-	public function __construct() {
-		$this->internal = 'people';
-	}
-	
 	public function completed() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		return $user->buildings->clonomat >= 1;
@@ -18,7 +14,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_People extends Rakuun_Intern_GUI_Panel
 			Schau mal im Techtree nach, was du dafür brauchst. du wirst feststellen, 
 			dass dir dafür noch die Gentechnik fehlt. Forsche dieses zunächst aus, 
 			bevor du mit dem Bau des Clon-O-Matens beginnen kannst.<br /> 
-			<b>Baue Clon-O-Mat auf Stufe 1.</b>
+			<b>Baue Clon-O-Mat auf Stufe 1 und besetze ihn mit Arbeitern.</b>
 		';
 	}
 }

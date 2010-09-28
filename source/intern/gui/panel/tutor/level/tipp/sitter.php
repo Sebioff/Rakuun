@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sitter extends Rakuun_Intern_GUI_Panel_Tutor_Tipp {
-	public function __construct() {
-		$this->internal = 'sitter';
-	}
-	
 	public function getDescription() {
 		$link = new GUI_Control_Link('profilelink', 'Profil', App::get()->getInternModule()->getSubmodule('profile')->getUrl());
 		return '
@@ -20,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sitter extends Rakuun_Intern_GUI_
 			deiner Arbeitszeit oder im Urlaub.
 			Einen Sitter kannst du im Profil eintragen und er kann jederzeit
 			geändert werden.
-			<br /><b>Klicke auf "Weiter" um fortzufahren!</b>
+			<br /><b>Klicke auf "-&gt;" um fortzufahren!</b>
 		';
 	}
 }

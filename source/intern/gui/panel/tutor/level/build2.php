@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Build2 extends Rakuun_Intern_GUI_Panel_Tutor_Level {
-	public function __construct() {
-		$this->internal = 'build2';
-	}
-	
 	public function completed() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		return ($user->buildings->ironmine >= 8 && $user->buildings->berylliummine >= 6);

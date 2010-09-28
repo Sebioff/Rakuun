@@ -10,7 +10,7 @@
 <br/>
 <strong>Features, die Rakuun von vielen anderen Games unterscheiden:</strong>
 <ul>
-	<li>Klar definiertes Spielziel. JEDER hat die Chance, die Runde für sich zu gewinnen - und es kann nur einen Sieger geben! Hier gibt es kein sinnloses rumgeklicker, da alle Spieler nur das eine wollen: die Ehre des Rundensieges.</li>
+	<li>Klar definiertes Spielziel. Hier gibt es kein sinnloses rumgeklicker, da alle Spieler nur das eine wollen: die Ehre des Rundensieges.</li>
 	<li>Die Länge der Spielrunden ist somit variabel. Sie beträgt in der Regel zwischen 2 und 3 Monaten, kann aber auch 4 Monate dauern - das hängt ganz von der Stärke der vertretenen Allianzen ab.</li>
 	<li>Der Rundensieg lässt sich nicht im Alleingang bewältigen, sondern ist klar auf das gute Zusammenspiel einer Meta/Allianz ausgelegt. Eine Herausforderung für jeden Browsergame-Profi, aber auch interessant und lehrreich für Neulinge in diesem Genre.</li>
 	<li>Zum Gewinnen benötigt man eine gute Portion Können und Taktik.</li>

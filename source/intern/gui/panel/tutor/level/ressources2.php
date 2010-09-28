@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources2 extends Rakuun_Intern_GUI_Panel_Tutor_Level {
-	public function __construct() {
-		$this->internal = 'ressources2';
-	}
-	
 	public function completed() {
 		return Router::get()->getCurrentModule() instanceof Rakuun_Intern_Module_Ressources;
 	}

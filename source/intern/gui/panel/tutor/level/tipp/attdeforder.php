@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Attdeforder extends Rakuun_Intern_GUI_Panel_Tutor_Tipp {
-	public function __construct() {
-		$this->internal = 'attdeforder';
-	}
-	
 	public function getDescription() {
 		$link = new GUI_Control_Link('maplink', 'Karte', App::get()->getInternModule()->getSubmodule('map')->getUrl());
 		return '
@@ -14,7 +10,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Attdeforder extends Rakuun_Intern
 			So kannst du dir deine wichtigen Einheiten ans Ende der Kampfreihenfolge
 			stellen. Einen Einfluss auf das Ergebnis des Kampfes hat die Reihenfolge
 			jedoch nicht! Sie bestimmt nur welche Einheiten zuerst fallen.
-			<br /><b>klicke auf "weiter" um fortzufahren!</b>
+			<br /><b>klicke auf "-&gt;" um fortzufahren!</b>
 		';
 	}
 }

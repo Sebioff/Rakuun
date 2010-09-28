@@ -1,10 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Citywall extends Rakuun_Intern_GUI_Panel_Tutor_Level {
-	public function __construct() {
-		$this->internal = 'citywall';
-	}
-	
 	public function completed() {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		return ($user->buildings->cityWall >= 1);

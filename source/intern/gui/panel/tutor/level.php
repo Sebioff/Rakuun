@@ -1,7 +1,6 @@
 <?php
 
 abstract class Rakuun_Intern_GUI_Panel_Tutor_Level {
-	protected $internal = __CLASS__;
 	private $last = null;
 	private $next = null;
 	
@@ -61,7 +60,7 @@ abstract class Rakuun_Intern_GUI_Panel_Tutor_Level {
 	}
 	
 	public function getInternal() {
-		return $this->internal;
+		return get_class($this);
 	}
 }
 ?>
