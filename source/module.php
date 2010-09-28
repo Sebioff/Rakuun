@@ -99,6 +99,8 @@ class Rakuun_Module extends Module {
 			Rakuun_TeamSecurity::get()->addToGroup($testUser, Rakuun_TeamSecurity::get()->getGroup(Rakuun_TeamSecurity::GROUP_USERMANAGERS));
 		}
 		
+		$demoUser = Rakuun_Index_Panel_Register::registerUser('Demo', 'demo');
+		
 		// Remove upload directory and its content
 		IO_Utils::deleteFolder(GUI_Control_FileUpload::getUploadDirectory());
 	}

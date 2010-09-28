@@ -5,14 +5,16 @@
  */
 class Rakuun_GameSecurity extends Security {
 	const GROUP_NEEDS_ACTIVATION = 1;
-	const GROUP_LOCKED = 2;
-	const GROUP_TEAM = 3;
-	const GROUP_DONORS = 4;
-	const GROUP_SPONSORS = 5;
-	const GROUP_BUGREPORTERS = 6;
+	const GROUP_DEMO = 2;
+	const GROUP_LOCKED = 3;
+	const GROUP_TEAM = 4;
+	const GROUP_DONORS = 5;
+	const GROUP_SPONSORS = 6;
+	const GROUP_BUGREPORTERS = 7;
 	
 	const PRIVILEGE_LOGIN = 1;
 	const PRIVILEGE_COLOREDNAME = 2;
+	const PRIVILEGE_DELETEACCOUNT = 3;
 	
 	private $vipGroups = array(self::GROUP_TEAM, self::GROUP_DONORS, self::GROUP_SPONSORS, self::GROUP_BUGREPORTERS);
 	
@@ -27,10 +29,11 @@ class Rakuun_GameSecurity extends Security {
 	}
 	
 	protected function getDefaultValue($prilegeIdentifier, DB_Record $user) {
-		if ($prilegeIdentifier == self::PRIVILEGE_LOGIN)
-			return true;
-		else
+		// if no value has been set, every privilege is granted by default (except colored names)
+		if ($prilegeIdentifier == self::PRIVILEGE_COLOREDNAME)
 			return parent::getDefaultValue($prilegeIdentifier, $user);
+		else
+			return true;
 	}
 	
 	public function getContainerUsers() {

@@ -5,6 +5,7 @@
 	$2  -  Registration
 	$3  -  Login
 	$4  -  News
+	$5  -  Infos
 */
 
 /* $1  -  Index --------------------------------------------------------------*/
@@ -108,4 +109,14 @@ input {
 #ctn_content .rakuun_news_item label
 {
 	float:none;
+}
+
+/* $5  -  Infos --------------------------------------------------------------*/
+body.info_main ul {
+	list-style:disc outside none;
+	padding-left:15px;
+}
+
+body.info_main ul li {
+	padding:2px 0px;
 }

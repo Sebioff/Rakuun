@@ -51,14 +51,27 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 
 		if ($this->hasErrors())
 			return;
+			
+		self::registerUser($this->username->getValue(), $this->password->getValue(), $this->mail->getValue());
 		
+		$this->setTemplate(dirname(__FILE__).'/register_successful.tpl');
+	}
+	
+	/**
+	 * Registers a new user
+	 * @param string $name
+	 * @param string $password
+	 * @param string $mail
+	 * @return Rakuun_DB_User the newly created user
+	 */
+	public static function registerUser($name, $password, $mail = '') {
 		DB_Connection::get()->beginTransaction();
 		$user = new Rakuun_DB_User();
-		$user->name = $this->username;
+		$user->name = $name;
 		$user->salt = md5(time() / rand());
-		$user->password = Rakuun_User_Manager::cryptPassword($this->password, $user->salt);
+		$user->password = Rakuun_User_Manager::cryptPassword($password, $user->salt);
 		$user->registrationTime = time();
-		$user->mail = $this->mail;
+		$user->mail = $mail;
 		$user->skin = 'tech';
 		$user->isInNoob = true;
 		if ($user->name[Text::length($user->name) - 1] == 's')
@@ -120,22 +133,24 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_PASSWORD, $user->password);
 		DB_Connection::get()->commit();
 		
-		try {
-			$mail = new Net_Mail();
-			$mail->setSubject('Rakuun: Anmeldung');
-			$mail->addRecipients($user->nameUncolored.' <'.$user->mail.'>');
-			$params = array('code' => $activation->code);
-			$activationURL = App::get()->getActivationModule()->getURL($params);
-			$templateEngine = new GUI_TemplateEngine();
-			$templateEngine->username = $user->nameUncolored;
-			$templateEngine->password = $this->password;
-			$templateEngine->activationURL = $activationURL;
-			// TODO modify content (might not be correct in the new version)
-			$mail->setMessage($templateEngine->render(dirname(__FILE__).'/register_mail.tpl'));
-			$mail->send();
-		}
-		catch (Core_Exception $e) {
-			IO_Log::get()->error($e->getTraceAsString());
+		if ($user->mail) {
+			try {
+				$mail = new Net_Mail();
+				$mail->setSubject('Rakuun: Anmeldung');
+				$mail->addRecipients($user->nameUncolored.' <'.$user->mail.'>');
+				$params = array('code' => $activation->code);
+				$activationURL = App::get()->getActivationModule()->getURL($params);
+				$templateEngine = new GUI_TemplateEngine();
+				$templateEngine->username = $user->nameUncolored;
+				$templateEngine->password = $this->password;
+				$templateEngine->activationURL = $activationURL;
+				// TODO modify content (might not be correct in the new version)
+				$mail->setMessage($templateEngine->render(dirname(__FILE__).'/register_mail.tpl'));
+				$mail->send();
+			}
+			catch (Core_Exception $e) {
+				IO_Log::get()->error($e->getTraceAsString());
+			}
 		}
 		
 		//Links
@@ -167,7 +182,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$igm->setSenderName(Rakuun_Intern_IGM::SENDER_SYSTEM);
 		$igm->send();
 		
-		$this->setTemplate(dirname(__FILE__).'/register_successful.tpl');
+		return $user;
 	}
 
 	public static function getReservedNames() {

@@ -23,12 +23,14 @@
 	width:1020px;
 }
 
-#ctn_ingame .rakuun_requirements_met
+#ctn_ingame .rakuun_requirements_met,
+#ctn_ingame .rakuun_requirements_met a
 {
 	color:#009f00;
 }
 
-#ctn_ingame .rakuun_requirements_failed
+#ctn_ingame .rakuun_requirements_failed,
+#ctn_ingame .rakuun_requirements_failed a
 {
 	color:#ff0000;
 }
