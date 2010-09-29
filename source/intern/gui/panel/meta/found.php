@@ -34,7 +34,7 @@ class Rakuun_Intern_GUI_Panel_Meta_Found extends GUI_Panel {
 		Rakuun_User_Manager::update($user);
 		Rakuun_DB_Containers::getAlliancesContainer()->save($user->alliance);
 		DB_Connection::get()->commit();
-		$this->getModule()->invalidate();
+		Scriptlet::redirect(App::get()->getInternModule()->getSubmodule('meta')->getURL());
 	}
 }
 

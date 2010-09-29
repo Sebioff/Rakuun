@@ -28,7 +28,10 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 
 				if ($user->alliance != null) {
 					$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Profile_Own('alliance'));
-					$this->addSubmodule(new Rakuun_Intern_Module_Meta('meta'));
+					if ($user->alliance->meta != null)
+						$this->addSubmodule(new Rakuun_Intern_Module_Meta('meta'));
+					else
+						$this->addSubmodule(new Rakuun_Intern_Module_Meta_None('meta'));
 				} else {
 					$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Profile_None('alliance'));
 				}

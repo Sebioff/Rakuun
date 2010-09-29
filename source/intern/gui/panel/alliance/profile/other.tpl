@@ -6,6 +6,9 @@
 		<? $this->displayPanel('picture'); ?>
 	<? endif; ?>
 	<? $this->displayPanel('externbox'); ?>
+	<? if ($this->hasPanel('metabox')): ?>
+		<? $this->displayPanel('metabox'); ?>
+	<? endif; ?>
 	<? $this->displayPanel('diplomacy'); ?>
 	<? $this->displayPanel('databases'); ?>
 	<? if ($this->hasPanel('application')): ?>

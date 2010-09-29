@@ -41,9 +41,9 @@ class Rakuun_Intern_Module_Meta extends Rakuun_Intern_Module_Meta_Common {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('pollbox', new Rakuun_Intern_GUI_Panel_Polls_Poll('poll'.$poll->getPK(), $poll), 'Letzte Umfrage'));
 	}
 	
-	public function checkPrivileges() {
-		$user = Rakuun_User_Manager::getCurrentUser();
-		return (isset($user->alliance) && (isset($user->alliance->meta) || Rakuun_Intern_Alliance_Security::get()->isInGroup($user, Rakuun_Intern_Alliance_Security::GROUP_LEADERS)));
-	}
+//	public function checkPrivileges() {
+//		$user = Rakuun_User_Manager::getCurrentUser();
+//		return (isset($user->alliance) && (isset($user->alliance->meta) || Rakuun_Intern_Alliance_Security::get()->isInGroup($user, Rakuun_Intern_Alliance_Security::GROUP_LEADERS)));
+//	}
 }
 ?>

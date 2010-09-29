@@ -13,5 +13,5 @@
 <? else: ?>
 	<div class="shout_text shout_announcement">
 <? endif; ?>
-	<?= Text::format((Text::escapeHTML($this->params->shout->text))); ?>
+	<?= Text::format(Text::escapeHTML($this->params->shout->text)); ?>
 </div>
