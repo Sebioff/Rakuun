@@ -14,6 +14,7 @@
 	$9  -  WarSim
 	$10 -  Map
 	$11 -  Boards
+	$12 -  Rules
 */
 
 /* $1  -  Common -------------------------------------------------------------*/
@@ -555,4 +556,14 @@ img.rakuun_fightreport_marker
 .ctn_board_content .core_gui_submitbutton
 {
 	margin-left:0px;
+}
+
+/* $12  -  Rules -------------------------------------------------------------*/
+body.rakuun_rules ul {
+	list-style:disc outside none;
+	padding-left:15px;
+}
+
+body.rakuun_rules ul li {
+	padding:2px 0px;
 }

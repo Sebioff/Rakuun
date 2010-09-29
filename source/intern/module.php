@@ -138,7 +138,9 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('vips'), 'VIPs', array('rakuun_navigation_node_vips'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('profile'))
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('profile'), 'Profil', array('rakuun_navigation_node_profile'));
-		
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('rules'))
+			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('rules'), 'Regeln', array('rakuun_navigation_node_rules'));
+			
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('admin')) {
 			$adminNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('admin'), 'Admin', array('rakuun_navigation_node_admin'));
 			if (Rakuun_Intern_Modules::get()->hasSubmodule('multihunting'))
