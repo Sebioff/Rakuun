@@ -11,8 +11,9 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 	public function init() {
 		parent::init();
 		
-		// not logged in? redirect to login page
-		if (!$this->getUser()) {
+		// not logged in or banned? redirect to login page
+		if (!$this->getUser()
+			|| Rakuun_GameSecurity::get()->isInGroup($this->getUser(), Rakuun_GameSecurity::GROUP_LOCKED)) {
 			$params = array('return' => base64_encode($this->getUrl($this->getParams())));
 			Scriptlet::redirect(App::get()->getIndexModule()->getUrl($params));
 		}

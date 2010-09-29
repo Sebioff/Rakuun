@@ -71,7 +71,8 @@ abstract class Rakuun_User_Manager {
 		$options = array();
 		$options['conditions'][] = array('user = ?', $user);		
 		$timeban = Rakuun_DB_Containers::getUserBannedContainer()->selectFirst($options);
-		Rakuun_DB_Containers::getUserBannedContainer()->delete($timeban);
+		if ($timeban)
+			Rakuun_DB_Containers::getUserBannedContainer()->delete($timeban);
 	}
 	
 	public static function logout() {
