@@ -36,10 +36,9 @@ class Rakuun_Intern_Module_Alliance_Profile_Own extends Rakuun_Intern_Module {
 		
 		if ($user->alliance->picture)
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_UploadedFile('alliancepicture', $user->alliance->picture, 'Allianzbild der Allianz '.$user->alliance->name), 'Allianzbild'));
-		else
-			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_Text('dummy', 'Kein Bild vorhanden')));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', new GUI_Panel_Text('text', Text::format($user->alliance->intern)), 'Interne Informationen'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('shoutboxbox', new Rakuun_Intern_GUI_Panel_Shoutbox_Alliance('shoutbox'), 'Allianzshoutbox'));
+		$this->contentPanel->addPanel($shoutbox = new Rakuun_GUI_Panel_Box('shoutboxbox', new Rakuun_Intern_GUI_Panel_Shoutbox_Alliance('shoutbox'), 'Allianzshoutbox'));
+		$shoutbox->addClasses('rakuun_box_alliance_shoutbox');
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('boardbox', new Rakuun_Intern_GUI_Panel_Board_Overview_Alliance('board'), 'Allianzforum'));
 		$options = array();
 		$options['order'] = 'date DESC';

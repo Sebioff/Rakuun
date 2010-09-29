@@ -1,15 +1,15 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-<? if ($this->hasPanel('picture')): ?>
-	<? $this->displayPanel('picture'); ?>
-<? endif; ?>
-<? $this->displayPanel('externbox'); ?>
+<div id="ctn_alliance_description">
+	<? if ($this->hasPanel('picture')): ?>
+		<? $this->displayPanel('picture'); ?>
+	<? endif; ?>
+	<? $this->displayPanel('externbox'); ?>
+	<? $this->displayPanel('diplomacy'); ?>
+	<? $this->displayPanel('databases'); ?>
+	<? if ($this->hasPanel('application')): ?>
+		<? $this->displayPanel('application'); ?>
+	<? endif; ?>
+</div>
 <? $this->displayPanel('memberbox'); ?>
-<br class="clear" />
-<? $this->displayPanel('databases'); ?>
-<br class="clear" />
-<? if ($this->hasPanel('application')): ?>
-	<? $this->displayPanel('application'); ?>
-<? endif; ?>
-<? $this->displayPanel('diplomacy'); ?>

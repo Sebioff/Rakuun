@@ -1,11 +1,14 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-<? $this->displayPanel('picturebox'); ?>
-<? $this->displayPanel('internbox'); ?>
-<br class="clear" />
+<div id="ctn_rakuun_alliance_leftcol">
+	<? if ($this->hasPanel('picturebox')): ?>
+		<? $this->displayPanel('picturebox'); ?>
+	<? endif; ?>
+	<? $this->displayPanel('internbox'); ?>
+	<? if ($this->hasPanel('pollbox')): ?>
+		<? $this->displayPanel('pollbox'); ?>
+	<? endif; ?>
+	<? $this->displayPanel('boardbox'); ?>
+</div>
 <? $this->displayPanel('shoutboxbox'); ?>
-<? $this->displayPanel('boardbox'); ?>
-<? if ($this->hasPanel('pollbox')): ?>
-	<? $this->displayPanel('pollbox'); ?>
-<? endif; ?>

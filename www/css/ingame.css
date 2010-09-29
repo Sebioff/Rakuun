@@ -559,11 +559,11 @@ img.rakuun_fightreport_marker
 }
 
 /* $12  -  Rules -------------------------------------------------------------*/
-body.rakuun_rules ul {
+.module_rules #ctn_content ul {
 	list-style:disc outside none;
 	padding-left:15px;
 }
 
-body.rakuun_rules ul li {
+.module_rules #ctn_content ul li {
 	padding:2px 0px;
 }

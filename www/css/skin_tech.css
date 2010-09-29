@@ -150,6 +150,11 @@ body.skin_tech
 	float:none;
 }
 
+.skin_tech #ctn_footer {
+	background:transparent url('../images/background_footer.gif') no-repeat left top;
+	height:1px;
+}
+
 /* $3  -  Boxes --------------------------------------------------------------*/
 .skin_tech .rakuun_box {
 	background:#363840 url('../images/rakuun_box_left.gif') repeat-y left top;
@@ -633,4 +638,26 @@ body.skin_tech
 
 .skin_tech .module_diplomacy .right_col .rakuun_box {
 	float:none;
+}
+
+.skin_tech .module_allianceview #ctn_alliance_description .rakuun_box {
+	float:none;
+}
+
+.skin_tech .module_allianceview #ctn_alliance_description {
+	float:left;
+	margin-left:277px;
+	margin-right:5px;
+	width:428px;
+}
+
+.skin_tech .module_alliance #ctn_rakuun_alliance_leftcol .rakuun_box {
+	float:none;
+}
+
+.skin_tech .module_alliance #ctn_rakuun_alliance_leftcol {
+	float:left;
+	margin-left:80px;
+	margin-right:5px;
+	width:428px;
 }

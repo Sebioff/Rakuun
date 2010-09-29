@@ -20,5 +20,7 @@
 			<? endif; ?>
 			<? $this->displayPage(); ?>
 		</div>
+		<div id="ctn_footer">
+		</div>
 	</div>
 </div>
