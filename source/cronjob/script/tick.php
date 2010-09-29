@@ -44,6 +44,9 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 		$options['conditions'][] = array('status = ?', Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::STATUS_DELETED);
 		$options['conditions'][] = array('(notice * 60 * 60) + date <= ?', time());
 		Rakuun_DB_Containers::getAlliancesDiplomaciesContainer()->delete($options);
+		
+		// unban users ---------------------------------------------------------
+		$this->unbanUsers();
 	}
 	
 	private function onDancertiaStarted(Rakuun_DB_Meta $meta) {
@@ -154,6 +157,17 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 		}
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->query('CREATE TABLE `'.$targetContainer->getTable().'` LIKE `'.DB_Connection::get()->getDatabaseName().'`.`'.$originalContainer->getTable().'`');
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->query('INSERT INTO `'.$targetContainer->getTable().'` SELECT * FROM `'.DB_Connection::get()->getDatabaseName().'`.`'.$originalContainer->getTable().'`');
+	}
+	
+	private function unbanUsers() {
+		$options = array();
+		$options['conditions'][] = array('time < ?', time());		
+		$users = Rakuun_DB_Containers::getUserBannedContainer()->select($options);
+		
+		foreach ($users as $user) {
+			Rakuun_User_Manager::unlock(Rakuun_DB_Containers::getUserContainer()->selectByPK($user->user));
+			Rakuun_DB_Containers::getUserBannedContainer()->delete($user);
+		}
 	}
 }
 

@@ -117,6 +117,20 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `users_activations` (
 $queries[] = 'ALTER TABLE `users_activations`
   ADD CONSTRAINT `users_activations_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
+/*
+ * time is the endtime, when the ban is to be finish
+ */
+$queries[] = 'CREATE TABLE IF NOT EXISTS `users_banned` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(10) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
+
+$queries[] = 'ALTER TABLE `users_activations`
+  ADD CONSTRAINT `users_banned_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
+
 $queries[] = 'CREATE TABLE IF NOT EXISTS `users_deleted` (
   `id` int(10) unsigned NOT NULL,
   `name` varchar(25) NOT NULL,

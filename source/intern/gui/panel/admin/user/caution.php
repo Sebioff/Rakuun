@@ -98,6 +98,22 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 			<br />'.$cautionReason;
 		$igm->setText($message);
 		$igm->send();
+		
+		//check if user has enough cautionpoints to be banned
+		self::checkBan($cautionUser);
+	}
+	
+	/*
+	 * Ban the user if he has enough cautionpoints.
+	 * @param user 
+	 */
+	private static function checkBan(Rakuun_DB_User $user) {
+		if (self::getCautionPoints($user) >=  15)
+			Rakuun_User_Manager::lock($user);
+		else if (self::getCautionPoints($user) >=  9)
+			Rakuun_User_Manager::lock($user, 120);
+		else if (self::getCautionPoints($user) >= 6)
+			 Rakuun_User_Manager::lock($user, 24);
 	}
 	
 	/**

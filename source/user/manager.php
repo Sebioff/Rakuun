@@ -44,14 +44,34 @@ abstract class Rakuun_User_Manager {
 	}
 	
 	// TODO add locking reason
-	public static function lock(Rakuun_DB_User $user) {
+	/**
+	 * lock a user
+	 * @param Rakuun_DB_User $user
+	 * @param $time time in hours to lock the user in time. 0 for permanent ban
+	 */
+	public static function lock(Rakuun_DB_User $user, $time = 0) {
 		$user->isOnline = 0;
 		self::update($user);
-		Rakuun_GameSecurity::get()->addToGroup($user, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_LOCKED));
+		
+		if (!Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_LOCKED)) {
+			Rakuun_GameSecurity::get()->addToGroup($user, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_LOCKED));
+			
+			if ($time != 0) {
+				$ban = new DB_Record();
+				$ban->user = $user;
+				$ban->time = time() + $time * 60 * 60; //time + hours
+				Rakuun_DB_Containers::getUserBannedContainer()->save($ban);
+			}
+		}
 	}
 	
 	public static function unlock(Rakuun_DB_User $user) {
 		Rakuun_GameSecurity::get()->removeFromGroup($user, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_LOCKED));
+		
+		$options = array();
+		$options['conditions'][] = array('user = ?', $user);		
+		$timeban = Rakuun_DB_Containers::getUserBannedContainer()->selectFirst($options);
+		Rakuun_DB_Containers::getUserBannedContainer()->delete($timeban);
 	}
 	
 	public static function logout() {

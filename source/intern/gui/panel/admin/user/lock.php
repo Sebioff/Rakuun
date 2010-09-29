@@ -21,11 +21,13 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Lock extends GUI_Panel {
 
 		$this->addPanel($user = new Rakuun_GUI_Control_UserSelect('lockuser', $this->user, 'User'));
 		$user->addValidator(new GUI_Validator_Mandatory());
+		$this->addPanel($timeban = new GUI_Control_Digitbox('timeban', 0, 'Zeit in Stunden (0=dauerhafte Sperre'));
 		$this->addPanel(new GUI_Control_SubmitButton('lock', 'User sperren'));
 	}
 	
 	public function onLock() {
 		$user = $this->lockuser->getUser();
+		$timeban = $this->timeban->getValue();
 		
 		if (Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_LOCKED)) {
 			$this->addError('Spieler ist bereits gesperrt');
@@ -34,7 +36,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Lock extends GUI_Panel {
 		if ($this->hasErrors())
 			return;
 		
-		Rakuun_User_Manager::lock($user);
+		Rakuun_User_Manager::lock($user, $timeban);
 	}
 }
 
