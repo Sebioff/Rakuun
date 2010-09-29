@@ -81,19 +81,29 @@ body.index_main .rakuun_box {
 	float:right;
 }
 
-.rakuun_box_register .core_gui_submitbutton {
-	color:#d1a362;
-}
-
 input {
 	background-color:#000000;
 	border:1px solid #163250;
 	color:#888888;
 }
 
+.core_gui_button_highlighted {
+	color:#d1a362;
+}
+
 /* $2  -  Registration -------------------------------------------------------*/
 
 /* $3  -  Login --------------------------------------------------------------*/
+.rakuun_box_login .core_gui_submitbutton {
+	float:left;
+}
+
+.rakuun_box_login .rakuun_testaccount_login {
+	border:1px solid #163250;
+	float:left;
+	margin-left:5px;
+	padding:1px 3px;
+}
 
 /* $4  -  News ---------------------------------------------------------------*/
 .rakuun_box_news

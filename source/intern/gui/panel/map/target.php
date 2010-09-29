@@ -58,7 +58,10 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$energyPriority->addClasses('rakuun_map_target_priorities');
 		$this->addPanel(new Rakuun_GUI_Panel_Info('destroy_buildings_label', 'Gebäude zerstören', 'Je größer die Angriffskraft, desto größer die Wahrscheinlichkeit, dass eine Stufe eines Gebäudes zerstört wird. Die maximale Wahrscheinlichkeit beträgt '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_MAX_PROBABILITY.'% und kann mit einer Angriffskraft von '.Rakuun_Cronjob_Script_Fight::DESTRUCTION_NEEDED_FORCE_FOR_MAX.' erreicht werden. Gegen Feinde, mit denen man sich im Krieg befindet, wird nur die Hälfte dessen benötigt.'));
 		$this->addPanel($state = new GUI_Control_HiddenBox('state', self::STATE_PREPARING));
-		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Vorbereiten...'));
+		if (Rakuun_GameSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_GameSecurity::PRIVILEGE_PARTICIPATE_IN_FIGHTS))
+			$this->addPanel(new GUI_Control_SubmitButton('submit', 'Vorbereiten...'));
+		else
+			$this->addPanel(new GUI_Panel_Text('submit', 'Fehlende Berechtigung zum Kämpfen'));
 	}
 	
 	public function onSubmit() {
@@ -102,6 +105,10 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 				if ($this->destroyBuildings->getSelected() && !$targetUser->canBeBashed(Rakuun_User_Manager::getCurrentUser())) {
 					$this->addError(sprintf('Der Spieler hat weniger als %d%% deiner eigenen Punktzahl, daher können seine Gebäude nicht zerstört werden.', RAKUUN_NOOB_SECURE_PERCENTAGE * 100));
 				}
+			}
+			
+			if (!Rakuun_GameSecurity::get()->hasPrivilege($targetUser, Rakuun_GameSecurity::PRIVILEGE_PARTICIPATE_IN_FIGHTS)) {
+				$this->addError('Dieser Spieler kann nicht an Kämpfen teilnehmen.');
 			}
 		}
 		else {

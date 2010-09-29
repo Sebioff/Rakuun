@@ -12,4 +12,7 @@
 	<? endif; ?>
 	<? $this->displayPanel('base64'); ?>
 	<? $this->displayPanel('submit'); ?>
+	<? if ($this->hasPanel('testaccount_login')): ?>
+		<? $this->displayPanel('testaccount_login'); ?>
+	<? endif; ?>
 </div>

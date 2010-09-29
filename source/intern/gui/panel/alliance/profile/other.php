@@ -25,7 +25,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Profile_Other extends GUI_Panel {
 		$this->addPanel(new Rakuun_GUI_Panel_Box('memberbox', new Rakuun_Intern_GUI_Panel_Alliance_Members('members', $alliance), 'Mitglieder'));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('databases', new Rakuun_Intern_GUI_Panel_Alliance_Databases('databases', $alliance), 'Datenbankteile der Allianz'));
 		$this->addPanel(new Rakuun_GUI_Panel_Box('diplomacy', new Rakuun_Intern_GUI_Panel_Alliance_Diplomacy_Overview('diplomacy_extern'), 'Diplomatische Beziehungen'));
-		if (!Rakuun_User_Manager::getCurrentUser()->alliance)
+		if (!Rakuun_User_Manager::getCurrentUser()->alliance && Rakuun_GameSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_GameSecurity::PRIVILEGE_JOIN_ALLIANCES))
 			$this->addPanel(new Rakuun_GUI_Panel_Box('application', new Rakuun_Intern_GUI_Panel_Alliance_Applications_Application('application'), 'Bei Allianz bewerben'));
 	}
 }

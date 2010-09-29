@@ -237,7 +237,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	}
 	
 	/**
-	 * Checks the given user can destroy buildings of this user
+	 * Checks if the given user can destroy buildings of this user
 	 * @param[in] Rakuun_DB_User user who wants to attack
 	 * @return boolean true, if the given user can destroy buildings of this user,
 	 * false otherwise

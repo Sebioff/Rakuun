@@ -105,6 +105,9 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 			if ($sender->isInNoob())
 				$this->addError('Du darfst dich nicht im Noobschutz befinden, um den Molekulartransmitter benutzen zu können');
 			
+			if (!Rakuun_GameSecurity::get()->hasPrivilege($recipient, Rakuun_GameSecurity::PRIVILEGE_USE_MOLECULARTRANSMITTER))
+				$this->addError('Dieser Spieler kann den Molekulartransmitter nicht benutzen.');
+			
 			// we have to check here for another time
 			if ($this->hasErrors())
 				return;

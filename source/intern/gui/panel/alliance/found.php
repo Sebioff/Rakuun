@@ -67,7 +67,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Found extends GUI_Panel {
 		$allianceBuildings->alliance = $alliance;
 		Rakuun_DB_Containers::getAlliancesBuildingsContainer()->save($allianceBuildings);
 		DB_Connection::get()->commit();
-		Router::get()->getCurrentModule()->invalidate();
+		$this->getModule()->redirect(App::get()->getInternModule()->getSubmodule('alliance')->getURL());
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

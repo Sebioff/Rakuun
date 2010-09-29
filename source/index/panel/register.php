@@ -21,13 +21,14 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$mail->addValidator(new GUI_Validator_Mandatory());
 		$mail->addValidator(new GUI_Validator_Mail());
 		$this->addPanel(new GUI_Control_HiddenBox('base64'));
-		$this->addPanel(new GUI_Control_SubmitButton('submit', I18N::translate('Anmelden')));
+		$this->addPanel($submit = new GUI_Control_SubmitButton('submit', I18N::translate('Anmelden')));
+		$submit->addClasses('core_gui_button_highlighted');
 	}
 	
 	public function afterInit() {
 		parent::afterInit();
 		
-		if (!Rakuun_User_Manager::isMasterUser() && (!RAKUUN_REGISTRATION_ENABLED || RAKUUN_ROUND_STARTTIME > time()) && (!Rakuun_User_Manager::getCurrentUser() || !Rakuun_TeamSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::PRIVILEGE_BACKENDACCESS))) {
+		if (Rakuun_Game::isRegistrationDisabled()) {
 			$this->setTemplate(dirname(__FILE__).'/register_disabled.tpl');
 			return;
 		}
@@ -52,7 +53,8 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		if ($this->hasErrors())
 			return;
 			
-		self::registerUser($this->username->getValue(), $this->password->getValue(), $this->mail->getValue());
+		$user = self::registerUser($this->username->getValue(), $this->password->getValue(), $this->mail->getValue());
+		Rakuun_Intern_Log_UserActivity::log($user, Rakuun_Intern_Log::ACTION_ACTIVITY_REGISTRATION, base64_decode($this->base64->getValue()));
 		
 		$this->setTemplate(dirname(__FILE__).'/register_successful.tpl');
 	}
@@ -128,7 +130,6 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$units->attackSequence = Rakuun_Intern_Production_Unit::DEFAULT_ATTACK_SEQUENCE;
 		Rakuun_DB_Containers::getUnitsContainer()->save($units);
 		
-		Rakuun_Intern_Log_UserActivity::log($user, Rakuun_Intern_Log::ACTION_ACTIVITY_REGISTRATION, base64_decode($this->base64->getValue()));
 		Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_EMAIL, $user->mail);
 		Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_PASSWORD, $user->password);
 		DB_Connection::get()->commit();
@@ -162,16 +163,16 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 			'Hi '.$user->name.',<br/>
 			<b>willkommen auf Rakuun!</b>
 			<br/>
-			Als erstes solltest du das Tutorial meistern. Der Tutor (immer oben auf jeder Seite) wird dir alles, was du für den Anfang brauchst, genau erklären. 
+			Als erstes solltest du das Tutorial meistern. Der Tutor (immer oben auf jeder Seite) wird dir alles, was du für den Anfang brauchst, genau erklären.
 			Hier werden dir auch schon viele Tipps gegeben.
 			<br/>
 			Falls du Probleme bei Rakuun hast, kannst du den '.$supportlink->render()
-			.' anschreiben - wir beantworten alle deine Fragen gerne! 
-			Ansonsten kann du deine Fragen auch in der Shoutbox stellen.  
+			.' anschreiben - wir beantworten alle deine Fragen gerne!
+			Ansonsten kann du deine Fragen auch in der Shoutbox stellen.
 			Du kannst auch gerne in unser '.$ticketlink->render().'
 			oder in unseren IRC-Channel (Server: Gamesurge (irc.gamesurge.net), Channel: #rakuun) kommen!
 			<br/>
-			Zur Zeit steht dein Account unter <b>Schutz</b>, d.h. er kann nicht 
+			Zur Zeit steht dein Account unter <b>Schutz</b>, d.h. er kann nicht
 			angegriffen werden!
 			Wie lange dieser Schutz besteht, kannst du auf deiner Startseite sehen.
 			Früher oder später wird er allerdings verfallen. Sobald du den Schutz verlassen hast, kannst du jederzeit in den Schutz

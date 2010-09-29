@@ -99,7 +99,14 @@ class Rakuun_Module extends Module {
 			Rakuun_TeamSecurity::get()->addToGroup($testUser, Rakuun_TeamSecurity::get()->getGroup(Rakuun_TeamSecurity::GROUP_USERMANAGERS));
 		}
 		
-		$demoUser = Rakuun_Index_Panel_Register::registerUser('Demo', 'demo');
+		$demoUser = Rakuun_Index_Panel_Register::registerUser(RAKUUN_TESTACCOUNT_NAME, RAKUUN_TESTACCOUNT_PASSWORD);
+		Rakuun_GameSecurity::get()->addToGroup($demoUser, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_DEMO));
+		// FIXME workaround for a framework limitation, see DB_Record::__set() fixme note
+		$demoUser = Rakuun_DB_Containers::getUserContainer()->selectByPK($demoUser);
+		// TODO refactor into own method
+		$demoUser->activationTime = time();
+		$demoUser->save();
+		Rakuun_DB_Containers::getUserActivationContainer()->deleteByUser($demoUser);
 		
 		// Remove upload directory and its content
 		IO_Utils::deleteFolder(GUI_Control_FileUpload::getUploadDirectory());

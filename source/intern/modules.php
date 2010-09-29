@@ -23,7 +23,7 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 		// modules that aren't accessible by sitter
 		if (!Rakuun_User_Manager::isSitting()) {
 			if ($user) {
-				if ($user->buildings->moleculartransmitter > 0)
+				if ($user->buildings->moleculartransmitter > 0 && Rakuun_GameSecurity::get()->hasPrivilege($user, Rakuun_GameSecurity::PRIVILEGE_USE_MOLECULARTRANSMITTER))
 					$this->addSubmodule(new Rakuun_Intern_Module_Trade('trade'));
 
 				if ($user->alliance != null) {

@@ -14,7 +14,10 @@ class Rakuun_GameSecurity extends Security {
 	
 	const PRIVILEGE_LOGIN = 1;
 	const PRIVILEGE_COLOREDNAME = 2;
-	const PRIVILEGE_DELETEACCOUNT = 3;
+	const PRIVILEGE_MODIFY_PROFILE = 3;
+	const PRIVILEGE_PARTICIPATE_IN_FIGHTS = 4;
+	const PRIVILEGE_JOIN_ALLIANCES = 5;
+	const PRIVILEGE_USE_MOLECULARTRANSMITTER = 5;
 	
 	private $vipGroups = array(self::GROUP_TEAM, self::GROUP_DONORS, self::GROUP_SPONSORS, self::GROUP_BUGREPORTERS);
 	
@@ -56,6 +59,15 @@ class Rakuun_GameSecurity extends Security {
 		$groupNeedsActivation->groupIdentifier = self::GROUP_NEEDS_ACTIVATION;
 		$this->getContainerGroups()->save($groupNeedsActivation);
 		$this->setPrivilege(self::PRIVILEGE_LOGIN, $groupNeedsActivation, false);
+		
+		$groupDemoAccounts = new DB_Record();
+		$groupDemoAccounts->name = 'Test-Accounts';
+		$groupDemoAccounts->groupIdentifier = self::GROUP_DEMO;
+		$this->getContainerGroups()->save($groupDemoAccounts);
+		$this->setPrivilege(self::PRIVILEGE_MODIFY_PROFILE, $groupDemoAccounts, false);
+		$this->setPrivilege(self::PRIVILEGE_PARTICIPATE_IN_FIGHTS, $groupDemoAccounts, false);
+		$this->setPrivilege(self::PRIVILEGE_JOIN_ALLIANCES, $groupDemoAccounts, false);
+		$this->setPrivilege(self::PRIVILEGE_USE_MOLECULARTRANSMITTER, $groupDemoAccounts, false);
 		
 		$groupLocked = new DB_Record();
 		$groupLocked->name = 'Gesperrte Spieler';

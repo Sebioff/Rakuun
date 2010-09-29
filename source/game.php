@@ -4,6 +4,14 @@
  * Globally needed functions
  */
 abstract class Rakuun_Game {
+	public static function isLoginDisabled() {
+		return (!Rakuun_User_Manager::isMasterUser() && (RAKUUN_ROUND_STARTTIME > time()) && (!Rakuun_User_Manager::getCurrentUser() || !Rakuun_TeamSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::PRIVILEGE_BACKENDACCESS)));
+	}
+	
+	public static function isRegistrationDisabled() {
+		return (!Rakuun_User_Manager::isMasterUser() && (!RAKUUN_REGISTRATION_ENABLED || RAKUUN_ROUND_STARTTIME > time()) && (!Rakuun_User_Manager::getCurrentUser() || !Rakuun_TeamSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::PRIVILEGE_BACKENDACCESS)));
+	}
+	
 	public static function sendErrorMail($backtrace, $customMessage, $errorType, $subject, $additionalInformation = '') {
 		$developers = array();
 		try {
