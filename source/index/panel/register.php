@@ -143,7 +143,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 				$activationURL = App::get()->getActivationModule()->getURL($params);
 				$templateEngine = new GUI_TemplateEngine();
 				$templateEngine->username = $user->nameUncolored;
-				$templateEngine->password = $this->password;
+				$templateEngine->password = '-dir bekannt-';
 				$templateEngine->activationURL = $activationURL;
 				// TODO modify content (might not be correct in the new version)
 				$mail->setMessage($templateEngine->render(dirname(__FILE__).'/register_mail.tpl'));
