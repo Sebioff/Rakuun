@@ -10,9 +10,9 @@ class Rakuun_Intern_GUI_Panel_Alliance_Edit extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/edit.tpl');
 		$user = Rakuun_User_Manager::getCurrentUser();
-		$this->addPanel($description = new GUI_Control_TextArea('description', $user->alliance->description, 'Öffentlicher Beschreibungstext'));
+		$this->addPanel($description = new GUI_Control_TextArea('description', $user->alliance->description, 'Öffentliche Beschreibung'));
 		$description->addValidator(new GUI_Validator_HTML());
-		$this->addPanel($intern = new GUI_Control_TextArea('intern', $user->alliance->intern, 'Interner Beschreibungstext'));
+		$this->addPanel($intern = new GUI_Control_TextArea('intern', $user->alliance->intern, 'Interne Beschreibung'));
 		$intern->addValidator(new GUI_Validator_HTML());
 		$this->addPanel($picture = new GUI_Control_FileUpload('picture', 102400, 'Profilbild'));
 		$picture->setAllowedFiletypes(array(GUI_Control_FileUpload::TYPE_GIF, GUI_Control_FileUpload::TYPE_JPEG, GUI_Control_FileUpload::TYPE_PNG));

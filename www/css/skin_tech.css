@@ -641,6 +641,10 @@ body.skin_tech
 	width:590px;
 }
 
+.skin_tech .module_diplomacy .left_col {
+	margin-left:50px;
+}
+
 .skin_tech .module_diplomacy .right_col {
 	float:left;
 	width:400px;
@@ -670,4 +674,26 @@ body.skin_tech
 	margin-left:80px;
 	margin-right:5px;
 	width:428px;
+}
+
+.skin_tech .module_edit .alliance_edit_leftcol,
+.skin_tech .module_edit .alliance_edit_rightcol {
+	float:left;
+	margin:0px 2px;
+	width:484px;
+}
+
+.skin_tech .module_edit .alliance_edit_leftcol .rakuun_box,
+.skin_tech .module_edit .alliance_edit_rightcol .rakuun_box {
+	float:none;
+}
+
+.skin_tech .module_edit .alliance_edit_rightcol .rakuun_box_alliance_rankselect {
+	float:left;
+	width:170px;
+}
+
+.skin_tech .module_edit .alliance_edit_rightcol .rakuun_box_alliance_rankedit {
+	float:left;
+	width:285px;
 }
