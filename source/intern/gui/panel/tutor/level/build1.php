@@ -7,7 +7,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Build1 extends Rakuun_Intern_GUI_Panel
 	}
 	
 	public function getDescription() {
-		$buildLink = new GUI_Control_Link('build', 'Baumenü', App::get()->getInternModule()->getSubmodule('build')->getUrl());
+		$buildLink = new GUI_Control_Link('build', 'Baumenü ("Produktion -&gt; Gebäude")', App::get()->getInternModule()->getSubmodule('build')->getUrl());
 		return '
 			Das wichtigste zu Beginn ist die Produktion von Rohstoffen zu erhöhen.
 			Im Moment kannst du lediglich Eisen und Beryllium abbauen, diese bilden die Grundlage

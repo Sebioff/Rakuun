@@ -14,7 +14,7 @@ class Rakuun_Index_Module extends Rakuun_Module {
 		$this->setMetaTag('keywords', 'browsergame, scifi, spielziel, strategie, weltraum');
 		$navigation = new CMS_Navigation();
 		$navigation->addModuleNode(App::get()->getIndexModule(), 'Home');
-		$navigation->addModuleNode(App::get()->getInfoModule(), 'Infos');
+		$navigation->addModuleNode(App::get()->getInfosModule(), 'Infos');
 		$navigation->addModuleNode(App::get()->getNewsModule(), 'News');
 		$navigation->addModuleNode(App::get()->getStoryModule(), 'Story');
 		$navigation->addModuleNode(App::get()->getScreenshotsModule(), 'Screenshots');

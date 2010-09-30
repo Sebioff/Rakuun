@@ -3,7 +3,7 @@
 $app = App::get();
 $app->addModule(new Rakuun_Index_Module_Index('index'));
 $app->addModule(new Rakuun_Index_Module_News('news'));
-$app->addModule(new Rakuun_Index_Module_Info('info'));
+$app->addModule(new Rakuun_Index_Module_Info('infos'));
 $app->addModule(new Rakuun_Index_Module_Story('story'));
 $app->addModule(new Rakuun_Index_Module_Screenshots('screenshots'));
 $app->addModule(new Rakuun_Index_Module_Activation('activation'));
