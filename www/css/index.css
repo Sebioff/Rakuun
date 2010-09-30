@@ -91,6 +91,12 @@ input {
 	color:#d1a362;
 }
 
+/* Fix for IE password box length problem */
+.core_gui_textbox,
+.core_gui_passwordbox {
+	font-family:Arial;
+}
+
 /* $2  -  Registration -------------------------------------------------------*/
 
 /* $3  -  Login --------------------------------------------------------------*/

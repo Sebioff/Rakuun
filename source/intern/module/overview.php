@@ -6,6 +6,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		
 		$this->setPageTitle('Übersicht');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/overview.tpl');
+		$this->addJsRouteReference('js', 'fb.js');
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
 		

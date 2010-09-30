@@ -12,6 +12,12 @@ class Rakuun_Index_Module_Index extends Rakuun_Index_Module {
 		
 		$this->setPageTitle('Runde '.RAKUUN_ROUND_NAME);
 		$this->setMetaTag('google-site-verification', 'eIrItgI6k6mLi528ji-izDF1xubnjvqa3QYJABicHMo');
+		$this->setMetaTag('og:title', 'Rakuun, das SciFi-Browsergame');
+		$this->setMetaTag('og:type', 'website');
+		$this->setMetaTag('og:image', 'http://www.rakuun.de/Rakuun/www/images/logo_80x80.jpg');
+		$this->setMetaTag('og:url', 'http://www.rakuun.de');
+		$this->setMetaTag('og:site_name', 'Rakuun');
+		$this->setMetaTag('og:app_id', '');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/index.tpl');
 		$this->contentPanel->addPanel($infobox = new Rakuun_GUI_Panel_Box('serverinfo', new Rakuun_Index_Panel_Serverinfo('content'), 'Serverinfo - Runde '.RAKUUN_ROUND_NAME));
 		$this->contentPanel->addPanel($registerBox = new Rakuun_GUI_Panel_Box('register', new Rakuun_Index_Panel_Register('content'), 'Schnellregistrierung'));

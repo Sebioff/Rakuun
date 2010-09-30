@@ -461,6 +461,15 @@ body.skin_tech
 	margin:5px 0px;
 }
 
+.skin_tech .fb_iframe_widget {
+	float:left;
+	margin-left:50px;
+}
+
+.skin_tech .twitter-share-button {
+	float:left;
+}
+
 /* $7  -  Techtree -----------------------------------------------------------*/
 .skin_tech #ctn_techtree_rows .rakuun_box {
 	float:left;

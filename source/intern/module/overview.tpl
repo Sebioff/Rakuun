@@ -38,6 +38,9 @@
 	<? $this->displayPanel('units'); ?>
 	
 	<div id="ctn_ad_buttons">
+		<fb:like href="http://www.rakuun.de" layout="button_count" width="90"></fb:like><div id="fb-root"></div>
+		<a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="RakuunBG">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<br class="clear"/>
 		<a href="http://www.galaxy-news.de/?page=charts&amp;op=vote&amp;game_id=67" class="gnews_link" target="_blank"><img src="http://www.galaxy-news.de/images/vote.gif" border="0" alt="Voten!" /></a>
 		<br/>
 		<script type="text/javascript"><!--
