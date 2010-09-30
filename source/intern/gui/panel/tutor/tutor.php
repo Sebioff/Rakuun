@@ -20,7 +20,9 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 			$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Profile());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Build2());
 		
-		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sitter());
+		// fix for demo account
+		if (Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_DEMO))
+			$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sitter());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Irc());
 		
 		// start to produce energy and people
