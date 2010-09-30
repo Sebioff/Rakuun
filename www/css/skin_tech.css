@@ -645,6 +645,11 @@ body.skin_tech
 }
 
 /* $15 -  Alliances ----------------------------------------------------------*/
+.skin_tech .module_alliance #ctn_rakuun_alliance_none {
+	margin:0px auto;
+	width:290px;
+}
+
 .skin_tech .module_applications .rakuun_box_applications {
 	margin-left:2px;
 	margin-right:2px;
@@ -712,4 +717,15 @@ body.skin_tech
 .skin_tech .module_edit .alliance_edit_rightcol .rakuun_box_alliance_rankedit {
 	float:left;
 	width:285px;
+}
+
+.skin_tech .module_interact .rakuun_box_alliance_account {
+	margin-left:260px;
+	width:200px;
+}
+
+.skin_tech .module_interact .rakuun_box_alliance_leave {
+	float:none;
+	margin:0px auto;
+	width:220px;
 }

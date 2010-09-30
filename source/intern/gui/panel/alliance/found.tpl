@@ -1,12 +1,12 @@
 <? if($this->hasErrors()): ?>
 	<? $this->displayErrors() ?>
 <? endif ?>
-Eisen: <?= $this->getIronCosts() ?>
+Kosten Eisen: <?= $this->getIronCosts(); ?>
 <br />
-Beryllium: <?= $this->getBerylliumCosts() ?>
+Kosten Beryllium: <?= $this->getBerylliumCosts(); ?>
 <br />
-<? $this->displayLabelForPanel('name') ?> <? $this->displayPanel('name') ?>
+<? $this->displayLabelForPanel('name'); ?> <? $this->displayPanel('name'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('tag') ?> <? $this->displayPanel('tag') ?>
+<? $this->displayLabelForPanel('tag'); ?> <? $this->displayPanel('tag'); ?>
 <br class="clear" />
-<? $this->displayPanel('submit') ?>
+<? $this->displayPanel('submit'); ?>

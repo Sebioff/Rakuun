@@ -3,7 +3,7 @@
 <? if (($imagePath = Router::get()->getStaticRoute('images', 'infopictures/'.$unit->getInternalName().'.jpg')) != '/'): ?>
 	<div class="rakuun_infopicture">
 		<? $size = getimagesize(PROJECT_PATH.'/www/images/infopictures/'.$unit->getInternalName().'.jpg'); ?>
-		<img src="<?= $imagePath; ?>" <?= ($size[0] > 480) ? 'width="480"' : '' ?> />
+		<img src="<?= $imagePath; ?>" <?= ($size[0] > 480) ? 'width="480"' : '' ?> alt="<?= $unit->getName(); ?>" />
 	</div>
 <? endif; ?>
 <?= $unit->getLongDescription(); ?>
