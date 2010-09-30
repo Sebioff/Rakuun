@@ -94,7 +94,7 @@ input {
 /* Fix for IE password box length problem */
 .core_gui_textbox,
 .core_gui_passwordbox {
-	font-family:Arial;
+	font-family:Verdana,Helvetica,sans-serif;
 }
 
 /* $2  -  Registration -------------------------------------------------------*/
