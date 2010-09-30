@@ -128,11 +128,11 @@ input {
 }
 
 /* $5  -  Infos --------------------------------------------------------------*/
-body.info_main ul {
+body.infos_main ul {
 	list-style:disc outside none;
 	padding-left:15px;
 }
 
-body.info_main ul li {
+body.infos_main ul li {
 	padding:2px 0px;
 }
