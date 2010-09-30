@@ -368,6 +368,7 @@ body.skin_tech
 .skin_tech #ctn_head #ctn_navigation li a:hover,
 .skin_tech #ctn_head #ctn_navigation li.core_navigation_node_inpath a {
 	background:transparent url('../images/navigation_hover_background.gif') repeat-x left top;
+	zoom:1; /* Fix for IE 7 */
 }
 
 .skin_tech #ctn_head #ctn_navigation ul ul li.core_navigation_node a {
