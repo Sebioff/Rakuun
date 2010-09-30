@@ -5,6 +5,7 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 	
 	public function __construct($name, $title = '') {
 		parent::__construct($name, $title);
+		$user = Rakuun_User_Manager::getCurrentUser();
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Start());
 		
@@ -13,7 +14,10 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_People1());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources2());
-		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Profile());
+		
+		// fix for demo account
+		if (Rakuun_TeamSecurity::get()->isInGroup($user, Rakuun_TeamSecurity::GROUP_DEVELOPER))
+			$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Profile());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Build2());
 		
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sitter());
