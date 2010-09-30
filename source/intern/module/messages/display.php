@@ -24,7 +24,8 @@ class Rakuun_Intern_Module_Messages_Display extends Rakuun_Intern_Module {
 		
 		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Message_Categories('categories', 'Nachrichtenkategorien'));
 		if ($message) {
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Message('message', $message));
+			$this->contentPanel->addPanel($messageBox = new Rakuun_GUI_Panel_Box('message', new Rakuun_Intern_GUI_Panel_Message('message', $message)));
+			$messageBox->addClasses('rakuun_box_message');
 			if ($message->canBeRepliedTo()) {
 				$replyTo = array($message->sender);
 				if ($message->type == Rakuun_Intern_IGM::TYPE_PRIVATE && $this->getParam('replyTo') == 'all') {

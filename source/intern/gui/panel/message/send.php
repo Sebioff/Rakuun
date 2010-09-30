@@ -23,9 +23,12 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 		$this->addPanel($recipients = new Rakuun_GUI_Control_MultiUserSelect('recipients', null, 'Empfänger'));
 		$recipients->addValidator(new GUI_Validator_Mandatory());
 		$recipientNames = array();
-		foreach ($this->sendToUsers as $user)
-			$recipientNames[] = $user->nameUncolored;
-		$recipients->setValue(implode(', ', $recipientNames));
+		if ($this->sendToUsers) {
+			foreach ($this->sendToUsers as $user)
+				$recipientNames[] = $user->nameUncolored;
+			$recipientNames = array_merge($recipientNames, explode(', ', $recipients->getValue()));
+			$recipients->setValue(implode(', ', $recipientNames));
+		}
 		$this->addPanel(new GUI_Control_TextBox('subject', $this->replyToMessage ? 'RE: '.Text::escapeHTML($this->replyToMessage->subject) : '', 'Betreff'));
 		if ($this->replyToMessage) {
 			$time = new GUI_Panel_Date('date', $this->replyToMessage->time);

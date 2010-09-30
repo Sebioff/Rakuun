@@ -299,23 +299,27 @@ table.boardview td.posting_count {
 	margin-top:4px;
 }
 
-.rakuun_message_envelope
-{
-	border:1px solid #000000;
-	cursor:pointer;
+#ctn_content .rakuun_box_message_envelope {
+	float:none;
+	margin:0px auto;
 	margin-bottom:4px;
-	padding:4px;
 	width:500px;
 }
+	
+.rakuun_box_message_envelope .content {
+	cursor:pointer;
+}
 
-.rakuun_message
+#ctn_content .rakuun_box_message
 {
+	float:none;
+	margin:0px auto;
 	width:500px;
 }
 
 .rakuun_message_head
 {
-	border:1px solid #000000;
+	border-bottom:1px solid #78787D;
 	padding:4px;
 }
 
@@ -331,8 +335,6 @@ table.boardview td.posting_count {
 
 .rakuun_message_content
 {
-	border:1px solid #000000;
-	border-top:none;
 	padding:4px;
 }
 

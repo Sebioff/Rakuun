@@ -46,7 +46,8 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 		
 		foreach ($this->getMessagesContainer()->select($filterOptions) as $message) {
 			$envelope = Rakuun_Intern_GUI_Panel_Message_Categories::getMessageEnvelopeForCategory($this->category);
-			$this->addEnvelope(new $envelope('message_'.$message->getPK(), $message));
+			$this->addEnvelope($envelopeBox = new Rakuun_GUI_Panel_Box('message_'.$message->getPK(), new $envelope('message_'.$message->getPK(), $message)));
+			$envelopeBox->addClasses('rakuun_box_message_envelope');
 		}
 		
 		if ($this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SENT && $this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS) {
@@ -97,7 +98,7 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 		return $this->messagesContainer;
 	}
 	
-	public function addEnvelope(Rakuun_Intern_GUI_Panel_Message_Envelope $envelope) {
+	public function addEnvelope(GUI_Panel $envelope) {
 		$this->addPanel($envelope);
 		$this->envelopes[] = $envelope;
 	}
