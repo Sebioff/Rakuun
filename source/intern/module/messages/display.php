@@ -33,13 +33,15 @@ class Rakuun_Intern_Module_Messages_Display extends Rakuun_Intern_Module {
 						$replyTo[] = Rakuun_DB_Containers::getUserContainer()->selectByPK($copyRecipient->value);
 					}
 				}
-				$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('reply', new Rakuun_Intern_GUI_Panel_Message_Send('reply', 'Antworten', $message, $replyTo)), 'Antworten');
+				$this->contentPanel->addPanel($replyBox = new Rakuun_GUI_Panel_Box('reply', new Rakuun_Intern_GUI_Panel_Message_Send('reply', 'Antworten', $message, $replyTo)), 'Antworten');
+				$replyBox->addClasses('rakuun_box_message_reply');
 			}
 		}
 		
 		if ($ticket) {
 			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Message_Support_Ticket('ticket', $ticket));
-				$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('replyticket', new Rakuun_Intern_GUI_Panel_Message_Support('replyticket', 'Antworten', $ticket)), 'Antworten');
+			$this->contentPanel->addPanel($replyBox = new Rakuun_GUI_Panel_Box('replyticket', new Rakuun_Intern_GUI_Panel_Message_Support('replyticket', 'Antworten', $ticket)), 'Antworten');
+			$replyBox->addClasses('rakuun_box_message_reply');
 		}
 	}
 }
