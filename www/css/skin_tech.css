@@ -615,6 +615,10 @@ body.skin_tech
 	text-align:right;
 }
 
+.skin_tech .module_info .rakuun_infopicture {
+	text-align:center;
+}
+
 /* $13 -  Profile ------------------------------------------------------------*/
 .skin_tech .module_showprofile .rakuun_user_profile_box {
 	float:none;

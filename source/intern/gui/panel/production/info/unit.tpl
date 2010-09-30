@@ -1,5 +1,11 @@
 <? /* @var $unit Rakuun_Intern_Production_Unit */ ?>
 <? $unit = $this->getProductionItem(); ?>
+<? if (($imagePath = Router::get()->getStaticRoute('images', 'infopictures/'.$unit->getInternalName().'.jpg')) != '/'): ?>
+	<div class="rakuun_infopicture">
+		<? $size = getimagesize(PROJECT_PATH.'/www/images/infopictures/'.$unit->getInternalName().'.jpg'); ?>
+		<img src="<?= $imagePath; ?>" <?= ($size[0] > 480) ? 'width="480"' : '' ?> />
+	</div>
+<? endif; ?>
 <?= $unit->getLongDescription(); ?>
 <br/>
 <? foreach($this->getProductionItem()->getAttributes() as $attributeProperties): ?>
