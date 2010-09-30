@@ -73,7 +73,11 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('stockmarket'))
 			$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('stockmarket'), 'Börse', array('rakuun_navigation_node_stockmarket'));
 		
-		$militaryNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('map'), 'Militär', array('rakuun_navigation_node_map'));
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('map'))
+			$militaryModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('map');
+		else
+			$militaryModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('warsim');
+		$militaryNode = $navigation->addModuleNode($militaryModule, 'Militär', array('rakuun_navigation_node_map'));
 		$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('map'), 'Karte');
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('warsim'))
 			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('warsim'), 'WarSim', array('rakuun_navigation_node_warsim'));

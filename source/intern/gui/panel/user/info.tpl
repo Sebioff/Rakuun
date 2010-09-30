@@ -44,5 +44,5 @@ Koordinaten:
 	<? else: ?>
 		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
 	<? endif; ?>
-	<?= $output; ?>.
+	<?= $output; ?> ist.
 <? endif; ?>
