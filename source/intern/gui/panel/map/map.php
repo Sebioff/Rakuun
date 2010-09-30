@@ -18,6 +18,10 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		$this->targetUser = $targetUser;
 		$this->cityX = $cityX;
 		$this->cityY = $cityY;
+		if (!$cityX && !$cityY) {
+			$this->cityX = Rakuun_User_Manager::getCurrentUser()->cityX;
+			$this->cityY = Rakuun_User_Manager::getCurrentUser()->cityY;
+		}
 		$this->viewRectX = $cityX;
 		$this->viewRectY = $cityY;
 		if ($this->viewRectX == 0 && $this->viewRectY == 0) {
