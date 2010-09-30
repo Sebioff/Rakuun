@@ -110,9 +110,8 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 			$igm->setText('Du wurdest von '.$user->name.' als Sitter eingetragen.');
 			$igm->send();
 			Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_SITTER, $sitter->name);
-		} else {
+		} else if ($user->sitter && !$sitter)
 			Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_SITTER, 'kein Sitter');
-		}
 		$user->sitter = $sitter;
 		$user->tutorial = $this->contentPanel->tutorial->getSelected();
 		
