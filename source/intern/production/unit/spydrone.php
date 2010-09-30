@@ -22,7 +22,9 @@ class Rakuun_Intern_Production_Unit_Spydrone extends Rakuun_Intern_Production_Un
 			Die Etherstream Technologie eignet sich daher nicht für wirkliche Kampfeinheiten; die Wissenschaft wäre noch nichtmal in der Lage, Streamgeneratoren für wesentlich größere Gebilde zu bauen.
 			<br/>
 			<br/>
-			Spionagesonden können mit der Verbesserten Tarnung ausgestattete Einheiten nicht erkennen.');
+			Spionagesonden können mit der Verbesserten Tarnung ausgestattete Einheiten <b>nicht</b> erkennen.
+			<br/>
+			Eine Spionagesonde kann 2000 Def aushalten, um unbeschadet zur Heimatstadt zurückzukehren');
 	}
 }
 

@@ -26,14 +26,16 @@
 	<hr />
 	<? $this->displayPanel('unit_input'); ?>
 	<? if ($this->hasPanel('spydrone') || $this->hasPanel('cloaked_spydrone')): ?>
-		<h2>Spionage</h2>
+		<h2>Spionage</h2> 
 		<? if ($this->hasPanel('spydrone')): ?>
 			<? $this->displayLabelForPanel('spydrone'); ?> <? $this->displayPanel('spydrone'); ?>
 			<br class="clear" />
 		<? endif; ?>
 		<? if ($this->hasPanel('cloaked_spydrone')): ?>
 			<? $this->displayLabelForPanel('cloaked_spydrone'); ?> <? $this->displayPanel('cloaked_spydrone'); ?>
+			<br class="clear" />
 		<? endif; ?>
+		<? $this->displayPanel('spy_label'); ?>
 		<hr/>
 	<? endif; ?>
 	<br class="clear" />

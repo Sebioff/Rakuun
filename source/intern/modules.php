@@ -52,6 +52,7 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 			if ($user && $user->buildings->stockMarket > 0)
 				$this->addSubmodule(new Rakuun_Intern_Module_StockMarket('stockmarket'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Rules('rules'));
+			$this->addSubmodule(new Rakuun_Intern_Module_Guide('guide'));
 		}
 		// modules that are only accessible by sitter
 		else {

@@ -35,11 +35,14 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$this->addPanel(new GUI_Panel_Label('target_coords_label', $this->targetX, 'Koordinaten'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
 		$spydrone = Rakuun_Intern_Production_Factory::getUnit('spydrone');
-		if ($spydrone->getAmount() > 0)
+		if ($spydrone->getAmount() > 0) {
 			$this->addPanel(new GUI_Control_DigitBox($spydrone->getInternalName(), 0, $spydrone->getName(), 0, $spydrone->getAmount()));
+			$this->addPanel(new Rakuun_GUI_Panel_Info('spy_label', 'Spionagekraft', 'Je mehr Sonden zum Gegner geschickt werden, desto größer ist die Wahrscheinlichkeit, dass die Sonden unversehrt und mit kompletten Bericht zurückkehren.'));
+		}
 		$cloakedSpydrone = Rakuun_Intern_Production_Factory::getUnit('cloaked_spydrone');
-		if ($cloakedSpydrone->getAmount() > 0)
+		if ($cloakedSpydrone->getAmount() > 0) {
 			$this->addPanel(new GUI_Control_DigitBox($cloakedSpydrone->getInternalName(), 0, $cloakedSpydrone->getName(), 0, $cloakedSpydrone->getAmount()));
+		}
 		$this->addPanel(new GUI_Control_CheckBox('destroy_buildings'));
 		$this->addPanel($ironPriority = new GUI_Control_RadioButtonList('iron_priority', 'Priorität Eisen'));
 		$ironPriority->addItem('Niedrig', 1, true);

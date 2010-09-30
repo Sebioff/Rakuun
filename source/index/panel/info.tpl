@@ -1,3 +1,8 @@
+Bei dem kostenlosen SciFi-Browsergame Rakuun spielen mehrere Allianzen gegeneinander um den Sieg der Runde: den Bau und der Verteidigung eines gigantischen Raumschiffes
+<br/>
+<br/>
+<strong>Features:</strong>
+<br/>
 <ul>
 	<li>Keine erkaufbaren Spielvorteile wie Premiumaccounts o.ä.</li>
 	<li>Umfangreiche Echtzeitstatistiken</li>
