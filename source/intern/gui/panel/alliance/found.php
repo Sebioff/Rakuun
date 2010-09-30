@@ -61,8 +61,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Found extends GUI_Panel {
 		$leaderRank->groupIdentifier = Rakuun_Intern_Alliance_Security::GROUP_LEADERS;
 		Rakuun_Intern_Alliance_Security::get()->getContainerGroups()->save($leaderRank);
 		Rakuun_Intern_Alliance_Security::get()->addToGroup($user, $leaderRank);
-		// delete user's applications on other alliances
-		Rakuun_DB_Containers::getAlliancesApplicationsContainer()->deleteByUser($user);
+		// set applications to other alliances to STATUS_JOINED_OTHER
+		$applications = Rakuun_DB_Containers::getAlliancesApplicationsContainer()->selectByUser($user);
+		foreach ($applications as $application) {
+			$application->status = Rakuun_Intern_GUI_Panel_Alliance_Applications::STATUS_JOINED_OTHER;
+			$application->date = time();
+			Rakuun_DB_Containers::getAlliancesApplicationsContainer()->save($application);
+		}
 		$allianceBuildings = new DB_Record();
 		$allianceBuildings->alliance = $alliance;
 		Rakuun_DB_Containers::getAlliancesBuildingsContainer()->save($allianceBuildings);
