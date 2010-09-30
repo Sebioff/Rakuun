@@ -8,12 +8,12 @@
 			<dl>
 				<dt>Support</dt>
 				<dd>
-					<? // TODO replace with correct action/url as soon as support has been implemented
-					$link = new GUI_Control_Link(
+					<? $link = new GUI_Control_Link(
 						'support',
 						'write',
 						App::get()->getInternModule()->getSubmodule('messages')->getURL(array('category' => Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS))
 					); ?>
+					<? $link->addClasses('rakuun_gui_writemessage'); ?>
 					<? $link->display(); ?>
 				</dd>
 			</dl>
@@ -39,6 +39,7 @@
 										'$(\'#main-messages_content-send-send-recipients\').val($(\'#main-messages_content-send-send-recipients\').val() + \''.$entity->user->nameUncolored.', \');return false;'
 										// Link needs fallback-url
 									); ?>
+									<? $link->addClasses('rakuun_gui_writemessage'); ?>
 									<? $link->display(); ?>
 								</dd>
 							<? endforeach; ?>

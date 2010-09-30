@@ -16,7 +16,8 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton extends GUI_Panel_Text {
 		parent::init();
 		
 		$this->setAttribute('style', '
-			background-color:#CCCCCC;
+			background-color:#555555;
+			cursor:pointer;
 			float:left;
 			height:'.$this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px;
 			line-height:'.$this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE.'px;

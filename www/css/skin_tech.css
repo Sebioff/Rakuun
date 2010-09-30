@@ -415,6 +415,18 @@ body.skin_tech
 	text-align:center;
 }
 
+.skin_tech .module_messages .rakuun_gui_writemessage {
+	background:transparent url('../images/mail.gif') no-repeat left top;
+	display:block;
+	font-size:0px;
+	height:12px;
+	width:20px;
+}
+
+.skin_tech #ctn_messages_top {
+	margin-left:75px;
+}
+
 /* $6  -  Overview -----------------------------------------------------------*/
 .skin_tech .shout_header a.answerlink {
 	background:transparent url('../images/shoutbox_reply_icon.gif') no-repeat left top;
