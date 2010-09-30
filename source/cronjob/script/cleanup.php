@@ -28,6 +28,9 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 		$options['conditions'][] = array('is_yimtay = ?', false);
 		DB_Connection::get()->beginTransaction();
 		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $yimtayUser) {
+			if (Rakuun_GameSecurity::get()->isInGroup($yimtayUser, Rakuun_GameSecurity::GROUP_DEMO))
+				continue;
+			
 			$alliance = $yimtayUser->alliance;
 			$yimtayUser->cityName = 'Yimtay-City';
 			$yimtayUser->alliance = null;

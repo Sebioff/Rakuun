@@ -17,7 +17,7 @@ class Rakuun_Index_Module extends Rakuun_Module {
 		$navigation->addModuleNode(App::get()->getInfoModule(), 'Infos');
 		$navigation->addModuleNode(App::get()->getNewsModule(), 'News');
 		$navigation->addModuleNode(App::get()->getStoryModule(), 'Story');
-		//$navigation->addModuleNode(App::get()->getScreenshotsModule(), 'Screenshots');
+		$navigation->addModuleNode(App::get()->getScreenshotsModule(), 'Screenshots');
 		$this->mainPanel->params->navigation =  $navigation;
 	}
 }

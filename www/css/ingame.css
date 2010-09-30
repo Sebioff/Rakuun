@@ -466,7 +466,7 @@ img.rakuun_fightreport_marker
 	float:left;
 }
 
-/* $10  -  Map ----------------------------------------------------------------*/
+/* $10 -  Map ----------------------------------------------------------------*/
 .rakuun_map_legend_description
 {
 	margin-left:15px;
@@ -558,7 +558,7 @@ img.rakuun_fightreport_marker
 	margin-left:0px;
 }
 
-/* $12  -  Rules -------------------------------------------------------------*/
+/* $12 -  Rules --------------------------------------------------------------*/
 .module_rules #ctn_content ul {
 	list-style:disc outside none;
 	padding-left:15px;
