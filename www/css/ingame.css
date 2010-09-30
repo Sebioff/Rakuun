@@ -361,20 +361,20 @@ img.rakuun_fightreport_marker
 	float:none;
 }
 
-.shout_text,
-.shout_header
+.shout_text
 {
 	overflow:hidden;
 	word-wrap:break-word;
 }
 
-.shout_header
-{
+.shout_header {
 	font-weight:bold;
+	position:relative;
+	width:255px;
+	word-wrap:break-word;
 }
 
 .shout_text,
-.shout_header,
 .module_overview .core_gui_textarea
 {
 	width:268px;

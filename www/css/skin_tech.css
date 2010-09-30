@@ -431,9 +431,11 @@ body.skin_tech
 .skin_tech .shout_header a.answerlink {
 	background:transparent url('../images/shoutbox_reply_icon.gif') no-repeat left top;
 	display:block;
-	float:right;
 	font-size:0px;
 	height:14px;
+	position:absolute;
+	right:-14px;
+	top:0px;
 	width:10px;
 }
 
