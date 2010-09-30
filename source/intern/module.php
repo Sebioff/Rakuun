@@ -85,30 +85,32 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('summary'))
 			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('summary'), 'Zusammenfassung', array('rakuun_navigation_node_summary'));
 		
-		$allianceNode = $navigation->addModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
-		$allianceNode->addModuleNode($allianceModule, 'Übersicht');
-		if ($allianceModule->hasSubmodule('interact'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen');
-		if ($allianceModule->hasSubmodule('edit'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('edit'), 'Verwaltung');
-		if ($allianceModule->hasSubmodule('ranks'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('ranks'), 'Ränge');
-		if ($allianceModule->hasSubmodule('applications')) {
-			$options['conditions'][] = array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
-			$options['conditions'][] = array('status = ?', Rakuun_Intern_GUI_Panel_Alliance_Applications::STATUS_NEW);
-			$applications = Rakuun_DB_Containers::getAlliancesApplicationsContainer()->count($options);
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('applications'), 'Bewerbungen ('.$applications.')');
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('alliance')) {
+			$allianceNode = $navigation->addModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
+			$allianceNode->addModuleNode($allianceModule, 'Übersicht');
+			if ($allianceModule->hasSubmodule('interact'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen');
+			if ($allianceModule->hasSubmodule('edit'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('edit'), 'Verwaltung');
+			if ($allianceModule->hasSubmodule('ranks'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('ranks'), 'Ränge');
+			if ($allianceModule->hasSubmodule('applications')) {
+				$options['conditions'][] = array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
+				$options['conditions'][] = array('status = ?', Rakuun_Intern_GUI_Panel_Alliance_Applications::STATUS_NEW);
+				$applications = Rakuun_DB_Containers::getAlliancesApplicationsContainer()->count($options);
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('applications'), 'Bewerbungen ('.$applications.')');
+			}
+			if ($allianceModule->hasSubmodule('diplomacy'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('diplomacy'), 'Diplomatie');
+			if ($allianceModule->hasSubmodule('statistics'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('statistics'), 'Statistiken');
+			if ($allianceModule->hasSubmodule('polls'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('polls'), 'Umfragen');
+			if ($allianceModule->hasSubmodule('account'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('account'), 'Allianzkonto');
+			if ($allianceModule->hasSubmodule('build'))
+				$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Gebäude');
 		}
-		if ($allianceModule->hasSubmodule('diplomacy'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('diplomacy'), 'Diplomatie');
-		if ($allianceModule->hasSubmodule('statistics'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('statistics'), 'Statistiken');
-		if ($allianceModule->hasSubmodule('polls'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('polls'), 'Umfragen');
-		if ($allianceModule->hasSubmodule('account'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('account'), 'Allianzkonto');
-		if ($allianceModule->hasSubmodule('build'))
-			$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Gebäude');
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('meta')) {
 			$metaNode = $navigation->addModuleNode($metaModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
