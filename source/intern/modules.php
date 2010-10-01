@@ -19,6 +19,9 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 		$this->addSubmodule(new Rakuun_Intern_Module_Summary('summary'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Alliance_View('allianceview'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Meta_View('metaview'));
+		$this->addSubmodule(new Rakuun_Intern_Module_Rules('rules'));
+		$this->addSubmodule(new Rakuun_Intern_Module_Guide('guide'));
+		$this->addSubmodule(new Rakuun_Intern_Module_Imprint('imprint'));
 		
 		// modules that aren't accessible by sitter
 		if (!Rakuun_User_Manager::isSitting()) {
@@ -51,8 +54,6 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 			$this->addSubmodule(new Rakuun_Intern_Module_Boards('boards'));
 			if ($user && $user->buildings->stockMarket > 0)
 				$this->addSubmodule(new Rakuun_Intern_Module_StockMarket('stockmarket'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Rules('rules'));
-			$this->addSubmodule(new Rakuun_Intern_Module_Guide('guide'));
 		}
 		// modules that are only accessible by sitter
 		else {

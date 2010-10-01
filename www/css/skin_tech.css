@@ -22,6 +22,7 @@
 	$13 -  Profile
 	$14 -  Highscores
 	$15 -  Alliances
+	$16 -  Imprint
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -737,4 +738,17 @@ body.skin_tech
 	float:none;
 	margin:0px auto;
 	width:220px;
+}
+
+/* $16 -  Imprint ------------------------------------------------------------*/
+.skin_tech #ctn_imprint .rakuun_box {
+	float:none;
+	margin:0px auto;
+	margin-bottom:5px;
+	width:400px;
+}
+
+.skin_tech #ctn_imprint #ctn_paypal_button {
+	margin:0px auto;
+	width:130px;
 }

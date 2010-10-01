@@ -150,6 +150,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('rules'), 'Regeln', array('rakuun_navigation_node_rules'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('guide'))
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('guide'), 'Anleitung', array('rakuun_navigation_node_guide'));
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('imprint'))
+			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('imprint'), 'Spenden/Impressum', array('rakuun_navigation_node_imprint'));
 				
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('admin')) {
 			$adminNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('admin'), 'Admin', array('rakuun_navigation_node_admin'));
