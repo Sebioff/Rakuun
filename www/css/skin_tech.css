@@ -696,6 +696,10 @@ body.skin_tech
 	width:428px;
 }
 
+.skin_tech .module_allianceview .rakuun_box_alliance_members {
+	width:250px;
+}
+
 .skin_tech .module_alliance #ctn_rakuun_alliance_leftcol .rakuun_box {
 	float:none;
 }
