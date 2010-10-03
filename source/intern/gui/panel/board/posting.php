@@ -17,10 +17,12 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 	public function init() {
 		parent::init();
 		 
+		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->setTemplate(dirname(__FILE__).'/posting.tpl');
-		if (Router::get()->getCurrentModule()->getParam('edit') == $this->posting->getPK()
-			&& Rakuun_User_Manager::getCurrentUser()->getPK() == $this->posting->user->getPK()
-			&& $this->posting->deleted == 0
+		if ((Router::get()->getCurrentModule()->getParam('edit') == $this->posting->getPK()
+			&& $this->posting->deleted == 0)		
+			&& (($this->posting->user && $this->posting->user->getPK() == $user->getPK())
+				|| ($this->posting->userName && $this->posting->userName == $user->nameUncolored && $this->posting->roundNumber == RAKUUN_ROUND_NAME))
 		) {
 			$this->addPanel($blanko = new GUI_Panel('form'));
 			$blanko->addPanel($text = new GUI_Control_TextArea('text', $this->posting->text, 'Posting'));
@@ -46,13 +48,13 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		}
 		if ($this->posting->editdate)
 			$this->addPanel(new GUI_Panel_Date('editdate', $this->posting->editdate));
-		if ($this->posting->user
-			&& $this->posting->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()
-			&& $this->posting->deleted == 0) 
+		if ($this->posting->deleted == 0
+			&& (($this->posting->user && $this->posting->user->getPK() == $user->getPK())
+			|| ($this->posting->userName && $this->posting->userName == $user->nameUncolored && $this->posting->roundNumber == RAKUUN_ROUND_NAME))) 
 		{
 			$this->addPanel(new GUI_Control_Link('editlink', '-edit-', Router::get()->getCurrentModule()->getUrl(array('board' => $this->posting->board->getPK(), 'edit' => $this->posting->getPK()))));
 		}
-		if ($this->getModule()->getParam('moderate') == Rakuun_User_Manager::getCurrentUser()->getPK()) {
+		if ($this->getModule()->getParam('moderate') == $user->getPK()) {
 			$this->addPanel($deleteButton = new GUI_Control_SubmitButton('delete', 'Löschen'));
 			$deleteButton->setConfirmationMessage('Das Posting von '.date(GUI_Panel_Date::FORMAT_DATETIME, $this->posting->date).' wirklich löschen?');
 		}
