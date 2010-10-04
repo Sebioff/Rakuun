@@ -19,35 +19,33 @@
 			</dl>
 		</li>
 	</ul>
+	<br class="clear"/>
 	<? if (!empty($this->params->groups)): ?>
 		<ul>
 			<? foreach ($this->params->groups as $group): ?>
 				<li>
 					<u><?= $group['group']->name; ?></u>
+					<br class="clear"/>
 					<? if (!empty($group['entities'])): ?>
-						<dl>
 							<? foreach ($group['entities'] as $entity): ?>
-								<dt>
-									<? $userLink = new Rakuun_GUI_Control_UserLink('userlink'.$entity->getPK(), $entity->user); ?>
-									<? $userLink->display(); ?>
-								</dt>
-								<dd>
-									<? $link = new GUI_Control_JsLink(
-										'link'.$entity->getPK(),
-										'write',
-										// FIXME Evil hardcoded stuff, don't hit me too hard
-										'$(\'#main-messages_content-send-send-recipients\').val($(\'#main-messages_content-send-send-recipients\').val() + \''.$entity->user->nameUncolored.', \');return false;'
-										// Link needs fallback-url
-									); ?>
-									<? $link->addClasses('rakuun_gui_writemessage'); ?>
-									<? $link->display(); ?>
-								</dd>
+								<? $userLink = new Rakuun_GUI_Control_UserLink('userlink'.$entity->getPK(), $entity->user); ?>
+								<? $userLink->display(); ?>
+								<? $link = new GUI_Control_JsLink(
+									'link'.$entity->getPK(),
+									'write',
+									// FIXME Evil hardcoded stuff, don't hit me too hard
+									'$(\'#main-messages_content-send-send-recipients\').val($(\'#main-messages_content-send-send-recipients\').val() + \''.$entity->user->nameUncolored.', \');return false;'
+									// Link needs fallback-url
+								); ?>
+								<? $link->addClasses('rakuun_gui_writemessage'); ?>
+								<? $link->display(); ?>
+								<br class="clear"/>
 							<? endforeach; ?>
-						</dl>
 					<? endif; ?>
 				</li>
 		<? endforeach; ?>
 		</ul>
+		<br class="clear"/>
 	<? endif; ?>
 <? elseif ($this->params->type == Rakuun_Intern_GUI_Panel_User_Directory::TYPE_ARMY): ?>
 	<? //TODO: Need to be implemented ?>

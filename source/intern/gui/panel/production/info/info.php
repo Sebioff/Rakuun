@@ -50,6 +50,26 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			);
 			$this->contentPanel->setTemplate(dirname(__FILE__).'/unit.tpl');
 		}
+		
+		if ($this->getProductionItem() instanceof Rakuun_Intern_Production_CityItem) {
+			$this->contentPanel->addPanel($costs = new GUI_Panel_Table('costs', 'Kosten'));
+			$costs->setAttribute('summary', 'Kostentabelle');
+			$costs->addHeader(array('Stufe', 'Eisen', 'Beryllium', 'Energie', 'Leute', 'Zeit'));
+			$startLevel = max($this->getProductionItem()->getLevel() - 5, 1);
+			$endLevel = $this->getProductionItem()->getLevel() + 5;
+			for ($i = $startLevel; $i <= $endLevel; $i++) {
+				$costs->addLine(
+					array(
+						$i,
+						GUI_Panel_Number::formatNumber($this->getProductionItem()->getIronCostsForLevel($i)),
+						GUI_Panel_Number::formatNumber($this->getProductionItem()->getBerylliumCostsForLevel($i)),
+						GUI_Panel_Number::formatNumber($this->getProductionItem()->getEnergyCostsForLevel($i)),
+						GUI_Panel_Number::formatNumber($this->getProductionItem()->getPeopleCostsForLevel($i)),
+						Rakuun_Date::formatCountDown($this->getProductionItem()->getTimeCosts($i))
+					)
+				);
+			}
+		}
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

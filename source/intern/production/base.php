@@ -6,6 +6,7 @@
 abstract class Rakuun_Intern_Production_Base {
 	const ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK = 'Rakuun_Intern_Production_Base_indestructible_by_attack';
 	const ATTRIBUTE_INVISIBLE_FOR_SPIES = 'Rakuun_Intern_Production_Base_invisible_for_spies';
+	const SITTER_PRODUCTION_COSTS_MULTIPLIER = 1.05;
 	
 	private $internalName = '';
 	private $name = '';
@@ -130,7 +131,7 @@ abstract class Rakuun_Intern_Production_Base {
 	public function getBaseIronCosts() {
 		$costs = $this->baseIronCosts;
 		if (Rakuun_User_Manager::isSitting())
-			$costs *= 1.05;
+			$costs *= self::SITTER_PRODUCTION_COSTS_MULTIPLIER;
 		return round($costs);
 	}
 	
@@ -141,7 +142,7 @@ abstract class Rakuun_Intern_Production_Base {
 	public function getBaseBerylliumCosts() {
 		$costs = $this->baseBerylliumCosts;
 		if (Rakuun_User_Manager::isSitting())
-			$costs *= 1.05;
+			$costs *= self::SITTER_PRODUCTION_COSTS_MULTIPLIER;
 		return round($costs);
 	}
 	
@@ -152,7 +153,7 @@ abstract class Rakuun_Intern_Production_Base {
 	public function getBaseEnergyCosts() {
 		$costs = $this->baseEnergyCosts;
 		if (Rakuun_User_Manager::isSitting())
-			$costs *= 1.05;
+			$costs *= self::SITTER_PRODUCTION_COSTS_MULTIPLIER;
 		return round($costs);
 	}
 	
@@ -163,7 +164,7 @@ abstract class Rakuun_Intern_Production_Base {
 	public function getBasePeopleCosts() {
 		$costs = $this->basePeopleCosts;
 		if (Rakuun_User_Manager::isSitting())
-			$costs *= 1.05;
+			$costs *= self::SITTER_PRODUCTION_COSTS_MULTIPLIER;
 		return round($costs);
 	}
 	

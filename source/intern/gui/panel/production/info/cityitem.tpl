@@ -8,3 +8,6 @@
 <? endforeach; ?>
 <br/>
 Punkte / Stufe: <?= $this->getProductionItem()->getPoints(); ?>
+<br/>
+<h3>Kosten</h3>
+<? $this->displayPanel('costs'); ?>

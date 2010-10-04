@@ -44,7 +44,8 @@ class Rakuun_Intern_GUI_Panel_User_SitterSwitch extends GUI_Panel {
 		if ($originalUser->lastBotVerification > $user->lastBotVerification)
 			$user->lastBotVerification = $originalUser->lastBotVerification;
 		Rakuun_User_Manager::update($user);
-		$this->getModule()->invalidate();
+		// invalidation doesn't work here, redirect to current page
+		$this->getModule()->redirect($this->getModule()->getUrl($this->getModule()->getParams()));
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

@@ -115,6 +115,14 @@ body.skin_tech
 	font-weight:bold;
 }
 
+.skin_tech .ac_results li {
+	background-color:#2c2d33;
+}
+
+.skin_tech .ac_results li.ac_over {
+	background-color:#44454b;
+}
+
 /* $2  -  Main Containers ----------------------------------------------------*/
 .skin_tech #ctn_main {
 	background:transparent url('../images/background_starfield.png') no-repeat center top;
@@ -419,6 +427,7 @@ body.skin_tech
 .skin_tech .module_messages .rakuun_gui_writemessage {
 	background:transparent url('../images/mail.gif') no-repeat left top;
 	display:block;
+	float:right;
 	font-size:0px;
 	height:12px;
 	width:20px;

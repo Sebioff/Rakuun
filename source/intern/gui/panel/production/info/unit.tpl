@@ -18,10 +18,13 @@
 Grundangriffskraft: <?= $unit->getBaseAttackValue(); ?>
 <br/>
 Grundverteidigungskraft: <?= $unit->getBaseDefenseValue(); ?>
+<br/>
+Geschwindigkeit: <?= Rakuun_Date::formatCountDown(1 + $unit->getSpeed()); ?> / Feld
 <? if ($unit->getRessourceTransportCapacity(1) > 0): ?>
 	<br/>
 	Transportkapazität: <?= GUI_Panel_Number::formatNumber($unit->getRessourceTransportCapacity(1)); ?>
 <? endif; ?>
+<br/>
 <br/>
 <? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER)): ?>
 	Fußsoldat

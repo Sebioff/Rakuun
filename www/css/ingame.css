@@ -395,7 +395,8 @@ img.rakuun_fightreport_marker
 }
 
 .module_overview .rakuun_sitter_deletebutton {
-	margin-left:110px;
+	float:right;
+	margin-left:0px;
 }
 
 #main-overview_content-sitterswitch {
