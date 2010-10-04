@@ -168,7 +168,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 			<br/>
 			Falls du Probleme bei Rakuun hast, kannst du den '.$supportlink->render()
 			.' anschreiben - wir beantworten alle deine Fragen gerne!
-			Ansonsten kann du deine Fragen auch in der Shoutbox stellen.
+			Ansonsten kannst du deine Fragen auch in der Shoutbox stellen.
 			Du kannst auch gerne in unser '.$ticketlink->render().'
 			oder in unseren IRC-Channel (Server: Gamesurge (irc.gamesurge.net), Channel: #rakuun) kommen!
 			<br/>

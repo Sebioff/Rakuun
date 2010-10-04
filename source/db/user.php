@@ -105,10 +105,25 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 			'%\[lightgrey\](.*?)\[/lightgrey\]%',
 			'%\[darkgrey\](.*?)\[/darkgrey\]%',
 			'%\[white\](.*?)\[/white\]%',
-			'%\[\#[\da-fA-F]{6}\](.*?)\[/#[\da-fA-F]{6}\]%'
+			'%\[\#([\da-fA-F]{6})\](.*?)\[/#\1\]%'
 		);
 		
-		$nameColored = preg_replace($patterns, '$1', $nameColored);
+		$replacements = array(
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$1',
+			'$2'
+		);
+		
+		$nameColored = preg_replace($patterns, $replacements, $nameColored);
 		if ($nameColored == parent::__get('name'))
 			return true;
 		else

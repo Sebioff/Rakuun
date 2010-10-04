@@ -7,7 +7,8 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/edit.tpl');
 		if (Rakuun_GameSecurity::get()->hasPrivilege($user, Rakuun_GameSecurity::PRIVILEGE_COLOREDNAME)) {
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Control_ColoredName('namecolored', $user, 'Nickname (farbig)'));
+			$this->contentPanel->addPanel($nameColored = new Rakuun_Intern_GUI_Control_ColoredName('namecolored', $user, 'Nickname (farbig)'));
+			$nameColored->addValidator(new GUI_Validator_MaxLength(255));
 			$this->contentPanel->addPanel(
 				new GUI_Panel_HoverInfo(
 					'namecoloredhelp',

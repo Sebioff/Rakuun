@@ -15,6 +15,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		if (!$this->getUser()
 			|| Rakuun_GameSecurity::get()->isInGroup($this->getUser(), Rakuun_GameSecurity::GROUP_LOCKED)) {
 			$params = array('return' => base64_encode($this->getUrl($this->getParams())));
+			$params['logout-reason'] = 'notloggedin';
 			Scriptlet::redirect(App::get()->getIndexModule()->getUrl($params));
 		}
 		

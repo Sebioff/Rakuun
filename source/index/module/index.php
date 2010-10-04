@@ -30,6 +30,8 @@ class Rakuun_Index_Module_Index extends Rakuun_Index_Module {
 			switch ($logoutReason) {
 				case 'noactivity':
 					$logoutReasonText->setText('Du wurdest sicherheitshalber automatisch ausgeloggt, da du für mindestens '.Rakuun_Date::formatCountDown(Rakuun_Intern_Module::TIMEOUT_NOACTIVITY).' keine Aktionen durchgeführt hast.');
+				case 'notloggedin':
+					$logoutReasonText->setText('Du musst dich erst einloggen, um Zugang zu dieser Seite zu haben.');
 				break;
 			}
 		}
