@@ -13,8 +13,13 @@
 	<?= $this->getMapLayer(); ?>
 	<? $this->displayPanel('path'); ?>
 	<? if ($this->getCityX() || $this->getCityY()): ?>
-		<div id="rakuun_map_indicator" class="scrolling_item" style="left:<?= ($this->realToViewPositionX($this->getCityX()) - 2); ?>px;top:<?= ($this->realToViewPositionY($this->getCityY()) - 2); ?>px;"></div>
+		<? $indicatorX = $this->getCityX(); ?>
+		<? $indicatorY = $this->getCityY(); ?>
+	<? else: ?>
+		<? $indicatorX = Rakuun_User_Manager::getCurrentUser()->cityX; ?>
+		<? $indicatorY = Rakuun_User_Manager::getCurrentUser()->cityY; ?>
 	<? endif; ?>
+	<div id="rakuun_map_indicator" class="scrolling_item" style="left:<?= ($this->realToViewPositionX($indicatorX) - 2); ?>px;top:<?= ($this->realToViewPositionY($indicatorY) - 2); ?>px;"></div>
 	<? $this->displayPanel('items'); ?>
 </div>
 
