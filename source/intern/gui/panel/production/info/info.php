@@ -57,6 +57,8 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$costs->addHeader(array('Stufe', 'Eisen', 'Beryllium', 'Energie', 'Leute', 'Zeit'));
 			$startLevel = max($this->getProductionItem()->getLevel() - 5, 1);
 			$endLevel = $this->getProductionItem()->getLevel() + 5;
+			if ($this->getProductionItem()->getMaximumLevel() > 0 && $this->getProductionItem()->getMaximumLevel() < $endLevel)
+				$endLevel = $this->getProductionItem()->getMaximumLevel();
 			for ($i = $startLevel; $i <= $endLevel; $i++) {
 				$costs->addLine(
 					array(

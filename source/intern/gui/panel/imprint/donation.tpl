@@ -23,6 +23,7 @@ Als Betreff am besten "Spende <?= Rakuun_User_Manager::getCurrentUser()->nameUnc
 <br/>
 <br/>
 <center><b>Paypal</b></center>
+Spenden per Paypal sind möglich, kosten uns allerdings Geb&uuml;hren. Normale &Uuml;berweisungen sind uns daher lieber.
 <div id="ctn_paypal_button">
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick">
