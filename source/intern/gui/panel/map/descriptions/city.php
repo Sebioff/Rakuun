@@ -10,20 +10,27 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		$this->cityOwner = $cityOwner;
 		$this->map = $map;
 		
-		$hoverText = $cityOwner->nameUncolored.
-			'<br/>'.Text::escapeHTML($cityOwner->cityName).
-			'<br/>Punkte: '.GUI_Panel_Number::formatNumber($cityOwner->points);
-			if ($cityOwner->alliance)
-				$hoverText .= '<br/>Allianz: '.$cityOwner->alliance->name;
-			$hoverText .= '<br/>Spieler ist ';
+		$hoverText = '';
+		$userLink = new Rakuun_GUI_Control_UserLink('userlink', $cityOwner, $cityOwner->getPK());
+		$igmLink = new Rakuun_GUI_Control_SendMessageLink('igmlink', $cityOwner);
+		if ($cityOwner->alliance) {
+			$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', $cityOwner->alliance);
+			$allianceLink->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
+			$hoverText .= Text::replace('"', '\"', $allianceLink->render()).' ';
+		}
+		$hoverText .= Text::replace('"', '\"', $userLink->render()).
+			'<br />'.Text::escapeHTML($cityOwner->cityName).
+			'<br />Punkte: '.GUI_Panel_Number::formatNumber($cityOwner->points);
+			$hoverText .= '<br />Spieler ist ';
 			if ($cityOwner->isOnline())
 				$hoverText .= 'online';
 			else
 				$hoverText .= 'offline';
+			$hoverText .= '<br />'.Text::replace('"', '\"', $igmLink->render());
 			if ($cityOwner->isInNoob())
-				$hoverText .= '<br/>Spieler befindet sich im Noobschutz';
+				$hoverText .= '<br />Spieler befindet sich im Noobschutz';
 			if ($cityOwner->isYimtay())
-				$hoverText .= '<br/>Der Spieler ist inaktiv';	
+				$hoverText .= '<br />Der Spieler ist inaktiv';
 		$this->setHoverText($hoverText);
 	}
 	

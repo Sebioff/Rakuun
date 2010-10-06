@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Create a Link to send am Message to a User
- * make sure, that the User has the Abilities to Trade with using this Link
+ * Create a Link to send a Message to an User
  * @author dr.dent
  */
 class Rakuun_GUI_Control_SendMessageLink extends GUI_Control_Link {

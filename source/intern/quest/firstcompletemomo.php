@@ -12,7 +12,7 @@ class Rakuun_Intern_Quest_FirstCompleteMomo extends Rakuun_Intern_Quest {
 	}
 	
 	public function getDescription() {
-		return 'Baue als Erster den MoMo vollständig aus!';
+		return 'Erforsche als Erster den MoMo vollständig!';
 	}
 	
 	public function getRewardDescription() {
