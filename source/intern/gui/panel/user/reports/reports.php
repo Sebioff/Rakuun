@@ -12,7 +12,7 @@ abstract class Rakuun_Intern_GUI_Panel_User_Reports extends GUI_Panel {
 	protected function getReports() {
 		$options = array();
 		$options['conditions'][] = array('spied_user = ?', $this->user);
-		$options['order'] = 'TIME DESC';
+		$options['order'] = 'TIME ASC';
 		$spies = Rakuun_DB_Containers::getLogSpiesContainer()->select($options);
 		$reports = array();
 		foreach ($spies as $spy) {
