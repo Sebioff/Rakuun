@@ -109,8 +109,6 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 				$allianceNode->addModuleNode($allianceModule->getSubmodule('polls'), 'Umfragen');
 			if ($allianceModule->hasSubmodule('account'))
 				$allianceNode->addModuleNode($allianceModule->getSubmodule('account'), 'Allianzkonto');
-			if (Rakuun_Intern_Modules::get()->getSubmoduleByName('boards')->getSubmoduleByName('alliance'))
-				$allianceNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('boards')->getSubmoduleByName('alliance'), 'Forum');
 			if ($allianceModule->hasSubmodule('build'))
 				$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Gebäude');
 		}
@@ -130,8 +128,6 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 				$metaNode->addModuleNode($metaModule->getSubmodule('statistics'), 'Statistiken');
 			if ($metaModule->hasSubmodule('polls'))
 				$metaNode->addModuleNode($metaModule->getSubmodule('polls'), 'Umfragen');
-			if (Rakuun_Intern_Modules::get()->getSubmoduleByName('boards')->getSubmoduleByName('meta'))
-				$allianceNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('boards')->getSubmoduleByName('meta'), 'Forum');
 			if ($metaModule->hasSubmodule('build'))
 				$metaNode->addModuleNode($metaModule->getSubmodule('build'), 'Gebäude');
 		}
