@@ -23,6 +23,7 @@
 	$14 -  Highscores
 	$15 -  Alliances
 	$16 -  Imprint
+	$17 -  Map
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -764,4 +765,20 @@ body.skin_tech
 .skin_tech #ctn_imprint #ctn_paypal_button {
 	margin:0px auto;
 	width:130px;
+}
+
+/* $17 -  Map ----------------------------------------------------------------*/
+.map_main .core_gui_hoverinfo { /* can't add .skin_tech here! */
+	position:relative;
+}
+
+.map_main .core_gui_hoverinfo_close { /* can't add .skin_tech here! */
+	background:transparent url('../images/cancel.gif') no-repeat 1px 1px;
+	display:block;
+	font-size:0px;
+	height:14px;
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:16px;
 }

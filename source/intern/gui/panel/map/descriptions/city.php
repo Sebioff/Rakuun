@@ -16,9 +16,9 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		if ($cityOwner->alliance) {
 			$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', $cityOwner->alliance);
 			$allianceLink->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
-			$hoverText .= Text::replace('"', '\"', $allianceLink->render()).' ';
+			$hoverText .= str_replace('"', '\"', $allianceLink->render()).' ';
 		}
-		$hoverText .= Text::replace('"', '\"', $userLink->render()).
+		$hoverText .= str_replace('"', '\"', $userLink->render()).
 			'<br />'.Text::escapeHTML($cityOwner->cityName).
 			'<br />Punkte: '.GUI_Panel_Number::formatNumber($cityOwner->points);
 			$hoverText .= '<br />Spieler ist ';
@@ -26,7 +26,7 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 				$hoverText .= 'online';
 			else
 				$hoverText .= 'offline';
-			$hoverText .= '<br />'.Text::replace('"', '\"', $igmLink->render());
+			$hoverText .= '<br />'.str_replace('"', '\"', $igmLink->render());
 			if ($cityOwner->isInNoob())
 				$hoverText .= '<br />Spieler befindet sich im Noobschutz';
 			if ($cityOwner->isYimtay())
