@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Building_Themepark extends Rakuun_Intern_Producti
 		$this->setBaseTimeCosts(10*60);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Baue Freizeitparks, damit deine Bürger zufrieden mit dir sind.');
-		$this->setLongDescription('Freizeitparks heben die Moral der Bevölkerung.
+		$this->setLongDescription('Freizeitparks heben die Moral der arbeitslosen Bevölkerung, denn ganz nach der Devise "Wer arbeitet ist glücklich", ist der nicht arbeitende Bevölkerungsteil unglücklich.
 			<br/>
 			Wenn Freizeitparks überfüllt sind, senkt sich schnell der Spassfaktor und die Leute denken eher darüber nach, bewaffnet gegen die Regierung vorzugehen.
 			<br/>
@@ -22,7 +22,7 @@ class Rakuun_Intern_Production_Building_Themepark extends Rakuun_Intern_Producti
 			<br/>
 			In dieser zum Teil virtuellen Umgebung kann man seine Sinne völlig verwirren und entspannen während man Massagen im gravitationslosen Flug durch eine Wand aus Dampf geniesst oder in virtuellen Welten gegen andere Besucher agiert.
 			<br/>
-			Durch den hier erzeugten Stimmungseffekt scheinen die langen Arbeitsstunden in den Minen in eine lang vergangene Zeit zurückzufallen, sodass man sich mit doppeltem Schwung wieder an die Arbeit machen kann.');
+			Durch den hier erzeugten Stimmungseffekt scheint die lange Arbeitslosigkeit in eine lang vergangene Zeit zurückzufallen, sodass sich die Arbeiter in Ruhe mit doppeltem Schwung wieder an die Arbeit machen können.');
 		$this->setPoints(12);
 	}
 }
