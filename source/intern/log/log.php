@@ -46,6 +46,11 @@ class Rakuun_Intern_Log {
 		self::ACTION_USERDATA_SITTER => 'neuen Sitter'
 	);
 	
+	protected static $multiActionDescriptions = array(
+		self::MULTIACTION_SAME_IP => 'IP',
+		self::MULTIACTION_SAME_COOKIE => 'Cookie'
+	);
+	
 	public static function multiCheck(Rakuun_DB_User $user, $action) {
 		if (!isset(self::$multiPoints[$action]) || self::$multiPoints[$action] === 0)
 			return;
@@ -100,6 +105,10 @@ class Rakuun_Intern_Log {
 	
 	public static function getActionDescription($action) {
 		return self::$actionDescriptions[$action];
+	}
+	
+	public static function getMultiActionDescription($action) {
+		return self::$multiActionDescriptions[$action];
 	}
 }
 

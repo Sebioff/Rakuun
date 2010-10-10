@@ -26,7 +26,7 @@ class Rakuun_Intern_GUI_Panel_Multihunting_Multiscore extends GUI_Panel_PageView
 			$line[] = $i;
 			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$i, $user);
 			$line[] = $user->alliance ? new Rakuun_GUI_Control_AllianceLink('useralliancelink'.$i, $user->alliance) : '';
-			$line[] = new GUI_Panel_Number('multipoints'.$i, $user->multiPoints);
+			$line[] = new Rakuun_GUI_Control_MultiLogLink('multilink'.$i, $user, $user->multiPoints);
 			$table->addLine($line);
 			$i++;
 		}

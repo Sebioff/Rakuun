@@ -14,7 +14,10 @@ class Rakuun_GUI_Control_MultiLogLink extends GUI_Control_Link {
 				$url = App::get()->getInternModule()->getSubmodule('multihunting')->getURL(array('user' => $user->id));
 			else
 				$url = '#';
-			parent::__construct($name, 'Multilog von '.$user->name.' anschauen', $url, $title);
+			if ($title === '')
+				parent::__construct($name, 'Multilog von '.$user->name.' anschauen', $url, $title);
+			else
+				parent::__construct($name, $title, $url, $title);
 		}
 	}
 }

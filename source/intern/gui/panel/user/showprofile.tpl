@@ -20,9 +20,11 @@
 	<br class="clear" />
 	Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
 	<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
-	<br class="clear" />
-	Multipunkte: <?= GUI_Panel_Number::formatNumber((int)$user->multiPoints); ?>
-	<? endif;?>
+		<br class="clear" />
+		Multipunkte:
+		<? $multilink = new Rakuun_GUI_Control_MultiLogLink('multiloglink', $user, $user->multiPoints); ?>
+		<? $multilink->display(); ?>
+		<? endif;?>
 	<? if ($user->alliance): ?>
 		<br class="clear" />
 		Allianz:
@@ -91,13 +93,7 @@
 		<? $useredit = new Rakuun_GUI_Control_UserDeleteLink('userdeletelink', $user, 'User löschen'); ?>
 		<? $useredit->display(); ?>
 		<br class="clear" />
-	<? endif;?>
-	<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
-		<? $useredit = new Rakuun_GUI_Control_MultiLogLink('multiloglink', $user, 'Multilog anschauen'); ?>
-		<? $useredit->display(); ?>
-		<br class="clear" />
-	<? endif;?>
-	
+	<? endif;?>	
 	<br class="clear" />
 	<? if ($user->isInNoob()): ?>
 		Der Spieler befindet sich im Noobschutz und kann nicht angegriffen werden.
