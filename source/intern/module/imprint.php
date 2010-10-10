@@ -1,8 +1,8 @@
 <?php
 
 /**
- * A Module for displaying all VIPs in this Game
- * @author dr.dent
+ * A Module for displaying the imprint and donations introductions
+ * @author Sebioff
  */
 class Rakuun_Intern_Module_Imprint extends Rakuun_Intern_Module {
 	public function init() {

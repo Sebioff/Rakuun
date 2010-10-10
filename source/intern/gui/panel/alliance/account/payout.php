@@ -43,7 +43,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 		$user = Rakuun_DB_Containers::getUserContainer()->selectFirst($options);
 		
 		if (!$user) {
-			$this->addError($this->userbox->getValue().' gehört nicht zu deiner Allianz.');
+			if (!$this->userbox->getKey())
+				$this->addError('kein Spieler ausgewählt.');
+			else
+				$this->addError($this->userbox->getValue().' gehört nicht zu deiner Allianz.');
 			//return here so user can't see store capacity of enemies
 			return;
 		}
