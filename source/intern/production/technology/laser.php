@@ -29,7 +29,7 @@ class Rakuun_Intern_Production_Technology_Laser extends Rakuun_Intern_Production
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht Kampfkraft um '.(self::FORCE_BONUS_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
+		$this->addEffect('Erhöht Kampfkraft von Lasereinheiten um '.(self::FORCE_BONUS_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
 	}
 }
 
