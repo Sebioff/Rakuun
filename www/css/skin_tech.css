@@ -461,9 +461,13 @@ body.skin_tech
 	color:#a15c5c;
 }
 
+.skin_tech .rakuun_box_fighttick {
+	width:130px;
+}
+
 .skin_tech .rakuun_box_outgoingarmies,
 .skin_tech .rakuun_box_incommingarmies {
-	width:412px;
+	width:399px;
 }
 
 .skin_tech .rakuun_box_outgoingarmies .core_gui_submitbutton_wrapper div {
@@ -781,4 +785,13 @@ body.skin_tech
 	top:0px;
 	right:0px;
 	width:16px;
+}
+
+.skin_tech .module_map .controls .core_gui_submitbutton_wrapper div {
+	background:none;
+}
+
+.skin_tech .module_map .rakuun_box_defendingunits .value,
+.skin_tech .module_map .rakuun_box_defendingunits .controls {
+	float:left;
 }

@@ -98,7 +98,8 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('info', new Rakuun_Intern_GUI_Panel_User_Info('info'), 'Informationen'));
 		
 		// fight tick
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('fight_tick', new Rakuun_Intern_GUI_Panel_Tick_Fight('fight_tick'), 'Kampftick'));
+		$this->contentPanel->addPanel($fightTick = new Rakuun_GUI_Panel_Box('fight_tick', new Rakuun_Intern_GUI_Panel_Tick_Fight('fight_tick'), 'Kampftick'));
+		$fightTick->addClasses('rakuun_box_fighttick');
 		
 		// specials
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', $specialsPanel = new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
