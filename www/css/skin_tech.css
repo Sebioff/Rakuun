@@ -507,6 +507,15 @@ body.skin_tech
 	float:left;
 }
 
+.skin_tech .module_overview .rakuun_box_wipbuildings,
+.skin_tech .module_overview .rakuun_box_wiptechnologies {
+	width:316px;
+}
+
+.skin_tech .module_overview .rakuun_box_wipunits {
+	width:286px;
+}
+
 /* $7  -  Techtree -----------------------------------------------------------*/
 .skin_tech #ctn_techtree_rows .rakuun_box {
 	float:left;
@@ -605,7 +614,6 @@ body.skin_tech
 .skin_tech .module_overview .rakuun_wip_panel {
 	float:left;
 	margin:0px 5px 5px 0px;
-	width:auto;
 }
 
 .skin_tech .rakuun_wip_panel .controls {

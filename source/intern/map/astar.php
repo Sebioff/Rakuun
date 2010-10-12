@@ -2,18 +2,12 @@
 
 class Rakuun_Intern_Map_AStar {
 	private $bitMap;
-	private $imageSizeX = 0;
-	private $imageSizeY = 0;
 	private $map;
 	private $movementCosts = 0;
 	private $unitTypes = 0;
 
 	public function __construct($movementCosts, $unitTypes) {
 		$this->bitMap = imagecreatefrompng(PROJECT_PATH.'/www/images/map.png');
-		$imagesize = array();
-		$imagesize = getImagesize(PROJECT_PATH.'/www/images/map.png');
-		$this->imageSizeX = $imagesize[0];
-		$this->imageSizeY = $imagesize[1];
 		$this->movementCosts = $movementCosts;
 		$this->unitTypes = $unitTypes;
 	}
@@ -121,7 +115,7 @@ class Rakuun_Intern_Map_AStar {
 	
 	public function &getMapNode($x, $y) {
 		if (!isset($this->map[$x][$y])) {
-			$walkable = $this->imageSizeX > $x && $this->imageSizeY > $y			 
+			$walkable = $x < Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH && $y < Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT
 						&& (imagecolorat($this->bitMap, $x, $y) == 0x000000);
 			$this->map[$x][$y] = array('x' => $x, 'y' => $y, 'walkable' => $walkable, 'costs' => $this->movementCosts, 'f' => 0, 'g' => 0, 'h' => 0, 'open' => false, 'expanded' => false);
 		}

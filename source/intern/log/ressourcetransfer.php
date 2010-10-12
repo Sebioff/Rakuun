@@ -2,7 +2,7 @@
 
 class Rakuun_Intern_Log_Ressourcetransfer extends Rakuun_Intern_Log {
 	public static function log(Rakuun_DB_User $user, $action, Rakuun_DB_User $sender, $iron, $beryllium = 0, $energy = 0, $people = 0) {
-		self::multiCheck($user, $action);
+		self::multiCheck($sender, $action);
 		$logEntry = new DB_Record();
 		$logEntry->user = $user;
 		$logEntry->sender = $sender;

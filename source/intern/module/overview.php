@@ -42,18 +42,21 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$options = array();
 		$options['conditions'][] = array('user = ?', $this->getUser());
 		if (Rakuun_DB_Containers::getBuildingsWIPContainer()->selectFirst($options)) {
-			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip_buildings', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Momentaner Bauvorgang');
+			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip_buildings', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers::getBuildingsWIPContainer()), 'Aktueller Bauvorgang');
 			$wipPanel->enableQueueView(false);
+			$wipPanel->addClasses('rakuun_box_wipbuildings');
 			$this->contentPanel->addPanel($wipPanel);
 		}
 		if (Rakuun_DB_Containers::getTechnologiesWIPContainer()->selectFirst($options)) {
-			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip_technologies', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers::getTechnologiesWIPContainer()), 'Momentane Forschung');
+			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_CityItems('wip_technologies', new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers::getTechnologiesWIPContainer()), 'Aktuelle Forschung');
 			$wipPanel->enableQueueView(false);
+			$wipPanel->addClasses('rakuun_box_wiptechnologies');
 			$this->contentPanel->addPanel($wipPanel, true);
 		}
 		if (Rakuun_DB_Containers::getUnitsWIPContainer()->selectFirst($options)) {
-			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_Units('wip_units', new Rakuun_Intern_Production_Producer_Units(Rakuun_DB_Containers::getUnitsContainer(), Rakuun_DB_Containers::getUnitsWIPContainer()), 'Momentane Einheitenproduktion');
+			$wipPanel = new Rakuun_Intern_GUI_Panel_Production_WIP_Units('wip_units', new Rakuun_Intern_Production_Producer_Units(Rakuun_DB_Containers::getUnitsContainer(), Rakuun_DB_Containers::getUnitsWIPContainer()), 'Aktuelle Einheitenproduktion');
 			$wipPanel->enableQueueView(false);
+			$wipPanel->addClasses('rakuun_box_wipunits');
 			$this->contentPanel->addPanel($wipPanel, true);
 		}
 		
