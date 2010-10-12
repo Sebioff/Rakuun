@@ -24,11 +24,11 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		$target->setPreserveValue();
 		if ($this->user)
 			$target->setValue($this->user->nameUncolored);
-		$this->addPanel($targetX = new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH));
+		$this->addPanel($targetX = new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH - 1));
 		$targetX->setPreserveValue();
 		if ($this->cityX)
 			$targetX->setValue($this->cityX);
-		$this->addPanel($targetY = new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT));
+		$this->addPanel($targetY = new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT - 1));
 		$targetY->setPreserveValue();
 		if ($this->cityY)
 			$targetY->setValue($this->cityY);
