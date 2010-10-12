@@ -12,6 +12,7 @@ class Rakuun_Intern_GUI_Panel_Board_Overview_Global extends Rakuun_Intern_GUI_Pa
 			Rakuun_DB_Containers_Persistent::getBoardsGlobalContainer()
 		);
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('global', Rakuun_Intern_GUI_Panel_Board_Global::getConfig(), $globalBoards));
+		$this->addPanel(new GUI_Control_Link('boardlink', 'Zum Forum', App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('global')->getUrl()));
 	}
 }
 ?>

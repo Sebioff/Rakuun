@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_Boards extends Rakuun_Intern_Module_Boards_Navigation {
+class Rakuun_Intern_Module_Boards extends Rakuun_Intern_Module {
 	public function __construct($name) {
 		parent::__construct($name);
 		

@@ -13,6 +13,7 @@ class Rakuun_Intern_GUI_Panel_Board_Overview_Alliance extends Rakuun_Intern_GUI_
 			Rakuun_DB_Containers::getBoardsAllianceContainer()->getFilteredContainer($boardsOptions)
 		);
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('list', Rakuun_Intern_GUI_Panel_Board_Alliance::getConfig(), $allianceBoards));
+		$this->addPanel(new GUI_Control_Link('boardlink', 'Zum Forum', App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('alliance')->getUrl()));
 	}
 }
 ?>

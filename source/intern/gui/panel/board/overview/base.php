@@ -1,6 +1,12 @@
 <?php
 
 abstract class Rakuun_Intern_GUI_Panel_Board_Overview_Base extends GUI_Panel {
+	public function init() {
+		parent::init();
+		
+		$this->setTemplate(dirname(__FILE__).'/base.tpl');
+	}
+	
 	protected function getBoards(DB_Container $visitedContainer, DB_Container $boardsContainer) {
 		$_visited = $visitedContainer->select();
 		$visited = array();

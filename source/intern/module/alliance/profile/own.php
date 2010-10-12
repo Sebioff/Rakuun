@@ -16,7 +16,6 @@ class Rakuun_Intern_Module_Alliance_Profile_Own extends Rakuun_Intern_Module {
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Applications('applications'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Edit('edit'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Diplomacy('diplomacy'));
-//			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Ranks('ranks'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Statistics('statistics'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Polls('polls'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Alliance_Account('account'));
@@ -39,7 +38,7 @@ class Rakuun_Intern_Module_Alliance_Profile_Own extends Rakuun_Intern_Module {
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', new GUI_Panel_Text('text', Text::format($user->alliance->intern)), 'Interne Informationen'));
 		$this->contentPanel->addPanel($shoutbox = new Rakuun_GUI_Panel_Box('shoutboxbox', new Rakuun_Intern_GUI_Panel_Shoutbox_Alliance('shoutbox'), 'Allianzshoutbox'));
 		$shoutbox->addClasses('rakuun_box_alliance_shoutbox');
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('boardbox', new Rakuun_Intern_GUI_Panel_Board_Overview_Alliance('board'), 'Allianzforum'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('boardbox', new Rakuun_Intern_GUI_Panel_Board_Overview_Alliance('board'), 'Neues aus dem Allianzforum'));
 		$options = array();
 		$options['order'] = 'date DESC';
 		$options['conditions'][] = array('type = ?', Rakuun_Intern_GUI_Panel_Polls::POLL_ALLIANCE);
