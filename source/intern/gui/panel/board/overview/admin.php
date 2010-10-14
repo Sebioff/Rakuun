@@ -10,7 +10,7 @@ class Rakuun_Intern_GUI_Panel_Board_Overview_Admin extends Rakuun_Intern_GUI_Pan
 			Rakuun_DB_Containers::getBoardsAdminLastVisitedContainer()->getFilteredContainer($options),
 			Rakuun_DB_Containers::getBoardsAdminContainer()
 		);
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('admin', Rakuun_Intern_GUI_Panel_Board_Admin::getConfig(), $adminBoards));
+		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('list', Rakuun_Intern_GUI_Panel_Board_Admin::getConfig(), $adminBoards));
 		$this->addPanel(new GUI_Control_Link('boardlink', 'Zum Forum', App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('admin')->getUrl()));
 	}
 }
