@@ -7,11 +7,20 @@ abstract class Rakuun_Intern_GUI_Panel_User_Reports extends GUI_Panel {
 		parent::__construct($name, $title);
 		
 		$this->user = $user;
+		
+		if ($this->getModule()->getParam('delete')) {
+			$reportToDelete = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK($this->getModule()->getParam('delete'));
+			if ($reportToDelete && $reportToDelete->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {
+				$reportToDelete->deleted = 1;
+				Rakuun_DB_Containers::getLogSpiesContainer()->save($reportToDelete);
+			}
+		}
 	}
 	
 	protected function getReports() {
 		$options = array();
 		$options['conditions'][] = array('spied_user = ?', $this->user);
+		$options['conditions'][] = array('deleted = ?', 0);
 		$options['order'] = 'TIME ASC';
 		$spies = Rakuun_DB_Containers::getLogSpiesContainer()->select($options);
 		$reports = array();
@@ -25,13 +34,17 @@ abstract class Rakuun_Intern_GUI_Panel_User_Reports extends GUI_Panel {
 	
 	public static function hasPrivilegesToSeeReport(DB_Record $report) {
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
-		return ($report->user->getPK() == $actualUser->getPK()
-			|| ($report->user->alliance !== null
-				&& $actualUser->alliance !== null
-				&& $report->user->alliance->getPK() == $actualUser->alliance->getPK()
-				&& Rakuun_Intern_Alliance_Security::get()->hasPrivilege($actualUser, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_REPORTS)
-				)
-		);
+		if ($report->user->getPK() == $actualUser->getPK())
+			return true;
+		if ($report->user->alliance !== null && $actualUser->alliance !== null && Rakuun_Intern_Alliance_Security::get()->hasPrivilege($actualUser, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_REPORTS)) {
+			if ($report->user->alliance->getPK() == $actualUser->alliance->getPK())
+				return true;
+			if ($report->user->alliance->meta !== null && $actualUser->alliance->meta !== null) {
+				if ($report->user->alliance->meta->getPK() == $actualUser->alliance->meta->getPK())
+					return true;
+			}
+		}
+		return false;
 	}
 }
 
