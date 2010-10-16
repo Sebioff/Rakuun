@@ -116,6 +116,10 @@ body.skin_tech
 	font-weight:bold;
 }
 
+.skin_tech .rakuun_box table tbody tr:hover {
+	background-color:#44454b;
+}
+
 .skin_tech .ac_results li {
 	background-color:#2c2d33;
 }
