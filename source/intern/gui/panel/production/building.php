@@ -62,8 +62,6 @@ class Rakuun_Intern_GUI_Panel_Production_Building extends Rakuun_Intern_GUI_Pane
 		$record->level = $nextBuildableLevel;
 		$record->starttime = time();
 		Rakuun_DB_Containers::getBuildingsWIPContainer()->save($record);
-		// FIXME changing properties of newly-saved records isn't possible atm
-		$record = Rakuun_DB_Containers::getBuildingsWIPContainer()->selectByPK($record->getPK());
 		$record->position = $record->getPK();
 		$record->save();
 		DB_Connection::get()->commit();

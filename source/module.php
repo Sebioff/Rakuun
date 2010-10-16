@@ -101,8 +101,6 @@ class Rakuun_Module extends Module {
 		
 		$demoUser = Rakuun_Index_Panel_Register::registerUser(RAKUUN_TESTACCOUNT_NAME, RAKUUN_TESTACCOUNT_PASSWORD);
 		Rakuun_GameSecurity::get()->addToGroup($demoUser, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_DEMO));
-		// FIXME workaround for a framework limitation, see DB_Record::__set() fixme note
-		$demoUser = Rakuun_DB_Containers::getUserContainer()->selectByPK($demoUser);
 		// TODO refactor into own method
 		$demoUser->activationTime = time();
 		$demoUser->save();
