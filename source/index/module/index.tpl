@@ -6,4 +6,6 @@
 <? endif; ?>
 <? $this->displayPanel('login'); ?>
 <br class="clear"/>
+<? $this->displayPanel('passwordforgotten'); ?>
+<br class="clear"/>
 <? $this->displayPanel('serverinfo'); ?>

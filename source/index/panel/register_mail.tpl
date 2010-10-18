@@ -21,5 +21,5 @@ Hinweis: falls der Account nicht innerhalb von 3 Tagen aktiviert wird, wird er a
 ---------------------------------------------------
 Rakuun - kostenloses SciFi-Browsergame
 Game: http://www.rakuun.de
-Forum: http://forum.rakuun.de
+Ticketsystem: http://tickets.rakuun.de
 IRC: #rakuun, Gamesurge (irc.gamesurge.net)
