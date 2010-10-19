@@ -1,6 +1,6 @@
 <?php
 
-abstract class Rakuun_Intern_GUI_Panel_User_Reports_Display extends Rakuun_Intern_GUI_Panel_User_Reports {
+abstract class Rakuun_Intern_GUI_Panel_Reports_Display extends GUI_Panel {
 	private $data = array();
 	
 	public function init() {

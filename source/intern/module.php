@@ -85,6 +85,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('warsim'), 'WarSim', array('rakuun_navigation_node_warsim'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('summary'))
 			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('summary'), 'Zusammenfassung', array('rakuun_navigation_node_summary'));
+		if (Rakuun_Intern_Modules::get()->hasSubmodule('reports'))
+			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('reports'), 'Spionagecenter', array('rakuun_navigation_node_reports'));
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('alliance')) {
 			$allianceNode = $navigation->addModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
