@@ -15,4 +15,6 @@
 	<? if ($this->hasPanel('testaccount_login')): ?>
 		<? $this->displayPanel('testaccount_login'); ?>
 	<? endif; ?>
+	<br class="clear" />
+	<div style="text-align:right;font-size:10px;"><a href="<?= App::get()->getPasswordForgottenModule()->getURL(); ?>">Passwort vergessen?</a></div>
 </div>

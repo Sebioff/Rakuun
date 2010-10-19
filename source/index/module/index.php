@@ -24,7 +24,6 @@ class Rakuun_Index_Module_Index extends Rakuun_Index_Module {
 		$registerBox->addClasses('rakuun_box_register');
 		$this->contentPanel->addPanel($loginBox = new Rakuun_GUI_Panel_Box('login', new Rakuun_Index_Panel_Login('login'), 'Login'));
 		$loginBox->addClasses('rakuun_box_login');
-		$this->contentPanel->addPanel($passwordForgottenBox = new Rakuun_GUI_Panel_Box('passwordforgotten', new Rakuun_Index_Panel_PasswordForgotten('content'), 'Passwort-vergessen Funktion'));
 		
 		if ($logoutReason = $this->getParam('logout-reason')) {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Note('logout_reason', $logoutReasonText = new GUI_Panel_Text('logout_reason', '', 'Ausgeloggt'), 'Ausgeloggt'));

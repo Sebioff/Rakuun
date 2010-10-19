@@ -135,6 +135,10 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		DB_Connection::get()->commit();
 		
 		if ($user->mail) {
+			/*
+			 * Catching exceptions here because sending mails is usually not possible
+			 * on DEV and that's annoying for testing.
+			 */
 			try {
 				$mail = new Net_Mail();
 				$mail->setSubject('Rakuun: Anmeldung');
@@ -153,7 +157,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 			}
 		}
 		
-		//Links
+		// links
 		$supportlink = new GUI_Control_Link('supportlink', 'Support', App::get()->getInternModule()->getSubmodule('messages')->getUrl());
 		$ticketlink = new GUI_Control_Link('ticketlink', 'Ticketsystem', 'http://tickets.rakuun.de');
 		

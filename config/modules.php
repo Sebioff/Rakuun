@@ -7,6 +7,7 @@ $app->addModule(new Rakuun_Index_Module_Info('infos'));
 $app->addModule(new Rakuun_Index_Module_Story('story'));
 $app->addModule(new Rakuun_Index_Module_Screenshots('screenshots'));
 $app->addModule(new Rakuun_Index_Module_Activation('activation'));
+$app->addModule(new Rakuun_Index_Module_PasswordForgotten('password_forgotten'));
 $app->addModule(new Rakuun_Index_Module_Master('master'));
 $app->addModule(new Rakuun_Index_Module_Endscore('endscore'));
 $app->addModule(new Rakuun_Cronjob('cronjob', 'cronjobs'));
