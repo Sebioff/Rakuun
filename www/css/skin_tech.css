@@ -563,16 +563,11 @@ body.skin_tech
 }
 
 .skin_tech #ctn_summary_unitstats .rakuun_box,
+.skin_tech #ctn_summary_pointlists .rakuun_box,
 .skin_tech #ctn_summary_buildingstats .rakuun_box {
 	margin-left:2px;
 	margin-right:2px;
 	width:470px;
-}
-
-.skin_tech #ctn_summary_pointlists .rakuun_box {
-	margin-left:2px;
-	margin-right:2px;
-	width:307px;
 }
 
 /* $9  -  Ressources ---------------------------------------------------------*/
