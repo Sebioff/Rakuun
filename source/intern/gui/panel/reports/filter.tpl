@@ -1,0 +1,9 @@
+<? $this->displayPanel('filter'); ?>
+<? $this->displayPanel('how'); ?>
+<? $this->displayPanel('what'); ?>
+<br class="clear" />
+<? $this->displayPanel('filter1'); ?>
+<? $this->displayPanel('how1'); ?>
+<? $this->displayPanel('what1'); ?>
+<br class="clear" />
+<? $this->displayPanel('submit'); ?>

@@ -72,21 +72,16 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		return false;
 	}
 	
-	public function getFilterString() {
-		$return = '';
+	public function getFilterStrings() {
+		$return = array('filter' => '', 'filter1' => '');
 		if (is_array($this->filter)) {
-			if ($this->filter['who'] == Rakuun_Intern_GUI_Panel_Reports_Filter::WHO_ATTER) {
-				if ($this->filter['how'] == Rakuun_Intern_GUI_Panel_Reports_Filter::HOW_EQUAL) {
-					$return = 'user = '.$this->filter['what'];
-				} else {
-					$return = 'user != '.$this->filter['what'];
-				}
-			} else {
-				if ($this->filter['how'] == Rakuun_Intern_GUI_Panel_Reports_Filter::HOW_EQUAL) {
-					$return = 'spied_user = '.$this->filter['what'];
-				} else {
-					$return = 'spied_user != '.$this->filter['what'];
-				}
+			if (isset($this->filter['what'])) {
+				$relation = Rakuun_Intern_GUI_Panel_Reports_Filter::getRelation($this->filter['how']);
+				$return['filter'] = $this->filter['filter'].' '.$relation.' '.$this->filter['what'];
+			}
+			if (isset($this->filter['what1'])) {
+				$relation = Rakuun_Intern_GUI_Panel_Reports_Filter::getRelation($this->filter['how1']);
+				$return['filter1'] = $this->filter['filter1'].' '.$relation.' '.$this->filter['what1'];
 			}
 		}
 		return $return;
