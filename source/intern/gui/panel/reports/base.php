@@ -48,7 +48,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			}
 			$line[] = $date;
 			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$spy->getPK(), $spy->user, $spy->user->getPK());
-			$line[] = new Rakuun_GUI_Control_UserLInk('spyeduserlink'.$spy->getPK(), $spy->spiedUser, $spy->spiedUser->getPK());
+			$line[] = new Rakuun_GUI_Control_UserLink('spieduserlink'.$spy->getPK(), $spy->spiedUser, $spy->spiedUser);
 			foreach ($units as $unit) {
 				$line[] = $spy->{Text::underscoreToCamelCase($unit->getInternalName())};
 			}
