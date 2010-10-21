@@ -7,6 +7,7 @@ class Rakuun_Intern_GUI_Panel_Reports_Filter extends GUI_Panel {
 	const HOW_UNEQUAL = 'unequal';
 	const HOW_GT_EQUAL = 'gt-equal';
 	const HOW_LT_EQUAL = 'lt-equal';
+	const FILTER_COUNT = 2;
 	
 	public function init() {
 		parent::init();
@@ -25,10 +26,12 @@ class Rakuun_Intern_GUI_Panel_Reports_Filter extends GUI_Panel {
 		foreach ($buildings as $building) {
 			$filter[$building->getInternalName()] = $building->getName();
 		}
-		$this->addPanel($filter1Control = new GUI_Control_DropDownBox('filter1', $filter));
-		$filter1Control->addClasses('filter1');
-		$this->addPanel(new GUI_Control_DropDownBox('how1', array(self::HOW_LT_EQUAL => '<=', self::HOW_EQUAL => '==', self::HOW_GT_EQUAL => '>=', self::HOW_UNEQUAL => '!=')));
-		$this->addPanel(new GUI_Control_TextBox('what1'));
+		for ($i = 0; $i < self::FILTER_COUNT; $i++) {
+			$this->addPanel($filterControl = new GUI_Control_DropDownBox('filter'.$i, $filter));
+			$filterControl->addClasses('filter');
+			$this->addPanel(new GUI_Control_DropDownBox('how'.$i, array(self::HOW_LT_EQUAL => '<=', self::HOW_EQUAL => '==', self::HOW_GT_EQUAL => '>=', self::HOW_UNEQUAL => '!=')));
+			$this->addPanel(new GUI_Control_TextBox('what'.$i));
+		}
 		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Filtern'));
 	}
 	
@@ -36,16 +39,22 @@ class Rakuun_Intern_GUI_Panel_Reports_Filter extends GUI_Panel {
 		if ($this->hasErrors())
 			return;
 			
-		$this->getModule()->contentPanel->reportsbox->getContentPanel()->reports->setFilter(
+		$this->getModule()->contentPanel->reportsbox->getContentPanel()->reports->addFilter(
 			array(
 				'filter' => $this->filter->getKey(),
 				'how' => $this->how->getKey(),
-				'what' => $this->what->getUser(),
-				'filter1' => $this->filter1->getKey(),
-				'how1' => $this->how1->getKey(),
-				'what1' => $this->what1->getValue()
+				'what' => $this->what->getUser()
 			)
 		);
+		for ($i = 0; $i < self::FILTER_COUNT; $i++) {
+			$this->getModule()->contentPanel->reportsbox->getContentPanel()->reports->addFilter(
+				array(
+					'filter' => $this->{'filter'.$i}->getKey(),
+					'how' => $this->{'how'.$i}->getKey(),
+					'what' => $this->{'what'.$i}->getValue()
+				)
+			);
+		}
 	}
 	
 	public static function getRelation($relation) {

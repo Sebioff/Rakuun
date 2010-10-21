@@ -2,7 +2,7 @@
 
 abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	protected $data = array();
-	protected $filter = null;
+	protected $filter = array();
 	
 	public function __construct($name, $title = '') {
 		parent::__construct($name, $title);
@@ -75,22 +75,20 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	}
 	
 	public function getFilterStrings() {
-		$return = array('filter' => '', 'filter1' => '');
-		if (is_array($this->filter)) {
-			if (isset($this->filter['what'])) {
-				$relation = Rakuun_Intern_GUI_Panel_Reports_Filter::getRelation($this->filter['how']);
-				$return['filter'] = $this->filter['filter'].' '.$relation.' '.$this->filter['what'];
-			}
-			if (isset($this->filter['what1'])) {
-				$relation = Rakuun_Intern_GUI_Panel_Reports_Filter::getRelation($this->filter['how1']);
-				$return['filter1'] = $this->filter['filter1'].' '.$relation.' '.$this->filter['what1'];
+		$return = array();
+		foreach ($this->filter as $filter) {
+			if (Text::length($filter['what']) > 0) {
+				$relation = Rakuun_Intern_GUI_Panel_Reports_Filter::getRelation($filter['how']);
+				$return[] = $filter['filter'].' '.$relation.' '.$filter['what'];
+			} else {
+				$return[] = '';
 			}
 		}
 		return $return;
 	}
 	
-	public function setFilter(array $filter) {
-		$this->filter = $filter;
+	public function addFilter(array $filter) {
+		$this->filter[] = $filter;
 	}
 }
 ?>

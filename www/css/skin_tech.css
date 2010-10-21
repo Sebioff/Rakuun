@@ -805,7 +805,6 @@ body.skin_tech
 }
 
 /* $18 -  Reports ------------------------------------------------------------*/
-.skin_tech .module_reports .rakuun_box_reports_filter .filter,
-.skin_tech .module_reports .rakuun_box_reports_filter .filter1 {
+.skin_tech .module_reports .rakuun_box_reports_filter .filter {
 	width:180px;
 }
