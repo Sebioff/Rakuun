@@ -39,7 +39,7 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		// set default values from spy report
 		if (($spyreport = $this->getModule()->getParam('spyreport')) && !$this->calcwarsim->hasBeenSubmitted()) {
 			$report = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK($spyreport);
-			if (Rakuun_Intern_GUI_Panel_User_Reports::hasPrivilegesToSeeReport($report)) {
+			if (Rakuun_Intern_GUI_Panel_Reports_Base::hasPrivilegesToSeeReport($report)) {
 				foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
 					if ($amount = $report->{Text::underscoreToCamelCase($unit->getInternalName())}) {
 						if (isset($this->panelsForAttackers[$unit->getInternalName()]))
