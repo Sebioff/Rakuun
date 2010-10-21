@@ -53,7 +53,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Edit extends GUI_Panel {
 			$mail->setSubject('Rakuun: Nickname geändert');
 			$mail->addRecipients($this->user->nameUncolored.' <'.$this->mail->getValue().'>');
 			$templateEngine = new GUI_TemplateEngine();
-			$templateEngine->username = $user->nameUncolored;
+			$templateEngine->username = $this->user->nameUncolored;
 			$mail->setMessage($templateEngine->render(dirname(__FILE__).'/edit_nick_mail.tpl'));
 			$mail->send();
 		}
