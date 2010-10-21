@@ -155,7 +155,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('guide'), 'Anleitung', array('rakuun_navigation_node_guide'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('imprint'))
 			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('imprint'), 'Spenden/Impressum', array('rakuun_navigation_node_imprint'));
-				
+		$infoNode->addNode(new CMS_Navigation_UrlNode('http://tickets.rakuun.de', 'Tickets'));
+		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('admin')) {
 			$adminNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('admin'), 'Admin', array('rakuun_navigation_node_admin'));
 			if (Rakuun_Intern_Modules::get()->hasSubmodule('multihunting'))
