@@ -40,6 +40,8 @@ class Rakuun_Intern_GUI_Panel_Production_Unit extends Rakuun_Intern_GUI_Panel_Pr
 		$record->amount = $amount;
 		$record->starttime = time();
 		Rakuun_DB_Containers::getUnitsWIPContainer()->save($record);
+		// FIXME changing properties of newly-saved records isn't possible atm
+		$record = Rakuun_DB_Containers::getUnitsWIPContainer()->selectByPK($record->getPK());
 		$record->position = $record->getPK();
 		$record->save();
 		DB_Connection::get()->commit();
