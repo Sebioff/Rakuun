@@ -32,6 +32,7 @@ class Rakuun_Intern_Module_Reports extends Rakuun_Intern_Module {
 		if ($user->alliance && $user->alliance->meta)
 			$menubox->getContentPanel()->addPanel(new GUI_Control_Link('metalink', '| Metaberichte', $this->getURL(array('show' => self::SHOW_META))));
 		$this->contentPanel->addPanel($filterbox = new Rakuun_GUI_Panel_Box('filterbox', null, 'Filter'));
+		$filterbox->addClasses('rakuun_box_reports_filter');
 		$filterbox->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_Filter('filter'));
 	}
 }

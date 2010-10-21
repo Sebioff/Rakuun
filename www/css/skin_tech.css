@@ -24,6 +24,7 @@
 	$15 -  Alliances
 	$16 -  Imprint
 	$17 -  Map
+	$18 -  Reports
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -167,6 +168,11 @@ body.skin_tech
 .skin_tech #ctn_footer {
 	background:transparent url('../images/background_footer.gif') no-repeat left top;
 	height:1px;
+}
+
+.skin_tech .rakuun_ctn_reports {
+	overflow:scroll;
+	width:944px;
 }
 
 /* $3  -  Boxes --------------------------------------------------------------*/
@@ -796,4 +802,10 @@ body.skin_tech
 .skin_tech .module_map .rakuun_box_defendingunits .value,
 .skin_tech .module_map .rakuun_box_defendingunits .controls {
 	float:left;
+}
+
+/* $18 -  Reports ------------------------------------------------------------*/
+.skin_tech .module_reports .rakuun_box_reports_filter .filter,
+.skin_tech .module_reports .rakuun_box_reports_filter .filter1 {
+	width:180px;
 }

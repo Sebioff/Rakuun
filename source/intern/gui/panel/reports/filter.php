@@ -12,7 +12,8 @@ class Rakuun_Intern_GUI_Panel_Reports_Filter extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/filter.tpl');
-		$this->addPanel(new GUI_Control_DropDownBox('filter', array(self::WHO_ATTER => 'Angreifer', self::WHO_DEFFER => 'Ziel')));
+		$this->addPanel($filterControl = new GUI_Control_DropDownBox('filter', array(self::WHO_ATTER => 'Angreifer', self::WHO_DEFFER => 'Ziel')));
+		$filterControl->addClasses('filter');
 		$this->addPanel(new GUI_Control_DropDownBox('how', array(self::HOW_EQUAL => '==', self::HOW_UNEQUAL => '!=')));
 		$this->addPanel(new Rakuun_GUI_Control_UserSelect('what'));
 		$filter = array();
@@ -24,7 +25,8 @@ class Rakuun_Intern_GUI_Panel_Reports_Filter extends GUI_Panel {
 		foreach ($buildings as $building) {
 			$filter[$building->getInternalName()] = $building->getName();
 		}
-		$this->addPanel(new GUI_Control_DropDownBox('filter1', $filter));
+		$this->addPanel($filter1Control = new GUI_Control_DropDownBox('filter1', $filter));
+		$filter1Control->addClasses('filter1');
 		$this->addPanel(new GUI_Control_DropDownBox('how1', array(self::HOW_LT_EQUAL => '<=', self::HOW_EQUAL => '==', self::HOW_GT_EQUAL => '>=', self::HOW_UNEQUAL => '!=')));
 		$this->addPanel(new GUI_Control_TextBox('what1'));
 		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Filtern'));

@@ -19,6 +19,8 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	public function beforeDisplay() {
 		parent::beforeDisplay();
 		
+		$this->setTemplate(dirname(__FILE__).'/base.tpl');
+		$this->addClasses('rakuun_ctn_reports');
 		$this->addPanel($table = new GUI_Panel_Table('reports'));
 		$units = Rakuun_Intern_Production_Factory::getAllUnits();
 		$buildings = Rakuun_Intern_Production_Factory::getAllBuildings();
@@ -42,7 +44,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 				$img = new GUI_Panel_Image('delimg', Router::get()->getStaticRoute('images', 'cancel.gif'));
 				$params = array_merge($this->getModule()->getParams(), array('delete' => $spy->getPK()));
 				$date->addPanel($link = new GUI_Control_Link('delete_link'.$spy->getPK(), $img->render(), $this->getModule()->getUrl($params)));
-				$link->setConfirmationMessage('Diesen Bericht wirklich löschen?'); 
+				$link->setConfirmationMessage('Diesen Bericht wirklich löschen?');
 			}
 			$line[] = $date;
 			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$spy->getPK(), $spy->user, $spy->user->getPK());
