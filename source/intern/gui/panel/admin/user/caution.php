@@ -60,8 +60,8 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 			} else {
 				$link = '';
 			}
-			
-			$cautionlist->addLine(array($caution->user->name, $caution->admin->name, $caution->points, $caution->reason, $date->getValue(), $link));
+			if ($caution->user)
+				$cautionlist->addLine(array($caution->user->name, $caution->admin->name, $caution->points, $caution->reason, $date->getValue(), $link));
 		}
 	}
 	
@@ -144,7 +144,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 		}
 		
 		$admin = Rakuun_User_Manager::getCurrentUser();
-		return ($caution->points > 0
+		return ($caution->points > 0 && $caution->user
 			&& (Rakuun_TeamSecurity::get()->hasPrivilege($admin, Rakuun_TeamSecurity::PRIVILEGE_CAUTIONRESET)
 			|| $admin->getPK() == $caution->admin));
 	}
