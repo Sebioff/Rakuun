@@ -106,7 +106,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 				}
 
 				if ($this->destroyBuildings->getSelected() && !$targetUser->canBeBashed(Rakuun_User_Manager::getCurrentUser())) {
-					$this->addError(sprintf('Der Spieler hat weniger als %d%% deiner eigenen Punktzahl, daher können seine Gebäude nicht zerstört werden.', RAKUUN_NOOB_SECURE_PERCENTAGE * 100));
+					$this->addError(sprintf('Der Spieler hat weniger als %d%% oder mehr als %d%% deiner eigenen Punktzahl, daher können seine Gebäude nicht zerstört werden.', RAKUUN_NOOB_SECURE_PERCENTAGE * 100, 100 / RAKUUN_NOOB_SECURE_PERCENTAGE));
 				}
 			}
 			
