@@ -405,6 +405,10 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		$this->baseSpeed = $baseSpeed;
 	}
 	
+	/**
+	 * @return int time in seconds this unit requires to move from one field to
+	 * another (the higher the slower)
+	 */
 	public function getSpeed() {
 		$baseValue = $this->baseSpeed;
 		$value = $baseValue;
@@ -416,6 +420,9 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		if ($this->getNeededTechnology('jet') > 0) {
 			$value -= $baseValue / 100 * Rakuun_Intern_Production_Technology_Jet::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('jet', $this->getDataSource()->technologies)->getLevel();
 		}
+		
+		if ($value < 0)
+			$value = 0;
 		
 		return $value;
 	}
