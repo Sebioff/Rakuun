@@ -65,7 +65,7 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 		$options['conditions'][] = array('time < ?', time() - self::CLEANUP_NOTACTIVATED_REMEMBER);
 		$options['conditions'][] = array('has_been_remembered = ?', false);
 		foreach (Rakuun_DB_Containers::getUserActivationContainer()->select($options) as $activation) {
-			/*$mail = new Net_Mail();
+			$mail = new Net_Mail();
 			$mail->setSubject('Rakuun: Account noch nicht aktiviert');
 			$mail->addRecipients($activation->user->nameUncolored.' <'.$activation->user->mail.'>');
 			$params = array('code' => $activation->code);
@@ -93,7 +93,7 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 			);
 			$mail->send();
 			$activation->hasBeenRemembered = true;
-			$activation->save();*/
+			$activation->save();
 		}
 		
 		// REMOVE NOT ACTIVATED ACCOUNTS ---------------------------------------
