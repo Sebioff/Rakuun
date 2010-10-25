@@ -65,7 +65,7 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 		$options['conditions'][] = array('time < ?', time() - self::CLEANUP_NOTACTIVATED_REMEMBER);
 		$options['conditions'][] = array('has_been_remembered = ?', false);
 		foreach (Rakuun_DB_Containers::getUserActivationContainer()->select($options) as $activation) {
-			$mail = new Net_Mail();
+			/*$mail = new Net_Mail();
 			$mail->setSubject('Rakuun: Account noch nicht aktiviert');
 			$mail->addRecipients($activation->user->nameUncolored.' <'.$activation->user->mail.'>');
 			$params = array('code' => $activation->code);
@@ -93,7 +93,7 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 			);
 			$mail->send();
 			$activation->hasBeenRemembered = true;
-			$activation->save();
+			$activation->save();*/
 		}
 		
 		// REMOVE NOT ACTIVATED ACCOUNTS ---------------------------------------
@@ -104,6 +104,7 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 			Rakuun_Intern_Log_UserActivity::log($activation->user, Rakuun_Intern_Log::ACTION_ACTIVITY_DELETE_NOTACTIVATED);
 			// we can't use delete by $options here because the delete handler of the container wouldn't work
 			Rakuun_User_Manager::delete($activation->user, 'Nicht aktiviert');
+			Rakuun_DB_Containers::getUserActivationContainer()->delete($activation);
 		}
 		DB_Connection::get()->commit();
 	}
