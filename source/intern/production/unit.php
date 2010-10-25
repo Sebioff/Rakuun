@@ -410,11 +410,11 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		$value = $baseValue;
 		
 		if ($this->getNeededTechnology('engine') > 0) {
-			$value += $baseValue / 100 * Rakuun_Intern_Production_Technology_Engine::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('engine', $this->getDataSource()->technologies)->getLevel();
+			$value -= $baseValue / 100 * Rakuun_Intern_Production_Technology_Engine::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('engine', $this->getDataSource()->technologies)->getLevel();
 		}
 		
 		if ($this->getNeededTechnology('jet') > 0) {
-			$value += $baseValue / 100 * Rakuun_Intern_Production_Technology_Jet::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('jet', $this->getDataSource()->technologies)->getLevel();
+			$value -= $baseValue / 100 * Rakuun_Intern_Production_Technology_Jet::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('jet', $this->getDataSource()->technologies)->getLevel();
 		}
 		
 		return $value;

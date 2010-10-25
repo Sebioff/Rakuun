@@ -128,7 +128,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		DB_Connection::get()->beginTransaction();
 		$armyTechnologies = new DB_Record();
 		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
-			if ($technology->hasInfluence(Rakuun_Intern_Production_Technology::INFLUENCE_ATTACK))
+			//if ($technology->hasInfluence(Rakuun_Intern_Production_Technology::INFLUENCE_ATTACK))
 				$armyTechnologies->{$technology->getInternalName()} = $technology->getLevel();
 		}
 		Rakuun_DB_Containers::getArmiesTechnologiesContainer()->save($armyTechnologies);
