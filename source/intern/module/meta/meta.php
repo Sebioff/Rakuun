@@ -25,7 +25,7 @@ class Rakuun_Intern_Module_Meta extends Rakuun_Intern_Module_Meta_Common {
 		$meta = $user->alliance->meta;
 		$this->setPageTitle('Meta - '.$meta->name);
 		if ($meta->picture)
-			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picture', new GUI_Panel_UploadedFile('metaepicture', $meta->picture, 'Metabild der Meta '.$meta->name), 'Metabild'));
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_UploadedFile('metaepicture', $meta->picture, 'Metabild der Meta '.$meta->name), 'Metabild'));
 		else
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_Text('dummy', 'Kein Bild vorhanden'), 'Metabild'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', $intern = new GUI_Panel_Text('intern', $meta->intern ? Text::format($meta->intern) : 'Keine Beschreibung'), 'Interne Informationen'));
