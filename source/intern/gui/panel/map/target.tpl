@@ -35,8 +35,10 @@
 			<? $this->displayLabelForPanel('cloaked_spydrone'); ?> <? $this->displayPanel('cloaked_spydrone'); ?>
 			<br class="clear" />
 		<? endif; ?>
-		<? $this->displayPanel('spy_label'); ?>
-		<hr/>
+		<? if ($this->hasPanel('spy_label')): ?>
+			<? $this->displayPanel('spy_label'); ?>
+		<? endif; ?>
+		<hr />
 	<? endif; ?>
 	<br class="clear" />
 	<? $this->displayLabelForPanel('iron_priority'); ?> <? $this->displayPanel('iron_priority'); ?>

@@ -74,7 +74,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		return false;
 	}
 	
-	public function getFilterStrings() {
+	protected function getFilterStrings() {
 		$return = array();
 		foreach ($this->filter as $filter) {
 			if (Text::length($filter['what']) > 0) {
