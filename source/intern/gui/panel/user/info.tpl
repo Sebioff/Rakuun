@@ -12,6 +12,8 @@ Username:
 Stadtname: <?= Text::escapeHTML($user->cityName); ?>
 <br class="clear" />
 Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
+<br class="clear" />
+Platz: <?= GUI_Panel_Number::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
 <? if ($user->alliance) : ?>
 	<br class="clear" />
 	Allianz:

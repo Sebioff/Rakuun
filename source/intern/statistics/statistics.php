@@ -96,6 +96,14 @@ abstract class Rakuun_Intern_Statistics {
 		return Rakuun_DB_Containers::getCautionContainer()->selectFirst($options)->countResult;
 	}
 	
+	/*
+	 * @param user 
+	 * @return rankposition of a user
+	 */
+	public static function getRank(Rakuun_DB_User $user) {
+		$options['conditions'][] = array('points > ?', $user->points);
+		return Rakuun_DB_Containers::getUserContainer()->count($options) + 1;
+	}
 }
 
 ?>

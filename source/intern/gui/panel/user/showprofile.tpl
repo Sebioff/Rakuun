@@ -19,6 +19,8 @@
 	ICQ: <?= $user->icq; ?>
 	<br class="clear" />
 	Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
+	<br class="clear" />
+	Platz: <?= GUI_Panel_Number::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
 	<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
 		<br class="clear" />
 		Multipunkte:
