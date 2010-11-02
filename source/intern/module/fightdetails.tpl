@@ -1,1 +1,0 @@
-<? $this->displayPanel('details'); ?>
