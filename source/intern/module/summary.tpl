@@ -15,6 +15,8 @@
 </div>
 <div id="ctn_summary_mixedstats">
 	<? $this->displayPanel('buildingevents'); ?>
+	<? $this->displayPanel('technologiesevents'); ?>
+	<br class="clear" />	
 	<? $this->displayPanel('ressources'); ?>
 	<? $this->displayPanel('fights'); ?>
 </div>

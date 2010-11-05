@@ -42,6 +42,9 @@ class Rakuun_Intern_Module_Summary extends Rakuun_Intern_Module {
 		$this->contentPanel->addPanel(
 			new Rakuun_GUI_Panel_Box('buildingevents', new Rakuun_Intern_GUI_Panel_Statistics_User_BuildingEvents('buildingevents'), 'Gebäude')
 		);
+		$this->contentPanel->addPanel(
+			new Rakuun_GUI_Panel_Box('technologiesevents', new Rakuun_Intern_GUI_Panel_Statistics_User_TechnologiesEvents('technologiesevents'), 'Forschungen')
+		);
 	}
 }
 ?>

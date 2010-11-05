@@ -1,1 +1,1 @@
-<? $this->displayPanel('info'); ?>
+<? if ($this->hasPanel('info')) : $this->displayPanel('info'); endif; ?>

@@ -96,6 +96,12 @@ class Rakuun_Intern_Event {
 				$building = Rakuun_Intern_Production_Factory::getBuilding($event->building);
 				$label = new Rakuun_GUI_Control_UserLink('event_user_'.$event->getPK(), $event->executingUser, $event->get('executing_user'));
 				return $building->getName().' Stufe '.($event->level + 1).' zerstört durch '.$label->render().'.';
+			case self::EVENT_TYPE_TECHNOLOGY_PRODUCE:
+				$technology = Rakuun_Intern_Production_Factory::getTechnology($event->technology);
+				return $technology->getName().' Stufe '.$event->level.' fertiggestellt.';
+			case self::EVENT_TYPE_TECHNOLOGY_REMOVE:
+				$technology = Rakuun_Intern_Production_Factory::getTechnology($event->technology);
+				return $technology->getName().' Stufe '.($event->level + 1).' abgerissen.';
 		}
 	}
 }
