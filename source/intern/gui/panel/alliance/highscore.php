@@ -29,8 +29,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
 				new Rakuun_GUI_Control_MetaLink('alliancemetalink'.$i, $alliance->meta) :
 				'';
 			$line[] = new GUI_Panel_Number('alliancepoints'.$i, $alliance->points);
-			// TODO refactor with 4.0.0 final, empty alliances shouldn't be possible
-			$allianceaverage = count($alliance->members) == 0 ? 0 : $alliance->points / count($alliance->members);
+			$allianceaverage = $alliance->points / count($alliance->members);
 			$number = new GUI_Panel_Number('allianceaverage'.$i, $allianceaverage);
 			$number->setPrefix('&oslash; ');
 			$line[] = $number;

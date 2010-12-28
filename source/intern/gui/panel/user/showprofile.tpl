@@ -1,5 +1,3 @@
-<? // TODO don't forget to show more public Userdata if there are implemented ?>
-
 <? if($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
@@ -56,7 +54,7 @@
 		$images = Rakuun_User_Specials_Database::getDatabaseImages();
 		
 		foreach ($databases as $db) {
-			if (in_array($db->identifier, $visibleDatabases)):	
+			if (in_array($db->identifier, $visibleDatabases)):
 				$image = new GUI_Panel_Image('image_'.$db, Router::get()->getStaticRoute('images', $images[$db->identifier].'.gif'));
 				$image->display();
 			endif;
@@ -95,7 +93,7 @@
 		<? $useredit = new Rakuun_GUI_Control_UserDeleteLink('userdeletelink', $user, 'User löschen'); ?>
 		<? $useredit->display(); ?>
 		<br class="clear" />
-	<? endif;?>	
+	<? endif;?>
 	<br class="clear" />
 	<? if ($user->isInNoob()): ?>
 		Der Spieler befindet sich im Noobschutz und kann nicht angegriffen werden.

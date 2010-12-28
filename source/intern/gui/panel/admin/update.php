@@ -30,8 +30,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		}
 		else {
 			if ($this->createNews->getSelected()) {
-				// FIXME hardcoded paths suck!
-				$history = explode("\n", $ssh->exec('svn log www/Rakuun -r BASE:HEAD'));
+				$history = explode("\n", $ssh->exec('svn log '.RAKUUN_SVN_PROJECT_PATH.' -r BASE:HEAD'));
 				$formatHistory = $this->formatHistory($history);
 				$this->addPanel(new GUI_Control_TextArea('newstext', 'Das Spiel wurde gerade aktualisiert. Folgende Änderungen wurden vorgenommen:'."\n".'<br/>'."\n".'<br/>'."\n".$formatHistory, 'Newseintrag'));
 				$this->addPanel($tweet = new GUI_Control_TextArea('tweet', 'Update: '.$formatHistory, 'Tweet'));
@@ -76,8 +75,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		// update core
 		$this->params->conflicts = false;
 		$log .= '<br /><strong>Updating CORE...</strong><br />';
-		// FIXME hardcoded paths suck!
-		$updateActions = explode("\n", $ssh->exec('svn update www/CORE'));
+		$updateActions = explode("\n", $ssh->exec('svn update '.RAKUUN_SVN_CORE_PATH));
 		foreach ($updateActions as $action) {
 			if (isset($action[0]) && $action[0] == 'C') {
 				$log .= '<span style="color:#ff0000">'.$action.'</span><br />';
@@ -122,8 +120,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Update extends GUI_Panel {
 		
 		if ($this->createNews->getSelected()) {
 			// get changes
-			// FIXME hardcoded paths suck!
-			$history = explode("\n", $ssh->exec('svn log www/Rakuun -r '.$revisionNumber.':'.(PROJECT_VERSION + 1)));
+			$history = explode("\n", $ssh->exec('svn log '.RAKUUN_SVN_PROJECT_PATH.' -r '.$revisionNumber.':'.(PROJECT_VERSION + 1)));
 			$formatHistory = $this->formatHistory($history);
 			
 			// add news entry

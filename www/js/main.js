@@ -49,8 +49,19 @@ $(document).ready(function(){
 		$(".skin_tech .rakuun_box .head h2").prepend("<span></span>");
 		$(".skin_tech .core_gui_submitbutton").wrap("<span class=\"core_gui_submitbutton_wrapper\"></span>").after("<div></div>");
 	}
+	// open submenus on hover over top menu entries
 	$(".skin_tech #ctn_head #ctn_navigation li").mouseover(function() {
 		$(".skin_tech #ctn_head #ctn_navigation li").removeClass("core_navigation_node_inpath");
 		$(this).addClass("core_navigation_node_inpath");
+	});
+	// center submenus below top menu entries
+	$(".skin_tech #ctn_head #ctn_navigation li ul").each(function() {
+		jqThis = $(this);
+		ownMaxWidth = jqThis.width();
+		jqThis.css("width", "auto");
+		ownWidth = jqThis.width();
+		parent = jqThis.parent();
+		jqThis.children().first().css("margin-left", Math.min(parent.position().left + parent.width() / 2 - ownWidth / 2, ownMaxWidth - ownWidth));
+		jqThis.css("width", ownMaxWidth);
 	});
 });
