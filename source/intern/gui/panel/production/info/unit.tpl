@@ -25,57 +25,59 @@ Geschwindigkeit: <?= Rakuun_Date::formatCountDown(1 + $unit->getSpeed()); ?> / F
 	Transportkapazität: <?= GUI_Panel_Number::formatNumber($unit->getRessourceTransportCapacity(1)); ?>
 <? endif; ?>
 <br/>
-<br/>
-<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER)): ?>
-	Fußsoldat
+<? if ($unit->getBaseAttackValue() > 0 || $unit->getBaseDefenseValue() > 0): ?>
 	<br/>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE ?>% Kampfkraft gegen Fahrzeuge
+	<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER)): ?>
+		Fußsoldat
 		<br/>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE ?>% Kampfkraft gegen Fahrzeuge
+			<br/>
+		<? endif; ?>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT ?>% Kampfkraft gegen Flugeinheiten
+			<br/>
+		<? endif; ?>
 	<? endif; ?>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT ?>% Kampfkraft gegen Flugeinheiten
+	<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE)): ?>
+		Fahrzeug
 		<br/>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER ?>% Kampfkraft gegen Fußsoldaten
+			<br/>
+		<? endif; ?>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_AIRCRAFT != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_AIRCRAFT > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_AIRCRAFT ?>% Kampfkraft gegen Flugeinheiten
+			<br/>
+		<? endif; ?>
 	<? endif; ?>
-<? endif; ?>
-<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE)): ?>
-	Fahrzeug
-	<br/>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER ?>% Kampfkraft gegen Fußsoldaten
+	<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT)): ?>
+		Flugeinheit
 		<br/>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER ?>% Kampfkraft gegen Fußsoldaten
+			<br/>
+		<? endif; ?>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_VEHICLE != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_VEHICLE > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_VEHICLE ?>% Kampfkraft gegen Fahrzeuge
+			<br/>
+		<? endif; ?>
 	<? endif; ?>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_AIRCRAFT != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_AIRCRAFT > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_VEHICLE_VS_AIRCRAFT ?>% Kampfkraft gegen Flugeinheiten
+	<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY)): ?>
+		Stationäre Einheit
 		<br/>
-	<? endif; ?>
-<? endif; ?>
-<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT)): ?>
-	Flugeinheit
-	<br/>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER ?>% Kampfkraft gegen Fußsoldaten
-		<br/>
-	<? endif; ?>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_VEHICLE != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_VEHICLE > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_AIRCRAFT_VS_VEHICLE ?>% Kampfkraft gegen Fahrzeuge
-		<br/>
-	<? endif; ?>
-<? endif; ?>
-<? if ($unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY)): ?>
-	Stationäre Einheit
-	<br/>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER ?>% Kampfkraft gegen Fußsoldaten
-		<br/>
-	<? endif; ?>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_VEHICLE != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_VEHICLE > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_VEHICLE ?>% Kampfkraft gegen Fahrzeuge
-		<br/>
-	<? endif; ?>
-	<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_AIRCRAFT != 0): ?>
-		<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_AIRCRAFT > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_AIRCRAFT ?>% Kampfkraft gegen Flugeinheiten
-		<br/>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER ?>% Kampfkraft gegen Fußsoldaten
+			<br/>
+		<? endif; ?>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_VEHICLE != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_VEHICLE > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_VEHICLE ?>% Kampfkraft gegen Fahrzeuge
+			<br/>
+		<? endif; ?>
+		<? if (Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_AIRCRAFT != 0): ?>
+			<?= ((Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_AIRCRAFT > 0) ? '+' : '') . Rakuun_Intern_Production_Unit::BONUS_PERCENT_STATIONARY_VS_AIRCRAFT ?>% Kampfkraft gegen Flugeinheiten
+			<br/>
+		<? endif; ?>
 	<? endif; ?>
 <? endif; ?>
 <br/>

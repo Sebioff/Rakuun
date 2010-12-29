@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Techtree extends Rakuun_Intern_GUI_Pan
 	}
 	
 	public function getDescription() {
-		$techtreeLink = new GUI_Control_Link('techtree', 'Techtree', App::get()->getInternModule()->getSubmodule('techtree')->getUrl());
+		$techtreeLink = new GUI_Control_Link('techtree', 'Techtree ("Produktion -&gt; Techtree")', App::get()->getInternModule()->getSubmodule('techtree')->getUrl());
 		return '
 			Mit Eisen und Beryllium als Rohstoffe wirst du allein nicht weiterkommen.
 			Energie ist ein ebenso wichtiger Rohstoff. Bevor du ihn jedoch produzieren

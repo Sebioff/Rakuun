@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Map extends Rakuun_Intern_GUI_Panel_Tu
 	}
 	
 	public function getDescription() {
-		$link = new GUI_Control_Link('maplink', 'Karte', App::get()->getInternModule()->getSubmodule('map')->getUrl());
+		$link = new GUI_Control_Link('maplink', 'Karte ("Militär -&gt; Karte")', App::get()->getInternModule()->getSubmodule('map')->getUrl());
 		return '
 			Hast du dir schonmal die '.$link->render().' angeschaut? Dort kannst
 			du die Position deiner Stadt, sowie die der anderen Spieler sehen.

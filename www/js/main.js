@@ -60,8 +60,8 @@ $(document).ready(function(){
 		ownMaxWidth = jqThis.width();
 		jqThis.css("width", "auto");
 		ownWidth = jqThis.width();
-		parent = jqThis.parent();
-		jqThis.children().first().css("margin-left", Math.min(parent.position().left + parent.width() / 2 - ownWidth / 2, ownMaxWidth - ownWidth));
+		jqParent = jqThis.parent();
+		jqThis.children().first().css("margin-left", Math.min(jqParent.position().left + jqParent.width() / 2 - ownWidth / 2, ownMaxWidth - ownWidth));
 		jqThis.css("width", ownMaxWidth);
 	});
 });
