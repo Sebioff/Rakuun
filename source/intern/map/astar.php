@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * TODO Use SplMinHeap with PHP 5.3 for the open list, should be way faster
+ *
+ */
 class Rakuun_Intern_Map_AStar {
 	private $bitMap;
 	private $map;
@@ -40,7 +44,7 @@ class Rakuun_Intern_Map_AStar {
 	
 	private function expandNode(&$expandedNode, &$targetNode, &$openNodes, &$closedNodes) {
 		$expandedNode['expanded'] = true;
-		$closedNodes[] = $expandedNode;
+		$closedNodes[] = &$expandedNode;
 		
 		$reachableNodes = array();
 		if ($expandedNode['x'] - 1 >= 0)
@@ -63,12 +67,12 @@ class Rakuun_Intern_Map_AStar {
 //			$reachableNodes[] = &self::$map[$expandedNode['x'] + 1][$expandedNode['y'] + 1];
 			
 		foreach ($reachableNodes as &$reachableNode) {
-			$deltaX = abs($reachableNode['x'] - $targetNode['x']);
-			$deltaY = abs($reachableNode['y'] - $targetNode['y']);
-			
 			if ((!$reachableNode['walkable'] && $this->unitTypes != Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT) || $reachableNode['expanded']) {
 				continue;
 			}
+			
+			$deltaX = abs($reachableNode['x'] - $targetNode['x']);
+			$deltaY = abs($reachableNode['y'] - $targetNode['y']);
 			
 			$g = $this->getMovementCosts($expandedNode, $reachableNode) + $expandedNode['g'];
 			
@@ -90,11 +94,13 @@ class Rakuun_Intern_Map_AStar {
 	}
 	
 	private function reconstructPath(&$pathNode, &$startNode, &$path = array()) {
-		array_unshift($path, $pathNode);
+		do {
+			array_unshift($path, $pathNode);
+			$prevNode = &$pathNode;
+			$pathNode = &$pathNode['parentNode'];
+		}
+		while ($prevNode['x'] != $startNode['x'] || $prevNode['y'] != $startNode['y']);
 
-		if ($pathNode['x'] != $startNode['x'] || $pathNode['y'] != $startNode['y'])
-			$this->reconstructPath($pathNode['parentNode'], $startNode, $path);
-		
 		return $path;
 	}
 	
