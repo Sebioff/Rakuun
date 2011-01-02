@@ -44,12 +44,16 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 		
 		if (!$user) {
 			if (!$this->userbox->getKey())
-				$this->addError('kein Spieler ausgewählt.');
+				$this->addError('Kein Spieler ausgewählt.');
 			else
 				$this->addError($this->userbox->getValue().' gehört nicht zu deiner Allianz.');
 			//return here so user can't see store capacity of enemies
 			return;
 		}
+		
+		if ($this->iron->getValue()+ $this->beryllium->getValue() + $this->energy->getValue() + $this->people->getValue() == 0)
+			$this->addError('Keine Ressourcen zu übertragen.');
+		
 		//check for user capacity
 		if ($this->iron->getValue() + $user->ressources->iron > $user->ressources->getCapacityIron()) {
 			$capacity = $user->ressources->getCapacityIron() - $user->ressources->iron;
@@ -84,10 +88,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 		
 		//check if user armee is below alliance average
 		if ($user->getArmyStrength(true) >= $user->alliance->getAverageMilitaryStrength(true))
-			$this->addError('Dieser Nutzer besitzt eine zu starke Armee, um noch mit Ressourcen gestärkt werden zu müssen.');
+			$this->addError('Dieser Spieler besitzt eine zu starke Armee, um noch mit Ressourcen gestärkt werden zu müssen.');
 
 		if ($user->points >= $alliance->points / count($alliance->members))
-			$this->addError('Dieser User hat zu viele Punkte.');
+			$this->addError('Dieser Spieler hat zu viele Punkte.');
 		
 		if ($this->hasErrors())
 			return;

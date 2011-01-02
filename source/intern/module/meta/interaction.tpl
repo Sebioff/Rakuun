@@ -1,5 +1,5 @@
 <? $this->displayPanel('account'); ?>
 <? $this->displayPanel('deposit'); ?>
-<? $this->displayPanel('movements'); ?>
+<? $this->displayPanel('allianceaccounts'); ?>
 <br class="clear" />
 <? $this->displayPanel('leave'); ?>

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * FIXME finishing stuff of _offline_ users might be a problem.
+ * E.g.: user is online, but not on overview/building page -> buildings don't get
+ * finished. COULD be abused.
+ */
 class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 	public function execute() {
 		// finish productions for not logged-in players ------------------------
@@ -50,6 +55,7 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 	}
 	
 	private function onDancertiaStarted(Rakuun_DB_Meta $meta) {
+		// TODO add IGM on game end
 //		foreach (Rakuun_DB_Containers::getUserContainer()->select() as $user) {
 //			// send IGM
 //			$igm = new Rakuun_Intern_IGM('Ende der Runde', $user);
@@ -161,7 +167,7 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 	
 	private function unbanUsers() {
 		$options = array();
-		$options['conditions'][] = array('time < ?', time());		
+		$options['conditions'][] = array('time < ?', time());
 		$users = Rakuun_DB_Containers::getUserBannedContainer()->select($options);
 		
 		foreach ($users as $user) {

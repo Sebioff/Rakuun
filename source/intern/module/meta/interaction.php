@@ -9,7 +9,7 @@ class Rakuun_Intern_Module_Meta_Interaction extends Rakuun_Intern_Module_Meta_Co
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('account', new Rakuun_Intern_GUI_Panel_Meta_Account('account'), 'Metakonto'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('deposit', new Rakuun_Intern_GUI_Panel_Meta_Account_Deposit('deposit'), 'Auf Metakonto einzahlen'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('leave', new Rakuun_Intern_GUI_Panel_Meta_Leave('leave'), 'Meta verlassen'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('movements', new Rakuun_Intern_GUI_Panel_Meta_Account_AllianceAccounts('metaaccounts'), 'Kontobewegungen'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('allianceaccounts', new Rakuun_Intern_GUI_Panel_Meta_Account_AllianceAccounts('allianceaccounts'), 'Kontostände'));
 	}
 	
 	public function checkPrivileges() {

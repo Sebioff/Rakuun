@@ -2,4 +2,4 @@
 <? $this->displayPanel('payout'); ?>
 <br class="clear" />
 <? $this->displayPanel('logview'); ?>
-<? $this->displayPanel('movements'); ?>
+<? $this->displayPanel('useraccounts'); ?>
