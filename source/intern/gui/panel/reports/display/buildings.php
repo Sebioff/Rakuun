@@ -23,6 +23,8 @@ class Rakuun_Intern_GUI_Panel_Reports_Display_Buildings extends Rakuun_Intern_GU
 			foreach ($reports as $report) {
 				if (Rakuun_Intern_GUI_Panel_Reports_Base::hasPrivilegesToSeeReport($report)) {
 					foreach ($buildings as $building) {
+						if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES))
+							continue;
 						$data['reports'][$building->getName()][$i] = $report->{Text::underscoreToCamelCase($building->getInternalName())};
 						$date[$report->time] = date(GUI_Panel_Date::FORMAT_DATE, $report->time);
 					}

@@ -53,6 +53,8 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 				$line[] = $spy->{Text::underscoreToCamelCase($unit->getInternalName())};
 			}
 			foreach ($buildings as $building) {
+				if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES))
+					continue;
 				$line[] = $spy->{Text::underscoreToCamelCase($building->getInternalName())};
 			}
 			$table->addLine($line);

@@ -248,7 +248,7 @@ abstract class Rakuun_Intern_Production_Base {
 	
 	public function setAttribute($attributeIdentifier, $value) {
 		if (!is_bool($value))
-			throw new Core_Exception('$$value must be boolean.');
+			throw new Core_Exception('$value must be boolean.');
 		
 		$this->attributes[$attributeIdentifier]['value'] = $value;
 	}
