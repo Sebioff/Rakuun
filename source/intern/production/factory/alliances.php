@@ -35,7 +35,11 @@ abstract class Rakuun_Intern_Production_Factory_Alliances {
 	}
 	
 	private static function generateBuildingList() {
-		self::addBuilding('database_detector', 'Rakuun_Intern_Production_Building_Alliances_DatabaseDetector');
+		self::addBuilding('database_detector_blue', 'Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorBlue');
+		self::addBuilding('database_detector_brown', 'Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorBrown');
+		self::addBuilding('database_detector_green', 'Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorGreen');
+		self::addBuilding('database_detector_red', 'Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorRed');
+		self::addBuilding('database_detector_yellow', 'Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorYellow');
 	}
 }
 

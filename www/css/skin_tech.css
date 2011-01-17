@@ -44,17 +44,17 @@ body.skin_tech
 	color:#4E82C2;
 }
 
-.skin_tech .rakuun_box .head {
+.skin_tech .rakuun_box .head h2 {
 	position:relative;
 }
 
 .skin_tech .rakuun_box .head h2 span {
 	background:url('../images/h_text_gradient.png') repeat-x;
-	position:absolute;
 	display:block;
-	width:100%;
 	height:20px;
-	bottom:0px;
+	position:absolute;
+	top:-2px;
+	width:100%;
 }
 
 * html .skin_tech .rakuun_box .head h2 span {

@@ -1027,7 +1027,11 @@ $queries[] = 'ALTER TABLE `shoutbox_metas`
 $queries[] = 'CREATE TABLE IF NOT EXISTS `alliances_buildings` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `alliance` smallint(5) unsigned NOT NULL,
-  `database_detector` mediumint(9) NOT NULL,
+  `database_detector_blue` mediumint(9) NOT NULL,
+  `database_detector_brown` mediumint(9) NOT NULL,
+  `database_detector_green` mediumint(9) NOT NULL,
+  `database_detector_red` mediumint(9) NOT NULL,
+  `database_detector_yellow` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `alliance` (`alliance`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;';

@@ -74,8 +74,20 @@ class Rakuun_User_Specials_Database extends Rakuun_User_Specials {
 	 * @return array of identifiers for databases that are visible for the given alliance
 	 */
 	public static function getVisibleDatabasesForAlliance(Rakuun_DB_Alliance $alliance = null) {
-		if ($alliance)
-			return array_slice(self::getDatabaseIdentifiers(), 0, $alliance->buildings->databaseDetector);
+		if ($alliance) {
+			$visibleDatabases = array();
+			if ($alliance->buildings->databaseDetectorBlue)
+				$visibleDatabases[] = Rakuun_User_Specials::SPECIAL_DATABASE_BLUE;
+			if ($alliance->buildings->databaseDetectorBrown)
+				$visibleDatabases[] = Rakuun_User_Specials::SPECIAL_DATABASE_BROWN;
+			if ($alliance->buildings->databaseDetectorGreen)
+				$visibleDatabases[] = Rakuun_User_Specials::SPECIAL_DATABASE_GREEN;
+			if ($alliance->buildings->databaseDetectorRed)
+				$visibleDatabases[] = Rakuun_User_Specials::SPECIAL_DATABASE_RED;
+			if ($alliance->buildings->databaseDetectorYellow)
+				$visibleDatabases[] = Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW;
+			return $visibleDatabases;
+		}
 		else
 			return array();
 	}
@@ -90,10 +102,10 @@ class Rakuun_User_Specials_Database extends Rakuun_User_Specials {
 	public static function getDatabaseImages() {
 		return array(
 			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 'db_blue',
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'db_red',
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'db_yellow',
 			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 'db_brown',
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'db_green'
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 'db_green',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 'db_red',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 'db_yellow'
 		);
 	}
 }
