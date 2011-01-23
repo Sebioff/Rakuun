@@ -32,6 +32,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$tableHeader[] = $building->getName();
 		}
 		$table->addHeader($tableHeader);
+		$table->addFooter($tableHeader);
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
 		foreach ($this->data as $spy) {
 			if (!self::hasPrivilegesToSeeReport($spy))

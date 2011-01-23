@@ -10,6 +10,10 @@
 				Achtung: du greifst ein Mitglied deiner Allianz an!
 				<br/>
 			<? endif; ?>
+			<? if ($target->isOnline()): ?>
+				Achtung: Der Spieler ist online!
+				<br/>
+			<? endif; ?>
 			<? $target = $target->name; ?>
 		<? endif; ?>
 		Ziel: <?= $target; ?>

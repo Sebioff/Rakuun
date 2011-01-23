@@ -38,7 +38,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 		$this->addPanel($message = new GUI_Control_TextBox('message', '', 'Verwendungszweck'));
 		$message->addValidator(new GUI_Validator_MaxLength(50));
 		
-		$this->addPanel(new GUI_Panel_Number('tradelimit', (1000 + $user->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $user->tradelimit), 'Du kannst heute noch so viele Ressourcen erhalten:'));
+		$this->addPanel(new GUI_Panel_Number('tradelimit', ($user->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $user->tradelimit), 'Du kannst heute noch so viele Ressourcen erhalten:'));
 		
 		$this->addPanel($submit = new GUI_Control_SubmitButton('submit', 'Berechnen'));
 		
@@ -80,7 +80,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 			if ($energycosts > $sender->ressources->energy)
 				$this->addError('So viel Energie besitzt du nicht');
 			
-			$tradelimit = 1000 + $recipient->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $recipient->tradelimit;
+			$tradelimit = $recipient->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $recipient->tradelimit;
 			if ($tradelimit < $tradevolume)
 				$this->addError('Der Empfänger kann nur noch '.$tradelimit.' Ressourcen erhalten');
 			if ($sender->id == $recipient->id)

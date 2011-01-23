@@ -10,6 +10,8 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 	
 	const MAX_EXCHANGE_COURSE = 4;
 	const MIN_EXCHANGE_COURSE = 0.25;
+	
+	const MIN_AMOUNT = 100;
 		
 	const RESSOURCE_IRON = 1;
 	const RESSOURCE_BERYLLIUM = 2;
@@ -53,6 +55,9 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		}
 		if ($amount > $tradable - $user->stockmarkettrade) {
 			$this->addError('Du kannst heute nur noch '.GUI_Panel_Number::formatNumber(self::getTradableLeft()).' Ressourcen über die Börse handeln.');
+		}
+		if ($amount < self::MIN_AMOUNT) {
+			$this->addError('Du musst mindestens '.GUI_Panel_Number::formatNumber(self::MIN_AMOUNT).' Ressourcen über die Börse handeln.');
 		}
 	}
 	

@@ -47,7 +47,7 @@ Jeder Spieler darf nur einen Account besitzen und spielen.
 Wenn ein Spieler mit einem anderen Spieler einen gemeinsamen Internetzugang benutzt, so ist dieses zu Beginn einer Runde aus beiden Account per IGM (link im Nachrichtenmenü) zu melden. Diese Accounts mit dem gleichen Internetzugang dürfen sich keine Rohstoffe schicken oder sich gegenseitig angreifen.
 <br/>
 <ul>
-	<li>1 Verwarnungspunkt bei unterlassener Meldung, bei Nichteinhaltung der gemeldeten Zeiten/Orte, bei Nichtnutzung des Ra2Go-Zuganges</li>
+	<li>1 Verwarnungspunkt bei unterlassener Meldung, bei Nichteinhaltung der gemeldeten Zeiten/Orte</li>
     <li>2 Verwarnungspunkte bei Handel/Angriff (ohne DB-Sicherung)</li>
     <li>6 Verwarnungspunkte bei Angriff (bei DB-Sicherung oder Start eines Angriffes, weil der Besitzer nicht da ist)</li>
     <li>betrifft immer alle beteiligten Accounts</li>
@@ -56,6 +56,7 @@ Wenn ein Spieler mit einem anderen Spieler einen gemeinsamen Internetzugang benu
 <br/>
 Es ist einer natürlichen Person gestattet einen Rakuun-Account einzurichten und zu besitzen. Ein zweiter (und jeder weitere) Account, der von einem bereits angemeldeten Spieler eröffnet, oder genutzt wird, ist ein sogenannter Multi. Multiusing ist unzulässig und wird bestraft.
 <ul>
+	<li>6 Verwarnpunkte für die bewusste Nutzung von Proxys um sich in einen anderen Account einzuloggen</li>
 	<li>15 Verwarnungspunkte (= Accountlöschung)</li>
     <li>betrifft immer alle beteiligten Accounts</li>
 </ul>

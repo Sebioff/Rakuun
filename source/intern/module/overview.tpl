@@ -62,17 +62,17 @@
 		<? $this->displayPanel('news'); ?>
 	<? endif; ?>
 
-	<? $this->displayPanel('info'); ?>
+	<? if ($this->hasPanel('sitterbox')): ?>
+		<br class="clear" />
+		<? $this->displayPanel('sitterbox'); ?>
+	<? endif; ?>
 	
 	<? if ($this->hasPanel('specials')): ?>
 		<? $this->displayPanel('specials'); ?>
 		<br class="clear" />
 	<? endif; ?>
 	
-	<? if ($this->hasPanel('sitterbox')): ?>
-		<br class="clear" />
-		<? $this->displayPanel('sitterbox'); ?>
-	<? endif; ?>
+	<? $this->displayPanel('info'); ?>
 	
 	<? if ($this->hasPanel('sitterswitch')): ?>
 		<br class="clear" />
