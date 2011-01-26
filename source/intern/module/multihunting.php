@@ -11,6 +11,7 @@ class Rakuun_Intern_Module_Multihunting extends Rakuun_Intern_Module implements 
 		$user = Rakuun_DB_Containers::getUserContainer()->selectByPK($param);
 		$users = Rakuun_DB_Containers::getUserContainer();
 		
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('search', new Rakuun_Intern_GUI_Panel_Multihunting_Search('search', 'Suchen'), 'Suchen'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('multiscore', new Rakuun_Intern_GUI_Panel_Multihunting_Multiscore('multiscore', $users, 'Multiscore'), 'Multiscore'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('multiaction', new Rakuun_Intern_GUI_Panel_Multihunting_MultiActionLog('multiaction', $user, 'Multiaktivitäten'), 'Multiaktivitäten'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('activity', new Rakuun_Intern_GUI_Panel_Multihunting_ActivityLog('activity', $user, 'Aktivitätslog'), 'Aktivitätslog'));

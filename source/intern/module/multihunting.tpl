@@ -1,3 +1,4 @@
+<? $this->displayPanel('search'); ?>
 <? $this->displayPanel('multiscore'); ?>
 <? $this->displayPanel('multiaction'); ?>
 <? $this->displayPanel('activity'); ?>
