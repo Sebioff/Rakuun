@@ -47,8 +47,8 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		if (in_array(Text::toUpperCase($this->username->getValue()), self::getReservedNames()))
 			$this->addError('Dieser Name kann nicht vergeben werden', $this->username);
 			
-		if (preg_match('/[<>,]+/', $this->username->getValue()))
-			$this->addError('Dieser Name enhält nicht erlaubte Zeichen', $this->username);
+		if (preg_match('/[@<>,#]+/', $this->username->getValue()))
+			$this->addError('Folgende Zeichen sind im Namen nicht erlaubt: @<>,#', $this->username);
 
 		if ($this->hasErrors())
 			return;

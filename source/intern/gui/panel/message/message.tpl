@@ -12,7 +12,7 @@
 		<br class="clear" />
 	</div>
 	<div class="rakuun_message_content">
-		<?= Text::format($this->getMessage()->text); ?>
+		<?= Rakuun_Text::formatPlayerText($this->getMessage()->text, false); ?>
 	</div>
 	<? if ($this->getMessage()->type == Rakuun_Intern_IGM::TYPE_PRIVATE): ?>
 		<? $userLinks = array(); ?>

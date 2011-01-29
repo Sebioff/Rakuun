@@ -22,7 +22,7 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		if (Router::get()->getCurrentModule()->getParam('answerid') > 0) {
 			$answer = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
-			$text->setValue('@'.$answer->nameUncolored.': ');
+			$text->setValue('@'.$answer->nameUncolored.'@: ');
 			$text->setFocus();
 		}
 		$this->addPanel(new GUI_Control_Link('refresh', 'Aktualisieren', $this->getModule()->getUrl()));

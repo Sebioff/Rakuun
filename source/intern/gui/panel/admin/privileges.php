@@ -43,7 +43,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Privileges extends GUI_Panel {
 		// send information message to the user
 		$igm = new Rakuun_Intern_IGM('Rechte geändert!', $teammember, '');
 		$igm->setSender($admin);
-		$message = 'Deine Rechte als Teammitglied wurde von '.$admin->name.' geändert. Du bist nun in folgenden Gruppen:'.$msgGroups;
+		$message = 'Deine Rechte als Teammitglied wurden von @'.$admin->nameUncolored.'@ geändert. Du bist nun in folgenden Gruppen:'.$msgGroups;
 		$igm->setText($message);
 		$igm->send();
 	}

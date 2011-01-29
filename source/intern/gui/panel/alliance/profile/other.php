@@ -19,7 +19,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Profile_Other extends GUI_Panel {
 		$this->getModule()->setPageTitle('Allianz - ['.$alliance->tag.'] '.$alliance->name);
 		$this->setTemplate(dirname(__FILE__).'/other.tpl');
 		
-		$this->addPanel(new Rakuun_GUI_Panel_Box('externbox', new GUI_Panel_Text('extern', Text::format($alliance->description)), '['.$alliance->tag.'] '.$alliance->name));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('externbox', new GUI_Panel_Text('extern', Rakuun_Text::formatPlayerText($alliance->description, false)), '['.$alliance->tag.'] '.$alliance->name));
 		if ($alliance->picture)
 			$this->addPanel($picture = new Rakuun_GUI_Panel_Box('picture', new GUI_Panel_UploadedFile('allianceimage', $alliance->picture, 'Allianzbild der Allianz '.$alliance->name), 'Allianzbild'));
 		$this->addPanel($memberBox = new Rakuun_GUI_Panel_Box('memberbox', new Rakuun_Intern_GUI_Panel_Alliance_Members('members', $alliance), 'Mitglieder'));

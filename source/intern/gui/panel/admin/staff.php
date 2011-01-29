@@ -40,7 +40,7 @@ class Rakuun_Intern_GUI_Panel_Admin_Staff extends GUI_Panel {
 		// send information message to the user
 		$igm = new Rakuun_Intern_IGM('Eintragung!', $user, '');
 		$igm->setSender($admin);
-		$message = 'Du bist von '.$admin->name.' in folgende Gruppen eingetragen worden:<br/>'.implode('<br/>', $msgGroups);
+		$message = 'Du bist von @'.$admin->nameUncolored.'@ in folgende Gruppen eingetragen worden:<br/>'.implode('<br/>', $msgGroups);
 		if (isset($msgGroups[Rakuun_GameSecurity::GROUP_DONORS]) || isset($msgGroups[Rakuun_GameSecurity::GROUP_SPONSORS])) {
 			$message .= '<br/>Vielen Dank für deine Spende! Du hast neue Funktionen erhalten.';
 			$message .= '<br/><a href="'.App::get()->getInternModule()->getSubmodule('profile')->getURL().'">Profil</a>';

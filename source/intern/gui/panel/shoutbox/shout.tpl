@@ -13,5 +13,5 @@
 <? else: ?>
 	<div class="shout_text shout_announcement">
 <? endif; ?>
-	<?= Text::format(Text::escapeHTML($this->params->shout->text)); ?>
+	<?= Rakuun_Text::formatPlayerText($this->params->shout->text); ?>
 </div>

@@ -29,7 +29,7 @@
 		<? if ($this->hasPanel('form')): ?>
 			<? $this->displayPanel('form'); ?>
 		<? else: ?>
-			<?=  Text::format(Text::escapeHTML($this->params->posting->text)); ?>
+			<?= Rakuun_Text::formatPlayerText($this->params->posting->text); ?>
 			<? if ($this->hasPanel('editdate')): ?>
 			<br />
 			<i>

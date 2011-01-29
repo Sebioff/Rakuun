@@ -28,7 +28,7 @@ class Rakuun_Intern_Module_Meta extends Rakuun_Intern_Module_Meta_Common {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_UploadedFile('metaepicture', $meta->picture, 'Metabild der Meta '.$meta->name), 'Metabild'));
 		else
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_Text('dummy', 'Kein Bild vorhanden'), 'Metabild'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', $intern = new GUI_Panel_Text('intern', $meta->intern ? Text::format($meta->intern) : 'Keine Beschreibung'), 'Interne Informationen'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', $intern = new GUI_Panel_Text('intern', $meta->intern ? Rakuun_Text::formatPlayerText($meta->intern, false) : 'Keine Beschreibung'), 'Interne Informationen'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('shoutboxbox', new Rakuun_Intern_GUI_Panel_Shoutbox_Meta('shouts', $meta), 'Shoutbox'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('boardbox', new Rakuun_Intern_GUI_Panel_Board_Overview_Meta('board'), 'Neues aus dem Metaforum'));
 		
