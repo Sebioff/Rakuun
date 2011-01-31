@@ -20,7 +20,7 @@
 		<br/>
 		Dauer: <?= Rakuun_Date::formatCountDown($this->getArmy()->targetTime - time()); ?>
 		<br/>
-		voraussichtliche Ankunft: <? $date = new GUI_Panel_Date('arrivingtime', $this->getArmy()->targetTime, '', GUI_Panel_Date::FORMAT_TIME); $date->display(); ?>
+		Voraussichtliche Ankunft: <? $date = new GUI_Panel_Date('arrivingtime', $this->getArmy()->targetTime, '', GUI_Panel_Date::FORMAT_TIME); $date->display(); ?>
 	<? else: ?>
 		<? $this->displayLabelForPanel('target'); ?> <? $this->displayPanel('target'); ?>
 		<br class="clear" />
@@ -30,7 +30,7 @@
 	<hr />
 	<? $this->displayPanel('unit_input'); ?>
 	<? if ($this->hasPanel('spydrone') || $this->hasPanel('cloaked_spydrone')): ?>
-		<h2>Spionage</h2> 
+		<h2>Spionage</h2>
 		<? if ($this->hasPanel('spydrone')): ?>
 			<? $this->displayLabelForPanel('spydrone'); ?> <? $this->displayPanel('spydrone'); ?>
 			<br class="clear" />

@@ -387,7 +387,7 @@ img.rakuun_igm_marker
 
 #main-overview_content-sitterbox textarea
 {
-	width:238px;
+	width:375px;
 }
 
 .module_overview .rakuun_sitter_switchbutton {
@@ -397,10 +397,6 @@ img.rakuun_igm_marker
 .module_overview .rakuun_sitter_deletebutton {
 	float:right;
 	margin-left:0px;
-}
-
-#main-overview_content-sitterswitch {
-	width:255px;
 }
 
 /* $8  -  Techtree -----------------------------------------------------------*/

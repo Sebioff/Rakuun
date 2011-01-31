@@ -40,7 +40,8 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			
 			$line = array();
 			$date = new GUI_Panel('date'.$spy->getPK());
-			$date->addPanel(new GUI_Control_Link('warsim_link'.$spy->getPK(), date(GUI_Panel_Date::FORMAT_DATETIME, $spy->time), App::get()->getInternModule()->getSubmodule('warsim')->getUrl(array('spyreport' => $spy->getPK()))));
+			$date->addPanel(new GUI_Panel_Text('date'.$spy->getPK(), date(GUI_Panel_Date::FORMAT_DATETIME, $spy->time)));
+			$date->addPanel(new GUI_Control_Link('warsim_link'.$spy->getPK(), 'WarSim', App::get()->getInternModule()->getSubmodule('warsim')->getUrl(array('spyreport' => $spy->getPK()))));
 			if ($spy->user->getPK() == $actualUser->getPK()) {
 				$img = new GUI_Panel_Image('delimg', Router::get()->getStaticRoute('images', 'cancel.gif'));
 				$params = array_merge($this->getModule()->getParams(), array('delete' => $spy->getPK()));

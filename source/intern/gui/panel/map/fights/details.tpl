@@ -7,7 +7,7 @@
 		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $this->getArmy()); ?>
 		<? if ($unit->getAmount() > 0): ?>
 			<li>
-				<?= $unit->getAmount(); ?>
+				<?= GUI_Panel_Number::formatNumber($unit->getAmount()); ?>
 				<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $unit->getType(), 'id' => $unit->getInternalName())); ?>">
 					<?= $unit->getNameForAmount(); ?>
 				</a>

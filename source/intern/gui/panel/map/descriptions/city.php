@@ -46,7 +46,14 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		$x = $this->cityOwner->cityX * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE;
 		$y = $this->cityOwner->cityY * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE;
 		$this->setAttribute('coords', $x.','.$y.','.($x + 10).','.($y + 10));
-		$this->setAttribute('onClick', sprintf('$(\'#%s\').val(\'%s\'); return false;', $this->map->target->target->target->getID(), $this->getCityOwner()->nameUncolored));
+		$this->addJS(sprintf('
+			$("#%s").click(function(event) {
+				$(\'#%s\').val(\'%s\');
+				$(\'#%s\').val(\'%s\');
+				$(\'#%s\').val(\'%s\');
+				return false;
+			});
+		', $this->getID(), $this->map->target->target->targetX->getID(), $this->cityOwner->cityX, $this->map->target->target->targetY->getID(), $this->cityOwner->cityY, $this->map->target->target->target->getID(), $this->getCityOwner()->nameUncolored));
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

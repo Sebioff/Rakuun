@@ -19,7 +19,7 @@ class Rakuun_Intern_Map_Items extends Scriptlet {
 		$colorDatabase = imagecolorallocate($image, 255, 255, 0);
 		
 		if (Rakuun_User_Manager::getCurrentUser()) {
-			if (Rakuun_User_Manager::getCurrentUser()->alliance && Rakuun_User_Manager::getCurrentUser()->alliance->buildings->databaseDetector > 0) {
+			if (Rakuun_User_Manager::getCurrentUser()->alliance) {
 				$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
 				if (!empty($visibleDatabases)) {
 					$images = Rakuun_User_Specials_Database::getDatabaseImages();

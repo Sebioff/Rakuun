@@ -154,6 +154,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 					clickY = Math.floor((e.pageY - position.top - globalY) / MAP_RECT_SIZE);
 					$("#'.$this->target->target->targetX->getID().'").val(clickX);
 					$("#'.$this->target->target->targetY->getID().'").val(clickY);
+					$("#'.$this->target->target->target->getID().'").val("");
 				});
 				
 				var scrollTimer;

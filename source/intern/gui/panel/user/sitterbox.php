@@ -15,7 +15,7 @@ class Rakuun_Intern_GUI_Panel_User_Sitterbox extends GUI_Panel {
 			$noteLabel = 'Nachricht an den Sitter';
 		}
 		$this->addPanel($userLink = new Rakuun_GUI_Control_UserLink('sittername', $otherUser));
-		$this->addPanel(new GUI_Control_TextArea('note', Rakuun_User_Manager::getCurrentUser()->sitterNote, $noteLabel));
+		$this->addPanel($noteTextArea = new GUI_Control_TextArea('note', Rakuun_User_Manager::getCurrentUser()->sitterNote, $noteLabel));
 		$this->addPanel($submitButton = new GUI_Control_SubmitButton('submit', 'Speichern'));
 		$submitButton->addClasses('no_margin');
 	}

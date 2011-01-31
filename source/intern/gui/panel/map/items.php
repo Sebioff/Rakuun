@@ -14,7 +14,7 @@ class Rakuun_Intern_GUI_Panel_Map_Items extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/items.tpl');
-		if (Rakuun_User_Manager::getCurrentUser()->alliance && Rakuun_User_Manager::getCurrentUser()->alliance->buildings->databaseDetector > 0) {
+		if (Rakuun_User_Manager::getCurrentUser()->alliance) {
 			$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
 			if (!empty($visibleDatabases)) {
 				$options = array();
