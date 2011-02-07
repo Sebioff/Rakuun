@@ -30,21 +30,13 @@ class Rakuun_Intern_GUI_Panel_Production_Workers extends Rakuun_GUI_Panel_Box {
 			return;
 			
 		DB_Connection::get()->beginTransaction();
-		$missingWorkers = $this->getProductionItem()->getRequiredWorkers() - $this->getProductionItem()->getWorkers();
-		if ($this->contentPanel->workersAddAmount->getValue() > $missingWorkers)
-			$this->contentPanel->workersAddAmount->setValue($missingWorkers);
-	
-		if ($this->contentPanel->workersAddAmount->getValue() > $this->getProductionItem()->getUser()->ressources->people)
-			$this->contentPanel->workersAddAmount->setValue($this->getProductionItem()->getUser()->ressources->people);
-
 		$this->getProductionItem()->getUser()->ressources->lower(0, 0, 0, $this->contentPanel->workersAddAmount->getValue());
 		$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser());
 		$workers->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} += $this->contentPanel->workersAddAmount->getValue();
 		$workers->save();
 		DB_Connection::get()->commit();
-		
-		if ($missingWorkers - $this->contentPanel->workersAddAmount->getValue() <= 0)
-			$this->contentPanel->workersAddAmount->setValue(0);
+			
+		$this->getModule()->invalidate();
 	}
 	
 	public function onWorkersRemove() {
@@ -53,14 +45,13 @@ class Rakuun_Intern_GUI_Panel_Production_Workers extends Rakuun_GUI_Panel_Box {
 			
 		DB_Connection::get()->beginTransaction();
 		$currentWorkers = $this->getProductionItem()->getWorkers();
-		if ($this->contentPanel->workersRemoveAmount->getValue() > $currentWorkers)
-			$this->contentPanel->workersRemoveAmount->setValue($currentWorkers);
 
 		$this->getProductionItem()->getUser()->ressources->raise(0, 0, 0, $this->contentPanel->workersRemoveAmount->getValue());
 		$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser());
 		$workers->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} -= $this->contentPanel->workersRemoveAmount->getValue();
 		$workers->save();
 		DB_Connection::get()->commit();
+		$this->getModule()->invalidate();
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

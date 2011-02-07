@@ -604,6 +604,19 @@ body.skin_tech
 	width:470px;
 }
 
+.skin_tech #ctn_workers_management {
+	margin:0px auto;
+	width:625px;
+}
+
+.skin_tech #ctn_workers_management .rakuun_box {
+	margin:0px 0px 5px 5px;
+}
+
+.skin_tech #ctn_workers_management .rakuun_box input.core_gui_submitbutton {
+	margin-left:5px;
+}
+
 /* $11 -  Production ---------------------------------------------------------*/
 .skin_tech .rakuun_wip_panel {
 	float:none;
