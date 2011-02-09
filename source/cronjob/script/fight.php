@@ -105,7 +105,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$attackerReportMarkers[] = Rakuun_Intern_IGM::ATTACHMENT_FIGHTREPORTMARKER_WON;
 		}
 			
-		// WINNER ----------------------------------------------
+		// WINNER --------------------------------------------------------------
 		// report for winner
 		$winnerReportText = '<br/><br/>Folgende Verluste sind zu beklagen:';
 		$deadWinnerUnitsTextForWinner = '';
@@ -151,7 +151,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			
 		Rakuun_Intern_Log_Fights::log($winnerUnitSource->user, $loserUnitSource->user, $army->user, $winnerLostUnits, $loserLostUnits, $army->getPK());
 			
-		// LOSER ----------------------------------------------
+		// LOSER ---------------------------------------------------------------
 		//report for loser
 		if (!$deadLoserUnitsText)
 			$deadLoserUnitsText = '<br/>Keine.';
@@ -185,7 +185,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			// make army return home
 			$army->moveHome();
 			
-			// STEALING RESSOURCES ---------------------------------
+			// STEALING RESSOURCES ---------------------------------------------
 			if (!$playersAreAllied) {
 				$totalPriority = $army->ironPriority + $army->berylliumPriority + $army->energyPriority;
 				$totalCapacity = 0;
@@ -244,7 +244,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					$winnerReportText .= '<br/><br/>Es konnten leider keine Rohstoffe erbeutet werden.';
 				}
 			
-				// DESTROY BUILDINGS -----------------------------------
+				// DESTROY BUILDINGS -------------------------------------------
 				// calculate destruction probability (probability(force) = a * x^2)
 				if ($army->destroyBuildings) {
 					$survivingAttackForce = $fightingSystem->getTotalAttackingPower() - $fightingSystem->getTotalDefendingPower();

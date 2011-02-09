@@ -29,6 +29,8 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$tableHeader[] = $unit->getName();
 		}
 		foreach ($buildings as $building) {
+			if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES))
+				continue;
 			$tableHeader[] = $building->getName();
 		}
 		$table->addHeader($tableHeader);

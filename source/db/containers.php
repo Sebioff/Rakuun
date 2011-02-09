@@ -433,6 +433,7 @@ abstract class Rakuun_DB_Containers {
 			return self::$logUserRessourcetransferContainer;
 			
 		self::$logUserRessourcetransferContainer = new DB_Container('log_users_ressourcetransfer');
+		self::$logUserRessourcetransferContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
 		self::$logUserRessourcetransferContainer->addReferencedContainer(self::getUserContainer(), 'sender', 'id');
 		
 		return self::$logUserRessourcetransferContainer;

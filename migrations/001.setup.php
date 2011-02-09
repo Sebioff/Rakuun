@@ -558,11 +558,9 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_users_ressourcetransfer` (
   `hostname` int(60) unsigned NOT NULL,
   `browser` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user` (`user`)
+  INDEX `user` (`user`),
+  INDEX `sender` (`sender`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
-
-$queries[] = 'ALTER TABLE `log_users_ressourcetransfer`
-  ADD CONSTRAINT `log_users_ressourcetransfer_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_users_data` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -620,7 +618,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_units_production` (
   `cloaked_spydrone` mediumint(9) NOT NULL,
   `lorica` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user` (`user`)
+  INDEX `user` (`user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
@@ -647,7 +645,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `log_fights` (
   `cloaked_spydrone` mediumint(9) NOT NULL,
   `lorica` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user` (`user`),
+  INDEX `user` (`user`),
   INDEX ( `fight_id` )
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=0;';
 
