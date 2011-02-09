@@ -7,12 +7,11 @@ class Rakuun_Intern_GUI_Panel_Map_Databases extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/databases.tpl');
 		
 		$this->params->visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
-		$images = Rakuun_User_Specials_Database::getDatabaseImages();
 		
 		$names = Rakuun_User_Specials::getNames();
 		
 		foreach ($this->params->visibleDatabases as $db) {
-			$this->addPanel(new GUI_Panel_Image('image_'.$db, Router::get()->getStaticRoute('images', $images[$db].'.gif')));
+			$this->addPanel(new Rakuun_Intern_GUI_Panel_Specials_Database('image_'.$db, $db));
 			$options = array();
 			$options['conditions'][] = array('identifier = ?', $db);
 			$assoc = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->selectFirst($options);
