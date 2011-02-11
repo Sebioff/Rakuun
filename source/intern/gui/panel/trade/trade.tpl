@@ -1,22 +1,24 @@
-<? if($this->hasErrors()): ?>
-	<? $this->displayErrors() ?>
+<? if ($this->hasErrors()): ?>
+	<? $this->displayErrors(); ?>
 <? endif; ?>
 
 
-<? $this->displayPanel('status') ?>
-<? $this->displayLabelForPanel('tradelimit') ?> <? $this->displayPanel('tradelimit') ?>
+<? $this->displayPanel('status'); ?>
+<? $this->displayPanel('tradelimit'); ?>
+<br />
+<br />
+<? $this->displayLabelForPanel('recipient'); ?> <? $this->displayPanel('recipient'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('recipient') ?> <? $this->displayPanel('recipient') ?>
+<? $this->displayLabelForPanel('iron'); ?> <? $this->displayPanel('iron'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('iron') ?> <? $this->displayPanel('iron') ?>
+<? $this->displayLabelForPanel('beryllium'); ?> <? $this->displayPanel('beryllium'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('beryllium') ?> <? $this->displayPanel('beryllium') ?>
+<? $this->displayLabelForPanel('energy'); ?> <? $this->displayPanel('energy'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('energy') ?> <? $this->displayPanel('energy') ?>
+<? $this->displayLabelForPanel('message'); ?> <? $this->displayPanel('message'); ?>
 <br class="clear" />
-<? $this->displayLabelForPanel('message') ?> <? $this->displayPanel('message') ?>
-<br class="clear" />
-<? $this->displayPanel('submit') ?>
 <? if ($this->hasBeenSubmitted() && !$this->hasErrors() && $this->hasPanel('costs')): ?>
+	<hr />
 	<? $this->displayPanel('costs'); ?>
 <? endif; ?>
+<? $this->displayPanel('submit'); ?>

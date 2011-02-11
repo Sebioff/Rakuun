@@ -1,6 +1,6 @@
 <?php
 
-abstract class Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorBrown extends Rakuun_Intern_Production_Building_Alliances_DatabaseDetector {
+class Rakuun_Intern_Production_Building_Alliances_DatabaseDetectorBrown extends Rakuun_Intern_Production_Building_Alliances_DatabaseDetector {
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
 		

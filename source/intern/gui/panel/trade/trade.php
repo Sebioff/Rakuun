@@ -38,7 +38,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 		$this->addPanel($message = new GUI_Control_TextBox('message', '', 'Verwendungszweck'));
 		$message->addValidator(new GUI_Validator_MaxLength(50));
 		
-		$this->addPanel(new GUI_Panel_Number('tradelimit', ($user->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $user->tradelimit), 'Du kannst heute noch so viele Ressourcen erhalten:'));
+		$this->addPanel(new GUI_Panel_Text('tradelimit', 'Du kannst heute noch '.GUI_Panel_Number::formatNumber($user->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $user->tradelimit).' Ressourcen erhalten'));
 		
 		$this->addPanel($submit = new GUI_Control_SubmitButton('submit', 'Berechnen'));
 		
@@ -56,9 +56,9 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 		// calculate costs and show them
 		if ($this->status->getValue() == self::IDLE) {
 			$this->status->setValue(self::CALC);
-			$costs = new Rakuun_Intern_GUI_Panel_Trade_ShowCosts('showcosts', 'Handeln...');
+			$costs = new Rakuun_Intern_GUI_Panel_Trade_ShowCosts('costs', 'Handeln...');
 			$costs->setTradeParameters($this->recipient->getUser(), $this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->message->getValue());
-			$this->addPanel(new Rakuun_GUI_Panel_Box('costs', $costs));
+			$this->addPanel($costs);
 			$this->submit->setValue('Abschicken');
 		} else if ($this->status->getValue() == self::CALC) {
 			$recipient = $this->recipient->getUser();
@@ -121,7 +121,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 			// send information message to the recipient
 			$igm = new Rakuun_Intern_IGM('Handel', $this->recipient->getUser(), '', Rakuun_Intern_IGM::TYPE_TRADE);
 			$igm->setSender($sender);
-			$message = 'Du hast von '.$sender->name.' folgende Ressourcen erhalten:
+			$message = 'Du hast von @'.$sender->nameUncolored.'@ folgende Ressourcen erhalten:
 				<br />'.$this->iron->getValue().' Eisen
 				<br />'.$this->beryllium->getValue().' Beryllium
 				<br />'.$this->energy->getValue().' Energie';
@@ -133,7 +133,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 			Rakuun_User_Manager::update($recipient);
 			Rakuun_Intern_Log_Ressourcetransfer::log($recipient, Rakuun_Intern_Log::ACTION_RESSOURCES_TRADE, $sender, $this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue());
 			DB_Connection::get()->commit();
-			$this->setSuccessMessage('Ressourcen erfolgreich übertragen');			
+			$this->setSuccessMessage('Ressourcen erfolgreich übertragen');
 		}
 	}
 }

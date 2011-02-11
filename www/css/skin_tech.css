@@ -25,6 +25,7 @@
 	$16 -  Imprint
 	$17 -  Map
 	$18 -  Reports
+	$19 -  Trade
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -820,4 +821,22 @@ body.skin_tech
 /* $18 -  Reports ------------------------------------------------------------*/
 .skin_tech .module_reports .rakuun_box_reports_filter .filter {
 	width:180px;
+}
+
+/* $19 -  Trade --------------------------------------------------------------*/
+.skin_tech .rakuun_box_trade {
+	float:none;
+	margin:0px auto;
+	width:330px;
+}
+
+.skin_tech .rakuun_box_trade input,
+.skin_tech .rakuun_box_trade select,
+.skin_tech .rakuun_box_trade textarea {
+	float:right;
+}
+
+.skin_tech .rakuun_box_trade .core_gui_submitbutton {
+	float:none;
+	margin-left:235px;
 }
