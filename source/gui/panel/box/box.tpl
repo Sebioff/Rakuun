@@ -1,15 +1,15 @@
-<div id="<?= $this->getID() ?>" <?= $this->getAttributeString() ?>>
+<div id="<?= $this->getID(); ?>" <?= $this->getAttributeString(); ?>>
 	<div class="body">
 		<div class="head">
 			<? if ($this->getTitle()): ?>
 				<div class="head_inner">
-					<h2><?= $this->getTitle() ?></h2>
+					<h2><?= $this->getTitle(); ?></h2>
 				</div>
 			<? endif; ?>
 		</div>
 		<div class="content">
 			<div class="content_inner">
-				<? $this->contentPanel->display() ?>
+				<? $this->contentPanel->display(); ?>
 			</div>
 		</div>
 	</div>

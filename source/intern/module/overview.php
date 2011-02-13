@@ -105,10 +105,8 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$fightTick->addClasses('rakuun_box_fighttick');
 		
 		// specials
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', $specialsPanel = new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
-		// TODO kinda stupid...
-		if (!$specialsPanel->gotSpecials())
-			$this->contentPanel->removePanel($this->contentPanel->specials);
+		if (Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->selectByUserFirst($user))
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('specials', $specialsPanel = new Rakuun_Intern_GUI_Panel_User_Specials('specials'), 'Specials'));
 		
 		// admin news
 		if ($user->adminnews)

@@ -130,6 +130,10 @@ body.skin_tech
 	background-color:#44454b;
 }
 
+.skin_tech input.ac_loading {
+	background:transparent url('../images/tech/loading.gif') no-repeat right top;
+}
+
 /* $2  -  Main Containers ----------------------------------------------------*/
 .skin_tech #ctn_main {
 	background:transparent url('../images/background_starfield.png') no-repeat center top;
@@ -216,6 +220,10 @@ body.skin_tech
 
 .skin_tech .collapsed .head_inner {
 	background:transparent url('../images/collapse_collapsed_tech.gif') no-repeat 3px 1px;
+}
+
+.skin_tech .ajax_loading .head_inner {
+	background:transparent url('../images/tech/loading.gif') no-repeat 3px 1px;
 }
 
 .skin_tech .rakuun_box .body {

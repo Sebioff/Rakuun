@@ -3,11 +3,13 @@
 /**
  * Displays all threads of a specific board.
  */
-class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel {
+class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel_PageView {
 	private $config = null;
 	
 	public function __construct($name, Board_Config $config) {
-		parent::__construct($name);
+		$options = array();
+		$options['conditions'][] = array('board = ?', $config->getBoardRecord());
+		parent::__construct($name, $config->getPostingsContainer()->getFilteredContainer($options));
 		
 		$this->config = $config;
 	}
@@ -38,10 +40,9 @@ class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel {
 		}
 		$this->config->getVisitedContainer()->save($lastVisit);
 		
-		$options = array();
-		$options['conditions'][] = array('board = ?', $this->config->getBoardRecord());
+		$options = $this->getOptions();
 		$options['order'] = 'date ASC';
-		$postings = $this->config->getPostingsContainer()->select($options);
+		$postings = $this->getContainer()->select($options);
 		$this->addPanel($list = new GUI_Panel_List('board'));
 		foreach ($postings as $posting) {
 			$list->addItem(new Rakuun_Intern_GUI_Panel_Board_Posting('posting'.$posting->getPK(), $posting, $this->config));

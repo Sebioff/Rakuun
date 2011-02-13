@@ -1,8 +1,6 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_User_Specials extends GUI_Panel {
-	private $gotSpecials = false;
-	
 	public function init() {
 		parent::init();
 		
@@ -27,15 +25,10 @@ class Rakuun_Intern_GUI_Panel_User_Specials extends GUI_Panel {
 			$line[] = $names[$database->identifier];
 			$line[] = $effects[$database->identifier];;
 			$specials->addLine($line);
-			$this->gotSpecials = true;
 		}
 		
 		//user specific Specials
 		//TODO
-	}
-	
-	public function gotSpecials() {
-		return $this->gotSpecials;
 	}
 }
 
