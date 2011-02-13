@@ -1,7 +1,7 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Reports_ByAlliance extends Rakuun_Intern_GUI_Panel_Reports_Base implements Scriptlet_Privileged {
-	public function beforeDisplay() {
+	public function afterInit() {
 		$options = array();
 		$options['order'] = 'time ASC';
 		$options['conditions'][] = array('user IN ('.implode(', ', Rakuun_User_Manager::getCurrentUser()->alliance->members).')');
@@ -12,7 +12,7 @@ class Rakuun_Intern_GUI_Panel_Reports_ByAlliance extends Rakuun_Intern_GUI_Panel
 		}
 		$this->data = Rakuun_DB_Containers::getLogSpiesContainer()->select($options);
 		
-		parent::beforeDisplay();
+		parent::afterInit();
 	}
 	
 	public function checkPrivileges() {

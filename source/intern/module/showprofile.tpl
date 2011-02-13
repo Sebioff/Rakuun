@@ -5,4 +5,5 @@
 	<? $this->displayPanel('buildingsbox'); ?>
 	<br class="clear" />
 	<? $this->displayPanel('reportsbox'); ?>
+	<? $this->displayPanel('detailsbox'); ?>
 <? endif; ?>

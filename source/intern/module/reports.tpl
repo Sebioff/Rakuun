@@ -4,3 +4,4 @@
 <? endif; ?>
 <br class="clear" />
 <? $this->displayPanel('reportsbox'); ?>
+<? $this->displayPanel('detailsbox'); ?>

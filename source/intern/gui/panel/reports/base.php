@@ -3,6 +3,7 @@
 abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	protected $data = array();
 	protected $filter = array();
+	private $table;
 	
 	public function __construct($name, $title = '') {
 		parent::__construct($name, $title);
@@ -16,26 +17,26 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		}
 	}
 	
-	public function beforeDisplay() {
-		parent::beforeDisplay();
+	public function beforeInit() {
+		parent::beforeInit();
+		
+		$this->addPanel($this->table = new GUI_Panel_Table('reports'));
+		$this->table->setFoldEvery(10, 'Ältere Berichte', 'addMouseOver();');
+	}
+	
+	public function afterInit() {
+		parent::afterInit();
 		
 		$this->setTemplate(dirname(__FILE__).'/base.tpl');
-		$this->addClasses('rakuun_ctn_reports');
-		$this->addPanel($table = new GUI_Panel_Table('reports'));
 		$units = Rakuun_Intern_Production_Factory::getAllUnits();
 		$buildings = Rakuun_Intern_Production_Factory::getAllBuildings();
-		$tableHeader = array('Datum', 'Angreifer', 'Ziel');
-		foreach ($units as $unit) {
-			$tableHeader[] = $unit->getName();
-		}
-		foreach ($buildings as $building) {
-			if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES))
-				continue;
-			$tableHeader[] = $building->getName();
-		}
-		$table->addHeader($tableHeader);
-		$table->addFooter($tableHeader);
+
+		$this->table->addHeader(array('Datum', 'Angreifer', 'Ziel', 'Att', 'Deff', '&Delta; Att', '&Delta; Deff'));
+
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
+		$data = array();
+		$lastAtt = 0;
+		$lastDeff = 0;
 		foreach ($this->data as $spy) {
 			if (!self::hasPrivilegesToSeeReport($spy))
 				continue;
@@ -51,18 +52,78 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 				$link->setConfirmationMessage('Diesen Bericht wirklich löschen?');
 			}
 			$line[] = $date;
-			$line[] = new Rakuun_GUI_Control_UserLink('userlink'.$spy->getPK(), $spy->user, $spy->user->getPK());
-			$line[] = new Rakuun_GUI_Control_UserLink('spieduserlink'.$spy->getPK(), $spy->spiedUser, $spy->spiedUser);
+			$atter = new GUI_Panel('atter'.$spy->getPK());
+			if ($spy->user->alliance) {
+				$atter->addPanel($link = new Rakuun_GUI_Control_AllianceLink('atteralliancelink'.$spy->getPK(), $spy->user->alliance));
+				$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
+			}
+			$atter->addPanel(new Rakuun_GUI_Control_UserLink('userlink'.$spy->getPK(), $spy->user, $spy->user->getPK()));
+			$line[] = $atter;
+			$target = new GUI_Panel('target'.$spy->getPK());
+			if ($spy->spiedUser->alliance) {
+				$target->addPanel($link = new Rakuun_GUI_Control_AllianceLink('targetalliancelink'.$spy->getPK(), $spy->spiedUser->alliance));
+				$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
+			}
+			$target->addPanel(new Rakuun_GUI_Control_UserLink('spieduserlink'.$spy->getPK(), $spy->spiedUser, $spy->spiedUser));
+			$line[] = $target;
+			$att = 0;
+			$deff = 0;
 			foreach ($units as $unit) {
-				$line[] = $spy->{Text::underscoreToCamelCase($unit->getInternalName())};
+				$att += $unit->getAttackValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
+				$deff += $unit->getDefenseValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
 			}
-			foreach ($buildings as $building) {
-				if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES))
-					continue;
-				$line[] = $spy->{Text::underscoreToCamelCase($building->getInternalName())};
-			}
-			$table->addLine($line);
+			$line[] = $att;
+			$line[] = $deff;
+			$deltaAtt = $att - $lastAtt;
+			$deltaDeff = $deff - $lastDeff; 
+			$line[] = $lastAtt > 0 ? $deltaAtt : $att;
+			$line[] = $lastDeff > 0 ? $deltaDeff : $deff;
+			$lastAtt = $att;
+			$lastDeff = $deff;
+			$data[] = $line;
 		}
+		foreach (array_reverse($data) as $line) {
+			$this->table->addLine($line);
+		}
+		$this->addJS('
+			var reportCache = new Array();
+			function addMouseOver() {
+				$("#'.$this->table->getAjaxID().'").children("tbody").children("tr").not("#'.$this->table->getAjaxID().'-fold").mouseover(function() {
+					spyId = /spyreport_(\d+)\"/.exec($(this).children().html())[1];
+					if (reportCache[spyId] == undefined) {
+						$.core.ajaxRequest(
+							"'.$this->getAjaxID().'",
+							"ajaxLoadReport",
+							{ id: spyId },
+							function(data) {
+								reportCache[spyId] = data;
+								$("#details").html(data);
+							}
+						);
+					} else {
+						$("#details").html(reportCache[spyId]);
+					}
+				});
+			}
+			addMouseOver();
+		');
+	}
+	
+	public function ajaxLoadReport() {
+		$report = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK((int)$_POST['id']);
+		if (!$report || !self::hasPrivilegesToSeeReport($report))
+			return 'Keine Berechtigung für diesen Report';
+		
+		$userLink = new Rakuun_GUI_Control_UserLink('userlink', $report->spiedUser);
+		$str = 'Ziel: '.$userLink->render().'<br />';
+		$str .= date(GUI_Panel_Date::FORMAT_DATETIME, $report->time).'<br />';
+		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($report) as $building) {
+			$str .= $building->getName().': '.$report->{Text::underscoreToCamelCase($building->getInternalName())}.'<br />';
+		}
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
+			$str .= $unit->getName().': '.$report->{Text::underscoreToCamelCase($unit->getInternalName())}.'<br />';
+		}
+		return $str;
 	}
 
 	public static function hasPrivilegesToSeeReport(DB_Record $report) {

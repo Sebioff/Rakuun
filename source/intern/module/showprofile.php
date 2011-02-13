@@ -19,6 +19,7 @@ class Rakuun_Intern_Module_ShowProfile extends Rakuun_Intern_Module {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('armybox', new Rakuun_Intern_GUI_Panel_Reports_Display_Army('army', $user), 'Einheitenübersicht'));
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('buildingsbox', new Rakuun_Intern_GUI_Panel_Reports_Display_Buildings('buildings', $user), 'Gebäudeübersicht'));
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('reportsbox', new Rakuun_Intern_GUI_Panel_Reports_ForUser('reports', $user), 'Berichteübersicht'));
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('detailsbox', new Rakuun_Intern_GUI_Panel_Reports_Details('details'), 'Details'));
 		}
 	}
 }
