@@ -39,8 +39,6 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
 		$data = array();
-		$lastAtt = 0;
-		$lastDeff = 0;
 		foreach ($this->data as $spy) {
 			if (!self::hasPrivilegesToSeeReport($spy))
 				continue;
@@ -76,14 +74,23 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 				$att += $unit->getAttackValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
 				$deff += $unit->getDefenseValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
 			}
+			
+			$previousReport = $this->getPreviousReportOf($spy);
+			$lastAtt = 0;
+			$lastDeff = 0;
+			if ($previousReport) {
+				foreach ($units as $unit) {
+					$lastAtt += $unit->getAttackValue($previousReport->{Text::underscoreToCamelCase($unit->getInternalName())});
+					$lastDeff += $unit->getDefenseValue($previousReport->{Text::underscoreToCamelCase($unit->getInternalName())});
+				}
+			}
+			
 			$line[] = $att;
 			$line[] = $deff;
 			$deltaAtt = $lastAtt > 0 ? $att - $lastAtt : $att;
 			$deltaDeff = $lastDeff > 0 ? $deff - $lastDeff : $deff;
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_att'.$spy->getPK(), $deltaAtt);
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_deff'.$spy->getPK(), $deltaDeff);
-			$lastAtt = $att;
-			$lastDeff = $deff;
 			$data[] = $line;
 		}
 		foreach (array_reverse($data) as $line) {
@@ -118,21 +125,10 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	public function ajaxLoadReport() {
 		$report = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK((int)$_POST['id']);
 		
-		$previousReport = null;
-		foreach (array_reverse($this->data) as $oldReport) {
-			if ($oldReport->getPK() >= $report->getPK() || !$this->hasPrivilegesToSeeReport($oldReport))
-				continue;
-				
-			$previousReport = $oldReport;
-			break;
-		}
+		$previousReport = $this->getPreviousReportOf($report);
 		
 		if (!$report || !self::hasPrivilegesToSeeReport($report))
 			return 'Keine Berechtigung für diesen Report';
-		
-//		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
-//			$str .= $unit->getName().': '.$report->{Text::underscoreToCamelCase($unit->getInternalName())}.'<br />';
-//		}
 		
 		$reportTable = new GUI_Panel_Table('report_table');
 		$reportTable->addTableCssClass('align_right', 1);
@@ -171,6 +167,24 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		return false;
 	}
 	
+	private function getPreviousReportOf(DB_Record $report) {
+		$previousReport = null;
+		$options = array();
+		$options['conditions'][] = array('spied_user = ?', $report->spiedUser);
+		$options['conditions'][] = array('deleted = ?', 0);
+		$options['conditions'][] = array('id < ?', $report->getPK());
+		$options['order'] = 'time DESC';
+		foreach (Rakuun_DB_Containers::getLogSpiesContainer()->select($options) as $oldReport) {
+			if (!$this->hasPrivilegesToSeeReport($oldReport))
+				continue;
+				
+			$previousReport = $oldReport;
+			break;
+		}
+		
+		return $previousReport;
+	}
+	
 	protected function getFilterStrings() {
 		$return = array();
 		foreach ($this->filter as $filter) {
@@ -188,4 +202,5 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		$this->filter[] = $filter;
 	}
 }
+
 ?>
