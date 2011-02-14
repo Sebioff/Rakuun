@@ -26,6 +26,7 @@
 	$17 -  Map
 	$18 -  Reports
 	$19 -  Trade
+	$20 -  Guide
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -224,6 +225,7 @@ body.skin_tech
 
 .skin_tech .ajax_loading .head_inner {
 	background:transparent url('../images/tech/loading.gif') no-repeat 3px 1px;
+	padding-left:19px;
 }
 
 .skin_tech .rakuun_box .body {
@@ -831,6 +833,21 @@ body.skin_tech
 	width:180px;
 }
 
+.skin_tech .rakuun_delta_up {
+	background:transparent url('../images/delta_up.gif') no-repeat left 1px;
+	padding-left:10px;
+}
+
+.skin_tech .rakuun_delta_down {
+	background:transparent url('../images/delta_down.gif') no-repeat left 1px;
+	padding-left:10px;
+}
+
+.skin_tech .rakuun_delta_equal {
+	background:transparent url('../images/delta_equal.gif') no-repeat left 1px;
+	padding-left:10px;
+}
+
 /* $19 -  Trade --------------------------------------------------------------*/
 .skin_tech .rakuun_box_trade {
 	float:none;
@@ -847,4 +864,9 @@ body.skin_tech
 .skin_tech .rakuun_box_trade .core_gui_submitbutton {
 	float:none;
 	margin-left:235px;
+}
+
+/* $20 -  Guide --------------------------------------------------------------*/
+.skin_tech .module_guide li {
+	margin:0px 0px 10px 10px;
 }

@@ -57,7 +57,7 @@ function GUI_Control_Box_Collapsible(controlID, enableAjax) {
 			contentInner.animate( {top: "0px"}, { queue:false, duration: animationDuration });
 			content.animate( {height: height + "px"}, { queue:false, duration: animationDuration, 
 				complete: function() {
-					$(this).css({overflow: "auto"});
+					$(this).css({overflow: "auto", height: ""});
 					element.removeClass("animating");
 				}
 			});
