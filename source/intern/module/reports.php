@@ -13,24 +13,26 @@ class Rakuun_Intern_Module_Reports extends Rakuun_Intern_Module {
 		$this->setPageTitle('Spionagecenter');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/reports.tpl');
 		
+		$this->contentPanel->addPanel($detailBox = new Rakuun_GUI_Panel_Box('detailsbox', null, 'Details'));
+		
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->contentPanel->addPanel($box = new Rakuun_GUI_Panel_Box('reportsbox', null, 'Berichte'));
 		switch ($this->getParam('show')) {
 			case self::SHOW_FOR_ALLIANCE:
-				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ForAlliance('reports'));
+				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ForAlliance('reports', $detailBox));
 			break;
 			case self::SHOW_FOR_META:
-				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_reports_ForMeta('reports'));
+				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ForMeta('reports', $detailBox));
 			break;
 			case self::SHOW_ALLIANCE:
-				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ByAlliance('reports'));
+				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ByAlliance('reports', $detailBox));
 			break;
 			case self::SHOW_META:
-				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ByMeta('reports'));
+				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_ByMeta('reports', $detailBox));
 			break;
 			case self::SHOW_OWN:
 			default:
-				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_Own('reports'));
+				$box->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_Own('reports', $detailBox));
 			break;
 		}
 		$this->contentPanel->addPanel($menubox = new Rakuun_GUI_Panel_Box('menubox', null, 'Quelle'));
@@ -42,7 +44,6 @@ class Rakuun_Intern_Module_Reports extends Rakuun_Intern_Module {
 //		$this->contentPanel->addPanel($filterbox = new Rakuun_GUI_Panel_Box('filterbox', null, 'Filter'));
 //		$filterbox->addClasses('rakuun_box_reports_filter');
 //		$filterbox->getContentPanel()->addPanel(new Rakuun_Intern_GUI_Panel_Reports_Filter('filter'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('detailsbox', new Rakuun_Intern_GUI_Panel_Reports_Details('details'), 'Details'));
 	}
 }
 ?>

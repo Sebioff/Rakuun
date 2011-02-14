@@ -4,9 +4,12 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	protected $data = array();
 	protected $filter = array();
 	private $table;
+	private $detailBox = null;
 	
-	public function __construct($name, $title = '') {
+	public function __construct($name, Rakuun_GUI_Panel_Box $detailBox, $title = '') {
 		parent::__construct($name, $title);
+		
+		$this->detailBox = $detailBox;
 	
 		if ($this->getModule()->getParam('delete')) {
 			$reportToDelete = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK($this->getModule()->getParam('delete'));
@@ -21,7 +24,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		parent::beforeInit();
 		
 		$this->addPanel($this->table = new GUI_Panel_Table('reports'));
-		$this->table->setFoldEvery(1, 'Ältere Berichte');
+		$this->table->setFoldEvery(10, 'Ältere Berichte');
 	}
 	
 	public function afterInit() {
@@ -101,19 +104,19 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$("#'.$this->table->getAjaxID().' tbody tr:not(#'.$this->table->getAjaxID().'-fold)").live("mouseover", function() {
 				spyId = /spyreport_(\d+)\"/.exec($(this).children().html())[1];
 				if (reportCache[spyId] == undefined) {
-					$("#'.$this->getParent()->getParent()->getID().'").addClass("ajax_loading");
+					$("#'.$this->detailBox->getID().'").addClass("ajax_loading");
 					$.core.ajaxRequest(
 						"'.$this->getAjaxID().'",
 						"ajaxLoadReport",
 						{ id: spyId },
 						function(data) {
 							reportCache[spyId] = data;
-							$("#'.$this->getParent()->getParent()->getID().'").removeClass("ajax_loading");
-							$("#details").html(data);
+							$("#'.$this->detailBox->getID().'").removeClass("ajax_loading");
+							$("#'.$this->detailBox->getID().' .content_inner").html(data);
 						}
 					);
 				} else {
-					$("#details").html(reportCache[spyId]);
+					$("#'.$this->detailBox->getID().' .content_inner").html(reportCache[spyId]);
 				}
 			});
 		');

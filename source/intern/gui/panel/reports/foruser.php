@@ -3,8 +3,8 @@
 class Rakuun_Intern_GUI_Panel_Reports_ForUser extends Rakuun_Intern_GUI_Panel_Reports_Base {
 	private $user;
 	
-	public function __construct($name, Rakuun_DB_User $user, $title = '') {
-		parent::__construct($name, $title);
+	public function __construct($name, Rakuun_DB_User $user, Rakuun_GUI_Panel_Box $detailBox, $title = '') {
+		parent::__construct($name, $detailBox, $title);
 		
 		$this->user = $user;
 	}

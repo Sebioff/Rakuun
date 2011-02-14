@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_GUI_Panel_Reports_ByMeta extends Rakuun_Intern_GUI_Panel_Reports_Base implements Scriptlet_Privileged {
+class Rakuun_Intern_GUI_Panel_Reports_ForMeta extends Rakuun_Intern_GUI_Panel_Reports_Base implements Scriptlet_Privileged {
 	public function afterInit() {
 		$meta = Rakuun_DB_Containers::getMetasContainer()->selectByPK((int)$this->getModule()->getParam('id'));
 		if ($meta) {
