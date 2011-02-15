@@ -45,20 +45,9 @@
 	
 	
 	Datenbanken:
-	<?php $options = array();
-		$options['conditions'][] = array('identifier IN ('.implode(', ', Rakuun_User_Specials_Database::getDatabaseIdentifiers()).')');
-		$options['conditions'][] = array('user = ?', $user);
-		$options['conditions'][] = array('active = ?', true);
-		$visibleDatabases = Rakuun_User_Specials_Database::getVisibleDatabasesForAlliance(Rakuun_User_Manager::getCurrentUser()->alliance);
-		$databases = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->select($options);
-		$images = Rakuun_User_Specials_Database::getDatabaseImages();
-		
-		foreach ($databases as $db) {
-			if (in_array($db->identifier, $visibleDatabases)):
-				$image = new GUI_Panel_Image('image_'.$db, Router::get()->getStaticRoute('images', $images[$db->identifier].'.gif'));
-				$image->display();
-			endif;
-		}?>
+	<? foreach ($this->params->databasePanels as $databasePanel): ?>
+		<? $databasePanel->display(); ?>
+	<? endforeach; ?>
 	
 	<br class="clear" />
 	Verwarnpunkte: <?= Rakuun_Intern_GUI_Panel_Admin_User_Caution::getCautionPoints($user) ?>

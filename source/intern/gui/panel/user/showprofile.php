@@ -23,6 +23,18 @@ class Rakuun_Intern_GUI_Panel_User_ShowProfile extends GUI_Panel {
 		if ($this->user && $this->user->picture)
 			$this->addPanel(new GUI_Panel_UploadedFile('picture', $this->user->picture, 'Profilbild von '.$this->user->nameUncolored));
 
+		$options = array();
+		$options['conditions'][] = array('identifier IN ('.implode(', ', Rakuun_User_Specials_Database::getDatabaseIdentifiers()).')');
+		$options['conditions'][] = array('user = ?', $this->user);
+		$options['conditions'][] = array('active = ?', true);
+		$databases = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->select($options);
+		
+		$databasePanels = array();
+		foreach ($databases as $db) {
+			$this->addPanel($image = new Rakuun_Intern_GUI_Panel_Specials_Database('image_'.$db->identifier, $db->identifier));
+			$databasePanels[] = $image;
+		}
+		$this->params->databasePanels = $databasePanels;
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
