@@ -23,7 +23,8 @@ class Rakuun_Intern_GUI_Panel_Multihunting_ActivityLog extends GUI_Panel {
 			$options['order'] = 'time DESC';
 			foreach (Rakuun_DB_Containers::getLogUserActivityContainer()->selectByUser($this->user, $options) as $activity) {
 				$date = new GUI_Panel_Date('date'.$activity->getPK(), $activity->time);
-				$log->addLine(array(Rakuun_Intern_Log::getActionDescription($activity->action), $date, $activity->cookie, $activity->ip, $activity->hostname, $activity->browser));
+				$ip = new GUI_Control_Link('url'.$activity->getPK(), $activity->ip, 'http://www.ip-adress.com/whois/'.$activity->ip);
+				$log->addLine(array(Rakuun_Intern_Log::getActionDescription($activity->action), $date, $activity->cookie, $ip, $activity->hostname, $activity->browser));
 			}
 		}
 	}

@@ -132,6 +132,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 			$igm->send();
 			Rakuun_User_Manager::update($recipient);
 			Rakuun_Intern_Log_Ressourcetransfer::log($recipient, Rakuun_Intern_Log::ACTION_RESSOURCES_TRADE, $sender, $this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue());
+			Rakuun_Intern_Log_RessourcetransferOut::log($sender, Rakuun_Intern_Log::ACTION_RESSOURCES_TRADE, $recipient, $this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue());
 			DB_Connection::get()->commit();
 			$this->setSuccessMessage('Ressourcen erfolgreich übertragen');
 		}

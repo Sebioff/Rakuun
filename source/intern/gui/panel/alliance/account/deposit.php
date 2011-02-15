@@ -58,6 +58,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 		$log->date = time();
 		$log->type = Rakuun_Intern_GUI_Panel_Alliance_Account::TYPE_USER_TO_ALLIANCE;
 		Rakuun_DB_Containers::getAlliancesAccountlogContainer()->save($log);
+		Rakuun_Intern_Log_RessourcetransferOut::log($user, Rakuun_Intern_Log::ACTION_RESSOURCES_ALLIANCE, $user, $this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->people->getValue());
 		DB_Connection::get()->commit();
 		$this->setSuccessMessage('Transfer erfolgreich.');
 		$this->getModule()->invalidate();

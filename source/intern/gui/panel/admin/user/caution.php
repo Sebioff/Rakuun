@@ -100,20 +100,52 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 		$igm->send();
 		
 		//check if user has enough cautionpoints to be banned
-		self::checkBan($cautionUser);
+		self::checkBan($cautionUser, $cautionreason, $admin);
 	}
 	
 	/*
 	 * Ban the user if he has enough cautionpoints.
 	 * @param user 
 	 */
-	private static function checkBan(Rakuun_DB_User $user) {
-		if (self::getCautionPoints($user) >=  15)
+	private static function checkBan(Rakuun_DB_User $user, $cautionreason = '', Rakuun_DB_User $admin = null) {
+		$isBanned = false;
+		if (self::getCautionPoints($user) >=  15) {
 			Rakuun_User_Manager::lock($user);
-		else if (self::getCautionPoints($user) >=  9)
+			$isBanned = true;
+		}
+		else if (self::getCautionPoints($user) >=  9) {
 			Rakuun_User_Manager::lock($user, 120);
-		else if (self::getCautionPoints($user) >= 6)
+			$isBanned = true;
+		}
+		else if (self::getCautionPoints($user) >= 6) {
 			 Rakuun_User_Manager::lock($user, 24);
+			 $isBanned = true;
+		}
+		
+		//send notificationmail to user
+		if ($isBanned) {
+			if ($user->mail) {
+				/*
+				 * Catching exceptions here because sending mails is usually not possible
+				 * on DEV and that's annoying for testing.
+				 */
+				try {
+					$mail = new Net_Mail();
+					$mail->setSubject('Rakuun: dein Account wurde gesperrt!');
+					$mail->addRecipients($user->nameUncolored.' <'.$user->mail.'>');
+					if ($admin) {
+						$mail->setSender($admin->mail, $admin->nameUncolored);
+					}
+					$templateEngine = new GUI_TemplateEngine();
+					$templateEngine->reason = $cautionreason;
+					$mail->setMessage($templateEngine->render(dirname(__FILE__).'/mail_notification.tpl'));
+					$mail->send();
+				}
+				catch (Core_Exception $e) {
+					IO_Log::get()->error($e->getTraceAsString());
+				}
+			}
+		}	
 	}
 	
 	/**

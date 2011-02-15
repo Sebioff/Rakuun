@@ -12,7 +12,7 @@
 <? if ($this->hasBeenSubmitted() && !$this->hasErrors() && count($this->params->logs)): ?>
 	<br class="clear" />
 	<? 	$this->addPanel($table = new GUI_Panel_Table('table', 'Suchergebnis')); ?>
-	<? 	$table->addHeader(array('Zeit', 'User', 'Aktion', 'IP', 'Hostname', 'Browser')); ?>
+	<? 	$table->addHeader(array('Aktion', 'Darum', 'User', 'IP', 'Hostname', 'Browser')); ?>
 	<? foreach ($this->params->logs as $log): ?>
 		<?	$date = new GUI_Panel_Date('date'.$log->getPK(), $log->time); ?>
 		<?	$table->addLine(array(Rakuun_Intern_Log::getActionDescription($log->action), $date, $log->user->name, $log->ip, $log->hostname, $log->browser)); ?>

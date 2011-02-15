@@ -238,6 +238,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					$army->beryllium = $stolenBeryllium;
 					$army->energy = $stolenEnergy;
 					Rakuun_Intern_Log_Ressourcetransfer::log($army->user, Rakuun_Intern_Log::ACTION_RESSOURCES_FIGHT, $army->target, $stolenIron, $stolenBeryllium, $stolenEnergy);
+					Rakuun_Intern_Log_RessourcetransferOut::log($army->target, Rakuun_Intern_Log::ACTION_RESSOURCES_FIGHT, $army->user, $stolenIron, $stolenBeryllium, $stolenEnergy);
 				}
 				else {
 					$loserReportText .= '<br/><br/>Die gegnerischen Truppen haben keine Rohstoffe gestohlen.';

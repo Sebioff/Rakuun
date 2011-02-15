@@ -23,7 +23,8 @@ class Rakuun_Intern_GUI_Panel_Multihunting_UserdataLog extends GUI_Panel {
 			$options['order'] = 'time DESC';
 			foreach (Rakuun_DB_Containers::getLogUserDataContainer()->selectByUser($this->user, $options) as $userdata) {
 				$date = new GUI_Panel_Date('date'.$userdata->getPK(), $userdata->time);
-				$log->addLine(array($date, Rakuun_Intern_Log::getActionDescription($userdata->action), $userdata->data, $userdata->ip, $userdata->hostname, $userdata->browser));
+				$ip = new GUI_Control_Link('url'.$userdata->getPK(), $userdata->ip, 'http://www.ip-adress.com/whois/'.$userdata->ip);
+				$log->addLine(array($date, Rakuun_Intern_Log::getActionDescription($userdata->action), $userdata->data, $ip, $userdata->hostname, $userdata->browser));
 			}
 		}
 	}

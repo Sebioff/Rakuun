@@ -4,3 +4,4 @@
 <? $this->displayPanel('activity'); ?>
 <? $this->displayPanel('userdata'); ?>
 <? $this->displayPanel('ressource'); ?>
+<? $this->displayPanel('ressourceout'); ?>
