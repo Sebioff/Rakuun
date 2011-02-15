@@ -15,25 +15,8 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	
 	public function __construct($name, Rakuun_DB_User $targetUser = null, $cityX = 0, $cityY = 0) {
 		parent::__construct($name);
-		$this->targetUser = $targetUser;
-		$this->cityX = $cityX;
-		$this->cityY = $cityY;
-		$this->viewRectX = $cityX;
-		$this->viewRectY = $cityY;
-		if ($this->viewRectX == 0 && $this->viewRectY == 0) {
-			$this->viewRectX = Rakuun_User_Manager::getCurrentUser()->cityX;
-			$this->viewRectY = Rakuun_User_Manager::getCurrentUser()->cityY;
-		}
-		$this->viewRectX -= $this->viewRectSize / 2;
-		if ($this->viewRectX < 0)
-			$this->viewRectX = 0;
-		if ($this->viewRectX > self::MAP_WIDTH - $this->viewRectSize)
-			$this->viewRectX = self::MAP_WIDTH - $this->viewRectSize;
-		$this->viewRectY -= $this->viewRectSize / 2;
-		if ($this->viewRectY < 0)
-			$this->viewRectY = 0;
-		if ($this->viewRectY > self::MAP_HEIGHT - $this->viewRectSize)
-			$this->viewRectY = self::MAP_HEIGHT - $this->viewRectSize;
+		
+		$this->setTarget($cityX, $cityY, $targetUser);
 	}
 	
 	public function init() {
@@ -43,7 +26,8 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_Path('path', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_Items('items', $this));
-		$this->addPanel(new Rakuun_GUI_Panel_Box('target', new Rakuun_Intern_GUI_Panel_Map_Target('target', $this->targetUser, $this->cityX, $this->cityY), 'Zielauswahl'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('target', $target = new Rakuun_Intern_GUI_Panel_Map_Target('target', $this->targetUser, $this->cityX, $this->cityY), 'Zielauswahl'));
+		$this->setTarget($target->targetX->getValue(), $target->targetY->getValue(), $target->target->getUser());
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Left('scroll_left', '', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Right('scroll_right', '', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', '', $this));
@@ -220,6 +204,28 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	
 	public function getCityY() {
 		return $this->cityY;
+	}
+	
+	public function setTarget($cityX, $cityY, Rakuun_DB_User $targetUser = null) {
+		$this->targetUser = $targetUser;
+		$this->cityX = $cityX;
+		$this->cityY = $cityY;
+		$this->viewRectX = $cityX;
+		$this->viewRectY = $cityY;
+		if ($this->viewRectX == 0 && $this->viewRectY == 0) {
+			$this->viewRectX = Rakuun_User_Manager::getCurrentUser()->cityX;
+			$this->viewRectY = Rakuun_User_Manager::getCurrentUser()->cityY;
+		}
+		$this->viewRectX -= $this->viewRectSize / 2;
+		if ($this->viewRectX < 0)
+			$this->viewRectX = 0;
+		if ($this->viewRectX > self::MAP_WIDTH - $this->viewRectSize)
+			$this->viewRectX = self::MAP_WIDTH - $this->viewRectSize;
+		$this->viewRectY -= $this->viewRectSize / 2;
+		if ($this->viewRectY < 0)
+			$this->viewRectY = 0;
+		if ($this->viewRectY > self::MAP_HEIGHT - $this->viewRectSize)
+			$this->viewRectY = self::MAP_HEIGHT - $this->viewRectSize;
 	}
 }
 

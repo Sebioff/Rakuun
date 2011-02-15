@@ -20,17 +20,17 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		parent::init();
 		
 		$this->setTemplate(dirname(__FILE__).'/target.tpl');
-		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', null, 'Ziel'));
+		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', $this->user, 'Ziel'));
 		$target->setPreserveValue();
-		if ($this->user)
+		if ($this->user && !$this->hasBeenSubmitted())
 			$target->setValue($this->user->nameUncolored);
 		$this->addPanel($targetX = new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH - 1));
 		$targetX->setPreserveValue();
-		if ($this->cityX)
+		if ($this->cityX && !$this->hasBeenSubmitted())
 			$targetX->setValue($this->cityX);
 		$this->addPanel($targetY = new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT - 1));
 		$targetY->setPreserveValue();
-		if ($this->cityY)
+		if ($this->cityY && !$this->hasBeenSubmitted())
 			$targetY->setValue($this->cityY);
 		$this->addPanel(new GUI_Panel_Label('target_coords_label', $this->targetX, 'Koordinaten'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
