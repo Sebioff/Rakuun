@@ -549,6 +549,16 @@ body.skin_tech
 	margin-right:3px;
 	width:auto;
 }
+	
+.skin_tech .text_icon_board {
+	background:url('../images/tech/icon_board.gif') no-repeat left top;
+	padding-left:18px;
+}
+
+.skin_tech .text_icon_envelope {
+	background:url('../images/tech/icon_envelope.gif') no-repeat left top;
+	padding-left:18px;
+}
 
 /* $7  -  Techtree -----------------------------------------------------------*/
 .skin_tech #ctn_techtree_rows .rakuun_box {

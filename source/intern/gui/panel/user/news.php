@@ -40,6 +40,128 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 						$unreadTicketsLink->setCaption('1 unbeantwortete Supportnachricht.');
 				}
 			}
+			
+			
+			// new global board posts
+			$postingsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->getTable();
+			$lastVisitTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalLastVisitedContainer()->getTable();
+			$boardsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalContainer()->getTable();
+			// count for all posts that have lastVisited information
+			$options = array();
+			$options['join'] = array($lastVisitTable);
+			$options['conditions'][] = array($lastVisitTable.'.user_name = ?', Rakuun_User_Manager::getCurrentUser()->nameUncolored);
+			$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
+			$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
+			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
+			$newPostingsCount = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
+			
+			// count for all posts that have no lastVisited information
+			$options = array();
+			$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\'';
+			$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
+			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
+			$newPostingsCount += Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
+			
+			if ($newPostingsCount > 0) {
+				$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('global')->getUrl();
+				$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_global_board_posts', $newPostingsCount.' neue Beiträge im globalen Forum.', $url));
+				if ($newPostingsCount == 1)
+					$unreadMessagesLink->setCaption('1 neuer Beitrag im globalen Forum.');
+			}
+			
+			// new alliance board posts
+			if (App::get()->getInternModule()->getSubmodule('boards')->hasSubmodule('alliance') && Rakuun_User_Manager::getCurrentUser()->alliance) {
+				$postingsTable = Rakuun_DB_Containers::getBoardsAlliancePostingsContainer()->getTable();
+				$lastVisitTable = Rakuun_DB_Containers::getBoardsAllianceLastVisitedContainer()->getTable();
+				$boardsTable = Rakuun_DB_Containers::getBoardsAllianceContainer()->getTable();
+				// count for all posts that have lastVisited information
+				$options = array();
+				$options['join'] = array($lastVisitTable, $boardsTable);
+				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
+				$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
+				$options['conditions'][] = array($lastVisitTable.'.user = ?', Rakuun_User_Manager::getCurrentUser());
+				$options['conditions'][] = array($boardsTable.'.alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
+				$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
+				$newPostingsCount = Rakuun_DB_Containers::getBoardsAlliancePostingsContainer()->count($options);
+				
+				// count for all posts that have no lastVisited information
+				$options = array();
+				$options['join'] = array($boardsTable);
+				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK();
+				$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
+				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
+				$options['conditions'][] = array($boardsTable.'.alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
+				$newPostingsCount += Rakuun_DB_Containers::getBoardsAlliancePostingsContainer()->count($options);
+				
+				if ($newPostingsCount > 0) {
+					$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('alliance')->getUrl();
+					$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_alliance_board_posts', $newPostingsCount.' neue Beiträge im Allianzforum.', $url));
+					if ($newPostingsCount == 1)
+						$unreadMessagesLink->setCaption('1 neuer Beitrag im Allianzforum.');
+				}
+			}
+			
+			// new meta board posts
+			if (App::get()->getInternModule()->getSubmodule('boards')->hasSubmodule('meta') && isset(Rakuun_User_Manager::getCurrentUser()->alliance->meta)) {
+				$postingsTable = Rakuun_DB_Containers::getBoardsMetaPostingsContainer()->getTable();
+				$lastVisitTable = Rakuun_DB_Containers::getBoardsMetaLastVisitedContainer()->getTable();
+				$boardsTable = Rakuun_DB_Containers::getBoardsMetaContainer()->getTable();
+				// count for all posts that have lastVisited information
+				$options = array();
+				$options['join'] = array($lastVisitTable, $boardsTable);
+				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
+				$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
+				$options['conditions'][] = array($lastVisitTable.'.user = ?', Rakuun_User_Manager::getCurrentUser());
+				$options['conditions'][] = array($boardsTable.'.meta = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
+				$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
+				$newPostingsCount = Rakuun_DB_Containers::getBoardsMetaPostingsContainer()->count($options);
+				
+				// count for all posts that have no lastVisited information
+				$options = array();
+				$options['join'] = array($boardsTable);
+				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK();
+				$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
+				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
+				$options['conditions'][] = array($boardsTable.'.meta = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
+				$newPostingsCount += Rakuun_DB_Containers::getBoardsMetaPostingsContainer()->count($options);
+				
+				if ($newPostingsCount > 0) {
+					$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('meta')->getUrl();
+					$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_meta_board_posts', $newPostingsCount.' neue Beiträge im Metaforum.', $url));
+					if ($newPostingsCount == 1)
+						$unreadMessagesLink->setCaption('1 neuer Beitrag im Metaforum.');
+				}
+			}
+			
+			// new admin board posts
+			if (Rakuun_TeamSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::PRIVILEGE_BACKENDACCESS)) {
+				$postingsTable = Rakuun_DB_Containers::getBoardsAdminPostingsContainer()->getTable();
+				$lastVisitTable = Rakuun_DB_Containers::getBoardsAdminLastVisitedContainer()->getTable();
+				$boardsTable = Rakuun_DB_Containers::getBoardsAdminContainer()->getTable();
+				// count for all posts that have lastVisited information
+				$options = array();
+				$options['join'] = array($lastVisitTable, $boardsTable);
+				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
+				$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
+				$options['conditions'][] = array($lastVisitTable.'.user = ?', Rakuun_User_Manager::getCurrentUser());
+				$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
+				$newPostingsCount = Rakuun_DB_Containers::getBoardsAdminPostingsContainer()->count($options);
+				
+				// count for all posts that have no lastVisited information
+				$options = array();
+				$options['join'] = array($boardsTable);
+				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK();
+				$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
+				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
+				$newPostingsCount += Rakuun_DB_Containers::getBoardsAdminPostingsContainer()->count($options);
+				
+				if ($newPostingsCount > 0) {
+					$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('admin')->getUrl();
+					$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_admin_board_posts', $newPostingsCount.' neue Beiträge im Adminforum.', $url));
+					if ($newPostingsCount == 1)
+						$unreadMessagesLink->setCaption('1 neuer Beitrag im Adminforum.');
+				}
+			}
 		}
 		
 		// news panel

@@ -1,16 +1,43 @@
 <? if ($this->hasPanel('unread_messages')): ?>
-	<? $this->displayPanel('unread_messages') ?>
-	<br />
+	<div class="text_icon_envelope">
+		<? $this->displayPanel('unread_messages'); ?>
+	</div>
 <? endif; ?>
 
 <? if ($this->hasPanel('unread_tickets_users')): ?>
-	<? $this->displayPanel('unread_tickets_users') ?>
-	<br />
+	<div class="text_icon_envelope">
+		<? $this->displayPanel('unread_tickets_users'); ?>
+	</div>
 <? endif; ?>
 
 <? if ($this->hasPanel('unread_tickets_supporters')): ?>
-	<? $this->displayPanel('unread_tickets_supporters') ?>
-	<br />
+	<div class="text_icon_envelope">
+		<? $this->displayPanel('unread_tickets_supporters'); ?>
+	</div>
+<? endif; ?>
+
+<? if ($this->hasPanel('unread_global_board_posts')): ?>
+	<div class="text_icon_board">
+		<? $this->displayPanel('unread_global_board_posts'); ?>
+	</div>
+<? endif; ?>
+
+<? if ($this->hasPanel('unread_alliance_board_posts')): ?>
+	<div class="text_icon_board">
+		<? $this->displayPanel('unread_alliance_board_posts'); ?>
+	</div>
+<? endif; ?>
+
+<? if ($this->hasPanel('unread_meta_board_posts')): ?>
+	<div class="text_icon_board">
+		<? $this->displayPanel('unread_meta_board_posts'); ?>
+	</div>
+<? endif; ?>
+
+<? if ($this->hasPanel('unread_admin_board_posts')): ?>
+	<div class="text_icon_board">
+		<? $this->displayPanel('unread_admin_board_posts'); ?>
+	</div>
 <? endif; ?>
 
 <? if ($this->hasPanel('news')): ?>
