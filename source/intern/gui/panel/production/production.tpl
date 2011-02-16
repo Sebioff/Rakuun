@@ -1,38 +1,39 @@
 <? /* @var $productionItem Rakuun_Intern_Production_Base */ ?>
 <? $productionItem = $this->getProductionItem() ?>
-<div class="production_item_header">
-	<h2>
-		<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
-			<?= $productionItem->getName() ?>
-		</a>
-	</h2> (Stufe <?= $productionItem->getLevel() ?><?= ($productionItem->getFutureLevels() > 0) ? ' + '.$productionItem->getFutureLevels() : '' ?><?= ($productionItem->getMaximumLevel() > 0) ? ' / '.$productionItem->getMaximumLevel() : '' ?>)
-</div>
-<div class="production_item_actions">
-	<? if (!$productionItem->reachedMaximumLevel()): ?>
-		<? if ($productionItem->canBuild()): ?>
-			<? if ($this->hasErrors()): ?>
-				<? $this->displayErrors(); ?>
-			<? endif; ?>
-			<? if ($this->hasPanel('produce')): ?>
-				<? $this->displayPanel('produce') ?>
+<div class="production_item_header clearfix">
+	<div class="production_item_title head_inner">
+		<h2>
+			<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
+				<?= $productionItem->getName() ?>
+			</a>
+		</h2> (Stufe <?= $productionItem->getLevel() ?><?= ($productionItem->getFutureLevels() > 0) ? ' + '.$productionItem->getFutureLevels() : '' ?><?= ($productionItem->getMaximumLevel() > 0) ? ' / '.$productionItem->getMaximumLevel() : '' ?>)
+	</div>
+	<div class="production_item_actions">
+		<? if (!$productionItem->reachedMaximumLevel()): ?>
+			<? if ($productionItem->canBuild()): ?>
+				<? if ($this->hasErrors()): ?>
+					<? $this->displayErrors(); ?>
+				<? endif; ?>
+				<? if ($this->hasPanel('produce')): ?>
+					<? $this->displayPanel('produce') ?>
+				<? endif; ?>
+			<? else: ?>
+				<span class="rakuun_requirements_failed">
+					<? if (!$productionItem->gotEnoughRessources()): ?>
+						Unzureichende Rohstoffe.
+					<? else: ?>
+						<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $productionItem->getInternalName(); ?>">Fehlende Voraussetzungen.</a>
+					<? endif; ?>
+				</span>
 			<? endif; ?>
 		<? else: ?>
-			<span class="rakuun_requirements_failed">
-				<? if (!$productionItem->gotEnoughRessources()): ?>
-					Unzureichende Rohstoffe.
-				<? else: ?>
-					<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $productionItem->getInternalName(); ?>">Fehlende Voraussetzungen.</a>
-				<? endif; ?>
-			</span>
+			Maximalstufe erreicht.
 		<? endif; ?>
-	<? else: ?>
-		Maximalstufe erreicht.
-	<? endif; ?>
-	<? if ($this->hasPanel('remove')): ?>
-		<? $this->displayPanel('remove') ?>
-	<? endif; ?>
+		<? if ($this->hasPanel('remove')): ?>
+			<? $this->displayPanel('remove') ?>
+		<? endif; ?>
+	</div>
 </div>
-<br class="clear" />
 <? if ($this->getHeadPanels()): ?>
 	<div class="headpanels">
 		<? foreach ($this->getHeadPanels() as $panel): ?>

@@ -13,7 +13,7 @@ class Rakuun_Intern_Module_Produce extends Rakuun_Intern_Module {
 		
 		$canProduce = false;
 		$sortpane = new GUI_Panel_Sortable('sortpane', Rakuun_User_Manager::getCurrentUser(), 'sequence_units');
-		$sortpane->setHandle('.head');
+		$sortpane->setHandle('.head, .production_item_header');
 		$this->contentPanel->addPanel($sortpane);
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
 			if ($unit->meetsTechnicalRequirements()) {

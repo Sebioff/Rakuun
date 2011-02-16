@@ -13,7 +13,7 @@ class Rakuun_Intern_Module_Research extends Rakuun_Intern_Module {
 		
 		$canResearch = false;
 		$sortpane = new GUI_Panel_Sortable('sortpane', Rakuun_User_Manager::getCurrentUser(), 'sequence_technologies');
-		$sortpane->setHandle('.head');
+		$sortpane->setHandle('.head, .production_item_header');
 		$this->contentPanel->addPanel($sortpane);
 		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
 			if ($technology->meetsTechnicalRequirements() || $technology->getLevel() > 0) {

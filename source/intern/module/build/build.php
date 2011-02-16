@@ -18,7 +18,7 @@ class Rakuun_Intern_Module_Build extends Rakuun_Intern_Module {
 		$this->contentPanel->addPanel($wipPanel, true);
 		
 		$sortpane = new GUI_Panel_Sortable('sortpane', Rakuun_User_Manager::getCurrentUser(), 'sequence_buildings');
-		$sortpane->setHandle('.head');
+		$sortpane->setHandle('.head, .production_item_header');
 		$this->contentPanel->addPanel($sortpane);
 		foreach (Rakuun_Intern_Production_Factory::getAllBuildings() as $building) {
 			if ($building->meetsTechnicalRequirements() || $building->getLevel() > 0) {

@@ -1,32 +1,33 @@
 <? /* @var $productionItem Rakuun_Intern_Production_Unit */ ?>
 <? $productionItem = $this->getProductionItem(); ?>
-<div class="production_item_header">
-	<h2>
-		<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
-			<?= $productionItem->getName(); ?>
-		</a>
-	</h2> (<?= GUI_Panel_Number::formatNumber($productionItem->getAmount()); ?><?= ($productionItem->getAmountInProduction() > 0) ? ' + '.GUI_Panel_Number::formatNumber($productionItem->getAmountInProduction()) : '' ?>)
-</div>
-<div class="production_item_actions">
-	<? if ($productionItem->canBuild()): ?>
-		<? if ($this->hasErrors()): ?>
-			<? $this->displayErrors(); ?>
-		<? endif; ?>
-		<? if ($this->hasPanel('produce')): ?>
-			<? $this->displayPanel('amount') ?>
-			<? $this->displayPanel('produce') ?>
-		<? endif; ?>
-	<? else: ?>
-		<span class="rakuun_requirements_failed">
-			<? if (!$productionItem->gotEnoughRessources()): ?>
-				Unzureichende Rohstoffe.
-			<? else: ?>
-				Fehlende Voraussetzungen.
+<div class="production_item_header clearfix">
+	<div class="production_item_title head_inner">
+		<h2>
+			<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
+				<?= $productionItem->getName(); ?>
+			</a>
+		</h2> (<?= GUI_Panel_Number::formatNumber($productionItem->getAmount()); ?><?= ($productionItem->getAmountInProduction() > 0) ? ' + '.GUI_Panel_Number::formatNumber($productionItem->getAmountInProduction()) : '' ?>)
+	</div>
+	<div class="production_item_actions">
+		<? if ($productionItem->canBuild()): ?>
+			<? if ($this->hasErrors()): ?>
+				<? $this->displayErrors(); ?>
 			<? endif; ?>
-		</span>
-	<? endif ?>
+			<? if ($this->hasPanel('produce')): ?>
+				<? $this->displayPanel('amount') ?>
+				<? $this->displayPanel('produce') ?>
+			<? endif; ?>
+		<? else: ?>
+			<span class="rakuun_requirements_failed">
+				<? if (!$productionItem->gotEnoughRessources()): ?>
+					Unzureichende Rohstoffe.
+				<? else: ?>
+					Fehlende Voraussetzungen.
+				<? endif; ?>
+			</span>
+		<? endif ?>
+	</div>
 </div>
-<br class="clear" />
 <? $ressources = $productionItem->getUser()->ressources; ?>
 <? $ironCosts = $productionItem->getIronCostsForAmount(1); ?>
 <? if ($ironCosts > 0): ?>

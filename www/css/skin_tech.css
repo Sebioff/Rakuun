@@ -135,6 +135,11 @@ body.skin_tech
 	background:transparent url('../images/tech/loading.gif') no-repeat right top;
 }
 
+.skin_tech .ui-sortable .rakuun_box .head_inner {
+	background:transparent url('../images/tech/rakuun_box_move.gif') no-repeat left top;
+	padding-left:19px;
+}
+
 /* $2  -  Main Containers ----------------------------------------------------*/
 .skin_tech #ctn_main {
 	background:transparent url('../images/background_starfield.png') no-repeat center top;
@@ -315,7 +320,10 @@ body.skin_tech
 
 .skin_tech .module_build .ui-sortable .head,
 .skin_tech .module_research .ui-sortable .head,
-.skin_tech .module_produce .ui-sortable .head {
+.skin_tech .module_produce .ui-sortable .head,
+.skin_tech .module_build .ui-sortable .production_item_header,
+.skin_tech .module_research .ui-sortable .production_item_header,
+.skin_tech .module_produce .ui-sortable .production_item_header {
 	cursor:move;
 }
 
