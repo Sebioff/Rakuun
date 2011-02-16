@@ -545,6 +545,11 @@ body.skin_tech
 	width:286px;
 }
 
+.skin_tech .module_overview .rakuun_box_sitter label {
+	margin-right:3px;
+	width:auto;
+}
+
 /* $7  -  Techtree -----------------------------------------------------------*/
 .skin_tech #ctn_techtree_rows .rakuun_box {
 	float:left;
@@ -834,6 +839,15 @@ body.skin_tech
 .skin_tech .module_map .rakuun_box_defendingunits .value,
 .skin_tech .module_map .rakuun_box_defendingunits .controls {
 	float:left;
+}
+
+.skin_tech #ctn_map {
+	float:left;
+	margin-bottom:5px;
+}
+
+.skin_tech .module_map .rakuun_box {
+	margin-right:5px;
 }
 
 /* $18 -  Reports ------------------------------------------------------------*/
