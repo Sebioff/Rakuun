@@ -4,14 +4,13 @@ class Rakuun_Intern_GUI_Panel_Map_ScrollButton_Left extends Rakuun_Intern_GUI_Pa
 	public function init() {
 		parent::init();
 		
-		$this->setText('&lt;');
 		$this->setScrollDeltaX(-3);
 		$this->setAttribute('style', '
-			background-color:#555555;
+			background:#555555 url(\''.Router::get()->getStaticRoute('images', 'tech/map_scroll_left.gif').'\') no-repeat 1px center;
 			cursor:pointer;
 			float:left;
 			height:'.($this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE).'px;
-			width:10px;
+			width:13px;
 			line-height:'.($this->getMap()->getViewRectSize() * Rakuun_Intern_GUI_Panel_Map::MAP_RECT_SIZE).'px;
 		');
 	}
