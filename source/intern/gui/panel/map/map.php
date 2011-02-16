@@ -94,19 +94,15 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 					$(".scroll_bg").each(function() {
 						x = bgX(this);
 						y = bgY(this);
-						//if (globalX < 0 && globalX > -%4$d)
-							x -= dx;
-						//if (globalY < 0 && globalY > -%3$d)
-							y -= dy;
+						x -= dx;
+						y -= dy;
 						$(this).css("background-position", x + "px " + y + "px");
 					});
 					$("#rakuun_map_scroll_items, #rakuun_map_map_layer, #rakuun_map_indicator").each(function() {
 						x = parseInt($(this).css("left"));
 						y = parseInt($(this).css("top"));
-						//if (globalX < 0 && globalX > -%4$d)
-							x -= dx;
-						//if (globalY < 0 && globalY > -%3$d)
-							y -= dy;
+						x -= dx;
+						y -= dy;
 						x = $(this).css("left", x + "px");
 						y = $(this).css("top", y + "px");
 					});
@@ -119,19 +115,8 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 					oldPageX = e.pageX;
 					oldPageY = e.pageY;
 					return false;
-				}).mouseup(function() {
-					pan = false;
-					return false;
-				}).mouseout(function() {
-					pan = false;
-					return false;
 				}).mousemove(function(e) {
-					if (pan) {
-						scroll(oldPageX - e.pageX, oldPageY - e.pageY);
-						oldPageX = e.pageX;
-						oldPageY = e.pageY;
-					}
-					return false;
+					e.preventDefault();
 				}).click(function(e) {
 					position = $(this).position();
 					clickX = Math.floor((e.pageX - position.left - globalX) / MAP_RECT_SIZE);
@@ -139,6 +124,19 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 					$("#'.$this->target->target->targetX->getID().'").val(clickX);
 					$("#'.$this->target->target->targetY->getID().'").val(clickY);
 					$("#'.$this->target->target->target->getID().'").val("");
+				});
+				
+				$("body")
+				.mousemove(function(e) {
+					if (pan) {
+						scroll(oldPageX - e.pageX, oldPageY - e.pageY);
+						oldPageX = e.pageX;
+						oldPageY = e.pageY;
+					}
+				}).mouseup(function() {
+					pan = false;
+				}).mouseleave(function() {
+					pan = false;
 				});
 				
 				var scrollTimer;
