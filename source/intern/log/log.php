@@ -21,6 +21,12 @@ class Rakuun_Intern_Log {
 	const MULTIACTION_SAME_IP = 0;
 	const MULTIACTION_SAME_COOKIE = 1;
 	
+	const TYPE_TRANSFER_IN = 0;
+	const TYPE_TRANSFER_OUT = 1;
+	const TYPE_TRANSFER_FROM = 2;
+	
+	const IPWHOIS = 'http://www.ip-adress.com/whois/';
+	
 	protected static $multiPoints = array(
 		self::ACTION_ACTIVITY_LOGIN => self::MULTIPOINTS_LOGIN,
 		self::ACTION_ACTIVITY_LOGOUT => 0,
@@ -49,6 +55,12 @@ class Rakuun_Intern_Log {
 	protected static $multiActionDescriptions = array(
 		self::MULTIACTION_SAME_IP => 'IP',
 		self::MULTIACTION_SAME_COOKIE => 'Cookie'
+	);
+	
+	protected static $typeTransferDescriptions = array(
+		self::TYPE_TRANSFER_IN => 'bekommen von',
+		self::TYPE_TRANSFER_OUT => 'gesendet an',
+		self::TYPE_TRANSFER_FROM => 'gesendet von'
 	);
 	
 	public static function multiCheck(Rakuun_DB_User $user, $action) {
@@ -109,6 +121,10 @@ class Rakuun_Intern_Log {
 	
 	public static function getMultiActionDescription($action) {
 		return self::$multiActionDescriptions[$action];
+	}
+	
+	public static function getTypeTransferDescription($action) {
+		return self::$typeTransferDescriptions[$action];
 	}
 }
 

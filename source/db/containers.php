@@ -44,7 +44,6 @@ abstract class Rakuun_DB_Containers {
 	private static $metasBuildingsWIPContainer = null;
 	private static $logUserActivityContainer = null;
 	private static $logUserRessourcetransferContainer = null;
-	private static $logUserRessourcetransferOutContainer = null;
 	private static $logUserDataContainer = null;
 	private static $messagesContainer = null;
 	private static $messagesAttachmentsContainer = null;
@@ -438,20 +437,6 @@ abstract class Rakuun_DB_Containers {
 		self::$logUserRessourcetransferContainer->addReferencedContainer(self::getUserContainer(), 'sender', 'id');
 		
 		return self::$logUserRessourcetransferContainer;
-	}
-	
-	/**
-	 * @return DB_Container
-	 */
-	public static function getLogUserRessourcetransferOutContainer() {
-		if (self::$logUserRessourcetransferOutContainer)
-			return self::$logUserRessourcetransferOutContainer;
-			
-		self::$logUserRessourcetransferOutContainer = new DB_Container('log_users_ressourcetransfer_out');
-		self::$logUserRessourcetransferOutContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
-		self::$logUserRessourcetransferOutContainer->addReferencedContainer(self::getUserContainer(), 'recipient', 'id');
-		
-		return self::$logUserRessourcetransferOutContainer;
 	}
 	
 	/**
