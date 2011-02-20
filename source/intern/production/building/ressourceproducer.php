@@ -11,7 +11,7 @@ class Rakuun_Intern_Production_Building_RessourceProducer extends Rakuun_Intern_
 	public function __construct($dataSource = null) {
 		parent::__construct($dataSource);
 		
-		$this->setAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK, true);
+		$this->setAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_DESTRUCTIBLE_UNTIL_AVERAGE_IN_WAR, true);
 	}
 	
 	// CUSTOM METHODS ----------------------------------------------------------

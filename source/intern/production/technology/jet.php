@@ -22,7 +22,7 @@ class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_T
 			<br/>
 			Die Anti-G Einheit der Gleiter sorgt dafür, dass um sie herum keine Gravitation stattfindet und sie somit schwerelos einfach in der Luft hängen, allerdings ist es ihm nicht möglich, den Gleiter auch nur im entferntesten zu bewegen.
 			<br/>
-			Deshalb wird hier ein spezieller Düsenantrieb verwendet. Seine Hauptfunktionsweise besteht darin, durch speziell geformte, rotierende Blätter innerhalb der Düse Luft von vorne heranzusaugen und nach hinten abzustoßen, zusätzlich wird ein hochexplosiver Treibstoff im inneren entzündet und die Explosion kontrolliert nach hinten geleitet.');
+			Deshalb wird hier ein spezieller Düsenantrieb verwendet. Seine Hauptfunktionsweise besteht darin, durch speziell geformte, rotierende Blätter innerhalb der Düse Luft von vorne heranzusaugen und nach hinten abzustoßen. Zusätzlich wird ein hochexplosiver Treibstoff im inneren entzündet und die Explosion kontrolliert nach hinten geleitet.');
 		$this->setPoints(8);
 	}
 	

@@ -26,7 +26,7 @@ class Rakuun_Intern_Production_Unit_Minigani extends Rakuun_Intern_Production_Un
 			<br/>
 			Ausgestattet mit 50 mm Kanonen durschlagen sie jede Panzerung und eignen ich daher prima als Bunkerbrecher.
 			<br/>
-			Ihr Motor ist dank des für Panzer relativ niedrigen Gewichtes von 10t in der Lage, sie ziemlich zu beschleunigen, sodass sie Fusstruppen selbst in Gelände übertreffen können.
+			Ihr Motor ist dank des für Panzer relativ niedrigen Gewichtes von 10t in der Lage, sie stark zu beschleunigen, sodass sie Fusstruppen selbst in Gelände übertreffen können.
 			<br/>
 			Die eher auf stabilen Metallen basierende Technologie sorgt außerdem für ein recht ausgeglichenes Bedürfniss an Rohstoffen.');
 	}

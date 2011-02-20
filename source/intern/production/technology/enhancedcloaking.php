@@ -16,7 +16,7 @@ class Rakuun_Intern_Production_Technology_EnhancedCloaking extends Rakuun_Intern
 		$this->setShortDescription('Durch die Verbesserte Tarnung sind Tarneinheiten in gegnerischen Spionageberichten, die von normalen Sonden erstellt wurden, absolut unsichtbar. Lediglich Tarnsonden können Einheiten, die mit der Verbesserten Tarnung ausgestattet sind, entdecken.');
 		$this->setLongDescription('Die Verbesserte Tarnung ist das Aktuellste, das die moderne Tarnforschung hervorgebracht hat.
 			<br/>
-			Jahrelang war die Wissenschaft damit beschäftigt, eine Lösung für das Problem zu finden, dass die bei der normalen Tarnung eingesetzte Lichtwellenumlenkung nur bei beweglichen Objekten wirksam ist. Ein mit der üblichen Tarnung ausgestattetes Gefährt ist im Stillstand sowohl für menschliche als auch elektronische Augen eindeutig, wenn auch leicht verschwommen sichtbar.
+			Jahrelang war die Wissenschaft damit beschäftigt, eine Lösung für das Problem zu finden, dass die bei der normalen Tarnung eingesetzte Lichtwellenumlenkung nur bei beweglichen Objekten wirksam ist. Ein mit der üblichen Tarnung ausgestattetes Gefährt ist im Stillstand sowohl für menschliche als auch elektronische Augen - wenn auch leicht verschwommen - sichtbar.
 			<br/>
 			Die Verbesserte Tarnung ergänzt die alte Tarnung um neueste Erkenntnisse auf dem Gebiet der Lumodynamik. So wird nicht nur die Umleitung der Lichtwellen signifikant verbessert, sondern insbesondere auch das Design der zu tarnenden Objekte leicht modifiziert um einen reibungsloseren Lichtwellenumfluss zu ermöglichen.
 			<br/>
@@ -24,7 +24,7 @@ class Rakuun_Intern_Production_Technology_EnhancedCloaking extends Rakuun_Intern
 			<br/>
 			Deshalb wird bei sich in Bewegung befindlichen Fahrzeugen weiterhin die alte Tarntechnologie eingesetzt, lediglich im Stillstand kann die Verbesserte Tarnung zum Einsatz kommen.
 			<br/>
-			Eine weitere Schwäche mit bislang ungeklärter Ursache ist, dass getarnte Objekte nach wie vor problemlos andere getarnte Objekte erkennen können. Somit kann die Verbesserte Tarnung effizient nur dazu eingesetzt werden, Tarneinheiten vor feindlichen Spionagesonden unsichtbar zu machen - doch vor Tarnsonden gibt es leider nach wie vor keinen wirksamen Schutz.');
+			Eine weitere Schwäche mit bislang ungeklärter Ursache ist, dass getarnte Objekte nach wie vor problemlos andere getarnte Objekte erkennen können. Somit kann die Verbesserte Tarnung nur dazu eingesetzt werden, Tarneinheiten vor feindlichen Spionagesonden unsichtbar zu machen - doch vor Tarnsonden gibt es leider nach wie vor keinen wirksamen Schutz.');
 		$this->setPoints(20);
 	}
 }

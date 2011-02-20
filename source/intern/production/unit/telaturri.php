@@ -25,7 +25,7 @@ class Rakuun_Intern_Production_Unit_Telaturri extends Rakuun_Intern_Production_U
 			<br/>
 			Der größte Vorteil des Turmes ist sein niedriger Verbrauch an Energie, da er immer noch auf dem alten Projektil-Prinzip basiert.
 			<br/>
-			Telaturris haben eine hohe Feuergeschwindigkeit mit eher schwächeren Projektilen und sind daher besonders gut gegen die schnellen Gleiter geeignet und weniger gegen langsame, aber gut gepanzerte, Fahrzeuge.');
+			Telaturris haben eine hohe Feuergeschwindigkeit mit eher schwächeren Projektilen und sind daher besonders gut gegen die schnellen Gleiter geeignet und weniger gegen langsame, aber gut gepanzerte Fahrzeuge.');
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

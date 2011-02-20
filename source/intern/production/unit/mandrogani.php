@@ -26,11 +26,11 @@ class Rakuun_Intern_Production_Unit_Mandrogani extends Rakuun_Intern_Production_
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING, true);
 		$this->setShortDescription('Mandrogani');
-		$this->setLongDescription('Der Mandrogani ist so ziemlich das höchste an Technik, was man auf dem Schlachtfeld antreffen kann.
+		$this->setLongDescription('Der Mandrogani ist so ziemlich das weitentwickelste an Technik, was man auf dem Schlachtfeld antreffen kann.
 			<br/>
-			Für einen Panzer seiner Größe scheint er nur unreichend gepanzert zu sein, doch seine Technik macht das wieder ziemlich wett: Einmal verwendet er modernste Lasertechnik, mit dem er im Kampf eine Allrounder-Eigenschaft hat, da der sowohl schnelle wie auch starke Laser gegen jeden Typ von Einheit einsetzbar ist.
+			Für einen Panzer seiner Größe scheint er nur unzureichend gepanzert zu sein, doch seine Technik macht das wieder wett: er verwendet modernste Lasertechnik, mit dem er im Kampf eine Allrounder-Eigenschaft hat, da der sowohl schnelle wie auch starke Laser gegen jeden Typ von Einheit einsetzbar ist.
 			<br/>
-			Desweiteren besitzt dieser Panzer eine Tarnvorrichtung, die es ihm erlaubt, sowohl unangekündigte Angriffe durchzuführen, als auch auf dem Schlachtfeld für eine Täuschung des Gegners zu sorgen.
+			Desweiteren besitzt dieser Panzer eine Tarnvorrichtung, die es ihm erlaubt, sowohl schwer vorhersehbare Angriffe durchzuführen, als auch auf dem Schlachtfeld für eine Täuschung des Gegners zu sorgen.
 			<br/>
 			Leider benötigen die Vorrichtung und der Laser eine Aufwärmzeit, sodass der Mandrogani gewaltige Abstriche im Verteidigungsfall erleiden muss.');
 	}

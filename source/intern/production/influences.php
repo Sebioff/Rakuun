@@ -9,6 +9,9 @@ class Rakuun_Intern_Production_Influences {
 	const RESSOURCE_ENERGY = 3;
 	const RESSOURCE_PEOPLE = 4;
 	
+	const THEMEPARK_SATISFACTION_NORMAL = 500;
+	const THEMEPARK_SATISFACTION_RATE = 250;
+	
 	public static function getRessourceProductionInfluenceRate($ressourceType, Rakuun_DB_User $user = null) {
 		if ($user === null)
 			$user = Rakuun_User_Manager::getCurrentUser();
@@ -44,19 +47,19 @@ class Rakuun_Intern_Production_Influences {
 			$user = Rakuun_User_Manager::getCurrentUser();
 		
 		$satisfaction = self::getPeopleSatisfaction($user) / RAKUUN_SPEED_SATISFACTION_MULTIPLIER;
-		if ($satisfaction >= 1250) {
+		if ($satisfaction >= self::THEMEPARK_SATISFACTION_NORMAL + 3 * self::THEMEPARK_SATISFACTION_RATE) {
 			return 0.85;
 		}
-		else if ($satisfaction >= 1000){
+		else if ($satisfaction >= self::THEMEPARK_SATISFACTION_NORMAL + 2 * self::THEMEPARK_SATISFACTION_RATE){
 			return 0.9;
 		}
-		else if ($satisfaction >= 750){
+		else if ($satisfaction >= self::THEMEPARK_SATISFACTION_NORMAL + self::THEMEPARK_SATISFACTION_RATE){
 			return 0.95;
 		}
-		else if ($satisfaction >= 500){
+		else if ($satisfaction >= self::THEMEPARK_SATISFACTION_NORMAL){
 			return 1;
 		}
-		else if ($satisfaction >= 250){
+		else if ($satisfaction >= self::THEMEPARK_SATISFACTION_NORMAL - self::THEMEPARK_SATISFACTION_RATE){
 			return 1.05;
 		}
 		else {

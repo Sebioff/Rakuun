@@ -18,7 +18,7 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 		$this->setShortDescription('Im Forschungslabor können neue Technologien, zum Beispiel zur Energiegewinnung oder für militärische Zwecke, erforscht werden.');
 		$this->setLongDescription('Forschungslaboratorien erm&ouml;glichen mit ihren Ger&auml;tschaften eine zielgerichtete Forschung.
 			<br/>
-			Umso st&auml;rker das Forschungslabor ausgebaut wurde, umso bessere und gr&ouml;&szlig;ere Ger&auml;tschaften sind darin enthalten die f&uuml;r schwierigere Forschungen oft unumg&auml;ngig sind.
+			Umso st&auml;rker das Forschungslabor ausgebaut wurde, umso bessere und gr&ouml;&szlig;ere Ger&auml;tschaften, die f&uuml;r schwierigere Forschungen oft unumg&auml;ngig sind, sind darin enthalten.
 			<br/>
 			Die Forscher sind die kl&uuml;gsten und kreativsten B&uuml;rger der Stadt und fr&ouml;nen mit Begeisterung ihrem Metier, oft arbeiten sie stundenlang unbezahlt im Labor, fasziniert von ihrer neusten Kreation.
 			<br/>

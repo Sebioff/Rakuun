@@ -15,9 +15,9 @@ class Rakuun_Intern_Production_Technology_Genetic extends Rakuun_Intern_Producti
 		$this->setShortDescription('Durch die Gentechnik können Clon-O-Maten gebaut werden, welche die "Produktion" von Rakuuranern erhöhen.');
 		$this->setLongDescription('Die Klonung eines Wesens an sich stellt wohl das geringste Problem dar.
 			<br/>
-			Was an dieser Technik wohl das schwerste ist, ist die Verschmelzung und Ausbesserung des Erbgutes sowie die Nährstoffzuflußkontrolle, die ein schnelles Wachstum ermöglicht.
+			Was an dieser Technik vermutlich das schwerste ist, ist die Verschmelzung und Ausbesserung des Erbgutes sowie die Nährstoffzuflußkontrolle, die ein schnelles Wachstum ermöglicht.
 			<br/>
-			Natürlich sollen letztendlich leistungsfähige Arbeiter und Krieger rauskommen, daher ist es unumgänglich, das Erbgut an einigen Stellen zu verbessern.
+			Natürlich sollen letztendlich leistungsfähige Arbeiter und Krieger entstehen; daher ist es unumgänglich, das Erbgut an einigen Stellen zu verbessern.
 			<br/>
 			Die in kürzester Zeit gezüchteten Wesen verfügen noch über sehr wenig Wissen und müssen so schnell wie möglich eingeschult werden, was eine verbesserte Hirnleistung nötig macht.
 			<br/>

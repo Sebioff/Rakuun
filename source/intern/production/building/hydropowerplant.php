@@ -15,9 +15,9 @@ class Rakuun_Intern_Production_Building_HydropowerPlant extends Rakuun_Intern_Pr
 		$this->setShortDescription('Liefert Energie.');
 		$this->setLongDescription('Wasserkraftwerk nutzen die Bewegung des Wassers, um Energie zu erzeugen.
 			<br/>
-			Da das Wasser wenig in der Menge variiert, ist der Stromgewinn durch das Wasser relativ konstant und kann zu allen Tageszeiten und bei jedem Wetter genutzt werden, allerdings ist die Leistung ein bißchen schwächer als die des Solarkraftwerks.
+			Da das Wasser wenig in der Menge variiert, ist der Stromgewinn durch das Wasser relativ konstant und kann zu allen Tageszeiten und bei jedem Wetter genutzt werden.
 			<br/>
-			Ein Wasserkraftwerk ist im Normallfall in einem Damm eingebaut; durch den Vorrat im Stausee ist auch während Trockenperioden Energiegewinnung garantiert. Der Druck des Sees drückt das Wasser unvorstellbar stark durch die Engen Röhren, in denen Turbinen sitzen, welche durch das Wasser angetrieben werden und einen Dynamo antreiben, der dadurch Strom produziert.');
+			Ein Wasserkraftwerk ist im Normallfall in einem Damm eingebaut; durch den Vorrat im Stausee ist auch während Trockenperioden Energiegewinnung garantiert. Der Druck des Sees drückt das Wasser unvorstellbar stark durch enge Röhren, in denen Turbinen sitzen, welche durch das Wasser angetrieben werden und einen Dynamo antreiben, der dadurch Strom produziert.');
 		$this->setPoints(3);
 	}
 	

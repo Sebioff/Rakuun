@@ -19,7 +19,7 @@ class Rakuun_Intern_Production_Technology_HeavyPlating extends Rakuun_Intern_Pro
 		$this->setShortDescription('Zur Produktion stark gepanzerter Einheiten.');
 		$this->setLongDescription('Schwere Panzerung ist meist so stabil und mehrschichtig konfiguriert, dass selbst die härtesten Schüsse einfach an ihr abprallen.
 			<br/>
-			Dafür benötigt es mehrere, dicke und dichte Schichten härteste Metalle wie Titan, die ein enormes Gewicht haben.
+			Dafür benötigt es mehrere, dicke und dichte Schichten härtester Metalle wie Titan, die ein enormes Gewicht haben.
 			<br/>
 			Daher sind besonders die ultraschwer gepanzerten Buhoganis unglaublich langsam und kaum in der Lage, Angriffen auszuweichen.');
 		$this->setPoints(10);

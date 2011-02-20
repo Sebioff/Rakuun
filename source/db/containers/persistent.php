@@ -2,6 +2,7 @@
 
 abstract class Rakuun_DB_Containers_Persistent {
 	private static $userContainer = null;
+	private static $userDeletedContainer = null;
 	private static $alliancesContainer = null;
 	private static $buildingsContainer = null;
 	private static $technologiesContainer = null;
@@ -30,6 +31,19 @@ abstract class Rakuun_DB_Containers_Persistent {
 		self::$userContainer->addReferencedContainer(self::getAlliancesContainer(), 'alliance', 'id');
 		
 		return self::$userContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getUserDeletedContainer() {
+		if (self::$userDeletedContainer)
+			return self::$userDeletedContainer;
+		
+		self::$userDeletedContainer = new DB_Container('users_deleted', 'Rakuun_DB_User');
+		self::$userDeletedContainer->setConnection(self::getPersistentConnection());
+		
+		return self::$userDeletedContainer;
 	}
 	
 	/**

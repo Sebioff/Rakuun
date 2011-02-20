@@ -21,7 +21,7 @@ class Rakuun_Intern_Production_Unit_LaserTurret extends Rakuun_Intern_Production
 		$this->addNeededTechnology('heavy_plating', 3);
 		$this->addNeededTechnology('laser', 6);
 		$this->setShortDescription('Laserturm');
-		$this->setLongDescription('Lasertürme sind größere Türme mit rotierbarem Kopf die man mit ziemlich intensiven Lasern ausgestattet hat.
+		$this->setLongDescription('Lasertürme sind größere Türme mit rotierbarem Kopf, die man mit intensiven Lasern ausgestattet hat.
 			<br/>
 			An den Frontlinien der Städte aufgestellt, sind sie für Angreifer eine große Bedrohung, was durch die hochenergetischen Laserblitze nicht gerade gemildert wird.
 			<br/>

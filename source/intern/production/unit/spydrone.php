@@ -17,14 +17,14 @@ class Rakuun_Intern_Production_Unit_Spydrone extends Rakuun_Intern_Production_Un
 		$this->setShortDescription('Spionagesonde');
 		$this->setLongDescription('Spionagesonden beruhen auf der ziemlich alten Technik des Etherstreams.
 			<br/>
-			Geleitet von einer unbekannten Kraft erreichen sie gigantische Geschwindigkeiten, können danach allerdings nicht mehr bremsen und fliegen, nachdem sie von der anvisierten Stadt Aufzeichnungen gemacht haben, weiter in Richtung Weltraum um dort durch den Unterdruck zu explodieren.
+			Geleitet von einer unbekannten Kraft erreichen sie gigantische Geschwindigkeiten. Diese Geschwindigkeiten sind so hoch, dass Spionagesonden in früheren Zeiten nicht mehr bremsen konnten und, nachdem sie von der anvisierten Stadt Aufzeichnungen gemacht haben, durch die Luftreibung überhitzten und explodierten.
 			<br/>
-			Die Etherstream Technologie eignet sich daher nicht für wirkliche Kampfeinheiten; die Wissenschaft wäre noch nichtmal in der Lage, Streamgeneratoren für wesentlich größere Gebilde zu bauen.
+			Die Etherstream Technologie eignet sich nicht für wirkliche Kampfeinheiten; die Wissenschaft wäre noch nichtmal in der Lage, Streamgeneratoren für wesentlich größere Gebilde zu bauen.
 			<br/>
 			<br/>
 			Spionagesonden können mit der Verbesserten Tarnung ausgestattete Einheiten <b>nicht</b> erkennen.
 			<br/>
-			Eine Spionagesonde kann 2000 Def aushalten, um unbeschadet zur Heimatstadt zurückzukehren');
+			Eine Spionagesonde kann bis zu 2000 Verteidigungskraft standhalten, um unbeschadet zur Heimatstadt zurückzukehren.');
 	}
 }
 

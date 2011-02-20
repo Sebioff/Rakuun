@@ -8,13 +8,18 @@
 <? endif; ?>
 <?= $unit->getLongDescription(); ?>
 <br/>
-<? foreach($this->getProductionItem()->getAttributes() as $attributeProperties): ?>
-	<? if($attributeProperties['value'] == true): ?>
-		<?= $attributeProperties['description']; ?>
-		<br/>
-	<? endif; ?>
-<? endforeach; ?>
 <br/>
+<? if ($this->getProductionItem()->getAttributes()): ?>
+	<h3>Eigenschaften</h3>
+	<ul>
+		<? foreach ($this->getProductionItem()->getAttributes() as $attributeProperties): ?>
+			<? if ($attributeProperties['value'] == true): ?>
+				<li><?= $attributeProperties['description']; ?></li>
+			<? endif; ?>
+		<? endforeach; ?>
+	</ul>
+	<br/>
+<? endif; ?>
 Grundangriffskraft: <?= $unit->getBaseAttackValue(); ?>
 <br/>
 Grundverteidigungskraft: <?= $unit->getBaseDefenseValue(); ?>

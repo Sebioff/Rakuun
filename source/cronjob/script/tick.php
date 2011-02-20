@@ -67,6 +67,7 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->beginTransaction();
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getAlliancesContainer(), Rakuun_DB_Containers_Persistent::getAlliancesContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getUserContainer(), Rakuun_DB_Containers_Persistent::getUserContainer());
+		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getUserDeletedContainer(), Rakuun_DB_Containers_Persistent::getUserDeletedContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers_Persistent::getBuildingsContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers_Persistent::getTechnologiesContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getUnitsContainer(), Rakuun_DB_Containers_Persistent::getUnitsContainer());

@@ -25,6 +25,10 @@ class Rakuun_Intern_Production_Building_Themepark extends Rakuun_Intern_Producti
 			Durch den hier erzeugten Stimmungseffekt scheint die lange Arbeitslosigkeit in eine lang vergangene Zeit zurückzufallen, sodass sich die Arbeiter in Ruhe mit doppeltem Schwung wieder an die Arbeit machen können.');
 		$this->setPoints(12);
 	}
+	
+	protected function defineEffects() {
+		$this->addEffect('Zufriedenstellung von insgesamt '.(($this->getLevel() + $this->getFutureLevels() + 1) * Rakuun_Intern_Production_Influences::THEMEPARK_SATISFACTION_NORMAL * RAKUUN_SPEED_SATISFACTION_MULTIPLIER).' Leuten');
+	}
 }
 
 ?>

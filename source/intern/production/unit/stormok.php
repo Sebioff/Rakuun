@@ -30,11 +30,11 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 			<br/>
 			Wie die Donanys verwenden sie Gattlins, auch wenn ihre einen Bonus im Treffen erfahren, da der Gegner Schwierigkeiten hat, den Schüssen eines nur durch Luftflirren wahrnehmbaren Gegners auszuweichen.
 			<br/>
-			Die Tarneinheit wiegt auch relativ wenig, was ihnen eine den Donanys ähnliche Geschwindigkeit erlaubt.
+			Die Tarneinheit wiegt auch relativ wenig, was ihnen eine recht hohe Geschwindigkeit erlaubt.
 			<br/>
 			Ihre Unsichtbarkeit kann sich als großer Vorteil erweisen da der Gegner nicht in der Lage ist, sich auf den Angriff vorzubereiten.
 			<br/>
-			Daher dienen sie hauptsächlich dazu, schwächere aber aktive Gegner auszuschalten.');
+			Daher dienen sie hauptsächlich dazu, schwächere, aber aktive Gegner auszuschalten.');
 	}
 }
 

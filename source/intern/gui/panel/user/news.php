@@ -64,9 +64,9 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 			
 			if ($newPostingsCount > 0) {
 				$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('global')->getUrl();
-				$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_global_board_posts', $newPostingsCount.' neue Beiträge im globalen Forum.', $url));
+				$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_global_board_posts', $newPostingsCount.' neue Beiträge im allgemeinen Forum.', $url));
 				if ($newPostingsCount == 1)
-					$unreadMessagesLink->setCaption('1 neuer Beitrag im globalen Forum.');
+					$unreadMessagesLink->setCaption('1 neuer Beitrag im allgemeinen Forum.');
 			}
 			
 			// new alliance board posts
