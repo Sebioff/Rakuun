@@ -1,5 +1,6 @@
-function GUI_Control_Box_Collapsible(controlID, enableAjax) {
+function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enableAjax) {
 	var ajaxHasBeenLoaded = false;
+	var self = this;
 
 	$("#" + controlID + " .head").click(
 		function() {
@@ -12,22 +13,31 @@ function GUI_Control_Box_Collapsible(controlID, enableAjax) {
 					ajaxHasBeenLoaded = true;
 				if (enableAjax && !ajaxHasBeenLoaded)
 					element.addClass("ajax_loading");
-				$.core.ajaxRequest(controlID, "ajaxCollapse", undefined, function() {
-					if (enableAjax && !ajaxHasBeenLoaded) {
-						$.core.loadPanels(new Array(controlID), function(panelData) {
-							element.find(".content").replaceWith($(panelData).find("#" + controlID + " .content"));
-							ajaxHasBeenLoaded = true;
-							element.removeClass("ajax_loading");
-							animate(element);
-						});
-					}
-				});
 				
+				if (enableSaveCollapsedState) {
+					$.core.ajaxRequest(controlID, "ajaxCollapse", undefined, function() {
+						self.ajaxConditionalLoadContent(element);
+					});
+				}
+				else
+					self.ajaxConditionalLoadContent(element);
+					
 				if (!enableAjax || ajaxHasBeenLoaded)
 					animate(element);
 			}
 		}
 	);
+	
+	this.ajaxConditionalLoadContent = function(element) {
+		if (enableAjax && !ajaxHasBeenLoaded) {
+			$.core.loadPanels(new Array(controlID), function(panelData) {
+				element.find(".content").replaceWith($(panelData).find("#" + controlID + " .content"));
+				ajaxHasBeenLoaded = true;
+				element.removeClass("ajax_loading");
+				animate(element);
+			});
+		}
+	}
 	
 	animate = function(element) {
 		var contentInner = element.find(".content_inner");

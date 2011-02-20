@@ -29,13 +29,23 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 			$recipientNames = array_merge($recipientNames, explode(', ', $recipients->getValue()));
 			$recipients->setValue(implode(', ', $recipientNames));
 		}
-		$this->addPanel(new GUI_Control_TextBox('subject', $this->replyToMessage ? 'RE: '.Text::escapeHTML($this->replyToMessage->subject) : '', 'Betreff'));
+		$subjectDefaultValue = '';
 		if ($this->replyToMessage) {
-			$time = new GUI_Panel_Date('date', $this->replyToMessage->time);
+			$subjectDefaultValue = Text::escapeHTML($this->replyToMessage->subject);
+			if (strpos($subjectDefaultValue, 'RE(') === 0) {
+				$reCount = 0;
+				preg_match('/RE\((.*?)\)/', $subjectDefaultValue, $reCount);
+				$reCount = ++$reCount[1];
+				$subjectDefaultValue = preg_replace('/RE\((\d*?)\)/', 'RE('.$reCount.')', $subjectDefaultValue);
+			}
+			else
+				$subjectDefaultValue = 'RE(1): '.$subjectDefaultValue;
 		}
-		$this->addPanel($newmessage = new GUI_Control_TextArea('newmessage', ($this->replyToMessage && $this->replyToMessage->sender) ? "\n\n--- Nachricht von ".$this->replyToMessage->sender->nameUncolored.' am '.$time->getValue()." ---\n".$this->replyToMessage->text : '', 'Nachricht'));
+		$this->addPanel(new GUI_Control_TextBox('subject', $subjectDefaultValue, 'Betreff'));
+		$this->addPanel($newmessage = new GUI_Control_TextArea('newmessage', '', 'Nachricht'));
 		$newmessage->addValidator(new GUI_Validator_Mandatory());
-		$this->addPanel(new GUI_Control_CheckBox('blindcopies', '', false, 'Blindkopien'));
+		$this->addPanel($infoPanel = new Rakuun_GUI_Panel_Info('blindcopy', 'Blindkopien', 'Empfänger können nicht sehen, an wen die Nachricht sonst geschickt wurde.'));
+		$this->addPanel($blindCopiesCheckbox = new GUI_Control_CheckBox('blindcopies', '', false, $infoPanel));
 		$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
 	}
 	
@@ -60,7 +70,24 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 						$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_COPYRECIPIENT, $copyRecipient);
 				}
 			}
+			
+			$newConversation = false;
+			if ($this->replyToMessage) {
+				$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_REPLYTO, $this->replyToMessage->getPK());
+				$conversationAttachments = $this->replyToMessage->getAttachmentsOfType(Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION);
+				$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION, $conversationAttachments[0]->value);
+			}
+			else
+				$newConversation = true;
+				
 			$igm->send();
+			if ($newConversation) {
+				$attachmentRecord = new DB_Record();
+				$attachmentRecord->message = $igm;
+				$attachmentRecord->type = Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION;
+				$attachmentRecord->value = $igm;
+				Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
+			}
 		}
 		DB_Connection::get()->commit();
 		$this->setSuccessMessage('Nachricht versendet');

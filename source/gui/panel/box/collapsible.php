@@ -2,12 +2,15 @@
 
 class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 	private $enableAjax = true;
+	private $enableSaveCollapsedState = true;
+	private $collapsed = null; // read only, use isCollapsed() to check state
 	
-	public function __construct($name, GUI_Panel $contentPanel = null, $title = '', $enableAjax = true) {
+	public function __construct($name, GUI_Panel $contentPanel = null, $title = '', $collapsed = null, $enableAjax = true) {
 		parent::__construct($name, $contentPanel, $title);
 		
 		$this->addClasses('rakuun_box_collapsible');
 		$this->enableAjax = $enableAjax;
+		$this->collapsed = $collapsed;
 	}
 	
 	public function init() {
@@ -23,7 +26,7 @@ class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 	public function afterInit() {
 		parent::afterInit();
 		
-		$this->addJS(sprintf('new GUI_Control_Box_Collapsible("%s", "%s");', $this->getID(), $this->enableAjax));
+		$this->addJS(sprintf('new GUI_Control_Box_Collapsible("%s", "%s", "%s");', $this->getID(), $this->enableSaveCollapsedState, $this->enableAjax));
 		
 		if ($this->isCollapsed())
 			$this->addClasses('collapsed');
@@ -47,8 +50,19 @@ class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 	}
 	
 	public function isCollapsed() {
-		$collapsedPanels = explode('|', Rakuun_User_Manager::getCurrentUser()->collapsedPanels);
-		return (in_array($this->getID(), $collapsedPanels));
+		if ($this->collapsed === null) {
+			$collapsedPanels = explode('|', Rakuun_User_Manager::getCurrentUser()->collapsedPanels);
+			$this->collapsed = (in_array($this->getID(), $collapsedPanels));
+		}
+		
+		if ($this->enableAjax && Router::get()->getRequestMode() == Router::REQUESTMODE_AJAX)
+			$this->collapsed = false;
+		
+		return $this->collapsed;
+	}
+	
+	public function enableSaveCollapsedState($enableSaveCollapsedState = true) {
+		$this->enableSaveCollapsedState = $enableSaveCollapsedState;
 	}
 }
 

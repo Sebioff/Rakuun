@@ -16,6 +16,8 @@ class Rakuun_Intern_IGM extends DB_Record {
 	const ATTACHMENT_TYPE_COPYRECIPIENT = 1;
 	const ATTACHMENT_TYPE_SPYREPORTLOG = 2;
 	const ATTACHMENT_TYPE_FIGHTREPORTMARKERS = 3;
+	const ATTACHMENT_TYPE_REPLYTO = 4;
+	const ATTACHMENT_TYPE_CONVERSATION = 5;
 	
 	const ATTACHMENT_FIGHTREPORTMARKER_LOST = 'lost';
 	const ATTACHMENT_FIGHTREPORTMARKER_WON = 'won';
@@ -68,6 +70,10 @@ class Rakuun_Intern_IGM extends DB_Record {
 		);
 	}
 	
+	/**
+	 * Adds a new attachment to this IGM.
+	 * NOTE: the attachment won't be saved if it is added after sending the IGM
+	 */
 	public function addAttachment($type, $value) {
 		$this->attachments[] = array($type, $value);
 	}
