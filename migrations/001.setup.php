@@ -1085,4 +1085,13 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `quests` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
 
+$queries[] = 'CREATE TABLE IF NOT EXISTS `users_eternal_user_assoc` (
+  `user` int(10) unsigned NOT NULL,
+  `eternal_user` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;';
+
+$queries[] = 'ALTER TABLE `users_eternal_user_assoc`
+  ADD CONSTRAINT `users_eternal_user_assoc_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE;';
+
 ?>

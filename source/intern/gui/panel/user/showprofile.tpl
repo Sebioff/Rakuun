@@ -48,8 +48,17 @@
 	<? foreach ($this->params->databasePanels as $databasePanel): ?>
 		<? $databasePanel->display(); ?>
 	<? endforeach; ?>
-	
 	<br class="clear" />
+	
+	<? if ($this->params->achievements): ?>
+		Leistungen:
+		<ul>
+			<? foreach ($this->params->achievements as $achievement): ?>
+				<li><?= $achievement; ?></li>
+			<? endforeach; ?>
+		</ul>
+	<? endif; ?>
+	
 	Verwarnpunkte: <?= Rakuun_Intern_GUI_Panel_Admin_User_Caution::getCautionPoints($user) ?>
 	<br class="clear" />
 	<br class="clear" />

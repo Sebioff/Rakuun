@@ -15,6 +15,9 @@ abstract class Rakuun_DB_Containers_Persistent {
 	private static $boardsGlobalContainer = null;
 	private static $boardsGlobalPostingsContainer = null;
 	private static $boardsGlobalLastVisitedContainer = null;
+	private static $eternalUserContainer = null;
+	private static $eternalUserUserAssocContainer = null;
+	private static $eternalUserAchievementContainer = null;
 	
 	private static $persistentConnection = null;
 	
@@ -176,7 +179,6 @@ abstract class Rakuun_DB_Containers_Persistent {
 		if (self::$boardsGlobalContainer)
 			return self::$boardsGlobalContainer;
 			
-		//TODO: Move to rakuun-static-db
 		self::$boardsGlobalContainer = new DB_Container('boards_global');
 		self::$boardsGlobalContainer->setConnection(self::getPersistentConnection());
 		
@@ -190,7 +192,6 @@ abstract class Rakuun_DB_Containers_Persistent {
 		if (self::$boardsGlobalPostingsContainer)
 			return self::$boardsGlobalPostingsContainer;
 			
-		//TODO: Move to rakuun-static-db
 		self::$boardsGlobalPostingsContainer = new DB_Container('boards_global_postings');
 		self::$boardsGlobalPostingsContainer->setConnection(self::getPersistentConnection());
 		self::$boardsGlobalPostingsContainer->addReferencedContainer(self::getUserContainer(), 'user', 'id');
@@ -206,12 +207,50 @@ abstract class Rakuun_DB_Containers_Persistent {
 		if (self::$boardsGlobalLastVisitedContainer)
 			return self::$boardsGlobalLastVisitedContainer;
 		
-		// Has to stay in rakuun-round-db
 		self::$boardsGlobalLastVisitedContainer = new DB_Container('boards_global_visited');
 		self::$boardsGlobalLastVisitedContainer->setConnection(self::getPersistentConnection());
 		self::$boardsGlobalLastVisitedContainer->addReferencedContainer(self::getBoardsGlobalContainer());
 		
 		return self::$boardsGlobalLastVisitedContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getEternalUserContainer() {
+		if (self::$eternalUserContainer)
+			return self::$eternalUserContainer;
+		
+		self::$eternalUserContainer = new DB_Container('eternal_user');
+		self::$eternalUserContainer->setConnection(self::getPersistentConnection());
+		
+		return self::$eternalUserContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getEternalUserUserAssocContainer() {
+		if (self::$eternalUserUserAssocContainer)
+			return self::$eternalUserUserAssocContainer;
+		
+		self::$eternalUserUserAssocContainer = new DB_Container('eternal_user_user_assoc');
+		self::$eternalUserUserAssocContainer->setConnection(self::getPersistentConnection());
+		
+		return self::$eternalUserUserAssocContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getEternalUserAchievementContainer() {
+		if (self::$eternalUserAchievementContainer)
+			return self::$eternalUserAchievementContainer;
+		
+		self::$eternalUserAchievementContainer = new DB_Container('eternal_user_achievements');
+		self::$eternalUserAchievementContainer->setConnection(self::getPersistentConnection());
+		
+		return self::$eternalUserAchievementContainer;
 	}
 	
 	// -------------------------------------------------------------------------

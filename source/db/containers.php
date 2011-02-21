@@ -74,6 +74,7 @@ abstract class Rakuun_DB_Containers {
 	private static $stockmarketContainer = null;
 	private static $databasesStartpositionsContainer = null;
 	private static $questsContainer = null;
+	private static $userEternalUserAssocContainer = null;
 	
 	// GETTERS / SETTERS -------------------------------------------------------
 	/**
@@ -989,6 +990,18 @@ abstract class Rakuun_DB_Containers {
 		self::$questsContainer = new DB_Container('quests');
 		
 		return self::$questsContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getUserEternalUserAssocContainer() {
+		if (self::$userEternalUserAssocContainer)
+			return self::$userEternalUserAssocContainer;
+		
+		self::$userEternalUserAssocContainer = new DB_Container('users_eternal_user_assoc');
+		
+		return self::$userEternalUserAssocContainer;
 	}
 }
 
