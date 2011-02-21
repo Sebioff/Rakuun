@@ -8,7 +8,7 @@ class Rakuun_Intern_Log_UserActivity extends Rakuun_Intern_Log {
 		$logEntry->time = time();
 		$logEntry->ip = $_SERVER['REMOTE_ADDR'];
 		$logEntry->hostname = gethostbyaddr($logEntry->ip);
-		$logEntry->browser = $_SERVER['HTTP_USER_AGENT'].' '.$additionalBrowserInfo;
+		$logEntry->browser = getenv('HTTP_USER_AGENT').' '.$additionalBrowserInfo;
 		if (isset($_COOKIE['data']))
 			$logEntry->cookie = $_COOKIE['data'];
 		$logEntry->action = $action;

@@ -7,7 +7,7 @@ class Rakuun_Intern_Log_Userdata extends Rakuun_Intern_Log {
 		$logEntry->time = time();
 		$logEntry->ip = $_SERVER['REMOTE_ADDR'];
 		$logEntry->hostname = gethostbyaddr($logEntry->ip);
-		$logEntry->browser = $_SERVER['HTTP_USER_AGENT'];
+		$logEntry->browser = getenv('HTTP_USER_AGENT');
 		$logEntry->action = $action;
 		$logEntry->data = $data;
 		Rakuun_DB_Containers::getLogUserDataContainer()->save($logEntry);
