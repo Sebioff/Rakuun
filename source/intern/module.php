@@ -11,6 +11,15 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 	public function init() {
 		parent::init();
 		
+		// give googlebot demo-account access
+		if (!$this->getUser() && stripos($_SERVER['HTTP_USER_AGENT'], 'googlebot') !== false) {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		    $name = gethostbyaddr($ip);
+		    $host = gethostbyname($name);
+		    if (stripos($name, 'googlebot') !== false)
+				Rakuun_User_Manager::login(RAKUUN_TESTACCOUNT_NAME, RAKUUN_TESTACCOUNT_PASSWORD);
+		}
+		
 		// not logged in or banned? redirect to login page
 		if (!$this->getUser()
 			|| Rakuun_GameSecurity::get()->isInGroup($this->getUser(), Rakuun_GameSecurity::GROUP_LOCKED)) {
@@ -55,120 +64,120 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		$this->mainPanel->addClasses(Rakuun_GUI_Skinmanager::get()->getCurrentSkinClass());
 		
 		$navigation = new CMS_Navigation();
-		$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('overview'), 'Übersicht', array('rakuun_navigation_node_overview'));
+		$navigation->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('overview'), 'Übersicht', array('rakuun_navigation_node_overview')));
 		
-		$productionNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('build'), 'Produktion', array('rakuun_navigation_node_build'));
+		$navigation->addNode($productionNode = new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('build'), 'Produktion', array('rakuun_navigation_node_build')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('build'))
-			$productionNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('build'), 'Gebäude', array('rakuun_navigation_node_build'));
+			$productionNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('build'), 'Gebäude', array('rakuun_navigation_node_build')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('research'))
-			$productionNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('research'), 'Forschungen', array('rakuun_navigation_node_research'));
+			$productionNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('research'), 'Forschungen', array('rakuun_navigation_node_research')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('produce'))
-			$productionNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('produce'), 'Einheiten', array('rakuun_navigation_node_produce'));
+			$productionNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('produce'), 'Einheiten', array('rakuun_navigation_node_produce')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('techtree'))
-			$productionNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('techtree'), 'Techtree', array('rakuun_navigation_node_techtree'));
+			$productionNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('techtree'), 'Techtree', array('rakuun_navigation_node_techtree')));
 		
-		$ressourcesNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('ressources'), 'Rohstoffe', array('rakuun_navigation_node_ressources'));
-		$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('ressources'), 'Übersicht');
+		$navigation->addNode($ressourcesNode = new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('ressources'), 'Rohstoffe', array('rakuun_navigation_node_ressources')));
+		$ressourcesNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('ressources'), 'Übersicht'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('trade'))
-			$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('trade'), 'Handeln', array('rakuun_navigation_node_trade'));
+			$ressourcesNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('trade'), 'Handeln', array('rakuun_navigation_node_trade')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('stockmarket'))
-			$ressourcesNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('stockmarket'), 'Börse', array('rakuun_navigation_node_stockmarket'));
+			$ressourcesNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('stockmarket'), 'Börse', array('rakuun_navigation_node_stockmarket')));
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('map'))
 			$militaryModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('map');
 		else
 			$militaryModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('summary');
-		$militaryNode = $navigation->addModuleNode($militaryModule, 'Militär', array('rakuun_navigation_node_map'));
+		$navigation->addNode($militaryNode = new CMS_Navigation_ModuleNode($militaryModule, 'Militär', array('rakuun_navigation_node_map')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('map'))
-			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('map'), 'Karte');
+			$militaryNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('map'), 'Karte'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('warsim'))
-			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('warsim'), 'WarSim', array('rakuun_navigation_node_warsim'));
+			$militaryNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('warsim'), 'WarSim', array('rakuun_navigation_node_warsim')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('summary'))
-			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('summary'), 'Zusammenfassung', array('rakuun_navigation_node_summary'));
+			$militaryNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('summary'), 'Zusammenfassung', array('rakuun_navigation_node_summary')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('reports'))
-			$militaryNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('reports'), 'Spionagecenter', array('rakuun_navigation_node_reports'));
+			$militaryNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('reports'), 'Spionagecenter', array('rakuun_navigation_node_reports')));
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('alliance')) {
-			$allianceNode = $navigation->addModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance'));
-			$allianceNode->addModuleNode($allianceModule, 'Übersicht');
+			$navigation->addNode($allianceNode = new CMS_Navigation_ModuleNode($allianceModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('alliance'), 'Allianz', array('rakuun_navigation_node_alliance')));
+			$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule, 'Übersicht'));
 			if ($allianceModule->hasSubmodule('interact'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('interact'), 'Aktionen'));
 			if ($allianceModule->hasSubmodule('edit'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('edit'), 'Verwaltung');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('edit'), 'Verwaltung'));
 			if ($allianceModule->hasSubmodule('ranks'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('ranks'), 'Ränge');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('ranks'), 'Ränge'));
 			if ($allianceModule->hasSubmodule('applications')) {
 				$options['conditions'][] = array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
 				$options['conditions'][] = array('status = ?', Rakuun_Intern_GUI_Panel_Alliance_Applications::STATUS_NEW);
 				$applications = Rakuun_DB_Containers::getAlliancesApplicationsContainer()->count($options);
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('applications'), 'Bewerbungen ('.$applications.')');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('applications'), 'Bewerbungen ('.$applications.')'));
 			}
 			if ($allianceModule->hasSubmodule('diplomacy'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('diplomacy'), 'Diplomatie');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('diplomacy'), 'Diplomatie'));
 			if ($allianceModule->hasSubmodule('statistics'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('statistics'), 'Statistiken');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('statistics'), 'Statistiken'));
 			if ($allianceModule->hasSubmodule('polls'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('polls'), 'Umfragen');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('polls'), 'Umfragen'));
 			if ($allianceModule->hasSubmodule('account'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('account'), 'Allianzkonto');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('account'), 'Allianzkonto'));
 			if ($allianceModule->hasSubmodule('build'))
-				$allianceNode->addModuleNode($allianceModule->getSubmodule('build'), 'Gebäude');
+				$allianceNode->addNode(new CMS_Navigation_ModuleNode($allianceModule->getSubmodule('build'), 'Gebäude'));
 		}
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('meta')) {
-			$metaNode = $navigation->addModuleNode($metaModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta'));
-			$metaNode->addModuleNode($metaModule, 'Übersicht');
+			$navigation->addNode($metaNode = new CMS_Navigation_ModuleNode($metaModule = Rakuun_Intern_Modules::get()->getSubmoduleByName('meta'), 'Meta', array('rakuun_navigation_node_meta')));
+			$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule, 'Übersicht'));
 			if ($metaModule->hasSubmodule('interaction'))
-				$metaNode->addModuleNode($metaModule->getSubmodule('interaction'), 'Aktionen');
+				$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule->getSubmodule('interaction'), 'Aktionen'));
 			if ($metaModule->hasSubmodule('edit'))
-				$metaNode->addModuleNode($metaModule->getSubmodule('edit'), 'Verwaltung');
+				$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule->getSubmodule('edit'), 'Verwaltung'));
 			if ($metaModule->hasSubmodule('applications')) {
 				$count = Rakuun_DB_Containers::getMetasApplicationsContainer()->countByMeta(Rakuun_User_Manager::getCurrentUser()->alliance->meta);
-				$metaNode->addModuleNode($metaModule->getSubmodule('applications'), 'Bewerbungen ('.$count.')');
+				$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule->getSubmodule('applications'), 'Bewerbungen ('.$count.')'));
 			}
 			if ($metaModule->hasSubmodule('statistics'))
-				$metaNode->addModuleNode($metaModule->getSubmodule('statistics'), 'Statistiken');
+				$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule->getSubmodule('statistics'), 'Statistiken'));
 			if ($metaModule->hasSubmodule('polls'))
-				$metaNode->addModuleNode($metaModule->getSubmodule('polls'), 'Umfragen');
+				$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule->getSubmodule('polls'), 'Umfragen'));
 			if ($metaModule->hasSubmodule('build'))
-				$metaNode->addModuleNode($metaModule->getSubmodule('build'), 'Gebäude');
+				$metaNode->addNode(new CMS_Navigation_ModuleNode($metaModule->getSubmodule('build'), 'Gebäude'));
 		}
 			
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('messages'))
-			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('messages'), 'Nachrichten', array('rakuun_navigation_node_messages'));
+			$navigation->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('messages'), 'Nachrichten', array('rakuun_navigation_node_messages')));
 		
-		$infoNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Infos', array('rakuun_navigation_node_search'));
-		$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Suche');
+		$navigation->addNode($infoNode = new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Infos', array('rakuun_navigation_node_search')));
+		$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('suchen'), 'Suche'));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('highscores'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('highscores'), 'Highscores', array('rakuun_navigation_node_highscores'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('highscores'), 'Highscores', array('rakuun_navigation_node_highscores')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('boards'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('boards'), 'Foren', array('rakuun_navigation_node_boards'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('boards'), 'Foren', array('rakuun_navigation_node_boards')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('statistics'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('statistics'), 'Statistik', array('rakuun_navigation_node_statistics'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('statistics'), 'Statistik', array('rakuun_navigation_node_statistics')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('vips'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('vips'), 'VIPs', array('rakuun_navigation_node_vips'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('vips'), 'VIPs', array('rakuun_navigation_node_vips')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('profile'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('profile'), 'Profil', array('rakuun_navigation_node_profile'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('profile'), 'Profil', array('rakuun_navigation_node_profile')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('rules'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('rules'), 'Regeln', array('rakuun_navigation_node_rules'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('rules'), 'Regeln', array('rakuun_navigation_node_rules')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('guide'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('guide'), 'Anleitung', array('rakuun_navigation_node_guide'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('guide'), 'Anleitung', array('rakuun_navigation_node_guide')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('imprint'))
-			$infoNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('imprint'), 'Spenden/Impressum', array('rakuun_navigation_node_imprint'));
+			$infoNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('imprint'), 'Spenden/Impressum', array('rakuun_navigation_node_imprint')));
 		$infoNode->addNode(new CMS_Navigation_UrlNode('http://tickets.rakuun.de', 'Tickets'));
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('admin')) {
-			$adminNode = $navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('admin'), 'Admin', array('rakuun_navigation_node_admin'));
+			$navigation->addNode($adminNode = new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('admin'), 'Admin', array('rakuun_navigation_node_admin')));
 			if (Rakuun_Intern_Modules::get()->hasSubmodule('multihunting'))
-				$adminNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('multihunting'), 'Multihunting', array('rakuun_navigation_node_multihunting'));
+				$adminNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('multihunting'), 'Multihunting', array('rakuun_navigation_node_multihunting')));
 			if (Rakuun_Intern_Modules::get()->hasSubmodule('support'))
-				$adminNode->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('support'), 'Support', array('rakuun_navigation_node_support'));
+				$adminNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('support'), 'Support', array('rakuun_navigation_node_support')));
 		}
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('logout'))
-			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('logout'), 'Logout', array('rakuun_navigation_node_logout'));
+			$navigation->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('logout'), 'Logout', array('rakuun_navigation_node_logout')));
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('sitterlogout'))
-			$navigation->addModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('sitterlogout'), 'Zu eigenem Account', array('rakuun_navigation_node_logout'));
+			$navigation->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('sitterlogout'), 'Zu eigenem Account', array('rakuun_navigation_node_logout')));
 		
 		$this->mainPanel->params->navigation = $navigation;
 		if (Rakuun_User_Manager::getCurrentUser()->tutorial) {

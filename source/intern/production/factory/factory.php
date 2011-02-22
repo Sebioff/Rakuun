@@ -76,8 +76,10 @@ abstract class Rakuun_Intern_Production_Factory {
 	 * @param $unitSource DB_Record Either a Rakuun_DB_User, null (which results
 	 * in returning units for the currently logged in user) or any other DB_Record
 	 * that contains amounts of units
+	 * @param $order array an array of internal unit names. The returned units will
+	 * be in the same order as in the array
 	 */
-	public static function getAllUnits(DB_Record $unitSource = null) {
+	public static function getAllUnits(DB_Record $unitSource = null, array $order = array()) {
 		if (!self::$unitList)
 			self::generateUnitList();
 		
@@ -85,6 +87,10 @@ abstract class Rakuun_Intern_Production_Factory {
 		foreach (self::$unitList as $internalName => $unitClass) {
 			$unitList[] = new $unitClass($unitSource);
 		}
+		
+		if ($order)
+			usort($unitList, array(new InternalNameComparator($order), 'compare'));
+		
 		return $unitList;
 	}
 	
@@ -156,6 +162,18 @@ abstract class Rakuun_Intern_Production_Factory {
 		self::addUnit('cloaked_spydrone', 'Rakuun_Intern_Production_Unit_CloakedSpydrone');
 		// TODO implement or remove
 		//self::addUnit('lorica', 'Rakuun_Intern_Production_Unit_Lorica');
+	}
+}
+
+class InternalNameComparator {
+	private $order = array();
+	
+	public function __construct(array $order) {
+		$this->order = $order;
+	}
+	
+	public function compare(Rakuun_Intern_Production_Base $a, Rakuun_Intern_Production_Base $b) {
+		return array_search($a->getInternalName(), $this->order) - array_search($b->getInternalName(), $this->order);
 	}
 }
 

@@ -4,6 +4,7 @@ abstract class Rakuun_DB_Containers_Persistent {
 	private static $userContainer = null;
 	private static $userDeletedContainer = null;
 	private static $alliancesContainer = null;
+	private static $metasContainer = null;
 	private static $buildingsContainer = null;
 	private static $technologiesContainer = null;
 	private static $unitsContainer = null;
@@ -60,6 +61,19 @@ abstract class Rakuun_DB_Containers_Persistent {
 		self::$alliancesContainer->setConnection(self::getPersistentConnection());
 		
 		return self::$alliancesContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getMetasContainer() {
+		if (self::$metasContainer)
+			return self::$metasContainer;
+		
+		self::$metasContainer = new DB_Container('metas', 'Rakuun_DB_Meta');
+		self::$metasContainer->setConnection(self::getPersistentConnection());
+		
+		return self::$metasContainer;
 	}
 	
 	/**

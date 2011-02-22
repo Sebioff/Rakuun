@@ -6,7 +6,7 @@
 (Stufe <?= $currentWIP->getLevel(); ?>)
  -
 <? if (!$currentWIP->meetsTechnicalRequirements()): ?>
-	<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $currentWIP->getWIPItem()->getInternalName(); ?>">Fehlende technische Vorraussetzungen.</a>
+	<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $currentWIP->getWIPItem()->getInternalName(); ?>">Fehlende technische Voraussetzungen.</a>
 <? else: ?>
 	<? $this->displayPanel('countdown'); ?>
 <? endif; ?>

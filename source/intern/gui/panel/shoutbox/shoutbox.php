@@ -20,17 +20,18 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 		
 		$this->setTemplate(dirname(__FILE__).'/shoutbox.tpl');
 		$user = Rakuun_User_Manager::getCurrentUser();
-		if (Router::get()->getCurrentModule()->getParam('answerid') > 0) {
-			$answer = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
-			$text->setValue('@'.$answer->nameUncolored.'@: ');
-			$text->setFocus();
-		}
 		$this->addPanel(new GUI_Control_Link('refresh', 'Aktualisieren', $this->getModule()->getUrl()));
 		if ($this->config->getUserIsMod())
 			$this->addPanel(new GUI_Control_Link('moderatelink', 'Moderieren', $this->getModule()->getUrl(array('moderate' => $user->getPK()))));
 		$this->addPanel($text = new GUI_Control_TextArea('shoutarea', '', 'Text'));
 		$text->addValidator(new GUI_Validator_Mandatory());
 		$text->addValidator(new GUI_Validator_Maxlength($this->config->getShoutMaxLength()));
+		if (Router::get()->getCurrentModule()->getParam('answerid') > 0) {
+			$answerUser = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
+			if ($answerUser)
+				$text->setValue('@'.$answerUser->nameUncolored.': ');
+			$text->setFocus();
+		}
 		$this->addPanel(new GUI_Control_AjaxSubmitButton('submit', 'shout!'));
 	}
 	

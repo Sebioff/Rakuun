@@ -3,8 +3,7 @@
 <h3>Einheiten</h3>
 <ul>
 	<? $attackSequence = array_reverse(explode('|', $this->getArmy()->fightingSequence)); ?>
-	<? foreach ($attackSequence as $unitName): ?>
-		<? $unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $this->getArmy()); ?>
+	<? foreach (Rakuun_Intern_Production_Factory::getAllUnits($this->getArmy(), $attackSequence) as $unit): ?>
 		<? if ($unit->getAmount() > 0): ?>
 			<li>
 				<?= GUI_Panel_Number::formatNumber($unit->getAmount()); ?>

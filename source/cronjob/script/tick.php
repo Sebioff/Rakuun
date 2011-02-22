@@ -20,7 +20,7 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 			new Rakuun_Intern_Production_Producer_CityItems(Rakuun_DB_Containers::getTechnologiesContainer(), Rakuun_DB_Containers::getTechnologiesWIPContainer(), $user);
 			// produce units
 			new Rakuun_Intern_Production_Producer_Units(Rakuun_DB_Containers::getUnitsContainer(), Rakuun_DB_Containers::getUnitsWIPContainer(), $user);
-			// TODO quickfix: noob protection calculation isn't done everytime that is needed yet (e.g. when finishing units or the noob protection limits are raised)
+			// TODO quickfix: noob protection calculation isn't done everytime that is needed yet (e.g. the noob protection limits are raised)
 			$user->recalculatePoints();
 			DB_Connection::get()->commit();
 		}
@@ -66,6 +66,7 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 		
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->beginTransaction();
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getAlliancesContainer(), Rakuun_DB_Containers_Persistent::getAlliancesContainer());
+		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getMetasContainer(), Rakuun_DB_Containers_Persistent::getMetasContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getUserContainer(), Rakuun_DB_Containers_Persistent::getUserContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getUserDeletedContainer(), Rakuun_DB_Containers_Persistent::getUserDeletedContainer());
 		$this->copyContainerToPersistentDatabase(Rakuun_DB_Containers::getBuildingsContainer(), Rakuun_DB_Containers_Persistent::getBuildingsContainer());

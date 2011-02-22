@@ -31,7 +31,7 @@ abstract class Rakuun_Intern_Production_Producer {
 		
 		// pause production if requirements fail
 		if ($this->getPauseOnMissingRequirements() && !$firstItem->getWIPItem()->meetsTechnicalRequirements()) {
-			foreach ($wipItems as $wipItem) {
+			foreach ($this->getWIP() as $wipItem) {
 				$wipItem->getRecord()->starttime = time();
 				$wipItem->getRecord()->save();
 			}

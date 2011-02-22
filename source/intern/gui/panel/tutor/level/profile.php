@@ -6,7 +6,10 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Profile extends Rakuun_Intern_GUI_Pane
 	}
 	
 	public function getDescription() {
-		$profilLink = new GUI_Control_Link('profillink', 'Profilseite ("Infos -&gt; Profil")', App::get()->getInternModule()->getSubmodule('profile')->getUrl());
+		if ($module = App::get()->getInternModule()->getSubmodule('profile'))
+			$profilLink = new GUI_Control_Link('profillink', 'Profilseite ("Infos -&gt; Profil")', $module->getUrl());
+		else
+			$profilLink = new GUI_Panel_Text('profillink', 'Profilseite (nicht verfügbar)');
 		return '
 			Begib dich jetzt zuerst auf deine '.$profilLink->render().'. Hier kannst du deine persönlichen
 			Einstellungen, wie e-Mail Adresse und Passwort ändern.<br />

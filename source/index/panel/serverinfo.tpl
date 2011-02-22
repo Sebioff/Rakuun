@@ -5,8 +5,7 @@
 	<br/>
 	Die aktuelle Runde wurde durch einen Sieg der Meta "<?= $roundInformation->winningMeta; ?>" gewonnen.
 	<br/>
-	<a href="<?= App::get()->getModule('endscore')->getUrl(); ?>">Zum Endhighscore</a>
-	<br/>
+	<center><a href="<?= App::get()->getModule('endscore')->getUrl(); ?>"><u>Zum Endhighscore</u></a></center>
 <? endif; ?>
 
 <? if ($this->hasPanel('start_countdown')): ?>

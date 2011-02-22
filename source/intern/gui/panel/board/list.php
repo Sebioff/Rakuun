@@ -44,8 +44,17 @@ class Rakuun_Intern_GUI_Panel_Board_List extends GUI_Panel {
 			} else {
 				$lastVisit = $this->config->getVisitedContainer()->selectFirst($options);
 				$link = new GUI_Control_Link('boardname'.$board->getPK(), $board->name, $module->getUrl(array('board' => $board->id)));
-				if (!$lastVisit || $lastVisit->date < $board->date)
-					$link->setAttribute('style', 'font-weight:bold');
+				if (!$lastVisit || $lastVisit->date < $board->date) {
+					if ($this->config->getIsGlobal()) {
+						$options = array();
+						$options['conditions'][] = array('board = ?', $board);
+						$options['conditions'][] = array('date >= ?', RAKUUN_ROUND_STARTTIME);
+						if ($this->config->getPostingsContainer()->selectFirst($options))
+							$link->setAttribute('style', 'font-weight:bold');
+					} else {
+						$link->setAttribute('style', 'font-weight:bold');
+					}
+				}
 				$line[] = $link;
 			}
 			$line[] = $this->config->getPostingsContainer()->countByBoard($board);

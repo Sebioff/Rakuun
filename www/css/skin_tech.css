@@ -552,6 +552,12 @@ body.skin_tech
 	width:286px;
 }
 
+.skin_tech .rakuun_box_dancertiastart {
+	float:none;
+	margin:0px auto;
+	width:520px;
+}
+
 .skin_tech .module_overview .rakuun_box_sitter label {
 	margin-right:3px;
 	width:auto;

@@ -2,6 +2,13 @@
 
 class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 	public function init() {
+		// demo account login
+		if (!Rakuun_Game::isLoginDisabled() && $loginParam = $this->getParam('login')) {
+			if ($loginParam == 'testaccount') {
+				Rakuun_User_Manager::login(RAKUUN_TESTACCOUNT_NAME, RAKUUN_TESTACCOUNT_PASSWORD);
+			}
+		}
+		
 		parent::init();
 		
 		$this->setPageTitle('Übersicht');
@@ -10,7 +17,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
 		
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box_Collapsible('news', new Rakuun_Intern_GUI_Panel_User_News('news'), 'Aktuelles'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('news', new Rakuun_Intern_GUI_Panel_User_News('news'), 'Aktuelles'));
 		
 		// dancertia countdown
 		$options = array();
@@ -18,6 +25,7 @@ class Rakuun_Intern_Module_Overview extends Rakuun_Intern_Module {
 		$options['order'] = 'dancertia_starttime ASC';
 		if ($metaWithDancertia = Rakuun_DB_Containers::getMetasContainer()->selectFirst($options)) {
 			$dancertiaCountdownPanel = new Rakuun_GUI_Panel_Box_Collapsible('dancertia_countdown', new Rakuun_Intern_GUI_Panel_Meta_DancertiaCountdown('dancertia_countdown', $metaWithDancertia, 'Raumschiffstart!'), 'Raumschiffstart!');
+			$dancertiaCountdownPanel->addClasses('rakuun_box_dancertiastart');
 			$this->contentPanel->addPanel($dancertiaCountdownPanel);
 		}
 		

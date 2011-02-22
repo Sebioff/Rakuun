@@ -22,7 +22,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Moderate extends GUI_Panel {
 		$this->addPanel($deleteLink = new GUI_Control_Link('delete', '-Löschen-', $module->getUrl(array('moderate' => Rakuun_User_Manager::getCurrentUser()->getPK(), 'delete' => $this->shout->getPK()))));
 		$deleteLink->setConfirmationMessage('Diesen Post wirklich löschen?');
 		if ($this->config->getIsGlobal()) {
-			$this->addPanel($timebanLink = new GUI_Control_Link('timeban', '-Timeban-', $module->getUrl(array('moderate' => Rakuun_User_Manager::getCurrentUser()->getPK(), 'timeban' => $this->shout->getPK()))));
+			$this->addPanel($timebanLink = new GUI_Control_Link('timeban', '-Timeban-', $module->getUrl(array('moderate' => Rakuun_User_Manager::getCurrentUser()->getPK(), 'timeban' => $this->shout->getPK(), 'time' => self::TIMEBAN_LENGTH))));
 			$timebanLink->setConfirmationMessage('Diesen User wirklich für '.Rakuun_Date::formatCountDown(self::TIMEBAN_LENGTH).' bannen?');
 		}
 		
@@ -35,12 +35,12 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Moderate extends GUI_Panel {
 				
 			// timeban user
 			if ($this->config->getIsGlobal() && $module->getParam('timeban') == $this->shout->getPK()) {
-				$this->shout->user->shoutboxTimeban = time();
+				$this->shout->user->shoutboxTimeban = time() + $module->getParam('time');
 				$this->shout->user->save();
 				$igm = new Rakuun_Intern_IGM('Shoutbox Ban', $this->shout->user);
 				$igm->setText('
 					Hallo '.$this->shout->user->nameUncolored.',
-					Du wurdest gerade von '.Rakuun_User_Manager::getCurrentUser()->nameUncolored.' für '.Rakuun_Date::formatCountDown(self::TIMEBAN_LENGTH).'
+					Du wurdest gerade von '.Rakuun_User_Manager::getCurrentUser()->nameUncolored.' für '.Rakuun_Date::formatCountDown($module->getParam('time')).'
 					aus der Shoutbox gebannt.
 				');
 				$igm->setSenderName(Rakuun_Intern_IGM::SENDER_SYSTEM);

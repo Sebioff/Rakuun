@@ -23,8 +23,10 @@ class Rakuun_GUI_Skinmanager {
 	}
 	
 	public function setCurrentSkin($skinNameID) {
-		if (isset($this->skins[$skinNameID]))
+		if (isset($this->skins[$skinNameID])) {
 			$this->currentSkin = $skinNameID;
+			$this->getCurrentSkin()->onUseSkin();
+		}
 	}
 	
 	/**

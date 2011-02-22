@@ -13,12 +13,13 @@ class Rakuun_Index_Module extends Rakuun_Module {
 		$this->setMetaTag('description', 'Bei dem kostenlosen SciFi-Browsergame Rakuun spielen mehrere Allianzen gegeneinander um den Sieg der Runde: den Bau eines gigantischen Raumschiffes.');
 		$this->setMetaTag('keywords', 'browsergame, scifi, spielziel, strategie, weltraum');
 		$navigation = new CMS_Navigation();
-		$navigation->addModuleNode(App::get()->getIndexModule(), 'Home');
-		$navigation->addModuleNode(App::get()->getInfosModule(), 'Infos');
-		$navigation->addModuleNode(App::get()->getNewsModule(), 'News');
-		$navigation->addModuleNode(App::get()->getStoryModule(), 'Story');
-		$navigation->addModuleNode(App::get()->getScreenshotsModule(), 'Screenshots');
+		$navigation->addNode(new CMS_Navigation_ModuleNode(App::get()->getIndexModule(), 'Home'));
+		$navigation->addNode(new CMS_Navigation_ModuleNode(App::get()->getInfosModule(), 'Infos'));
+		$navigation->addNode(new CMS_Navigation_ModuleNode(App::get()->getNewsModule(), 'News'));
+		$navigation->addNode(new CMS_Navigation_ModuleNode(App::get()->getStoryModule(), 'Story'));
+		$navigation->addNode(new CMS_Navigation_ModuleNode(App::get()->getScreenshotsModule(), 'Screenshots'));
 		$this->mainPanel->params->navigation =  $navigation;
+		Rakuun_GUI_Skinmanager::get()->setCurrentSkin('tech');
 	}
 }
 

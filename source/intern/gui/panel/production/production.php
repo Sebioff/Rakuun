@@ -26,7 +26,7 @@ abstract class Rakuun_Intern_GUI_Panel_Production_Production extends GUI_Panel {
 	
 	public function onProduce() {
 		if (!$this->getProductionItem()->meetsTechnicalRequirements())
-			$this->addError('Fehlende technische Vorraussetzungen');
+			$this->addError('Fehlende technische Voraussetzungen');
 			
 		if (!$this->getProductionItem()->gotEnoughRessources())
 			$this->addError('Fehlende Ressourcen');

@@ -4,12 +4,6 @@ class Rakuun_Index_Panel_Login extends GUI_Panel {
 	public function init() {
 		parent::init();
 		
-		if (!Rakuun_Game::isLoginDisabled() && $loginParam = $this->getModule()->getParam('login')) {
-			if ($loginParam == 'testaccount' && !Rakuun_User_Manager::login(RAKUUN_TESTACCOUNT_NAME, RAKUUN_TESTACCOUNT_PASSWORD)) {
-				$this->getModule()->redirect(App::get()->getInternModule()->getSubmoduleByName('overview')->getUrl());
-			}
-		}
-		
 		$this->setTemplate(dirname(__FILE__).'/login.tpl');
 		
 		$this->addPanel($username = new GUI_Control_TextBox('username', null, 'Nickname'));
@@ -23,7 +17,7 @@ class Rakuun_Index_Panel_Login extends GUI_Panel {
 		$this->addPanel(new GUI_Control_HiddenBox('base64'));
 		$this->addPanel(new GUI_Control_SubmitButton('submit', 'Login'));
 		if (!Rakuun_Game::isLoginDisabled()) {
-			$this->addPanel($testaccountLogin = new GUI_Control_Link('testaccount_login', 'Test-Account', Router::get()->getCurrentModule()->getUrl(array('login' => 'testaccount'))));
+			$this->addPanel($testaccountLogin = new GUI_Control_Link('testaccount_login', 'Test-Account', App::get()->getInternModule()->getSubmodule('overview')->getUrl(array('login' => 'testaccount'))));
 			$testaccountLogin->addClasses('rakuun_testaccount_login', 'core_gui_button_highlighted');
 		}
 	}

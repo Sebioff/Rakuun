@@ -17,14 +17,17 @@ class Rakuun_Intern_GUI_Panel_Support_Answer extends GUI_Panel {
 		$this->setTemplate(dirname(__FILE__).'/answer.tpl');
 		$this->addClasses('rakuun_messages_send');
 		
-		$this->addPanel(new GUI_Panel_Text('recipient', $this->ticket->user->name, 'Empfänger: '));
-		$this->addPanel(new GUI_Panel_Text('subject', $this->ticket->subject, 'Betreff: '));
-		if ($this->ticket) {
-			$date = new GUI_Panel_Date('date', $this->ticket->date);
+		if ($this->ticket->user) {
+			$this->addPanel(new GUI_Panel_Text('recipient', $this->ticket->user->name, 'Empfänger: '));
+			$this->addPanel(new GUI_Panel_Text('subject', $this->ticket->subject, 'Betreff: '));
+			if ($this->ticket) {
+				$date = new GUI_Panel_Date('date', $this->ticket->date);
+			}
+			$this->addPanel($message = new GUI_Control_TextArea('message', "\n\n--- Nachricht von ".$this->ticket->user->nameUncolored.' am '.$date->getValue()." ---\n".$this->ticket->text, 'Nachricht'));
+			$message->addValidator(new GUI_Validator_Mandatory());
+			$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
 		}
-		$this->addPanel($message = new GUI_Control_TextArea('message', "\n\n--- Nachricht von ".$this->ticket->user->nameUncolored.' am '.$date->getValue()." ---\n".$this->ticket->text, 'Nachricht'));
-		$message->addValidator(new GUI_Validator_Mandatory());
-		$this->addPanel(new GUI_Control_SubmitButton('send', 'Abschicken'));
+		$this->params->user = $this->ticket->user;
 		$this->addPanel(new GUI_Control_SubmitButton('addepted', 'als bearbeitet markieren'));
 	}
 	

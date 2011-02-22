@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Production_Unit extends Rakuun_Intern_GUI_Panel_Pr
 			$this->addError('Mindestens 1 Einheit muss produziert werden');
 		
 		if (!$this->getProductionItem()->meetsTechnicalRequirements())
-			$this->addError('Fehlende technische Vorraussetzungen');
+			$this->addError('Fehlende technische Voraussetzungen');
 		
 		if (!$this->getProductionItem()->gotEnoughRessources($amount))
 			$this->addError('Fehlende Ressourcen');

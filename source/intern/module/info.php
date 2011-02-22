@@ -12,15 +12,18 @@ class Rakuun_Intern_Module_Info extends Rakuun_Intern_Module {
 		
 		if ($this->getParam('type') == 'building') {
 			$productionItem = Rakuun_Intern_Production_Factory::getBuilding($this->getParam('id'));
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Info('info', $productionItem));
+			if ($productionItem != null)
+				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Info('info', $productionItem));
 		}
 		elseif ($this->getParam('type') == 'technology') {
 			$productionItem = Rakuun_Intern_Production_Factory::getTechnology($this->getParam('id'));
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Info('info', $productionItem));
+			if ($productionItem != null)
+				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Info('info', $productionItem));
 		}
 		elseif ($this->getParam('type') == 'unit') {
 			$productionItem = Rakuun_Intern_Production_Factory::getUnit($this->getParam('id'));
-			$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Info('info', $productionItem));
+			if ($productionItem != null)
+				$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Production_Info('info', $productionItem));
 		}
 	}
 }

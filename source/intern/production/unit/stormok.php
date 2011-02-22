@@ -26,7 +26,7 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING, true);
 		$this->setShortDescription('Stormok');
-		$this->setLongDescription('Stormoks verwenden die neusten Prinzipe der Tarnung und sind für normale Städte praktisch unsichtbar.
+		$this->setLongDescription('Stormoks verwenden die neusten Prinzipien der Tarnung und sind für normale Städte praktisch unsichtbar.
 			<br/>
 			Wie die Donanys verwenden sie Gattlins, auch wenn ihre einen Bonus im Treffen erfahren, da der Gegner Schwierigkeiten hat, den Schüssen eines nur durch Luftflirren wahrnehmbaren Gegners auszuweichen.
 			<br/>

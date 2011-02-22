@@ -7,7 +7,10 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Alliance extends Rakuun_Intern_GUI_Pan
 	}
 	
 	public function getDescription() {
-		$allianceLink = new GUI_Control_Link('alliance', 'Allianz', App::get()->getInternModule()->getSubmodule('alliance')->getUrl());
+		if ($module = App::get()->getInternModule()->getSubmodule('alliance'))
+			$allianceLink = new GUI_Control_Link('alliance', 'Allianz', $module->getUrl());
+		else
+			$allianceLink = new GUI_Panel_Text('alliance', 'Allianz (nicht verfügbar)');
 		return '
 			Die Allianz ist ein wesentlicher Bestandteil des Spiels. Ohne Allianz kann man das Spiel nicht gewinnen.
 			Hier wird dir geholfen und der Zusammenhalt gestärkt. Eine Allianz bietet dir zudem einige Vorteile wie z.B.:
@@ -17,7 +20,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Alliance extends Rakuun_Intern_GUI_Pan
 				<li>Bündnisse mit anderen Allianzen schließen und damit Verbündete gewinnen oder</li>
 				<li>anderen Allianzen den Krieg erklären um an die Herrschaft Rakuuns zu gelangen
 			</ul>
-			<b>Trete daher nun einer '.$allianceLink->render().' deiner Wahl bei oder gründe deine eigene!</b> 
+			<b>Trete daher nun einer '.$allianceLink->render().' deiner Wahl bei oder gründe deine eigene!</b>
 		';
 	}
 }

@@ -48,8 +48,13 @@ img.background_image {
 	background:#000000;
 	border:1px solid #163250;
 	margin-bottom:5px;
+	margin-left:5px;
 	padding:3px;
 	width:419px;
+}
+
+.rakuun_box_producedunits {
+	width:auto;
 }
 
 body.index_main .rakuun_box {

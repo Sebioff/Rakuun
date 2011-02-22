@@ -27,6 +27,13 @@ abstract class Rakuun_GUI_Skin {
 	public function __toString() {
 		return $this->getName();
 	}
+	
+	/**
+	 * Callback that is executed if this skin is used.
+	 */
+	public function onUseSkin() {
+		
+	}
 
 	// GETTERS / SETTERS -------------------------------------------------------
 	public function getNameID() {

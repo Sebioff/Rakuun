@@ -66,7 +66,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		$pool = self::getStockRessources();
 		if ($iron > 0) {
 			// user gets iron
-			if (!$user->ressources->gotEnoughCapacity($iron))
+			if (!$user->ressources->gotEnoughCapacity($iron, 0, 0, 0))
 				$this->addError('So viel Eisen kannst du nicht mehr einlagern!');
 			if ($pool[self::RESSOURCE_IRON] < $iron)
 				$this->addError('So viel Eisen ist nicht mehr im Ressourcenpool vorhanden!');
@@ -77,7 +77,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		}
 		if ($beryllium > 0) {
 			// user gets beryllium
-			if (!$user->ressources->gotEnoughCapacity($beryllium))
+			if (!$user->ressources->gotEnoughCapacity(0, $beryllium, 0, 0))
 				$this->addError('So viel Beryllium kannst du nicht mehr einlagern!');
 			if ($pool[self::RESSOURCE_BERYLLIUM] < $beryllium)
 				$this->addError('So viel Beryllium ist nicht mehr im Ressourcenpool vorhanden!');
@@ -88,7 +88,7 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 		}
 		if ($energy > 0) {
 			// user gets energy
-			if (!$user->ressources->gotEnoughCapacity($energy))
+			if (!$user->ressources->gotEnoughCapacity(0, 0, $energy, 0))
 				$this->addError('So viel Energie kannst du nicht mehr einlagern!');
 			if ($pool[self::RESSOURCE_ENERGY] < $energy)
 				$this->addError('So viel Energie ist nicht mehr im Ressourcenpool vorhanden!');

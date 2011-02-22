@@ -20,7 +20,7 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 		
 		// pause production if requirements fail
 		if ($this->getPauseOnMissingRequirements() && !$firstItem->getWIPItem()->meetsTechnicalRequirements()) {
-			foreach ($wipItems as $wipItem) {
+			foreach ($this->getWIP() as $wipItem) {
 				$wipItem->getRecord()->starttime = time();
 				$wipItem->getRecord()->save();
 			}
@@ -65,7 +65,9 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 				$this->wip = $wipItems;
 				$this->produce();
 			}
+			$firstItem->getUser()->reachNoob();
 		}
+		
 	}
 
 	public function addWIPItem(DB_Record $wipItem) {

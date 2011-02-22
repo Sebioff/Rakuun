@@ -7,7 +7,10 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Military2 extends Rakuun_Intern_GUI_Pa
 	}
 	
 	public function getDescription() {
-		$link = new GUI_Control_Link('statistics', 'Statistik ("Infos -&gt; Statistik")', App::get()->getInternModule()->getSubmodule('statistics')->getUrl());
+		if ($module = App::get()->getInternModule()->getSubmodule('statistics'))
+			$link = new GUI_Control_Link('statistics', 'Statistik ("Infos -&gt; Statistik")', $module->getUrl());
+		else
+			$link = new GUI_Panel_Text('statistics', 'Statistik (nicht verfügbar)');
 		return '
 			Hast du deine Verteidigung im Blick? Überprüfe dies, indem du deine
 			Verteidigungskraft mit der des Noobschutzes vergleichst.

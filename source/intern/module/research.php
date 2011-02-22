@@ -23,7 +23,7 @@ class Rakuun_Intern_Module_Research extends Rakuun_Intern_Module {
 			}
 		}
 		if (!$canResearch) {
-			$link = new GUI_Control_Link('techtree', 'Vorraussetzungen', App::get()->getInternModule()->getSubmodule('techtree')->getUrl());
+			$link = new GUI_Control_Link('techtree', 'Voraussetzungen', App::get()->getInternModule()->getSubmodule('techtree')->getUrl());
 			$this->contentPanel->addPanel(new GUI_Panel_Text('information', 'Forschen derzeit nicht möglich - es wurden noch keine '.$link->render().' für eine Forschung erfüllt.'));
 		}
 	}

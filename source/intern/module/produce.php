@@ -23,7 +23,7 @@ class Rakuun_Intern_Module_Produce extends Rakuun_Intern_Module {
 			}
 		}
 		if (!$canProduce) {
-			$link = new GUI_Control_Link('techtree', 'Vorraussetzungen', App::get()->getInternModule()->getSubmodule('techtree')->getUrl());
+			$link = new GUI_Control_Link('techtree', 'Voraussetzungen', App::get()->getInternModule()->getSubmodule('techtree')->getUrl());
 			$this->contentPanel->addPanel(new GUI_Panel_Text('information', 'Produktion derzeit nicht möglich - es wurden noch keine '.$link->render().' für eine Einheit erfüllt.'));
 		}
 	}

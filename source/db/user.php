@@ -195,7 +195,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	 * TODO this method is called very often and contains some huge calculations
 	 * -> cache results of user count / points sum etc.
 	 */
-	private function reachNoob() {
+	public function reachNoob() {
 		// calc average points
 		$average = Rakuun_Intern_Statistics::averagePoints() * 0.6;
 		$nooblimit = $average;

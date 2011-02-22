@@ -11,6 +11,7 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		$this->map = $map;
 		
 		$this->enableAjax(true, array($this, 'getCityDescription'));
+		$this->enableLocking();
 	}
 	
 	public function init() {

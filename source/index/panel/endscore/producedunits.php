@@ -2,7 +2,7 @@
 
 class Rakuun_Index_Panel_Endscore_ProducedUnits extends GUI_Panel_Plot_Lines {
 	public function __construct($name, $description = '', $title = '') {
-		parent::__construct($name, 800, 300, $description, $title);
+		parent::__construct($name, 845, 300, $description, $title);
 	}
 	
 	public function init() {

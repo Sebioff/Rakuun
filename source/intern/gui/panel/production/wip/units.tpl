@@ -12,7 +12,7 @@
 <? if (Rakuun_User_Manager::getCurrentUser()->productionPaused): ?>
 	Produktion pausiert.
 <? elseif (!$currentWIP->meetsTechnicalRequirements()): ?>
-	<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $currentWIP->getWIPItem()->getInternalName(); ?>">Fehlende technische Vorraussetzungen.</a>
+	<a href="<?= App::get()->getInternModule()->getSubmodule('techtree')->getUrl(); ?>#<?= $currentWIP->getWIPItem()->getInternalName(); ?>">Fehlende technische Voraussetzungen.</a>
 <? else: ?>
 	<? if ($currentWIP->getAmount() > 1): ?>
 		Nächste Einheit fertiggestellt in: <? $this->displayPanel('countdown'); ?>

@@ -4,7 +4,6 @@ class Rakuun_Intern_GUI_Panel_Stockmarket_Display extends GUI_Panel {
 	
 	public function init() {
 		parent::init();
-//		$this->help();
 		$options = array();
 		$options['order'] = 'DATE DESC';
 		$options['limit'] = 25;

@@ -38,7 +38,7 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 			if ($this->posting->roundNumber == RAKUUN_ROUND_NAME) {
 				// user belongs to actual rakuun-round
 				$postingUser = Rakuun_DB_Containers::getUserContainer()->selectByNameFirst($this->posting->userName);
-				$this->addPanel(new Rakuun_GUI_Control_UserLink('user', $postingUser, $postingUser->getPK()));
+				$this->addPanel(new Rakuun_GUI_Control_UserLink('user', $postingUser));
 			} else {
 				// user belongs to historic rakuun-round
 				$this->addPanel(new GUI_Panel_Text('user', $this->posting->userName.' ['.$this->posting->roundNumber.']'));

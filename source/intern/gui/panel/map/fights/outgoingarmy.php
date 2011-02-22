@@ -48,6 +48,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmy extends GUI_Panel {
 	}
 	
 	public function onCancel() {
+		DB_Connection::get()->beginTransaction();
 		// calculate armies current position
 		$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($this->army);
 		$pathCalculator->getPath();
@@ -60,6 +61,7 @@ class Rakuun_Intern_GUI_Panel_Map_Fights_OutgoingArmy extends GUI_Panel {
 		$pathCalculator = new Rakuun_Intern_Map_ArmyPathCalculator($this->army);
 		$pathCalculator->getPath();
 		$this->army->save();
+		DB_Connection::get()->commit();
 		$this->getModule()->invalidate();
 	}
 	
