@@ -10,7 +10,7 @@ class Rakuun_Intern_Achievements_AdapterFactory {
 	
 	private function buildAdapterList() {
 		$this->adapterList[] = new Rakuun_Intern_Achievements_Round24Adapter('24');
-		$this->adapterList[] = new Rakuun_Intern_Achievements_Round25SpeedAdapter('25 Speed');
+		$this->adapterList[] = new Rakuun_Intern_Achievements_Round25Adapter('25');
 	}
 	
 	/**

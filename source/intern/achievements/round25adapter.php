@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Achievements_Round25SpeedAdapter extends Rakuun_Intern_Achievements_Round24Adapter {
+class Rakuun_Intern_Achievements_Round25Adapter extends Rakuun_Intern_Achievements_Round24Adapter {
 	protected function addAchievements(DB_Record $user, DB_Record $eternalUser, $roundName) {
 		parent::addAchievements($user, $eternalUser, $roundName);
 		
