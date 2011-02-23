@@ -398,6 +398,19 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$spiedBuildings = array();
 			$spiedUnits = array();
 			
+			$previousReport = null;
+			$options = array();
+			$options['conditions'][] = array('spied_user = ?', $army->target);
+			$options['conditions'][] = array('deleted = ?', 0);
+			$options['order'] = 'time DESC';
+			foreach (Rakuun_DB_Containers::getLogSpiesContainer()->select($options) as $oldReport) {
+				if (!Rakuun_Intern_GUI_Panel_Reports_Base::hasPrivilegesToSeeReport($oldReport, $army->user))
+					continue;
+					
+				$previousReport = $oldReport;
+				break;
+			}
+			
 			$defenderReportText = 'Soeben wurden geheime Daten unserer Stadt von '.$userLink.$userAllianceLink.' ausspioniert!';
 			$attackerReportText = 'Soeben gelang es einigen unserer Spionagesonden, geheime Daten von '.$targetLink.$targetAllianceLink.' zu übermitteln!';
 			
@@ -429,7 +442,9 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 						continue;
 					
 					if ($building->getLevel() > 0) {
-						$spiedBuildingsReportText .= '<br/>'.$building->getName().' (Stufe '.$building->getLevel().')';
+						$delta = ($previousReport) ? $building->getLevel() - $previousReport->{Text::underscoreToCamelCase($building->getInternalName())} : $building->getLevel();
+						$deltaIcon = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta);
+						$spiedBuildingsReportText .= '<br/>'.$building->getName().' (Stufe '.$building->getLevel().' '.$deltaIcon->render().')';
 						$spiedBuildings[$building->getInternalName()] = $building->getLevel();
 					}
 				}
@@ -449,7 +464,9 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				$unitsText = '';
 				foreach (Rakuun_Intern_Production_Factory::getAllUnits($army->target) as $unit) {
 					if ($unit->getAmount() > 0 && (!$successfullEnhancedCloaking || !$unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING))) {
-						$unitsText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$unit->getAmount()).' '.$unit->getNameForAmount();
+						$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
+						$deltaIcon = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta);
+						$unitsText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$unit->getAmount()).' '.$unit->getNameForAmount().' '.$deltaIcon->render();
 						$spiedUnits[$unit->getInternalName()] = $unit->getAmount();
 					}
 				}

@@ -44,16 +44,18 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 		$filterOptions = $this->getOptions();
 		$filterOptions['order'] = 'id DESC';
 		
+		$this->addPanel($selectedMessages = new GUI_Control_CheckBoxList('selected_messages'));
+		
 		foreach ($this->getMessagesContainer()->select($filterOptions) as $message) {
 			$envelope = Rakuun_Intern_GUI_Panel_Message_Categories::getMessageEnvelopeForCategory($this->category);
-			$this->addEnvelope($envelopeBox = new Rakuun_GUI_Panel_Box('message_'.$message->getPK(), new $envelope('message_'.$message->getPK(), $message)));
+			$this->addEnvelope($envelopeBox = new Rakuun_GUI_Panel_Box('message_'.$message->getPK(), new $envelope('message_'.$message->getPK(), $message, $selectedMessages)));
 			$envelopeBox->addClasses('rakuun_box_message_envelope');
 		}
 		
 		if ($this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SENT && $this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS) {
 			$selections = array(
-				self::SELECTION_ALL			=> 'Alle Nachrichten in "'.Rakuun_Intern_GUI_Panel_Message_Categories::getNameForCategory($this->category).'"'//,
-				//self::SELECTION_SELECTED	=> 'Markierte Nachrichten'
+				self::SELECTION_ALL			=> 'Alle Nachrichten in "'.Rakuun_Intern_GUI_Panel_Message_Categories::getNameForCategory($this->category).'"',
+				self::SELECTION_SELECTED	=> 'Markierte Nachrichten'
 			);
 			$this->addPanel(new GUI_Control_DropDownBox('selections', $selections));
 			$actions = array(
@@ -75,7 +77,10 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 			
 		$options = array();
 		if ($this->selections->getKey() == self::SELECTION_SELECTED) {
-			// TODO set options
+			$selectedIDs = array();
+			foreach ($this->selectedMessages->getSelectedItems() as $selectedItem)
+				$selectedIDs[] = DB_Container::escape($selectedItem->getValue());
+			$options['conditions'][] = array('id IN ('.implode(', ', $selectedIDs).')');
 		}
 		
 		if ($this->actions->getKey() == self::ACTION_DELETE) {

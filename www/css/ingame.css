@@ -306,8 +306,9 @@ table.boardview td.posting_count {
 	width:500px;
 }
 	
-.rakuun_box_message_envelope .content {
-	cursor:pointer;
+.rakuun_box_message_envelope .core_gui_checkbox {
+	margin:30px 0px;
+	margin-right:5px;
 }
 
 #ctn_content .rakuun_box_message

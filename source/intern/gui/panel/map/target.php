@@ -195,6 +195,7 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		}
 		else {
 			$this->state->setValue(self::STATE_PREPARING);
+			$this->setSuccessMessage('Armee ist unterwegs');
 		}
 		
 		$userUnits->save();

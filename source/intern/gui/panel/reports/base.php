@@ -102,7 +102,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		$this->addJS('
 			var reportCache = new Array();
 			$("#'.$this->table->getAjaxID().' tbody tr:not(#'.$this->table->getAjaxID().'-fold)").live("mouseover", function() {
-				spyId = /spyreport_(\d+)\"/.exec($(this).children().html())[1];
+				var spyId = /spyreport_(\d+)\"/.exec($(this).children().html())[1];
 				if (reportCache[spyId] == undefined) {
 					$("#'.$this->detailBox->getID().'").addClass("ajax_loading");
 					$.core.ajaxRequest(
@@ -152,15 +152,17 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		return $templateEngine->render(dirname(__FILE__).'/report.tpl');
 	}
 
-	public static function hasPrivilegesToSeeReport(DB_Record $report) {
-		$actualUser = Rakuun_User_Manager::getCurrentUser();
-		if ($report->user->getPK() == $actualUser->getPK())
+	public static function hasPrivilegesToSeeReport(DB_Record $report, Rakuun_DB_User $currentUser = null) {
+		if (!$currentUser)
+			$currentUser = Rakuun_User_Manager::getCurrentUser();
+		
+		if ($report->user->getPK() == $currentUser->getPK())
 			return true;
-		if ($report->user->alliance !== null && $actualUser->alliance !== null && Rakuun_Intern_Alliance_Security::get()->hasPrivilege($actualUser, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_REPORTS)) {
-			if ($report->user->alliance->getPK() == $actualUser->alliance->getPK())
+		if ($report->user->alliance !== null && $currentUser->alliance !== null && Rakuun_Intern_Alliance_Security::get()->hasPrivilege($currentUser, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_REPORTS)) {
+			if ($report->user->alliance->getPK() == $currentUser->alliance->getPK())
 				return true;
-			if ($report->user->alliance->meta !== null && $actualUser->alliance->meta !== null) {
-				if ($report->user->alliance->meta->getPK() == $actualUser->alliance->meta->getPK())
+			if ($report->user->alliance->meta !== null && $currentUser->alliance->meta !== null) {
+				if ($report->user->alliance->meta->getPK() == $currentUser->alliance->meta->getPK())
 					return true;
 			}
 		}
@@ -175,7 +177,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		$options['conditions'][] = array('id < ?', $report->getPK());
 		$options['order'] = 'time DESC';
 		foreach (Rakuun_DB_Containers::getLogSpiesContainer()->select($options) as $oldReport) {
-			if (!$this->hasPrivilegesToSeeReport($oldReport))
+			if (!self::hasPrivilegesToSeeReport($oldReport))
 				continue;
 				
 			$previousReport = $oldReport;
