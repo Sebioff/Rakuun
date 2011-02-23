@@ -50,7 +50,7 @@ body.skin_tech
 	position:relative;
 }
 
-.skin_tech .rakuun_box .head h2 span {
+.skin_tech .rakuun_box .head h2 span.gradient {
 	background:url('../images/h_text_gradient.png') repeat-x;
 	display:block;
 	height:20px;
@@ -59,7 +59,7 @@ body.skin_tech
 	width:100%;
 }
 
-* html .skin_tech .rakuun_box .head h2 span {
+* html .skin_tech .rakuun_box .head h2 span.gradient {
 	background:none;
 }
 
@@ -94,6 +94,11 @@ body.skin_tech
 	right:0px;
 	top:-4px;
 	width:4px;
+}
+
+.skin_tech .core_ajax_loading {
+	background:transparent url('../images/tech/loading.gif') no-repeat 3px 1px;
+	padding-left:21px;
 }
 
 .skin_tech .core_gui_hoverinfo {
@@ -496,7 +501,7 @@ body.skin_tech
 	padding:0px;
 }
 
-.skin_tech .rakuun_message_contentpanel .head h2 span {
+.skin_tech .rakuun_message_contentpanel .head h2 span.gradient {
 	display:none;
 }
 
@@ -759,6 +764,16 @@ body.skin_tech
 
 .skin_tech .module_profile .rakuun_box_delete {
 	width:470px;
+}
+
+.skin_tech .rakuun_profilepicture {
+	text-align:center;
+}
+
+.skin_tech .rakuun_achievements li {
+	list-style-position:inside;
+    list-style-type:disc;
+    padding-left:10px;
 }
 
 /* $14 -  Highscores ---------------------------------------------------------*/

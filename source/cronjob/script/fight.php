@@ -398,18 +398,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$spiedBuildings = array();
 			$spiedUnits = array();
 			
-			$previousReport = null;
-			$options = array();
-			$options['conditions'][] = array('spied_user = ?', $army->target);
-			$options['conditions'][] = array('deleted = ?', 0);
-			$options['order'] = 'time DESC';
-			foreach (Rakuun_DB_Containers::getLogSpiesContainer()->select($options) as $oldReport) {
-				if (!Rakuun_Intern_GUI_Panel_Reports_Base::hasPrivilegesToSeeReport($oldReport, $army->user))
-					continue;
-					
-				$previousReport = $oldReport;
-				break;
-			}
+			$previousReport = Rakuun_Intern_GUI_Panel_Reports_Base::getNewestReportForUser($army->target, $army->user);
 			
 			$defenderReportText = 'Soeben wurden geheime Daten unserer Stadt von '.$userLink.$userAllianceLink.' ausspioniert!';
 			$attackerReportText = 'Soeben gelang es einigen unserer Spionagesonden, geheime Daten von '.$targetLink.$targetAllianceLink.' zu übermitteln!';

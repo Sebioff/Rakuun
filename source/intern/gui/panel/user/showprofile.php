@@ -20,8 +20,10 @@ class Rakuun_Intern_GUI_Panel_User_ShowProfile extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/showprofile.tpl');
 				
-		if ($this->user && $this->user->picture)
-			$this->addPanel(new GUI_Panel_UploadedFile('picture', $this->user->picture, 'Profilbild von '.$this->user->nameUncolored));
+		if ($this->user && $this->user->picture) {
+			$this->addPanel($picture = new GUI_Panel_UploadedFile('picture', $this->user->picture, 'Profilbild von '.$this->user->nameUncolored));
+			$picture->addClasses('rakuun_profilepicture');
+		}
 
 		$options = array();
 		$options['conditions'][] = array('identifier IN ('.implode(', ', Rakuun_User_Specials_Database::getDatabaseIdentifiers()).')');

@@ -10,57 +10,60 @@
 	<? endif; ?>
 	<?= $user->description; ?>
 	<br class="clear" />
-	Username: <?= $user->name; ?>
-	<br class="clear" />
-	Stadtname: <?= Text::escapeHTML($user->cityName); ?>
-	<br class="clear" />
-	ICQ: <?= $user->icq; ?>
-	<br class="clear" />
-	Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
-	<br class="clear" />
-	Platz: <?= GUI_Panel_Number::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
-	<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
+	<center>
+		<? $mapLink = new Rakuun_GUI_Control_Maplink('maplink', $user, 'zur Karte'); ?>
+		<? $mapLink->display(); ?> - <?= Text::escapeHTML($user->cityName); ?>
 		<br class="clear" />
-		Multipunkte:
-		<? $multilink = new Rakuun_GUI_Control_MultiLogLink('multiloglink', $user, $user->multiPoints); ?>
-		<? $multilink->display(); ?>
-		<? endif;?>
-	<? if ($user->alliance): ?>
-		<br class="clear" />
-		Allianz:
-		<? $allylink = new Rakuun_GUI_Control_AllianceLink('allylink', $user->alliance, $user->alliance->name); ?>
-		<? $allylink->display(); ?>
-		<? if ($user->alliance->meta): ?>
+		<? if ($user->icq): ?>
+			ICQ: <?= $user->icq; ?>
 			<br class="clear" />
-			Meta:
-			<? $metalink = new Rakuun_GUI_Control_MetaLink('metalink', $user->alliance->meta, $user->alliance->meta->name); ?>
-			<? $metalink->display(); ?>
+		<? endif; ?>
+		Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
+		<br class="clear" />
+		<? if ($cautionPoints = Rakuun_Intern_GUI_Panel_Admin_User_Caution::getCautionPoints($user)): ?>
+			Verwarnpunkte: <?= $cautionPoints; ?>
+			<br class="clear" />
+		<? endif; ?>
+		Platz: <?= GUI_Panel_Number::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
+		<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
+			<br class="clear" />
+			Multipunkte:
+			<? $multilink = new Rakuun_GUI_Control_MultiLogLink('multiloglink', $user, $user->multiPoints); ?>
+			<? $multilink->display(); ?>
+			<? endif;?>
+		<? if ($user->alliance): ?>
+			<br class="clear" />
+			Allianz:
+			<? $allylink = new Rakuun_GUI_Control_AllianceLink('allylink', $user->alliance, $user->alliance->name); ?>
+			<? $allylink->display(); ?>
+			<? if ($user->alliance->meta): ?>
+				<br class="clear" />
+				Meta:
+				<? $metalink = new Rakuun_GUI_Control_MetaLink('metalink', $user->alliance->meta, $user->alliance->meta->name); ?>
+				<? $metalink->display(); ?>
+			<? endif;?>
 		<? endif;?>
-	<? endif;?>
-	<br class="clear" />
-	Koordinaten:
-	<? $mapLink = new Rakuun_GUI_Control_Maplink('maplink', $user, 'zur Karte'); ?>
-	<? $mapLink->display(); ?>
-	<br class="clear" />
+		<br class="clear" />
+	</center>
 	
-	
-	Datenbanken:
-	<? foreach ($this->params->databasePanels as $databasePanel): ?>
-		<? $databasePanel->display(); ?>
-	<? endforeach; ?>
-	<br class="clear" />
+	<? if ($this->params->databasePanels): ?>
+		Datenbanken:
+		<? foreach ($this->params->databasePanels as $databasePanel): ?>
+			<? $databasePanel->display(); ?>
+		<? endforeach; ?>
+		<br class="clear" />
+	<? endif; ?>
 	
 	<? if ($this->params->achievements): ?>
+		<br/>
 		Leistungen:
-		<ul>
+		<ul class="rakuun_achievements">
 			<? foreach ($this->params->achievements as $achievement): ?>
 				<li><?= $achievement; ?></li>
 			<? endforeach; ?>
 		</ul>
 	<? endif; ?>
 	
-	Verwarnpunkte: <?= Rakuun_Intern_GUI_Panel_Admin_User_Caution::getCautionPoints($user) ?>
-	<br class="clear" />
 	<br class="clear" />
 	Aktionen:
 	<br class="clear" />

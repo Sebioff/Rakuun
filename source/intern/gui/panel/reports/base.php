@@ -169,6 +169,32 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		return false;
 	}
 	
+	/**
+	 * @return DB_Record
+	 */
+	public static function getNewestReportForUser(Rakuun_DB_User $user, Rakuun_DB_User $currentUser = null) {
+		if (!$currentUser)
+			$currentUser = Rakuun_User_Manager::getCurrentUser();
+		
+		$previousReport = null;
+		$options = array();
+		$options['conditions'][] = array('spied_user = ?', $user);
+		$options['conditions'][] = array('deleted = ?', 0);
+		$options['order'] = 'time DESC';
+		foreach (Rakuun_DB_Containers::getLogSpiesContainer()->select($options) as $oldReport) {
+			if (!Rakuun_Intern_GUI_Panel_Reports_Base::hasPrivilegesToSeeReport($oldReport, $currentUser))
+				continue;
+				
+			$previousReport = $oldReport;
+			break;
+		}
+		
+		return $previousReport;
+	}
+	
+	/**
+	 * @return DB_Record
+	 */
 	private function getPreviousReportOf(DB_Record $report) {
 		$previousReport = null;
 		$options = array();

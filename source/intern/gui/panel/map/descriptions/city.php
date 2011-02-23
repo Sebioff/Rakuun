@@ -51,9 +51,9 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		if ($this->cityOwner->alliance) {
 			$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', $this->cityOwner->alliance);
 			$allianceLink->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
-			$hoverText .= str_replace('"', '\"', $allianceLink->render()).' ';
+			$hoverText .= $allianceLink->render().' ';
 		}
-		$hoverText .= str_replace('"', '\"', $userLink->render()).
+		$hoverText .= $userLink->render().
 			'<br />'.Text::escapeHTML($this->cityOwner->cityName).
 			'<br />Punkte: '.GUI_Panel_Number::formatNumber($this->cityOwner->points);
 			$hoverText .= '<br />Spieler ist ';
@@ -61,11 +61,26 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 				$hoverText .= 'online';
 			else
 				$hoverText .= 'offline';
-			$hoverText .= '<br />'.str_replace('"', '\"', $igmLink->render());
+			$hoverText .= '<br />'.$igmLink->render();
 			if ($this->cityOwner->isInNoob())
 				$hoverText .= '<br />Spieler befindet sich im Noobschutz';
 			if ($this->cityOwner->isYimtay())
 				$hoverText .= '<br />Der Spieler ist inaktiv';
+				
+		$newestReport = Rakuun_Intern_GUI_Panel_Reports_Base::getNewestReportForUser($this->cityOwner);
+		if ($newestReport) {
+			$att = 0;
+			$deff = 0;
+			foreach (Rakuun_Intern_Production_Factory::getAllUnits($newestReport) as $unit) {
+				$att += $unit->getAttackValue();
+				$deff += $unit->getDefenseValue();
+			}
+			
+			$hoverText .= '<br/><br/>Letzte Spionage: '.date(GUI_Panel_Date::FORMAT_DATETIME, $newestReport->time);
+			$hoverText .= '<br/>Angriffskraft: '.GUI_Panel_Number::formatNumber($att);
+			$hoverText .= '<br/>Verteidigungskraft: '.GUI_Panel_Number::formatNumber($deff);
+		}
+		
 		return $hoverText;
 	}
 }

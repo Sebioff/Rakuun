@@ -83,7 +83,7 @@ function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enable
 $(document).ready(function(){
 	if (!jQuery.browser.msie && jQuery.browser.version.substr(0,1) <= "7") {
 		$(".skin_tech #ctn_head #ctn_navigation li a").prepend("<span></span>");
-		$(".skin_tech .rakuun_box .head h2").prepend("<span></span>");
+		$(".skin_tech .rakuun_box .head h2").prepend("<span class=\"gradient\"></span>");
 		$(".skin_tech .core_gui_submitbutton").wrap("<span class=\"core_gui_submitbutton_wrapper\"></span>").after("<div></div>");
 	}
 	// open submenus on hover over top menu entries
