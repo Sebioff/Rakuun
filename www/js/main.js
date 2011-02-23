@@ -1,6 +1,7 @@
 function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enableAjax) {
 	var ajaxHasBeenLoaded = false;
 	var self = this;
+	this.animationSpeed = 8;
 
 	$("#" + controlID + " .head").click(
 		function() {
@@ -23,7 +24,7 @@ function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enable
 					self.ajaxConditionalLoadContent(element);
 					
 				if (!enableAjax || ajaxHasBeenLoaded)
-					animate(element);
+					self.animate(element);
 			}
 		}
 	);
@@ -34,19 +35,23 @@ function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enable
 				element.find(".content").replaceWith($(panelData).find("#" + controlID + " .content"));
 				ajaxHasBeenLoaded = true;
 				element.removeClass("ajax_loading");
-				animate(element);
+				self.animate(element);
 			});
 		}
 	}
 	
-	animate = function(element) {
+	this.setAnimationSpeed = function(animationSpeed) {
+		this.animationSpeed = animationSpeed;
+	}
+	
+	this.animate = function(element) {
 		var contentInner = element.find(".content_inner");
 		var content = element.find(".content");
 		
 		if (!element.hasClass('collapsed')) {
 			content.css({overflow: "hidden"});
 			height = content.height();
-			animationDuration = height * 8;
+			animationDuration = height * this.animationSpeed;
 			contentInner.animate( {top: "-" + (height + 4) + "px"}, { queue:false, duration: animationDuration});
 			content.animate( {height: "0px"}, { queue:false, duration: animationDuration, 
 				complete: function() {
@@ -60,7 +65,7 @@ function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enable
 			contentInner.css({top: "-1000000px"});
 			element.removeClass("collapsed");
 			height = content.height();
-			animationDuration = height * 8;
+			animationDuration = height * this.animationSpeed;
 			content.css({height: "0px", overflow: "hidden"});
 			contentInner.css({top: "-" + (height + 4) + "px"});
 			

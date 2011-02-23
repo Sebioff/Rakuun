@@ -4,6 +4,7 @@ class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 	private $enableAjax = true;
 	private $enableSaveCollapsedState = true;
 	private $collapsed = null; // read only, use isCollapsed() to check state
+	private $animationSpeed;
 	
 	public function __construct($name, GUI_Panel $contentPanel = null, $title = '', $collapsed = null, $enableAjax = true) {
 		parent::__construct($name, $contentPanel, $title);
@@ -26,7 +27,9 @@ class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 	public function afterInit() {
 		parent::afterInit();
 		
-		$this->addJS(sprintf('new GUI_Control_Box_Collapsible("%s", "%s", "%s");', $this->getID(), $this->enableSaveCollapsedState, $this->enableAjax));
+		$this->addJS(sprintf('box = new GUI_Control_Box_Collapsible("%s", "%s", "%s");', $this->getID(), $this->enableSaveCollapsedState, $this->enableAjax));
+		if ($this->animationSpeed)
+			$this->addJS('box.setAnimationSpeed('.$this->animationSpeed.');');
 		
 		if ($this->isCollapsed())
 			$this->addClasses('collapsed');
@@ -63,6 +66,10 @@ class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 	
 	public function enableSaveCollapsedState($enableSaveCollapsedState = true) {
 		$this->enableSaveCollapsedState = $enableSaveCollapsedState;
+	}
+	
+	public function setAnimationSpeed($animationSpeed) {
+		$this->animationSpeed = $animationSpeed;
 	}
 }
 

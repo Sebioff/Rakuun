@@ -17,5 +17,6 @@
 	<br/>
 	<? $this->displayLabelForPanel('date'); ?> <? $this->displayPanel('date'); ?>
 	<br/>
-	<a href="<?= $this->params->url ?>">Öffnen</a>
+	<a href="<?= $this->params->url ?>" class="rakuun_message_open">Öffnen</a>
+	<? $this->displayPanel('content'); ?>
 </div>

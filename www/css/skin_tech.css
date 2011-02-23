@@ -481,6 +481,45 @@ body.skin_tech
 	width:520px;
 }
 
+.skin_tech a.rakuun_message_open {
+	font-size:18px;
+	left:136px;
+	position:absolute;
+	top:66px;
+	z-index:1;
+}
+
+.skin_tech .rakuun_message_contentpanel {
+	background:none;
+	float:none;
+	margin:10px 0px 0px 15px;
+	padding:0px;
+}
+
+.skin_tech .rakuun_message_contentpanel .head h2 span {
+	display:none;
+}
+
+.skin_tech .rakuun_message_contentpanel .body,
+.skin_tech .rakuun_message_contentpanel .head,
+.skin_tech .rakuun_message_contentpanel .content,
+.skin_tech .rakuun_message_contentpanel .decorator1,
+.skin_tech .rakuun_message_contentpanel .decorator2,
+.skin_tech .rakuun_message_contentpanel .decorator3,
+.skin_tech .rakuun_message_contentpanel .decorator4,
+.skin_tech .rakuun_message_contentpanel .topleft,
+.skin_tech .rakuun_message_contentpanel .topright,
+.skin_tech .rakuun_message_contentpanel .bottomleft,
+.skin_tech .rakuun_message_contentpanel .bottomright {
+	background:none;
+	margin:0px;
+	padding:0px;
+}
+
+.skin_tech .rakuun_message_contentpanel .content {
+	margin-top:2px;
+}
+
 /* $6  -  Overview -----------------------------------------------------------*/
 .skin_tech .shout_header a.answerlink {
 	background:transparent url('../images/shoutbox_reply_icon.gif') no-repeat left top;

@@ -14,6 +14,26 @@ class Rakuun_Intern_GUI_Panel_Message_BasicEnvelope extends Rakuun_Intern_GUI_Pa
 		$this->getSelectionList()->addItemCheckbox($selectionCheckbox = new GUI_Control_CheckBox('checkbox'.$this->getMessage()->getPK(), $this->getMessage()->getPK()));
 		$this->params->url = App::get()->getInternModule()->getSubmodule('messages')->getSubmodule('display')->getURL(array('id' => $this->getMessage()->getPK()));
 		$this->params->selectionCheckbox = $selectionCheckbox;
+		
+		$this->addPanel($content = new Rakuun_GUI_Panel_Box_Collapsible('content', new MessageContent('content', $this->getMessage()), 'Anzeigen', true));
+		$content->enableSaveCollapsedState(false);
+		$content->addClasses('rakuun_message_contentpanel');
+		$content->setAnimationSpeed(2);
+	}
+}
+
+class MessageContent extends GUI_Panel {
+	private $message;
+	
+	public function __construct($name, DB_Record $message) {
+		parent::__construct($name);
+		$this->message = $message;
+	}
+	
+	public function init() {
+		parent::init();
+		
+		$this->addPanel(new GUI_Panel_Text('text', Rakuun_Text::formatPlayerText($this->message->text, false)));
 	}
 }
 
