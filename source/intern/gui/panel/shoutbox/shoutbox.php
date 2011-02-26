@@ -29,7 +29,7 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 		if (Router::get()->getCurrentModule()->getParam('answerid') > 0) {
 			$answerUser = Rakuun_DB_Containers::getUserContainer()->selectByIdFirst(Router::get()->getCurrentModule()->getParam('answerid'));
 			if ($answerUser)
-				$text->setValue('@'.$answerUser->nameUncolored.': ');
+				$text->setValue('@@'.$answerUser->nameUncolored.'@: ');
 			$text->setFocus();
 		}
 		$this->addPanel(new GUI_Control_AjaxSubmitButton('submit', 'shout!'));

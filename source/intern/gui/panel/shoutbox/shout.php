@@ -24,7 +24,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Shout extends GUI_Panel {
 		if ($this->shout->user) {
 			$params['answerid'] = $this->shout->user->getPK();
 			$params[$this->getParent()->getName().'-page'] = $this->getParent()->getPage();
-			$this->addPanel($answerLink = new GUI_Control_JsLink('answerlink', '-antworten-', '$(\'#'.$this->getParent()->shoutarea->getID().'\').val(\'@'.$this->shout->user->nameUncolored.'@: \').focus(); return false;', Router::get()->getCurrentModule()->getUrl($params)));
+			$this->addPanel($answerLink = new GUI_Control_JsLink('answerlink', '-antworten-', '$(\'#'.$this->getParent()->shoutarea->getID().'\').val(\'@@'.$this->shout->user->nameUncolored.'@: \').focus(); return false;', Router::get()->getCurrentModule()->getUrl($params)));
 			$answerLink->setAttribute('rel', 'nofollow');
 			$answerLink->addClasses('answerlink');
 		}

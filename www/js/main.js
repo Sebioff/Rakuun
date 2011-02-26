@@ -10,7 +10,7 @@ function GUI_Control_Box_Collapsible(controlID, enableSaveCollapsedState, enable
 			if (!element.hasClass("animating")) {
 				element.addClass("animating");
 				var collapsed = element.hasClass('collapsed');
-				if (!collapsed || element.find(".content_inner").html())
+				if (!collapsed || $.trim(element.find(".content_inner").html()))
 					ajaxHasBeenLoaded = true;
 				if (enableAjax && !ajaxHasBeenLoaded)
 					element.addClass("ajax_loading");
