@@ -1,3 +1,6 @@
+Importiere Leistungen aus früheren Runden
+<br/>
+<br/>
 <h3>Ewiges Profil erstellen</h3>
 <? $this->displayPanel('create'); ?>
 <hr/>

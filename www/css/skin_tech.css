@@ -763,7 +763,12 @@ body.skin_tech
 }
 
 .skin_tech .module_profile .rakuun_box_delete {
-	width:470px;
+	width:480px;
+}
+
+.skin_tech .rakuun_box_profile_edit {
+	margin-right:5px;
+	width:480px;
 }
 
 .skin_tech .rakuun_profilepicture {
