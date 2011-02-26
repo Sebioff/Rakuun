@@ -46,11 +46,10 @@ abstract class Rakuun_Intern_Achievements_Adapter {
 			return 'Falsche Zugangsdaten';
 		
 		$options = array();
-		$options['conditions'][] = array('eternal_user = ?', $eternalUser);
 		$options['conditions'][] = array('user = ?', $user->id);
 		$options['conditions'][] = array('round = ?', $this->getRoundInformation($roundName));
 		if (Rakuun_DB_Containers_Persistent::getEternalUserUserAssocContainer()->selectFirst($options))
-			return 'Rundeninformation wurde bereits hinzugefügt';
+			return 'Rundeninformation wurde bereits einem Spieler hinzugefügt';
 		
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->beginTransaction();
 		$assoc = new DB_Record();
