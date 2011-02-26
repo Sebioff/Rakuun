@@ -28,28 +28,7 @@ class Rakuun_Text {
 	
 	private static function replaceSmileys($text) {
 		$smileyPath = Router::get()->getStaticRoute('images', '/smileys');
-		return str_replace(array(
-			':artist:',
-			':cry:',
-			':dizzy:',
-			':eyepatch:',
-			':)',
-			':(|)',
-			':(',
-			'8)',
-			':D',
-			':mad:',
-			':nono:',
-			':o',
-			':sad:',
-			':sick:',
-			':P',
-			':uuh:',
-			':wacko:',
-			';)',
-			':elk:',
-			'xD'
-		), array(
+		return str_replace(self::getSmilieCodes(), array(
 			'<img src="'.$smileyPath.'/artist.gif">',
 			'<img src="'.$smileyPath.'/cry.gif">',
 			'<img src="'.$smileyPath.'/dizzy.gif">',
@@ -71,5 +50,30 @@ class Rakuun_Text {
 			'<img src="'.$smileyPath.'/elk.gif">',
 			'<img src="'.$smileyPath.'/xd.gif">'
 		), $text);
+	}
+	
+	public static function getSmilieCodes() {
+		return array(
+			':artist:',
+			':cry:',
+			':dizzy:',
+			':eyepatch:',
+			':)',
+			':(|)',
+			':(',
+			'8)',
+			':D',
+			':mad:',
+			':nono:',
+			':o',
+			':sad:',
+			':sick:',
+			':P',
+			':uuh:',
+			':wacko:',
+			';)',
+			':elk:',
+			'xD'
+		);
 	}
 }
