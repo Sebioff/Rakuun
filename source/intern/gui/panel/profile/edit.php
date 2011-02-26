@@ -10,7 +10,7 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 			$this->contentPanel->addPanel($nameColored = new Rakuun_Intern_GUI_Control_ColoredName('namecolored', $user, 'Nickname (farbig)'));
 			$nameColored->addValidator(new GUI_Validator_MaxLength(255));
 			$this->contentPanel->addPanel(
-				new GUI_Panel_HoverInfo(
+				$colorHelper = new GUI_Panel_HoverInfo(
 					'namecoloredhelp',
 					'[help]',
 					'[darkblue]'.$user->nameUncolored.'[/darkblue]<br />' .
@@ -27,6 +27,7 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 					'[#2288EE]'.$user->nameUncolored.'[/#2288EE]<br />'
 				)
 			);
+			$colorHelper->enableLocking();
 		}
 		$this->contentPanel->addPanel($cityname = new GUI_Control_TextBox('cityname', $user->cityName, 'Stadtname'));
 		$cityname->addValidator(new GUI_Validator_Mandatory());
