@@ -14,7 +14,8 @@
 		<? endif; ?>
 	<? endforeach; ?>
 	<? if ($this->getPageCount() > 1): ?>
-		<? $this->displayLabelForPanel('pages'); ?>: <? $this->displayPanel('pages'); ?>
+		<? $this->displayLabelForPanel('pages', array('shoutbox_pages_label')); ?> <? $this->displayPanel('pages'); ?>
+		<br class="clear"/>
 		<hr />
 	<? endif; ?>
 	<? $this->displayPanel('shoutarea'); ?>

@@ -381,6 +381,14 @@ img.rakuun_igm_marker
 	width:268px;
 }
 
+.ctn_shoutbox .shoutbox_pages_label {
+	width:auto;
+}
+
+.ctn_shoutbox .core_gui_pageview_pages {
+	float:right;
+}
+
 .module_overview .ctn_shoutbox .core_gui_submitbutton
 {
 	margin-left:68px;
