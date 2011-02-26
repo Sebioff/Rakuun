@@ -38,6 +38,7 @@ class Rakuun_Intern_Module_Messages_Display extends Rakuun_Intern_Module {
 				$this->contentPanel->addPanel($historyBox = new Rakuun_GUI_Panel_Box_Collapsible('history', new Rakuun_Intern_GUI_Panel_Message_History('history', $message), 'History', true));
 				$historyBox->addClasses('rakuun_box_message_history');
 				$historyBox->enableSaveCollapsedState(false);
+				$historyBox->setAnimationSpeed(2);
 			}
 		}
 		

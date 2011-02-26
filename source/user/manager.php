@@ -69,7 +69,7 @@ abstract class Rakuun_User_Manager {
 		Rakuun_GameSecurity::get()->removeFromGroup($user, Rakuun_GameSecurity::get()->getGroup(Rakuun_GameSecurity::GROUP_LOCKED));
 		
 		$options = array();
-		$options['conditions'][] = array('user = ?', $user);		
+		$options['conditions'][] = array('user = ?', $user);
 		$timeban = Rakuun_DB_Containers::getUserBannedContainer()->selectFirst($options);
 		if ($timeban)
 			Rakuun_DB_Containers::getUserBannedContainer()->delete($timeban);
@@ -77,10 +77,12 @@ abstract class Rakuun_User_Manager {
 	
 	public static function logout() {
 		$user = self::getCurrentUser();
-		$user->isOnline = 0;
-		self::update($user);
-		Rakuun_Intern_Log_UserActivity::log($user, Rakuun_Intern_Log::ACTION_ACTIVITY_LOGOUT);
-		unset($_SESSION['user']);
+		if ($user) {
+			$user->isOnline = 0;
+			self::update($user);
+			Rakuun_Intern_Log_UserActivity::log($user, Rakuun_Intern_Log::ACTION_ACTIVITY_LOGOUT);
+			unset($_SESSION['user']);
+		}
 	}
 	
 	public static function checkPassword(Rakuun_DB_User $user = null, $password = '') {
