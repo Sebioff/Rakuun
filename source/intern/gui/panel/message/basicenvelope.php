@@ -10,7 +10,7 @@ class Rakuun_Intern_GUI_Panel_Message_BasicEnvelope extends Rakuun_Intern_GUI_Pa
 		$this->setTemplate(dirname(__FILE__).'/basicenvelope.tpl');
 		$this->addPanel(new GUI_Panel_Date('date', $this->getMessage()->time, 'Datum'));
 		$this->addPanel(new Rakuun_GUI_Control_UserLink('receiver', $this->getMessage()->user, $this->getMessage()->get('user'), 'Empfänger'));
-		if (in_array($this->getMessage()->senderName, Rakuun_Intern_IGM::getReservedNames()))
+		if (in_array(Text::toUpperCase($this->getMessage()->senderName), Rakuun_Intern_IGM::getReservedNames()))
 			$this->addPanel(new GUI_Panel_Text('sender', $this->getMessage()->senderName, 'Sender'));
 		else
 			$this->addPanel(new Rakuun_GUI_Control_UserLink('sender', $this->getMessage()->sender, $this->getMessage()->get('sender'), 'Sender'));
@@ -37,6 +37,11 @@ class MessageContent extends GUI_Panel {
 		parent::init();
 		
 		$this->addPanel(new GUI_Panel_Text('text', Rakuun_Text::formatPlayerText($this->message->text, false)));
+		
+		if (!$this->message->hasBeenRead && $this->message->user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {
+			$this->message->hasBeenRead = true;
+			$this->message->save();
+		}
 	}
 }
 

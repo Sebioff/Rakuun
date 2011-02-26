@@ -58,7 +58,8 @@ class Rakuun_GUI_Panel_Box_Collapsible extends Rakuun_GUI_Panel_Box {
 			$this->collapsed = (in_array($this->getID(), $collapsedPanels));
 		}
 		
-		if ($this->enableAjax && Router::get()->getRequestMode() == Router::REQUESTMODE_AJAX)
+		if ($this->enableAjax && Router::get()->getRequestMode() == Router::REQUESTMODE_AJAX
+		&& ($_POST['core_ajax_panel'] == $this->getID() || ($_POST['core_ajax_method'] == 'display' && in_array($this->getID(), explode(',', $_POST['refreshPanels'])))))
 			$this->collapsed = false;
 		
 		return $this->collapsed;
