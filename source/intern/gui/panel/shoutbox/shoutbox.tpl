@@ -6,6 +6,7 @@
 	<? if ($this->hasPanel('moderatelink')): ?>
 		<? $this->displayPanel('moderatelink'); ?>
 	<? endif; ?>
+	<? $this->displayPanel('info'); ?>
 	<hr />
 	<? foreach ($this->panels as $panel): ?>
 		<? if (strpos($panel->getName(), 'shout_') === 0): ?>

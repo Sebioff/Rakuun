@@ -33,6 +33,9 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 			$text->setFocus();
 		}
 		$this->addPanel(new GUI_Control_AjaxSubmitButton('submit', 'shout!'));
+		$this->addPanel($info = new GUI_Panel_HoverInfo('info', 'Codes', null));
+		$info->addClasses('rakuun_gui_infopanel');
+		$info->setHoverText('Links:<br />Userprofil: @username@<br />Kartenlink: #username#<br /><br />Smilies:<br />'.implode('<br />', Rakuun_Text::getSmilieCodes()));
 	}
 	
 	public function afterInit() {
