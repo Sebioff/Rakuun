@@ -23,12 +23,14 @@ class Rakuun_Intern_GUI_Panel_Profile_EternalProfile extends GUI_Panel {
 		
 		$profiles = array();
 		$eternalUser = Rakuun_DB_Containers::getUserEternalUserAssocContainer()->selectByUserFirst(Rakuun_User_Manager::getCurrentUser());
-		$linkedProfiles = Rakuun_DB_Containers_Persistent::getEternalUserUserAssocContainer()->selectByEternalUser($eternalUser);
-		foreach ($linkedProfiles as $profileAssoc) {
-			$roundInformation = Rakuun_DB_Containers_Persistent::getRoundInformationContainer()->selectByPK($profileAssoc->round);
-			$adapter = Rakuun_Intern_Achievements_AdapterFactory::get()->getAdapterForRound($roundInformation->roundName);
-			$profile = $adapter->getRoundContainer('user', $roundInformation->roundName)->selectByPK($profileAssoc->user);
-			$profiles[] = 'Runde '.$roundInformation->roundName.': '.$profile->name;
+		if ($eternalUser) {
+			$linkedProfiles = Rakuun_DB_Containers_Persistent::getEternalUserUserAssocContainer()->selectByEternalUser($eternalUser->eternalUser);
+			foreach ($linkedProfiles as $profileAssoc) {
+				$roundInformation = Rakuun_DB_Containers_Persistent::getRoundInformationContainer()->selectByPK($profileAssoc->round);
+				$adapter = Rakuun_Intern_Achievements_AdapterFactory::get()->getAdapterForRound($roundInformation->roundName);
+				$profile = $adapter->getRoundContainer('user', $roundInformation->roundName)->selectByPK($profileAssoc->user);
+				$profiles[] = 'Runde '.$roundInformation->roundName.': '.$profile->name;
+			}
 		}
 		$this->params->linkedProfiles = $profiles;
 	}
