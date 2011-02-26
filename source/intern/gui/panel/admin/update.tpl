@@ -1,7 +1,7 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-<? $this->displayPanel('create_news'); ?>
+<? $this->displayLabelForPanel('create_news'); ?> <? $this->displayPanel('create_news'); ?>
 <? if ($this->hasPanel('newstext')): ?>
 	<br class="clear"/>
 	<? $this->displayLabelForPanel('newstext'); ?> <? $this->displayPanel('newstext'); ?>

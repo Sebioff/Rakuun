@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * FIXME this tutor level is never used!
+ */
 class Rakuun_Intern_GUI_Panel_Tutor_Level_Military2 extends Rakuun_Intern_GUI_Panel_Tutor_Level {
 	public function completed() {
 		$user = Rakuun_User_Manager::getCurrentUser();
