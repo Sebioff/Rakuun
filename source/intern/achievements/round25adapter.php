@@ -8,7 +8,7 @@ class Rakuun_Intern_Achievements_Round25Adapter extends Rakuun_Intern_Achievemen
 		if ($user->alliance) {
 			$alliance = Rakuun_DB_Containers_Persistent::getAlliancesContainer()->selectByPK($user->alliance);
 			$meta = Rakuun_DB_Containers_Persistent::getMetasContainer()->selectByPK($alliance->meta);
-			if ($meta->name == $this->getRoundInformation($roundName)->winningMeta)
+			if ($meta && $meta->name == $this->getRoundInformation($roundName)->winningMeta)
 				$this->saveAchievement($eternalUser, $roundName, 'Mitglied der Siegermeta');
 		}
 	}
