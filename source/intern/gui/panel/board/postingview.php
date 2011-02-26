@@ -41,7 +41,7 @@ class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel_PageView {
 		$this->config->getVisitedContainer()->save($lastVisit);
 		
 		$options = $this->getOptions();
-		$options['order'] = 'date ASC';
+		$options['order'] = 'date DESC';
 		$postings = $this->getContainer()->select($options);
 		$this->addPanel($list = new GUI_Panel_List('board'));
 		foreach ($postings as $posting) {
