@@ -29,7 +29,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
 				new Rakuun_GUI_Control_MetaLink('alliancemetalink'.$i, $alliance->meta) :
 				'';
 			$line[] = new GUI_Panel_Number('alliancepoints'.$i, $alliance->points);
-			$allianceaverage = $alliance->points / count($alliance->members);
+			$count = count($alliance->members);
+			$allianceaverage = $alliance->points / ($count > 0 ? $count : 1);
 			$number = new GUI_Panel_Number('allianceaverage'.$i, $allianceaverage);
 			$number->setPrefix('&oslash; ');
 			$line[] = $number;
