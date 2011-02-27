@@ -43,7 +43,12 @@ class Rakuun_Intern_GUI_Panel_Board_List extends GUI_Panel {
 				$line[] = $box;
 			} else {
 				$lastVisit = $this->config->getVisitedContainer()->selectFirst($options);
-				$link = new GUI_Control_Link('boardname'.$board->getPK(), $board->name, $module->getUrl(array('board' => $board->id)));
+				
+				$urlParams = array('board' => $board->id);
+				if (!$lastVisit || $lastVisit->date < $board->date)
+					$urlParams['show'] = 'recent';
+				
+				$link = new GUI_Control_Link('boardname'.$board->getPK(), $board->name, $module->getUrl($urlParams));
 				if (!$lastVisit || $lastVisit->date < $board->date) {
 					if ($this->config->getIsGlobal()) {
 						$options = array();

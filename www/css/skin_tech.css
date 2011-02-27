@@ -27,6 +27,7 @@
 	$18 -  Reports
 	$19 -  Trade
 	$20 -  Guide
+	$21 -  Boards
 */
 
 /* $1  -  Common Elements ----------------------------------------------------*/
@@ -973,4 +974,9 @@ body.skin_tech
 /* $20 -  Guide --------------------------------------------------------------*/
 .skin_tech .module_guide li {
 	margin:0px 0px 10px 10px;
+}
+
+/* $21 -  Boards -------------------------------------------------------------*/
+.skin_tech .rakuun_board_posting_mostrecent {
+	background-color:#55565c;
 }
