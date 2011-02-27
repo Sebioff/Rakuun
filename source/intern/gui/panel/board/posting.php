@@ -20,7 +20,7 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->setTemplate(dirname(__FILE__).'/posting.tpl');
 		if ((Router::get()->getCurrentModule()->getParam('edit') == $this->posting->getPK()
-			&& $this->posting->deleted == 0)		
+			&& $this->posting->deleted == 0)
 			&& (($this->posting->user && $this->posting->user->getPK() == $user->getPK())
 				|| ($this->posting->userName && $this->posting->userName == $user->nameUncolored && $this->posting->roundNumber == RAKUUN_ROUND_NAME))
 		) {
@@ -50,9 +50,11 @@ class Rakuun_Intern_GUI_Panel_Board_Posting extends GUI_Panel {
 			$this->addPanel(new GUI_Panel_Date('editdate', $this->posting->editdate));
 		if ($this->posting->deleted == 0
 			&& (($this->posting->user && $this->posting->user->getPK() == $user->getPK())
-			|| ($this->posting->userName && $this->posting->userName == $user->nameUncolored && $this->posting->roundNumber == RAKUUN_ROUND_NAME))) 
+			|| ($this->posting->userName && $this->posting->userName == $user->nameUncolored && $this->posting->roundNumber == RAKUUN_ROUND_NAME)))
 		{
-			$this->addPanel(new GUI_Control_Link('editlink', '-edit-', Router::get()->getCurrentModule()->getUrl(array('board' => $this->posting->board->getPK(), 'edit' => $this->posting->getPK()))));
+			$urlParams = $this->getModule()->getParams();
+			$urlParams['edit'] = $this->posting->getPK();
+			$this->addPanel(new GUI_Control_Link('editlink', '-edit-', Router::get()->getCurrentModule()->getUrl($urlParams)));
 		}
 		if ($this->getModule()->getParam('moderate') == $user->getPK()) {
 			$this->addPanel($deleteButton = new GUI_Control_SubmitButton('delete', 'Löschen'));
