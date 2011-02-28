@@ -46,7 +46,6 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 			$postingsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->getTable();
 			$lastVisitTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalLastVisitedContainer()->getTable();
 			$boardsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalContainer()->getTable();
-			define('CORE_DEBUG_SHOW_QUERIES', true);
 			// count for all posts that have lastVisited information
 			$options = array();
 			$options['join'] = array($lastVisitTable);
