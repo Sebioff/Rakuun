@@ -29,26 +29,26 @@ class Rakuun_Text {
 	private static function replaceSmileys($text) {
 		$smileyPath = Router::get()->getStaticRoute('images', '/smileys');
 		return str_replace(self::getSmilieCodes(), array(
-			'<img src="'.$smileyPath.'/artist.gif">',
-			'<img src="'.$smileyPath.'/cry.gif">',
-			'<img src="'.$smileyPath.'/dizzy.gif">',
-			'<img src="'.$smileyPath.'/eyepatch.gif">',
-			'<img src="'.$smileyPath.'/happy.gif">',
-			'<img src="'.$smileyPath.'/ape.gif">',
-			'<img src="'.$smileyPath.'/frown.gif">',
-			'<img src="'.$smileyPath.'/cool.gif">',
-			'<img src="'.$smileyPath.'/happy2.gif">',
-			'<img src="'.$smileyPath.'/mad.gif">',
-			'<img src="'.$smileyPath.'/nono.gif">',
-			'<img src="'.$smileyPath.'/oh.gif">',
-			'<img src="'.$smileyPath.'/sad.gif">',
-			'<img src="'.$smileyPath.'/sick.gif">',
-			'<img src="'.$smileyPath.'/tongue.gif">',
-			'<img src="'.$smileyPath.'/uuh.gif">',
-			'<img src="'.$smileyPath.'/wacko.gif">',
-			'<img src="'.$smileyPath.'/zwinker.gif">',
-			'<img src="'.$smileyPath.'/elk.gif">',
-			'<img src="'.$smileyPath.'/xd.gif">'
+			'<img src="'.$smileyPath.'/artist.gif" alt="artist" />',
+			'<img src="'.$smileyPath.'/cry.gif" alt="cry" />',
+			'<img src="'.$smileyPath.'/dizzy.gif" alt="dizzy" />',
+			'<img src="'.$smileyPath.'/eyepatch.gif" alt="eyepatch" />',
+			'<img src="'.$smileyPath.'/happy.gif" alt="happy" />',
+			'<img src="'.$smileyPath.'/ape.gif" alt="ape" />',
+			'<img src="'.$smileyPath.'/frown.gif" alt="frown" />',
+			'<img src="'.$smileyPath.'/cool.gif" alt="cool" />',
+			'<img src="'.$smileyPath.'/happy2.gif" alt="happy2" />',
+			'<img src="'.$smileyPath.'/mad.gif" alt="mad" />',
+			'<img src="'.$smileyPath.'/nono.gif" alt="nono" />',
+			'<img src="'.$smileyPath.'/oh.gif" alt="oh" />',
+			'<img src="'.$smileyPath.'/sad.gif" alt="sad" />',
+			'<img src="'.$smileyPath.'/sick.gif" alt="sick" />',
+			'<img src="'.$smileyPath.'/tongue.gif" alt="tongue" />',
+			'<img src="'.$smileyPath.'/uuh.gif" alt="uuh" />',
+			'<img src="'.$smileyPath.'/wacko.gif" alt="wacko" />',
+			'<img src="'.$smileyPath.'/zwinker.gif" alt="zwinker" />',
+			'<img src="'.$smileyPath.'/elk.gif" alt="elk" />',
+			'<img src="'.$smileyPath.'/xd.gif" alt="xd" />'
 		), $text);
 	}
 	
