@@ -24,7 +24,7 @@ class Rakuun_Intern_GUI_Panel_Board_MarkRead extends GUI_Panel {
 			$options = array();
 			$options['conditions'][] = array('board = ?', $board);
 			if ($this->config->getIsGlobal()) {
-				$options['conditions'][] = array('user_name = ?', $user->name);
+				$options['conditions'][] = array('user_name = ?', $user->nameUncolored);
 				$options['conditions'][] = array('round_number = ?', RAKUUN_ROUND_NAME);
 			} else {
 				$options['conditions'][] = array('user = ?', $user);
