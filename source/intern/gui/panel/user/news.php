@@ -50,6 +50,7 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 			$options = array();
 			$options['join'] = array($lastVisitTable);
 			$options['conditions'][] = array($lastVisitTable.'.user_name = ?', Rakuun_User_Manager::getCurrentUser()->nameUncolored);
+			$options['conditions'][] = array($lastVisitTable.'.round_number = ?', RAKUUN_ROUND_NAME);
 			$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
 			$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
 			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
@@ -57,7 +58,7 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 			
 			// count for all posts that have no lastVisited information
 			$options = array();
-			$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\'';
+			$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\' AND '.$lastVisitTable.'.round_number = \''.DB_Container::escape(RAKUUN_ROUND_NAME).'\'';
 			$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
 			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
 			$newPostingsCount += Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);

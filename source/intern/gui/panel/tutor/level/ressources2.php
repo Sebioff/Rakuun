@@ -6,7 +6,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Ressources2 extends Rakuun_Intern_GUI_
 	}
 	
 	public function getDescription() {
-		$ressourcesLink = new GUI_Control_Link('resslink', 'Ressourcenübersicht ("Ressourcen -&gt; Übersicht")', App::get()->getInternModule()->getSubmodule('ressources')->getUrl());
+		$ressourcesLink = new GUI_Control_Link('resslink', 'Ressourcenübersicht ("Rohstoffe -&gt; Übersicht")', App::get()->getInternModule()->getSubmodule('ressources')->getUrl());
 		return '
 			Deine Arbeiter haben ihre Arbeit aufgenommen und produzieren nun zusätzliche Rohstoffe.
 			Die Veränderung der Produktionsrate solltest du dir auch wieder auf der '.$ressourcesLink->render().' angucken.<br />
