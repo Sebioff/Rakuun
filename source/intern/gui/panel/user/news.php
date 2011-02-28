@@ -54,12 +54,11 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 			$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
 			$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
 			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
-			$options['group'] = $postingsTable.'.id';
 			$newPostingsCount = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
 			
 			// count for all posts that have no lastVisited information
 			$options = array();
-			$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\' AND '.$lastVisitTable.'.round_number = \''.DB_Container::escape(RAKUUN_ROUND_NAME).'\' GROUP BY '.$boardsTable.'.id';
+			$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\' AND '.$lastVisitTable.'.round_number = \''.DB_Container::escape(RAKUUN_ROUND_NAME).'\'';
 			$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
 			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
 			$newPostingsCount += Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
@@ -84,13 +83,12 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 				$options['conditions'][] = array($lastVisitTable.'.user = ?', Rakuun_User_Manager::getCurrentUser());
 				$options['conditions'][] = array($boardsTable.'.alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
 				$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
-				$options['group'] = $postingsTable.'.id';
 				$newPostingsCount = Rakuun_DB_Containers::getBoardsAlliancePostingsContainer()->count($options);
 				
 				// count for all posts that have no lastVisited information
 				$options = array();
 				$options['join'] = array($boardsTable);
-				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK().' GROUP BY '.$boardsTable.'.id';
+				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK();
 				$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
 				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
 				$options['conditions'][] = array($boardsTable.'.alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance);
@@ -117,13 +115,12 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 				$options['conditions'][] = array($lastVisitTable.'.user = ?', Rakuun_User_Manager::getCurrentUser());
 				$options['conditions'][] = array($boardsTable.'.meta = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
 				$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
-				$options['group'] = $postingsTable.'.id';
 				$newPostingsCount = Rakuun_DB_Containers::getBoardsMetaPostingsContainer()->count($options);
 				
 				// count for all posts that have no lastVisited information
 				$options = array();
 				$options['join'] = array($boardsTable);
-				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK().' GROUP BY '.$boardsTable.'.id';
+				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user = '.Rakuun_User_Manager::getCurrentUser()->getPK();
 				$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
 				$options['conditions'][] = array($boardsTable.'.id = '.$postingsTable.'.board');
 				$options['conditions'][] = array($boardsTable.'.meta = ?', Rakuun_User_Manager::getCurrentUser()->alliance->meta);
