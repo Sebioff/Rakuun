@@ -58,8 +58,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 		$log->date = time();
 		$log->type = Rakuun_Intern_GUI_Panel_Alliance_Account::TYPE_USER_TO_ALLIANCE;
 		$log->ip = $_SERVER['REMOTE_ADDR'];
-		$log->hostname = gethostbyaddr($logEntry->ip);
-		$$log->browser = $_SERVER['HTTP_USER_AGENT'];
+		$log->hostname = gethostbyaddr($log->ip);
+		$log->browser = $_SERVER['HTTP_USER_AGENT'];
 		Rakuun_DB_Containers::getAlliancesAccountlogContainer()->save($log);
 		DB_Connection::get()->commit();
 		$this->setSuccessMessage('Transfer erfolgreich.');
