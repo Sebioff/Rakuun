@@ -42,34 +42,36 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 			}
 			
 			
-			// new global board posts
-			$postingsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->getTable();
-			$lastVisitTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalLastVisitedContainer()->getTable();
-			$boardsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalContainer()->getTable();
-			// count for all posts that have lastVisited information
-			$options = array();
-			$options['join'] = array($lastVisitTable);
-			$options['conditions'][] = array($lastVisitTable.'.user_name = ?', Rakuun_User_Manager::getCurrentUser()->nameUncolored);
-			$options['conditions'][] = array($lastVisitTable.'.round_number = ?', RAKUUN_ROUND_NAME);
-			$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
-			$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
-			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
-			$newPostingsCount = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
-			
-			// count for all posts that have no lastVisited information
-			$options = array();
-			$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\' AND '.$lastVisitTable.'.round_number = \''.DB_Container::escape(RAKUUN_ROUND_NAME).'\'';
-			$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
-			$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
-			$newPostingsCount += Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
-			
-			if ($newPostingsCount > 0) {
-				$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('global')->getUrl();
-				$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_global_board_posts', $newPostingsCount.' neue Beiträge im allgemeinen Forum.', $url));
-				if ($newPostingsCount == 1)
-					$unreadMessagesLink->setCaption('1 neuer Beitrag im allgemeinen Forum.');
+			if (Rakuun_User_Manager::getCurrentUser()->showGlobalBoardCount) {
+				// new global board posts
+				$postingsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->getTable();
+				$lastVisitTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalLastVisitedContainer()->getTable();
+				$boardsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalContainer()->getTable();
+				// count for all posts that have lastVisited information
+				$options = array();
+				$options['join'] = array($lastVisitTable);
+				$options['conditions'][] = array($lastVisitTable.'.user_name = ?', Rakuun_User_Manager::getCurrentUser()->nameUncolored);
+				$options['conditions'][] = array($lastVisitTable.'.round_number = ?', RAKUUN_ROUND_NAME);
+				$options['conditions'][] = array($postingsTable.'.board = '.$lastVisitTable.'.board');
+				$options['conditions'][] = array($postingsTable.'.date > '.$lastVisitTable.'.date');
+				$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
+				$newPostingsCount = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
+				
+				// count for all posts that have no lastVisited information
+				$options = array();
+				$subQuery = 'SELECT '.$boardsTable.'.id FROM '.$boardsTable.', '.$lastVisitTable.' WHERE '.$boardsTable.'.id = '.$lastVisitTable.'.board AND '.$lastVisitTable.'.user_name = \''.DB_Container::escape(Rakuun_User_Manager::getCurrentUser()->nameUncolored).'\' AND '.$lastVisitTable.'.round_number = \''.DB_Container::escape(RAKUUN_ROUND_NAME).'\'';
+				$options['conditions'][] = array($postingsTable.'.board NOT IN ('.$subQuery.')');
+				$options['conditions'][] = array($postingsTable.'.round_number = ?', RAKUUN_ROUND_NAME);
+				$newPostingsCount += Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->count($options);
+				
+				if ($newPostingsCount > 0) {
+					$url = App::get()->getInternModule()->getSubmodule('boards')->getSubmodule('global')->getUrl();
+					$this->addPanel($unreadMessagesLink = new GUI_Control_Link('unread_global_board_posts', $newPostingsCount.' neue Beiträge im allgemeinen Forum.', $url));
+					if ($newPostingsCount == 1)
+						$unreadMessagesLink->setCaption('1 neuer Beitrag im allgemeinen Forum.');
+				}
 			}
-			
+				
 			// new alliance board posts
 			if (App::get()->getInternModule()->getSubmodule('boards')->hasSubmodule('alliance') && Rakuun_User_Manager::getCurrentUser()->alliance) {
 				$postingsTable = Rakuun_DB_Containers::getBoardsAlliancePostingsContainer()->getTable();

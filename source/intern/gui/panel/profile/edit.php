@@ -54,6 +54,7 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 		$this->contentPanel->addPanel($picture = new GUI_Control_FileUpload('picture', 102400, 'Profilbild'));
 		$picture->setAllowedFiletypes(array(GUI_Control_FileUpload::TYPE_GIF, GUI_Control_FileUpload::TYPE_JPEG, GUI_Control_FileUpload::TYPE_PNG));
 		$this->contentPanel->addPanel(new GUI_Control_CheckBox('tutorial', 1, (bool)$user->tutorial, 'Zeige Tutorial'));
+		$this->contentPanel->addPanel(new GUI_Control_CheckBox('boardcount', 1, (bool)$user->showGlobalBoardCount, 'Zeige Anzahl neuer Beiträge im globalen Forum'));
 		$this->contentPanel->addPanel(new GUI_Control_SubmitButton('submit', 'Speichern'));
 	}
 	
@@ -116,6 +117,7 @@ class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
 			Rakuun_Intern_Log_Userdata::log($user, Rakuun_Intern_Log::ACTION_USERDATA_SITTER, 'kein Sitter');
 		$user->sitter = $sitter;
 		$user->tutorial = $this->contentPanel->tutorial->getSelected();
+		$user->showGlobalBoardCount = $this->contentPanel->boardcount->getSelected();
 		
 		Rakuun_User_Manager::update($user);
 		Rakuun_GUI_Skinmanager::get()->setCurrentSkin($user->skin);

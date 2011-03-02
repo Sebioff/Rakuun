@@ -51,3 +51,11 @@
 	du nach 24 Stunden noch keine Aktivierungsmail erhalten hast.
 	<br />
 <? endif; ?>
+
+<? if (Rakuun_User_Manager::getCurrentUser()->lastGnVoting < time() - Rakuun_Intern_Module_GNVote::GN_VOTE_TIMELIMIT): ?>
+	<div id="ctn_ad_buttons">
+		<a href="<?= App::get()->getInternModule()->getSubmodule('vote')->getURL(); ?>" class="gnews_link" target="_blank">
+			<img src="<?= Router::get()->getStaticRoute('images', 'vote.gif'); ?>" border="0" alt="Vote bitte für uns!" />
+		</a>
+	</div>
+<? endif; ?>

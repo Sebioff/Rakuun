@@ -23,4 +23,6 @@
 <br class="clear" />
 <? $this->displayLabelForPanel('tutorial'); ?> <? $this->displayPanel('tutorial'); ?>
 <br class="clear" />
+<? $this->displayLabelForPanel('boardcount'); ?> <? $this->displayPanel('boardcount'); ?>
+<br class="clear" />
 <? $this->displayPanel('submit'); ?>

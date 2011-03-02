@@ -22,6 +22,7 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 		$this->addSubmodule(new Rakuun_Intern_Module_Rules('rules'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Guide('guide'));
 		$this->addSubmodule(new Rakuun_Intern_Module_Imprint('imprint'));
+		$this->addSubmodule(new Rakuun_Intern_Module_GNVote('vote'));
 		
 		// modules that aren't accessible by sitter
 		if (!Rakuun_User_Manager::isSitting()) {
