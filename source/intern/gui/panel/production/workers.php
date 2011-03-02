@@ -17,10 +17,11 @@ class Rakuun_Intern_GUI_Panel_Production_Workers extends Rakuun_GUI_Panel_Box {
 		$missingWorkers = $this->getProductionItem()->getRequiredWorkers() - $this->getProductionItem()->getWorkers();
 		if ($missingWorkers > $this->getProductionItem()->getUser()->ressources->people)
 			$missingWorkers = $this->getProductionItem()->getUser()->ressources->people;
-		$this->contentPanel->addPanel(new GUI_Control_DigitBox('workers_add_amount', $missingWorkers));
+		$maxAddAmount = min($missingWorkers, $this->getProductionItem()->getUser()->ressources->people);
+		$this->contentPanel->addPanel(new GUI_Control_DigitBox('workers_add_amount', $missingWorkers, 'Einzustellende Arbeiter', 0, $maxAddAmount));
 		$this->contentPanel->addPanel(new GUI_Control_SubmitButton('workers_add', 'Arbeiter einstellen'));
 		
-		$this->contentPanel->addPanel(new GUI_Control_DigitBox('workers_remove_amount'));
+		$this->contentPanel->addPanel(new GUI_Control_DigitBox('workers_remove_amount', 0, 'Zu entlassende Arbeiter', 0, $this->getProductionItem()->getWorkers()));
 		$this->contentPanel->addPanel(new GUI_Control_SubmitButton('workers_remove', 'Arbeiter entlassen'));
 	}
 	
