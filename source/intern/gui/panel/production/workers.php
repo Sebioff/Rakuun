@@ -27,35 +27,32 @@ class Rakuun_Intern_GUI_Panel_Production_Workers extends Rakuun_GUI_Panel_Box {
 	
 	// CALLBACKS ---------------------------------------------------------------
 	public function onWorkersAdd() {
-		if ($this->hasErrors())
+		if ($this->contentPanel->hasErrors())
 			return;
 		
-		if (Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser())->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} + $this->contentPanel->workersAddAmount->getValue() <= $this->getProductionItem()->getRequiredWorkers()) {
-			DB_Connection::get()->beginTransaction();
-			$this->getProductionItem()->getUser()->ressources->lower(0, 0, 0, $this->contentPanel->workersAddAmount->getValue());
-			$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser());
-			$workers->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} += $this->contentPanel->workersAddAmount->getValue();
-			$workers->save();
-			DB_Connection::get()->commit();
-				
-			$this->getModule()->invalidate();	
-		}
+		DB_Connection::get()->beginTransaction();
+		$this->getProductionItem()->getUser()->ressources->lower(0, 0, 0, $this->contentPanel->workersAddAmount->getValue());
+		$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser());
+		$workers->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} += $this->contentPanel->workersAddAmount->getValue();
+		$workers->save();
+		DB_Connection::get()->commit();
+			
+		$this->getModule()->invalidate();
 	}
 	
 	public function onWorkersRemove() {
-		if ($this->hasErrors())
+		if ($this->contentPanel->hasErrors())
 			return;
-		if (Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser())->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} - $this->contentPanel->workersRemoveAmount->getValue() >= 0) {
-			DB_Connection::get()->beginTransaction();
-			$currentWorkers = $this->getProductionItem()->getWorkers();
 		
-			$this->getProductionItem()->getUser()->ressources->raise(0, 0, 0, $this->contentPanel->workersRemoveAmount->getValue());
-			$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser());
-			$workers->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} -= $this->contentPanel->workersRemoveAmount->getValue();
-			$workers->save();
-			DB_Connection::get()->commit();
-			$this->getModule()->invalidate();
-		}
+		DB_Connection::get()->beginTransaction();
+		$currentWorkers = $this->getProductionItem()->getWorkers();
+	
+		$this->getProductionItem()->getUser()->ressources->raise(0, 0, 0, $this->contentPanel->workersRemoveAmount->getValue());
+		$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($this->getProductionItem()->getUser());
+		$workers->{Text::underscoreToCamelCase($this->getProductionItem()->getInternalName())} -= $this->contentPanel->workersRemoveAmount->getValue();
+		$workers->save();
+		DB_Connection::get()->commit();
+		$this->getModule()->invalidate();
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
