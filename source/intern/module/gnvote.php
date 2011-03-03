@@ -8,8 +8,10 @@ class Rakuun_Intern_Module_GNVote extends Module {
 		parent::init();
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
-		$user->lastGnVoting = time();
-		Rakuun_User_Manager::update($user);
+		if ($user->lastGnVoting < time() - self::GN_VOTE_TIMELIMIT) {
+			$user->lastGnVoting = time();
+			Rakuun_User_Manager::update($user);
+		}
 		
 		Scriptlet::redirect(self::GN_VOTE_URL);
 	}
