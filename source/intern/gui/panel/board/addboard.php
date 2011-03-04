@@ -25,7 +25,7 @@ class Rakuun_Intern_GUI_Panel_Board_AddBoard extends GUI_Panel {
 			return;
 		
 		$board = $this->config->getBoardRecord();
-		$board->name = $this->name->getValue();
+		$board->name = Text::escapeHTML($this->name->getValue());
 		$board->date = time();
 		$this->config->getBoardsContainer()->save($board);
 		$this->name->resetValue();
