@@ -13,7 +13,9 @@ class Rakuun_Index_Module_Screenshots extends Rakuun_Index_Module {
 		$this->addJsAfterContent('
 			$(".lightbox").lightbox({
 			    fitToScreen: true,
-			    imageClickClose: false
+			    imageClickClose: false,
+			    fileLoadingImage: "'.Router::get()->getStaticRoute('images', 'lightbox/loading.gif').'",
+				fileBottomNavCloseImage: "'.Router::get()->getStaticRoute('images', 'lightbox/closelabel.gif').'"
 		    });
 		');
 	}
