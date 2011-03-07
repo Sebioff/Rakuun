@@ -8,7 +8,9 @@ class Rakuun_Intern_Module_GNVote extends Module {
 		parent::init();
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
-		if ($user->lastGnVoting < time() - self::GN_VOTE_TIMELIMIT) {
+
+		//FIXME Hotfix! Page is viewable outside (not logged in)
+		if ($user && $user->lastGnVoting < time() - self::GN_VOTE_TIMELIMIT) {
 			$user->lastGnVoting = time();
 			Rakuun_User_Manager::update($user);
 		}

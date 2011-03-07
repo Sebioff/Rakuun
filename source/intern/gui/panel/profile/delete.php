@@ -9,7 +9,8 @@ class Rakuun_Intern_GUI_Panel_Profile_Delete extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/delete.tpl');
 		
-		$this->addPanel(new GUI_Control_SecureSubmitButton('submit', 'Löschen'));;
+		$this->addPanel($deleteButton = new GUI_Control_SecureSubmitButton('submit', 'Löschen'));
+		$deleteButton->setConfirmationMessage('Soll der Account wirklich gelöscht werden?');
 		$this->addPanel($password = new GUI_Control_PasswordBox('password', null, 'Passwort'));
 		$password->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel(new GUI_Control_TextArea('text', null, 'Begründung'));
