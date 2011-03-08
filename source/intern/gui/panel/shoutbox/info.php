@@ -14,6 +14,7 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Info extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/info.tpl');
 		$this->addClasses('rakuun_gui_infopanel');
+		$this->addClasses('cursor_pointer');
 		
 		$this->addJS("
 			$('#".$this->getID()."').click(function() {
@@ -21,7 +22,8 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Info extends GUI_Panel {
 			});
 			function shoutboxInfoText(text) {
 				$('#".$this->shoutarea->getID()."').val($('#".$this->shoutarea->getID()."').val() + ' ' + jQuery.trim(text));
-				$('#".$this->getID()."_hover').slideToggle('slow', 'linear');
+				shoutboxCountCharactersDown();
+				$('#".$this->getID()."').click();
 			}
 			$('#".$this->getID()."_hover dl dt').click(function() { shoutboxInfoText($(this).html()) });
 			$('#".$this->getID()."_hover dl dd').click(function() { shoutboxInfoText($(this).prev().html()) });
@@ -32,10 +34,9 @@ class Rakuun_Intern_GUI_Panel_Shoutbox_Info extends GUI_Panel {
 			'#nickname#' => 'Maplink \'nickname\''
 		);
 		
-		$rakuunText = new Rakuun_Text();
 		$smilies = array();
 		foreach (Rakuun_Text::getSmilieCodes() as $smilie) {
-			$smilies[$smilie] = $rakuunText->formatPlayerText($smilie);
+			$smilies[$smilie] = Rakuun_Text::formatPlayerText($smilie);
 		}
 		$this->params->smilies = $smilies;
 	}
