@@ -13,7 +13,7 @@
 					<?= $image->render(); ?>
 					<?= $effects[$databaseRecord->identifier]; ?> (aktuell: +<?= $database->getEffectValue() * 100; ?>%)
 				</li>
-			<? else ?>
+			<? else: ?>
 				<? $invisibleCount++; ?>
 			<? endif; ?>
 		<? endforeach; ?>
