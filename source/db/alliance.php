@@ -86,6 +86,29 @@ class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_O
 		}
 		return $sum / $count;
 	}
+	
+	public function canSeeDatabase($identifier) {
+		switch ($identifier) {
+			case Rakuun_User_Specials::SPECIAL_DATABASE_BLUE:
+				return $this->buildings->databaseDetectorBlue > 0;
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_BROWN:
+				return $this->buildings->databaseDetectorBrown > 0;
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_GREEN:
+				return $this->buildings->databaseDetectorGreen > 0;
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_RED:
+				return $this->buildings->databaseDetectorRed > 0;
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW:
+				return $this->buildings->databaseDetectorYellow > 0;
+			break;
+			default:
+				return false;
+			break;
+		}
+	}
 }
 
 ?>

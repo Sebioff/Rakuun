@@ -32,9 +32,12 @@ class Rakuun_Intern_GUI_Panel_User_ShowProfile extends GUI_Panel {
 		$databases = Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->select($options);
 		
 		$databasePanels = array();
+		$actualUser = Rakuun_User_Manager::getCurrentUser();
 		foreach ($databases as $db) {
-			$this->addPanel($image = new Rakuun_Intern_GUI_Panel_Specials_Database('image_'.$db->identifier, $db->identifier));
-			$databasePanels[] = $image;
+			if ($actualUser && $actualUser->alliance && $actualUser->alliance->canSeeDatabase($db->identifier)) {
+				$this->addPanel($image = new Rakuun_Intern_GUI_Panel_Specials_Database('image_'.$db->identifier, $db->identifier));
+				$databasePanels[] = $image;
+			}
 		}
 		$this->params->databasePanels = $databasePanels;
 		

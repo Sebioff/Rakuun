@@ -24,7 +24,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		parent::beforeInit();
 		
 		$this->addPanel($this->table = new GUI_Panel_Table('reports'));
-		$this->table->setFoldEvery(10, 'Ältere Berichte');
+		$this->table->setFoldEvery(20, 'Ältere Berichte');
 	}
 	
 	public function afterInit() {
