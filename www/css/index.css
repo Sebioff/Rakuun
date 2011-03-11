@@ -6,6 +6,7 @@
 	$3  -  Login
 	$4  -  News
 	$5  -  Infos
+	$6  -  Error
 */
 
 /* $1  -  Index --------------------------------------------------------------*/
@@ -140,4 +141,16 @@ body.infos_main ul {
 
 body.infos_main ul li {
 	padding:2px 0px;
+}
+
+/* $6  -  Error --------------------------------------------------------------*/
+body#rakuun_error_page {
+	background:#000000 url('../images/error.jpg') no-repeat left top;
+	padding:200px 200px 20px 550px;
+}
+	
+body#rakuun_error_page h1 {
+	font-size:16px;
+	font-weight:bold;
+	margin-bottom:20px;
 }
