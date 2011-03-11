@@ -54,8 +54,8 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 		
 		if ($this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SENT && $this->category != Rakuun_Intern_GUI_Panel_Message_Categories::CATEGORY_SUPPORTTICKETS) {
 			$selections = array(
-				self::SELECTION_ALL			=> 'Alle Nachrichten in "'.Rakuun_Intern_GUI_Panel_Message_Categories::getNameForCategory($this->category).'"',
-				self::SELECTION_SELECTED	=> 'Markierte Nachrichten'
+				self::SELECTION_SELECTED	=> 'Markierte Nachrichten',
+				self::SELECTION_ALL			=> 'Alle Nachrichten in "'.Rakuun_Intern_GUI_Panel_Message_Categories::getNameForCategory($this->category).'"'
 			);
 			$this->addPanel(new GUI_Control_DropDownBox('selections', $selections));
 			$actions = array(

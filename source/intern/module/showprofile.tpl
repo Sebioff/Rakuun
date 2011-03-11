@@ -1,4 +1,6 @@
-<? $this->displayPanel('showprofile'); ?>
+<? if ($this->hasPanel('showprofile')): ?>
+	<? $this->displayPanel('showprofile'); ?>
+<? endif; ?>
 <? if ($this->hasPanel('reportsbox')): ?>
 	<br class="clear" />
 	<? $this->displayPanel('armybox'); ?>

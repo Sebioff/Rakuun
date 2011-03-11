@@ -24,7 +24,7 @@ class Rakuun_Intern_Production_Unit_Minigani extends Rakuun_Intern_Production_Un
 		$this->setShortDescription('Minigani');
 		$this->setLongDescription('Miniganis sind leichte Panzer.
 			<br/>
-			Ausgestattet mit 50 mm Kanonen durschlagen sie jede Panzerung und eignen ich daher prima als Bunkerbrecher.
+			Ausgestattet mit 50 mm Kanonen durschlagen sie jede Panzerung und eignen sich daher prima als Bunkerbrecher.
 			<br/>
 			Ihr Motor ist dank des für Panzer relativ niedrigen Gewichtes von 10t in der Lage, sie stark zu beschleunigen, sodass sie Fusstruppen selbst in Gelände übertreffen können.
 			<br/>

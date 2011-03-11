@@ -41,7 +41,11 @@
 		<fb:like href="http://www.rakuun.de" layout="button_count" width="90"></fb:like><div id="fb-root"></div>
 		<a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="RakuunBG">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		<br class="clear"/>
-		<? if ($user->lastGnVoting > time() - Rakuun_Intern_Module_GNVote::GN_VOTE_TIMELIMIT): ?>
+		<? $voteUser = Rakuun_User_Manager::getCurrentUser(); ?>
+		<? if (Rakuun_User_Manager::isSitting()): ?>
+			<? $voteUser = $voteUser->sitter; ?>
+		<? endif; ?>
+		<? if ($voteUser->lastGnVoting > time() - Rakuun_Intern_Module_GNVote::GN_VOTE_TIMELIMIT): ?>
 			<a href="<?= App::get()->getInternModule()->getSubmodule('vote')->getURL(); ?>" class="gnews_link" target="_blank">
 				<img src="<?= Router::get()->getStaticRoute('images', 'vote_soon.gif'); ?>" border="0" alt="Danke fürs voten!" />
 			</a>

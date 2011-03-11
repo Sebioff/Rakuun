@@ -1,6 +1,6 @@
 <?php
 
-class Rakuun_Intern_Module_GNVote extends Module {
+class Rakuun_Intern_Module_GNVote extends Rakuun_Intern_Module {
 	const GN_VOTE_URL = 'http://www.galaxy-news.de/?page=charts&op=vote&game_id=67';
 	const GN_VOTE_TIMELIMIT = 86400; // 24h
 	
@@ -8,9 +8,9 @@ class Rakuun_Intern_Module_GNVote extends Module {
 		parent::init();
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
-
-		//FIXME Hotfix! Page is viewable outside (not logged in)
-		if ($user && $user->lastGnVoting < time() - self::GN_VOTE_TIMELIMIT) {
+		if (Rakuun_User_Manager::isSitting())
+			$user = $user->sitter;
+		if ($user->lastGnVoting < time() - self::GN_VOTE_TIMELIMIT) {
 			$user->lastGnVoting = time();
 			Rakuun_User_Manager::update($user);
 		}
