@@ -65,7 +65,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$atter->addPanel(new Rakuun_GUI_Control_UserLink('userlink'.$spy->getPK(), $spy->user, $spy->user->getPK()));
 			$line[] = $atter;
 			$target = new GUI_Panel('target'.$spy->getPK());
-			if ($spy->spiedUser->alliance) {
+			if ($spy->spiedUser && $spy->spiedUser->alliance) {
 				$target->addPanel($link = new Rakuun_GUI_Control_AllianceLink('targetalliancelink'.$spy->getPK(), $spy->spiedUser->alliance));
 				$link->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
 			}
