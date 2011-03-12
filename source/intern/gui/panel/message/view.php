@@ -80,8 +80,9 @@ class Rakuun_Intern_GUI_Panel_Message_View extends GUI_Panel_PageView {
 			$selectedIDs = array();
 			foreach ($this->selectedMessages->getSelectedItems() as $selectedItem)
 				$selectedIDs[] = DB_Container::escape($selectedItem->getValue());
-			if ($selectedIDs)
-				$options['conditions'][] = array('id IN ('.implode(', ', $selectedIDs).')');
+			if (!$selectedIDs)
+				return;
+			$options['conditions'][] = array('id IN ('.implode(', ', $selectedIDs).')');
 		}
 		
 		if ($this->actions->getKey() == self::ACTION_DELETE) {

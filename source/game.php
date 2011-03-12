@@ -48,6 +48,8 @@ abstract class Rakuun_Game {
 		}
 		$message .= "\n\n";
 		$message .= 'POST Content: '.print_r($_POST, true);
+		$message .= "\n\n";
+		$message .= 'SERVER Content: '.print_r($_SERVER, true);
 		$mail->setMessage($message);
 		$recipients = explode(',', RAKUUN_ERRORMAIL_RECIPIENTS);
 		$mail->addRecipients($recipients);
