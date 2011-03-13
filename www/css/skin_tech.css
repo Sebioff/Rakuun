@@ -102,6 +102,18 @@ body.skin_tech
 	padding-left:21px;
 }
 
+.skin_tech .rakuun_box .core_ajax_loading {
+	background:transparent url('../images/tech/loading.gif') no-repeat center center;
+	padding-left:inherit;
+}
+
+.skin_tech .rakuun_box .core_ajax_loading * {
+	opacity:.3;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	filter:alpha(opacity=30);
+	
+}
+
 .skin_tech .core_gui_hoverinfo {
 	background-color:#363840;
 	border:1px solid #78787D;
