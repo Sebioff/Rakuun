@@ -44,7 +44,7 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 			$this->addPanel(new Rakuun_Intern_GUI_Panel_Shoutbox_Shout('shout_'.$shout->getPK(), $this->config, $shout));
 		}
 		
-		$this->refresh->setAttribute('onclick', sprintf('$.core.refreshPanels([\'%s\']); return false;', $this->getParent()->getID()));
+		$this->refresh->setAttribute('onclick', sprintf('$(\'#%1$s\').addClass(\'core_ajax_loading\'); $.core.refreshPanels([\'%2$s\']); return false;', $this->getID(), $this->getParent()->getID()));
 		
 		$this->shoutarea->addJS(sprintf(
 			'
