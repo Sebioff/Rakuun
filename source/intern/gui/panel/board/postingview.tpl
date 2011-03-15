@@ -7,6 +7,7 @@
 		<? $this->displayPanel('moderatelink'); ?>
 	<? endif; ?>
 	<? $this->displayPanel('board'); ?>
-	<? $this->displayPanel('pages'); ?>
 	<? $this->displayPanel('post'); ?>
+	<br class="clear" />
+	<? $this->displayPanel('pages'); ?>
 </div>

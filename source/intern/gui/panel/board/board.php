@@ -58,25 +58,6 @@ abstract class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_Search('suchen', $this->config));
 	}
 	
-//	public static function getNewPostingsCount(DB_Container $boardsContainer = null, DB_Container $visitedContainer = null) {
-//		$options = array();
-//		$options['conditions'][] = array('user = ?', Rakuun_User_Manager::getCurrentUser());
-//		$_visited = $visitedContainer->select($options);
-//		$visited = array();
-//		foreach ($_visited as $visit) {
-//			$visited[$visit->board->getPK()] = $visit;
-//		}
-//		$boards = $boardsContainer->select();
-//		$count = 0;
-//		foreach ($boards as $board) {
-//			if (isset($visited[$board->getPK()]) && $visited[$board->getPK()]->date < $board->date)
-//				$count++;
-//			if (!isset($visited[$board->getPK()]))
-//				$count++;
-//		}
-//		return $count;
-//	}
-	
 	public function showPages() {
 		return ($this->getPageCount() > 1 && Router::get()->getCurrentModule()->getParam('board') === null);
 	}

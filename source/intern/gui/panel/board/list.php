@@ -23,6 +23,7 @@ class Rakuun_Intern_GUI_Panel_Board_List extends GUI_Panel {
 		$header[] = 'Letzte Änderung';
 		if ($module->getParam('moderate') == $user->getPK()) {
 			$header[] = 'löschen';
+			$header[] = 'schließen';
 			$this->addPanel(new GUI_Control_SubmitButton('edit', 'Namen speichern'));
 		}
 		$table->addHeader($header);
@@ -71,6 +72,10 @@ class Rakuun_Intern_GUI_Panel_Board_List extends GUI_Panel {
 				$button->setConfirmationMessage('Das Forum `'.$board->name.'` wirklich löschen?');
 				$blanko->addPanel(new GUI_Control_HiddenBox('board', $board->getPK()));
 				$line[] = $blanko;
+				$close = new GUI_Control_SubmitButton('close', ($board->closed ? 'Öffnen' : 'Schließen'));
+				$close->setConfirmationMessage('Das Forum `'.$board->name.'` wirklich '.($board->closed ? 'öffnen' : 'schließen?'));
+				$close->addCallback(array($this, 'onCloseCustom'), array($board));
+				$line[] = $close;
 			}
 			$table->addLine($line);
 		}
@@ -95,6 +100,15 @@ class Rakuun_Intern_GUI_Panel_Board_List extends GUI_Panel {
 			return;
 		
 		$board->delete();
+		$this->getModule()->invalidate();
+	}
+	
+	public function onCloseCustom($board) {
+		if ($this->getModule()->getParam('moderate') != Rakuun_User_Manager::getCurrentUser()->getPK() || $this->hasErrors())
+			return;
+		
+		$board->closed = !$board->closed;
+		$board->save();
 		$this->getModule()->invalidate();
 	}
 }

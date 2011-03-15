@@ -74,7 +74,10 @@ class Rakuun_Intern_GUI_Panel_Board_PostingView extends GUI_Panel_PageView {
 				$postingPanel->addClasses('rakuun_board_posting_mostrecent');
 		}
 		$this->params->boardname = $this->config->getBoardRecord()->name;
-		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_AddPost('post', $this->config));
+		if ($this->config->getBoardRecord()->closed)
+			$this->addPanel(new GUI_Panel_Text('post', 'Geschlossen'));
+		else
+			$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_AddPost('post', $this->config));
 		if ($this->config->getUserIsMod()) {
 			$module = $this->getModule();
 			if ($module->getParam('moderate') == $user->getPK())
