@@ -67,15 +67,16 @@ class Rakuun_Intern_GUI_Panel_Board_List extends GUI_Panel {
 			$line[] = new GUI_Panel_Date('date'.$board->getPK().$this->getName(), $board->date);
 			if ($module->getParam('moderate') == $user->getPK()) {
 				$blanko = new GUI_Panel('moderate'.$board->getPK());
-				$blanko->addPanel($button = new GUI_Control_SubmitButton('delete', 'Löschen'));
-				$button->addCallback(array($this, 'onDeleteCustom'), array($board));
-				$button->setConfirmationMessage('Das Forum `'.$board->name.'` wirklich löschen?');
-				$blanko->addPanel(new GUI_Control_HiddenBox('board', $board->getPK()));
+				$blanko->addPanel($delete = new GUI_Control_SubmitButton('delete', 'Löschen'));
+				$delete->addCallback(array($this, 'onDeleteCustom'), array($board));
+				$delete->setConfirmationMessage('Das Forum `'.$board->name.'` wirklich löschen?');
 				$line[] = $blanko;
+				$blanko = new GUI_Panel('close'.$board->getPK());
 				$close = new GUI_Control_SubmitButton('close', ($board->closed ? 'Öffnen' : 'Schließen'));
 				$close->setConfirmationMessage('Das Forum `'.$board->name.'` wirklich '.($board->closed ? 'öffnen' : 'schließen?'));
 				$close->addCallback(array($this, 'onCloseCustom'), array($board));
-				$line[] = $close;
+				$blanko->addPanel($close);
+				$line[] = $blanko;
 			}
 			$table->addLine($line);
 		}
