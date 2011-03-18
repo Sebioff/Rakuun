@@ -12,14 +12,21 @@ class Rakuun_Text {
 	
 	private static function linkPlayerProfiles($match) {
 		if (isset($match[0][1]) && $user = Rakuun_DB_Containers::getUserContainer()->selectByNameFirst(substr($match[0], 1, -1))) {
+			if ($user->alliance) {
+				$allianceLink = new Rakuun_GUI_Control_AllianceLink('', $user->alliance);
+				$allianceLink->setDisplay(Rakuun_GUI_Control_AllianceLink::DISPLAY_TAG_ONLY);
+				$alliance = $allianceLink->render().' ';
+			} else {
+				$alliance = '';
+			}
 			if ($match[0][0] == '@') {
 				$userLink = new Rakuun_GUI_Control_UserLink('', $user);
-				return $userLink->render();
+				return $alliance.$userLink->render();
 			}
 			else {
 				$mapLink = new Rakuun_GUI_Control_MapLink('', $user);
 				$userLink = new Rakuun_GUI_Control_UserLink('', $user);
-				return $mapLink->render().' ('.$userLink->render().')';
+				return $mapLink->render().' '.$alliance.$userLink->render();
 			}
 		}
 		
