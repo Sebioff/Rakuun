@@ -32,6 +32,9 @@ class Rakuun_Intern_GUI_Panel_Meta_Applications extends GUI_Panel {
 	}
 	
 	public function onSubmit() {
+		if (Rakuun_GameSecurity::get()->isInGroup(Rakuun_User_Manager::getCurrentUser(), Rakuun_GameSecurity::GROUP_DEMO))
+			$this->addError('Demo-User darf keine Allianzen in seine Meta aufnehmen.');
+		
 		if ($this->hasErrors())
 			return;
 		

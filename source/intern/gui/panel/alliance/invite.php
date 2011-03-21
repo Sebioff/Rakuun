@@ -39,11 +39,14 @@ class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
 	}
 	
 	public function onSubmit() {
+		$user = Rakuun_User_Manager::getCurrentUser();
+		if (Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_DEMO))
+			$this->addError('Demo-User darf keine Einladungen verschicken.');
+		
 		if ($this->hasErrors())
 			return;
 		
 		DB_Connection::get()->beginTransaction();
-		$user = Rakuun_User_Manager::getCurrentUser();
 		$options = $this->getPossibleRecipientOptions();
 		$options['conditions'][] = array('id = ?', $this->users->getKey());
 		$recipient = Rakuun_DB_Containers::getUserContainer()->selectFirst($options);
