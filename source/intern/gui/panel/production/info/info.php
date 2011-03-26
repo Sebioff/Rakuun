@@ -17,8 +17,8 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$this->contentPanel->addPanel($production = new GUI_Panel_Table('production', 'Produktionsrate'));
 			$production->setAttribute('summary', 'Produktionsrate');
 			$production->addHeader(array('Stufe', 'Produktion / 5 Minuten'));
-			$startLevel = max($this->getProductionItem()->getLevel() - 5, 1);
-			$endLevel = $this->getProductionItem()->getLevel() + 5;
+			$startLevel = max($this->getProductionItem()->getLevel(), 1);
+			$endLevel = $this->getProductionItem()->getLevel() + 10;
 			$productionTime = time() - 60 * 5;
 			for ($i = $startLevel; $i <= $endLevel; $i++) {
 				if ($this->getProductionItem()->getBaseIronProduction() > 0)
@@ -55,8 +55,8 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$this->contentPanel->addPanel($costs = new GUI_Panel_Table('costs', 'Kosten'));
 			$costs->setAttribute('summary', 'Kostentabelle');
 			$costs->addHeader(array('Stufe', 'Eisen', 'Beryllium', 'Energie', 'Leute', 'Zeit'));
-			$startLevel = max($this->getProductionItem()->getLevel() - 5, 1);
-			$endLevel = $this->getProductionItem()->getLevel() + 5;
+			$startLevel = max($this->getProductionItem()->getLevel(), 1);
+			$endLevel = $this->getProductionItem()->getLevel() + 10;
 			if ($this->getProductionItem()->getMaximumLevel() > 0 && $this->getProductionItem()->getMaximumLevel() < $endLevel)
 				$endLevel = $this->getProductionItem()->getMaximumLevel();
 			for ($i = $startLevel; $i <= $endLevel; $i++) {
