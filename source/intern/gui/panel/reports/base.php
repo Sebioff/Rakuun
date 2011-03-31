@@ -31,9 +31,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		parent::afterInit();
 		
 		$this->setTemplate(dirname(__FILE__).'/base.tpl');
-		$units = Rakuun_Intern_Production_Factory::getAllUnits();
-		$buildings = Rakuun_Intern_Production_Factory::getAllBuildings();
-
+		
 		$this->table->addHeader(array('Datum', 'Angreifer', 'Ziel', 'Att', 'Deff', '&Delta; Att', '&Delta; Deff'));
 		$this->table->addTableCssClass('align_right', 3);
 		$this->table->addTableCssClass('align_right', 4);
@@ -73,6 +71,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$line[] = $target;
 			$att = 0;
 			$deff = 0;
+			$units = Rakuun_Intern_Production_Factory::getAllUnits($spy->user);
 			foreach ($units as $unit) {
 				$att += $unit->getAttackValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
 				$deff += $unit->getDefenseValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
