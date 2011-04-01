@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+
+/* Following Googles suggestion to use more Comic Sans MS */
+
+body {
+	font-family:comic sans ms,Verdana,Helvetica,sans-serif !important;
+}

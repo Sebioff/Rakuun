@@ -198,6 +198,9 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		foreach (Rakuun_GUI_Skinmanager::get()->getCssRouteReferences() as $route) {
 			$this->addCssRouteReference($route[0], $route[1]);
 		}
+		
+		if (date('d.m') == '01.04')
+			$this->addCssRouteReference('css', '/seasons/aprilfools.css');
 	}
 	
 	/**
