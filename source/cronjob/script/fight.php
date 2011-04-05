@@ -290,6 +290,15 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 							else
 								$destroyedBuilding = $destructibleBuildings[rand(0, count($destructibleBuildings) - 1)];
 							$army->target->buildings->lower($destroyedBuilding->getInternalName(), $army->user);
+							// remove workers from producers
+							if ($destroyedBuilding instanceof Rakuun_Intern_Production_Building_RessourceProducer) {
+								$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($army->target);
+								// only change workers if amount > maxWorkersAmount
+								if ($workers->{Text::underscoreToCamelCase($destroyedBuilding->getInternalName())} > $destroyedBuilding->getRequiredWorkers()) {
+									$workers->{Text::underscoreToCamelCase($destroyedBuilding->getInternalName())} = $destroyedBuilding->getRequiredWorkers();
+									$workers->save();
+								}
+							}
 							// dancertia got destroyed
 							if ($destroyedBuilding->getInternalName() == 'shield_generator' && $army->target->alliance && $army->target->alliance->meta
 								&& $army->target->alliance->meta->dancertiaStarttime + RAKUUN_SPEED_DANCERTIA_STARTTIME > time() && !$army->target->alliance->meta->hasMemberWithShieldGenerator()
