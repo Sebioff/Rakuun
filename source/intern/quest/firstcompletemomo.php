@@ -1,7 +1,7 @@
 <?php
 
 class Rakuun_Intern_Quest_FirstCompleteMomo extends Rakuun_Intern_Quest {
-	const BUILD_TIME_REDUCTION_PERCENT = 4;
+	const BUILD_TIME_REDUCTION_PERCENT = 50;
 	
 	protected function canBeAwarded() {
 		return (!$this->exists());
@@ -16,7 +16,7 @@ class Rakuun_Intern_Quest_FirstCompleteMomo extends Rakuun_Intern_Quest {
 	}
 	
 	public function getRewardDescription() {
-		return '4% Verkürzung der Bauzeit von Gebäuden';
+		return self::BUILD_TIME_REDUCTION_PERCENT.'% Verkürzung der Bauzeit von Gebäuden';
 	}
 	
 	public function getOwnerName() {
