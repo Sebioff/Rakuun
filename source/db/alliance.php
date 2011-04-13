@@ -69,9 +69,10 @@ class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_O
 	}
 	
 	public function recalculatePoints() {
-		$members = $this->getMembers();
 		$this->points = 0;
-		foreach ($members as $member) {
+		$options = array();
+		$options['properties'] = 'points';
+		foreach (Rakuun_DB_Containers::getUserContainer()->selectByAlliance($this, $options) as $member) {
 			$this->points += $member->points;
 		}
 		$this->save();

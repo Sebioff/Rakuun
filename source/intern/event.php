@@ -27,7 +27,6 @@ class Rakuun_Intern_Event {
 		if ($executingUser)
 			$record->executingUser = $executingUser;
 		Rakuun_DB_Containers::getLogBuildingsContainer()->save($record);
-		$userBuildings->user->recalculatePoints();
 		// if user is offline, save the news
 		if ($record->eventType == self::EVENT_TYPE_BUILDING_PRODUCE && !$userBuildings->user->isOnline()) {
 			$building = Rakuun_Intern_Production_Factory::getBuilding($internalName, $userBuildings->user);
@@ -64,7 +63,6 @@ class Rakuun_Intern_Event {
 		}
 		// TODO save executing user (note: not neccessarily set)
 		Rakuun_DB_Containers::getLogTechnologiesContainer()->save($record);
-		$userTechnologies->user->recalculatePoints();
 		// if user is offline, save the news
 		if ($record->eventType == self::EVENT_TYPE_TECHNOLOGY_PRODUCE && !$userTechnologies->user->isOnline()) {
 			$technology = Rakuun_Intern_Production_Factory::getTechnology($internalName, $userTechnologies->user);

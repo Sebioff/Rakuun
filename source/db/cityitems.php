@@ -15,6 +15,7 @@ class Rakuun_DB_CityItems extends DB_Record {
 			WHERE '.$databaseSchema['primaryKey'].' = '.$this->getPK();
 		if ($this->getContainer()->update($query, $this) === true) {
 			$this->{Text::underscoreToCamelCase($internalName)} -= $deltaLevel;
+			$this->user->recalculatePoints();
 		}
 	}
 	
@@ -29,6 +30,7 @@ class Rakuun_DB_CityItems extends DB_Record {
 			WHERE '.$databaseSchema['primaryKey'].' = '.$this->getPK();
 		if ($this->getContainer()->update($query, $this) === true) {
 			$this->{Text::underscoreToCamelCase($internalName)} += $deltaLevel;
+			$this->user->recalculatePoints();
 		}
 	}
 }
