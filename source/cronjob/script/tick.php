@@ -11,6 +11,9 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 		$options = array();
 		$options['conditions'][] = array('is_online < ?', time() - Rakuun_Intern_Module::TIMEOUT_ISONLINE);
 		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $user) {
+			if (!$user) {
+				backtrace();
+			}
 			DB_Connection::get()->beginTransaction();
 			// produce ressources (needs to be done first due to mines and stores)
 			$user->produceRessources();
