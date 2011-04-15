@@ -10,6 +10,7 @@ class Rakuun_DB_Buildings extends Rakuun_DB_CityItems {
 	public function lower($internalName, Rakuun_DB_User $destroyer, $deltaLevel = 1) {
 		parent::lower($internalName, $destroyer, $deltaLevel);
 		Rakuun_Intern_Event::onChangeBuildingLevel($this, $internalName, $deltaLevel * -1, $destroyer);
+		$this->user->recalculatePoints();
 	}
 	
 	/**
@@ -18,6 +19,7 @@ class Rakuun_DB_Buildings extends Rakuun_DB_CityItems {
 	public function raise($internalName, $deltaLevel = 1) {
 		parent::raise($internalName, $deltaLevel);
 		Rakuun_Intern_Event::onChangeBuildingLevel($this, $internalName, $deltaLevel, Rakuun_User_Manager::getCurrentUser());
+		$this->user->recalculatePoints();
 	}
 }
 
