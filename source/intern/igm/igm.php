@@ -50,11 +50,22 @@ class Rakuun_Intern_IGM extends DB_Record {
 			
 		Rakuun_DB_Containers::getMessagesContainer()->save($this);
 		
+		$newConversation = true;
 		foreach ($this->attachments as $attachment) {
 			$attachmentRecord = new DB_Record();
 			$attachmentRecord->message = $this;
 			$attachmentRecord->type = $attachment[0];
+			if ($attachmentRecord->type == self::ATTACHMENT_TYPE_CONVERSATION)
+				$newConversation = false;
 			$attachmentRecord->value = $attachment[1];
+			Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
+		}
+		
+		if ($newConversation) {
+			$attachmentRecord = new DB_Record();
+			$attachmentRecord->message = $this;
+			$attachmentRecord->type = Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION;
+			$attachmentRecord->value = $this;
 			Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
 		}
 	}

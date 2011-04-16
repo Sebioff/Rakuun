@@ -99,19 +99,13 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 		$igm->setText($message);
 		$igm->send();
 		
-		$attachmentRecord = new DB_Record();
-		$attachmentRecord->message = $igm;
-		$attachmentRecord->type = Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION;
-		$attachmentRecord->value = $igm;
-		Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
-		
 		//check if user has enough cautionpoints to be banned
 		self::checkBan($cautionUser, $cautionReason, $admin);
 	}
 	
 	/*
 	 * Ban the user if he has enough cautionpoints.
-	 * @param user 
+	 * @param user
 	 */
 	private static function checkBan(Rakuun_DB_User $user, $cautionreason = '', Rakuun_DB_User $admin = null) {
 		$isBanned = false;
@@ -151,7 +145,7 @@ class Rakuun_Intern_GUI_Panel_Admin_User_Caution extends GUI_Panel {
 					IO_Log::get()->error($e->getTraceAsString());
 				}
 			}
-		}	
+		}
 	}
 	
 	/**

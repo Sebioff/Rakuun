@@ -28,12 +28,6 @@ class Rakuun_Intern_GUI_Panel_Meta_Mail extends GUI_Panel {
 			$igm->setSender(Rakuun_User_Manager::getCurrentUser());
 			$igm->setText($this->text);
 			$igm->send();
-			
-			$attachmentRecord = new DB_Record();
-			$attachmentRecord->message = $igm;
-			$attachmentRecord->type = Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION;
-			$attachmentRecord->value = $igm;
-			Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
 		}
 		DB_Connection::get()->commit();
 		$this->setSuccessMessage('Nachricht verschickt!');

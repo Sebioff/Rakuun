@@ -4,10 +4,16 @@
  * Class that is responsible for producing units
  */
 class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_Producer {
+	private $unitsHaveBeenProduced = false;
+	
 	public function __construct(DB_Container $itemContainer, DB_Container $itemWIPContainer, Rakuun_DB_User $user = null) {
 		if (!$user)
 			$user = Rakuun_User_Manager::getCurrentUser();
 		parent::__construct($itemContainer, $itemWIPContainer, $user, 'user');
+		
+		if ($this->unitsHaveBeenProduced) {
+			$user->reachNoob();
+		}
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------
@@ -63,11 +69,10 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 			if (DB_Connection::get()->commit()) {
 				// update internal wip-list with the list that got one item less
 				$this->wip = $wipItems;
+				$this->unitsHaveBeenProduced = true;
 				$this->produce();
 			}
-			$firstItem->getUser()->reachNoob();
 		}
-		
 	}
 
 	public function addWIPItem(DB_Record $wipItem) {

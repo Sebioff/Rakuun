@@ -81,12 +81,6 @@ class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
 		//finally save IGM with updated text
 		$igm->save();
 		
-		$attachmentRecord = new DB_Record();
-		$attachmentRecord->message = $igm;
-		$attachmentRecord->type = Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION;
-		$attachmentRecord->value = $igm;
-		Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
-		
 		$this->setSuccessMessage('Nachricht verschickt');
 		//increment invitationscounter
 		$alliance = $user->alliance;

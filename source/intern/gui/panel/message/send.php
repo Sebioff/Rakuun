@@ -71,23 +71,13 @@ class Rakuun_Intern_GUI_Panel_Message_Send extends GUI_Panel {
 				}
 			}
 			
-			$newConversation = false;
 			if ($this->replyToMessage) {
 				$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_REPLYTO, $this->replyToMessage->getPK());
 				$conversationAttachments = $this->replyToMessage->getAttachmentsOfType(Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION);
 				$igm->addAttachment(Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION, $conversationAttachments[0]->value);
 			}
-			else
-				$newConversation = true;
 				
 			$igm->send();
-			if ($newConversation) {
-				$attachmentRecord = new DB_Record();
-				$attachmentRecord->message = $igm;
-				$attachmentRecord->type = Rakuun_Intern_IGM::ATTACHMENT_TYPE_CONVERSATION;
-				$attachmentRecord->value = $igm;
-				Rakuun_DB_Containers::getMessagesAttachmentsContainer()->save($attachmentRecord);
-			}
 		}
 		DB_Connection::get()->commit();
 		$this->setSuccessMessage('Nachricht versendet');
