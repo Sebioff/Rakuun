@@ -132,21 +132,21 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 
 	public function recalculatePoints() {
 		$points = 0;
-		
+
 		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($this) as $building) {
 			$points += $building->getPoints() * $building->getLevel();
 		}
-		
+
 		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies($this) as $technology) {
 			$points += $technology->getPoints() * $technology->getLevel();
 		}
-		
+
 		$this->points = $points;
 		$this->save();
-		
+
 		if ($this->alliance)
 			$this->alliance->recalculatePoints();
-		
+
 		$this->reachNoob();
 	}
 	
@@ -196,26 +196,14 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	 * -> cache results of user count / points sum etc.
 	 */
 	public function reachNoob() {
-		// calc average points
-		$average = Rakuun_Intern_Statistics::averagePoints() * 0.6;
-		$nooblimit = $average;
-		if ($average < RAKUUN_NOOB_START_LIMIT_OF_POINTS)
-			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_POINTS;
-		
-		// calc armystrength
-		$average = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6;
-		$armyStrengthLimit = $average;
-		if ($armyStrengthLimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
-			$armyStrengthLimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
-		$armyStrength = $this->getArmyStrength();
-		
 		$oldNoobState = $this->isInNoob();
-		$this->isInNoob = ($this->points <= $nooblimit	// points below point limit
-						&& $armyStrength <= $armyStrengthLimit //armystrength below armystrength limit
+		$this->isInNoob = (!$this->isYimtay()
+						&& $this->isBelowNoobPointLimit()
+						&& $this->isBelowNoobArmyLimit()
 						&& $this->buildings->shieldGenerator == 0	// no shield generator
 						&& $this->getDatabaseCount() == 0	// no databases
-						&& !Rakuun_DB_Containers::getArmiesContainer()->selectByUserFirst($this)	// no armies
-						&& !$this->isYimtay());
+						&& !Rakuun_DB_Containers::getArmiesContainer()->selectByUserFirst($this));	// no armies
+						
 						
 		if ($oldNoobState != $this->isInNoob) {
 			$this->save();
@@ -249,6 +237,27 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 				}
 			}
 		}
+	}
+	
+	private function isBelowNoobPointLimit() {
+		// calc average points
+		$average = Rakuun_Intern_Statistics::averagePoints() * 0.6;
+		$nooblimit = $average;
+		if ($average < RAKUUN_NOOB_START_LIMIT_OF_POINTS)
+			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_POINTS;
+			
+		return ($this->points <= $nooblimit);	// points below point limit;
+	}
+	
+	private function isBelowNoobArmyLimit() {
+		// calc armystrength
+		$average = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6;
+		$armyStrengthLimit = $average;
+		if ($armyStrengthLimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
+			$armyStrengthLimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
+		$armyStrength = $this->getArmyStrength();
+		
+		return ($armyStrength <= $armyStrengthLimit); //armystrength below armystrength limit
 	}
 	
 	/**
