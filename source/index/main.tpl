@@ -4,6 +4,12 @@
 	</div>
 	<div id="ctn_content">
 		<? $this->displayPage(); ?>
-		<img class="background_image" alt="Rakuun" src="<?= Router::get()->getStaticRoute('images', 'background_index.jpg'); ?>"/>
+		<? $bgImage = Router::get()->getStaticRoute('images', 'background_index.jpg'); ?>
+		<? $easterSunday = easter_date(); ?>
+		<? $date = date('d.m'); ?>
+		<? if ($date == date('d.m', $easterSunday - 60 * 60 * 24 * 2) || $date == date('d.m', $easterSunday - 60 * 60 * 24) || $date == date('d.m', $easterSunday) || $date == date('d.m', $easterSunday + 60 * 60 * 24)): ?>
+			<? $bgImage = Router::get()->getStaticRoute('images', 'seasons/background_index_easter.png'); ?>
+		<? endif; ?>
+		<img class="background_image" alt="Rakuun" src="<?= $bgImage; ?>"/>
 	</div>
 </div>
