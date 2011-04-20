@@ -40,6 +40,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
 		$data = array();
+		$jsReports = 'var reportCache = new Array();';
 		foreach ($this->data as $spy) {
 			if (!self::hasPrivilegesToSeeReport($spy))
 				continue;
@@ -94,11 +95,12 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_att'.$spy->getPK(), $deltaAtt);
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_deff'.$spy->getPK(), $deltaDeff);
 			$data[] = $line;
+			$jsReports .= $this->formatReportForJS($spy, $previousReport);
 		}
 		foreach (array_reverse($data) as $line) {
 			$this->table->addLine($line);
 		}
-		$this->addJS('
+/*		$this->addJS('
 			var reportCache = new Array();
 			$("#'.$this->table->getAjaxID().' tbody tr:not(#'.$this->table->getAjaxID().'-fold)").live("mouseover", function() {
 				var spyId = /spyreport_(\d+)\"/.exec($(this).children().html())[1];
@@ -118,10 +120,38 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 					$("#'.$this->detailBox->getID().' .content_inner").html(reportCache[spyId]);
 				}
 			});
-		');
+		'); */
+		$this->getModule()->addJsRouteReference('core_js', 'base64.js');
+		$jsReports .= '$("#'.$this->table->getAjaxID().' tbody tr:not(#'.$this->table->getAjaxID().'-fold)").live("mouseover", function() {
+			$("#'.$this->detailBox->getID().' .content_inner").html(base64.decode(reportCache[/spyreport_(\d+)\"/.exec($(this).children().html())[1]]));
+		})';
+		$this->addJS($jsReports);
 	}
 	
-	public function ajaxLoadReport() {
+	private function formatReportForJS($report, $previousReport = null) {
+		$reportTable = new GUI_Panel_Table('report_table');
+		$reportTable->addTableCssClass('align_right', 1);
+		$reportTable->addTableCssClass('align_right', 2);
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($report) as $building) {
+			$delta = ($previousReport) ? $building->getLevel() - $previousReport->{Text::underscoreToCamelCase($building->getInternalName())} : $building->getLevel();
+			$reportTable->addLine(array($building->getName(), GUI_Panel_Number::formatNumber($building->getLevel()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta)));
+		}
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
+			$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
+			$reportTable->addLine(array($unit->getName(), GUI_Panel_Number::formatNumber($unit->getAmount()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta)));
+		}
+		
+		$templateEngine = new GUI_TemplateEngine();
+		$templateEngine->report = $report;
+		$templateEngine->userLink = new Rakuun_GUI_Control_UserLink('userlink', $report->spiedUser);
+		$templateEngine->reportTable = $reportTable;
+		
+		return 'reportCache['.$report->getPK().'] = \''.base64_encode($templateEngine->render(dirname(__FILE__).'/report.tpl')).'\';';
+	}
+	
+/*	public function ajaxLoadReport() {
 		$report = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK((int)$_POST['id']);
 		
 		$previousReport = $this->getPreviousReportOf($report);
@@ -149,7 +179,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		$templateEngine->reportTable = $reportTable;
 		
 		return $templateEngine->render(dirname(__FILE__).'/report.tpl');
-	}
+	} */
 
 	public static function hasPrivilegesToSeeReport(DB_Record $report, Rakuun_DB_User $currentUser = null) {
 		if (!$currentUser)
