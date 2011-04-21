@@ -89,8 +89,8 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 	}
 	
 	private function visibleOnLoad() {
-		return !(($this->map->getViewRectX() >= $this->cityOwner->cityX && $this->cityOwner->cityX <= $this->map->getViewRectX() + $this->map->getViewRectSize())
-			&& ($this->map->getViewRectY() >= $this->cityOwner->cityY && $this->cityOwner->cityY <= $this->map->getViewRectY() + $this->map->getViewRectSize()));
+		return (($this->map->getViewRectX() <= (int)$this->cityOwner->cityX && (int)$this->cityOwner->cityX <= $this->map->getViewRectX() + $this->map->getViewRectSize())
+			&& ($this->map->getViewRectY() <= (int)$this->cityOwner->cityY && (int)$this->cityOwner->cityY <= $this->map->getViewRectY() + $this->map->getViewRectSize()));
 	}
 }
 
