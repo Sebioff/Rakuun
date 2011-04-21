@@ -10,7 +10,11 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		$this->cityOwner = $cityOwner;
 		$this->map = $map;
 		
-		$this->enableAjax(true, array($this, 'getCityDescription'));
+		if ($this->visibleOnLoad())
+			$this->setHoverText(str_replace('"', '\\"', $this->getCityDescription()));
+		else
+			$this->enableAjax(true, array($this, 'getCityDescription'));
+		
 		$this->enableLocking();
 	}
 	
@@ -82,6 +86,11 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		}
 		
 		return $hoverText;
+	}
+	
+	private function visibleOnLoad() {
+		return !(($this->map->getViewRectX() >= $this->cityOwner->cityX && $this->cityOwner->cityX <= $this->map->getViewRectX() + $this->map->getViewRectSize())
+			&& ($this->map->getViewRectY() >= $this->cityOwner->cityY && $this->cityOwner->cityY <= $this->map->getViewRectY() + $this->map->getViewRectSize()));
 	}
 }
 
