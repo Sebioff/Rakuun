@@ -260,6 +260,12 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					if ($probability > self::DESTRUCTION_MAX_PROBABILITY)
 						$probability = self::DESTRUCTION_MAX_PROBABILITY;
 					if (rand(1, 100) <= $probability) {
+						$enemiesAtWar = false;
+						if ($army->user->alliance && $army->target->alliance) {
+							$diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
+							if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR)
+								$enemiesAtWar = true;
+						}
 						$destructibleBuildings = array();
 						foreach (Rakuun_Intern_Production_Factory::getAllBuildings($army->target) as $building) {
 							if ($building->getLevel() > $building->getMinimumLevel() && !$building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK)) {
@@ -269,14 +275,8 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 									$options = array();
 									$options['properties'] = $properties[] = 'SUM('.$building->getInternalName().') AS '.$building->getInternalName().'_sum';
 									$averageLevel = round(Rakuun_DB_Containers::getBuildingsContainer()->selectFirst($options)->{Text::underscoreToCamelCase($building->getInternalName().'_sum')} / Rakuun_Intern_Statistics::noOfPlayers());
-									if ($building->getLevel() > $averageLevel) {
-										if ($army->user->alliance && $army->target->alliance) {
-											$diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
-											if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR) {
-												$canBeDestroyed = true;
-											}
-										}
-									}
+									if ($building->getLevel() > $averageLevel && $enemiesAtWar)
+										$canBeDestroyed = true;
 								}
 								
 								if ($canBeDestroyed)
