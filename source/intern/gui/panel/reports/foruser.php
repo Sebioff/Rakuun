@@ -13,7 +13,8 @@ class Rakuun_Intern_GUI_Panel_Reports_ForUser extends Rakuun_Intern_GUI_Panel_Re
 		$options = array();
 		$options['conditions'][] = array('spied_user = ?', $this->user);
 		$options['conditions'][] = array('deleted = ?', 0);
-		$options['order'] = 'time ASC';
+		$options['order'] = 'time DESC';
+		$options['limit'] = Rakuun_Intern_GUI_Panel_Reports_Base::MAX_REPORTS_TO_LOAD;
 		$this->data = Rakuun_DB_Containers::getLogSpiesContainer()->select($options);
 		
 		parent::afterInit();

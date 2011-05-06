@@ -5,7 +5,8 @@ class Rakuun_Intern_GUI_Panel_Reports_ForMeta extends Rakuun_Intern_GUI_Panel_Re
 		$meta = Rakuun_DB_Containers::getMetasContainer()->selectByPK((int)$this->getModule()->getParam('id'));
 		if ($meta) {
 			$options = array();
-			$options['order'] = 'time ASC';
+			$options['order'] = 'time DESC';
+			$options['limit'] = Rakuun_Intern_GUI_Panel_Reports_Base::MAX_REPORTS_TO_LOAD;
 			$options['conditions'][] = array('spied_user IN ('.implode(', ', $meta->members).')');
 			$options['conditions'][] = array('deleted = ?', 0);
 			foreach ($this->getFilterStrings() as $filterString) {

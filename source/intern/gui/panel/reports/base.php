@@ -6,6 +6,9 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	private $table;
 	private $detailBox = null;
 	
+	const REPORTS_PER_PAGE = 20;
+	const MAX_REPORTS_TO_LOAD = 300;
+	
 	public function __construct($name, Rakuun_GUI_Panel_Box $detailBox, $title = '') {
 		parent::__construct($name, $title);
 		
@@ -24,7 +27,17 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		parent::beforeInit();
 		
 		$this->addPanel($this->table = new GUI_Panel_Table('reports'));
-		$this->table->setFoldEvery(20, 'Ältere Berichte');
+		$this->table->setFoldEvery(self::REPORTS_PER_PAGE, 'Ältere Berichte', 'addJsReports()');
+		$this->addJs('function addJsReports() {
+			$.core.ajaxRequest(
+				"'.$this->getAjaxID().'",
+				"ajaxAddJsReports",
+				{ after: foldedAfter[\''.$this->table->getName().'\'] },
+				function(data) {
+					eval(data);
+				}
+			);
+		}');
 	}
 	
 	public function afterInit() {
@@ -39,7 +52,6 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		$this->table->addTableCssClass('align_right', 6);
 
 		$actualUser = Rakuun_User_Manager::getCurrentUser();
-		$data = array();
 		$jsReports = 'var reportCache = new Array();';
 		foreach ($this->data as $spy) {
 			if (!self::hasPrivilegesToSeeReport($spy))
@@ -94,33 +106,11 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$deltaDeff = $lastDeff > 0 ? $deff - $lastDeff : $deff;
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_att'.$spy->getPK(), $deltaAtt);
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_deff'.$spy->getPK(), $deltaDeff);
-			$data[] = $line;
-			$jsReports .= $this->formatReportForJS($spy, $previousReport);
-		}
-		foreach (array_reverse($data) as $line) {
+			if ($this->table->getLineCount() < self::REPORTS_PER_PAGE)
+				$jsReports .= $this->formatReportForJS($spy, $previousReport);
+			
 			$this->table->addLine($line);
 		}
-/*		$this->addJS('
-			var reportCache = new Array();
-			$("#'.$this->table->getAjaxID().' tbody tr:not(#'.$this->table->getAjaxID().'-fold)").live("mouseover", function() {
-				var spyId = /spyreport_(\d+)\"/.exec($(this).children().html())[1];
-				if (reportCache[spyId] == undefined) {
-					$("#'.$this->detailBox->getID().'").addClass("ajax_loading");
-					$.core.ajaxRequest(
-						"'.$this->getAjaxID().'",
-						"ajaxLoadReport",
-						{ id: spyId },
-						function(data) {
-							reportCache[spyId] = data;
-							$("#'.$this->detailBox->getID().'").removeClass("ajax_loading");
-							$("#'.$this->detailBox->getID().' .content_inner").html(data);
-						}
-					);
-				} else {
-					$("#'.$this->detailBox->getID().' .content_inner").html(reportCache[spyId]);
-				}
-			});
-		'); */
 		$this->getModule()->addJsRouteReference('core_js', 'base64.js');
 		$jsReports .= '$("#'.$this->table->getAjaxID().' tbody tr:not(#'.$this->table->getAjaxID().'-fold)").live("mouseover", function() {
 			$("#'.$this->detailBox->getID().' .content_inner").html(base64.decode(reportCache[/spyreport_(\d+)\"/.exec($(this).children().html())[1]]));
@@ -128,76 +118,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		$this->addJS($jsReports);
 	}
 	
-	private function formatReportForJS($report, $previousReport = null) {
-		$reportTable = new GUI_Panel_Table('report_table');
-		$reportTable->addTableCssClass('align_right', 1);
-		$reportTable->addTableCssClass('align_right', 2);
-		
-		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($report) as $building) {
-			$delta = ($previousReport) ? $building->getLevel() - $previousReport->{Text::underscoreToCamelCase($building->getInternalName())} : $building->getLevel();
-			$reportTable->addLine(array($building->getName(), GUI_Panel_Number::formatNumber($building->getLevel()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta)));
-		}
-		
-		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
-			$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
-			$reportTable->addLine(array($unit->getName(), GUI_Panel_Number::formatNumber($unit->getAmount()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta)));
-		}
-		
-		$templateEngine = new GUI_TemplateEngine();
-		$templateEngine->report = $report;
-		$templateEngine->userLink = new Rakuun_GUI_Control_UserLink('userlink', $report->spiedUser);
-		$templateEngine->reportTable = $reportTable;
-		
-		return 'reportCache['.$report->getPK().'] = \''.base64_encode($templateEngine->render(dirname(__FILE__).'/report.tpl')).'\';';
-	}
-	
-/*	public function ajaxLoadReport() {
-		$report = Rakuun_DB_Containers::getLogSpiesContainer()->selectByPK((int)$_POST['id']);
-		
-		$previousReport = $this->getPreviousReportOf($report);
-		
-		if (!$report || !self::hasPrivilegesToSeeReport($report))
-			return 'Keine Berechtigung für diesen Report';
-		
-		$reportTable = new GUI_Panel_Table('report_table');
-		$reportTable->addTableCssClass('align_right', 1);
-		$reportTable->addTableCssClass('align_right', 2);
-		
-		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($report) as $building) {
-			$delta = ($previousReport) ? $building->getLevel() - $previousReport->{Text::underscoreToCamelCase($building->getInternalName())} : $building->getLevel();
-			$reportTable->addLine(array($building->getName(), GUI_Panel_Number::formatNumber($building->getLevel()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta)));
-		}
-		
-		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
-			$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
-			$reportTable->addLine(array($unit->getName(), GUI_Panel_Number::formatNumber($unit->getAmount()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta)));
-		}
-		
-		$templateEngine = new GUI_TemplateEngine();
-		$templateEngine->report = $report;
-		$templateEngine->userLink = new Rakuun_GUI_Control_UserLink('userlink', $report->spiedUser);
-		$templateEngine->reportTable = $reportTable;
-		
-		return $templateEngine->render(dirname(__FILE__).'/report.tpl');
-	} */
-
-	public static function hasPrivilegesToSeeReport(DB_Record $report, Rakuun_DB_User $currentUser = null) {
-		if (!$currentUser)
-			$currentUser = Rakuun_User_Manager::getCurrentUser();
-		
-		if ($report->user->getPK() == $currentUser->getPK())
-			return true;
-		if ($report->user->alliance !== null && $currentUser->alliance !== null && Rakuun_Intern_Alliance_Security::get()->hasPrivilege($currentUser, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_REPORTS)) {
-			if ($report->user->alliance->getPK() == $currentUser->alliance->getPK())
-				return true;
-			if ($report->user->alliance->meta !== null && $currentUser->alliance->meta !== null) {
-				if ($report->user->alliance->meta->getPK() == $currentUser->alliance->meta->getPK())
-					return true;
-			}
-		}
-		return false;
-	}
-	
+	// GETTERS / SETTERS -------------------------------------------------------
 	/**
 	 * @return DB_Record
 	 */
@@ -257,6 +178,56 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 	
 	public function addFilter(array $filter) {
 		$this->filter[] = $filter;
+	}
+	
+	// CUSTOM FUNCTIONS --------------------------------------------------------
+	private function formatReportForJS($report, $previousReport = null) {
+		$reportTable = new GUI_Panel_Table('report_table');
+		$reportTable->addTableCssClass('align_right', 1);
+		$reportTable->addTableCssClass('align_right', 2);
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($report) as $building) {
+			$delta = ($previousReport) ? $building->getLevel() - $previousReport->{Text::underscoreToCamelCase($building->getInternalName())} : $building->getLevel();
+			$reportTable->addLine(array($building->getName(), GUI_Panel_Number::formatNumber($building->getLevel()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta)));
+		}
+		
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
+			$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
+			$reportTable->addLine(array($unit->getName(), GUI_Panel_Number::formatNumber($unit->getAmount()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta)));
+		}
+		
+		$templateEngine = new GUI_TemplateEngine();
+		$templateEngine->report = $report;
+		$templateEngine->userLink = new Rakuun_GUI_Control_UserLink('userlink', $report->spiedUser);
+		$templateEngine->reportTable = $reportTable;
+		
+		return 'reportCache['.$report->getPK().'] = \''.base64_encode($templateEngine->render(dirname(__FILE__).'/report.tpl')).'\';';
+	}
+
+	public static function hasPrivilegesToSeeReport(DB_Record $report, Rakuun_DB_User $currentUser = null) {
+		if (!$currentUser)
+			$currentUser = Rakuun_User_Manager::getCurrentUser();
+		
+		if ($report->user->getPK() == $currentUser->getPK())
+			return true;
+		if ($report->user->alliance !== null && $currentUser->alliance !== null && Rakuun_Intern_Alliance_Security::get()->hasPrivilege($currentUser, Rakuun_Intern_Alliance_Security::PRIVILEGE_SEE_REPORTS)) {
+			if ($report->user->alliance->getPK() == $currentUser->alliance->getPK())
+				return true;
+			if ($report->user->alliance->meta !== null && $currentUser->alliance->meta !== null) {
+				if ($report->user->alliance->meta->getPK() == $currentUser->alliance->meta->getPK())
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	// AJAX-CALLBACKS ----------------------------------------------------------
+	public function ajaxAddJsReports() {
+		$str = '';
+		foreach (array_slice($this->data, $_POST['after'] - self::REPORTS_PER_PAGE, self::REPORTS_PER_PAGE) as $report) {
+			$str .= $this->formatReportForJS($report, $this->getPreviousReportOf($report));
+		}
+		return $str;
 	}
 }
 

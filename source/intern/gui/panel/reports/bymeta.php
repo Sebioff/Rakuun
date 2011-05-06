@@ -3,7 +3,8 @@
 class Rakuun_Intern_GUI_Panel_Reports_ByMeta extends Rakuun_Intern_GUI_Panel_Reports_Base implements Scriptlet_Privileged {
 	public function afterInit() {
 		$options = array();
-		$options['order'] = 'time ASC';
+		$options['order'] = 'time DESC';
+		$options['limit'] = Rakuun_Intern_GUI_Panel_Reports_Base::MAX_REPORTS_TO_LOAD;
 		$options['conditions'][] = array('user IN ('.implode(', ', Rakuun_User_Manager::getCurrentUser()->alliance->meta->members).')');
 		$options['conditions'][] = array('deleted = ?', 0);
 		foreach ($this->getFilterStrings() as $filterString) {
