@@ -12,7 +12,7 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 		parent::init();
 		
 		// give googlebot demo-account access
-		if (!$this->getUser() && stripos($_SERVER['HTTP_USER_AGENT'], 'googlebot') !== false) {
+		if (!$this->getUser() && stripos(getenv('HTTP_USER_AGENT'), 'googlebot') !== false) {
 			$ip = $_SERVER['REMOTE_ADDR'];
 		    $name = gethostbyaddr($ip);
 		    $host = gethostbyname($name);
