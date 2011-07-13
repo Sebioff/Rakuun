@@ -27,7 +27,7 @@ Koordinaten:
 <br class="clear" />
 <? if($user->isInNoob()): ?>
 <br class="clear" />
-	Hinweis: Du befindest dich im Noobschutz!
+	<b>Hinweis</b>: Du befindest dich im Noobschutz!
 	Im Noobschutz kannst du nicht handeln und nicht angegriffen werden.
 	Du verlässt den Noobschutz, sobald deine Punktzahl
 	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints() * 0.6; ?>
@@ -47,4 +47,11 @@ Koordinaten:
 		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
 	<? endif; ?>
 	<?= $output; ?> ist.
+	Du kehrst jederzeit wieder in den Noobschutz zurück, sobald alle der oben genannten Kriterien zutreffen und du:
+	<br/>
+	<ul>
+		<li>- kein Datenbankteil hälst</li>
+		<li>- kein Schildgenerator hast</li>
+		<li>- keine laufenden Angriffe hast</li>
+	</ul> 
 <? endif; ?>
