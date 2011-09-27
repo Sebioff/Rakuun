@@ -61,7 +61,14 @@ class Rakuun_Intern_GUI_Panel_Alliance_Applications_Application extends GUI_Pane
 			);
 			$igm->send();
 		}
-		DB_Connection::get()->commit();		
+		DB_Connection::get()->commit();
+
+		//save alliancehistory
+		$user = Rakuun_User_Manager::getCurrentUser();
+		$alliance = Rakuun_DB_Containers::getAlliancesContainer()->selectByIDFirst($application->alliance);
+		$alliancehistory = new Rakuun_Intern_Alliance_History($user, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_APPLICATION);
+		$alliancehistory->save();
+		
 		$this->setSuccessMessage('Deine Bewerbung wurde abgeschickt.'); 
 	}
 }

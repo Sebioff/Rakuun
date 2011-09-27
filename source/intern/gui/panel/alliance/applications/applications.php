@@ -79,6 +79,9 @@ class Rakuun_Intern_GUI_Panel_Alliance_Applications extends GUI_Panel {
 					$application['record']->editor = Rakuun_User_Manager::getCurrentUser();
 					$application['record']->editorNotice = $application['reason']->getValue();
 					Rakuun_DB_Containers::getAlliancesApplicationsContainer()->save($application['record']);
+					//save alliancehistory
+					$alliancehistory = new Rakuun_Intern_Alliance_History($user, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_UNACCEPTED);
+					$alliancehistory->save();
 				break;
 				case self::ACTION_HIRE:
 					$user->alliance = $alliance;
@@ -102,6 +105,9 @@ class Rakuun_Intern_GUI_Panel_Alliance_Applications extends GUI_Panel {
 						$other_application->date = time();
 						Rakuun_DB_Containers::getAlliancesApplicationsContainer()->save($other_application);
 					}
+					//save alliancehistory
+					$alliancehistory = new Rakuun_Intern_Alliance_History($user, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_ACCEPTED);
+					$alliancehistory->save();
 				break;
 				case self::ACTION_NOTHING:
 					//do nothing

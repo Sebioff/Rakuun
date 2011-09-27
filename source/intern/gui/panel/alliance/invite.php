@@ -88,6 +88,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Invite extends GUI_Panel {
 		$alliance->save();
 		DB_Connection::get()->commit();
 		$this->getModule()->invalidate();
+		
+		//save alliancehistory
+		$alliancehistory = new Rakuun_Intern_Alliance_History($recipient, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_INVITATION);
+		$alliancehistory->save();
 	}
 	
 	/**

@@ -23,7 +23,11 @@ class Rakuun_Intern_Module_Alliance_Profile_None extends Rakuun_Intern_Module {
 					Rakuun_User_Manager::update($user);
 					//delete the invitation message to avoid abuse
 					Rakuun_DB_Containers::getMessagesContainer()->delete($igm);
-					//$this->invalidate();
+					//save alliancehistory
+					$alliance = Rakuun_DB_Containers::getAlliancesContainer()->selectByIDFirst((int)$this->getParam('id'));
+					$alliancehistory = new Rakuun_Intern_Alliance_History($user, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_JOIN);
+					$alliancehistory->save();
+					
 					$this->redirect(App::get()->getInternModule()->getSubmodule('alliance')->getURL());
 				}
 			}

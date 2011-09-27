@@ -75,6 +75,7 @@ abstract class Rakuun_DB_Containers {
 	private static $databasesStartpositionsContainer = null;
 	private static $questsContainer = null;
 	private static $userEternalUserAssocContainer = null;
+	private static $allianceHistoryContainer = null;
 	
 	// GETTERS / SETTERS -------------------------------------------------------
 	/**
@@ -1002,6 +1003,18 @@ abstract class Rakuun_DB_Containers {
 		self::$userEternalUserAssocContainer = new DB_Container('users_eternal_user_assoc');
 		
 		return self::$userEternalUserAssocContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getAllianceHistoryContainer() {
+		if (self::$allianceHistoryContainer)
+			return self::$allianceHistoryContainer;
+		
+		self::$allianceHistoryContainer = new DB_Container('alliance_history');
+		
+		return self::$allianceHistoryContainer;
 	}
 }
 

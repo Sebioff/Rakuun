@@ -57,9 +57,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 				);
 				$igm->send();
 				// kick the user from alliance
+				$alliance = $user->alliance; 
 				$user->alliance = null;
 				Rakuun_User_Manager::update($user);
 				$this->getModule()->invalidate();
+				//save alliancehistory
+				$alliancehistory = new Rakuun_Intern_Alliance_History($user, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_KICK);
+				$alliancehistory->save();
 				DB_Connection::get()->commit();
 			}
 		}
