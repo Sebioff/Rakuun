@@ -51,7 +51,7 @@
 		<? if ($ironCosts > $ressources->iron): ?>
 			<? $classes[] = 'rakuun_requirements_failed'; ?>
 		<? endif; ?>
-		<span class="<?= implode(' ', $classes) ?>"><?= GUI_Panel_Number::formatNumber($ironCosts); ?> Eisen</span>
+		<span class="<?= implode(' ', $classes) ?>"><?= Text::formatNumber($ironCosts); ?> Eisen</span>
 	<? endif; ?>
 	<? $berylliumCosts = $productionItem->getBerylliumCostsForLevel($nextBuildableLevel); ?>
 	<? if ($berylliumCosts > 0): ?>
@@ -59,7 +59,7 @@
 		<? if ($berylliumCosts > $ressources->beryllium): ?>
 			<? $classes[] = 'rakuun_requirements_failed'; ?>
 		<? endif; ?>
-		<span class="<?= implode(' ', $classes) ?>"><?= GUI_Panel_Number::formatNumber($berylliumCosts); ?> Beryllium</span>
+		<span class="<?= implode(' ', $classes) ?>"><?= Text::formatNumber($berylliumCosts); ?> Beryllium</span>
 	<? endif; ?>
 	<? $energyCosts = $productionItem->getEnergyCostsForLevel($nextBuildableLevel); ?>
 	<? if ($energyCosts > 0): ?>
@@ -67,7 +67,7 @@
 		<? if ($energyCosts > $ressources->energy): ?>
 			<? $classes[] = 'rakuun_requirements_failed'; ?>
 		<? endif; ?>
-		<span class="<?= implode(' ', $classes) ?>"><?= GUI_Panel_Number::formatNumber($energyCosts); ?> Energie</span>
+		<span class="<?= implode(' ', $classes) ?>"><?= Text::formatNumber($energyCosts); ?> Energie</span>
 	<? endif; ?>
 	<? $peopleCosts = $productionItem->getPeopleCostsForLevel($nextBuildableLevel); ?>
 	<? if ($peopleCosts > 0): ?>
@@ -75,7 +75,7 @@
 		<? if ($peopleCosts > $ressources->people): ?>
 			<? $classes[] = 'rakuun_requirements_failed'; ?>
 		<? endif ?>
-		<span class="<?= implode(' ', $classes) ?>"><?= GUI_Panel_Number::formatNumber($peopleCosts); ?> Leute</span>
+		<span class="<?= implode(' ', $classes) ?>"><?= Text::formatNumber($peopleCosts); ?> Leute</span>
 	<? endif ?>
 	<?= Rakuun_Date::formatCountDown($productionItem->getTimeCosts($nextBuildableLevel)) ?>
 	<br />

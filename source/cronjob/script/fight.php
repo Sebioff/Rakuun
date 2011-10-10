@@ -115,14 +115,14 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$unit = Rakuun_Intern_Production_Factory::getUnit($unitName, $winnerUnitSource);
 			$deadUnitAmount = $unit->getAmount() - $unitAmount;
 			if ($deadUnitAmount > 0) {
-				$deadWinnerUnitsTextForWinner .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).'/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
-				$deadWinnerUnitsTextForLoser .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).'/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
+				$deadWinnerUnitsTextForWinner .= '<br/>'.Text::formatNumber($deadUnitAmount).'/'.Text::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
+				$deadWinnerUnitsTextForLoser .= '<br/>'.Text::formatNumber($deadUnitAmount).'/'.Text::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
 				// delete winner units
 				$winnerUnitSource->{Text::underscoreToCamelCase($unitName)} -= $deadUnitAmount;
 				$winnerLostUnits[$unitName] = $deadUnitAmount;
 			}
 			elseif ($unit->getAmount() > 0) {
-				$deadWinnerUnitsTextForWinner .= '<br/>0/'.GUI_Panel_Number::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
+				$deadWinnerUnitsTextForWinner .= '<br/>0/'.Text::formatNumber($unit->getAmount()).' '.$unit->getNameForAmount();
 			}
 		}
 		$winnerUnitSource->save();
@@ -136,7 +136,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				if (isset($survivingLoserUnitAmounts[$unit->getInternalName()]))
 					$deadUnitAmount = $unit->getAmount() - $survivingLoserUnitAmounts[$unit->getInternalName()];
 				if ($deadUnitAmount > 0) {
-					$deadLoserUnitsText .= '<br/>'.GUI_Panel_Number::formatNumber($deadUnitAmount).' '.$unit->getNameForAmount($deadUnitAmount);
+					$deadLoserUnitsText .= '<br/>'.Text::formatNumber($deadUnitAmount).' '.$unit->getNameForAmount($deadUnitAmount);
 					// delete loser units
 					$loserUnitSource->{Text::underscoreToCamelCase($unit->getInternalName())} -= $deadUnitAmount;
 					$loserLostUnits[$unit->getInternalName()] = $deadUnitAmount;
@@ -222,16 +222,16 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					$loserReportText .= '<br/><br/>Die gegnerischen Truppen erbeuteten folgende Rohstoffe:';
 					$winnerReportText .= '<br/><br/>Die folgenden Rohstoffe konnten erbeutet werden:';
 					if ($stolenIron > 0) {
-						$loserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenIron).' Eisen';
-						$winnerReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenIron).' Eisen';
+						$loserReportText .= '<br/>'.Text::formatNumber($stolenIron).' Eisen';
+						$winnerReportText .= '<br/>'.Text::formatNumber($stolenIron).' Eisen';
 					}
 					if ($stolenBeryllium > 0) {
-						$loserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenBeryllium).' Beryllium';
-						$winnerReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenBeryllium).' Beryllium';
+						$loserReportText .= '<br/>'.Text::formatNumber($stolenBeryllium).' Beryllium';
+						$winnerReportText .= '<br/>'.Text::formatNumber($stolenBeryllium).' Beryllium';
 					}
 					if ($stolenEnergy > 0) {
-						$loserReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenEnergy).' Energie';
-						$winnerReportText .= '<br/>'.GUI_Panel_Number::formatNumber($stolenEnergy).' Energie';
+						$loserReportText .= '<br/>'.Text::formatNumber($stolenEnergy).' Energie';
+						$winnerReportText .= '<br/>'.Text::formatNumber($stolenEnergy).' Energie';
 					}
 					$army->target->ressources->lower($stolenIron, $stolenBeryllium, $stolenEnergy);
 					$army->iron = $stolenIron;
@@ -424,9 +424,9 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			$defenderReportText .= '<br/><br/>Die Menge der in unseren Lagern befindlichen Rohstoffe:';
 			$attackerReportText .= '<br/><br/>Folgende Rohstoffe konnten ausfindig gemacht werden:';
 			$spiedRessourcesText = '';
-			$spiedRessourcesText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->iron).' Eisen';
-			$spiedRessourcesText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->beryllium).' Beryllium';
-			$spiedRessourcesText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$army->target->ressources->energy).' Energie';
+			$spiedRessourcesText .= '<br/>'.Text::formatNumber((int)$army->target->ressources->iron).' Eisen';
+			$spiedRessourcesText .= '<br/>'.Text::formatNumber((int)$army->target->ressources->beryllium).' Beryllium';
+			$spiedRessourcesText .= '<br/>'.Text::formatNumber((int)$army->target->ressources->energy).' Energie';
 			$defenderReportText .= $spiedRessourcesText;
 			$attackerReportText .= $spiedRessourcesText;
 			
@@ -464,7 +464,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					if ($unit->getAmount() > 0 && (!$successfullEnhancedCloaking || !$unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING))) {
 						$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
 						$deltaIcon = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta);
-						$unitsText .= '<br/>'.GUI_Panel_Number::formatNumber((int)$unit->getAmount()).' '.$unit->getNameForAmount().' '.$deltaIcon->render();
+						$unitsText .= '<br/>'.Text::formatNumber((int)$unit->getAmount()).' '.$unit->getNameForAmount().' '.$deltaIcon->render();
 						$spiedUnits[$unit->getInternalName()] = $unit->getAmount();
 					}
 				}

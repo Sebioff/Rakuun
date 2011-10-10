@@ -36,10 +36,10 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Ressources extends GUI_Panel {
 			$table->addLine(
 				array(
 					new Rakuun_GUI_Control_UserLink('user'.$ressource->user->getPK(), $ressource->user),
-					GUI_Panel_Number::formatNumber($ressource->iron),
-					GUI_Panel_Number::formatNumber($ressource->beryllium),
-					GUI_Panel_Number::formatNumber($ressource->energy),
-					GUI_Panel_Number::formatNumber($ressource->people)
+					Text::formatNumber($ressource->iron),
+					Text::formatNumber($ressource->beryllium),
+					Text::formatNumber($ressource->energy),
+					Text::formatNumber($ressource->people)
 				)
 			);
 			$summe['iron'] += $ressource->iron;
@@ -50,19 +50,19 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Ressources extends GUI_Panel {
 		$table->addFooter(
 			array(
 				'Summe:',
-				GUI_Panel_Number::formatNumber($summe['iron']),
-				GUI_Panel_Number::formatNumber($summe['beryllium']),
-				GUI_Panel_Number::formatNumber($summe['energy']),
-				GUI_Panel_Number::formatNumber($summe['people'])
+				Text::formatNumber($summe['iron']),
+				Text::formatNumber($summe['beryllium']),
+				Text::formatNumber($summe['energy']),
+				Text::formatNumber($summe['people'])
 			)
 		);
 		$table->addFooter(
 			array(
 				'Durchschnitt:',
-				GUI_Panel_Number::formatNumber($summe['iron'] / count($ressources)),
-				GUI_Panel_Number::formatNumber($summe['beryllium'] / count($ressources)),
-				GUI_Panel_Number::formatNumber($summe['energy'] / count($ressources)),
-				GUI_Panel_Number::formatNumber($summe['people'] / count($ressources))
+				Text::formatNumber($summe['iron'] / count($ressources)),
+				Text::formatNumber($summe['beryllium'] / count($ressources)),
+				Text::formatNumber($summe['energy'] / count($ressources)),
+				Text::formatNumber($summe['people'] / count($ressources))
 			)
 		);
 		$table->setAttribute('summary', 'Ressourcenübersicht der Allianz '.$this->alliance->name);

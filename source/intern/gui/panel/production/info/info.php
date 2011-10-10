@@ -22,13 +22,13 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$productionTime = time() - 60 * 5;
 			for ($i = $startLevel; $i <= $endLevel; $i++) {
 				if ($this->getProductionItem()->getBaseIronProduction() > 0)
-					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedIron($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
+					$production->addLine(array($i, Text::formatNumber($this->getProductionItem()->getProducedIron($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 				else if ($this->getProductionItem()->getBaseBerylliumProduction() > 0)
-					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedBeryllium($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
+					$production->addLine(array($i, Text::formatNumber($this->getProductionItem()->getProducedBeryllium($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 				else if ($this->getProductionItem()->getBaseEnergyProduction() > 0)
-					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedEnergy($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
+					$production->addLine(array($i, Text::formatNumber($this->getProductionItem()->getProducedEnergy($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 				else if ($this->getProductionItem()->getBasePeopleProduction() > 0)
-					$production->addLine(array($i, GUI_Panel_Number::formatNumber($this->getProductionItem()->getProducedPeople($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
+					$production->addLine(array($i, Text::formatNumber($this->getProductionItem()->getProducedPeople($productionTime, $i * Rakuun_Intern_Production_Building_RessourceProducer::WORKERS_PER_LEVEL, $i))));
 			}
 			$this->contentPanel->setTemplate(dirname(__FILE__).'/ressourceproducer.tpl');
 		}
@@ -41,10 +41,10 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 			$costs->addHeader(array('Eisen', 'Beryllium', 'Energie', 'Leute', 'Zeit'));
 			$costs->addLine(
 				array(
-					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBaseIronCosts()),
-					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBaseBerylliumCosts()),
-					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBaseEnergyCosts()),
-					GUI_Panel_Number::formatNumber($this->getProductionItem()->getBasePeopleCosts()),
+					Text::formatNumber($this->getProductionItem()->getBaseIronCosts()),
+					Text::formatNumber($this->getProductionItem()->getBaseBerylliumCosts()),
+					Text::formatNumber($this->getProductionItem()->getBaseEnergyCosts()),
+					Text::formatNumber($this->getProductionItem()->getBasePeopleCosts()),
 					Rakuun_Date::formatCountDown($this->getProductionItem()->getBaseTimeCosts())
 				)
 			);
@@ -63,10 +63,10 @@ class Rakuun_Intern_GUI_Panel_Production_Info extends Rakuun_GUI_Panel_Box {
 				$costs->addLine(
 					array(
 						$i,
-						GUI_Panel_Number::formatNumber($this->getProductionItem()->getIronCostsForLevel($i)),
-						GUI_Panel_Number::formatNumber($this->getProductionItem()->getBerylliumCostsForLevel($i)),
-						GUI_Panel_Number::formatNumber($this->getProductionItem()->getEnergyCostsForLevel($i)),
-						GUI_Panel_Number::formatNumber($this->getProductionItem()->getPeopleCostsForLevel($i)),
+						Text::formatNumber($this->getProductionItem()->getIronCostsForLevel($i)),
+						Text::formatNumber($this->getProductionItem()->getBerylliumCostsForLevel($i)),
+						Text::formatNumber($this->getProductionItem()->getEnergyCostsForLevel($i)),
+						Text::formatNumber($this->getProductionItem()->getPeopleCostsForLevel($i)),
 						Rakuun_Date::formatCountDown($this->getProductionItem()->getTimeCosts($i))
 					)
 				);

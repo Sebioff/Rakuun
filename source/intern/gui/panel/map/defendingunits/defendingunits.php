@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Map_DefendingUnits extends GUI_Panel {
 					$this->panelsForDefendingUnits[array_search($unit->getInternalName(), $fightingSequence)] = $itemPanel;
 				}
 				else {
-					$this->addPanel($itemPanel = new GUI_Panel_Text($unit->getInternalName(), $unit->getNameForAmount(2) .' ('.GUI_Panel_Number::formatNumber($unit->getAmount()).')'));
+					$this->addPanel($itemPanel = new GUI_Panel_Text($unit->getInternalName(), $unit->getNameForAmount(2) .' ('.Text::formatNumber($unit->getAmount()).')'));
 					$this->panelsForOtherUnits[] = $itemPanel;
 				}
 			}

@@ -8,10 +8,10 @@ class Rakuun_Intern_Production_WIP_Unit extends Rakuun_Intern_Production_WIP {
 		parent::init();
 		$this->cancel->setConfirmationMessage(
 			'Wirklich abbrechen?\nEs werden 50% der Kosten erstattet:'.
-			'\n'.GUI_Panel_Number::formatNumber(round($this->getWIPItem()->getIronRepayForAmount())).' Eisen'.
-			'\n'.GUI_Panel_Number::formatNumber(round($this->getWIPItem()->getBerylliumRepayForAmount())).' Beryllium'.
-			'\n'.GUI_Panel_Number::formatNumber(round($this->getWIPItem()->getEnergyRepayForAmount())).' Energie'.
-			'\n'.GUI_Panel_Number::formatNumber(round($this->getWIPItem()->getPeopleRepayForAmount())).' Leute'
+			'\n'.Text::formatNumber(round($this->getWIPItem()->getIronRepayForAmount())).' Eisen'.
+			'\n'.Text::formatNumber(round($this->getWIPItem()->getBerylliumRepayForAmount())).' Beryllium'.
+			'\n'.Text::formatNumber(round($this->getWIPItem()->getEnergyRepayForAmount())).' Energie'.
+			'\n'.Text::formatNumber(round($this->getWIPItem()->getPeopleRepayForAmount())).' Leute'
 		);
 	}
 	

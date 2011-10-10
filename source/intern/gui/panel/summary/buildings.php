@@ -13,15 +13,15 @@ class Rakuun_Intern_GUI_Panel_Summary_Buildings extends GUI_Panel {
 				$table->addLine(
 					array(
 						new GUI_Control_Link('link'.$building->getInternalName(), $building->getName(), App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $building->getType(), 'id' => $building->getInternalName()))),
-						GUI_Panel_Number::formatNumber($building->getLevel()),
-						GUI_Panel_Number::formatNumber($building->getLevel() * $building->getPoints())
+						Text::formatNumber($building->getLevel()),
+						Text::formatNumber($building->getLevel() * $building->getPoints())
 					)
 				);
 				$summe += $building->getLevel() * $building->getPoints();
 			}
 		}
 		$table->addHeader(array('Name', 'Level', 'Punkte'));
-		$table->addFooter(array('Summe:', '', GUI_Panel_Number::formatNumber($summe)));
+		$table->addFooter(array('Summe:', '', Text::formatNumber($summe)));
 		$table->addTableCssClass('align_left', 0);
 	}
 }

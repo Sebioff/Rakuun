@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_LostBuildings extends GUI_Panel {
 		$options['group'] = 'building';
 		foreach (Rakuun_DB_Containers::getLogBuildingsContainer()->select($options) as $lostBuildingLevels) {
 			$building = Rakuun_Intern_Production_Factory::getBuilding($lostBuildingLevels->building);
-			$line = array($building->getName(), GUI_Panel_Number::formatNumber(abs($lostBuildingLevels->lostLevels)));
+			$line = array($building->getName(), Text::formatNumber(abs($lostBuildingLevels->lostLevels)));
 			$table->addLine($line);
 		}
 		$table->addTableCssClass('align_left', 0);

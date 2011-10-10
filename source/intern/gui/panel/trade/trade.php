@@ -38,7 +38,7 @@ class Rakuun_Intern_GUI_Panel_Trade extends GUI_Panel {
 		$this->addPanel($message = new GUI_Control_TextBox('message', '', 'Verwendungszweck'));
 		$message->addValidator(new GUI_Validator_MaxLength(50));
 		
-		$this->addPanel(new GUI_Panel_Text('tradelimit', 'Du kannst heute noch '.GUI_Panel_Number::formatNumber($user->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $user->tradelimit).' Ressourcen erhalten'));
+		$this->addPanel(new GUI_Panel_Text('tradelimit', 'Du kannst heute noch '.Text::formatNumber($user->buildings->moleculartransmitter * Rakuun_Intern_Production_Building_Moleculartransmitter::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER - $user->tradelimit).' Ressourcen erhalten'));
 		
 		$this->addPanel($submit = new GUI_Control_SubmitButton('submit', 'Berechnen'));
 		

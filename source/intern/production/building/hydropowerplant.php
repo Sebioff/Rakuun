@@ -24,7 +24,7 @@ class Rakuun_Intern_Production_Building_HydropowerPlant extends Rakuun_Intern_Pr
 	protected function defineEffects() {
 		$producedCurrentLevel = $this->getProducedEnergy(time() - 60, $this->getRequiredWorkers($this->getLevel() + $this->getFutureLevels()), $this->getLevel() + $this->getFutureLevels());
 		$producedNextLevel = $this->getProducedEnergy(time() - 60, $this->getRequiredWorkers($this->getLevel() + $this->getFutureLevels() + 1), $this->getLevel() + $this->getFutureLevels() + 1);
-		$this->addEffect('Erhöht die Menge der erzeugten Energie pro Minute um '.GUI_Panel_Number::formatNumber($producedNextLevel - $producedCurrentLevel));
+		$this->addEffect('Erhöht die Menge der erzeugten Energie pro Minute um '.Text::formatNumber($producedNextLevel - $producedCurrentLevel));
 	}
 }
 

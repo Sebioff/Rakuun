@@ -4,7 +4,7 @@
 	<? if ($producedItem->getAmount() > 0): ?>
 		<li>
 			<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $producedItem->getType(), 'id' => $producedItem->getInternalName())); ?>">
-				<?= $producedItem->getNameForAmount() ?> (<?= GUI_Panel_Number::formatNumber($producedItem->getAmount()) ?>)
+				<?= $producedItem->getNameForAmount() ?> (<?= Text::formatNumber($producedItem->getAmount()) ?>)
 			</a>
 		</li>
 		<? $gotItems = true; ?>

@@ -40,7 +40,7 @@ class Rakuun_Intern_Production_Building_Berylliummine extends Rakuun_Intern_Prod
 	protected function defineEffects() {
 		$producedCurrentLevel = $this->getProducedBeryllium(time() - 60, $this->getRequiredWorkers($this->getLevel() + $this->getFutureLevels()), $this->getLevel() + $this->getFutureLevels());
 		$producedNextLevel = $this->getProducedBeryllium(time() - 60, $this->getRequiredWorkers($this->getLevel() + $this->getFutureLevels() + 1), $this->getLevel() + $this->getFutureLevels() + 1);
-		$this->addEffect('Erhöht die Menge des abgebauten Berylliums pro Minute um '.GUI_Panel_Number::formatNumber($producedNextLevel - $producedCurrentLevel));
+		$this->addEffect('Erhöht die Menge des abgebauten Berylliums pro Minute um '.Text::formatNumber($producedNextLevel - $producedCurrentLevel));
 	}
 }
 

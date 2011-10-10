@@ -60,6 +60,7 @@ abstract class Rakuun_DB_Containers {
 	private static $logTechnologiesContainer = null;
 	private static $logMultiactionsContainer = null;
 	private static $logMultiactionsUsersAssocContainer = null;
+	private static $logOutgoingArmiesContainer = null;
 	private static $userCallbacksContainer = null;
 	private static $supportticketsContainer = null;
 	private static $usersDirectoryArmyGroups = null;
@@ -1015,6 +1016,19 @@ abstract class Rakuun_DB_Containers {
 		self::$allianceHistoryContainer = new DB_Container('alliance_history');
 		
 		return self::$allianceHistoryContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getLogOutgoingArmiesContainer() {
+		if (self::$logOutgoingArmiesContainer)
+			return self::$logOutgoingArmiesContainer;
+		
+		self::$logOutgoingArmiesContainer = new DB_Container('log_outgoing_armies');
+		self::$logOutgoingArmiesContainer->addReferencedContainer(self::getUserContainer(), 'opponent', 'id');
+		
+		return self::$logOutgoingArmiesContainer;
 	}
 }
 

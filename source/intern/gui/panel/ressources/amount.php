@@ -24,7 +24,7 @@ class Rakuun_Intern_GUI_Panel_Ressources_Amount extends GUI_Panel_Number {
 	}
 	
 	public function getText() {
-		return number_format($this->text, 0, self::DECIMALS_SEPARATOR, self::THOUSANDS_SEPARATOR);
+		return number_format($this->text, 0, Text::$numberFormatDefaultDecimalsSeparator, Text::$numberFormatDefaultThousandsSeparator);
 	}
 }
 

@@ -12,7 +12,7 @@
 	<? foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit): ?>
 		<? $amount = $fight->{Text::underscoreToCamelCase($unit->getInternalName().'_sum')}; ?>
 		<? if ($amount > 0): ?>
-			<?= GUI_Panel_Number::formatNumber($amount); ?> <?= $unit->getNameForAmount($amount); ?>
+			<?= Text::formatNumber($amount); ?> <?= $unit->getNameForAmount($amount); ?>
 			<br/>
 		<? endif; ?>
 	<? endforeach; ?>

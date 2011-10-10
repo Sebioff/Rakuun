@@ -13,8 +13,8 @@ class Rakuun_Intern_GUI_Panel_Summary_Technologies extends GUI_Panel {
 				$table->addLine(
 					array(
 						new GUI_Control_Link('link'.$technology->getInternalName(), $technology->getName(), App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $technology->getType(), 'id' => $technology->getInternalName()))),
-						GUI_Panel_Number::formatNumber($technology->getLevel()),
-						GUI_Panel_Number::formatNumber($technology->getLevel() * $technology->getPoints())
+						Text::formatNumber($technology->getLevel()),
+						Text::formatNumber($technology->getLevel() * $technology->getPoints())
 					)
 				);
 				$summe += $technology->getLevel() * $technology->getPoints();
@@ -24,7 +24,7 @@ class Rakuun_Intern_GUI_Panel_Summary_Technologies extends GUI_Panel {
 			$this->addPanel(new GUI_Panel_Text('summary', 'Keine.'));
 		else {
 			$table->addHeader(array('Name', 'Level', 'Punkte'));
-			$table->addFooter(array('Summe:', '', GUI_Panel_Number::formatNumber($summe)));
+			$table->addFooter(array('Summe:', '', Text::formatNumber($summe)));
 			$this->addPanel($table);
 		}
 		$table->addTableCssClass('align_left', 0);

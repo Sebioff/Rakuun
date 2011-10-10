@@ -32,7 +32,7 @@ class Rakuun_Intern_GUI_Panel_Production_Building extends Rakuun_Intern_GUI_Pane
 			$currentWorkers = $this->getProductionItem()->getWorkers();
 			$requiredWorkers = $this->getProductionItem()->getRequiredWorkers();
 			
-			$this->addHeadPanel($workers = new GUI_Panel_Text('workers', 'Arbeiter: '.GUI_Panel_Number::formatNumber($currentWorkers).'/'.GUI_Panel_Number::formatNumber($requiredWorkers)));
+			$this->addHeadPanel($workers = new GUI_Panel_Text('workers', 'Arbeiter: '.Text::formatNumber($currentWorkers).'/'.Text::formatNumber($requiredWorkers)));
 			$workers->addClasses('workers');
 			
 			if ($currentWorkers < $requiredWorkers)

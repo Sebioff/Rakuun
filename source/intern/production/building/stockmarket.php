@@ -29,7 +29,7 @@ class Rakuun_Intern_Production_Building_StockMarket extends Rakuun_Intern_Produc
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöhung der umtauschbaren Ressourcen pro Tag um '.GUI_Panel_Number::formatNumber(Rakuun_Intern_Production_Building_StockMarket::TRADELIMIT_PER_LEVEL * RAKUUN_TRADELIMIT_MULTIPLIER));
+		$this->addEffect('Erhöhung der umtauschbaren Ressourcen pro Tag um '.Text::formatNumber(Rakuun_Intern_Production_Building_StockMarket::TRADELIMIT_PER_LEVEL * RAKUUN_TRADELIMIT_MULTIPLIER));
 	}
 }
 

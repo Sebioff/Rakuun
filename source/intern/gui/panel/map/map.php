@@ -32,7 +32,9 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Right('scroll_right', '', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Up('scroll_up', '', $this));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_ScrollButton_Down('scroll_down', '', $this));
-		$this->addPanel($legend = new Rakuun_GUI_Panel_Box('legend', new Rakuun_Intern_GUI_Panel_Map_Legend('legend'), 'Legende'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('legend', new Rakuun_Intern_GUI_Panel_Map_Legend('legend'), 'Legende'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('directorylast', new Rakuun_Intern_GUI_Panel_Map_Directory_Last('directory'), 'Letzte 10 Angriffe'));
+		$this->addPanel(new Rakuun_GUI_Panel_Box('directorytop', new Rakuun_Intern_GUI_Panel_Map_Directory_Top('directory'), 'Top 10 Angriffe'));
 		
 		$this->addClasses('rakuun_map');
 	}

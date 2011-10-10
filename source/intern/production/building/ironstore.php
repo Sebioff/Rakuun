@@ -18,7 +18,7 @@ class Rakuun_Intern_Production_Building_Ironstore extends Rakuun_Intern_Producti
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht die Menge des lagerbaren Eisens um '.GUI_Panel_Number::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
+		$this->addEffect('Erhöht die Menge des lagerbaren Eisens um '.Text::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
 	}
 }
 

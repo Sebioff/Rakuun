@@ -25,7 +25,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_Economy extends GUI_Panel {
 			if ($building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INVISIBLE_FOR_SPIES) === true)
 				continue;
 			
-			$line = array('&oslash; Stufe '.$building->getName(), GUI_Panel_Number::formatNumber(round($buildingAmounts->{Text::underscoreToCamelCase($building->getInternalName().'_sum')} / $usersCount)));
+			$line = array('&oslash; Stufe '.$building->getName(), Text::formatNumber(round($buildingAmounts->{Text::underscoreToCamelCase($building->getInternalName().'_sum')} / $usersCount)));
 			$table->addLine($line);
 		}
 	}

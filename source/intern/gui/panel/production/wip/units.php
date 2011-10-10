@@ -15,10 +15,10 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_Units extends Rakuun_Intern_GUI_Pan
 			$firstWIP = $wipItems[0];
 			$this->contentPanel->cancel->setConfirmationMessage(
 				'Wirklich abbrechen?\nEs werden 50% der Kosten erstattet:'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getIronRepayForAmount())).' Eisen'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getBerylliumRepayForAmount())).' Beryllium'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getEnergyRepayForAmount())).' Energie'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getPeopleRepayForAmount())).' Leute'
+				'\n'.Text::formatNumber(round($firstWIP->getIronRepayForAmount())).' Eisen'.
+				'\n'.Text::formatNumber(round($firstWIP->getBerylliumRepayForAmount())).' Beryllium'.
+				'\n'.Text::formatNumber(round($firstWIP->getEnergyRepayForAmount())).' Energie'.
+				'\n'.Text::formatNumber(round($firstWIP->getPeopleRepayForAmount())).' Leute'
 			);
 		}
 		

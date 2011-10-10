@@ -17,7 +17,7 @@ class Rakuun_Index_Panel_Endscore_BestFighters extends GUI_Panel {
 		$i = 0;
 		foreach (Rakuun_DB_Containers_Persistent::getLogFightsContainer()->select($options) as $fighter) {
 			$userLink = new Rakuun_GUI_Control_UserLink('user', $fighter->user, $fighter->get('user'));
-			$tableRows[$i][0] = $userLink->render().' - '.GUI_Panel_Number::formatNumber($fighter->wins).' Siege';
+			$tableRows[$i][0] = $userLink->render().' - '.Text::formatNumber($fighter->wins).' Siege';
 			$i++;
 		}
 		
@@ -40,7 +40,7 @@ class Rakuun_Index_Panel_Endscore_BestFighters extends GUI_Panel {
 		$i = 0;
 		foreach (Rakuun_DB_Containers_Persistent::getLogFightsContainer()->select($options) as $fighter) {
 			$userLink = new Rakuun_GUI_Control_UserLink('user', $fighter->user, $fighter->get('user'));
-			$tableRows[$i][1] = $userLink->render().' - '.GUI_Panel_Number::formatNumber($fighter->wins).' Siege';
+			$tableRows[$i][1] = $userLink->render().' - '.Text::formatNumber($fighter->wins).' Siege';
 			$i++;
 		}
 		

@@ -3,7 +3,7 @@
 <a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $currentWIP->getType(), 'id' => $currentWIP->getInternalName())); ?>">
 	<?= $currentWIP->getWIPItem()->getNameForAmount(); ?>
 </a>
-(x<?= GUI_Panel_Number::formatNumber($currentWIP->getAmount()); ?>)
+(x<?= Text::formatNumber($currentWIP->getAmount()); ?>)
 <div class="controls">
 	<? $this->displayPanel('pause'); ?>
 	<? $this->displayPanel('cancel'); ?>

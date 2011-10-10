@@ -30,5 +30,7 @@
 	<? $this->displayPanel('scroll_down'); ?>
 </div>
 <? $this->displayPanel('target'); ?>
+<? $this->displayPanel('directorytop'); ?>
+<? $this->displayPanel('directorylast'); ?>
 <br class="clear" />
 <? $this->displayPanel('legend'); ?>

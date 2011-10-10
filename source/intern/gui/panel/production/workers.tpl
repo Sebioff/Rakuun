@@ -1,7 +1,7 @@
 <? if ($this->hasErrors()): ?>
 	<? $this->displayErrors(); ?>
 <? endif; ?>
-Arbeiter: <?= GUI_Panel_Number::formatNumber($this->getProductionItem()->getWorkers()); ?>/<?= GUI_Panel_Number::formatNumber($this->getProductionItem()->getRequiredWorkers()); ?>
+Arbeiter: <?= Text::formatNumber($this->getProductionItem()->getWorkers()); ?>/<?= Text::formatNumber($this->getProductionItem()->getRequiredWorkers()); ?>
 <br />
 <? $this->displayPanel('workers_add_amount'); ?> <? $this->displayPanel('workers_add'); ?>
 <br />

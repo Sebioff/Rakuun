@@ -18,7 +18,7 @@ class Rakuun_Intern_Production_Building_Energystore extends Rakuun_Intern_Produc
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht die Kapazität der speicherbaren Energie um '.GUI_Panel_Number::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
+		$this->addEffect('Erhöht die Kapazität der speicherbaren Energie um '.Text::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
 	}
 }
 

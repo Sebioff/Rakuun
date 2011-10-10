@@ -46,11 +46,11 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 					$notAtHome = 0;
 				$summe[$unit->getInternalName()] += $atHome + $atBuild + $notAtHome;
 				$header[++$i] = $unit->getNamePlural();
-				$lineText = GUI_Panel_Number::formatNumber($atHome);
+				$lineText = Text::formatNumber($atHome);
 				if ($atBuild > 0)
-					$lineText .= ' (+'.GUI_Panel_Number::formatNumber($atBuild).')';
+					$lineText .= ' (+'.Text::formatNumber($atBuild).')';
 				if (!$unit->isOfUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY))
-					$lineText .= ' / '.GUI_Panel_Number::formatNumber($notAtHome);
+					$lineText .= ' / '.Text::formatNumber($notAtHome);
 				$line[$unit->getInternalName()] = $lineText;
 			}
 			$header[++$i] = 'Stadtmauer';
@@ -60,24 +60,24 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			$line[] = $user->technologies->laser;
 			$summe['Laser'] = '';
 			$header[++$i] = 'Att';
-			$line[] = GUI_Panel_Number::formatNumber($user->att);
+			$line[] = Text::formatNumber($user->att);
 			if (!isset($summe['att']))
 				$summe['att'] = 0;
 			$summe['att'] += $user->att;
 			$header[++$i] = 'Deff';
-			$line[] = GUI_Panel_Number::formatNumber($user->deff);
+			$line[] = Text::formatNumber($user->deff);
 			if (!isset($summe['deff']))
 				$summe['deff'] = 0;
 			$summe['deff'] += $user->deff;
 			
 			$header[++$i] = 'AS';
-			$line[] = GUI_Panel_Number::formatNumber(($user->att + $user->deff) / 2.0);
+			$line[] = Text::formatNumber(($user->att + $user->deff) / 2.0);
 			if (!isset($summe['as']))
 				$summe['as'] = 0;
 			$summe['as'] += ($user->att + $user->deff) / 2.0;
 			
 			$header[++$i] = 'Punkte';
-			$line[] = GUI_Panel_Number::formatNumber($user->points);
+			$line[] = Text::formatNumber($user->points);
 			if (!isset($summe['points']))
 				$summe['points'] = 0;
 			$summe['points'] += $user->points;
@@ -91,7 +91,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			array_merge(
 				array('Summe:'),
 				array_map(
-					create_function('$item', 'return is_numeric($item) ? GUI_Panel_Number::formatNumber($item) : $item;'),
+					create_function('$item', 'return is_numeric($item) ? Text::formatNumber($item) : $item;'),
 					$summe
 				)
 			)
@@ -127,7 +127,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Statistic_Army extends GUI_Panel {
 			array_merge(
 				array('Durchschnitt:'),
 				array_map(
-					create_function('$item', 'return is_numeric($item) ? GUI_Panel_Number::formatNumber($item / '.count($users).') : $item;'),
+					create_function('$item', 'return is_numeric($item) ? Text::formatNumber($item / '.count($users).') : $item;'),
 					$summe
 				)
 			)

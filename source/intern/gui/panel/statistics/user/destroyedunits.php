@@ -29,7 +29,7 @@ class Rakuun_Intern_GUI_Panel_Statistics_User_DestroyedUnits extends GUI_Panel {
 			$unitsDestroyedInAttack = $destroyedInAttack->{Text::underscoreToCamelCase($unit->getInternalName())};
 			$unitsDestroyedInDefense = $destroyedInDefense->{Text::underscoreToCamelCase($unit->getInternalName())};
 			$total = $unitsDestroyedInAttack + $unitsDestroyedInDefense;
-			$table->addLine(array($unit->getNameForAmount(2), GUI_Panel_Number::formatNumber($unitsDestroyedInAttack), GUI_Panel_Number::formatNumber($unitsDestroyedInDefense), GUI_Panel_Number::formatNumber($total)));
+			$table->addLine(array($unit->getNameForAmount(2), Text::formatNumber($unitsDestroyedInAttack), Text::formatNumber($unitsDestroyedInDefense), Text::formatNumber($total)));
 		}
 		$table->addTableCssClass('align_left', 0);
 	}

@@ -13,7 +13,7 @@ class Rakuun_Intern_Module_StockMarket extends Rakuun_Intern_Module {
 		$beryllium = new GUI_Panel_Number('beryllium', $ressources[Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_BERYLLIUM]);
 		$energy = new GUI_Panel_Number('energy', $ressources[Rakuun_Intern_GUI_Panel_StockMarket::RESSOURCE_ENERGY]);
 		
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('poolbox', new GUI_Panel_Text('pool', $iron->render().' Eisen | '.$beryllium->render().' Beryllium | '.$energy->render().' Energie<br />Heute noch handelbare Ressourcen: '.GUI_Panel_Number::formatNumber(Rakuun_Intern_GUI_Panel_StockMarket::getTradableLeft())), 'Verfügbare Ressourcen'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('poolbox', new GUI_Panel_Text('pool', $iron->render().' Eisen | '.$beryllium->render().' Beryllium | '.$energy->render().' Energie<br />Heute noch handelbare Ressourcen: '.Text::formatNumber(Rakuun_Intern_GUI_Panel_StockMarket::getTradableLeft())), 'Verfügbare Ressourcen'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('displaybox', new Rakuun_Intern_GUI_Panel_Stockmarket_Display('display'), 'Kursverlauf'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('buyironbox', new Rakuun_Intern_GUI_Panel_StockMarket_Buy_Iron('iron'), 'Eisen kaufen'));
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('buyberylliumbox', new Rakuun_Intern_GUI_Panel_StockMarket_Buy_Beryllium('beryllium'), 'Beryllium kaufen'));

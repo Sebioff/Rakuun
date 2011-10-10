@@ -18,7 +18,7 @@ class Rakuun_Intern_Production_Building_Berylliumstore extends Rakuun_Intern_Pro
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht die Menge des lagerbaren Berylliums um '.GUI_Panel_Number::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
+		$this->addEffect('Erhöht die Menge des lagerbaren Berylliums um '.Text::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
 	}
 }
 

@@ -29,7 +29,7 @@ class Rakuun_Intern_Production_Building_Moleculartransmitter extends Rakuun_Inte
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht die Menge an erhaltbaren Ressourcen pro Tag um '.GUI_Panel_Number::formatNumber(self::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER));
+		$this->addEffect('Erhöht die Menge an erhaltbaren Ressourcen pro Tag um '.Text::formatNumber(self::TRADE_VOLUME * RAKUUN_TRADELIMIT_MULTIPLIER));
 	}
 }
 

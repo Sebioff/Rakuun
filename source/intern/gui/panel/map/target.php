@@ -200,6 +200,15 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		
 		$userUnits->save();
 		
+		// log outgoing armies
+		$log = new DB_Record();
+		foreach ($sendedUnits as $internalName => $sendedUnit)
+			$log->$internalName = $sendedUnit;
+		$log->user = $user;
+		$log->opponent = $targetUser;
+		$log->time = time();
+		Rakuun_DB_Containers::getLogOutgoingArmiesContainer()->save($log);
+		
 		DB_Connection::get()->commit();
 	}
 	

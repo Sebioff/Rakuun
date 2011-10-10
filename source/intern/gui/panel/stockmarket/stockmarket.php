@@ -51,13 +51,13 @@ class Rakuun_Intern_GUI_Panel_StockMarket extends GUI_Panel {
 			$this->addError('Du befindest dich im Noobschutz und darfst die Börse daher nicht nutzen!');
 		}
 		if ($amount > $tradable) {
-			$this->addError('Du kannst maximal '.GUI_Panel_Number::formatNumber($tradable).' Ressourcen pro Tag über die Börse handeln.');
+			$this->addError('Du kannst maximal '.Text::formatNumber($tradable).' Ressourcen pro Tag über die Börse handeln.');
 		}
 		if ($amount > $tradable - $user->stockmarkettrade) {
-			$this->addError('Du kannst heute nur noch '.GUI_Panel_Number::formatNumber(self::getTradableLeft()).' Ressourcen über die Börse handeln.');
+			$this->addError('Du kannst heute nur noch '.Text::formatNumber(self::getTradableLeft()).' Ressourcen über die Börse handeln.');
 		}
 		if ($amount < self::MIN_AMOUNT) {
-			$this->addError('Du musst mindestens '.GUI_Panel_Number::formatNumber(self::MIN_AMOUNT).' Ressourcen über die Börse handeln.');
+			$this->addError('Du musst mindestens '.Text::formatNumber(self::MIN_AMOUNT).' Ressourcen über die Börse handeln.');
 		}
 	}
 	

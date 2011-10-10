@@ -20,7 +20,7 @@ class Rakuun_Intern_Production_Building_House extends Rakuun_Intern_Production_B
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht die Menge der Leute die in der Stadt wohnen können um '.GUI_Panel_Number::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
+		$this->addEffect('Erhöht die Menge der Leute die in der Stadt wohnen können um '.Text::formatNumber($this->getCapacity($this->getLevel() + $this->getFutureLevels() + 1) - $this->getCapacity($this->getLevel() + $this->getFutureLevels())));
 	}
 }
 

@@ -188,12 +188,12 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 		
 		foreach (Rakuun_Intern_Production_Factory::getAllBuildings($report) as $building) {
 			$delta = ($previousReport) ? $building->getLevel() - $previousReport->{Text::underscoreToCamelCase($building->getInternalName())} : $building->getLevel();
-			$reportTable->addLine(array($building->getName(), GUI_Panel_Number::formatNumber($building->getLevel()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta)));
+			$reportTable->addLine(array($building->getName(), Text::formatNumber($building->getLevel()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$building->getInternalName(), $delta)));
 		}
 		
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($report) as $unit) {
 			$delta = ($previousReport) ? $unit->getAmount() - $previousReport->{Text::underscoreToCamelCase($unit->getInternalName())} : $unit->getAmount();
-			$reportTable->addLine(array($unit->getName(), GUI_Panel_Number::formatNumber($unit->getAmount()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta)));
+			$reportTable->addLine(array($unit->getName(), Text::formatNumber($unit->getAmount()), new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta'.$unit->getInternalName(), $delta)));
 		}
 		
 		$templateEngine = new GUI_TemplateEngine();

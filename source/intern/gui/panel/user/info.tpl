@@ -11,9 +11,9 @@ Username:
 <br class="clear" />
 Stadtname: <?= Text::escapeHTML($user->cityName); ?>
 <br class="clear" />
-Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
+Punkte: <?= Text::formatNumber((int)$user->points); ?>
 <br class="clear" />
-Platz: <?= GUI_Panel_Number::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
+Platz: <?= Text::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
 <? if ($user->alliance) : ?>
 	<br class="clear" />
 	Allianz:
@@ -33,18 +33,18 @@ Koordinaten:
 	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints() * 0.6; ?>
 	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_POINTS): ?>
-		<? $output .= GUI_Panel_Number::formatNumber(floor($averagePoints)); ?>
+		<? $output .= Text::formatNumber(floor($averagePoints)); ?>
 	<? else: ?>
-		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_POINTS); ?>
+		<? $output .= Text::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_POINTS); ?>
 	<? endif; ?>
 	<?= $output; ?>
 	oder deine Armeestärke
 	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6; ?>
 	<? $output = '> '; ?>
 	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH): ?>
-		<? $output .= GUI_Panel_Number::formatNumber(floor($averagePoints)); ?>
+		<? $output .= Text::formatNumber(floor($averagePoints)); ?>
 	<? else: ?>
-		<? $output .= GUI_Panel_Number::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
+		<? $output .= Text::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
 	<? endif; ?>
 	<?= $output; ?> ist.
 	Du kehrst jederzeit wieder in den Noobschutz zurück, sobald alle der oben genannten Kriterien zutreffen und du:

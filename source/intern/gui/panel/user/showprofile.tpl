@@ -18,13 +18,13 @@
 			ICQ: <?= $user->icq; ?>
 			<br class="clear" />
 		<? endif; ?>
-		Punkte: <?= GUI_Panel_Number::formatNumber((int)$user->points); ?>
+		Punkte: <?= Text::formatNumber((int)$user->points); ?>
 		<br class="clear" />
 		<? if ($cautionPoints = Rakuun_Intern_GUI_Panel_Admin_User_Caution::getCautionPoints($user)): ?>
 			Verwarnpunkte: <?= $cautionPoints; ?>
 			<br class="clear" />
 		<? endif; ?>
-		Platz: <?= GUI_Panel_Number::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
+		Platz: <?= Text::formatNumber((int)Rakuun_Intern_Statistics::getRank($user)); ?>
 		<? if (Rakuun_TeamSecurity::get()->hasPrivilege($currentUser, Rakuun_TeamSecurity::PRIVILEGE_MULTIHUNTING)): ?>
 			<br class="clear" />
 			Multipunkte:

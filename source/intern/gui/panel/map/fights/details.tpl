@@ -6,7 +6,7 @@
 	<? foreach (Rakuun_Intern_Production_Factory::getAllUnits($this->getArmy(), $attackSequence) as $unit): ?>
 		<? if ($unit->getAmount() > 0): ?>
 			<li>
-				<?= GUI_Panel_Number::formatNumber($unit->getAmount()); ?>
+				<?= Text::formatNumber($unit->getAmount()); ?>
 				<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $unit->getType(), 'id' => $unit->getInternalName())); ?>">
 					<?= $unit->getNameForAmount(); ?>
 				</a>
@@ -20,7 +20,7 @@
 	<? foreach (Rakuun_Intern_Production_Factory::getAllUnits($this->getArmy()) as $unit): ?>
 		<? $attackForce += $unit->getAttackValue(); ?>
 	<? endforeach; ?>
-	Angriffskraft: <?= GUI_Panel_Number::formatNumber($attackForce); ?>
+	Angriffskraft: <?= Text::formatNumber($attackForce); ?>
 	<? if ($this->getArmy()->destroyBuildings): ?>
 		<br/>
 		Gebäude zerstören aktiviert
@@ -30,9 +30,9 @@
 	<hr/>
 	<h3>Erbeutete Ressourcen</h3>
 	<ul>
-		<li>Eisen: <?= GUI_Panel_Number::formatNumber($this->getArmy()->iron); ?></li>
-		<li>Beryllium: <?= GUI_Panel_Number::formatNumber($this->getArmy()->beryllium); ?></li>
-		<li>Energie: <?= GUI_Panel_Number::formatNumber($this->getArmy()->energy); ?></li>
+		<li>Eisen: <?= Text::formatNumber($this->getArmy()->iron); ?></li>
+		<li>Beryllium: <?= Text::formatNumber($this->getArmy()->beryllium); ?></li>
+		<li>Energie: <?= Text::formatNumber($this->getArmy()->energy); ?></li>
 	</ul>
 <? endif; ?>
 <hr/>

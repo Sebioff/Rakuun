@@ -5,10 +5,10 @@
 	<br/>
 	Beute:
 	<br/>
-	<?= GUI_Panel_Number::formatNumber($raid->iron); ?> Eisen
+	<?= Text::formatNumber($raid->iron); ?> Eisen
 	<br/>
-	<?= GUI_Panel_Number::formatNumber($raid->beryllium); ?> Beryllium
+	<?= Text::formatNumber($raid->beryllium); ?> Beryllium
 	<br/>
-	<?= GUI_Panel_Number::formatNumber($raid->energy); ?> Energie
+	<?= Text::formatNumber($raid->energy); ?> Energie
 	<hr/>
 <? endforeach; ?>

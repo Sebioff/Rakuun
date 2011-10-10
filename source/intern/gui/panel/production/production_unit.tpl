@@ -6,7 +6,7 @@
 			<a href="<?= App::get()->getInternModule()->getSubmodule('info')->getURL(array('type' => $productionItem->getType(), 'id' => $productionItem->getInternalName())); ?>">
 				<?= $productionItem->getName(); ?>
 			</a>
-		</h2> (<?= GUI_Panel_Number::formatNumber($productionItem->getAmount()); ?><?= ($productionItem->getAmountInProduction() > 0) ? ' + '.GUI_Panel_Number::formatNumber($productionItem->getAmountInProduction()) : '' ?>)
+		</h2> (<?= Text::formatNumber($productionItem->getAmount()); ?><?= ($productionItem->getAmountInProduction() > 0) ? ' + '.Text::formatNumber($productionItem->getAmountInProduction()) : '' ?>)
 	</div>
 	<div class="production_item_actions">
 		<? if ($productionItem->canBuild()): ?>
@@ -35,7 +35,7 @@
 	<? if ($ironCosts > $ressources->iron): ?>
 		<? $classes[] = 'rakuun_requirements_failed'; ?>
 	<? endif ?>
-	<span class="<?= implode(' ', $classes); ?>"><?= GUI_Panel_Number::formatNumber($ironCosts); ?> Eisen</span>
+	<span class="<?= implode(' ', $classes); ?>"><?= Text::formatNumber($ironCosts); ?> Eisen</span>
 <? endif ?>
 <? $berylliumCosts = $productionItem->getBerylliumCostsForAmount(1); ?>
 <? if ($berylliumCosts > 0): ?>
@@ -43,7 +43,7 @@
 	<? if ($berylliumCosts > $ressources->beryllium): ?>
 		<? $classes[] = 'rakuun_requirements_failed'; ?>
 	<? endif ?>
-	<span class="<?= implode(' ', $classes); ?>"><?= GUI_Panel_Number::formatNumber($berylliumCosts); ?> Beryllium</span>
+	<span class="<?= implode(' ', $classes); ?>"><?= Text::formatNumber($berylliumCosts); ?> Beryllium</span>
 <? endif ?>
 <? $energyCosts = $productionItem->getEnergyCostsForAmount(1); ?>
 <? if ($energyCosts > 0): ?>
@@ -51,7 +51,7 @@
 	<? if ($energyCosts > $ressources->energy): ?>
 		<? $classes[] = 'rakuun_requirements_failed'; ?>
 	<? endif ?>
-	<span class="<?= implode(' ', $classes); ?>"><?= GUI_Panel_Number::formatNumber($energyCosts); ?> Energie</span>
+	<span class="<?= implode(' ', $classes); ?>"><?= Text::formatNumber($energyCosts); ?> Energie</span>
 <? endif ?>
 <? $peopleCosts = $productionItem->getPeopleCostsForAmount(1); ?>
 <? if ($peopleCosts > 0): ?>
@@ -59,7 +59,7 @@
 	<? if ($peopleCosts > $ressources->people): ?>
 		<? $classes[] = 'rakuun_requirements_failed'; ?>
 	<? endif ?>
-	<span class="<?= implode(' ', $classes); ?>"><?= GUI_Panel_Number::formatNumber($peopleCosts); ?> Leute</span>
+	<span class="<?= implode(' ', $classes); ?>"><?= Text::formatNumber($peopleCosts); ?> Leute</span>
 <? endif ?>
 <?= Rakuun_Date::formatCountDown($productionItem->getTimeCosts(1)); ?>
 <div class="rakuun_production_item_description">

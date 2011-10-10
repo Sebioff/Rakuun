@@ -59,7 +59,7 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 		}
 		$hoverText .= $userLink->render().
 			'<br />'.Text::escapeHTML($this->cityOwner->cityName).
-			'<br />Punkte: '.GUI_Panel_Number::formatNumber($this->cityOwner->points);
+			'<br />Punkte: '.Text::formatNumber($this->cityOwner->points);
 			$hoverText .= '<br />Spieler ist ';
 			if ($this->cityOwner->isOnline())
 				$hoverText .= 'online';
@@ -81,8 +81,8 @@ class Rakuun_Intern_GUI_Panel_Map_Descriptions_City extends GUI_Panel_HoverInfo 
 			}
 			
 			$hoverText .= '<br/><br/>Letzte Spionage: '.date(GUI_Panel_Date::FORMAT_DATETIME, $newestReport->time);
-			$hoverText .= '<br/>Angriffskraft: '.GUI_Panel_Number::formatNumber($att);
-			$hoverText .= '<br/>Verteidigungskraft: '.GUI_Panel_Number::formatNumber($deff);
+			$hoverText .= '<br/>Angriffskraft: '.Text::formatNumber($att);
+			$hoverText .= '<br/>Verteidigungskraft: '.Text::formatNumber($deff);
 		}
 		
 		return $hoverText;

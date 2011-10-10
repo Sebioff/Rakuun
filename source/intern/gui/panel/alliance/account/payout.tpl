@@ -3,9 +3,9 @@
 <? endif ?>
 Auszahlung nur an schwache Spieler, d.h.:
 <br/>
-weniger als <?= GUI_Panel_Number::formatNumber($this->params->averagePoints); ?> Punkte und
+weniger als <?= Text::formatNumber($this->params->averagePoints); ?> Punkte und
 <br/>
-weniger als <?= GUI_Panel_Number::formatNumber($this->params->averageStrength); ?> Armeestärke
+weniger als <?= Text::formatNumber($this->params->averageStrength); ?> Armeestärke
 <br/>
 <? if ($this->hasPanel('userbox')): ?>
 	<? $this->displayLabelForPanel('userbox'); ?> <? $this->displayPanel('userbox'); ?>

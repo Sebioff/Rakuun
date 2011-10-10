@@ -36,7 +36,7 @@ class Rakuun_Intern_Quest_FirstCapturedDatabase extends Rakuun_Intern_Quest {
 	}
 	
 	public function getRewardDescription() {
-		return GUI_Panel_Number::formatNumber(self::REWARD_IRON).' Eisen, '.GUI_Panel_Number::formatNumber(self::REWARD_BERYLLIUM).' Beryllium und '.GUI_Panel_Number::formatNumber(self::REWARD_ENERGY).' Energie in die Allianzkasse';
+		return Text::formatNumber(self::REWARD_IRON).' Eisen, '.Text::formatNumber(self::REWARD_BERYLLIUM).' Beryllium und '.Text::formatNumber(self::REWARD_ENERGY).' Energie in die Allianzkasse';
 	}
 	
 	public function getOwnerName() {

@@ -9,10 +9,10 @@ class Rakuun_Intern_GUI_Panel_Production_WIP_CityItems extends Rakuun_Intern_GUI
 			$firstWIP = $wipItems[0];
 			$this->contentPanel->cancel->setConfirmationMessage(
 				'Wirklich abbrechen?\nEs werden 50% der Kosten erstattet:'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getIronRepayForLevel())).' Eisen'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getBerylliumRepayForLevel())).' Beryllium'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getEnergyRepayForLevel())).' Energie'.
-				'\n'.GUI_Panel_Number::formatNumber(round($firstWIP->getPeopleRepayForLevel())).' Leute'
+				'\n'.Text::formatNumber(round($firstWIP->getIronRepayForLevel())).' Eisen'.
+				'\n'.Text::formatNumber(round($firstWIP->getBerylliumRepayForLevel())).' Beryllium'.
+				'\n'.Text::formatNumber(round($firstWIP->getEnergyRepayForLevel())).' Energie'.
+				'\n'.Text::formatNumber(round($firstWIP->getPeopleRepayForLevel())).' Leute'
 			);
 		}
 	}
