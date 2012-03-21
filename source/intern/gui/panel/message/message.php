@@ -16,9 +16,12 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	public function init() {
 		parent::init();
 		
-		$userPK = Rakuun_User_Manager::getCurrentUser()->getPK();
-		if ($this->message->user->getPK() != $userPK && (!$this->message->sender || $this->message->sender->getPK() != $userPK))
+		$user = Rakuun_User_Manager::getCurrentUser();
+		$userPK = $user->getPK();
+		
+		if ($this->hasNoPrivilege($user)){
 			return;
+		}
 		
 		if (!$this->message->hasBeenRead && $this->message->user->getPK() == $userPK) {
 			$this->message->hasBeenRead = true;
@@ -31,8 +34,14 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 			$this->addPanel(new Rakuun_GUI_Control_UserLink('sender', $this->message->sender, 'Sender'));
 		else
 			$this->addPanel(new GUI_Panel_Text('sender', $this->message->getSenderName(), 'Sender'));
-		if ($this->message->user->getPK() == $userPK)
+		if ($this->message->user->getPK() == $userPK) {
 			$this->addPanel(new GUI_Control_Submitbutton('delete', 'Löschen'));
+			if ($this->message->isReported) {
+				$this->addPanel(new GUI_Panel_Text('report', 'Diese Nachricht wurde gemeldet!'));
+			} else if ($this->message->sender) {
+				$this->addPanel(new GUI_Control_Submitbutton('report', 'Melden!'));
+			}
+		}
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------
@@ -46,6 +55,19 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	public function onDelete() {
 		Rakuun_DB_Containers::getMessagesContainer()->delete($this->message);
 		$this->getModule()->redirect(App::get()->getInternModule()->getSubmodule('messages')->getUrl());
+	}
+	
+	public function onReport() {
+		$this->message->isReported = true;
+		Rakuun_DB_Containers::getMessagesContainer()->save($this->message);		
+	}
+	
+	private function hasNoPrivilege($user) {
+		$userPK = $user->getPK();
+		$msgUserPK = $this->message->user->getPK();
+		$has_teamprivilege = Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_REPORTEDMESSAGES);
+		return $has_teamprivilege != "1" 
+				&& $msgUserPK != $userPK && (!$this->message->sender || $this->message->sender->getPK() != $userPK);
 	}
 }
 

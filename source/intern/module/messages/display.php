@@ -7,7 +7,10 @@ class Rakuun_Intern_Module_Messages_Display extends Rakuun_Intern_Module {
 		$message = null;
 		if ($id = (int)$this->getParam('id')) {
 			$message = Rakuun_DB_Containers::getMessagesContainer()->selectByPK($id);
-			if (!$message || ($message->user->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK() && ($message->sender == null || $message->sender->getPK() != Rakuun_User_Manager::getCurrentUser()->getPK()))) {
+			$user = Rakuun_User_Manager::getCurrentUser();
+			
+			if (!$message 
+				|| (Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_REPORTEDMESSAGES) != 1) && ($message->user->getPK() != $user->getPK() && ($message->sender == null || $message->sender->getPK() != $user->getPK()))) {
 				$this->redirect($this->getParent()->getUrl());
 			}
 		}

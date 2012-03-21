@@ -63,6 +63,7 @@ class Rakuun_TeamSecurity extends Security {
 		$this->getContainerGroups()->save($groupSupporters);
 		$this->setPrivilege(self::PRIVILEGE_BACKENDACCESS, $groupSupporters);
 		$this->setPrivilege(self::PRIVILEGE_SUPPORT, $groupSupporters);
+		$this->setPrivilege(self::PRIVILEGE_REPORTEDMESSAGES, $groupSupporters);
 		
 		$groupMultihunters = new DB_Record();
 		$groupMultihunters->name = 'Multihunter';
@@ -86,13 +87,6 @@ class Rakuun_TeamSecurity extends Security {
 		$this->getContainerGroups()->save($groupRapoleditors);
 		$this->setPrivilege(self::PRIVILEGE_BACKENDACCESS, $groupRapoleditors);
 		$this->setPrivilege(self::PRIVILEGE_RAPOL, $groupRapoleditors);
-		
-		$groupReportedmessages = new DB_Record();
-		$groupReportedmessages->name = 'bearbeitet gemeldete Nachrichten';
-		$groupReportedmessages->groupIdentifier = self::GROUP_REPORTED_MESSAGES;
-		$this->getContainerGroups()->save($groupReportedmessages);
-		$this->setPrivilege(self::PRIVILEGE_BACKENDACCESS, $groupReportedmessages);
-		$this->setPrivilege(self::PRIVILEGE_REPORTEDMESSAGES, $groupReportedmessages);
 		
 		$groupUsermanagers = new DB_Record();
 		$groupUsermanagers->name = 'Usermanager';

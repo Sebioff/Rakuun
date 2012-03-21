@@ -38,4 +38,7 @@
 	<? if ($this->hasPanel('delete')): ?>
 		<? $this->displayPanel('delete'); ?>
 	<? endif; ?>
+	<? if ($this->hasPanel('report')): ?>
+		<? $this->displayPanel('report'); ?>
+	<? endif; ?>
 </div>

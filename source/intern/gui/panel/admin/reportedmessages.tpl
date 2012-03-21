@@ -1,0 +1,1 @@
+<? $this->displayPanel('reported_messages'); ?>

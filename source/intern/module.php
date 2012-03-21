@@ -172,6 +172,8 @@ class Rakuun_Intern_Module extends Rakuun_Module {
 				$adminNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('multihunting'), 'Multihunting', array('rakuun_navigation_node_multihunting')));
 			if (Rakuun_Intern_Modules::get()->hasSubmodule('support'))
 				$adminNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('support'), 'Support', array('rakuun_navigation_node_support')));
+			if (Rakuun_Intern_Modules::get()->hasSubmodule('reportedmessages'))
+				$adminNode->addNode(new CMS_Navigation_ModuleNode(Rakuun_Intern_Modules::get()->getSubmoduleByName('reportedmessages'), 'Gemeldete Nachrichten', array('rakuun_navigation_node_reportedmessages')));
 		}
 		
 		if (Rakuun_Intern_Modules::get()->hasSubmodule('logout'))

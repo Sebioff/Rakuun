@@ -51,10 +51,10 @@ class Rakuun_Intern_Modules extends Rakuun_Module {
 			$this->addSubmodule(new Rakuun_Intern_Module_Admin('admin'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Multihunting('multihunting'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Support('support'));
+			$this->addSubmodule(new Rakuun_Intern_Module_ReportedMessages('reportedmessages'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Logout('logout'));
 			$this->addSubmodule(new Rakuun_Intern_Module_Boards('boards'));
-//			if ($user && $user->units->spydrone + $user->units->cloakedSpydrone > 0)
-				$this->addSubmodule(new Rakuun_Intern_Module_Reports('reports'));
+			$this->addSubmodule(new Rakuun_Intern_Module_Reports('reports'));
 			if ($user && $user->buildings->stockMarket > 0)
 				$this->addSubmodule(new Rakuun_Intern_Module_StockMarket('stockmarket'));
 		}
