@@ -11,6 +11,7 @@ class Rakuun_DB_Buildings extends Rakuun_DB_CityItems {
 		parent::lower($internalName, $destroyer, $deltaLevel);
 		Rakuun_Intern_Event::onChangeBuildingLevel($this, $internalName, $deltaLevel * -1, $destroyer);
 		$this->user->recalculatePoints();
+		$this->user->addXP(-1);
 	}
 	
 	/**
@@ -20,6 +21,7 @@ class Rakuun_DB_Buildings extends Rakuun_DB_CityItems {
 		parent::raise($internalName, $deltaLevel);
 		Rakuun_Intern_Event::onChangeBuildingLevel($this, $internalName, $deltaLevel, Rakuun_User_Manager::getCurrentUser());
 		$this->user->recalculatePoints();
+		$this->user->addXP(1);
 	}
 }
 

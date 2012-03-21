@@ -337,6 +337,18 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		return $sum;
 	}
 	
+	public function addXP($amount) {
+		$this->xp = $this->xp + $amount;
+		$this->save();
+	}
+	
+	/**
+	 * @return reached level of a user. level is equivalent to no of skillpoints
+	 */
+	public function getLevel() {
+		return ($this->xp / 100); 
+	}
+	
 	/**
 	 * @see db/DB_Record#__get()
 	 */
