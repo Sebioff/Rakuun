@@ -290,6 +290,14 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 							else
 								$destroyedBuilding = $destructibleBuildings[rand(0, count($destructibleBuildings) - 1)];
 							$army->target->buildings->lower($destroyedBuilding->getInternalName(), $army->user);
+							
+							//raiseRessourcesForDestroyedBuilding
+							$iron = $destroyedBuilding->getIronRepayForLevel();
+							$beryllium = $destroyedBuilding->getBerylliumRepayForLevel();
+							$energy = $destroyedBuilding->getEnergyRepayForLevel();
+							$people = $destroyedBuilding->getPeopleRepayForLevel();
+							$destroyedBuilding->getUser()->ressources->raise($iron, $beryllium, $energy, $people);
+							
 							// remove workers from producers
 							if ($destroyedBuilding instanceof Rakuun_Intern_Production_Building_RessourceProducer) {
 								$workers = Rakuun_DB_Containers::getBuildingsWorkersContainer()->selectByUserFirst($army->target);
@@ -516,6 +524,16 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		$userUnits->save();
 		$army->user->ressources->raise($army->iron, $army->beryllium, $army->energy);
 		$army->delete();
+	}
+	
+	private function raiseRessourcesForDestroyedBuilding($destroyedBuilding) {
+		//DB_Connection::get()->beginTransaction();
+		
+		//DB_Connection::get()->commit();
+	}
+	
+	private function destroyBuildings($army, $fightingSystem) {
+		
 	}
 }
 
