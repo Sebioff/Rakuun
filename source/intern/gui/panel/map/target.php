@@ -89,15 +89,15 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 			$this->addError('Einheiten und Sonden können nicht zusammen verschickt werden.');
 		}
 		
-		if ($targetUser->isLocked()) {
-			$this->addError('Dieser Spieler ist gesperrt und kann nicht angegriffen werden');
-		}
-		
 		$targetUser = $this->getTargetUser();
 		
 		if ($targetUser) {
 			$targetX = $targetUser->cityX;
 			$targetY = $targetUser->cityY;
+			
+			if ($targetUser->isLocked()) {
+				$this->addError('Dieser Spieler ist gesperrt und kann nicht angegriffen werden');
+			}
 			
 			if ($targetUser->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {
 				$this->addError('Du kannst dich nicht selbst angreifen!');

@@ -173,6 +173,10 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		return (bool)$this->isYimtay;
 	}
 	
+	public function isLocked() {
+		return Rakuun_GameSecurity::get()->isInGroup($this, Rakuun_GameSecurity::GROUP_LOCKED);
+	}
+	
 	/**
 	 * @return number of Databases the user have
 	 */
