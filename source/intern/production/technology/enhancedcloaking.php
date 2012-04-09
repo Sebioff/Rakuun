@@ -6,10 +6,11 @@ class Rakuun_Intern_Production_Technology_EnhancedCloaking extends Rakuun_Intern
 		
 		$this->setInternalName('enhanced_cloaking');
 		$this->setName('Verbesserte Tarnung');
-		$this->setBaseIronCosts(12000);
-		$this->setBaseBerylliumCosts(16000);
-		$this->setBaseEnergyCosts(18000);
-		$this->setBaseTimeCosts(3*24*60*60);
+		$this->setBaseIronCosts(25000);
+		$this->setBaseBerylliumCosts(25000);
+		$this->setBaseEnergyCosts(25000);
+		$this->setBasePeopleCosts(10000);
+		$this->setBaseTimeCosts(7*24*60*60 + 12*60*60); //7d 12h 00min
 		$this->addNeededBuilding('laboratory', 10);
 		$this->addNeededTechnology('cloaking', 2);
 		$this->setMaximumLevel(1);
@@ -25,7 +26,7 @@ class Rakuun_Intern_Production_Technology_EnhancedCloaking extends Rakuun_Intern
 			Deshalb wird bei sich in Bewegung befindlichen Fahrzeugen weiterhin die alte Tarntechnologie eingesetzt, lediglich im Stillstand kann die Verbesserte Tarnung zum Einsatz kommen.
 			<br/>
 			Eine weitere Schwäche mit bislang ungeklärter Ursache ist, dass getarnte Objekte nach wie vor problemlos andere getarnte Objekte erkennen können. Somit kann die Verbesserte Tarnung nur dazu eingesetzt werden, Tarneinheiten vor feindlichen Spionagesonden unsichtbar zu machen - doch vor Tarnsonden gibt es leider nach wie vor keinen wirksamen Schutz.');
-		$this->setPoints(20);
+		$this->setPoints(50);
 	}
 }
 
