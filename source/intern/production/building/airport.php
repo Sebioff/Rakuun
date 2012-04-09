@@ -9,9 +9,10 @@ class Rakuun_Intern_Production_Building_Airport extends Rakuun_Intern_Production
 		$this->setInternalName('airport');
 		$this->setName('Flughafen');
 		$this->setBaseIronCosts(1500);
-		$this->setBaseBerylliumCosts(1500);
-		$this->setBasePeopleCosts(200);
-		$this->setBaseTimeCosts(45*60);
+		$this->setBaseBerylliumCosts(2000);
+		$this->setBaseEnergyCosts(1000);
+		$this->setBasePeopleCosts(20);
+		$this->setBaseTimeCosts(10*60);
 		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('military_base', 5);
 		$this->addNeededTechnology('antigravitation', 1);
@@ -27,7 +28,7 @@ class Rakuun_Intern_Production_Building_Airport extends Rakuun_Intern_Production
 			Der Job eines Kampfpiloten kann mental Einfachere zermürben und wer nicht fähig ist, in einem Team zu kämpfen, taugt ebenfalls nichts.
 			<br/>
 			Nur wer sich nach jahrelangem Training bewährt hat, darf die Gerüste erklimmen und im Cockpit eines echten Kampfgleiters sitzen um seinen ersten Einsatz durchzuführen.');
-		$this->setPoints(8);
+		$this->setPoints(10);
 	}
 	
 	protected function defineEffects() {

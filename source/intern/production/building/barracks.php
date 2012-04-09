@@ -8,9 +8,10 @@ class Rakuun_Intern_Production_Building_Barracks extends Rakuun_Intern_Productio
 		
 		$this->setInternalName('barracks');
 		$this->setName('Kaserne');
-		$this->setBaseIronCosts(600);
-		$this->setBaseBerylliumCosts(350);
-		$this->setBasePeopleCosts(30);
+		$this->setBaseIronCosts(2000);
+		$this->setBaseBerylliumCosts(1500);
+		$this->setBaseEnergyCosts(1000);
+		$this->setBasePeopleCosts(20);
 		$this->setBaseTimeCosts(10*60);
 		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('ironmine', 5);
@@ -30,7 +31,7 @@ class Rakuun_Intern_Production_Building_Barracks extends Rakuun_Intern_Productio
 			Die meisten Kasernen arbeiten zusätzlich mit Drogen, die sowohl die Brutalität als auch die Schmerzunempfindlichkeit steigern.
 			<br/>
 			Einige wenige Elitekasernen setzen dann statt dem die Ausbildung abschließenden virtuellen Kampf eine wirkliche Schlacht in Gange, in der die schwachen Soldaten durch die "natürliche Auslese" beseitigt werden.');
-		$this->setPoints(6);
+		$this->setPoints(10);
 	}
 	
 	protected function defineEffects() {

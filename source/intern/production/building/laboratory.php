@@ -11,7 +11,7 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 		$this->setBaseIronCosts(600);
 		$this->setBaseBerylliumCosts(400);
 		$this->setBasePeopleCosts(30);
-		$this->setBaseTimeCosts(10*60);
+		$this->setBaseTimeCosts(20*60);
 		$this->addNeededBuilding('ironmine', 3);
 		$this->addNeededBuilding('berylliummine', 2);
 		$this->setMaximumLevel(19);
@@ -30,6 +30,31 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 	
 	protected function defineEffects() {
 		$this->addEffect('Verkürzung der Forschungszeiten um insgesamt '.(self::RESEARCH_TIME_REDUCTION_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
+	}
+	
+	//OVERRIDES
+	public function getIronCostsForLevel($level = null) {
+		if ($level === null)
+			$level = $this->getLevel();
+		return pow($this->getBaseIronCosts() * $level, 2);
+	}
+	
+	public function getBerylliumCostsForLevel($level = null) {
+		if ($level === null)
+			$level = $this->getLevel();
+		return pow($this->getBaseBerylliumCosts() * $level, 2);
+	}
+	
+	public function getEnergyCostsForLevel($level = null) {
+		if ($level === null)
+			$level = $this->getLevel();
+		return pow($this->getBaseEnergyCosts() * $level, 2);
+	}
+	
+	public function getPeopleCostsForLevel($level = null) {
+		if ($level === null)
+			$level = $this->getLevel();
+		return pow($this->getBasePeopleCosts() * $level, 2);
 	}
 }
 
