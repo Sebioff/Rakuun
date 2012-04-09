@@ -2,6 +2,7 @@
 
 class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Production_Building {
 	const RESEARCH_TIME_REDUCTION_PERCENT = 5;
+	const EXP_FOR_COSTS = 1.1;
 	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
@@ -36,25 +37,25 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 	public function getIronCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return pow($this->getBaseIronCosts() * $level, 2);
+		return round(pow($this->getBaseIronCosts() * $level, EXP_FOR_COSTS));
 	}
 	
 	public function getBerylliumCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return pow($this->getBaseBerylliumCosts() * $level, 2);
+		return round(pow($this->getBaseBerylliumCosts() * $level, EXP_FOR_COSTS));
 	}
 	
 	public function getEnergyCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return pow($this->getBaseEnergyCosts() * $level, 2);
+		return round(pow($this->getBaseEnergyCosts() * $level, EXP_FOR_COSTS));
 	}
 	
 	public function getPeopleCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return pow($this->getBasePeopleCosts() * $level, 2);
+		return round(pow($this->getBasePeopleCosts() * $level, EXP_FOR_COSTS));
 	}
 }
 
