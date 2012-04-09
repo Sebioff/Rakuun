@@ -7,22 +7,21 @@ class Rakuun_Intern_Production_Unit_Tertor extends Rakuun_Intern_Production_Unit
 		$this->setInternalName('tertor');
 		$this->setName('Tertor');
 		$this->setNamePlural('Tertoren');
-		$this->setBaseIronCosts(900);
-		$this->setBaseBerylliumCosts(800);
-		$this->setBaseEnergyCosts(800);
-		$this->setBasePeopleCosts(40);
-		$this->setBaseTimeCosts(16*60);
-		$this->setBaseAttackValue(88);
-		$this->setBaseDefenseValue(9);
-		$this->setBaseSpeed(169);
-		$this->setRessourceTransportCapacity(80);
+		$this->setBaseIronCosts(250);
+		$this->setBaseBerylliumCosts(750);
+		$this->setBaseEnergyCosts(500);
+		$this->setBasePeopleCosts(10);
+		$this->setBaseTimeCosts(20*60);
+		$this->setBaseAttackValue(10);
+		$this->setBaseDefenseValue(20);
+		$this->setBaseSpeed(3*60);
+		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('airport', 3);
 		$this->addNeededTechnology('heavy_weaponry', 6);
 		$this->addNeededTechnology('heavy_plating', 2);
 		$this->addNeededTechnology('jet', 1);
 		$this->addNeededTechnology('antigravitation', 2);
-		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Tertor');
 		$this->setLongDescription('Tertoren sind Antigrav-Bomber.
 			<br/>

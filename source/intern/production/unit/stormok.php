@@ -7,15 +7,15 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->setInternalName('stormok');
 		$this->setName('Stormok');
 		$this->setNamePlural('Stormoks');
-		$this->setBaseIronCosts(850);
-		$this->setBaseBerylliumCosts(700);
-		$this->setBaseEnergyCosts(700);
-		$this->setBasePeopleCosts(40);
-		$this->setBaseTimeCosts(18*60);
-		$this->setBaseAttackValue(70);
-		$this->setBaseDefenseValue(20);
-		$this->setBaseSpeed(111);
-		$this->setRessourceTransportCapacity(80);
+		$this->setBaseIronCosts(350);
+		$this->setBaseBerylliumCosts(650);
+		$this->setBaseEnergyCosts(500);
+		$this->setBasePeopleCosts(10);
+		$this->setBaseTimeCosts(15*60);
+		$this->setBaseAttackValue(20);
+		$this->setBaseDefenseValue(10);
+		$this->setBaseSpeed(4*60);
+		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('airport', 4);
 		$this->addNeededTechnology('heavy_weaponry', 3);
@@ -24,7 +24,6 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->addNeededTechnology('antigravitation', 2);
 		$this->addNeededTechnology('cloaking', 3);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
-		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING, true);
 		$this->setShortDescription('Stormok');
 		$this->setLongDescription('Stormoks verwenden die neusten Prinzipien der Tarnung und sind für normale Städte praktisch unsichtbar.
 			<br/>

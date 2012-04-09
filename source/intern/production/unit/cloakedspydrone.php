@@ -10,8 +10,9 @@ class Rakuun_Intern_Production_Unit_CloakedSpydrone extends Rakuun_Intern_Produc
 		$this->setName('Tarnsonde');
 		$this->setNamePlural('Tarnsonden');
 		$this->setBaseIronCosts(400);
-		$this->setBaseBerylliumCosts(250);
-		$this->setBaseEnergyCosts(500);
+		$this->setBaseBerylliumCosts(400);
+		$this->setBaseEnergyCosts(400);
+		$this->setBasePeopleCosts(2);
 		$this->setBaseTimeCosts(5*60);
 		$this->setBaseSpeed(20);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);

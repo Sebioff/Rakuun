@@ -10,6 +10,7 @@ class Rakuun_Intern_Production_Unit_Spydrone extends Rakuun_Intern_Production_Un
 		$this->setBaseIronCosts(100);
 		$this->setBaseBerylliumCosts(100);
 		$this->setBaseEnergyCosts(100);
+		$this->setBasePeopleCosts(1);
 		$this->setBaseTimeCosts(3*60);
 		$this->setBaseSpeed(15);
 		$this->addNeededBuilding('barracks', 3);

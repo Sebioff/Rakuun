@@ -7,22 +7,21 @@ class Rakuun_Intern_Production_Unit_Donany extends Rakuun_Intern_Production_Unit
 		$this->setInternalName('donany');
 		$this->setName('Donany');
 		$this->setNamePlural('Donanies');
-		$this->setBaseIronCosts(750);
-		$this->setBaseBerylliumCosts(500);
+		$this->setBaseIronCosts(525);
+		$this->setBaseBerylliumCosts(525);
 		$this->setBaseEnergyCosts(550);
-		$this->setBasePeopleCosts(40);
-		$this->setBaseTimeCosts(19*60);
-		$this->setBaseAttackValue(50);
-		$this->setBaseDefenseValue(14);
-		$this->setBaseSpeed(59);
-		$this->setRessourceTransportCapacity(150);
+		$this->setBasePeopleCosts(15);
+		$this->setBaseTimeCosts(17*60+30);
+		$this->setBaseAttackValue(15);
+		$this->setBaseDefenseValue(15);
+		$this->setBaseSpeed(20);
+		$this->setRessourceTransportCapacity();
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('airport', 1);
 		$this->addNeededTechnology('heavy_weaponry', 3);
 		$this->addNeededTechnology('heavy_plating', 3);
 		$this->addNeededTechnology('jet', 3);
 		$this->addNeededTechnology('antigravitation', 1);
-		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Donany');
 		$this->setLongDescription('Donanys sind die allererste je gebaute Antigravitations-Kampfeinheit.
 			<br/>
