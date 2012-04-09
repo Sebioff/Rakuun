@@ -15,7 +15,7 @@ class Rakuun_Intern_Production_Unit_Donany extends Rakuun_Intern_Production_Unit
 		$this->setBaseAttackValue(15);
 		$this->setBaseDefenseValue(15);
 		$this->setBaseSpeed(20);
-		$this->setRessourceTransportCapacity();
+		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('airport', 1);
 		$this->addNeededTechnology('heavy_weaponry', 3);
