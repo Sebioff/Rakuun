@@ -132,24 +132,21 @@ abstract class Rakuun_Intern_Production_Factory {
 		self::addTechnology('hydropower', 'Rakuun_Intern_Production_Technology_Hydropower');
 		self::addTechnology('genetic', 'Rakuun_Intern_Production_Technology_Genetic');
 		self::addTechnology('light_weaponry', 'Rakuun_Intern_Production_Technology_LightWeaponry');
-		self::addTechnology('heavy_weaponry', 'Rakuun_Intern_Production_Technology_HeavyWeaponry');
 		self::addTechnology('light_plating', 'Rakuun_Intern_Production_Technology_LightPlating');
-		self::addTechnology('heavy_plating', 'Rakuun_Intern_Production_Technology_HeavyPlating');
-		self::addTechnology('engine', 'Rakuun_Intern_Production_Technology_Engine');
 		self::addTechnology('jet', 'Rakuun_Intern_Production_Technology_Jet');
 		self::addTechnology('laser', 'Rakuun_Intern_Production_Technology_Laser');
 		self::addTechnology('antigravitation', 'Rakuun_Intern_Production_Technology_Antigravitation');
 		self::addTechnology('cloaking', 'Rakuun_Intern_Production_Technology_Cloaking');
 		self::addTechnology('enhanced_cloaking', 'Rakuun_Intern_Production_Technology_EnhancedCloaking');
 		self::addTechnology('momo', 'Rakuun_Intern_Production_Technology_Momo');
+		self::addTechnology('supercompression', 'Rakuun_Intern_Production_Technology_Supercompression');
+		self::addTechnology('plasmatechnology', 'Rakuun_Intern_Production_Technology_Plasmatechnology');
+		self::addTechnology('cybernetics', 'Rakuun_Intern_Production_Technology_Cybernetics');
 	}
 	
 	private static function generateUnitList() {
-		// TODO implement or remove
-		//self::addUnit('pezetto', 'Rakuun_Intern_Production_Unit_Pezetto');
 		self::addUnit('inra', 'Rakuun_Intern_Production_Unit_Inra');
 		self::addUnit('laser_rifleman', 'Rakuun_Intern_Production_Unit_LaserRifleman');
-		self::addUnit('tego', 'Rakuun_Intern_Production_Unit_Tego');
 		self::addUnit('minigani', 'Rakuun_Intern_Production_Unit_Minigani');
 		self::addUnit('mandrogani', 'Rakuun_Intern_Production_Unit_Mandrogani');
 		self::addUnit('buhogani', 'Rakuun_Intern_Production_Unit_Buhogani');
@@ -160,8 +157,7 @@ abstract class Rakuun_Intern_Production_Factory {
 		self::addUnit('telaturri', 'Rakuun_Intern_Production_Unit_Telaturri');
 		self::addUnit('spydrone', 'Rakuun_Intern_Production_Unit_Spydrone');
 		self::addUnit('cloaked_spydrone', 'Rakuun_Intern_Production_Unit_CloakedSpydrone');
-		// TODO implement or remove
-		//self::addUnit('lorica', 'Rakuun_Intern_Production_Unit_Lorica');
+		self::addUnit('lorica', 'Rakuun_Intern_Production_Unit_Lorica');
 	}
 }
 

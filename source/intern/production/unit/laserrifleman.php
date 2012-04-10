@@ -14,10 +14,11 @@ class Rakuun_Intern_Production_Unit_LaserRifleman extends Rakuun_Intern_Producti
 		$this->setBaseTimeCosts(20*60);
 		$this->setBaseAttackValue(20);
 		$this->setBaseDefenseValue(10);
-		$this->setBaseSpeed(240);
+		$this->setBaseSpeed(4*60);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER);
-		$this->addNeededBuilding('barracks', 3);
+		$this->addNeededBuilding('barracks', 10);
+		$this->addNeededTechnology('cybernetics', 2);
 		$this->addNeededTechnology('laser', 1);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Laserschütze');

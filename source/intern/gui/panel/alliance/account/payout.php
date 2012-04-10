@@ -19,8 +19,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 			if ($user->getArmyStrength(true) < $averageStrength && $user->points < $averagePoints)
 				$_users[$user->getPK()] = $user->name;
 		}
-		$defaultuser = null
-		if in_array(Rakuun_User_Manager::getCurrentUser(), $_users) {
+		$defaultuser = null;
+		if (in_array(Rakuun_User_Manager::getCurrentUser(), $_users)) {
 			$defaultuser = Rakuun_User_Manager::getCurrentUser();
 		}
 		$this->addPanel($userbox = new GUI_Control_DropDownBox('userbox', $_users, $defaultuser));

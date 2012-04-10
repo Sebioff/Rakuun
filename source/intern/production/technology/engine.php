@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * TODO remove if it is absolutely clear that this won't be used anymore
+ * @deprecated
+ */
 class Rakuun_Intern_Production_Technology_Engine extends Rakuun_Intern_Production_Technology {
 	const SPEED_BONUS_PERCENT = 5;
 	

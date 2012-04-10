@@ -11,7 +11,8 @@ class Rakuun_Intern_Production_Technology_LightPlating extends Rakuun_Intern_Pro
 		$this->setBaseEnergyCosts(2000);
 		$this->setBasePeopleCosts(1000);
 		$this->setBaseTimeCosts(60*60);
-		$this->addNeededBuilding('laboratory', 3);
+		$this->setInfluence(Rakuun_Intern_Production_Technology::INFLUENCE_DEFENSE);
+		$this->addNeededBuilding('laboratory', 1);
 		$this->addNeededBuilding('tank_factory', 1);
 		$this->setMaximumLevel(3);
 		$this->setShortDescription('Zur Produktion leicht gepanzerter Einheiten.');

@@ -9,10 +9,10 @@ class Rakuun_Intern_Production_Technology_Cloaking extends Rakuun_Intern_Product
 		$this->setBaseIronCosts(25000);
 		$this->setBaseBerylliumCosts(25000);
 		$this->setBaseEnergyCosts(25000);
-		$this->setBasePeopleCosts(10000);
-		$this->setBaseTimeCosts(7*24*60*60 + 12*60*60); //7d 12h 00min
-		$this->addNeededBuilding('laboratory', 8);
-		$this->setMaximumLevel(3);
+		$this->setBasePeopleCosts(15000);
+		$this->setBaseTimeCosts(7*24*60*60+12*60*60); //7d 12h 00min
+		$this->addNeededBuilding('laboratory', 15);
+		$this->setMaximumLevel(1);
 		$this->setShortDescription('Die Tarnung ermöglicht den Bau getarnter Einheiten.');
 		$this->setLongDescription('Die moderne Tarntechnologie setzt im Gegensatz zur alten nicht mehr ausschließlich Materialien ein, die Sonarwellen schlucken, sondern ist eine tatsächliche Unsichtbarwerdung.
 			<br/>

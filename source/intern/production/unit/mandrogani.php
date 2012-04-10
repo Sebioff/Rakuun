@@ -17,12 +17,9 @@ class Rakuun_Intern_Production_Unit_Mandrogani extends Rakuun_Intern_Production_
 		$this->setBaseSpeed(3*60+30);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
-		$this->addNeededBuilding('tank_factory', 4);
-		$this->addNeededTechnology('heavy_weaponry', 1);
-		$this->addNeededTechnology('light_plating', 4);
-		$this->addNeededTechnology('engine', 3);
-		$this->addNeededTechnology('laser', 3);
-		$this->addNeededTechnology('cloaking', 2);
+		$this->addNeededBuilding('tank_factory', 15);
+		$this->addNeededTechnology('light_plating', 3);
+		$this->addNeededTechnology('cloaking', 1);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_CLOAKING, true);
 		$this->setShortDescription('Mandrogani');

@@ -174,13 +174,13 @@ abstract class Rakuun_Intern_Production_Base {
 		$this->basePeopleCosts = $basePeopleCosts;
 	}
 	
-	/**
-	 * Sets the costs for the lowest level of this building in seconds
-	 */
 	public function getBaseTimeCosts() {
 		return $this->baseTimeCosts;
 	}
 	
+	/**
+	 * Sets the costs for the lowest level of this building in seconds
+	 */
 	public function setBaseTimeCosts($baseTimeCosts) {
 		$this->baseTimeCosts = $baseTimeCosts;
 	}

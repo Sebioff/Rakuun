@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Technology_Hydropower extends Rakuun_Intern_Produ
 		$this->setBaseIronCosts(2000);
 		$this->setBaseBerylliumCosts(2500);
 		$this->setBaseTimeCosts(720*60);
-		$this->addNeededBuilding('laboratory', 3);
+		$this->addNeededBuilding('laboratory', 1);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Wird zur Energiegewinnung benötigt.');
 		$this->setLongDescription('Die Gewinnung von Energie aus der Kraft von Wasser ist ein relativ simpler Vorgang: man staut einen See an, durchzieht den Staudamm mit Röhren und fügt in diese Turbinen ein, die einen Dynamo antreiben.

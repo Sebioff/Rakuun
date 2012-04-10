@@ -380,16 +380,16 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `technologies` (
   `hydropower` mediumint(9) NOT NULL,
   `genetic` mediumint(9) NOT NULL,
   `light_weaponry` mediumint(9) NOT NULL,
-  `heavy_weaponry` mediumint(9) NOT NULL,
   `light_plating` mediumint(9) NOT NULL,
-  `heavy_plating` mediumint(9) NOT NULL,
-  `engine` mediumint(9) NOT NULL,
   `jet` mediumint(9) NOT NULL,
   `laser` mediumint(9) NOT NULL,
   `antigravitation` mediumint(9) NOT NULL,
   `cloaking` mediumint(9) NOT NULL,
   `enhanced_cloaking` mediumint(9) NOT NULL,
   `momo` mediumint(9) NOT NULL,
+  `supercompression` mediumint(9) NOT NULL,
+  `plasmatechnology` mediumint(9) NOT NULL,
+  `cybernetics` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;';
@@ -462,15 +462,15 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `armies_technologies` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `hydropower` mediumint(9) NOT NULL,
   `light_weaponry` mediumint(9) NOT NULL,
-  `heavy_weaponry` mediumint(9) NOT NULL,
   `light_plating` mediumint(9) NOT NULL,
-  `heavy_plating` mediumint(9) NOT NULL,
-  `engine` mediumint(9) NOT NULL,
   `jet` mediumint(9) NOT NULL,
   `laser` mediumint(9) NOT NULL,
   `antigravitation` mediumint(9) NOT NULL,
   `cloaking` mediumint(9) NOT NULL,
   `enhanced_cloaking` mediumint(9) NOT NULL,
+  `supercompression` mediumint(9) NOT NULL,
+  `plasmatechnology` mediumint(9) NOT NULL,
+  `cybernetics` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;';
 

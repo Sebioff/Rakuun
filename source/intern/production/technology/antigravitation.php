@@ -11,8 +11,9 @@ class Rakuun_Intern_Production_Technology_Antigravitation extends Rakuun_Intern_
 		$this->setBaseEnergyCosts(1000);
 		$this->setBasePeopleCosts(1000);
 		$this->setBaseTimeCosts(60*60);
-		$this->addNeededBuilding('laboratory', 7);
-		$this->setMaximumLevel(3);
+		$this->addNeededBuilding('laboratory', 1);
+		$this->addNeededBuilding('airport', 1);
+		$this->setMaximumLevel(1);
 		$this->setShortDescription('Der Antigravitationsantrieb wird für den Bau von Flugeinheiten benötigt.');
 		$this->setLongDescription('Nur sehr wenig lassen Forscher über diese Technologie durchdringen.
 			<br/>

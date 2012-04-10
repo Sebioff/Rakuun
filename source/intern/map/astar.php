@@ -8,12 +8,12 @@ class Rakuun_Intern_Map_AStar {
 	private $bitMap;
 	private $map;
 	private $movementCosts = 0;
-	private $unitTypes = 0;
+	private $canAllMoveOverWater = false;
 
-	public function __construct($movementCosts, $unitTypes) {
+	public function __construct($movementCosts, $canAllMoveOverWater) {
 		$this->bitMap = imagecreatefrompng(PROJECT_PATH.'/www/images/map.png');
 		$this->movementCosts = $movementCosts;
-		$this->unitTypes = $unitTypes;
+		$this->canAllMoveOverWater = $canAllMoveOverWater;
 	}
 	
 	public function run($startX, $startY, $endX, $endY) {
@@ -67,7 +67,7 @@ class Rakuun_Intern_Map_AStar {
 //			$reachableNodes[] = &self::$map[$expandedNode['x'] + 1][$expandedNode['y'] + 1];
 			
 		foreach ($reachableNodes as &$reachableNode) {
-			if ((!$reachableNode['walkable'] && $this->unitTypes != Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT) || $reachableNode['expanded']) {
+			if ((!$reachableNode['walkable'] && !$this->canAllMoveOverWater) || $reachableNode['expanded']) {
 				continue;
 			}
 			

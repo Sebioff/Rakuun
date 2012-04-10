@@ -1,8 +1,6 @@
 <?php
 
 class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_Technology {
-	const SPEED_BONUS_PERCENT = 5;
-	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
 		
@@ -13,9 +11,7 @@ class Rakuun_Intern_Production_Technology_Jet extends Rakuun_Intern_Production_T
 		$this->setBaseEnergyCosts(15000);
 		$this->setBasePeopleCosts(15000);
 		$this->setBaseTimeCosts(7*24*60*60 + 12*60*60); //7d 12h 00min
-		$this->addNeededBuilding('laboratory', 9);
-		$this->addNeededBuilding('airport', 1);
-		$this->addNeededTechnology('engine', 5);
+		$this->addNeededBuilding('laboratory', 15);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Eine verbesserte Version der Standard-Antriebs-Form. Der Düsenantrieb ist absolut notwendig zur Produktion von Flugeinheiten.');
 		$this->setLongDescription('Der Düsenantrieb ist für die Fortbewegung der Gleiter verantwortlich.

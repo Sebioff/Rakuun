@@ -5,25 +5,26 @@
  */
 abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_UserItem {
 	// TODO add pezetto to end of list if pezettos get implemented
-	const DEFAULT_DEFENSE_SEQUENCE = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani|laser_turret';
-	const DEFAULT_ATTACK_SEQUENCE = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|tego|minigani|buhogani';
+	const DEFAULT_DEFENSE_SEQUENCE = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|lorica|minigani|buhogani|laser_turret';
+	const DEFAULT_ATTACK_SEQUENCE = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|lorica|minigani|buhogani';
 	
 	const TYPE_FOOTSOLDIER = 1; // binary 0001
 	const TYPE_VEHICLE = 2; // binary 0010
 	const TYPE_AIRCRAFT = 4; // binary 0100
 	const TYPE_STATIONARY = 8; // binary 1000
 	
-	const BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER = 22;
-	const BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER = -14;
-	const BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER = 18;
-	const BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE = -20;
-	const BONUS_PERCENT_AIRCRAFT_VS_VEHICLE = 22;
-	const BONUS_PERCENT_STATIONARY_VS_VEHICLE = 15;
-	const BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT = -26;
-	const BONUS_PERCENT_VEHICLE_VS_AIRCRAFT = 8;
+	const BONUS_PERCENT_VEHICLE_VS_FOOTSOLDIER = 20;
+	const BONUS_PERCENT_AIRCRAFT_VS_FOOTSOLDIER = 0;
+	const BONUS_PERCENT_STATIONARY_VS_FOOTSOLDIER = 0;
+	const BONUS_PERCENT_FOOTSOLDIER_VS_VEHICLE = 0;
+	const BONUS_PERCENT_AIRCRAFT_VS_VEHICLE = 20;
+	const BONUS_PERCENT_STATIONARY_VS_VEHICLE = 0;
+	const BONUS_PERCENT_FOOTSOLDIER_VS_AIRCRAFT = 20;
+	const BONUS_PERCENT_VEHICLE_VS_AIRCRAFT = 0;
 	const BONUS_PERCENT_STATIONARY_VS_AIRCRAFT = 0;
 	
 	const ATTRIBUTE_CLOAKING = 'Rakuun_Intern_Production_Unit_cloaking';
+	const ATTRIBUTE_MOVE_OVER_WATER = 'Rakuun_Intern_Production_Unit_move_over_water';
 	
 	private $amount = null;
 	private $baseAttackValue = 0;
@@ -49,6 +50,7 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 		parent::__construct($dataSource, $user);
 		
 		$this->addAttribute(self::ATTRIBUTE_CLOAKING, false, 'Diese Einheit kann sich tarnen');
+		$this->addAttribute(self::ATTRIBUTE_MOVE_OVER_WATER, false, 'Diese Einheit kann sich über Wasser bewegen');
 	}
 	
 	// CUSTOM METHODS ----------------------------------------------------------
@@ -410,21 +412,7 @@ abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_Us
 	 * another (the higher the slower)
 	 */
 	public function getSpeed() {
-		$baseValue = $this->baseSpeed;
-		$value = $baseValue;
-		
-		if ($this->getNeededTechnology('engine') > 0) {
-			$value -= $baseValue / 100 * Rakuun_Intern_Production_Technology_Engine::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('engine', $this->getDataSource()->technologies)->getLevel();
-		}
-		
-		if ($this->getNeededTechnology('jet') > 0) {
-			$value -= $baseValue / 100 * Rakuun_Intern_Production_Technology_Jet::SPEED_BONUS_PERCENT * Rakuun_Intern_Production_Factory::getTechnology('jet', $this->getDataSource()->technologies)->getLevel();
-		}
-		
-		if ($value < 0)
-			$value = 0;
-		
-		return $value;
+		return $this->baseSpeed;
 	}
 }
 

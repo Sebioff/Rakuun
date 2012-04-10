@@ -17,10 +17,8 @@ class Rakuun_Intern_Production_Unit_Minigani extends Rakuun_Intern_Production_Un
 		$this->setBaseSpeed(3*60);
 		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
-		$this->addNeededBuilding('tank_factory', 3);
-		$this->addNeededTechnology('heavy_weaponry', 2);
-		$this->addNeededTechnology('light_plating', 5);
-		$this->addNeededTechnology('engine', 3);
+		$this->addNeededBuilding('tank_factory', 1);
+		$this->addNeededTechnology('light_plating', 1);
 		$this->setShortDescription('Minigani');
 		$this->setLongDescription('Miniganis sind leichte Panzer.
 			<br/>

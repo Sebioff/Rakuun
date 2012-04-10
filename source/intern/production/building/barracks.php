@@ -14,8 +14,6 @@ class Rakuun_Intern_Production_Building_Barracks extends Rakuun_Intern_Productio
 		$this->setBasePeopleCosts(20);
 		$this->setBaseTimeCosts(10*60);
 		$this->setMaximumLevel(50);
-		$this->addNeededBuilding('ironmine', 5);
-		$this->addNeededBuilding('berylliummine', 5);
 		$this->addNeededBuilding('military_base', 1);
 		$this->setShortDescription('In der Kaserne werden Soldaten ausgebildet.<br />Ein Ausbau bewirkt eine schnellere Ausbildung.');
 		$this->setLongDescription('Kasernen sind für die Ausbildung der Infanterie vorgesehen, in höheren Stufen der Kaserne findet man außerdem kleinere Werften, in denen Spionagesonden konstruiert werden können.

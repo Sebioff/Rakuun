@@ -14,9 +14,7 @@ class Rakuun_Intern_Production_Building_TankFactory extends Rakuun_Intern_Produc
 		$this->setBasePeopleCosts(20);
 		$this->setBaseTimeCosts(10*60);
 		$this->setMaximumLevel(50);
-		$this->addNeededBuilding('ironmine', 10);
-		$this->addNeededBuilding('berylliummine', 8);
-		$this->addNeededBuilding('military_base', 2);
+		$this->addNeededBuilding('military_base', 1);
 		$this->setShortDescription('Die Panzerfabrik ermöglicht die Produktion von Panzern.<br />Ein Ausbau bewirkt eine schnellere Produktion.');
 		$this->setLongDescription('In Panzerfabriken werden je nach Stufe unterschiedlich mächtige Panzer produziert.
 			Diese Fabriken sind mit modernster Technik ausgestattet.

@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Unit_Lorica extends Rakuun_Intern_Production_Unit
 		$this->setNamePlural('Loricas');
 		$this->setBaseIronCosts(525);
 		$this->setBaseBerylliumCosts(525);
-		$this->setBaseEnergyCosts(500);
+		$this->setBaseEnergyCosts(550);
 		$this->setBasePeopleCosts(15);
 		$this->setBaseTimeCosts(17*60+30);
 		$this->setBaseAttackValue(15);
@@ -17,9 +17,9 @@ class Rakuun_Intern_Production_Unit_Lorica extends Rakuun_Intern_Production_Unit
 		$this->setBaseSpeed(3*60+30);
 		$this->setRessourceTransportCapacity(1000);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER);
-		$this->addNeededBuilding('tank_factory', 1);
-		$this->addNeededTechnology('light_plating', 3);
-		$this->addNeededTechnology('engine', 5);
+		$this->addNeededBuilding('barracks', 15);
+		$this->addNeededTechnology('cybernetics', 3);
+		$this->addNeededTechnology('supercompression', 1);
 		$this->setShortDescription('Lorica');
 		$this->setLongDescription('Loricas sind sogenannte BMTs, bemannte Mannschafts-Transporter.
 			<br/>

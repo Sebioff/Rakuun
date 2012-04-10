@@ -11,8 +11,8 @@ class Rakuun_Intern_Production_Technology_EnhancedCloaking extends Rakuun_Intern
 		$this->setBaseEnergyCosts(25000);
 		$this->setBasePeopleCosts(10000);
 		$this->setBaseTimeCosts(7*24*60*60 + 12*60*60); //7d 12h 00min
-		$this->addNeededBuilding('laboratory', 10);
-		$this->addNeededTechnology('cloaking', 2);
+		$this->addNeededBuilding('laboratory', 20);
+		$this->addNeededTechnology('cloaking', 1);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Durch die Verbesserte Tarnung sind Tarneinheiten in gegnerischen Spionageberichten, die von normalen Sonden erstellt wurden, absolut unsichtbar. Lediglich Tarnsonden können Einheiten, die mit der Verbesserten Tarnung ausgestattet sind, entdecken.');
 		$this->setLongDescription('Die Verbesserte Tarnung ist das Aktuellste, das die moderne Tarnforschung hervorgebracht hat.

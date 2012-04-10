@@ -14,13 +14,13 @@ class Rakuun_Intern_Production_Unit_Inra extends Rakuun_Intern_Production_Unit {
 		$this->setBaseTimeCosts(15*60);
 		$this->setBaseAttackValue(10);
 		$this->setBaseDefenseValue(20);
-		$this->setBaseSpeed(180);
+		$this->setBaseSpeed(3*60);
 		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER);
 		$this->addNeededBuilding('barracks', 1);
-		$this->addNeededTechnology('light_weaponry', 1);
+		$this->addNeededTechnology('cybernetics', 1);
 		$this->setShortDescription('Inra');
-		$this->setLongDescription('Infanterie-Rakuuraner, auch Inras genannt, bilden das Rückrat der meisten Armeen.
+		$this->setLongDescription('Infanterie-Rakuuraner, auch Inras genannt, bilden das Rückgrat der meisten Armeen.
 			<br/>
 			Ausgestattet mit einfachen Gaussgewehren sind sie in der Lage, stabilste Hüllen zu durchdringen.
 			<br/>

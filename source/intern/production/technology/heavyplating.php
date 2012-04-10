@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * TODO remove if it is absolutely clear that this won't be used anymore
+ * @deprecated
+ */
 class Rakuun_Intern_Production_Technology_HeavyPlating extends Rakuun_Intern_Production_Technology {
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);

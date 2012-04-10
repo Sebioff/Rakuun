@@ -9,16 +9,17 @@ class Rakuun_Intern_Map_ArmyPathCalculator {
 	
 	public function getPath() {
 		$speed = 0;
-		$unitTypes = 0;
+		$canAllMoveOverWater = true;
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($this->army) as $unit) {
 			if ($unit->getAmount() <= 0)
 				continue;
-			$unitTypes = Rakuun_Intern_Production_Unit::getJoinedUnitType($unitTypes, $unit->getUnitType());
+			if (!$unit->getAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_MOVE_OVER_WATER))
+				$canAllMoveOverWater = false;
 			if ($unit->getSpeed() > $speed)
 				$speed = $unit->getSpeed();
 		}
 		$speed *= $this->army->speedMultiplier;
-		$astar = new Rakuun_Intern_Map_AStar($speed, $unitTypes);
+		$astar = new Rakuun_Intern_Map_AStar($speed, $canAllMoveOverWater);
 		$options = array();
 		$options['order'] = 'ID ASC';
 		$pathNodes = Rakuun_DB_Containers::getArmiesPathsContainer()->selectByArmy($this->army, $options);

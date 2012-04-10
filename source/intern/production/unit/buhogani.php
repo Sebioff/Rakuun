@@ -14,14 +14,13 @@ class Rakuun_Intern_Production_Unit_Buhogani extends Rakuun_Intern_Production_Un
 		$this->setBaseTimeCosts(20*60);
 		$this->setBaseAttackValue(20);
 		$this->setBaseDefenseValue(10);
-		$this->setBaseSpeed(4*60);
+		$this->setBaseSpeed(240);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
+		$this->addNeededBuilding('tank_factory', 10);
+		$this->addNeededTechnology('light_plating', 2);
+		$this->addNeededTechnology('light_weaponry', 1);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
-		$this->addNeededBuilding('tank_factory', 5);
-		$this->addNeededTechnology('heavy_weaponry', 5);
-		$this->addNeededTechnology('heavy_plating', 1);
-		$this->addNeededTechnology('engine', 4);
 		$this->setShortDescription('Buhogani');
 		$this->setLongDescription('Der Buhogani ist um einiges härter gepanzert als sein kleiner Bruder, der Minigani, und besitzt mit 76 mm Kanonen eine bei weitem durchschlagendere Kraft.
 			<br/>
