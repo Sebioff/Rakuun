@@ -35,7 +35,7 @@ class Rakuun_Intern_Module_Alliance_Profile_Own extends Rakuun_Intern_Module {
 		
 		if ($user->alliance->picture)
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('picturebox', new GUI_Panel_UploadedFile('alliancepicture', $user->alliance->picture, 'Allianzbild der Allianz '.$user->alliance->name), 'Allianzbild'));
-		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', new GUI_Panel_Text('text', Rakuun_Text::formatPlayerText($user->alliance->intern, false)), 'Interne Informationen'));
+		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('internbox', new Rakuun_Intern_GUI_Panel_Alliance_Internbox('internbox', 'Interne Informationen')));
 		$this->contentPanel->addPanel($shoutbox = new Rakuun_GUI_Panel_Box('shoutboxbox', new Rakuun_Intern_GUI_Panel_Shoutbox_Alliance('shoutbox'), 'Allianzshoutbox'));
 		$shoutbox->addClasses('rakuun_box_alliance_shoutbox');
 		$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('boardbox', new Rakuun_Intern_GUI_Panel_Board_Overview_Alliance('board'), 'Neues aus dem Allianzforum'));
