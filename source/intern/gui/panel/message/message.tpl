@@ -41,4 +41,9 @@
 	<? if ($this->hasPanel('report')): ?>
 		<? $this->displayPanel('report'); ?>
 	<? endif; ?>
+	<? if ($this->hasPanel('signature')): ?>
+		<div class="border_top">
+		<? $this->displayPanel('signature'); ?>
+	<? endif; ?>
+	</div>
 </div>

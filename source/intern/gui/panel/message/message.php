@@ -42,6 +42,28 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 				$this->addPanel(new GUI_Control_Submitbutton('report', 'Melden!'));
 			}
 		}
+		switch ($this->message->type) { 
+			case Rakuun_Intern_IGM::TYPE_PRIVATE:
+				//oh here cann be wonderful a sponsor feature: adding signature, configurable in profile
+				break;
+			case Rakuun_Intern_IGM::TYPE_ALLIANCE:
+				$this->addPanel(new GUI_Panel_Text('signature', 'Allianzrundmail', 'Signatur'));
+				break;
+			case Rakuun_Intern_IGM::TYPE_META:
+				$this->addPanel(new GUI_Panel_Text('signature', 'Metarundmail', 'Signatur'));
+				break;
+			case Rakuun_Intern_IGM::TYPE_META:
+				$this->addPanel(new GUI_Panel_Text('signature', 'Handel', 'Signatur'));
+				break;
+			case Rakuun_Intern_IGM::TYPE_FIGHT:
+				$this->addPanel(new GUI_Panel_Text('signature', 'Kampfbericht', 'Signatur'));
+				break;
+			case Rakuun_Intern_IGM::TYPE_META:
+				$this->addPanel(new GUI_Panel_Text('signature', 'Spionagebericht', 'Signatur'));
+				break;
+			default:
+				//no signature
+		}
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

@@ -149,3 +149,9 @@ form div.core_common_error_list label {
 {
 	padding:2px;
 }
+
+.border_top {
+	border-top: 1px solid white;
+	padding-top: 5px;
+	margin-top: 5px;
+}
