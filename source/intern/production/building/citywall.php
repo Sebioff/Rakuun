@@ -11,7 +11,7 @@ class Rakuun_Intern_Production_Building_CityWall extends Rakuun_Intern_Productio
 		$this->setBaseIronCosts(9000);
 		$this->setBaseEnergyCosts(5000);
 		$this->setBasePeopleCosts(200);
-		$this->setBaseTimeCosts(240*60);
+		$this->setBaseTimeCosts(120*60);
 		$this->addNeededBuilding('ironmine', 10);
 		$this->addNeededBuilding('berylliummine', 10);
 		$this->addNeededBuilding('clonomat', 1);

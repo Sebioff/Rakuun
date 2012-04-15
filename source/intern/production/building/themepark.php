@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Building_Themepark extends Rakuun_Intern_Producti
 		$this->setBaseIronCosts(600);
 		$this->setBaseBerylliumCosts(400);
 		$this->setBasePeopleCosts(30);
-		$this->setBaseTimeCosts(10*60);
+		$this->setBaseTimeCosts(5*60);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Baue Freizeitparks, damit deine Bürger zufrieden mit dir sind.');
 		$this->setLongDescription('Freizeitparks heben die Moral der arbeitslosen Bevölkerung, denn ganz nach der Devise "Wer arbeitet ist glücklich", ist der nicht arbeitende Bevölkerungsteil unglücklich.

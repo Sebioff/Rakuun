@@ -9,8 +9,8 @@ class Rakuun_Intern_Production_Influences {
 	const RESSOURCE_ENERGY = 3;
 	const RESSOURCE_PEOPLE = 4;
 	
-	const THEMEPARK_SATISFACTION_NORMAL = 500;
-	const THEMEPARK_SATISFACTION_RATE = 250;
+	const THEMEPARK_SATISFACTION_NORMAL = 1000;
+	const THEMEPARK_SATISFACTION_RATE = 500;
 	
 	public static function getRessourceProductionInfluenceRate($ressourceType, Rakuun_DB_User $user = null) {
 		if ($user === null)
@@ -36,7 +36,7 @@ class Rakuun_Intern_Production_Influences {
 			$user = Rakuun_User_Manager::getCurrentUser();
 		
 		// TODO: add massacre people
-		return $user->ressources->people / Rakuun_Intern_Production_Factory::getBuilding('themepark', $user)->getLevel();
+		return ($user->ressources->people / Rakuun_Intern_Production_Factory::getBuilding('themepark', $user)->getLevel()) / RAKUUN_SPEED_SATISFACTION_MULTIPLIER;
 	}
 	
 	/**
@@ -46,7 +46,7 @@ class Rakuun_Intern_Production_Influences {
 		if ($user === null)
 			$user = Rakuun_User_Manager::getCurrentUser();
 		
-		$satisfaction = self::getPeopleSatisfaction($user) / RAKUUN_SPEED_SATISFACTION_MULTIPLIER;
+		$satisfaction = self::getPeopleSatisfaction($user);
 		if ($satisfaction >= self::THEMEPARK_SATISFACTION_NORMAL + 3 * self::THEMEPARK_SATISFACTION_RATE) {
 			return 0.85;
 		}

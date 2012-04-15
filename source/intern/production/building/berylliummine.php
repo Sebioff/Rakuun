@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Building_Berylliummine extends Rakuun_Intern_Prod
 		$this->setBaseIronCosts(200);
 		$this->setBaseBerylliumCosts(300);
 		$this->setBasePeopleCosts(12);
-		$this->setBaseTimeCosts(6*60);
+		$this->setBaseTimeCosts(3*60);
 		$this->setBaseBerylliumProduction(1);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Je weiter die Berylliummine ausgebaut ist und je mehr Arbeiter in ihr sind, desto mehr Beryllium liefert sie. Beryllium ist einer der beiden Grundrohstoffe, der für sämtliche Gebäude benötigt wird.');

@@ -10,7 +10,7 @@ class Rakuun_Intern_Production_Building_Clonomat extends Rakuun_Intern_Productio
 		$this->setBaseBerylliumCosts(400);
 		$this->setBaseEnergyCosts(1200);
 		$this->setBasePeopleCosts(4);
-		$this->setBaseTimeCosts(10*60);
+		$this->setBaseTimeCosts(5*60);
 		$this->addNeededBuilding('ironmine', 4);
 		$this->addNeededBuilding('berylliummine', 3);
 		$this->addNeededBuilding('hydropower_plant', 3);

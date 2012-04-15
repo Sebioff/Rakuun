@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Building_HydropowerPlant extends Rakuun_Intern_Pr
 		$this->setBaseIronCosts(125);
 		$this->setBaseBerylliumCosts(100);
 		$this->setBasePeopleCosts(15);
-		$this->setBaseTimeCosts(5*60);
+		$this->setBaseTimeCosts(3*60);
 		$this->addNeededTechnology('hydropower', 1);
 		$this->setBaseEnergyProduction(1);
 		$this->setShortDescription('Liefert Energie.');

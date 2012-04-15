@@ -27,7 +27,7 @@ class Rakuun_Intern_Production_Building_RessourceProducer extends Rakuun_Intern_
 		
 		$workersLevel = $workers / self::WORKERS_PER_LEVEL;
 		$level = ($workersLevel > $level) ? $level : $workersLevel;
-		$production = ($level / 4 + $level / 5) * 2.5;
+		$production = ($level / 4 + $level / 5) * 5;
 		$production *= (time() - $lastProductionTime) / 60;
 		$production *= $this->getBaseIronProduction();
 		$production *= Rakuun_Intern_Production_Influences::getRessourceProductionInfluenceRate(Rakuun_Intern_Production_Influences::RESSOURCE_IRON, $this->getUser());
@@ -48,7 +48,7 @@ class Rakuun_Intern_Production_Building_RessourceProducer extends Rakuun_Intern_
 		
 		$workersLevel = $workers / self::WORKERS_PER_LEVEL;
 		$level = ($workersLevel > $level) ? $level : $workersLevel;
-		$production = ($level / 4 + $level / 5) * 2.5;
+		$production = ($level / 4 + $level / 5) * 5;
 		$production *= (time() - $lastProductionTime) / 60;
 		$production *= $this->getBaseBerylliumProduction();
 		$production *= Rakuun_Intern_Production_Influences::getRessourceProductionInfluenceRate(Rakuun_Intern_Production_Influences::RESSOURCE_BERYLLIUM, $this->getUser());
@@ -69,7 +69,7 @@ class Rakuun_Intern_Production_Building_RessourceProducer extends Rakuun_Intern_
 		
 		$workersLevel = $workers / self::WORKERS_PER_LEVEL;
 		$level = ($workersLevel > $level) ? $level : $workersLevel;
-		$production = ($level / 4) * 2.5;
+		$production = ($level / 4) * 5;
 		$production *= (time() - $lastProductionTime) / 60;
 		$production *= $this->getBaseEnergyProduction();
 		$production *= Rakuun_Intern_Production_Influences::getRessourceProductionInfluenceRate(Rakuun_Intern_Production_Influences::RESSOURCE_ENERGY, $this->getUser());
@@ -90,7 +90,7 @@ class Rakuun_Intern_Production_Building_RessourceProducer extends Rakuun_Intern_
 		
 		$workersLevel = $workers / self::WORKERS_PER_LEVEL;
 		$level = ($workersLevel > $level) ? $level : $workersLevel;
-		$production = (($level + 1) / 5) * 2.5;
+		$production = (($level + 1) / 5) * 5;
 		$production *= (time() - $lastProductionTime) / 60;
 		$production *= $this->getBasePeopleProduction();
 		$production *= Rakuun_Intern_Production_Influences::getRessourceProductionInfluenceRate(Rakuun_Intern_Production_Influences::RESSOURCE_PEOPLE, $this->getUser());

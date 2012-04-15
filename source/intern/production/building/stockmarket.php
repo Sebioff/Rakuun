@@ -2,9 +2,9 @@
 
 class Rakuun_Intern_Production_Building_StockMarket extends Rakuun_Intern_Production_Building {
 	/**
-	 * defines how much the tradelimit increases by building the next stock market level
-	 */
-	const TRADELIMIT_PER_LEVEL = 2000;
+	 * defines how much the tradelimit increases by building the next stock market
+	 * level */
+	const TRADELIMIT_PER_LEVEL = 4000;
 	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
@@ -15,7 +15,7 @@ class Rakuun_Intern_Production_Building_StockMarket extends Rakuun_Intern_Produc
 		$this->setBaseBerylliumCosts(3000);
 		$this->setBaseEnergyCosts(2000);
 		$this->setBasePeopleCosts(300);
-		$this->setBaseTimeCosts(180*60);
+		$this->setBaseTimeCosts(90*60);
 		$this->addNeededBuilding('hydropower_plant', 3);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setMaximumLevel(10);

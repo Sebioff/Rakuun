@@ -1,8 +1,8 @@
 <?php
 
 class Rakuun_Intern_Production_Building_Moleculartransmitter extends Rakuun_Intern_Production_Building {
-	// receivable amount with one moleculartransmitter (multiplier in code)
-	const TRADE_VOLUME = 1000;
+	/** receivable amount with one moleculartransmitter (multiplier in code) */
+	const TRADE_VOLUME = 2000;
 	
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);
@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Building_Moleculartransmitter extends Rakuun_Inte
 		$this->setBaseIronCosts(1000);
 		$this->setBaseBerylliumCosts(1000);
 		$this->setBasePeopleCosts(100);
-		$this->setBaseTimeCosts(30*60);
+		$this->setBaseTimeCosts(15*60);
 		$this->addNeededBuilding('hydropower_plant', 5);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Der Molekulartransmitter ermöglicht es, auf einfachem Weg direkt mit anderen Rakuuranern zu handeln.');

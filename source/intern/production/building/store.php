@@ -1,7 +1,7 @@
 <?php
 
 class Rakuun_Intern_Production_Building_Store extends Rakuun_Intern_Production_Building {
-	const SAVE_CAPACITY_RAISE_PER_WEEK = 1000;
+	const SAVE_CAPACITY_RAISE_PER_WEEK = 2000;
 	
 	private $baseCapacity = 0;
 	

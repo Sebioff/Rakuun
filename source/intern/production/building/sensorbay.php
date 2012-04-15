@@ -10,7 +10,7 @@ class Rakuun_Intern_Production_Building_SensorBay extends Rakuun_Intern_Producti
 		$this->setBaseBerylliumCosts(1500);
 		$this->setBaseEnergyCosts(1000);
 		$this->setBasePeopleCosts(20);
-		$this->setBaseTimeCosts(20*60);
+		$this->setBaseTimeCosts(10*60);
 		$this->addNeededBuilding('airport', 2);
 		$this->setShortDescription('Das Sensorfeld dient dem Entdecken von feindlichen Tarneinheiten, die sich auf dem Weg zu deiner Stadt befinden.<br />Je höher das Sensorfeld ausgebaut ist, desto früher können getarnte Einheiten aufgespürt werden.');
 		$this->setLongDescription('Sensorfelder orten getarnte Angreifer.

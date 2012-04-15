@@ -9,7 +9,7 @@ class Rakuun_Intern_Production_Building_Ironmine extends Rakuun_Intern_Productio
 		$this->setBaseIronCosts(300);
 		$this->setBaseBerylliumCosts(200);
 		$this->setBasePeopleCosts(12);
-		$this->setBaseTimeCosts(6*60);
+		$this->setBaseTimeCosts(3*60);
 		$this->setBaseIronProduction(1);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Die Eisenmine liefert mehr Eisen, wenn sie ausgebaut wird und mehr Arbeiter in ihr sind. Eisen ist einer der beiden Grundrohstoffe, der für sämtliche Gebäude benötigt wird.');
