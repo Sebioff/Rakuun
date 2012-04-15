@@ -187,36 +187,53 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 			
 			// STEALING RESSOURCES ---------------------------------------------
 			if (!$playersAreAllied) {
-				$totalPriority = $army->ironPriority + $army->berylliumPriority + $army->energyPriority;
 				$totalCapacity = 0;
 				foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
 					$totalCapacity += $unit->getRessourceTransportCapacity();
 				}
 				
-				$maxIronCapacity = $totalCapacity * $army->ironPriority / $totalPriority;
-				$maxBerylliumCapacity = $totalCapacity * $army->berylliumPriority / $totalPriority;
-				$maxEnergyCapacity = $totalCapacity * $army->energyPriority / $totalPriority;
-				
-				$takeableIron = $army->target->ressources->iron - $army->target->ressources->getSaveCapacityIron();
+				$options = array();
+				$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+				$targetRessources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($army->target, $options);
+				$takeableIron = $targetRessources->iron - $targetRessources->getSaveCapacityIron();
 				if ($takeableIron < 0)
 					$takeableIron = 0;
-				$takeableBeryllium = $army->target->ressources->beryllium - $army->target->ressources->getSaveCapacityBeryllium();
+				$takeableBeryllium = $targetRessources->beryllium - $targetRessources->getSaveCapacityBeryllium();
 				if ($takeableBeryllium < 0)
 					$takeableBeryllium = 0;
-				$takeableEnergy = $army->target->ressources->energy - $army->target->ressources->getSaveCapacityEnergy();
+				$takeableEnergy = $targetRessources->energy - $targetRessources->getSaveCapacityEnergy();
 				if ($takeableEnergy < 0)
 					$takeableEnergy = 0;
 					
-				$stolenIron = rand($maxIronCapacity * 1 / 30, $maxIronCapacity);
-				$stolenBeryllium = rand($maxBerylliumCapacity * 1 / 30, $maxBerylliumCapacity);
-				$stolenEnergy = rand($maxEnergyCapacity * 1 / 30, $maxEnergyCapacity);
-				
-				if ($stolenIron > $takeableIron)
-					$stolenIron = $takeableIron;
-				if ($stolenBeryllium > $takeableBeryllium)
-					$stolenBeryllium = $takeableBeryllium;
-				if ($stolenEnergy > $takeableEnergy)
-					$stolenEnergy = $takeableEnergy;
+				$remainingCapacity = $totalCapacity;
+				$stolenIron = 0;
+				$stolenBeryllium = 0;
+				$stolenEnergy = 0;
+				while ($remainingCapacity > 0 &&
+					($stolenIron < $takeableIron || $stolenBeryllium < $takeableBeryllium || $stolenEnergy < $takeableEnergy)
+				) {
+					$totalPriority = 0;
+					if ($stolenIron < $takeableIron)
+						$totalPriority += $army->ironPriority;
+					if ($stolenBeryllium < $takeableBeryllium)
+						$totalPriority += $army->berylliumPriority;
+					if ($stolenEnergy < $takeableEnergy)
+						$totalPriority += $army->energyPriority;
+					$maxIronCapacity = $remainingCapacity * $army->ironPriority / $totalPriority;
+					$maxBerylliumCapacity = $remainingCapacity * $army->berylliumPriority / $totalPriority;
+					$maxEnergyCapacity = $remainingCapacity * $army->energyPriority / $totalPriority;
+					if ($stolenIron + $maxIronCapacity > $takeableIron)
+						$maxIronCapacity = $takeableIron - $stolenIron;
+					if ($stolenBeryllium + $maxBerylliumCapacity > $takeableBeryllium)
+						$maxBerylliumCapacity = $takeableBeryllium - $stolenBeryllium;
+					if ($stolenEnergy + $maxEnergyCapacity > $takeableEnergy)
+						$maxEnergyCapacity = $takeableEnergy - $stolenEnergy;
+						
+					$stolenIron += $maxIronCapacity;
+					$stolenBeryllium += $maxBerylliumCapacity;
+					$stolenEnergy += $maxEnergyCapacity;
+					$remainingCapacity -= $maxIronCapacity + $maxBerylliumCapacity + $maxEnergyCapacity;
+				}
 					
 				if ($stolenIron > 0 || $stolenBeryllium > 0 || $stolenEnergy > 0) {
 					$loserReportText .= '<br/><br/>Die gegnerischen Truppen erbeuteten folgende Rohstoffe:';
@@ -233,7 +250,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 						$loserReportText .= '<br/>'.Text::formatNumber($stolenEnergy).' Energie';
 						$winnerReportText .= '<br/>'.Text::formatNumber($stolenEnergy).' Energie';
 					}
-					$army->target->ressources->lower($stolenIron, $stolenBeryllium, $stolenEnergy);
+					$targetRessources->lower($stolenIron, $stolenBeryllium, $stolenEnergy);
 					$army->iron = $stolenIron;
 					$army->beryllium = $stolenBeryllium;
 					$army->energy = $stolenEnergy;
