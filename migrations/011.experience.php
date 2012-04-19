@@ -1,6 +1,6 @@
 <?php
 
-$queries[] = "ALTER TABLE `users` ADD `XP` INT( 10 ) NOT NULL;";
+$queries[] = "ALTER TABLE `users` ADD `xp` INT( 10 ) NOT NULL;";
 
 $queries[] = 'CREATE TABLE IF NOT EXISTS `user_skills` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,

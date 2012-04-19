@@ -96,15 +96,13 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 			$activation->save();
 		}
 		
-		// REMOVE NOT ACTIVATED ACCOUNTS ---------------------------------------
+		// LOCK NOT ACTIVATED ACCOUNTS -----------------------------------------
 		$options = array();
 		$options['conditions'][] = array('time < ?', time() - self::CLEANUP_NOTACTIVATED_DELETE);
 		DB_Connection::get()->beginTransaction();
 		foreach (Rakuun_DB_Containers::getUserActivationContainer()->select($options) as $activation) {
-			Rakuun_Intern_Log_UserActivity::log($activation->user, Rakuun_Intern_Log::ACTION_ACTIVITY_DELETE_NOTACTIVATED);
-			// we can't use delete by $options here because the delete handler of the container wouldn't work
-			Rakuun_User_Manager::delete($activation->user, 'Nicht aktiviert');
-			Rakuun_DB_Containers::getUserActivationContainer()->delete($activation);
+			Rakuun_Intern_Log_UserActivity::log($activation->user, Rakuun_Intern_Log::ACTION_ACTIVITY_LOCK_NOTACTIVATED);
+			Rakuun_User_Manager::lock($activation->user);
 		}
 		DB_Connection::get()->commit();
 	}

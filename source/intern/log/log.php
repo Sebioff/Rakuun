@@ -13,7 +13,7 @@ class Rakuun_Intern_Log {
 	const ACTION_RESSOURCES_TRADE = 5;
 	const ACTION_ACTIVITY_DELETE = 6;
 	const ACTION_ACTIVITY_DELETE_INACTIVE = 7;
-	const ACTION_ACTIVITY_DELETE_NOTACTIVATED = 8;
+	const ACTION_ACTIVITY_LOCK_NOTACTIVATED = 8;
 	const ACTION_USERDATA_EMAIL = 9;
 	const ACTION_USERDATA_SITTER = 10;
 	const ACTION_USERDATA_PASSWORD = 11;
@@ -46,7 +46,7 @@ class Rakuun_Intern_Log {
 		self::ACTION_RESSOURCES_TRADE => 'Handel',
 		self::ACTION_ACTIVITY_DELETE => 'Account löschen',
 		self::ACTION_ACTIVITY_DELETE_INACTIVE => 'Account löschen (inaktiv)',
-		self::ACTION_ACTIVITY_DELETE_NOTACTIVATED => 'Account löschen (nicht aktiviert)',
+		self::ACTION_ACTIVITY_LOCK_NOTACTIVATED => 'Account sperren (nicht aktiviert)',
 		self::ACTION_USERDATA_EMAIL => 'neue Emailadresse',
 		self::ACTION_USERDATA_PASSWORD => 'neues Passwort',
 		self::ACTION_USERDATA_SITTER => 'neuen Sitter'
