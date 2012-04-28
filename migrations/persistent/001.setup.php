@@ -42,6 +42,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `eternal_user_achievements` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `eternal_user` int(10) unsigned NOT NULL,
   `round` smallint(5) unsigned NOT NULL,
+  `type` tinyint(1) NOT NULL DEFAULT \'0\',
   `achievement` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `eternal_user` (`eternal_user`),

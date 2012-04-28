@@ -77,6 +77,7 @@ abstract class Rakuun_DB_Containers {
 	private static $questsContainer = null;
 	private static $userEternalUserAssocContainer = null;
 	private static $allianceHistoryContainer = null;
+	private static $registerContainer = null;
 	
 	// GETTERS / SETTERS -------------------------------------------------------
 	/**
@@ -1029,6 +1030,18 @@ abstract class Rakuun_DB_Containers {
 		self::$logOutgoingArmiesContainer->addReferencedContainer(self::getUserContainer(), 'opponent', 'id');
 		
 		return self::$logOutgoingArmiesContainer;
+	}
+	
+	/**
+	 * @return DB_Container
+	 */
+	public static function getRegisterContainer() {
+		if (self::$registerContainer)
+			return self::$registerContainer;
+		
+		self::$registerContainer = new DB_Container('register');
+		
+		return self::$registerContainer;
 	}
 }
 

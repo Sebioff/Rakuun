@@ -4,6 +4,8 @@
 	<? $this->displayPanel('logout_reason'); ?>
 	<br class="clear"/>
 <? endif; ?>
-<? $this->displayPanel('login'); ?>
-<br class="clear"/>
+<? if ($this->hasPanel('login')): ?>
+	<? $this->displayPanel('login'); ?>
+	<br class="clear"/>
+<? endif; ?>
 <? $this->displayPanel('serverinfo'); ?>

@@ -177,6 +177,10 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		return Rakuun_GameSecurity::get()->isInGroup($this, Rakuun_GameSecurity::GROUP_LOCKED);
 	}
 	
+	public function isDemo() {
+		return Rakuun_GameSecurity::get()->isInGroup($this, Rakuun_GameSecurity::GROUP_DEMO);
+	}
+	
 	/**
 	 * @return number of Databases the user have
 	 */
@@ -244,24 +248,11 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	}
 	
 	private function isBelowNoobPointLimit() {
-		// calc average points
-		$average = Rakuun_Intern_Statistics::averagePoints() * 0.6;
-		$nooblimit = $average;
-		if ($average < RAKUUN_NOOB_START_LIMIT_OF_POINTS)
-			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_POINTS;
-			
-		return ($this->points <= $nooblimit);	// points below point limit;
+		return ($this->points <= Rakuun_Intern_Statistics::getNoobPointLimit());	// points below point limit;
 	}
 	
 	private function isBelowNoobArmyLimit() {
-		// calc armystrength
-		$average = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6;
-		$armyStrengthLimit = $average;
-		if ($armyStrengthLimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
-			$armyStrengthLimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
-		$armyStrength = $this->getArmyStrength();
-		
-		return ($armyStrength <= $armyStrengthLimit); //armystrength below armystrength limit
+		return ($this->getArmyStrength() <= Rakuun_Intern_Statistics::getNoobArmyStrengthLimit()); //armystrength below armystrength limit
 	}
 	
 	/**
@@ -280,7 +271,9 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	
 	public function produceRessources() {
 		DB_Connection::get()->beginTransaction();
-		$ressources = $this->ressources;
+		$options = array();
+		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($this, $options);
 		$producedIron = $ressources->producedIron + Rakuun_Intern_Production_Factory::getBuilding('ironmine', $this)->getProducedIron();
 		$producedBeryllium = $ressources->producedBeryllium + Rakuun_Intern_Production_Factory::getBuilding('berylliummine', $this)->getProducedBeryllium();
 		$producedEnergy = $ressources->producedEnergy + Rakuun_Intern_Production_Factory::getBuilding('hydropower_plant', $this)->getProducedEnergy();

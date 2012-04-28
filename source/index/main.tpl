@@ -10,6 +10,9 @@
 		<? if ($date == date('d.m', $easterSunday - 60 * 60 * 24 * 2) || $date == date('d.m', $easterSunday - 60 * 60 * 24) || $date == date('d.m', $easterSunday) || $date == date('d.m', $easterSunday + 60 * 60 * 24)): ?>
 			<? $bgImage = Router::get()->getStaticRoute('images', 'seasons/background_index_easter.png'); ?>
 		<? endif; ?>
+		<? if (date('n') == 2 && (date('j') == 15 || date('Y') == 2012)): ?>
+			<? $bgImage = Router::get()->getStaticRoute('images', 'seasons/background_index_ooo.png'); ?>
+		<? endif; ?>
 		<img class="background_image" alt="Rakuun" src="<?= $bgImage; ?>"/>
 	</div>
 </div>

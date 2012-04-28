@@ -9,7 +9,6 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 	public function execute() {
 		// REMOVE INACTIVE PLAYERS ---------------------------------------------
 		$options = array();
-		// uses last_login instead of last_activity, because last_activity is updated by sitter as well
 		$options['conditions'][] = array('last_login < ?', time() - self::CLEANUP_INACTIVE_DELETE);
 		$options['conditions'][] = array('registration_time < ?', time() - self::CLEANUP_INACTIVE_DELETE);
 		DB_Connection::get()->beginTransaction();
@@ -22,7 +21,6 @@ class Rakuun_Cronjob_Script_Cleanup extends Cronjob_Script {
 		
 		// MAKE INACTIVE PLAYERS TO YIMTAY -------------------------------------
 		$options = array();
-		// uses last_login instead of last_activity, because last_activity is updated by sitter as well
 		$options['conditions'][] = array('last_login < ?', time() - self::CLEANUP_INACTIVE_YIMTAY);
 		$options['conditions'][] = array('registration_time < ?', time() - self::CLEANUP_INACTIVE_YIMTAY);
 		$options['conditions'][] = array('is_yimtay = ?', false);

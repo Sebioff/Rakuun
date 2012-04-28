@@ -12,7 +12,7 @@ class Rakuun_Intern_Module_Alliance_Edit extends Rakuun_Intern_Module implements
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('edit', new Rakuun_Intern_GUI_Panel_Alliance_Edit('edit'), 'Details bearbeiten'));
 		if (Rakuun_Intern_Alliance_Security::get()->isInGroup($user, Rakuun_Intern_Alliance_Security::GROUP_LEADERS))
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('delete', new Rakuun_Intern_GUI_Panel_Alliance_Delete('delete_alliance'), 'Allianz löschen'));
-		if (Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_KICKING))
+		if (Rakuun_Intern_Mode::getCurrentMode()->allowKickFromAlliances() &&  Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_KICKING))
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('kick', new Rakuun_Intern_GUI_Panel_Alliance_Kick('kick'), 'Member kicken'));
 		if (Rakuun_Intern_Alliance_Security::get()->hasPrivilege($user, Rakuun_Intern_Alliance_Security::PRIVILEGE_NEWSLETTER))
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('mail', new Rakuun_Intern_GUI_Panel_Alliance_Mail('mail', $this->getUser()->alliance), 'Allianzrundmail schreiben'));

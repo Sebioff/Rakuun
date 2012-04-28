@@ -27,7 +27,12 @@ class Rakuun_Intern_Production_Building_Themepark extends Rakuun_Intern_Producti
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Zufriedenstellung von insgesamt '.(($this->getLevel() + $this->getFutureLevels() + 1) * Rakuun_Intern_Production_Influences::THEMEPARK_SATISFACTION_NORMAL * RAKUUN_SPEED_SATISFACTION_MULTIPLIER).' Leuten');
+		$futureLevel = $this->getLevel() + $this->getFutureLevels();
+		$this->addEffect('Zufriedenstellung von insgesamt '.Text::formatNumber($this->getSatisfiedPeopleAmount($futureLevel + 1)).' Leuten (vorher: '.Text::formatNumber($this->getSatisfiedPeopleAmount($futureLevel)).')');
+	}
+	
+	private function getSatisfiedPeopleAmount($level) {
+		return $level * Rakuun_Intern_Production_Influences::THEMEPARK_SATISFACTION_NORMAL * RAKUUN_SPEED_SATISFACTION_MULTIPLIER;
 	}
 }
 

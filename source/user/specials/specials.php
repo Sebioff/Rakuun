@@ -149,11 +149,11 @@ abstract class Rakuun_User_Specials {
 		$effectValues = Rakuun_User_Specials::getEffectValues();
 		$effects = array(
 			Rakuun_User_Specials::SPECIAL_WARPGATE => 'reduziert eigene Armeebewegungszeit um '.$effectValues[Rakuun_User_Specials::SPECIAL_WARPGATE] * 100 .'%',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Reduziert Armeebewegungszeit aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BLUE] * 100 .'% täglich',
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Erhöht Angriffskraft aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED] * 100 .'% täglich',
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Reduziert Einheitenproduktionszeit aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100 .'% täglich',
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Erhöht Ressourcenproduktion von Eisen und Beryllium aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'% täglich',
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Erhöht Verteidigungskraft aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN] * 100 .'% täglich'
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Reduziert Armeebewegungszeit aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BLUE] * 100 .'% täglich pro Ausbaustufe des Datenbankdetektors',
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Erhöht Angriffskraft aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_RED] * 100 .'% täglich pro Ausbaustufe des Datenbankdetektors',
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Reduziert Einheitenproduktionszeit aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW] * 100 .'% täglich pro Ausbaustufe des Datenbankdetektors',
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Erhöht Ressourcenproduktion von Eisen und Beryllium aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_BROWN] * 100 .'% täglich pro Ausbaustufe des Datenbankdetektors',
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => '+'.(self::EFFECTVALUE_DATABASE_DEFENSE * 100).'% Verteidigungskraft für den Halter; Erhöht Verteidigungskraft aller Metamitglieder um +'.$effectValues[Rakuun_User_Specials::SPECIAL_DATABASE_GREEN] * 100 .'% täglich pro Ausbaustufe des Datenbankdetektors'
 		);
 		return $effects;
 	}
@@ -164,11 +164,11 @@ abstract class Rakuun_User_Specials {
 	public static function getEffectValues() {
 		$effectsValues = array(
 			Rakuun_User_Specials::SPECIAL_WARPGATE => 0.5,
-			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 0.03,
-			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 0.0025,
-			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 0.0025,
-			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 0.0025,
-			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 0.0025
+			Rakuun_User_Specials::SPECIAL_DATABASE_BLUE => 0.006,
+			Rakuun_User_Specials::SPECIAL_DATABASE_RED => 0.0006,
+			Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW => 0.004,
+			Rakuun_User_Specials::SPECIAL_DATABASE_BROWN => 0.0006,
+			Rakuun_User_Specials::SPECIAL_DATABASE_GREEN => 0.0005
 		);
 		return $effectsValues;
 	}

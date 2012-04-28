@@ -2,6 +2,7 @@
 
 class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 	private $level = array();
+	private $currentLevelNumber = 1;
 	
 	public function __construct($name, $title = '') {
 		parent::__construct($name, $title);
@@ -23,7 +24,6 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		// fix for demo account
 		if (!Rakuun_GameSecurity::get()->isInGroup($user, Rakuun_GameSecurity::GROUP_DEMO))
 			$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sitter());
-		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Irc());
 		
 		// start to produce energy and people
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Techtree());
@@ -54,9 +54,10 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		// some more Tipps
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Tickets());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Sensorbay());
-		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Goal());
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Faq());
-		
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Faq2());
+		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Tipp_Goal());
+
 		$this->addLevel(new Rakuun_Intern_GUI_Panel_Tutor_Level_Finish());
 	}
 	
@@ -77,9 +78,10 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 			$this->addPanel($end = new GUI_Control_SubmitButton('end', 'Beenden'));
 			$end->setTitle('Das Tutorial beenden');
 		} else {
-			if ($this->params->level->completed()) {
-				$this->addPanel($next = new GUI_Control_SubmitButton('next', '-&gt;'));
-				$next->setTitle('Weiter');
+			$this->addPanel($next = new GUI_Control_SubmitButton('next', '-&gt;'));
+			$next->setTitle('Weiter');
+			if (!$this->params->level->completed()) {
+				$next->setValue('Überspringen');
 			}
 			$this->addPanel($last = new GUI_Control_SubmitButton('last', '&raquo;'));
 			$last->setTitle('Ans Ende springen');
@@ -95,6 +97,7 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		foreach ($this->level as $level) {
 			if ($level->getInternal() == $levelDB->level)
 				return $level;
+			$this->currentLevelNumber++;
 		}
 	}
 	
@@ -108,10 +111,8 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 	}
 	
 	public function onNext() {
-		if ($this->params->level->completed()) {
-			$this->params->level->finish();
-			$this->getModule()->invalidate();
-		}
+		$this->params->level->finish();
+		$this->getModule()->invalidate();
 	}
 	
 	public function onBack() {
@@ -134,6 +135,14 @@ class Rakuun_Intern_GUI_Panel_Tutor extends GUI_Panel {
 		$user->tutorial = false;
 		Rakuun_User_Manager::update($user);
 		$this->getModule()->invalidate();
+	}
+	
+	public function getCurrentLevelNumber() {
+		return $this->currentLevelNumber;
+	}
+	
+	public function getLevelCount() {
+		return count($this->level);
 	}
 }
 ?>

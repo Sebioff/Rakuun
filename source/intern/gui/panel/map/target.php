@@ -21,17 +21,8 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		
 		$this->setTemplate(dirname(__FILE__).'/target.tpl');
 		$this->addPanel($target = new Rakuun_GUI_Control_UserSelect('target', $this->user, 'Ziel'));
-		$target->setPreserveValue();
-		if ($this->user && !$this->hasBeenSubmitted())
-			$target->setValue($this->user->nameUncolored);
 		$this->addPanel($targetX = new GUI_Control_DigitBox('target_x', $this->cityX, 'X', 0, Rakuun_Intern_GUI_Panel_Map::MAP_WIDTH - 1));
-		$targetX->setPreserveValue();
-		if ($this->cityX && !$this->hasBeenSubmitted())
-			$targetX->setValue($this->cityX);
 		$this->addPanel($targetY = new GUI_Control_DigitBox('target_y', $this->cityY, 'Y', 0, Rakuun_Intern_GUI_Panel_Map::MAP_HEIGHT - 1));
-		$targetY->setPreserveValue();
-		if ($this->cityY && !$this->hasBeenSubmitted())
-			$targetY->setValue($this->cityY);
 		$this->addPanel(new GUI_Panel_Label('target_coords_label', $this->targetX, 'Koordinaten'));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Map_UnitInput('unit_input'));
 		$spydrone = Rakuun_Intern_Production_Factory::getUnit('spydrone');
@@ -70,8 +61,14 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 	public function onSubmit() {
 		$targetX = 0;
 		$targetY = 0;
-		$sendedUnits = $this->unitInput->getArmy();
 		$user = Rakuun_User_Manager::getCurrentUser();
+		
+		DB_Connection::get()->beginTransaction();
+		$options = array();
+		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+		$userUnits = Rakuun_DB_Containers::getUnitsContainer()->selectByUserFirst($user, $options);
+		
+		$sendedUnits = $this->unitInput->getArmy($userUnits);
 		
 		if ($user->buildings->militaryBase == 0) {
 			$this->addError('Du brauchst einen Militärstützpunkt, um deine Armee loszuschicken');
@@ -103,6 +100,10 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 				$this->addError('Du kannst dich nicht selbst angreifen!');
 			}
 			
+			if ($targetUser->isLocked() && !$targetUser->isYimtay) {
+				$this->addError('Dieser Spieler ist gesperrt und kann nicht angegriffen werden');
+			}
+			
 			// noobprotection only if it's gonna be an attack with units
 			if (!empty($sendedUnits)) {
 				if ($targetUser->isInNoob()) {
@@ -126,17 +127,15 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		if ($this->hasErrors()) {
 			$this->state->setValue(self::STATE_PREPARING);
 			$this->submit->setValue('Vorbereiten...');
+			DB_Connection::get()->rollback();
 			return;
 		}
 		
-		DB_Connection::get()->beginTransaction();
 		$armyTechnologies = new DB_Record();
 		foreach (Rakuun_Intern_Production_Factory::getAllTechnologies() as $technology) {
 			$armyTechnologies->{$technology->getInternalName()} = $technology->getLevel();
 		}
 		Rakuun_DB_Containers::getArmiesTechnologiesContainer()->save($armyTechnologies);
-		
-		$userUnits = Rakuun_User_Manager::getCurrentUser()->units;
 		
 		$army = new Rakuun_DB_Army();
 		$army->user = Rakuun_User_Manager::getCurrentUser();
@@ -195,10 +194,16 @@ class Rakuun_Intern_GUI_Panel_Map_Target extends GUI_Panel {
 		if ($this->state->getValue() == self::STATE_PREPARING) {
 			$this->state->setValue(self::STATE_REVIEWING);
 			$this->submit->setValue('Abschicken');
+			$this->target->addClasses('hidden');
+			$this->targetX->addClasses('hidden');
+			$this->targetY->addClasses('hidden');
 			return;
 		}
 		else {
 			$this->state->setValue(self::STATE_PREPARING);
+			$this->target->setDefaultValue($this->target->getValue());
+			$this->targetX->setDefaultValue($this->targetX->getValue());
+			$this->targetY->setDefaultValue($this->targetY->getValue());
 			$this->setSuccessMessage('Armee ist unterwegs');
 		}
 		

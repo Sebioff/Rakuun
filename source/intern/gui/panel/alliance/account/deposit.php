@@ -25,8 +25,12 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 	}
 	
 	public function onSubmit() {
+		DB_Connection::get()->beginTransaction();
 		$user = Rakuun_User_Manager::getCurrentUser();
-		$ressources = $user->ressources;
+		$options = array();
+		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($user, $options);
+		
 		if ($this->iron->getValue() > $ressources->iron)
 			$this->addError('So viel Eisen hast du nicht.');
 		if ($this->beryllium->getValue() > $ressources->beryllium)
@@ -36,16 +40,17 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Deposit extends GUI_Panel {
 		if ($this->people->getValue() > $ressources->people)
 			$this->addError('So viele Leute hast du nicht.');
 		if (!($user->buildings->moleculartransmitter > 0))
-			$this->addError('Du benötigste einen Molekulartransmitter, um in die Allianzkasse einzahlen zu können.');
+			$this->addError('Du benötigst einen Molekulartransmitter, um in die Allianzkasse einzahlen zu können.');
 		if ($user->isInNoob())
 			$this->addError('Du darfst dich nicht im Noobschutz befinden, um in die Allianzkasse einzahlen zu können');
 		if ($this->iron->getValue() + $this->beryllium->getValue() + $this->energy->getValue() + $this->people->getValue() == 0)
 			$this->addError('Du kannst nicht nichts einzahlen!');
 			
-		if ($this->hasErrors())
+		if ($this->hasErrors()) {
+			DB_Connection::get()->rollback();
 			return;
+		}
 			
-		DB_Connection::get()->beginTransaction();
 		$ressources->lower($this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->people->getValue());
 		$user->alliance->raise($this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->people->getValue());
 		$log = new DB_Record();

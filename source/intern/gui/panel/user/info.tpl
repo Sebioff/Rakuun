@@ -28,25 +28,12 @@ Koordinaten:
 <? if($user->isInNoob()): ?>
 <br class="clear" />
 	<b>Hinweis</b>: Du befindest dich im Noobschutz!
+	<br/>
 	Im Noobschutz kannst du nicht handeln und nicht angegriffen werden.
-	Du verlässt den Noobschutz, sobald deine Punktzahl
-	<? $averagePoints = Rakuun_Intern_Statistics::averagePoints() * 0.6; ?>
-	<? $output = '> '; ?>
-	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_POINTS): ?>
-		<? $output .= Text::formatNumber(floor($averagePoints)); ?>
-	<? else: ?>
-		<? $output .= Text::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_POINTS); ?>
-	<? endif; ?>
-	<?= $output; ?>
-	oder deine Armeestärke
-	<? $averagePoints = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6; ?>
-	<? $output = '> '; ?>
-	<? if ($averagePoints > RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH): ?>
-		<? $output .= Text::formatNumber(floor($averagePoints)); ?>
-	<? else: ?>
-		<? $output .= Text::formatNumber(RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH); ?>
-	<? endif; ?>
-	<?= $output; ?> ist.
+	<br/>
+	Du verlässt den Noobschutz, sobald deine Punktzahl &gt; <?= Text::formatNumber(Rakuun_Intern_Statistics::getNoobPointLimit()); ?>
+	oder deine Armeestärke &gt; <?= Text::formatNumber(Rakuun_Intern_Statistics::getNoobArmyStrengthLimit()); ?> ist.
+	<br/>
 	Du kehrst jederzeit wieder in den Noobschutz zurück, sobald alle der oben genannten Kriterien zutreffen und du:
 	<br/>
 	<ul>

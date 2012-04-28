@@ -46,6 +46,11 @@ abstract class Rakuun_Intern_Production_Producer {
 			$this->getItemContainer()->selectFirst($options)->raise(($firstItem->getInternalName()));
 			// remove from wips
 			$this->getItemWIPContainer()->delete($firstItem->getRecord());
+			if (DB_Connection::get()->getNumberOfAffectedRows() <= 0) {
+				// something went wrong... WIP item doesn't exist in the database anymore
+				DB_Connection::get()->rollback();
+				return;
+			}
 			// production finished callback
 			$this->onFinishedProduction($firstItem->getWIPItem());
 			//update remaining buildings to new starttime

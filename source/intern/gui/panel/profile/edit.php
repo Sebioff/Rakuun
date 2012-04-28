@@ -1,12 +1,12 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Profile_Edit extends Rakuun_GUI_Panel_Box {
-	public function __construct($name) {
-		parent::__construct($name);
+	public function __construct($name, $title = '') {
+		parent::__construct($name, null, $title);
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/edit.tpl');
-		if (Rakuun_GameSecurity::get()->hasPrivilege($user, Rakuun_GameSecurity::PRIVILEGE_COLOREDNAME)) {
+		if (Rakuun_GameSecurity::get()->hasPrivilege($user, Rakuun_GameSecurity::PRIVILEGE_COLOREDNAME) && Rakuun_Intern_Mode::getCurrentMode()->allowUserChangeNameColor()) {
 			$this->contentPanel->addPanel($nameColored = new Rakuun_Intern_GUI_Control_ColoredName('namecolored', $user, 'Nickname (farbig)'));
 			$nameColored->addValidator(new GUI_Validator_MaxLength(255));
 			$this->contentPanel->addPanel(

@@ -1,6 +1,9 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Profile_EternalProfile extends GUI_Panel {
+	const STATE_PREPARE = 0;
+	const STATE_CONFIRM = 1;
+	
 	public function __construct($name) {
 		parent::__construct($name);
 		
@@ -20,6 +23,7 @@ class Rakuun_Intern_GUI_Panel_Profile_EternalProfile extends GUI_Panel {
 		$this->addPanel($password = new GUI_Control_PasswordBox('password', null, 'Passwort'));
 		$password->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel(new GUI_Control_SubmitButton('add', 'Hinzufügen'));
+		$this->addPanel($state = new GUI_Control_HiddenBox('state'));
 		
 		$profiles = array();
 		$eternalUser = Rakuun_DB_Containers::getUserEternalUserAssocContainer()->selectByUserFirst(Rakuun_User_Manager::getCurrentUser());
@@ -40,8 +44,24 @@ class Rakuun_Intern_GUI_Panel_Profile_EternalProfile extends GUI_Panel {
 		$eternalUser = Rakuun_DB_Containers_Persistent::getEternalUserContainer()->selectByPK($eternalUserAssoc->eternalUser);
 		
 		$adapter = Rakuun_Intern_Achievements_AdapterFactory::get()->getAdapterForRound($this->round->getValue());
-		if ($error = $adapter->addUserEternalUserAssoc($this->username->getValue(), $this->password->getValue(), $this->round->getValue(), $eternalUser))
-			$this->addError($error);
+		
+		if ($adapter->isAlreadyConnected($this->username->getValue(), $this->round->getValue())) {
+			if ($this->state->getValue() == self::STATE_PREPARE) {
+				$this->state->setValue(self::STATE_CONFIRM);
+				return;
+			}
+			else {
+				if ($error = $adapter->changeUserEternalUserAssoc($this->username->getValue(), $this->password->getValue(), $this->round->getValue(), $eternalUser))
+					$this->addError($error);
+				else
+					$this->state->setValue(self::STATE_PREPARE);
+			}
+		}
+		else {
+			if ($error = $adapter->addUserEternalUserAssoc($this->username->getValue(), $this->password->getValue(), $this->round->getValue(), $eternalUser))
+				$this->addError($error);
+			$this->state->setValue(self::STATE_PREPARE);
+		}
 		
 		if ($this->hasErrors())
 			return;

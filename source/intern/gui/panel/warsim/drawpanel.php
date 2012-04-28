@@ -81,7 +81,7 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		foreach ($this->panelsForDefenders as $unitName => $panel) {
 			$defenders->{Text::underscoreToCamelCase($unitName)} = $panel->getValue();
 		}
-		$defenders->fightingSequence = Rakuun_Intern_Production_Unit::DEFAULT_DEFENSE_SEQUENCE;
+		$defenders->fightingSequence = Rakuun_User_Manager::getCurrentUser()->units->fightingSequence;
 		$defenderTechnology = new DB_Record();
 		foreach ($this->panelsForDefendersTechnology as $technologyName => $panel) {
 			$defenderTechnology->{Text::underscoreToCamelCase($technologyName)} = $panel->getValue();
@@ -97,7 +97,7 @@ class Rakuun_Intern_GUI_Panel_Warsim_Drawpanel extends GUI_Panel {
 		foreach ($this->panelsForAttackers as $unitName => $panel) {
 			$attackers->{Text::underscoreToCamelCase($unitName)} = $panel->getValue();
 		}
-		$attackers->fightingSequence = Rakuun_Intern_Production_Unit::DEFAULT_ATTACK_SEQUENCE;
+		$attackers->fightingSequence = Rakuun_User_Manager::getCurrentUser()->units->attackSequence;
 		$attackerTechnology = new DB_Record();
 		foreach ($this->panelsForAttackersTechnology as $technologyName => $panel) {
 			$attackerTechnology->{Text::underscoreToCamelCase($technologyName)} = $panel->getValue();

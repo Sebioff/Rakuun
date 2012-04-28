@@ -124,13 +124,13 @@ Spielernamen dürfen nicht in Anlehnung an Namen von Rakuun-Teammitgliedern erst
 <br/>
 <b>§4.3 Verbotene Spielerangaben</b>
 <br/>
-Grundsätzlich dürfen folgende Angaben nicht öffentlich zugänglich gepostet werden: Fleetdaten anderer Spieler/Allianzen, Kampfberichte, Angriffe. Der öffentliche Aufruf zum Plätten/Bashen/Atten anderer Spieler ist ebenso ausdrücklich untersagt.
+Grundsätzlich dürfen folgende Angaben nicht öffentlich zugänglich gepostet werden: Informationen aus Kampf-/Spionageberichten (insbesondere Fleetdaten anderer Spieler/Allianzen), Angriffe. Der öffentliche Aufruf zum Plätten/Bashen/Atten anderer Spieler ist ebenso ausdrücklich untersagt.
 <br/>
 Dabei spielt es keine Rolle, ob diese Daten erfunden sind oder der Wahrheit entsprechen.
 <ul>
 	<li>2 Verwarnungspunkte für das Posten der Information, wer wen angreift</li>
 	<li>3 Verwarnungspunkte für das Nennen von platten Spielern</li>
-    <li>4 Verwarnungspunkte für das Posten von Informationen über die Einheitenanzahl</li>
+    <li>4 Verwarnungspunkte für das Posten von Informationen aus Kampf-/Spionageberichten</li>
     <li>4 Verwarnungspunkte für den Aufruf zum Angreifen bestimmter Spieler</li>
 </ul>
 <br/>

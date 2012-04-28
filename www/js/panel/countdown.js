@@ -1,8 +1,9 @@
 function GUI_Control_CountDown(controlID, currentTime, targetTime, enableHoverInfo, finishedMessage, callback) {
 	var self = this;
-	var restTime = targetTime - currentTime;
+	var duration = targetTime - currentTime;
 	var interval = setInterval(function(){self.tick();}, 1000);
 	var timerID = currentTime;
+	var startTime = new Date().getTime();
 	
 	if (enableHoverInfo == 1) {
 		$("#" + controlID).mouseover(function() {
@@ -35,7 +36,7 @@ function GUI_Control_CountDown(controlID, currentTime, targetTime, enableHoverIn
 			$("#" + controlID).data('activeTimer', timerID);
 		}
 		
-		restTime -= 1;
+		var restTime = duration - Math.round((new Date().getTime() - startTime) / 1000);
 		if (restTime < 0) {
 			restTime = 0;
 		}

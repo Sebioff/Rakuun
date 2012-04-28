@@ -35,6 +35,9 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 		
 		if ($firstItem->getRemainingTime() <= 0) {
 			DB_Connection::get()->beginTransaction();
+			$options = array();
+			$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+			$userUnits = $this->getItemContainer()->selectByUserFirst($firstItem->getUser(), $options);
 			$finishedAmount = $firstItem->getAmountOfFinishedUnits();
 			if ($finishedAmount >= $firstItem->getAmount()) {
 				// remove from wips container
@@ -51,7 +54,6 @@ class Rakuun_Intern_Production_Producer_Units extends Rakuun_Intern_Production_P
 				$firstItem->setAmount($firstItem->getRecord()->amount);
 			}
 			// count users units up
-			$userUnits = $this->getItemContainer()->selectByUserFirst($firstItem->getUser());
 			$userUnits->{Text::underscoreToCamelCase($firstItem->getInternalName())} += $finishedAmount;
 			$userUnits->save();
 			// log production

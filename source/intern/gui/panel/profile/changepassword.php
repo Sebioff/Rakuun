@@ -1,8 +1,8 @@
 <?php
 
 class Rakuun_Intern_GUI_Panel_Profile_ChangePassword extends Rakuun_GUI_Panel_Box {
-	public function __construct($name) {
-		parent::__construct($name);
+	public function __construct($name, $title = '') {
+		parent::__construct($name, null, $title);
 		
 		$user = Rakuun_User_Manager::getCurrentUser();
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/changepassword.tpl');

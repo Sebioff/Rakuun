@@ -784,6 +784,11 @@ body.skin_tech
 	width:480px;
 }
 
+.skin_tech .rakuun_box_profile_eternal {
+	margin-right:5px;
+	width:300px;
+}
+
 .skin_tech .rakuun_profilepicture {
 	text-align:center;
 }

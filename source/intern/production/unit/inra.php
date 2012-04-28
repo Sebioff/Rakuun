@@ -26,7 +26,7 @@ class Rakuun_Intern_Production_Unit_Inra extends Rakuun_Intern_Production_Unit {
 			<br/>
 			Inras sind hart geschult und laufen mit schwersten Verletzungen noch über die Kampfesfelder um noch soviele Gegner mitzureißen wie möglich.
 			<br/>
-			Da sie allerdings nicht motorisiert sind, haben sie eine relativ langsame Geschwindigkeit und sind deshalb für schnelle Schlachten weniger geignet.');
+			Da sie allerdings nicht motorisiert sind, haben sie eine relativ langsame Geschwindigkeit und sind deshalb für schnelle Schlachten weniger geeignet.');
 	}
 }
 

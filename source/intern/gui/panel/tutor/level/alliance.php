@@ -18,7 +18,7 @@ class Rakuun_Intern_GUI_Panel_Tutor_Level_Alliance extends Rakuun_Intern_GUI_Pan
 				<li>du kannst deine Ressourcen in der Allianzkasse sparen und dir oder anderen Spielern damit unterstützen</li>
 				<li>Ressourcen und Armeen deiner Allianzmitglieder einsehen</li>
 				<li>Bündnisse mit anderen Allianzen schließen und damit Verbündete gewinnen oder</li>
-				<li>anderen Allianzen den Krieg erklären um an die Herrschaft Rakuuns zu gelangen
+				<li>anderen Allianzen den Krieg erklären um an die Herrschaft Rakuuns zu gelangen</li>
 			</ul>
 			<b>Trete daher nun einer '.$allianceLink->render().' deiner Wahl bei oder gründe deine eigene!</b>
 		';

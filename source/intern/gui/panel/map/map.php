@@ -195,7 +195,7 @@ class Rakuun_Intern_GUI_Panel_Map extends GUI_Panel {
 	}
 	
 	public function getMapLayer() {
-		return '<div style="width:'.(self::MAP_WIDTH * self::MAP_RECT_SIZE).'px; height:'.(self::MAP_HEIGHT * self::MAP_RECT_SIZE).'px; background:#2D78BE url('.Router::get()->getStaticRoute('images', 'map_large.png').') no-repeat left top; position:absolute;" id="rakuun_map_map_layer" class="scroll_item"></div>';
+		return '<div style="width:'.(self::MAP_WIDTH * self::MAP_RECT_SIZE).'px; height:'.(self::MAP_HEIGHT * self::MAP_RECT_SIZE).'px; background:#2D78BE url('.Rakuun_Intern_Mode::getCurrentMode()->getMapImagePath().') no-repeat left top; position:absolute;" id="rakuun_map_map_layer" class="scroll_item"></div>';
 	}
 	
 	public function getCityX() {

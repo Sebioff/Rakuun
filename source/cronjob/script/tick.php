@@ -25,6 +25,19 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 			DB_Connection::get()->commit();
 		}
 		
+		// remove users from alliances -----------------------------------------
+		$options = array();
+		$options['conditions'][] = array('alliance_leave_time > 0');
+		$options['conditions'][] = array('alliance_leave_time < ?', time() - Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT);
+		foreach (Rakuun_DB_Containers::getUserContainer()->select($options) as $user) {
+			DB_Connection::get()->beginTransaction();
+			Rakuun_Intern_Alliance_Security::getForAlliance($user->alliance)->removeFromAllGroups($user);
+      $user->alliance = null;
+      $user->allianceLeaveTime = 0;
+			Rakuun_User_Manager::update($user);
+			DB_Connection::get()->commit();
+		}
+		
 		// finish alliance buildings -------------------------------------------
 		foreach (Rakuun_DB_Containers::getAlliancesContainer()->select() as $alliance) {
 			DB_Connection::get()->beginTransaction();
@@ -52,6 +65,9 @@ class Rakuun_Cronjob_Script_Tick extends Cronjob_Script {
 		
 		// unban users ---------------------------------------------------------
 		$this->unbanUsers();
+		
+		// notify game mode class ----------------------------------------------
+		Rakuun_Intern_Mode::getCurrentMode()->onTick();
 	}
 	
 	private function onDancertiaStarted(Rakuun_DB_Meta $meta) {

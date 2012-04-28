@@ -28,7 +28,12 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Verkürzung der Forschungszeiten um insgesamt '.(self::RESEARCH_TIME_REDUCTION_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
+		$futureLevel = $this->getLevel() + $this->getFutureLevels();
+		$this->addEffect('Verkürzung der Forschungszeiten um insgesamt '.$this->getResearchTimerReductionPercent($futureLevel + 1).'% (vorher: '.$this->getResearchTimerReductionPercent($futureLevel).'%)');
+	}
+	
+	private function getResearchTimerReductionPercent($level) {
+		return self::RESEARCH_TIME_REDUCTION_PERCENT * $level;
 	}
 	
 	//OVERRIDES

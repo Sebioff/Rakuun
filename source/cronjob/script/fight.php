@@ -85,7 +85,9 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		$targetLink = $link->render();
 		
 		if ($fightingSystem->getDefenderWon()) {
-			$winnerUnitSource = $army->target->units;
+			$options = array();
+			$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+			$winnerUnitSource = Rakuun_DB_Containers::getUnitsContainer()->selectByUserFirst($army->target, $options);
 			$loserUnitSource = $army;
 			$survivingWinnerUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
 			$survivingLoserUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
@@ -96,7 +98,9 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 		}
 		else {
 			$winnerUnitSource = $army;
-			$loserUnitSource = $army->target->units;
+			$options = array();
+			$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+			$loserUnitSource = Rakuun_DB_Containers::getUnitsContainer()->selectByUserFirst($army->target, $options);
 			$survivingWinnerUnitAmounts = $fightingSystem->getSurvivingAttackingUnitAmounts();
 			$survivingLoserUnitAmounts = $fightingSystem->getSurvivingDefendingUnitAmounts();
 			$defenderReportText = 'Wir wurden angegriffen!<br/>Eine feindliche Armee von '.$userLink.$userAllianceLink.' überfiel unsere Stadt und vernichtete unsere Armee.';
@@ -192,9 +196,14 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					$totalCapacity += $unit->getRessourceTransportCapacity();
 				}
 				
+				$maxIronCapacity = $totalCapacity * $army->ironPriority / $totalPriority;
+				$maxBerylliumCapacity = $totalCapacity * $army->berylliumPriority / $totalPriority;
+				$maxEnergyCapacity = $totalCapacity * $army->energyPriority / $totalPriority;
+				
 				$options = array();
 				$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
 				$targetRessources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($army->target, $options);
+				
 				$takeableIron = $targetRessources->iron - $targetRessources->getSaveCapacityIron();
 				if ($takeableIron < 0)
 					$takeableIron = 0;
@@ -266,23 +275,19 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				if ($army->destroyBuildings) {
 					$survivingAttackForce = $fightingSystem->getTotalAttackingPower() - $fightingSystem->getTotalDefendingPower();
 					$neededAttackForce = self::DESTRUCTION_NEEDED_FORCE_FOR_MAX;
+					$enemiesAtWar = false;
 					// only half of the attack force needed for maximum probability if there is war
 					if ($army->user->alliance && $army->target->alliance) {
 						$diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
 						if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR) {
 							$neededAttackForce /= 2;
+							$enemiesAtWar = true;
 						}
 					}
 					$probability = self::DESTRUCTION_MAX_PROBABILITY / pow($neededAttackForce, 2) * pow($survivingAttackForce, 2);
 					if ($probability > self::DESTRUCTION_MAX_PROBABILITY)
 						$probability = self::DESTRUCTION_MAX_PROBABILITY;
 					if (rand(1, 100) <= $probability) {
-						$enemiesAtWar = false;
-						if ($army->user->alliance && $army->target->alliance) {
-							$diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
-							if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR)
-								$enemiesAtWar = true;
-						}
 						$destructibleBuildings = array();
 						foreach (Rakuun_Intern_Production_Factory::getAllBuildings($army->target) as $building) {
 							if ($building->getLevel() > $building->getMinimumLevel() && !$building->getAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK)) {
@@ -532,14 +537,19 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 	 * Executed if an army returns home
 	 */
 	private function returnHome(Rakuun_DB_Army $army) {
-		$userUnits = $army->user->units;
+		$options = array();
+		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+		$userUnits = Rakuun_DB_Containers::getUnitsContainer()->selectByUserFirst($army->user, $options);
 		foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
 			if ($unit->getAmount() > 0) {
 				$userUnits->{Text::underscoreToCamelCase($unit->getInternalName())} += $unit->getAmount();
 			}
 		}
 		$userUnits->save();
-		$army->user->ressources->raise($army->iron, $army->beryllium, $army->energy);
+		$options = array();
+		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($army->user, $options);
+		$ressources->raise($army->iron, $army->beryllium, $army->energy);
 		$army->delete();
 	}
 	

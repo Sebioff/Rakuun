@@ -84,7 +84,7 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 			$line[] = $target;
 			$att = 0;
 			$deff = 0;
-			$units = Rakuun_Intern_Production_Factory::getAllUnits($spy->user);
+			$units = Rakuun_Intern_Production_Factory::getAllUnits($spy->spiedUser);
 			foreach ($units as $unit) {
 				$att += $unit->getAttackValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
 				$deff += $unit->getDefenseValue($spy->{Text::underscoreToCamelCase($unit->getInternalName())});
@@ -100,8 +100,8 @@ abstract class Rakuun_Intern_GUI_Panel_Reports_Base extends GUI_Panel {
 				}
 			}
 			
-			$line[] = $att;
-			$line[] = $deff;
+			$line[] = Text::formatNumber($att);
+			$line[] = Text::formatNumber($deff);
 			$deltaAtt = $lastAtt > 0 ? $att - $lastAtt : $att;
 			$deltaDeff = $lastDeff > 0 ? $deff - $lastDeff : $deff;
 			$line[] = new Rakuun_Intern_GUI_Panel_Reports_DeltaIcon('delta_att'.$spy->getPK(), $deltaAtt);

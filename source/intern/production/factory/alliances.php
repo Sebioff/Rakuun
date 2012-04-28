@@ -30,6 +30,32 @@ abstract class Rakuun_Intern_Production_Factory_Alliances {
 		return $buildingList;
 	}
 	
+	/**
+	 * @return Rakuun_Intern_Production_Building
+	 */
+	public static function getDetectorForDatabase($databaseIdentifier, DB_Record $buildingSource = null) {
+		$internalName = '';
+		switch ($databaseIdentifier) {
+			case Rakuun_User_Specials::SPECIAL_DATABASE_BLUE:
+				$internalName = 'database_detector_blue';
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_BROWN:
+				$internalName = 'database_detector_brown';
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_GREEN:
+				$internalName = 'database_detector_green';
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_RED:
+				$internalName = 'database_detector_red';
+			break;
+			case Rakuun_User_Specials::SPECIAL_DATABASE_YELLOW:
+				$internalName = 'database_detector_yellow';
+			break;
+		}
+		
+		return self::getBuilding($internalName, $buildingSource);
+	}
+	
 	private static function addBuilding($internalName, $buildingClass) {
 		self::$buildingList[$internalName] = $buildingClass;
 	}

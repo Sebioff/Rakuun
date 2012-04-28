@@ -46,9 +46,10 @@
 			<? $voteUser = $voteUser->sitter; ?>
 		<? endif; ?>
 		<? if ($voteUser->lastGnVoting > time() - Rakuun_Intern_Module_GNVote::GN_VOTE_TIMELIMIT): ?>
-			<a href="<?= App::get()->getInternModule()->getSubmodule('vote')->getURL(); ?>" class="gnews_link" target="_blank">
+			<a href="<?= App::get()->getInternModule()->getSubmodule('vote')->getURL(); ?>" data-style="horizontal-counter" data-id="67" class="mmofacts-widget gnews_link" target="_blank">
 				<img src="<?= Router::get()->getStaticRoute('images', 'vote_soon.gif'); ?>" border="0" alt="Danke fürs voten!" />
 			</a>
+			<script type="text/javascript" src="http://www.mmofacts.com/static/js/widget.js"></script>
 		<? endif; ?>
 		<br/>
 		<script type="text/javascript"><!--

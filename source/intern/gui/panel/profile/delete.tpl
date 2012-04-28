@@ -1,6 +1,9 @@
 <? if ($this->hasMessages()): ?>
 	<? $this->displayMessages() ?>
 <? endif; ?>
+<? if (Rakuun_User_Manager::getCurrentUser()->getDatabaseCount() > 0): ?>
+	<p style="color: red">Du verteidigst ein Datenbankteil für deine Allianz und kannst dich daher nicht löschen.</p><br class="clear" />
+<? endif; ?>
 Um den Account zu löschen ist dein Passwort notwendig:
 <br class="clear" />
 <? $this->displayLabelForPanel('password'); ?> <? $this->displayPanel('password'); ?>

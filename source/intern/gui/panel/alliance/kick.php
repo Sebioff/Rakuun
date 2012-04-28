@@ -13,7 +13,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 			$this->addPanel($blanko = new GUI_Panel('blanko'.$member->getPK()));
 			$blanko->addPanel($kickbutton = new GUI_Control_SecureSubmitButton('kick', 'kicken'));
 			$kickbutton->setTitle($member->nameUncolored);
-			$kickbutton->setConfirmationMessage('Willst du '.$member->nameUncolored.' wirklich kicken?');
+			$kickbutton->setConfirmationMessage('Der Austritt wird erst nach '.Rakuun_Date::formatCountDown(Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT).' gültig.\nWillst du '.$member->nameUncolored.' wirklich kicken?');
 			$blanko->addPanel(new GUI_Control_HiddenBox('id', $member->getPK()));
 		}
 	}
@@ -42,8 +42,11 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 					DB_Connection::get()->rollback();
 					return;
 				}
-				// delete users privileges
-				Rakuun_Intern_Alliance_Security::get()->removeFromAllGroups($user);
+				if ($user->allianceLeaveTime > 0) {
+					$this->addError('Dieser Spieler verlässt bereits die Allianz.');
+					DB_Connection::get()->rollback();
+					return;
+				}
 				// send information message to the user
 				$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', Rakuun_User_Manager::getCurrentUser()->alliance);
 				$aktUserLink = new Rakuun_GUI_Control_UserLink('userlink', Rakuun_User_Manager::getCurrentUser());
@@ -53,12 +56,12 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 				$igm->setSenderName(Rakuun_Intern_IGM::SENDER_ALLIANCE);
 				$igm->setText(
 					'Du wurdest von '.$aktUserLink->render().' aus der Allianz '.$allianceLink->render().' gekickt!<br />'.
+					'Der Austritt wird nach '.Rakuun_Date::formatCountDown(Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT).' gültig.<br />'.
 					$allianceModuleLink->render()
 				);
 				$igm->send();
-				// kick the user from alliance
-				$alliance = $user->alliance; 
-				$user->alliance = null;
+				// start alliance leave countdown
+				$user->allianceLeaveTime = time();
 				Rakuun_User_Manager::update($user);
 				$this->getModule()->invalidate();
 				//save alliancehistory

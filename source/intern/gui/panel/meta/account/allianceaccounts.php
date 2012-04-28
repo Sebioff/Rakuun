@@ -20,20 +20,21 @@ class Rakuun_Intern_GUI_Panel_Meta_Account_AllianceAccounts extends GUI_Panel_Pa
 		$logs = $this->getContainer()->select(array_merge($options, $this->getOptions()));
 		$alliances = array();
 		foreach ($logs as $log) {
-			if (!isset($alliances[$log->alliance->getPK()])) {
-				$alliances[$log->alliance->getPK()]['sum'] = array(
-						'iron' => 0,
-						'beryllium' => 0,
-						'energy' => 0,
-						'people' => 0
-					);
+			if ($log->alliance) { //hotfix: if alliance is deleted
+				if (!isset($alliances[$log->alliance->getPK()])) {
+					$alliances[$log->alliance->getPK()]['sum'] = array(
+							'iron' => 0,
+							'beryllium' => 0,
+							'energy' => 0,
+							'people' => 0
+						);
+				}
+				$alliances[$log->alliance->getPK()]['sum']['iron'] += $log->iron;
+				$alliances[$log->alliance->getPK()]['sum']['beryllium'] += $log->beryllium;
+				$alliances[$log->alliance->getPK()]['sum']['energy'] += $log->energy;
+				$alliances[$log->alliance->getPK()]['sum']['people'] += $log->people;
+				$alliances[$log->alliance->getPK()]['alliance'] = $log->alliance;
 			}
-			$alliances[$log->alliance->getPK()]['sum']['iron'] += $log->iron;
-			$alliances[$log->alliance->getPK()]['sum']['beryllium'] += $log->beryllium;
-			$alliances[$log->alliance->getPK()]['sum']['energy'] += $log->energy;
-			$alliances[$log->alliance->getPK()]['sum']['people'] += $log->people;
-			$alliances[$log->alliance->getPK()]['alliance'] = $log->alliance;
-			
 		}
 		$table = new GUI_Panel_Table('table');
 		$table->setAttribute('summary', 'Kontobewegungen');

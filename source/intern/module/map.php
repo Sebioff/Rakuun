@@ -6,8 +6,10 @@ class Rakuun_Intern_Module_Map extends Rakuun_Intern_Module {
 		
 		$this->setPageTitle('Karte');
 		$this->contentPanel->setTemplate(dirname(__FILE__).'/map.tpl');
+		$target = null;
 		$paramUser = $this->getParam('user');
-		$target = Rakuun_DB_Containers::getUserContainer()->selectByPK($paramUser);
+		if ($paramUser)
+			$target = Rakuun_DB_Containers::getUserContainer()->selectByPK($paramUser);
 		$paramX = $this->getParam('cityX');
 		$paramY = $this->getParam('cityY');
 		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Map('map', $target, $paramX, $paramY));

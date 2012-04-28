@@ -5,7 +5,7 @@
  */
 abstract class Rakuun_Game {
 	public static function isLoginDisabled() {
-		return (!Rakuun_User_Manager::isMasterUser() && (RAKUUN_ROUND_STARTTIME > time()) && (!Rakuun_User_Manager::getCurrentUser() || !Rakuun_TeamSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::PRIVILEGE_BACKENDACCESS)));
+		return (!Rakuun_User_Manager::isMasterUser() && (RAKUUN_ROUND_STARTTIME > time() && time() > RAKUUN_ROUND_ENDTIME) && (!Rakuun_User_Manager::getCurrentUser() || !Rakuun_TeamSecurity::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_TeamSecurity::PRIVILEGE_BACKENDACCESS)));
 	}
 	
 	public static function isRegistrationDisabled() {

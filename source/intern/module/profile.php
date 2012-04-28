@@ -13,19 +13,20 @@ class Rakuun_Intern_Module_Profile extends Rakuun_Intern_Module implements Scrip
 			}
 		}
 		
-		$this->contentPanel->addPanel($editBox = new Rakuun_Intern_GUI_Panel_Profile_Edit('edit'));
+		$this->contentPanel->addPanel($editBox = new Rakuun_Intern_GUI_Panel_Profile_Edit('edit', 'Profil'));
 		$editBox->addClasses('rakuun_box_profile_edit');
-		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Profile_ChangePassword('change_password'));
+		$this->contentPanel->addPanel(new Rakuun_Intern_GUI_Panel_Profile_ChangePassword('change_password', 'Passwort ändern'));
 		$this->contentPanel->addPanel($deleteBox = new Rakuun_GUI_Panel_Box('delete', new Rakuun_Intern_GUI_Panel_Profile_Delete('link'), 'Account löschen'));
 		$deleteBox->addClasses('rakuun_box_delete');
 		
 		// eternal profile
 		if (Rakuun_DB_Containers::getUserEternalUserAssocContainer()->selectByUserFirst(Rakuun_User_Manager::getCurrentUser())) {
-			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('eternal_profile', new Rakuun_Intern_GUI_Panel_Profile_EternalProfile('eternal_profile'), 'Ewiges Profil'));
+			$this->contentPanel->addPanel($eternalProfileBox = new Rakuun_GUI_Panel_Box('eternal_profile', new Rakuun_Intern_GUI_Panel_Profile_EternalProfile('eternal_profile'), 'Ewiges Profil'));
 		}
 		else {
-			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('eternal_profile', new Rakuun_Intern_GUI_Panel_Profile_EternalProfileManage('eternal_profile'), 'Ewiges Profil'));
+			$this->contentPanel->addPanel($eternalProfileBox = new Rakuun_GUI_Panel_Box('eternal_profile', new Rakuun_Intern_GUI_Panel_Profile_EternalProfileManage('eternal_profile'), 'Ewiges Profil'));
 		}
+		$eternalProfileBox->addClasses('rakuun_box_profile_eternal');
 	}
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------

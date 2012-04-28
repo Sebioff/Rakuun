@@ -12,17 +12,17 @@ class Rakuun_Intern_GUI_Panel_Statistics extends GUI_Panel {
 		$line = array('Anzahl Spieler:', Text::formatNumber(Rakuun_Intern_Statistics::noOfPlayers()));
 		$table->addLine($line);
 		
-		$nooblimit = Rakuun_Intern_Statistics::averagePoints() * 0.6;
-		if ($nooblimit < RAKUUN_NOOB_START_LIMIT_OF_POINTS)
-			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_POINTS;
-		$line = array('Noobschutz Punktegrenze:', Text::formatNumber($nooblimit));
+		$line = array('Anzahl inaktiver Spieler:', Text::formatNumber(Rakuun_Intern_Statistics::noOfInactiveUsers()));
+		$table->addLine($line);
+		
+		$line = array('Anzahl eingeloggter Spieler:', Text::formatNumber(Rakuun_Intern_Statistics::noOfLoggedInUsers()));
+		$table->addLine($line);
+		
+		$line = array('Noobschutz Punktegrenze:', Text::formatNumber(Rakuun_Intern_Statistics::getNoobPointLimit()));
 		$table->addLine($line);
 		
 		// calc armystrength
-		$nooblimit = Rakuun_Intern_Statistics::averageArmyStrength() * 0.6;
-		if ($nooblimit < RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH)
-			$nooblimit = RAKUUN_NOOB_START_LIMIT_OF_ARMY_STRENGTH;
-		$line = array('Noobschutz Armeestärkegrenze:', Text::formatNumber($nooblimit));
+		$line = array('Noobschutz Armeestärkegrenze:', Text::formatNumber(Rakuun_Intern_Statistics::getNoobArmyStrengthLimit()));
 		$table->addLine($line);
 		
 		$line = array('Anzahl Allianzen:', Text::formatNumber(Rakuun_Intern_Statistics::noOfAllies()));

@@ -6,6 +6,7 @@
 class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_Owner {
 	public function __construct() {
 		$this->setVirtualProperty('members', array($this, 'getMembers'));
+		$this->setVirtualProperty('memberscount', array($this, 'getMembersCount'));
 		$this->setVirtualProperty('buildings', array($this, 'getBuildings'));
 		$this->setVirtualProperty('ressources', array($this, 'getRessources'));
 	}
@@ -16,6 +17,10 @@ class Rakuun_DB_Alliance extends DB_Record implements Rakuun_Intern_Production_O
 	
 	protected function getMembers() {
 		return Rakuun_DB_Containers::getUserContainer()->select(array('conditions' => array(array('alliance = ?', $this)), 'order' => 'name ASC'));
+	}
+	
+	protected function getMembersCount() {
+		return count($this->getMembers());
 	}
 	
 	protected function getBuildings() {

@@ -22,7 +22,12 @@ class Rakuun_Intern_Production_Building_MilitaryBase extends Rakuun_Intern_Produ
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Verkürzung der Produktionszeit von hier produzierten Einheiten um insgesamt '.(self::PRODUCTION_TIME_REDUCTION_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
+		$futureLevel = $this->getLevel() + $this->getFutureLevels();
+		$this->addEffect('Verkürzung der Produktionszeit von hier produzierten Einheiten um insgesamt '.$this->getProductionTimeReductionPercent($futureLevel + 1).'% (vorher: '.$this->getProductionTimeReductionPercent($futureLevel).'%)');
+	}
+	
+	private function getProductionTimeReductionPercent($level) {
+		return self::PRODUCTION_TIME_REDUCTION_PERCENT * $level;
 	}
 }
 

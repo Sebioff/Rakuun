@@ -41,10 +41,14 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 	}
 	
 	public function onSubmit() {
+		DB_Connection::get()->beginTransaction();
 		$alliance = Rakuun_User_Manager::getCurrentUser()->alliance;
 		$options['conditions'][] = array('id = ?', $this->userbox->getKey());
 		$options['conditions'][] = array('alliance = ?', $alliance);
 		$user = Rakuun_DB_Containers::getUserContainer()->selectFirst($options);
+		$options = array();
+		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
+		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($user, $options);
 		
 		if (!$user) {
 			if (!$this->userbox->getKey())
@@ -59,23 +63,23 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 			$this->addError('Keine Ressourcen zu übertragen.');
 		
 		//check for user capacity
-		if ($this->iron->getValue() + $user->ressources->iron > $user->ressources->getCapacityIron()) {
-			$capacity = $user->ressources->getCapacityIron() - $user->ressources->iron;
+		if ($this->iron->getValue() + $ressources->iron > $ressources->getCapacityIron()) {
+			$capacity = $ressources->getCapacityIron() - $ressources->iron;
 			$this->addError($user->name.' kann nur noch '.$capacity.' Eisen empfangen.');
 			$this->iron->setValue($capacity);
 		}
-		if ($this->beryllium->getValue() + $user->ressources->beryllium > $user->ressources->getCapacityBeryllium()) {
-			$capacity = $user->ressources->getCapacityBeryllium() - $user->ressources->beryllium;
+		if ($this->beryllium->getValue() + $ressources->beryllium > $ressources->getCapacityBeryllium()) {
+			$capacity = $ressources->getCapacityBeryllium() - $ressources->beryllium;
 			$this->addError($user->name.' kann nur noch '.$capacity.' Beryllium empfangen.');
 			$this->beryllium->setValue($capacity);
 		}
-		if ($this->energy->getValue() + $user->ressources->energy > $user->ressources->getCapacityEnergy()) {
-			$capacity = $user->ressources->getCapacityEnergy() - $user->ressources->energy;
+		if ($this->energy->getValue() + $ressources->energy > $ressources->getCapacityEnergy()) {
+			$capacity = $ressources->getCapacityEnergy() - $ressources->energy;
 			$this->addError($user->name.' kann nur noch '.$capacity.' Energie empfangen.');
 			$this->energy->setValue($capacity);
 		}
-		if ($this->people->getValue() + $user->ressources->people > $user->ressources->getCapacityPeople()) {
-			$capacity = $user->ressources->getCapacityPeople() - $user->ressources->people;
+		if ($this->people->getValue() + $ressources->people > $ressources->getCapacityPeople()) {
+			$capacity = $ressources->getCapacityPeople() - $ressources->people;
 			$this->addError($user->name.' kann nur noch '.$capacity.' Leute empfangen.');
 			$this->people->setValue($capacity);
 		}
@@ -97,11 +101,12 @@ class Rakuun_Intern_GUI_Panel_Alliance_Account_Payout extends GUI_Panel {
 		if ($user->points >= $alliance->points / count($alliance->members))
 			$this->addError('Dieser Spieler hat zu viele Punkte.');
 		
-		if ($this->hasErrors())
+		if ($this->hasErrors()) {
+			DB_Connection::get()->rollback();
 			return;
+		}
 		
-		DB_Connection::get()->beginTransaction();
-		$user->ressources->raise($this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->people->getValue());
+		$ressources->raise($this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->people->getValue());
 		$alliance->lower($this->iron->getValue(), $this->beryllium->getValue(), $this->energy->getValue(), $this->people->getValue());
 		$log = new DB_Record();
 		$log->alliance = $user->alliance;

@@ -17,7 +17,7 @@ ini_set('session.gc_maxlifetime', 3600);
 
 // PROJECT SPECIFIC CONSTANTS --------------------------------------------------
 define('RAKUUN_ERRORMAIL_RECIPIENTS', 'sebioff@gmx.de');
-define('RAKUUN_VERSION', '4.2.0');
-define('RAKUUN_ROUND_NAME', '26');
+define('RAKUUN_VERSION', '4.3.0');
+define('RAKUUN_ROUND_NAME', '31');
 
 ?>

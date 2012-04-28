@@ -1,6 +1,6 @@
 function GUI_Control_Ressources(controlID, amount, productionRate, limit) {
 	var self = this;
-	var interval = setInterval(function(){self.tick();}, Math.max(100, 1000 / productionRate));
+	var interval = setInterval(function(){self.tick();}, Math.max(300, 1000 / productionRate));
 	var control = document.getElementById(controlID);
 	var startTime = new Date().getTime();
 	

@@ -2,6 +2,7 @@
 
 class Rakuun_Index_Panel_Register extends GUI_Panel {
 	private static $reservedNames = array('SYSTEM', 'YIMTAY', 'SUPPORT', 'MULTIHUNTER', 'ADMIN');
+	private $restrictedChars = '%@<>,#\'"';
 	public function init() {
 		parent::init();
 		
@@ -11,7 +12,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$username->addValidator(new GUI_Validator_RangeLength(2, 25));
 		$username->addValidator(new GUI_Validator_Mandatory());
 		$username->addValidator(new Rakuun_GUI_Validator_Name());
-		$username->setFocus();
+		$username->setFocus();	
 		$this->addPanel($password = new GUI_Control_PasswordBox('password', null, 'Passwort'));
 		$password->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel($password_repeat = new GUI_Control_PasswordBox('password_repeat', null, 'Passwort (Wiederholung)'));
@@ -47,8 +48,8 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		if (in_array(Text::toUpperCase($this->username->getValue()), self::getReservedNames()))
 			$this->addError('Dieser Name kann nicht vergeben werden', $this->username);
 			
-		if (preg_match('/[@<>,#]+/', $this->username->getValue()))
-			$this->addError('Folgende Zeichen sind im Namen nicht erlaubt: @<>,#', $this->username);
+		if (preg_match('/['.$this->restrictedChars.']+/', $this->username->getValue()))
+			$this->addError('Folgende Zeichen sind im Namen nicht erlaubt: '.stripslashes($this->restrictedChars), $this->username);
 
 		if ($this->hasErrors())
 			return;
@@ -80,10 +81,11 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 			$user->cityName = $user->name.'\' Stadt';
 		else
 			$user->cityName = $user->name.'s Stadt';
-		$coordinateGenerator = new Rakuun_Intern_Map_CoordinateGenerator();
+		$coordinateGenerator = Rakuun_Intern_Mode::getCurrentMode()->getCoordinateGenerator();
 		$position = $coordinateGenerator->getRandomFreeCoordinate();
 		$user->cityX = $position[0];
 		$user->cityY = $position[1];
+		Rakuun_Intern_Mode::getCurrentMode()->onNewUser($user);
 		Rakuun_DB_Containers::getUserContainer()->save($user);
 		
 		$activation = new DB_Record();

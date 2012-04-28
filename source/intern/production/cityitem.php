@@ -49,7 +49,10 @@ abstract class Rakuun_Intern_Production_CityItem extends Rakuun_Intern_Productio
 	public function getIronRepayForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round($this->getIronCostsForLevel($level) / 2);
+		$divider = 2;
+		if (Rakuun_User_Manager::isSitting()) 			
+			$divider *= Rakuun_Intern_Production_Base::SITTER_PRODUCTION_COSTS_MULTIPLIER;
+		return round($this->getIronCostsForLevel($level) / $divider);
 	}
 	
 	/**
@@ -58,7 +61,10 @@ abstract class Rakuun_Intern_Production_CityItem extends Rakuun_Intern_Productio
 	public function getBerylliumRepayForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round($this->getBerylliumCostsForLevel($level) / 2);
+		$divider = 2;
+		if (Rakuun_User_Manager::isSitting()) 			
+			$divider *= Rakuun_Intern_Production_Base::SITTER_PRODUCTION_COSTS_MULTIPLIER;
+		return round($this->getBerylliumCostsForLevel($level) / $divider);
 	}
 	
 	/**
@@ -67,7 +73,10 @@ abstract class Rakuun_Intern_Production_CityItem extends Rakuun_Intern_Productio
 	public function getEnergyRepayForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round($this->getEnergyCostsForLevel($level) / 2);
+		$divider = 2;
+		if (Rakuun_User_Manager::isSitting()) 			
+			$divider *= Rakuun_Intern_Production_Base::SITTER_PRODUCTION_COSTS_MULTIPLIER;
+		return round($this->getEnergyCostsForLevel($level) / $divider);
 	}
 	
 	/**
@@ -76,7 +85,10 @@ abstract class Rakuun_Intern_Production_CityItem extends Rakuun_Intern_Productio
 	public function getPeopleRepayForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round($this->getPeopleCostsForLevel($level) / 2);
+		$divider = 2;
+		if (Rakuun_User_Manager::isSitting()) 			
+			$divider *= Rakuun_Intern_Production_Base::SITTER_PRODUCTION_COSTS_MULTIPLIER;
+		return round($this->getPeopleCostsForLevel($level) / $divider);
 	}
 	
 	/**

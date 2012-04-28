@@ -31,6 +31,13 @@ class Rakuun_Intern_GUI_Panel_Alliance_Databases extends GUI_Panel {
 		$options['conditions'][] = array($specialsUsersAssocTable.'.active = ?', true);
 		return Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->select($options);
 	}
+	
+	/**
+	 * @return Rakuun_DB_Alliance
+	 */
+	public function getAlliance() {
+		return $this->alliance;
+	}
 }
 
 ?>

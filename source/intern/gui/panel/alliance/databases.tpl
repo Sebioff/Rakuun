@@ -12,13 +12,13 @@
 					<? $images = Rakuun_User_Specials_Database::getDatabaseImages(); ?>
 					<? $image = new GUI_Panel_Image('image_'.$databaseRecord->identifier, Router::get()->getStaticRoute('images', $images[$databaseRecord->identifier].'.gif')); ?>
 					<?= $image->render(); ?>
-					<?= $effects[$databaseRecord->identifier]; ?> (aktuell: +<?= $database->getEffectValue() * 100; ?>%)
+					<?= $effects[$databaseRecord->identifier]; ?> (aktuell: +<?= $database->getEffectValue($this->getAlliance()) * 100; ?>%)
 				</li>
 				<? $visibleCount++; ?>
 			<? endif; ?>
 		<? endforeach; ?>
 		<? if ($visibleCount != $databasesCount): ?>
-			<li><hr />Diese Allianz besitzt <?= ($databasesCount - $visibleCount) ?> <?= ($visibleCount < $databasesCount ? 'weitere(s) ' : '') ?>Datenbankteil(e).</li> 
+			<li><hr />Diese Allianz besitzt <?= ($databasesCount - $visibleCount) ?> <?= ($visibleCount < $databasesCount ? 'weitere(s) ' : '') ?>Datenbankteil(e).</li>
 		<? endif; ?>
 	</ul>
 <? else: ?>

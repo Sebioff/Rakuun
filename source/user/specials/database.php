@@ -64,10 +64,14 @@ class Rakuun_User_Specials_Database extends Rakuun_User_Specials {
 		return Rakuun_DB_Containers::getSpecialsUsersAssocContainer()->selectFirst($options);
 	}
 	
-	public function getEffectValue() {
+	public function getEffectValue(Rakuun_DB_Alliance $alliance = null) {
+		if (!$alliance)
+			$alliance = $this->user->alliance;
+			
+		$detector = Rakuun_Intern_Production_Factory_Alliances::getDetectorForDatabase($this->identifier, $alliance);
 		$effectValues = Rakuun_User_Specials::getEffectValues();
 		$moveTime = $this->getParam(Rakuun_User_Specials::PARAM_DATABASE_MOVED)->value;
-		return round((time() - $moveTime) / 60 / 60 / 24 * $effectValues[$this->identifier], 4);
+		return round((time() - $moveTime) / 60 / 60 / 24 * $effectValues[$this->identifier] * $detector->getLevel(), 4);
 	}
 	
 	/**

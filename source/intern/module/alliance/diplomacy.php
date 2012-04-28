@@ -14,7 +14,7 @@ class Rakuun_Intern_Module_Alliance_Diplomacy extends Rakuun_Intern_Module imple
 	
 	// OVERRIDES / IMPLEMENTS --------------------------------------------------
 	public function checkPrivileges() {
-		return Rakuun_Intern_Alliance_Security::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_Intern_Alliance_Security::PRIVILEGE_DIPLOMACY);
+		return Rakuun_Intern_Mode::getCurrentMode()->allowDiplomacy() && Rakuun_Intern_Alliance_Security::get()->hasPrivilege(Rakuun_User_Manager::getCurrentUser(), Rakuun_Intern_Alliance_Security::PRIVILEGE_DIPLOMACY);
 	}
 }
 

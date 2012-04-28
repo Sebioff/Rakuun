@@ -11,7 +11,7 @@ class Rakuun_Intern_Map_AStar {
 	private $canAllMoveOverWater = false;
 
 	public function __construct($movementCosts, $canAllMoveOverWater) {
-		$this->bitMap = imagecreatefrompng(PROJECT_PATH.'/www/images/map.png');
+		$this->bitMap = Rakuun_Intern_Mode::getCurrentMode()->getBitMapImage();
 		$this->movementCosts = $movementCosts;
 		$this->canAllMoveOverWater = $canAllMoveOverWater;
 	}

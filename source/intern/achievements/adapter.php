@@ -1,6 +1,9 @@
 <?php
 
 abstract class Rakuun_Intern_Achievements_Adapter {
+	const TYPE_GENERATED = 0; // automatically awarded achievements, might be deleted and re-generated
+	const TYPE_CUSTOM = 1; // custom achievements, e.g. awarded by an admin
+	
 	private $validSinceRoundName;
 	
 	public function __construct($validSinceRoundName) {
@@ -15,11 +18,12 @@ abstract class Rakuun_Intern_Achievements_Adapter {
 		$this->saveAchievement($eternalUser, $roundName, 'Platz #'.$rank);
 	}
 	
-	protected function saveAchievement(DB_Record $eternalUser, $roundName, $text) {
+	protected function saveAchievement(DB_Record $eternalUser, $roundName, $text, $type = self::TYPE_GENERATED) {
 		$achievement = new DB_Record();
 		$achievement->eternalUser = $eternalUser;
 		$achievement->round = $this->getRoundInformation($roundName);
 		$achievement->achievement = $text;
+		$achievement->type = $type;
 		Rakuun_DB_Containers_Persistent::getEternalUserAchievementContainer()->save($achievement);
 	}
 	
@@ -28,6 +32,59 @@ abstract class Rakuun_Intern_Achievements_Adapter {
 	 */
 	public function authenticate(Rakuun_DB_User $user, $password) {
 		return Rakuun_User_Manager::checkPassword($user, $password);
+	}
+	
+	/**
+	 * @return boolean true if the achievements of the given user have already been
+	 * added to an eternal profile for the given round, false otherwise
+	 */
+	public function isAlreadyConnected($userName, $roundName) {
+		$user = $this->getRoundContainer('user', $roundName)->selectByNameFirst($userName);
+		if (!$user) {
+			return false;
+		}
+		$options = array();
+		$options['conditions'][] = array('user = ?', $user->id);
+		$options['conditions'][] = array('round = ?', $this->getRoundInformation($roundName));
+		return (Rakuun_DB_Containers_Persistent::getEternalUserUserAssocContainer()->selectFirst($options) !== null);
+	}
+	
+	/**
+	 * Changes the association for the given user in the given round to the given
+	 * eternal user profile
+	 * @return String errormessage
+	 */
+	public function changeUserEternalUserAssoc($userName, $password, $roundName, DB_Record $eternalUser) {
+		$user = $this->getRoundContainer('user', $roundName)->selectByNameFirst($userName);
+
+		if (!$user)
+			return 'Falsche Zugangsdaten';
+				
+		$userObject = new Rakuun_DB_User();
+		$userObject->password = $user->password;
+		$userObject->salt = $user->salt;
+		if (!$this->authenticate($userObject, $password))
+			return 'Falsche Zugangsdaten';
+		
+		$roundInformation = $this->getRoundInformation($roundName);
+		Rakuun_DB_Containers_Persistent::getPersistentConnection()->beginTransaction();
+		$options = array();
+		$options['conditions'][] = array('user = ?', $user->id);
+		$options['conditions'][] = array('round = ?', $roundInformation);
+		$assoc = Rakuun_DB_Containers_Persistent::getEternalUserUserAssocContainer()->selectFirst($options);
+		if (!$assoc)
+			return 'Kann nicht verbinden, keine bereits bestehende Verbindung gefunden';
+		$oldEternalUser = $assoc->eternalUser;
+		$assoc->eternalUser = $eternalUser;
+		$assoc->save();
+		$options = array();
+		$options['conditions'][] = array('eternal_user = ?', $oldEternalUser);
+		$options['conditions'][] = array('round = ?', $roundInformation);
+		foreach (Rakuun_DB_Containers_Persistent::getEternalUserAchievementContainer()->select($options) as $achievementRecord) {
+			$achievementRecord->eternalUser = $eternalUser;
+			$achievementRecord->save();
+		}
+		Rakuun_DB_Containers_Persistent::getPersistentConnection()->commit();
 	}
 	
 	/**
@@ -45,11 +102,8 @@ abstract class Rakuun_Intern_Achievements_Adapter {
 		if (!$this->authenticate($userObject, $password))
 			return 'Falsche Zugangsdaten';
 		
-		$options = array();
-		$options['conditions'][] = array('user = ?', $user->id);
-		$options['conditions'][] = array('round = ?', $this->getRoundInformation($roundName));
-		if (Rakuun_DB_Containers_Persistent::getEternalUserUserAssocContainer()->selectFirst($options))
-			return 'Rundeninformation wurde bereits einem Spieler hinzugefügt';
+		if ($this->isAlreadyConnected($userName, $roundName))
+			return 'Rundeninformation wurde bereits einem anderen ewigen Profil hinzugefügt';
 		
 		Rakuun_DB_Containers_Persistent::getPersistentConnection()->beginTransaction();
 		$assoc = new DB_Record();

@@ -13,7 +13,7 @@ class Rakuun_Intern_Module_Admin extends Rakuun_Intern_Module implements Scriptl
 		
 		if (Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_GAMEUPDATE)) {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('update', new Rakuun_Intern_GUI_Panel_Admin_Update('update'), 'Spielupdate'));
-			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('newround', new Rakuun_Intern_GUI_Panel_Admin_NewRound('newround'), 'Neue Runde'));
+			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('roundcontrol', new Rakuun_Intern_GUI_Panel_Admin_RoundControl('roundcontrol'), 'Rundensteuerung'));
 		}
 		if (Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_ADDVIPS)) {
 			$this->contentPanel->addPanel(new Rakuun_GUI_Panel_Box('staff', new Rakuun_Intern_GUI_Panel_Admin_Staff('staff'), 'VIPs eintragen'));

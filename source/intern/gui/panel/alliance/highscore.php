@@ -16,7 +16,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
 		
 		$this->setTemplate(dirname(__FILE__).'/highscore.tpl');
 		$this->addPanel($table = new GUI_Panel_Table('highscore'));
-		$table->addHeader(array('Rang', 'Name', 'Meta', 'Punkte', 'Durchschnitt'));
+		$table->addHeader(array('Rang', 'Name', 'Meta', 'Mitglieder', 'Punkte', 'Durchschnitt'));
 		$table->addTableCssClass('align_right', 3);
 		$table->addTableCssClass('align_right', 4);
 		$alliances = $this->getContainer()->select($this->getOptions());
@@ -28,6 +28,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Highscore extends GUI_Panel_PageView {
 			$line[] = $alliance->meta ?
 				new Rakuun_GUI_Control_MetaLink('alliancemetalink'.$i, $alliance->meta) :
 				'';
+			$line[] = new GUI_Panel_Number('alliancemembers'.$i, $alliance->memberscount);
 			$line[] = new GUI_Panel_Number('alliancepoints'.$i, $alliance->points);
 			$count = count($alliance->members);
 			$allianceaverage = $alliance->points / ($count > 0 ? $count : 1);

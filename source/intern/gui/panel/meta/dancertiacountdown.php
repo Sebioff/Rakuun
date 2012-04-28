@@ -19,6 +19,9 @@ class Rakuun_Intern_GUI_Panel_Meta_DancertiaCountdown extends GUI_Panel {
 		$countdown->enableHoverInfo(true);
 		$this->params->currentShieldHolder = $this->meta->getCurrentShieldGeneratorHolder();
 		$this->params->currentShieldCount = $this->meta->getShieldGeneratorCount();
+		$this->addPanel($userlink = new Rakuun_GUI_Control_UserLink('userlink', $this->meta->getCurrentShieldGeneratorHolder()));
+		$this->addPanel($metalink = new Rakuun_GUI_Control_MetaLink('metalink', $this->meta)); 
+		
 	}
 	
 	// GETTERS / SETTERS -------------------------------------------------------

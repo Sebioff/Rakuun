@@ -14,12 +14,13 @@ class Rakuun_Intern_GUI_Panel_Map_UnitInput extends GUI_Panel {
 		}
 	}
 	
-	public function getArmy() {
+	public function getArmy(DB_Record $unitSource = null) {
 		$army = array();
 		
-		foreach (Rakuun_Intern_Production_Factory::getAllUnits() as $unit) {
-			if ($this->hasPanel($unit->getInternalName()))
-			if ($this->hasPanel($unit->getInternalName()) && $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue() > 0) {
+		foreach (Rakuun_Intern_Production_Factory::getAllUnits($unitSource) as $unit) {
+			if ($this->hasPanel($unit->getInternalName()) && $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue() > 0
+			&& $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue() <= $unit->getAmount()
+			) {
 				$army[$unit->getInternalName()] = $this->{Text::underscoreToCamelCase($unit->getInternalName())}->valuePanel->getValue();
 			}
 		}

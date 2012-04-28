@@ -24,7 +24,8 @@ class Rakuun_Intern_Production_Building_SensorBay extends Rakuun_Intern_Producti
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Erhöht die Erkennungsreichweite getarnter Angriffe auf '.Rakuun_Date::formatCountDown($this->getRange($this->getLevel() + 1)));
+		$futureLevel = $this->getLevel() + $this->getFutureLevels();
+		$this->addEffect('Erhöht die Erkennungsreichweite getarnter Angriffe auf '.Rakuun_Date::formatCountDown($this->getRange($futureLevel + 1)).' (vorher: '.Rakuun_Date::formatCountDown($this->getRange($futureLevel)).')');
 	}
 	
 	// CUSTOM METHODS ----------------------------------------------------------

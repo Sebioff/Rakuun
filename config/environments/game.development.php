@@ -9,6 +9,7 @@
 
 // $1  -  Game Control /////////////////////////////////////////////////////////
 define('RAKUUN_REGISTRATION_ENABLED', true);
+define('RAKUUN_GAME_MODE', 'Rakuun_Intern_Mode_Standard');
 
 // $2  -  Speed ////////////////////////////////////////////////////////////////
 define('RAKUUN_SPEED_BUILDING', 100);

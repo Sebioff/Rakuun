@@ -1,7 +1,7 @@
 <?php
 
 class Rakuun_Intern_Module_GNVote extends Rakuun_Intern_Module {
-	const GN_VOTE_URL = 'http://www.galaxy-news.de/?page=charts&op=vote&game_id=67';
+	const GN_VOTE_URL = 'http://de.mmofacts.com/rakuun-67#track';
 	const GN_VOTE_TIMELIMIT = 86400; // 24h
 	
 	public function init() {

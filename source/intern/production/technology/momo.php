@@ -27,7 +27,12 @@ class Rakuun_Intern_Production_Technology_Momo extends Rakuun_Intern_Production_
 	}
 	
 	protected function defineEffects() {
-		$this->addEffect('Verkürzung der Bauzeit von Gebäuden um insgesamt '.(self::BUILDING_TIME_REDUCTION_PERCENT * ($this->getLevel() + $this->getFutureLevels() + 1)).'%');
+		$futureLevel = $this->getLevel() + $this->getFutureLevels();
+		$this->addEffect('Verkürzung der Bauzeit von Gebäuden um insgesamt '.$this->getBuildingTimeReductionPercent($futureLevel + 1).'% (vorher: '.$this->getBuildingTimeReductionPercent($futureLevel).'%)');
+	}
+	
+	private function getBuildingTimeReductionPercent($level) {
+		return self::BUILDING_TIME_REDUCTION_PERCENT * $level;
 	}
 }
 

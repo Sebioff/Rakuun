@@ -40,7 +40,10 @@ class Rakuun_Intern_Quest_FirstCapturedDatabase extends Rakuun_Intern_Quest {
 	}
 	
 	public function getOwnerName() {
-		return Rakuun_DB_Containers::getAlliancesContainer()->selectByPK($this->getRecord()->owner)->name;
+		if ($alliance = Rakuun_DB_Containers::getAlliancesContainer()->selectByPK($this->getRecord()->owner))
+			return $alliance->name;
+		else
+			return 'gelöschte Allianz';
 	}
 }
 

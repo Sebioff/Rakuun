@@ -79,15 +79,17 @@ class Rakuun_Intern_GUI_Panel_Production_Building extends Rakuun_Intern_GUI_Pane
 		$options = array();
 		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
 		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($building->getUser(), $options);
-		// repay ressources
 		$building = $this->getProductionItem();
-		$iron = $building->getIronRepayForLevel();
-		$beryllium = $building->getBerylliumRepayForLevel();
-		$energy = $building->getEnergyRepayForLevel();
-		$people = $building->getPeopleRepayForLevel();
-		$ressources->raise($iron, $beryllium, $energy, $people);
+		$level = $building->getLevel();
 		// lower building level
+		/* has to be done first, see #682 */
 		$building->getUser()->buildings->lower($building->getInternalName(), Rakuun_User_Manager::getCurrentUser());
+		// repay ressources
+		$iron = $building->getIronRepayForLevel($level);
+		$beryllium = $building->getBerylliumRepayForLevel($level);
+		$energy = $building->getEnergyRepayForLevel($level);
+		$people = $building->getPeopleRepayForLevel($level);
+		$ressources->raise($iron, $beryllium, $energy, $people);
 		// remove unneeded workers
 		if ($building instanceof Rakuun_Intern_Production_Building_RessourceProducer) {
 			$lowerLevel = $building->getLevel();

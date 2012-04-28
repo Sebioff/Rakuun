@@ -3,6 +3,7 @@
 $queries[] = 'CREATE TABLE IF NOT EXISTS `boards_global` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
+  `closed` BOOL NOT NULL,
   `date` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;';
