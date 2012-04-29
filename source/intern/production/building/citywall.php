@@ -31,7 +31,7 @@ class Rakuun_Intern_Production_Building_CityWall extends Rakuun_Intern_Productio
 	
 	protected function defineEffects() {
 		$futureLevel = $this->getLevel() + $this->getFutureLevels();
-		$this->addEffect('Verteidigungskraft-Bonus gegen Nicht-Flugeinheiten auf '.$this->getDefenseBonusPercent($futureLevel + 1).'% (vorher: '.$this->getDefenseBonusPercent($futureLevel).'%');
+		$this->addEffect('Verteidigungskraft-Bonus gegen alle Einheiten auf '.$this->getDefenseBonusPercent($futureLevel + 1).'% (vorher: '.$this->getDefenseBonusPercent($futureLevel).'%');
 	}
 	
 	private function getDefenseBonusPercent($level) {
