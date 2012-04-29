@@ -5,7 +5,7 @@
  */
 abstract class Rakuun_Intern_Production_Unit extends Rakuun_Intern_Production_UserItem {
 	// TODO add pezetto to end of list if pezettos get implemented
-	const DEFAULT_DEFENSE_SEQUENCE = 'telaturri|tertor|inra|donany|stormok|mandrogani|laser_rifleman|lorica|minigani|buhogani|laser_turret';
+	const DEFAULT_DEFENSE_SEQUENCE = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|lorica|minigani|buhogani|laser_turret';
 	const DEFAULT_ATTACK_SEQUENCE = 'tertor|inra|donany|stormok|mandrogani|laser_rifleman|lorica|minigani|buhogani';
 	
 	const TYPE_FOOTSOLDIER = 1; // binary 0001

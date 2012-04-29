@@ -154,7 +154,6 @@ abstract class Rakuun_Intern_Production_Factory {
 		self::addUnit('tertor', 'Rakuun_Intern_Production_Unit_Tertor');
 		self::addUnit('stormok', 'Rakuun_Intern_Production_Unit_Stormok');
 		self::addUnit('laser_turret', 'Rakuun_Intern_Production_Unit_LaserTurret');
-		self::addUnit('telaturri', 'Rakuun_Intern_Production_Unit_Telaturri');
 		self::addUnit('spydrone', 'Rakuun_Intern_Production_Unit_Spydrone');
 		self::addUnit('cloaked_spydrone', 'Rakuun_Intern_Production_Unit_CloakedSpydrone');
 		self::addUnit('lorica', 'Rakuun_Intern_Production_Unit_Lorica');
