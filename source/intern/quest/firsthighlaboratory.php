@@ -1,6 +1,8 @@
 <?php
 
-class Rakuun_Intern_Quest_FirstLaboratory10 extends Rakuun_Intern_Quest {
+class Rakuun_Intern_Quest_FirstHighLaboratory extends Rakuun_Intern_Quest {
+	const REQUIRED_LABORATORY_LEVEL = 20;
+	
 	protected function awardTo(DB_Record $awardTo) {
 		parent::awardTo($awardTo);
 		
@@ -19,7 +21,7 @@ class Rakuun_Intern_Quest_FirstLaboratory10 extends Rakuun_Intern_Quest {
 	}
 	
 	public function getDescription() {
-		return 'Baue als Erster Forschungslabor Stufe 20!';
+		return 'Baue als Erster Forschungslabor Stufe '.self::REQUIRED_LABORATORY_LEVEL.'!';
 	}
 	
 	public function getRewardDescription() {
