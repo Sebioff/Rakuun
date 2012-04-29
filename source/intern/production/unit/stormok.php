@@ -18,6 +18,7 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
 		$this->addNeededBuilding('airport', 1);
+		$this->addNeededTechnology('antigravitation', 1);
 		$this->setShortDescription('Stormok');
 		$this->setLongDescription('Stormoks verwenden die neusten Prinzipien der Tarnung und sind für normale Städte praktisch unsichtbar.
 			<br/>
