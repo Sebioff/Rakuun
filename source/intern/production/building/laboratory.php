@@ -40,25 +40,25 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 	public function getIronCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round(pow($this->getBaseIronCosts() * $level, EXP_FOR_COSTS));
+		return round(pow($this->getBaseIronCosts() * $level, self::EXP_FOR_COSTS));
 	}
 	
 	public function getBerylliumCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round(pow($this->getBaseBerylliumCosts() * $level, EXP_FOR_COSTS));
+		return round(pow($this->getBaseBerylliumCosts() * $level, self::EXP_FOR_COSTS));
 	}
 	
 	public function getEnergyCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round(pow($this->getBaseEnergyCosts() * $level, EXP_FOR_COSTS));
+		return round(pow($this->getBaseEnergyCosts() * $level, self::EXP_FOR_COSTS));
 	}
 	
 	public function getPeopleCostsForLevel($level = null) {
 		if ($level === null)
 			$level = $this->getLevel();
-		return round(pow($this->getBasePeopleCosts() * $level, EXP_FOR_COSTS));
+		return round(pow($this->getBasePeopleCosts() * $level, self::EXP_FOR_COSTS));
 	}
 }
 
