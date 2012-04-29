@@ -71,6 +71,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Found extends GUI_Panel {
 		$allianceBuildings = new DB_Record();
 		$allianceBuildings->alliance = $alliance;
 		Rakuun_DB_Containers::getAlliancesBuildingsContainer()->save($allianceBuildings);
+		$alliancehistory = new Rakuun_Intern_Alliance_History($user, $alliance->name, Rakuun_Intern_Alliance_History::TYPE_FOUND);
+		$alliancehistory->save();
 		DB_Connection::get()->commit();
 		$this->getModule()->redirect(App::get()->getInternModule()->getSubmodule('alliance')->getURL());
 	}

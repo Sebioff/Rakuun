@@ -8,6 +8,7 @@ class Rakuun_Intern_Alliance_History {
 	const TYPE_INVITATION = 4;
 	const TYPE_LEAVE = 5;
 	const TYPE_JOIN = 6;
+	const TYPE_FOUND = 7;
 	
 	public function __construct(Rakuun_DB_User $user, $alliancename, $type) {
 		$this->user = $user;
@@ -33,7 +34,8 @@ class Rakuun_Intern_Alliance_History {
 			self::TYPE_KICK => 'Rauswurf',
 			self::TYPE_INVITATION => 'Einladung',
 			self::TYPE_LEAVE => 'Austritt',
-			self::TYPE_JOIN => 'Beitritt'
+			self::TYPE_JOIN => 'Beitritt',
+			self::TYPE_JOIN => 'Gründung'
 		);
 	}
 }
