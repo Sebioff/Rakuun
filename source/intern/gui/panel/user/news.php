@@ -41,8 +41,8 @@ class Rakuun_Intern_GUI_Panel_User_News extends GUI_Panel {
 				}
 			}
 			
-			
-			if (Rakuun_User_Manager::getCurrentUser()->showGlobalBoardCount) {
+			// TODO reactivate this sometime once the counts can be done faster
+			if (false && Rakuun_User_Manager::getCurrentUser()->showGlobalBoardCount) {
 				// new global board posts
 				$postingsTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalPostingsContainer()->getTable();
 				$lastVisitTable = Rakuun_DB_Containers_Persistent::getBoardsGlobalLastVisitedContainer()->getTable();
