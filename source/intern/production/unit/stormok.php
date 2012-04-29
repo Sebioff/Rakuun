@@ -7,21 +7,17 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->setInternalName('stormok');
 		$this->setName('Stormok');
 		$this->setNamePlural('Stormoks');
-		$this->setBaseIronCosts(525);
-		$this->setBaseBerylliumCosts(525);
-		$this->setBaseEnergyCosts(550);
-		$this->setBasePeopleCosts(15);
-		$this->setBaseTimeCosts(17*60+30);
-		$this->setBaseAttackValue(15);
-		$this->setBaseDefenseValue(15);
-		$this->setBaseSpeed(20);
-		$this->setRessourceTransportCapacity(50);
+		$this->setBaseIronCosts(250);
+		$this->setBaseBerylliumCosts(750);
+		$this->setBaseEnergyCosts(500);
+		$this->setBasePeopleCosts(10);
+		$this->setBaseTimeCosts(15*60);
+		$this->setBaseAttackValue(10);
+		$this->setBaseDefenseValue(20);
+		$this->setBaseSpeed(3*60);
+		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
-		$this->addNeededBuilding('airport', 15);
-		$this->addNeededTechnology('antigravitation', 3);
-		$this->addNeededTechnology('jet', 1);
-		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
-		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_MOVE_OVER_WATER, true);
+		$this->addNeededBuilding('airport', 1);
 		$this->setShortDescription('Stormok');
 		$this->setLongDescription('Stormoks verwenden die neusten Prinzipien der Tarnung und sind für normale Städte praktisch unsichtbar.
 			<br/>
