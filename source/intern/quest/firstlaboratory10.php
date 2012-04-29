@@ -19,7 +19,7 @@ class Rakuun_Intern_Quest_FirstLaboratory10 extends Rakuun_Intern_Quest {
 	}
 	
 	public function getDescription() {
-		return 'Baue als Erster Forschungslabor Stufe 10!';
+		return 'Baue als Erster Forschungslabor Stufe 20!';
 	}
 	
 	public function getRewardDescription() {

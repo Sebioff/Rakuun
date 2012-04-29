@@ -35,13 +35,11 @@ class Rakuun_Intern_Event {
 		}
 		
 		// award quests
-		if ($record->eventType == self::EVENT_TYPE_BUILDING_PRODUCE) {
-			if ($internalName == 'laboratory') {
-				if ($record->level == 10) {
-					$quest = new Rakuun_Intern_Quest_FirstLaboratory10();
-					$quest->awardIfPossible($record->user);
-				}
-			}
+		if (($record->eventType == self::EVENT_TYPE_BUILDING_PRODUCE)
+			&& ($internalName == 'laboratory')
+			&& ($record->level == 20)) {
+				$quest = new Rakuun_Intern_Quest_FirstLaboratory10();
+				$quest->awardIfPossible($record->user);
 		}
 	}
 	
