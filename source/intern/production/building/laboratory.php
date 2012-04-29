@@ -1,7 +1,7 @@
 <?php
 
 class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Production_Building {
-	const RESEARCH_TIME_REDUCTION_PERCENT = 5;
+	const RESEARCH_TIME_REDUCTION_PERCENT = 2;
 	const EXP_FOR_COSTS = 1.1;
 	
 	public function __construct(DB_Record $dataSource = null) {
@@ -13,7 +13,7 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 		$this->setBaseBerylliumCosts(300);
 		$this->setBasePeopleCosts(30);
 		$this->setBaseTimeCosts(20*60);
-		$this->setMaximumLevel(19);
+		$this->setMaximumLevel(50);
 		$this->setShortDescription('Im Forschungslabor können neue Technologien, zum Beispiel zur Energiegewinnung oder für militärische Zwecke, erforscht werden.');
 		$this->setLongDescription('Forschungslaboratorien erm&ouml;glichen mit ihren Ger&auml;tschaften eine zielgerichtete Forschung.
 			<br/>
