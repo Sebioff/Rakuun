@@ -35,7 +35,7 @@ class Rakuun_Intern_Alliance_History {
 			self::TYPE_INVITATION => 'Einladung',
 			self::TYPE_LEAVE => 'Austritt',
 			self::TYPE_JOIN => 'Beitritt',
-			self::TYPE_JOIN => 'Gründung'
+			self::TYPE_FOUND => 'Gründung'
 		);
 	}
 }
