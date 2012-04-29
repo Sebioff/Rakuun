@@ -23,8 +23,10 @@
 Grundangriffskraft: <?= $unit->getBaseAttackValue(); ?>
 <br/>
 Grundverteidigungskraft: <?= $unit->getBaseDefenseValue(); ?>
-<br/>
-Geschwindigkeit: <?= Rakuun_Date::formatCountDown(1 + $unit->getSpeed()); ?> / Feld
+<? if ($unit->getSpeed() > 0): ?>
+	<br/>
+	Geschwindigkeit: <?= Rakuun_Date::formatCountDown(1 + $unit->getSpeed()); ?> / Feld
+<? endif; ?>
 <? if ($unit->getRessourceTransportCapacity(1) > 0): ?>
 	<br/>
 	Transportkapazität: <?= Text::formatNumber($unit->getRessourceTransportCapacity(1)); ?>
