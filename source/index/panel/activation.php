@@ -15,7 +15,7 @@ class Rakuun_Index_Panel_Activation extends GUI_Panel {
 			Rakuun_DB_Containers::getUserActivationContainer()->delete($activation);
 			// FIXME this is not quite ideal, the user might be locked for different reasons...
 			// unlock the user if neccessary (might be locked for not activating his account)
-			if ($activation->user->îsLocked())
+			if ($activation->user->isLocked())
 				Rakuun_User_Manager::unlock($activation->user);
 			$this->hasBeenActivated = true;
 		}

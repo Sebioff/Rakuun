@@ -20,6 +20,7 @@ class Rakuun_Intern_Production_Unit_Donany extends Rakuun_Intern_Production_Unit
 		$this->addNeededBuilding('airport', 15);
 		$this->addNeededTechnology('antigravitation', 3);
 		$this->addNeededTechnology('jet', 1);
+		$this->setAttribute(Rakuun_Intern_Production_Unit::ATTRIBUTE_MOVE_OVER_WATER, true);
 		$this->setShortDescription('Donany');
 		$this->setLongDescription('Donanys sind die allererste je gebaute Antigravitations-Kampfeinheit.
 			<br/>

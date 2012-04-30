@@ -195,11 +195,7 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 				foreach (Rakuun_Intern_Production_Factory::getAllUnits($army) as $unit) {
 					$totalCapacity += $unit->getRessourceTransportCapacity();
 				}
-				
-				$maxIronCapacity = $totalCapacity * $army->ironPriority / $totalPriority;
-				$maxBerylliumCapacity = $totalCapacity * $army->berylliumPriority / $totalPriority;
-				$maxEnergyCapacity = $totalCapacity * $army->energyPriority / $totalPriority;
-				
+
 				$options = array();
 				$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
 				$targetRessources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($army->target, $options);
