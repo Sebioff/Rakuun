@@ -78,8 +78,8 @@ class Rakuun_Intern_GUI_Panel_Production_Building extends Rakuun_Intern_GUI_Pane
 		DB_Connection::get()->beginTransaction();
 		$options = array();
 		$options['lock'] = DB_Container::LOCK_FOR_UPDATE;
-		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($building->getUser(), $options);
 		$building = $this->getProductionItem();
+		$ressources = Rakuun_DB_Containers::getRessourcesContainer()->selectByUserFirst($building->getUser(), $options);
 		$level = $building->getLevel();
 		// lower building level
 		/* has to be done first, see #682 */
