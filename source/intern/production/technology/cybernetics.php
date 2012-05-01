@@ -11,6 +11,7 @@ class Rakuun_Intern_Production_Technology_Cybernetics extends Rakuun_Intern_Prod
 		$this->setBaseEnergyCosts(1000);
 		$this->setBasePeopleCosts(1000);
 		$this->setBaseTimeCosts(60*60);
+		$this->addNeededBuilding('laboratory', 1);
 		$this->addNeededBuilding('barracks', 1);
 		$this->setMaximumLevel(3);
 		$this->setShortDescription('');
