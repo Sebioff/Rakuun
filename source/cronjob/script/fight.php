@@ -273,17 +273,13 @@ class Rakuun_Cronjob_Script_Fight extends Cronjob_Script {
 					$neededAttackForce = self::DESTRUCTION_NEEDED_FORCE_FOR_MAX;
 					$enemiesAtWar = false;
 					// only half of the attack force needed for maximum probability if there is war
-          if ($army->user->alliance) {
-            if ($army->target->alliance) {
-              $diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
-              if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR) {
-                $neededAttackForce /= 2;
-                $enemiesAtWar = true;
-              }
-            } else {
-              $enemiesAtWar = true;
-            }
-          }
+					if ($army->user->alliance && $army->target->alliance) {
+						$diplomacyRelation = $army->user->alliance->getDiplomacy($army->target->alliance);
+						if ($diplomacyRelation && $diplomacyRelation->type == Rakuun_Intern_GUI_Panel_Alliance_Diplomacy::RELATION_WAR) {
+							$neededAttackForce /= 2;
+							$enemiesAtWar = true;
+						}
+					}
 					$probability = self::DESTRUCTION_MAX_PROBABILITY / pow($neededAttackForce, 2) * pow($survivingAttackForce, 2);
 					if ($probability > self::DESTRUCTION_MAX_PROBABILITY)
 						$probability = self::DESTRUCTION_MAX_PROBABILITY;
