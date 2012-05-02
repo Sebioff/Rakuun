@@ -67,6 +67,10 @@ abstract class Rakuun_Intern_GUI_Panel_Shoutbox extends GUI_Panel_PageView {
 	}
 	
 	public function onSubmit() {
+		if (Rakuun_GameSecurity::get()->isInGroup(Rakuun_User_Manager::getCurrentUser(), Rakuun_GameSecurity::GROUP_DEMO)) {
+			$this->addError('Anonym darf nicht geshouted werden ;)');
+		}
+		
 		if ($this->hasErrors())
 			return;
 			
