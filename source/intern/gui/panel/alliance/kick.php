@@ -48,7 +48,8 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 					return;
 				}
 				// send information message to the user
-				$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', Rakuun_User_Manager::getCurrentUser()->alliance);
+				$alliance = Rakuun_User_Manager::getCurrentUser()->alliance;
+				$allianceLink = new Rakuun_GUI_Control_AllianceLink('alliancelink', $alliance);
 				$aktUserLink = new Rakuun_GUI_Control_UserLink('userlink', Rakuun_User_Manager::getCurrentUser());
 				$allianceModuleLink = new GUI_Control_Link('allianceslink', 'Allianzen', App::get()->getInternModule()->getSubmodule('alliance')->getURL());
 				$igm = new Rakuun_Intern_IGM('Kick aus Allianz', $user);
