@@ -124,12 +124,12 @@ abstract class Rakuun_Intern_Statistics {
 	}
 	
 	public static function noOfInactiveUsers() {
-		$options['conditions'][] = array('is_yimtay > ?', true);
+		$options['conditions'][] = array('is_yimtay = ?', true);
 		return Rakuun_DB_Containers::getUserContainer()->count($options);
 	}
 	
 	public static function noOfLoggedInUsers() {
-		$options['conditions'][] = array('is_online > ?', true);
+		$options['conditions'][] = array('is_online > ?', time() - Rakuun_Intern_Module::TIMEOUT_ISONLINE);
 		return Rakuun_DB_Containers::getUserContainer()->count($options);
 	}
 }
