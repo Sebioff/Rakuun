@@ -7,8 +7,8 @@ class Rakuun_Intern_Production_Unit_LaserRifleman extends Rakuun_Intern_Producti
 		$this->setInternalName('laser_rifleman');
 		$this->setName('Laserschütze');
 		$this->setNamePlural('Laserschützen');
-		$this->setBaseIronCosts(400);
-		$this->setBaseBerylliumCosts(600);
+		$this->setBaseIronCosts(600);
+		$this->setBaseBerylliumCosts(400);
 		$this->setBaseEnergyCosts(500);
 		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(20*60);

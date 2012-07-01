@@ -7,8 +7,8 @@ class Rakuun_Intern_Production_Unit_Inra extends Rakuun_Intern_Production_Unit {
 		$this->setInternalName('inra');
 		$this->setName('Infanterie-Rakuuraner');
 		$this->setNamePlural('Infanterie-Rakuuraner');
-		$this->setBaseIronCosts(250);
-		$this->setBaseBerylliumCosts(750);
+		$this->setBaseIronCosts(750);
+		$this->setBaseBerylliumCosts(250);
 		$this->setBaseEnergyCosts(500);
 		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(15*60);
