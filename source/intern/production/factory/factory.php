@@ -142,11 +142,13 @@ abstract class Rakuun_Intern_Production_Factory {
 		self::addTechnology('supercompression', 'Rakuun_Intern_Production_Technology_Supercompression');
 		self::addTechnology('plasmatechnology', 'Rakuun_Intern_Production_Technology_Plasmatechnology');
 		self::addTechnology('cybernetics', 'Rakuun_Intern_Production_Technology_Cybernetics');
+		self::addTechnology('sensor_technology', 'Rakuun_Intern_Production_Technology_SensorTechnology');
 	}
 	
 	private static function generateUnitList() {
 		self::addUnit('inra', 'Rakuun_Intern_Production_Unit_Inra');
 		self::addUnit('laser_rifleman', 'Rakuun_Intern_Production_Unit_LaserRifleman');
+		self::addUnit('lorica', 'Rakuun_Intern_Production_Unit_Lorica');
 		self::addUnit('minigani', 'Rakuun_Intern_Production_Unit_Minigani');
 		self::addUnit('mandrogani', 'Rakuun_Intern_Production_Unit_Mandrogani');
 		self::addUnit('buhogani', 'Rakuun_Intern_Production_Unit_Buhogani');
@@ -156,7 +158,6 @@ abstract class Rakuun_Intern_Production_Factory {
 		self::addUnit('laser_turret', 'Rakuun_Intern_Production_Unit_LaserTurret');
 		self::addUnit('spydrone', 'Rakuun_Intern_Production_Unit_Spydrone');
 		self::addUnit('cloaked_spydrone', 'Rakuun_Intern_Production_Unit_CloakedSpydrone');
-		self::addUnit('lorica', 'Rakuun_Intern_Production_Unit_Lorica');
 	}
 }
 

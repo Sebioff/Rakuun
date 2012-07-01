@@ -390,6 +390,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `technologies` (
   `supercompression` mediumint(9) NOT NULL,
   `plasmatechnology` mediumint(9) NOT NULL,
   `cybernetics` mediumint(9) NOT NULL,
+  `sensor_technology` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;';
@@ -471,6 +472,7 @@ $queries[] = 'CREATE TABLE IF NOT EXISTS `armies_technologies` (
   `supercompression` mediumint(9) NOT NULL,
   `plasmatechnology` mediumint(9) NOT NULL,
   `cybernetics` mediumint(9) NOT NULL,
+  `sensor_technology` mediumint(9) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;';
 
