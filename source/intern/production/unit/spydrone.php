@@ -14,6 +14,7 @@ class Rakuun_Intern_Production_Unit_Spydrone extends Rakuun_Intern_Production_Un
 		$this->setBaseTimeCosts(3*60);
 		$this->setBaseSpeed(15);
 		$this->addNeededBuilding('military_base', 1);
+		$this->addNeededTechnology('sensor_technology', 1);
 		$this->setAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK, true);
 		$this->setShortDescription('Spionagesonde');
 		$this->setLongDescription('Spionagesonden beruhen auf der ziemlich alten Technik des Etherstreams.
