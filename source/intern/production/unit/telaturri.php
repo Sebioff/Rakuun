@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated
+ */
 class Rakuun_Intern_Production_Unit_Telaturri extends Rakuun_Intern_Production_Unit {
 	public function __construct(DB_Record $dataSource = null) {
 		parent::__construct($dataSource);

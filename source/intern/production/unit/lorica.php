@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_Lorica extends Rakuun_Intern_Production_Unit
 		$this->setBaseTimeCosts(17*60+30);
 		$this->setBaseAttackValue(15);
 		$this->setBaseDefenseValue(15);
-		$this->setBaseSpeed(3*60+30);
+		$this->setBaseSpeed(160);
 		$this->setRessourceTransportCapacity(1000);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_FOOTSOLDIER);
 		$this->addNeededBuilding('barracks', 15);

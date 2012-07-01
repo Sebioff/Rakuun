@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_Minigani extends Rakuun_Intern_Production_Un
 		$this->setBaseTimeCosts(15*60);
 		$this->setBaseAttackValue(10);
 		$this->setBaseDefenseValue(20);
-		$this->setBaseSpeed(3*60);
+		$this->setBaseSpeed(160);
 		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
 		$this->addNeededBuilding('tank_factory', 1);

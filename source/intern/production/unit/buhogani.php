@@ -14,7 +14,7 @@ class Rakuun_Intern_Production_Unit_Buhogani extends Rakuun_Intern_Production_Un
 		$this->setBaseTimeCosts(20*60);
 		$this->setBaseAttackValue(20);
 		$this->setBaseDefenseValue(10);
-		$this->setBaseSpeed(240);
+		$this->setBaseSpeed(220);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
 		$this->addNeededBuilding('tank_factory', 10);
