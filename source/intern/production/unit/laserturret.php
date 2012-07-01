@@ -12,7 +12,7 @@ class Rakuun_Intern_Production_Unit_LaserTurret extends Rakuun_Intern_Production
 		$this->setBaseEnergyCosts(500);
 		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(20*60);
-		$this->setBaseDefenseValue(20);
+		$this->setBaseDefenseValue(22);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY);
 		$this->addNeededBuilding('military_base', 1);
 		$this->addNeededBuilding('city_wall', 1);

@@ -12,8 +12,8 @@ class Rakuun_Intern_Production_Unit_Stormok extends Rakuun_Intern_Production_Uni
 		$this->setBaseEnergyCosts(500);
 		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(15*60);
-		$this->setBaseAttackValue(10);
-		$this->setBaseDefenseValue(20);
+		$this->setBaseAttackValue(8);
+		$this->setBaseDefenseValue(22);
 		$this->setBaseSpeed(160);
 		$this->setRessourceTransportCapacity(100);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
