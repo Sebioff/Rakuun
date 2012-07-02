@@ -12,6 +12,7 @@ class Rakuun_Intern_Production_Technology_LightWeaponry extends Rakuun_Intern_Pr
 		$this->setBasePeopleCosts(1000);
 		$this->setBaseTimeCosts(60*60);
 		$this->addNeededBuilding('laboratory', 1);
+		$this->addNeededBuilding('tank_factory', 1);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Grundwissen der Waffenanwendung, das für die Produktion schwächerer Militäreinheiten benötigt wird.');
 		$this->setLongDescription('Leichte Waffentechnik konzentriert sich auf schnelle Waffen, die in kürzester Zeit möglichst zielgenau kleinere Projektile verschießen.
