@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Technology_Plasmatechnology extends Rakuun_Intern
 		
 		$this->setInternalName('plasmatechnology');
 		$this->setName('Plasmatechnik');
-		$this->setBaseIronCosts(20000);
-		$this->setBaseBerylliumCosts(30000);
-		$this->setBaseEnergyCosts(10000);
-		$this->setBasePeopleCosts(10000);
-		$this->setBaseTimeCosts(5*24*60*60);
+		$this->setBaseIronCosts(2000);
+		$this->setBaseBerylliumCosts(3000);
+		$this->setBaseEnergyCosts(1000);
+		$this->setBasePeopleCosts(1000);
+		$this->setBaseTimeCosts(60*60);
 		$this->addNeededBuilding('laboratory', 10);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('');

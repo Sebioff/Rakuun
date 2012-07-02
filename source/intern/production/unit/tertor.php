@@ -17,8 +17,7 @@ class Rakuun_Intern_Production_Unit_Tertor extends Rakuun_Intern_Production_Unit
 		$this->setBaseSpeed(220);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_AIRCRAFT);
-		$this->addNeededBuilding('airport', 10);
-		$this->addNeededTechnology('antigravitation', 2);
+		$this->addNeededBuilding('airport', 1);
 		$this->addNeededTechnology('plasmatechnology', 1);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Tertor');

@@ -17,8 +17,7 @@ class Rakuun_Intern_Production_Unit_Buhogani extends Rakuun_Intern_Production_Un
 		$this->setBaseSpeed(220);
 		$this->setRessourceTransportCapacity(50);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_VEHICLE);
-		$this->addNeededBuilding('tank_factory', 10);
-		$this->addNeededTechnology('light_plating', 2);
+		$this->addNeededBuilding('tank_factory', 1);
 		$this->addNeededTechnology('light_weaponry', 1);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Buhogani');
