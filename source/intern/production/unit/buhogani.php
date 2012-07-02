@@ -7,8 +7,8 @@ class Rakuun_Intern_Production_Unit_Buhogani extends Rakuun_Intern_Production_Un
 		$this->setInternalName('buhogani');
 		$this->setName('Buhogani');
 		$this->setNamePlural('Buhoganis');
-		$this->setBaseIronCosts(100);
-		$this->setBaseBerylliumCosts(900);
+		$this->setBaseIronCosts(200);
+		$this->setBaseBerylliumCosts(800);
 		$this->setBaseEnergyCosts(500);
 		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(20*60);
