@@ -45,7 +45,7 @@ class Rakuun_Intern_GUI_Panel_User_ShowProfile extends GUI_Panel {
 		$eternalUser = Rakuun_DB_Containers::getUserEternalUserAssocContainer()->selectByUserFirst($this->user);
 		if ($eternalUser) {
 			$options = array();
-			$options['order'] = 'round ASC';
+			$options['order'] = 'round DESC';
 			$linkedAchievements = Rakuun_DB_Containers_Persistent::getEternalUserAchievementContainer()->selectByEternalUser($eternalUser->eternalUser, $options);
 			foreach ($linkedAchievements as $achievement) {
 				$roundInformation = Rakuun_DB_Containers_Persistent::getRoundInformationContainer()->selectByPK($achievement->round);
