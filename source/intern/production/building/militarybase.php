@@ -8,11 +8,11 @@ class Rakuun_Intern_Production_Building_MilitaryBase extends Rakuun_Intern_Produ
 		
 		$this->setInternalName('military_base');
 		$this->setName('Militärstützpunkt');
-		$this->setBaseIronCosts(1500);
-		$this->setBaseBerylliumCosts(1500);
-		$this->setBaseEnergyCosts(1500);
-		$this->setBasePeopleCosts(20);
-		$this->setBaseTimeCosts(15*60);
+		$this->setBaseIronCosts(1200);
+		$this->setBaseBerylliumCosts(1200);
+		$this->setBaseEnergyCosts(1200);
+		$this->setBasePeopleCosts(16);
+		$this->setBaseTimeCosts(12*60);
 		$this->setMaximumLevel(50);
 		$this->setShortDescription('Der Militärstützpunkt ist sowohl Versammlungsort aller militärischen Einheiten, als auch der "Bauplatz" (und somit eine Grundvoraussetzung) für alle militärischen Gebäude.');
 		$this->setLongDescription('Der Militärstützpunkt ist der Platz, auf dem alle militärischen Gebäude stehen.

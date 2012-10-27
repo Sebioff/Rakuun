@@ -10,10 +10,10 @@ class Rakuun_Intern_Production_Unit_Telaturri extends Rakuun_Intern_Production_U
 		$this->setInternalName('telaturri');
 		$this->setName('Telaturri');
 		$this->setNamePlural('Telaturris');
-		$this->setBaseIronCosts(800);
-		$this->setBaseBerylliumCosts(300);
-		$this->setBasePeopleCosts(10);
-		$this->setBaseTimeCosts(15*60);
+		$this->setBaseIronCosts(640);
+		$this->setBaseBerylliumCosts(240);
+		$this->setBasePeopleCosts(8);
+		$this->setBaseTimeCosts(12*60);
 		$this->setBaseDefenseValue(40);
 		$this->setUnitType(Rakuun_Intern_Production_Unit::TYPE_STATIONARY);
 		$this->addNeededBuilding('military_base', 4);

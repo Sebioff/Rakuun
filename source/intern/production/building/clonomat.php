@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Building_Clonomat extends Rakuun_Intern_Productio
 		
 		$this->setInternalName('clonomat');
 		$this->setName('Clon-O-Mat');
-		$this->setBaseIronCosts(550);
-		$this->setBaseBerylliumCosts(400);
-		$this->setBaseEnergyCosts(1200);
+		$this->setBaseIronCosts(440);
+		$this->setBaseBerylliumCosts(320);
+		$this->setBaseEnergyCosts(1000);
 		$this->setBasePeopleCosts(4);
-		$this->setBaseTimeCosts(5*60);
+		$this->setBaseTimeCosts(4*60);
 		$this->addNeededBuilding('ironmine', 4);
 		$this->addNeededBuilding('berylliummine', 3);
 		$this->addNeededBuilding('hydropower_plant', 3);

@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Building_SensorBay extends Rakuun_Intern_Producti
 		
 		$this->setInternalName('sensor_bay');
 		$this->setName('Sensorfeld');
-		$this->setBaseIronCosts(1500);
-		$this->setBaseBerylliumCosts(1500);
-		$this->setBaseEnergyCosts(1000);
-		$this->setBasePeopleCosts(20);
-		$this->setBaseTimeCosts(10*60);
+		$this->setBaseIronCosts(1200);
+		$this->setBaseBerylliumCosts(1200);
+		$this->setBaseEnergyCosts(800);
+		$this->setBasePeopleCosts(16);
+		$this->setBaseTimeCosts(8*60);
 		$this->addNeededTechnology('sensor_technology', 2);
 		$this->setShortDescription('Das Sensorfeld dient dem Entdecken von feindlichen Tarneinheiten, die sich auf dem Weg zu deiner Stadt befinden.<br />Je höher das Sensorfeld ausgebaut ist, desto früher können getarnte Einheiten aufgespürt werden.');
 		$this->setLongDescription('Sensorfelder orten getarnte Angreifer.

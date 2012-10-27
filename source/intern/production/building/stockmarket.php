@@ -11,11 +11,11 @@ class Rakuun_Intern_Production_Building_StockMarket extends Rakuun_Intern_Produc
 		
 		$this->setInternalName('stock_market');
 		$this->setName('Börse');
-		$this->setBaseIronCosts(4000);
-		$this->setBaseBerylliumCosts(3000);
-		$this->setBaseEnergyCosts(2000);
-		$this->setBasePeopleCosts(300);
-		$this->setBaseTimeCosts(90*60);
+		$this->setBaseIronCosts(3200);
+		$this->setBaseBerylliumCosts(2400);
+		$this->setBaseEnergyCosts(1600);
+		$this->setBasePeopleCosts(240);
+		$this->setBaseTimeCosts(80*60);
 		$this->addNeededBuilding('hydropower_plant', 3);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setMaximumLevel(10);

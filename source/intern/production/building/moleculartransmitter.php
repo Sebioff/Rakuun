@@ -9,10 +9,10 @@ class Rakuun_Intern_Production_Building_Moleculartransmitter extends Rakuun_Inte
 		
 		$this->setInternalName('moleculartransmitter');
 		$this->setName('Molekulartransmitter');
-		$this->setBaseIronCosts(1000);
-		$this->setBaseBerylliumCosts(1000);
-		$this->setBasePeopleCosts(100);
-		$this->setBaseTimeCosts(15*60);
+		$this->setBaseIronCosts(800);
+		$this->setBaseBerylliumCosts(800);
+		$this->setBasePeopleCosts(80);
+		$this->setBaseTimeCosts(12*60);
 		$this->addNeededBuilding('hydropower_plant', 5);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_NotInNoobProtection());
 		$this->setShortDescription('Der Molekulartransmitter ermöglicht es, auf einfachem Weg direkt mit anderen Rakuuranern zu handeln.');

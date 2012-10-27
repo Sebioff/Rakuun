@@ -6,9 +6,9 @@ class Rakuun_Intern_Production_Building_Ironmine extends Rakuun_Intern_Productio
 		
 		$this->setInternalName('ironmine');
 		$this->setName('Eisenmine');
-		$this->setBaseIronCosts(300);
-		$this->setBaseBerylliumCosts(200);
-		$this->setBasePeopleCosts(12);
+		$this->setBaseIronCosts(240);
+		$this->setBaseBerylliumCosts(180);
+		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(3*60);
 		$this->setBaseIronProduction(1);
 		$this->setMinimumLevel(1);

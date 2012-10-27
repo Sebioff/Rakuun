@@ -8,10 +8,10 @@ class Rakuun_Intern_Production_Building_CityWall extends Rakuun_Intern_Productio
 		
 		$this->setInternalName('city_wall');
 		$this->setName('Stadtmauer');
-		$this->setBaseIronCosts(9000);
-		$this->setBaseEnergyCosts(5000);
-		$this->setBasePeopleCosts(200);
-		$this->setBaseTimeCosts(120*60);
+		$this->setBaseIronCosts(7200);
+		$this->setBaseEnergyCosts(4000);
+		$this->setBasePeopleCosts(160);
+		$this->setBaseTimeCosts(100*60);
 		$this->addNeededBuilding('ironmine', 10);
 		$this->addNeededBuilding('berylliummine', 10);
 		$this->addNeededBuilding('clonomat', 1);

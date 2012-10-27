@@ -6,10 +6,10 @@ class Rakuun_Intern_Production_Building_ShieldGenerator extends Rakuun_Intern_Pr
 		
 		$this->setInternalName('shield_generator');
 		$this->setName('Schildgenerator');
-		$this->setBaseIronCosts(50000);
-		$this->setBaseBerylliumCosts(50000);
-		$this->setBaseEnergyCosts(30000);
-		$this->setBasePeopleCosts(5000);
+		$this->setBaseIronCosts(40000);
+		$this->setBaseBerylliumCosts(40000);
+		$this->setBaseEnergyCosts(24000);
+		$this->setBasePeopleCosts(4000);
 		$this->setBaseTimeCosts(4*60*60);
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_GotDatabases());
 		$this->addNeededRequirement(new Rakuun_Intern_Production_Requirement_Meta_GotSpacePort());

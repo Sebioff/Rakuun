@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Building_House extends Rakuun_Intern_Production_B
 		
 		$this->setInternalName('house');
 		$this->setName('Wohnhaus');
-		$this->setBaseIronCosts(2250);
-		$this->setBaseBerylliumCosts(750);
-		$this->setBasePeopleCosts(150);
+		$this->setBaseIronCosts(1800);
+		$this->setBaseBerylliumCosts(600);
+		$this->setBasePeopleCosts(120);
 		$this->setBaseTimeCosts(8*60);
-		$this->setBaseCapacity(4000);
+		$this->setBaseCapacity(4800);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Jedes Wohnhaus erhöht die Anzahl der Bürger, die in der Stadt wohnen können.');
 		$this->setLongDescription('Wohnhäuser sind größere Gebäude mit einer großen Anzahl Standard-Wohneinheiten.

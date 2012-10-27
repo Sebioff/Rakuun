@@ -8,11 +8,11 @@ class Rakuun_Intern_Production_Building_TankFactory extends Rakuun_Intern_Produc
 		
 		$this->setInternalName('tank_factory');
 		$this->setName('Panzerfabrik');
-		$this->setBaseIronCosts(1500);
-		$this->setBaseBerylliumCosts(1500);
-		$this->setBaseEnergyCosts(1500);
-		$this->setBasePeopleCosts(20);
-		$this->setBaseTimeCosts(10*60);
+		$this->setBaseIronCosts(1200);
+		$this->setBaseBerylliumCosts(1200);
+		$this->setBaseEnergyCosts(1200);
+		$this->setBasePeopleCosts(16);
+		$this->setBaseTimeCosts(8*60);
 		$this->setMaximumLevel(50);
 		$this->addNeededBuilding('military_base', 1);
 		$this->setShortDescription('Die Panzerfabrik ermöglicht die Produktion von Panzern.<br />Ein Ausbau bewirkt eine schnellere Produktion.');

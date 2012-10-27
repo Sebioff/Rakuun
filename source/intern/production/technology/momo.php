@@ -8,11 +8,11 @@ class Rakuun_Intern_Production_Technology_Momo extends Rakuun_Intern_Production_
 		
 		$this->setInternalName('momo');
 		$this->setName('MoMo');
-		$this->setBaseIronCosts(1000);
-		$this->setBaseBerylliumCosts(600);
-		$this->setBaseEnergyCosts(400);
-		$this->setBasePeopleCosts(50);
-		$this->setBaseTimeCosts(30*60);
+		$this->setBaseIronCosts(800);
+		$this->setBaseBerylliumCosts(480);
+		$this->setBaseEnergyCosts(320);
+		$this->setBasePeopleCosts(40);
+		$this->setBaseTimeCosts(24*60);
 		$this->addNeededBuilding('laboratory', 3);
 		$this->setMaximumLevel(19);
 		$this->setShortDescription('MoMo (Momentum Modularrecycling) nutzt eine komplizierte Technik, die eine Beschleunigung der Bauvorgänge ermöglicht.');

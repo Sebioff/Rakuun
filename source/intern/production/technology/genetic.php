@@ -6,10 +6,10 @@ class Rakuun_Intern_Production_Technology_Genetic extends Rakuun_Intern_Producti
 		
 		$this->setInternalName('genetic');
 		$this->setName('Gentechnik');
-		$this->setBaseIronCosts(800);
-		$this->setBaseBerylliumCosts(800);
-		$this->setBaseEnergyCosts(1000);
-		$this->setBaseTimeCosts(720*60);
+		$this->setBaseIronCosts(640);
+		$this->setBaseBerylliumCosts(640);
+		$this->setBaseEnergyCosts(800);
+		$this->setBaseTimeCosts(570*60);
 		$this->addNeededBuilding('laboratory', 2);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Durch die Gentechnik können Clon-O-Maten gebaut werden, welche die "Produktion" von Rakuuranern erhöhen.');

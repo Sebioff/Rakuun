@@ -9,10 +9,10 @@ class Rakuun_Intern_Production_Building_Laboratory extends Rakuun_Intern_Product
 		
 		$this->setInternalName('laboratory');
 		$this->setName('Forschungslabor');
-		$this->setBaseIronCosts(600);
-		$this->setBaseBerylliumCosts(300);
-		$this->setBasePeopleCosts(30);
-		$this->setBaseTimeCosts(20*60);
+		$this->setBaseIronCosts(480);
+		$this->setBaseBerylliumCosts(240);
+		$this->setBasePeopleCosts(24);
+		$this->setBaseTimeCosts(16*60);
 		$this->setMaximumLevel(50);
 		$this->setShortDescription('Im Forschungslabor können neue Technologien, zum Beispiel zur Energiegewinnung oder für militärische Zwecke, erforscht werden.');
 		$this->setLongDescription('Forschungslaboratorien erm&ouml;glichen mit ihren Ger&auml;tschaften eine zielgerichtete Forschung.

@@ -6,9 +6,9 @@ class Rakuun_Intern_Production_Building_HydropowerPlant extends Rakuun_Intern_Pr
 		
 		$this->setInternalName('hydropower_plant');
 		$this->setName('Wasserkraftwerk');
-		$this->setBaseIronCosts(125);
-		$this->setBaseBerylliumCosts(100);
-		$this->setBasePeopleCosts(15);
+		$this->setBaseIronCosts(100);
+		$this->setBaseBerylliumCosts(80);
+		$this->setBasePeopleCosts(12);
 		$this->setBaseTimeCosts(3*60);
 		$this->addNeededTechnology('hydropower', 1);
 		$this->setBaseEnergyProduction(1);

@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Building_Energystore extends Rakuun_Intern_Produc
 		
 		$this->setInternalName('energystore');
 		$this->setName('Energiespeicher');
-		$this->setBaseIronCosts(1800);
-		$this->setBaseBerylliumCosts(1800);
-		$this->setBasePeopleCosts(120);
-		$this->setBaseTimeCosts(9*60);
-		$this->setBaseCapacity(20000);
+		$this->setBaseIronCosts(1500);
+		$this->setBaseBerylliumCosts(1500);
+		$this->setBasePeopleCosts(100);
+		$this->setBaseTimeCosts(8*60);
+		$this->setBaseCapacity(24000);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Durch den Ausbau des Energiespeichers wird die Menge der speicherbaren Energie erhöht.');
 		$this->setLongDescription('Ein Energiespeicher besteht aus einer gigantischen Anzahl hochkapazitärer Kondensatoren in einer magnetisch isolierenden Hülle und wird speziell zum Speichern von Energie gebaut.');

@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Building_Berylliumstore extends Rakuun_Intern_Pro
 		
 		$this->setInternalName('berylliumstore');
 		$this->setName('Berylliumlager');
-		$this->setBaseIronCosts(1200);
-		$this->setBaseBerylliumCosts(1500);
-		$this->setBasePeopleCosts(90);
-		$this->setBaseTimeCosts(9*60);
-		$this->setBaseCapacity(20000);
+		$this->setBaseIronCosts(1000);
+		$this->setBaseBerylliumCosts(1200);
+		$this->setBasePeopleCosts(80);
+		$this->setBaseTimeCosts(8*60);
+		$this->setBaseCapacity(24000);
 		$this->setMinimumLevel(1);
 		$this->setShortDescription('Durch den Ausbau des Berylliumlagers wird die Menge des lagerbaren Berylliums erhöht.');
 		$this->setLongDescription('Ein Berylliumlager ist ein Komplex mit vielen luftgepolsterten Kammern, der speziell zum Lagern von Beryllium geeignet ist.');

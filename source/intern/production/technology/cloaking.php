@@ -6,11 +6,11 @@ class Rakuun_Intern_Production_Technology_Cloaking extends Rakuun_Intern_Product
 		
 		$this->setInternalName('cloaking');
 		$this->setName('Tarnung');
-		$this->setBaseIronCosts(25000);
-		$this->setBaseBerylliumCosts(25000);
-		$this->setBaseEnergyCosts(25000);
-		$this->setBasePeopleCosts(15000);
-		$this->setBaseTimeCosts(7*24*60*60+12*60*60); //7d 12h 00min
+		$this->setBaseIronCosts(20000);
+		$this->setBaseBerylliumCosts(20000);
+		$this->setBaseEnergyCosts(20000);
+		$this->setBasePeopleCosts(12000);
+		$this->setBaseTimeCosts(6*24*60*60);
 		$this->addNeededBuilding('laboratory', 15);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Die Tarnung ermöglicht den Bau getarnter Einheiten.');

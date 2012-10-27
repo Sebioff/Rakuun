@@ -6,9 +6,9 @@ class Rakuun_Intern_Production_Building_Berylliummine extends Rakuun_Intern_Prod
 		
 		$this->setInternalName('berylliummine');
 		$this->setName('Berylliummine');
-		$this->setBaseIronCosts(200);
-		$this->setBaseBerylliumCosts(300);
-		$this->setBasePeopleCosts(12);
+		$this->setBaseIronCosts(180);
+		$this->setBaseBerylliumCosts(240);
+		$this->setBasePeopleCosts(10);
 		$this->setBaseTimeCosts(3*60);
 		$this->setBaseBerylliumProduction(1);
 		$this->setMinimumLevel(1);

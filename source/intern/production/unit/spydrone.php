@@ -7,12 +7,12 @@ class Rakuun_Intern_Production_Unit_Spydrone extends Rakuun_Intern_Production_Un
 		$this->setInternalName('spydrone');
 		$this->setName('Spionagesonde');
 		$this->setNamePlural('Spionagesonden');
-		$this->setBaseIronCosts(100);
-		$this->setBaseBerylliumCosts(100);
-		$this->setBaseEnergyCosts(100);
+		$this->setBaseIronCosts(80);
+		$this->setBaseBerylliumCosts(80);
+		$this->setBaseEnergyCosts(80);
 		$this->setBasePeopleCosts(1);
 		$this->setBaseTimeCosts(3*60);
-		$this->setBaseSpeed(15);
+		$this->setBaseSpeed(8);
 		$this->addNeededBuilding('military_base', 1);
 		$this->addNeededTechnology('sensor_technology', 1);
 		$this->setAttribute(Rakuun_Intern_Production_Base::ATTRIBUTE_INDESTRUCTIBLE_BY_ATTACK, true);

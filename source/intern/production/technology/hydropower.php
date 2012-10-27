@@ -6,9 +6,9 @@ class Rakuun_Intern_Production_Technology_Hydropower extends Rakuun_Intern_Produ
 		
 		$this->setInternalName('hydropower');
 		$this->setName('Wassertechnik');
-		$this->setBaseIronCosts(2000);
-		$this->setBaseBerylliumCosts(2500);
-		$this->setBaseTimeCosts(720*60);
+		$this->setBaseIronCosts(1600);
+		$this->setBaseBerylliumCosts(2000);
+		$this->setBaseTimeCosts(570*60);
 		$this->addNeededBuilding('laboratory', 1);
 		$this->setMaximumLevel(1);
 		$this->setShortDescription('Wird zur Energiegewinnung benötigt.');
