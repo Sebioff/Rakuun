@@ -1,6 +1,24 @@
 <?php
 
 /**
+ * @package Rakuun Browsergame
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
+ * @license GNU/GPL, see license.txt
+ * This file is part of Rakuun.
+ *
+ * Rakuun is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Rakuun is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rakuun. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * @property Rakuun_DB_Ressources $ressources
  * @property Rakuun_DB_Buildings $buildings
  * @property Rakuun_DB_Technologies $technologies
@@ -49,43 +67,6 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	
 	protected function getNameUncolored() {
 		return parent::__get('name');
-	}
-	
-	/**
-	 * Translates a name containing color codes into an actually colored name.
-	 */
-	protected function colorName($nameColored) {
-		$patterns = array(
-			'%\[darkblue\](.*?)\[/darkblue\]%',
-			'%\[lime\](.*?)\[/lime\]%',
-			'%\[limeblue\](.*?)\[/limeblue\]%',
-			'%\[purple\](.*?)\[/purple\]%',
-			'%\[pink\](.*?)\[/pink\]%',
-			'%\[brown\](.*?)\[/brown\]%',
-			'%\[gold\](.*?)\[/gold\]%',
-			'%\[orange\](.*?)\[/orange\]%',
-			'%\[lightgrey\](.*?)\[/lightgrey\]%',
-			'%\[darkgrey\](.*?)\[/darkgrey\]%',
-			'%\[white\](.*?)\[/white\]%',
-			'%\[(\#[\da-fA-F]{6})\](.*?)\[/\1\]%'
-		);
-		
-		$replacements = array(
-			'<span style="color:#000080">$1</span>',
-			'<span style="color:#00FF00">$1</span>',
-			'<span style="color:#00FFFF">$1</span>',
-			'<span style="color:#800080">$1</span>',
-			'<span style="color:#FF00FF">$1</span>',
-			'<span style="color:#800000">$1</span>',
-			'<span style="color:#808000">$1</span>',
-			'<span style="color:#FF7F00">$1</span>',
-			'<span style="color:#C0C0C0">$1</span>',
-			'<span style="color:#808080">$1</span>',
-			'<span style="color:#FFFFFF">$1</span>',
-			'<span style="color:$1">$2</span>'
-		);
-		
-		return preg_replace($patterns, $replacements, $nameColored);
 	}
 	
 	/**
@@ -343,7 +324,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 	 * @return reached level of a user. level is equivalent to no of skillpoints
 	 */
 	public function getLevel() {
-		return ($this->xp / 100); 
+		return ($this->xp / 100);
 	}
 	
 	/**
@@ -354,7 +335,7 @@ class Rakuun_DB_User extends DB_Record implements Rakuun_Intern_Production_Owner
 		
 		if ($property == 'name') {
 			if ($nameColored = parent::__get('nameColored')) {
-				$value = $this->colorName($nameColored);
+				$value = Rakuun_Text::colorUsername($nameColored);
 			}
 		}
 		

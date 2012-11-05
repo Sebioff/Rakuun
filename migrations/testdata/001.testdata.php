@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * @package Rakuun Browsergame
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
+ * @license GNU/GPL, see license.txt
+ * This file is part of Rakuun.
+ *
+ * Rakuun is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Rakuun is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rakuun. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 // USER "Test"
 $queries[] = "INSERT INTO `users` (`id`, `name`, `name_colored`, `city_name`, `password`, `salt`, `mail`, `skin`, `city_x`, `city_y`) VALUES
 (1, 'Test', '[gold]Test[/gold]', 'Teststadt', '362d538ca473183259014418311e241a', 'e57fd64014b627dca55b3ec1f98d7b6b', 'sebioff@gmx.de', 'tech', '10', '15');";

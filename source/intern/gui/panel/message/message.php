@@ -1,6 +1,24 @@
 <?php
 
 /**
+ * @package Rakuun Browsergame
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
+ * @license GNU/GPL, see license.txt
+ * This file is part of Rakuun.
+ *
+ * Rakuun is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Rakuun is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rakuun. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Displays a single IGM
  */
 class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
@@ -42,7 +60,7 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 				$this->addPanel(new GUI_Control_Submitbutton('report', 'Melden!'));
 			}
 		}
-		switch ($this->message->type) { 
+		switch ($this->message->type) {
 			case Rakuun_Intern_IGM::TYPE_PRIVATE:
 				//oh here cann be wonderful a sponsor feature: adding signature, configurable in profile
 				break;
@@ -81,14 +99,14 @@ class Rakuun_Intern_GUI_Panel_Message extends GUI_Panel {
 	
 	public function onReport() {
 		$this->message->isReported = true;
-		Rakuun_DB_Containers::getMessagesContainer()->save($this->message);		
+		Rakuun_DB_Containers::getMessagesContainer()->save($this->message);
 	}
 	
 	private function hasNoPrivilege($user) {
 		$userPK = $user->getPK();
 		$msgUserPK = $this->message->user->getPK();
 		$has_teamprivilege = Rakuun_TeamSecurity::get()->hasPrivilege($user, Rakuun_TeamSecurity::PRIVILEGE_REPORTEDMESSAGES);
-		return $has_teamprivilege != "1" 
+		return $has_teamprivilege != "1"
 				&& $msgUserPK != $userPK && (!$this->message->sender || $this->message->sender->getPK() != $userPK);
 	}
 }

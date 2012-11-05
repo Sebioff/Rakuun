@@ -1,6 +1,24 @@
 <?php
 
 /**
+ * @package Rakuun Browsergame
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
+ * @license GNU/GPL, see license.txt
+ * This file is part of Rakuun.
+ *
+ * Rakuun is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Rakuun is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rakuun. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Displays all or one specific board.
  */
 abstract class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
@@ -51,7 +69,7 @@ abstract class Rakuun_Intern_GUI_Panel_Board extends GUI_Panel_PageView {
 			} else {
 				$this->addPanel(new GUI_Control_Link('moderatelink', '-moderieren-', $module->getUrl(array('moderate' => $user->getPK()))));
 			}
-		}	
+		}
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_List('board', $this->config, $boards));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_AddBoard('addboard', $this->config));
 		$this->addPanel(new Rakuun_Intern_GUI_Panel_Board_MarkRead('markread', $this->config));

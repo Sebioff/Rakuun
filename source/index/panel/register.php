@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * @package Rakuun Browsergame
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
+ * @license GNU/GPL, see license.txt
+ * This file is part of Rakuun.
+ *
+ * Rakuun is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Rakuun is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rakuun. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 class Rakuun_Index_Panel_Register extends GUI_Panel {
 	private static $reservedNames = array('SYSTEM', 'YIMTAY', 'SUPPORT', 'MULTIHUNTER', 'ADMIN');
 	private $restrictedChars = '%@<>,#\'"';
@@ -12,7 +30,7 @@ class Rakuun_Index_Panel_Register extends GUI_Panel {
 		$username->addValidator(new GUI_Validator_RangeLength(2, 25));
 		$username->addValidator(new GUI_Validator_Mandatory());
 		$username->addValidator(new Rakuun_GUI_Validator_Name());
-		$username->setFocus();	
+		$username->setFocus();
 		$this->addPanel($password = new GUI_Control_PasswordBox('password', null, 'Passwort'));
 		$password->addValidator(new GUI_Validator_Mandatory());
 		$this->addPanel($password_repeat = new GUI_Control_PasswordBox('password_repeat', null, 'Passwort (Wiederholung)'));

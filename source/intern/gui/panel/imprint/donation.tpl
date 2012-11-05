@@ -1,3 +1,22 @@
+<?
+/**
+ * @package Rakuun Browsergame
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
+ * @license GNU/GPL, see license.txt
+ * This file is part of Rakuun.
+ *
+ * Rakuun is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Rakuun is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Rakuun. If not, see <http://www.gnu.org/licenses/>.
+ */
+?>
 Der Server f&uuml;r dieses Spiel kostet Geld und wird haupts&auml;chlich durch Spenden finanziert - deshalb freuen wir uns &uuml;ber jede Spende. Sie helfen uns dabei, das Spiel weiter f&uuml;r euch betreiben zu k&ouml;nnen.
 <br/>
 Ab 5€ erhalten Spender einen bunten Nicknamen.
