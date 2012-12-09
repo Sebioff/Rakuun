@@ -28,27 +28,31 @@ abstract class Rakuun_Intern_Statistics {
 	 * @return average Points of all Users
 	 * TODO can/should be cached
 	 */
-	public static function averagePoints($withoutInactive = false) {
+	public static function averagePoints($withoutInactive = false, $withoutNoobs = false) {
 		$options = array();
 		$options['properties'] = 'SUM(points) AS sum_points';
 		if ($withoutInactive)
 			$options['conditions'][] = array('is_yimtay = ?', 0);
+		if ($withoutNoobs)
+			$options['conditions'][] = array('points > ?', RAKUUN_NOOB_START_LIMIT_OF_POINTS);
 		$sumOfPoints = Rakuun_DB_Containers::getUserContainer()->selectFirst($options)->sumPoints;
 		$average = $sumOfPoints / Rakuun_Intern_Statistics::noOfPlayers($withoutInactive);
 		return $average;
 	}
 	
 	public static function getNoobPointLimit() {
-		return max(RAKUUN_NOOB_START_LIMIT_OF_POINTS, Rakuun_Intern_Statistics::averagePoints(true) * 0.6);
+		return max(RAKUUN_NOOB_START_LIMIT_OF_POINTS, Rakuun_Intern_Statistics::averagePoints(true, true) * 0.6);
 	}
 	
 	/**
 	 * @return No of All Players
 	 */
-	public static function noOfPlayers($withoutInactive = false) {
+	public static function noOfPlayers($withoutInactive = false, $withoutNoobs = false) {
 		$options = array();
 		if ($withoutInactive)
 			$options['conditions'][] = array('is_yimtay = ?', 0);
+		if ($withoutNoobs)
+			$options['conditions'][] = array('points > ?', RAKUUN_NOOB_START_LIMIT_OF_POINTS);
 		return Rakuun_DB_Containers::getUserContainer()->count($options);
 	}
 	
