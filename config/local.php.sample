@@ -1,0 +1,20 @@
+<?php
+
+define('CORE_PATH', realpath(dirname(__FILE__).'/../../CORE'));
+define('DB_CONNECTION', 'mysql://user:password@localhost?database');
+define('DB_CONNECTION_PERSISTENT', 'mysql://user:password@localhost?database_persistent');
+
+// OTHER AVAILABLE CONSTANTS ---------------------------------------------------
+// required for updating the game via SVN from the admin control panel
+//define('RAKUUN_SVN_PROJECT_PATH', ''); // local path to Rakuun
+//define('RAKUUN_SVN_CORE_PATH', ''); // local path to CORE
+//define('RAKUUN_SSH_ADDRESS', '');
+//define('RAKUUN_SSH_USER', '');
+//define('RAKUUN_SSH_PASSWORD', '');
+//
+//define('RAKUUN_TWITTER_CONSUMERKEY', '');
+//define('RAKUUN_TWITTER_CONSUMERSECRET', '');
+//define('RAKUUN_TWITTER_ACCESSTOKEN', '');
+//define('RAKUUN_TWITTER_ACCESSTOKENSECRET', '');
+
+?>
