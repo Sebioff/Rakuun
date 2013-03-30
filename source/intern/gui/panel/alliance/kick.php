@@ -2,7 +2,7 @@
 
 /**
  * @package Rakuun Browsergame
- * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre JÃ¤hrling
+ * @copyright Copyright (C) 2012 Sebastian Mayer, Andreas Sicking, Andre Jährling
  * @license GNU/GPL, see license.txt
  * This file is part of Rakuun.
  *
@@ -31,7 +31,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 			$this->addPanel($blanko = new GUI_Panel('blanko'.$member->getPK()));
 			$blanko->addPanel($kickbutton = new GUI_Control_SecureSubmitButton('kick', 'kicken'));
 			$kickbutton->setTitle($member->nameUncolored);
-			$kickbutton->setConfirmationMessage('Der Austritt wird erst nach '.Rakuun_Date::formatCountDown(Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT).' gÃ¼ltig.\nWillst du '.$member->nameUncolored.' wirklich kicken?');
+			$kickbutton->setConfirmationMessage('Der Austritt wird erst nach '.Rakuun_Date::formatCountDown(Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT).' gültig.\nWillst du '.$member->nameUncolored.' wirklich kicken?');
 			$blanko->addPanel(new GUI_Control_HiddenBox('id', $member->getPK()));
 		}
 	}
@@ -46,12 +46,12 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 				DB_Connection::get()->beginTransaction();
 				$user = Rakuun_DB_Containers::getUserContainer()->selectByPK($this->{'blanko'.$member->getPK()}->id->getValue(), array('conditions' => array(array('alliance = ?', Rakuun_User_Manager::getCurrentUser()->alliance))));
 				if (!$user) {
-					$this->addError('Dieser User gehÃ¶rt nicht zu deiner Allianz!');
+					$this->addError('Dieser User gehört nicht zu deiner Allianz!');
 					DB_Connection::get()->rollback();
 					return;
 				}
 				if ($user->getPK() == Rakuun_User_Manager::getCurrentUser()->getPK()) {
-					$this->addError('Sich selbst kicken? PersÃ¶nlichkeitsstÃ¶rung? :D');
+					$this->addError('Sich selbst kicken? Persönlichkeitsstörung? :D');
 					DB_Connection::get()->rollback();
 					return;
 				}
@@ -61,7 +61,12 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 					return;
 				}
 				if ($user->allianceLeaveTime > 0) {
-					$this->addError('Dieser Spieler verlÃ¤sst bereits die Allianz.');
+					$this->addError('Dieser Spieler verlässt bereits die Allianz.');
+					DB_Connection::get()->rollback();
+					return;
+				}
+				if ($user->getDatabaseCount() > 0) {
+					$this->addError('Dieser User bewacht ein Datenbankteil und kann die Allianz daher nicht verlassen.');
 					DB_Connection::get()->rollback();
 					return;
 				}
@@ -75,7 +80,7 @@ class Rakuun_Intern_GUI_Panel_Alliance_Kick extends GUI_Panel {
 				$igm->setSenderName(Rakuun_Intern_IGM::SENDER_ALLIANCE);
 				$igm->setText(
 					'Du wurdest von '.$aktUserLink->render().' aus der Allianz '.$allianceLink->render().' gekickt!<br />'.
-					'Der Austritt wird nach '.Rakuun_Date::formatCountDown(Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT).' gÃ¼ltig.<br />'.
+					'Der Austritt wird nach '.Rakuun_Date::formatCountDown(Rakuun_Intern_GUI_Panel_Alliance_Leave::LEAVE_TIMEOUT).' gültig.<br />'.
 					$allianceModuleLink->render()
 				);
 				$igm->send();
