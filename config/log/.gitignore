@@ -1,0 +1,5 @@
+# this file is used as a workaround to force git to commit the log directory, as committing truly empty directories is currently not supported
+# ignore everything in this directory
+*
+# except for this file
+!.gitignore
